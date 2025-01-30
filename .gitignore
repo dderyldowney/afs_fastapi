@@ -5,3 +5,5 @@ _site
 .idea/
 .mypy_cache
 .pytest_cache
+Gemfile.lock
+venv
