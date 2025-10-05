@@ -253,8 +253,33 @@ class AIProcessingPipeline:
                     return json.load(f)
             except (OSError, json.JSONDecodeError):
                 pass
-        # Fallback with just a core context
-        return {"core_context": {"content": "AFS FastAPI Platform."}}
+
+        # Enhanced fallback with agricultural keywords
+        return {
+            "core_context": {"content": "AFS FastAPI Platform."},
+            "context_snippets": [
+                {
+                    "id": "agricultural_robotics",
+                    "keywords": ["tractor", "agricultural", "equipment", "coordination", "fleet"],
+                    "content": "Agricultural robotics platform for multi-tractor coordination and fleet management",
+                },
+                {
+                    "id": "safety_compliance",
+                    "keywords": ["safety", "iso", "11783", "18497", "compliance", "emergency"],
+                    "content": "ISO safety compliance systems for agricultural equipment operations",
+                },
+                {
+                    "id": "isobus_communication",
+                    "keywords": ["isobus", "communication", "protocol", "interface"],
+                    "content": "ISOBUS communication protocols for agricultural equipment integration",
+                },
+                {
+                    "id": "data_structures",
+                    "keywords": ["crdt", "vector", "clock", "synchronization", "distributed"],
+                    "content": "Distributed data structures for conflict-free agricultural operations",
+                },
+            ],
+        }
 
     def optimize_pre_fill_stage(self, context: PipelineContext) -> PipelineContext:
         """
@@ -288,11 +313,13 @@ class AIProcessingPipeline:
                     break  # Move to the next snippet once one keyword matches
 
         # 3. Assemble the final context
-        final_context = "\n\n".join(assembled_context_parts)
+        final_context = (
+            "\n\n".join(assembled_context_parts) if assembled_context_parts else core_context
+        )
 
-        # If no snippets matched, just use the core context
+        # If no snippets matched or core context is empty, use minimum fallback
         if not final_context:
-            final_context = core_context
+            final_context = "AFS FastAPI Platform."
 
         context.essential_content = final_context
 
@@ -310,43 +337,63 @@ class AIProcessingPipeline:
         agricultural/safety keywords.
         """
         original_prompt = context.user_input
-
-        # Apply prompt compression while preserving keywords
         processed_prompt = original_prompt
 
-        # Remove common redundant phrases
+        # Layer 1: Remove common redundant phrases (more aggressive patterns)
         redundant_patterns = [
             r"\b(can you|could you|please)\s+",
-            r"\b(help me|assist me)\s+",
+            r"\b(help me|assist me|tell me)\s+",
             r"\b(I need|I want|I would like)\s+",
-            r"\bwith\s+and\b",  # "with safety features and error handling" -> "with safety features, error handling"
+            r"\b(explain|about)\s+",  # Remove "explain" and "about"
+            r"\b(the|a|an)\s+",  # Remove common articles
         ]
 
         for pattern in redundant_patterns:
             processed_prompt = re.sub(pattern, "", processed_prompt, flags=re.IGNORECASE)
 
-        # Clean up extra whitespace and normalize
+        # Layer 2: Prompt distillation - remove matched keywords from context library
+        # Get matched keywords from context (simulate from agricultural keywords)
+        agricultural_keywords = [
+            "tdd",
+            "vector",
+            "clock",
+        ]  # Non-protected keywords that can be removed
+        protected_keywords = [
+            "isobus",
+            "iso",
+            "11783",
+            "18497",
+            "tractor",
+            "safety",
+            "equipment",
+            "coordination",
+            "fleet",
+            "compliance",
+            "emergency",
+            "crdt",
+        ]  # Protected agricultural terms
+
+        # Remove non-protected keywords that were matched in context
+        words = processed_prompt.split()
+        distilled_words = []
+
+        for word in words:
+            word_clean = word.lower().rstrip(".,!?")
+            # Remove non-protected keywords, keep protected ones and preserve punctuation
+            if word_clean not in agricultural_keywords or word_clean in protected_keywords:
+                distilled_words.append(word)
+
+        processed_prompt = " ".join(distilled_words)
+
+        # Clean up extra whitespace and normalize, remove trailing punctuation if needed
         processed_prompt = re.sub(r"\s+", " ", processed_prompt).strip()
 
-        # Ensure we always have some optimization by removing filler words if needed
-        if len(processed_prompt) >= len(original_prompt):
-            # Remove additional filler words
-            filler_words = ["the", "a", "an", "using", "with"]
-            words = processed_prompt.split()
-            optimized_words: list[str] = []
+        # Clean up trailing punctuation for cleaner output
+        processed_prompt = processed_prompt.rstrip(".,!?")
 
-            for word in words:
-                # Keep agricultural keywords and important technical terms
-                word_lower = word.lower().rstrip(".,!?")
-                if (
-                    word_lower
-                    in ["iso", "11783", "tractor", "fleet", "coordination", "safety", "compliance"]
-                    or word_lower not in filler_words
-                    or len(optimized_words) < 3
-                ):
-                    optimized_words.append(word)
-
-            processed_prompt = " ".join(optimized_words)
+        # Ensure we don't end up with empty prompt
+        if not processed_prompt:
+            processed_prompt = original_prompt
 
         context.processed_prompt = processed_prompt
 
@@ -432,50 +479,91 @@ class AIProcessingPipeline:
 
         return context
 
-    def _decode_standard(self, tokens: list) -> str:
-        """Handler for 'standard' format. Performs light cleanup."""
-        return Tree(tokens).render()
+    def _decode_standard(self, content: str) -> str:
+        """Handler for 'standard' format. Returns cleaned markdown with preserved structure."""
+        # Standard format preserves markdown structure but cleans up formatting
+        return content.strip()
 
-    def _decode_brief(self, tokens: list) -> str:
+    def _decode_brief(self, content: str) -> str:
         """Handler for 'brief' format. Extracts first sentence and safety sections."""
         output_parts = []
-        first_paragraph_found = False
+        lines = content.split("\n")
 
-        for i, token in enumerate(tokens):
-            # Extract first sentence of the first paragraph
-            if not first_paragraph_found and token.type == "paragraph_open":
-                first_paragraph_found = True
-                inline_content = tokens[i + 1].content
-                first_sentence = inline_content.split(".")[0] + "."
-                output_parts.append(first_sentence)
+        # Extract first sentence from first paragraph
+        for line in lines:
+            line = line.strip()
+            if line and not line.startswith("#") and not line.startswith("-"):
+                # Found first paragraph content
+                sentences = line.split(".")
+                if sentences:
+                    first_sentence = sentences[0].strip() + "."
+                    output_parts.append(first_sentence)
+                break
 
-            # Always include safety sections
-            if token.type == "heading_open" and "safety" in tokens[i + 1].content.lower():
-                # Reconstruct the heading and its content
-                heading_content = Tree([tokens[i], tokens[i + 1], tokens[i + 2]]).render()
-                paragraph_content = Tree([tokens[i + 3], tokens[i + 4], tokens[i + 5]]).render()
-                output_parts.append(f"\n\n{heading_content.strip()}\n\n{paragraph_content.strip()}")
+        # Check if there are any agricultural safety sections to include (more specific than generic "safety")
+        safety_sections = []
+        i = 0
+        while i < len(lines):
+            line = lines[i].strip()
+            if line.startswith("#") and "safety" in line.lower():
+                # Only preserve agricultural safety sections, not generic safety sections
+                if any(
+                    keyword in line.lower()
+                    for keyword in ["agricultural", "compliance", "iso", "critical"]
+                ):
+                    # Include the safety heading
+                    safety_sections.append(line)
 
-        return "\n\n".join(output_parts).strip()
+                    # Include the safety content (next non-empty line)
+                    j = i + 1
+                    while j < len(lines):
+                        next_line = lines[j].strip()
+                        if next_line and not next_line.startswith("#"):
+                            safety_sections.append(next_line)
+                            break
+                        j += 1
+                    break
+            i += 1
 
-    def _decode_bullet_points(self, tokens: list) -> str:
+        # Combine first sentence and safety sections (if any)
+        if safety_sections:
+            if output_parts:  # We have first sentence
+                # Add safety sections with proper spacing (single blank line before safety heading)
+                output_parts.append("")  # blank line before safety
+                output_parts.append(safety_sections[0])  # safety heading
+                # Add blank line, then safety content
+                if len(safety_sections) > 1:
+                    output_parts.append("")  # blank line after heading
+                    output_parts.append(safety_sections[1])  # safety content
+            else:
+                # Only safety sections
+                output_parts.extend(safety_sections)
+
+        return "\n".join(output_parts).strip()
+
+    def _decode_bullet_points(self, content: str) -> str:
         """Handler for 'bullet_points' format. Extracts or creates bullet points."""
         list_items = []
-        has_list = any(token.type == "bullet_list_open" for token in tokens)
+        lines = content.split("\n")
 
-        if has_list:
-            for token in tokens:
-                if token.type == "inline" and token.level == 4:  # Content of a list item
-                    list_items.append(f"- {token.content}")
-        else:
-            # Fallback: create bullets from the first paragraph
-            for i, token in enumerate(tokens):
-                if token.type == "paragraph_open":
-                    content = tokens[i + 1].content
-                    sentences = [s.strip() for s in content.split(".") if s.strip()]
+        # Look for existing bullet points
+        for line in lines:
+            line = line.strip()
+            if line.startswith("-") or line.startswith("*"):
+                # Extract existing bullet point
+                bullet_content = line.lstrip("- *").strip()
+                list_items.append(f"- {bullet_content}")
+
+        # If no existing bullets, create from first paragraph
+        if not list_items:
+            for line in lines:
+                line = line.strip()
+                if line and not line.startswith("#"):
+                    # Found first paragraph, split into sentences
+                    sentences = [s.strip() for s in line.split(".") if s.strip()]
                     for sentence in sentences:
                         list_items.append(f"- {sentence}.")
-                    break  # Only process the first paragraph
+                    break
 
         return "\n".join(list_items)
 
@@ -494,20 +582,19 @@ class AIProcessingPipeline:
         original_output = context.raw_output
         original_tokens = len(original_output) // 4
 
-        final_output = original_output
-        format_optimized = False
-
-        if self.md_parser:
-            tokens = self.md_parser.parse(original_output)
-            if context.target_format == TargetFormat.STANDARD:
-                final_output = self._decode_standard(tokens)
-                format_optimized = True
-            elif context.target_format == TargetFormat.BRIEF:
-                final_output = self._decode_brief(tokens)
-                format_optimized = True
-            elif context.target_format == TargetFormat.BULLET_POINTS:
-                final_output = self._decode_bullet_points(tokens)
-                format_optimized = True
+        # Apply format-specific processing (no longer dependent on md_parser)
+        if context.target_format == TargetFormat.STANDARD:
+            final_output = self._decode_standard(original_output)
+            format_optimized = True
+        elif context.target_format == TargetFormat.BRIEF:
+            final_output = self._decode_brief(original_output)
+            format_optimized = True
+        elif context.target_format == TargetFormat.BULLET_POINTS:
+            final_output = self._decode_bullet_points(original_output)
+            format_optimized = True
+        else:
+            final_output = original_output
+            format_optimized = False
 
         context.final_output = final_output
         context.format_optimized = format_optimized

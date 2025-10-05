@@ -75,13 +75,31 @@
       "priority": "medium",
       "category": "general",
       "completed_at": "2025-10-05T16:55:08Z"
+    },
+    {
+      "id": "strategic-20251005_183103_0130",
+      "content": "Fix Infrastructure Python Environment Detection - Critical updatechangelog bash execution failures preventing reliable commits and development workflow",
+      "status": "completed",
+      "created_at": "2025-10-05T18:31:03Z",
+      "priority": "medium",
+      "category": "general",
+      "completed_at": "2025-10-05T18:46:21Z"
+    },
+    {
+      "id": "strategic-20251005_183115_8286",
+      "content": "Rebuild AI Processing Pipeline Context System - Critical failures in context handling, prompt distillation, and format-aware parsing breaking session management",
+      "status": "completed",
+      "created_at": "2025-10-05T18:31:15Z",
+      "priority": "medium",
+      "category": "general",
+      "completed_at": "2025-10-05T19:01:45Z"
     }
   ],
   "metadata": {
-    "last_updated": "2025-10-05T16:55:08Z",
+    "last_updated": "2025-10-05T19:01:45Z",
     "version": "1.0.0",
-    "total_strategic_todos": 9,
-    "completed_count": 4,
+    "total_strategic_todos": 11,
+    "completed_count": 6,
     "pending_count": 5
   }
 }

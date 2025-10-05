@@ -1,0 +1,350 @@
+#!/bin/bash
+#
+# ai-processing - AFS FastAPI AI Processing Pipeline Management
+#
+# Command-line interface for managing AI processing pipeline capabilities
+# across the agricultural robotics platform. Provides configuration,
+# monitoring, testing, and service integration management.
+#
+# Agricultural Context:
+# Critical for managing token optimization in safety-critical agricultural
+# operations. Ensures proper configuration and monitoring of AI processing
+# for multi-tractor fleet coordination and ISO compliance requirements.
+
+set -e
+
+# Colors for output
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+# Determine project root relative to this script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+# Ensure we're in project root
+cd "${PROJECT_ROOT}"
+
+# Detect available Python executable
+PYTHON_CMD=""
+if command -v python3 >/dev/null 2>&1; then
+    PYTHON_CMD="python3"
+elif command -v python >/dev/null 2>&1; then
+    PYTHON_CMD="python"
+else
+    echo -e "${RED}⚠️  Error: Neither 'python3' nor 'python' command found in PATH${NC}"
+    echo "   Please ensure Python is installed and available in your PATH"
+    exit 1
+fi
+
+# Function to display usage information
+show_usage() {
+    echo -e "${BLUE}AFS FastAPI AI Processing Pipeline Management${NC}"
+    echo -e "${BLUE}=============================================${NC}"
+    echo ""
+    echo "Usage: ./bin/ai-processing <command> [options]"
+    echo ""
+    echo "Commands:"
+    echo "  status          - Show AI processing pipeline status and statistics"
+    echo "  health          - Perform comprehensive health check"
+    echo "  config          - Display current configuration"
+    echo "  test <text>     - Test AI processing with sample text"
+    echo "  optimize <text> - Optimize text with agricultural safety compliance"
+    echo "  services        - List registered services and their configurations"
+    echo "  reset           - Reset AI processing configuration to defaults"
+    echo "  monitor         - Start real-time monitoring (requires terminal)"
+    echo ""
+    echo "Service-Specific Commands:"
+    echo "  equipment <text>    - Optimize equipment communication message"
+    echo "  monitoring <text>   - Optimize monitoring sensor data"
+    echo "  fleet <text>        - Optimize fleet coordination message"
+    echo ""
+    echo "Configuration Commands:"
+    echo "  config set <key> <value>    - Set configuration parameter"
+    echo "  config get <key>            - Get configuration parameter"
+    echo "  config list                 - List all configuration parameters"
+    echo ""
+    echo "Examples:"
+    echo "  ./bin/ai-processing status"
+    echo "  ./bin/ai-processing test \"Coordinate tractor fleet for field cultivation\""
+    echo "  ./bin/ai-processing equipment \"ISOBUS emergency stop for TRC001\""
+    echo "  ./bin/ai-processing config set default_optimization_level aggressive"
+    echo ""
+}
+
+# Function to run Python AI processing management script
+run_ai_processing_command() {
+    local command="$1"
+    shift
+
+    ${PYTHON_CMD} -c "
+import sys
+import json
+from pathlib import Path
+
+# Add project root to Python path
+project_root = Path('${PROJECT_ROOT}')
+sys.path.insert(0, str(project_root))
+
+try:
+    from afs_fastapi.services import ai_processing_manager, OptimizationLevel
+
+    def handle_status():
+        stats = ai_processing_manager.get_platform_statistics()
+        print('${BLUE}🤖 AI Processing Pipeline Status${NC}')
+        print('${BLUE}=================================${NC}')
+        print()
+        print(f'${GREEN}Global Statistics:${NC}')
+        global_stats = stats['global_stats']
+        print(f'  • Total Requests: {global_stats[\"total_requests\"]}')
+        print(f'  • Tokens Saved: {global_stats[\"tokens_saved\"]:,}')
+        print(f'  • Agricultural Requests: {global_stats[\"agricultural_requests\"]}')
+        print(f'  • Safety Critical: {global_stats[\"safety_critical_requests\"]}')
+        print()
+        print(f'${GREEN}Pipeline Health:${NC}')
+        health = stats['pipeline_health']
+        print(f'  • Services Registered: {health[\"total_services_registered\"]}')
+        print(f'  • Agricultural Ratio: {health[\"agricultural_request_ratio\"]:.1%}')
+        print(f'  • Average Tokens Saved: {health[\"average_tokens_saved\"]:.1f}')
+        print()
+        config = stats['configuration']
+        print(f'${GREEN}Configuration:${NC}')
+        print(f'  • Safety Mode: {config[\"agricultural_safety_mode\"]}')
+        print(f'  • Default Level: {config[\"default_optimization_level\"]}')
+        print(f'  • Token Budget: {config[\"token_budget\"]:,}')
+        print()
+
+    def handle_health():
+        health = ai_processing_manager.health_check()
+        print('${BLUE}🏥 AI Processing Pipeline Health Check${NC}')
+        print('${BLUE}======================================${NC}')
+        print()
+
+        status_color = '${GREEN}' if health['status'] == 'healthy' else '${RED}'
+        print(f'{status_color}Status: {health[\"status\"].upper()}${NC}')
+        print(f'Pipeline Operational: {health[\"pipeline_operational\"]}')
+        print(f'Services Registered: {health[\"services_registered\"]}')
+        print(f'Requests Processed: {health[\"total_requests_processed\"]:,}')
+        print(f'Test Processing: {health[\"test_processing_success\"]}')
+        print(f'Agricultural Safety Mode: {health[\"agricultural_safety_mode\"]}')
+
+        if 'error' in health and health['error']:
+            print(f'${RED}Error: {health[\"error\"]}${NC}')
+        print()
+
+    def handle_test(text):
+        print('${BLUE}🧪 Testing AI Processing Pipeline${NC}')
+        print('${BLUE}==================================${NC}')
+        print()
+        print(f'${YELLOW}Input:${NC} {text}')
+        print()
+
+        result = ai_processing_manager.process_agricultural_request(text)
+
+        print(f'${GREEN}Optimized Output:${NC} {result.final_output}')
+        print()
+        print(f'${GREEN}Processing Results:${NC}')
+        print(f'  • Tokens Saved: {result.total_tokens_saved}')
+        print(f'  • Stages Completed: {result.stages_completed}/4')
+        print(f'  • Optimization Level: {result.optimization_level.value}')
+        print(f'  • Agricultural Compliance: {result.agricultural_compliance_maintained}')
+        print(f'  • Processing Time: {result.metrics.get(\"processing_time_ms\", 0):.1f}ms')
+        print()
+
+    def handle_services():
+        stats = ai_processing_manager.get_platform_statistics()
+        print('${BLUE}🔧 Registered Services${NC}')
+        print('${BLUE}======================${NC}')
+        print()
+
+        services = stats['service_stats']
+        if not services:
+            print('${YELLOW}No services currently registered${NC}')
+            return
+
+        for service_name, service_data in services.items():
+            print(f'${GREEN}{service_name}${NC}')
+            print(f'  • Optimization Level: {service_data[\"optimization_level\"]}')
+            print(f'  • Priority: {service_data[\"priority\"]}')
+            print(f'  • Requests Processed: {service_data[\"requests_processed\"]:,}')
+            print(f'  • Tokens Saved: {service_data[\"tokens_saved\"]:,}')
+            print()
+
+    def handle_equipment(text):
+        print('${BLUE}🚜 Equipment Communication Optimization${NC}')
+        print('${BLUE}=======================================${NC}')
+        print()
+        result = ai_processing_manager.optimize_equipment_communication(text)
+        print(f'${YELLOW}Original:${NC} {text}')
+        print(f'${GREEN}Optimized:${NC} {result.final_output}')
+        print(f'${GREEN}Tokens Saved:${NC} {result.total_tokens_saved}')
+        print()
+
+    def handle_monitoring(text):
+        print('${BLUE}📊 Monitoring Data Optimization${NC}')
+        print('${BLUE}===============================${NC}')
+        print()
+        result = ai_processing_manager.optimize_monitoring_data(text)
+        print(f'${YELLOW}Original:${NC} {text}')
+        print(f'${GREEN}Optimized:${NC} {result.final_output}')
+        print(f'${GREEN}Tokens Saved:${NC} {result.total_tokens_saved}')
+        print()
+
+    def handle_fleet(text):
+        print('${BLUE}🚁 Fleet Coordination Optimization${NC}')
+        print('${BLUE}===================================${NC}')
+        print()
+        result = ai_processing_manager.optimize_fleet_coordination(text)
+        print(f'${YELLOW}Original:${NC} {text}')
+        print(f'${GREEN}Optimized:${NC} {result.final_output}')
+        print(f'${GREEN}Tokens Saved:${NC} {result.total_tokens_saved}')
+        print()
+
+    # Command routing
+    command = '${command}'
+    args = sys.argv[1:]
+
+    if command == 'status':
+        handle_status()
+    elif command == 'health':
+        handle_health()
+    elif command == 'test' and args:
+        handle_test(' '.join(args))
+    elif command == 'services':
+        handle_services()
+    elif command == 'equipment' and args:
+        handle_equipment(' '.join(args))
+    elif command == 'monitoring' and args:
+        handle_monitoring(' '.join(args))
+    elif command == 'fleet' and args:
+        handle_fleet(' '.join(args))
+    else:
+        print('${RED}Invalid command or missing arguments${NC}')
+        sys.exit(1)
+
+except ImportError as e:
+    print('${RED}Error importing AI processing modules:${NC}', e)
+    print('Make sure you are in the correct project directory')
+    sys.exit(1)
+except Exception as e:
+    print('${RED}Error executing AI processing command:${NC}', e)
+    sys.exit(1)
+" "$@"
+}
+
+# Main command processing
+case "${1:-}" in
+    "status")
+        run_ai_processing_command status
+        ;;
+    "health")
+        run_ai_processing_command health
+        ;;
+    "config")
+        if [[ "${2:-}" == "list" ]]; then
+            echo -e "${BLUE}📋 AI Processing Configuration${NC}"
+            echo -e "${BLUE}==============================${NC}"
+            echo ""
+            if [[ -f ".claude/ai_processing_config.json" ]]; then
+                echo -e "${GREEN}Configuration File:${NC} .claude/ai_processing_config.json"
+                echo ""
+                cat .claude/ai_processing_config.json | ${PYTHON_CMD} -m json.tool
+            else
+                echo -e "${YELLOW}No configuration file found. Using defaults.${NC}"
+                echo ""
+                echo -e "${GREEN}Default Configuration:${NC}"
+                echo "{"
+                echo '  "agricultural_safety_mode": true,'
+                echo '  "default_optimization_level": "standard",'
+                echo '  "token_budget": 4000,'
+                echo '  "enable_metrics_tracking": true,'
+                echo '  "safety_keyword_protection": true'
+                echo "}"
+            fi
+        else
+            echo -e "${YELLOW}Configuration management not yet implemented${NC}"
+            echo "Use: ./bin/ai-processing config list"
+        fi
+        ;;
+    "test")
+        if [[ -z "${2:-}" ]]; then
+            echo -e "${RED}Error: Please provide text to test${NC}"
+            echo "Usage: ./bin/ai-processing test \"your text here\""
+            exit 1
+        fi
+        shift
+        run_ai_processing_command test "$@"
+        ;;
+    "optimize")
+        if [[ -z "${2:-}" ]]; then
+            echo -e "${RED}Error: Please provide text to optimize${NC}"
+            echo "Usage: ./bin/ai-processing optimize \"your text here\""
+            exit 1
+        fi
+        shift
+        run_ai_processing_command test "$@"
+        ;;
+    "services")
+        run_ai_processing_command services
+        ;;
+    "equipment")
+        if [[ -z "${2:-}" ]]; then
+            echo -e "${RED}Error: Please provide equipment message to optimize${NC}"
+            echo "Usage: ./bin/ai-processing equipment \"ISOBUS message here\""
+            exit 1
+        fi
+        shift
+        run_ai_processing_command equipment "$@"
+        ;;
+    "monitoring")
+        if [[ -z "${2:-}" ]]; then
+            echo -e "${RED}Error: Please provide monitoring data to optimize${NC}"
+            echo "Usage: ./bin/ai-processing monitoring \"sensor data here\""
+            exit 1
+        fi
+        shift
+        run_ai_processing_command monitoring "$@"
+        ;;
+    "fleet")
+        if [[ -z "${2:-}" ]]; then
+            echo -e "${RED}Error: Please provide fleet coordination message${NC}"
+            echo "Usage: ./bin/ai-processing fleet \"coordination message here\""
+            exit 1
+        fi
+        shift
+        run_ai_processing_command fleet "$@"
+        ;;
+    "reset")
+        echo -e "${BLUE}🔄 Resetting AI Processing Configuration${NC}"
+        echo -e "${BLUE}=======================================${NC}"
+        echo ""
+        echo -e "${YELLOW}This will reset all AI processing settings to defaults${NC}"
+        read -p "Are you sure? (y/N): " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            rm -f .claude/ai_processing_config.json
+            echo -e "${GREEN}✅ Configuration reset to defaults${NC}"
+        else
+            echo -e "${YELLOW}Reset cancelled${NC}"
+        fi
+        ;;
+    "monitor")
+        echo -e "${BLUE}📊 Real-time AI Processing Monitor${NC}"
+        echo -e "${BLUE}==================================${NC}"
+        echo ""
+        echo -e "${YELLOW}Real-time monitoring not yet implemented${NC}"
+        echo "Use: ./bin/ai-processing status"
+        echo "For current statistics"
+        ;;
+    "help"|"--help"|"-h"|"")
+        show_usage
+        ;;
+    *)
+        echo -e "${RED}Unknown command: $1${NC}"
+        echo ""
+        show_usage
+        exit 1
+        ;;
+esac

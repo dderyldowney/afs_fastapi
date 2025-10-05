@@ -1,0 +1,109 @@
+{
+  "agricultural_safety_mode": true,
+  "default_optimization_level": "standard",
+  "token_budget": 4000,
+  "enable_metrics_tracking": true,
+  "safety_keyword_protection": true,
+  "services": {
+    "equipment": {
+      "optimization_level": "conservative",
+      "priority": "high",
+      "description": "Equipment communication (ISOBUS, safety protocols)"
+    },
+    "monitoring": {
+      "optimization_level": "standard",
+      "priority": "medium",
+      "description": "Sensor data and monitoring systems"
+    },
+    "fleet": {
+      "optimization_level": "aggressive",
+      "priority": "medium",
+      "description": "Multi-tractor fleet coordination"
+    },
+    "api": {
+      "optimization_level": "standard",
+      "priority": "medium",
+      "description": "General API request processing"
+    },
+    "platform": {
+      "optimization_level": "standard",
+      "priority": "medium",
+      "description": "General platform operations"
+    }
+  },
+  "optimization_settings": {
+    "conservative": {
+      "reduction_target": 0.15,
+      "preserve_all_safety_keywords": true,
+      "enable_format_optimization": false,
+      "description": "Minimal optimization for safety-critical operations"
+    },
+    "standard": {
+      "reduction_target": 0.30,
+      "preserve_agricultural_keywords": true,
+      "enable_format_optimization": true,
+      "description": "Balanced optimization preserving agricultural context"
+    },
+    "aggressive": {
+      "reduction_target": 0.50,
+      "preserve_essential_keywords": true,
+      "enable_format_optimization": true,
+      "description": "Maximum optimization for routine operations"
+    },
+    "adaptive": {
+      "reduction_target": 0.30,
+      "auto_detect_safety_critical": true,
+      "dynamic_level_adjustment": true,
+      "description": "Automatically adjusts based on content analysis"
+    }
+  },
+  "safety_compliance": {
+    "iso_11783_compliance": true,
+    "iso_18497_compliance": true,
+    "protected_keywords": [
+      "emergency",
+      "stop",
+      "safety",
+      "critical",
+      "fault",
+      "collision",
+      "iso",
+      "isobus",
+      "compliance",
+      "tractor",
+      "equipment",
+      "agricultural",
+      "cultivation",
+      "harvest",
+      "coordination",
+      "fleet"
+    ],
+    "safety_critical_patterns": [
+      "emergency.*stop",
+      "critical.*fault",
+      "safety.*protocol",
+      "iso.*compliance",
+      "collision.*detection"
+    ]
+  },
+  "performance_settings": {
+    "max_processing_time_ms": 1000,
+    "enable_caching": true,
+    "cache_duration_seconds": 300,
+    "parallel_processing": false,
+    "batch_processing_size": 10
+  },
+  "monitoring": {
+    "enable_detailed_logging": true,
+    "log_agricultural_requests": true,
+    "log_safety_critical_requests": true,
+    "enable_metrics_export": true,
+    "metrics_export_interval_seconds": 60
+  },
+  "integration": {
+    "auto_register_services": true,
+    "service_discovery_enabled": true,
+    "cross_service_optimization": true,
+    "shared_context_library": true
+  }
+}
