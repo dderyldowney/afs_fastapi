@@ -117,7 +117,7 @@ class ViewerConfig:
         Returns:
             String key of the preferred viewer.
         """
-        return self._config.get("preferred_viewer", self._get_platform_default())
+        return str(self._config.get("preferred_viewer", self._get_platform_default()))
 
     def set_preferred_viewer(self, viewer_key: str) -> None:
         """Set the preferred viewer in configuration.
@@ -134,7 +134,7 @@ class ViewerConfig:
         Returns:
             True if auto-detection is enabled, False otherwise.
         """
-        return self._config.get("auto_detect_viewers", True)
+        return bool(self._config.get("auto_detect_viewers", True))
 
     def set_auto_detect(self, enabled: bool) -> None:
         """Enable or disable auto-detection of viewers.
@@ -151,7 +151,7 @@ class ViewerConfig:
         Returns:
             True if fallback is enabled, False otherwise.
         """
-        return self._config.get("fallback_to_system", True)
+        return bool(self._config.get("fallback_to_system", True))
 
     def set_fallback_to_system(self, enabled: bool) -> None:
         """Enable or disable fallback to system default viewer.
@@ -172,7 +172,7 @@ class ViewerConfig:
             Priority value (lower is higher priority).
         """
         preferences = self._config.get("viewer_preferences", {})
-        return preferences.get(viewer_key, {}).get("priority", 999)
+        return int(preferences.get(viewer_key, {}).get("priority", 999))
 
     def set_viewer_priority(self, viewer_key: str, priority: int) -> None:
         """Set priority for a specific viewer.

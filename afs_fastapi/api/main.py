@@ -40,19 +40,19 @@ if _cors_origins:
 
 
 @app.get("/", tags=["meta"], summary="Welcome message")
-async def read_root():
+async def read_root() -> dict[str, str]:
     """Root endpoint returning welcome message."""
     return {"message": "Welcome to the Agricultural Farm System API"}
 
 
 @app.get("/health", tags=["meta"], summary="Health check")
-async def health_check():
+async def health_check() -> dict[str, str]:
     """Health check endpoint."""
     return {"status": "healthy"}
 
 
 @app.get("/version", tags=["meta"], summary="API version")
-async def api_version():
+async def api_version() -> dict[str, str]:
     """Version information endpoint."""
     return {"version": __version__}
 
@@ -137,12 +137,12 @@ async def process_with_ai_optimization(request: AIProcessingRequest) -> AIProces
         result = ai_processing_manager.process_with_budget_constraint(
             user_input=request.user_input,
             token_budget=request.token_budget,
-            service_name=request.service_name,
+            service_name=request.service_name or "platform",
         )
     else:
         result = ai_processing_manager.process_agricultural_request(
             user_input=request.user_input,
-            service_name=request.service_name,
+            service_name=request.service_name or "platform",
             optimization_level=optimization_level,
             context_data=request.context_data,
         )

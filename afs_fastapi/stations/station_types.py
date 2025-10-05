@@ -23,10 +23,10 @@ class MasterStation:
         self.station_id = station_id
         self.system = system
 
-    def activate(self):
+    def activate(self) -> str:
         return f"Master station {self.station_id} for {self.system} system is activated."
 
-    def deactivate(self):
+    def deactivate(self) -> str:
         return f"Master station {self.station_id} for {self.system} system is deactivated."
 
 
