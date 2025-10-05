@@ -1,32 +1,12 @@
 {
-  "total_sessions_monitored": 72,
+  "total_sessions_monitored": 74,
   "total_interactions_optimized": 29,
   "total_tokens_saved_all_time": 551,
   "average_optimization_effectiveness": 0.0,
   "agricultural_compliance_violations": 0,
   "enforcement_failures": 0,
-  "last_monitoring_update": "2025-10-05T18:19:48.750850",
+  "last_monitoring_update": "2025-10-05T18:29:59.672850",
   "session_history": [
-    {
-      "session_id": "session_1759683892",
-      "session_start": "2025-10-05T13:04:52.231575",
-      "session_end": "2025-10-05T13:10:09.422026",
-      "total_interactions": 0,
-      "total_tokens_saved": 0,
-      "agricultural_interactions": 0,
-      "safety_critical_interactions": 0,
-      "agent_type": "unknown"
-    },
-    {
-      "session_id": "session_1759684209",
-      "session_start": "2025-10-05T13:10:09.421892",
-      "session_end": "2025-10-05T13:15:53.323016",
-      "total_interactions": 0,
-      "total_tokens_saved": 0,
-      "agricultural_interactions": 0,
-      "safety_critical_interactions": 0,
-      "agent_type": "unknown"
-    },
     {
       "session_id": "session_1759684553",
       "session_start": "2025-10-05T13:15:53.322890",
@@ -501,6 +481,26 @@
       "session_id": "session_1759702311",
       "session_start": "2025-10-05T18:11:51.143071",
       "session_end": "2025-10-05T18:19:48.750841",
+      "total_interactions": 0,
+      "total_tokens_saved": 0,
+      "agricultural_interactions": 0,
+      "safety_critical_interactions": 0,
+      "agent_type": "unknown"
+    },
+    {
+      "session_id": "session_1759702788",
+      "session_start": "2025-10-05T18:19:48.750717",
+      "session_end": "2025-10-05T18:24:54.754286",
+      "total_interactions": 0,
+      "total_tokens_saved": 0,
+      "agricultural_interactions": 0,
+      "safety_critical_interactions": 0,
+      "agent_type": "unknown"
+    },
+    {
+      "session_id": "session_1759703094",
+      "session_start": "2025-10-05T18:24:54.754139",
+      "session_end": "2025-10-05T18:29:59.672842",
       "total_interactions": 0,
       "total_tokens_saved": 0,
       "agricultural_interactions": 0,
