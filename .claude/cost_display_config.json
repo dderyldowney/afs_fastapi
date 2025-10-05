@@ -1,0 +1,18 @@
+{
+  "cost_display_enabled": true,
+  "display_format": "compact",
+  "update_frequency": "per_response",
+  "agricultural_context": true,
+  "cost_tracking": {
+    "session_cost": true,
+    "cumulative_cost": true,
+    "model_breakdown": false,
+    "savings_display": true
+  },
+  "display_settings": {
+    "position": "header",
+    "format": "💰 Session: ${session_cost} | Total: ${total_cost} | Saved: ${savings}",
+    "precision": 2,
+    "currency": "USD"
+  }
+}

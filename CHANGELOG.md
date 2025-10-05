@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Error handling tests for missing Python executables in agricultural field deployments
   - Command-line robustness tests across different shell environments
   - Ensures CHANGELOG generation reliability for safety-critical agricultural documentation
+- **cost-tracking**: Real-time Claude API cost display system for agricultural budget management (affects multi-tractor equipment operations)
+  - Complete Claude API cost calculator with support for Sonnet 4, Haiku 3.5, and Opus 4.1 models
+  - Status line integration showing running costs in Claude Code interface
+  - Session cost tracking with agricultural context and token optimization savings
+  - Cost display formatters for agricultural technician-friendly interfaces
+  - Integration with existing token optimization infrastructure for budget analysis
 
 ### Changed
 - **infrastructure**: Update strategic and phase TODO management state synchronization

@@ -1,0 +1,18 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "python ~/.claude/cost_status_display.py"
+  },
+  "outputStyle": "Explanatory",
+  "costDisplay": {
+    "enabled": true,
+    "realTime": true,
+    "agricultural": true,
+    "showSavings": true
+  },
+  "agricultural": {
+    "safetyLevel": "standard",
+    "complianceMode": true,
+    "costTracking": true
+  }
+}
