@@ -4,29 +4,24 @@
 
 ---
 
-## Platform Status (v0.1.3+)
+## Executive Overview
 
-**AFS FastAPI**: Production-ready agricultural robotics platform with mandatory Test-Driven Development, Git Commit Separation, and CHANGELOG Triple-Layer Loop Protection for distributed multi-tractor coordination systems.
+**AFS FastAPI** is a production-ready agricultural robotics platform implementing distributed multi-tractor coordination systems with mandatory enterprise development standards for safety-critical agricultural operations.
 
-### Core Metrics
+### Platform Status (v0.1.3+)
 
+**Core Metrics**:
 - **Version**: v0.1.3+ (TDD, Commit Separation, CHANGELOG Loop Protection, Universal AI Investigation, Standardized Test Reporting)
 - **Test Suite**: 214 tests (211 pass, 3 xfail in 4.63s) - 12 CHANGELOG enforcement, 10 session init, 13 updatechangelog, 13 whereweare, 13 updatedocs (7 stubbed)
 - **Code Quality**: Zero warnings (Ruff, MyPy, Black, isort)
 - **Industry Compliance**: ISO 11783 (ISOBUS), ISO 18497 (Safety)
 - **Distributed Systems**: Vector Clock operational for fleet coordination
 
-### Universal AI Agent Compliance
+### Universal AI Agent Compatibility
 
-All AI agents must follow:
-- **Test-First Development**: RED phase before code, GREEN phase implementation, REFACTOR phase enhancement
-- **Structured Investigation Pattern**: Investigation steps, files examined, evidence collected, final analysis
-- **Standardized Test Reporting**: Executive summary, insight block, test distribution, health indicators, agricultural context
-- **Git Commit Separation**: Single concern per commit with agricultural context
-- **CHANGELOG Triple-Layer Loop Protection**: Hash ranges + auto-detection + [skip-changelog] marker
-- **Cross-Agent Infrastructure Sharing**: Any command/hook/config changes added to all agent configurations
+**Supported Platforms**: Claude Code (primary), GitHub Copilot (secondary), ChatGPT, Gemini Code Assist, Amazon CodeWhisperer
 
-**Complete requirements**: See [Mandatory Requirements](#mandatory-requirements-for-all-ai-agents) section below.
+Throughout this document, **"all AI agents"** refers to all five compatible platforms above, ensuring consistent development capabilities across AI assistants.
 
 ### Authoritative ISO 11783 References
 
@@ -37,20 +32,12 @@ All AI agents must follow:
 
 ---
 
-## Universal AI Agents
-
-**Compatible AI Platforms**: Claude Code (primary), GitHub Copilot (secondary), ChatGPT, Gemini Code Assist, Amazon CodeWhisperer
-
-Throughout this document, **"all AI agents"** refers to all five compatible platforms above.
-
----
-
-## Mandatory Requirements for All AI Agents
+## Universal AI Agent Compliance
 
 > **Canonical Source**: This section is the authoritative reference for all mandatory requirements.
 > **Cross-References**: CLAUDE.md and AGENTS.md reference this section to avoid duplication.
 
-All compatible AI agents must follow these requirements with no exceptions. Enforcement through pre-commit hooks and comprehensive test validation.
+All compatible AI agents must follow these six mandatory requirements with no exceptions. Enforcement through pre-commit hooks and comprehensive test validation.
 
 ### 1. Test-First Development
 
@@ -135,27 +122,42 @@ NEW COMMAND → Automatic Updates:
 
 ## Agricultural Robotics Context
 
-**Safety-critical multi-tractor coordination**: AFS FastAPI implements distributed systems for autonomous agricultural equipment operating in shared field environments. Failures can cause equipment damage, crop loss, or operator injury.
+**Safety-Critical Multi-Tractor Coordination**: AFS FastAPI implements distributed systems for autonomous agricultural equipment operating in shared field environments. Safety failures can cause equipment damage, crop loss, or operator injury, making reliability paramount.
 
-**ISO compliance requirements**:
+### ISO Compliance Requirements
+
 - **ISO 18497**: Agricultural machinery safety standards for autonomous systems
 - **ISO 11783**: ISOBUS communication protocols for tractor-implement coordination
 
-**Test-First Development rationale**: Agricultural robotics demands bulletproof reliability. Every function must be validated against agricultural scenarios before deployment.
+These standards ensure interoperability, safety, and regulatory compliance across agricultural equipment manufacturers and farm operations.
 
-**Documentation rationale**: Complete version history (CHANGELOG.md) and strategic assessments (WHERE_WE_ARE.md) essential for compliance auditing, stakeholder communication, and emergency incident investigation.
+### Development Standards Rationale
 
-**Universal AI agent support**: Consistent development capabilities across all AI platforms ensures knowledge continuity, reduces training overhead, and maintains quality standards regardless of which assistant is used.
+**Test-First Development**: Bulletproof reliability demands test-proven code. Every function must be validated against agricultural scenarios before deployment to prevent safety incidents and operational failures.
+
+**Documentation Integrity**: Complete version history (CHANGELOG.md) and strategic assessments (WHERE_WE_ARE.md) are essential for:
+- Compliance auditing and regulatory reviews
+- Stakeholder communication and progress tracking
+- Emergency incident investigation and root cause analysis
+- Cross-team knowledge transfer and training
+
+**Universal AI Agent Support**: Consistent development capabilities across all AI platforms ensures:
+- Knowledge continuity between development sessions
+- Reduced training overhead for team members
+- Maintained quality standards regardless of assistant used
+- Seamless collaboration across different AI tools
 
 ---
 
-## Universal Session Management Commands
+## Session Management Commands
 
-**All AI agents** can execute these commands with persistent cross-session knowledge.
+**All AI agents** can execute these commands with persistent cross-session knowledge transfer and consistent functionality across platforms.
 
 **Command trigger files**: All commands documented in `.claude/commands/` directory with complete specifications.
 
-### loadsession
+### Session Initialization & State Management
+
+#### loadsession
 
 **Purpose**: Restore complete project context (conceptual, contextual, functional).
 
@@ -171,7 +173,7 @@ NEW COMMAND → Automatic Updates:
 
 **Reference**: [docs/EXECUTION_ORDER.md](docs/EXECUTION_ORDER.md), [.claude/commands/loadsession.md](.claude/commands/loadsession.md)
 
-### savesession
+#### savesession
 
 **Purpose**: Capture complete session state with mandatory compaction into SESSION_SUMMARY.md.
 
@@ -187,101 +189,7 @@ NEW COMMAND → Automatic Updates:
 
 **Reference**: [.claude/commands/savesession.md](.claude/commands/savesession.md)
 
-### runtests
-
-**Purpose**: Execute comprehensive test suite with standardized reporting format.
-
-**Usage**:
-- `./bin/runtests` - Full test suite
-- `./bin/runtests --coverage` - With coverage analysis
-- `./bin/runtests -q` - Quiet mode
-- `./bin/runtests tests/unit/equipment/` - Specific directory
-
-**Required AI agent analysis** (6 sections):
-1. Executive Summary
-2. Insight Block
-3. Test Distribution
-4. Platform Health Indicators
-5. Agricultural Context
-6. Advisory Notes
-
-**Reference**: [.claude/commands/runtests.md](.claude/commands/runtests.md)
-
-### whereweare
-
-**Purpose**: Display or generate comprehensive WHERE_WE_ARE.md strategic assessment.
-
-**Usage**:
-- `./bin/whereweare` - Display existing 480+ line strategic documentation
-- `./bin/whereweare --generate` - Generate from current platform state
-- `/whereweare` - Claude Code slash command
-
-**Functionality**:
-- Extracts live metrics (git tags, test counts, README.md, SESSION_SUMMARY.md)
-- Essential for ISO compliance planning and stakeholder communication
-- Synthesizes strategic assessment from distributed platform state
-
-**Reference**: [.claude/commands/whereweare.md](.claude/commands/whereweare.md)
-
-### updatedocs
-
-**Purpose**: Meta-command for unified regeneration of all 6 core documentation files.
-
-**Usage**:
-- `./bin/updatedocs` - Update all 6 core documents
-- `./bin/updatedocs --dry-run` - Preview without execution
-- `./bin/updatedocs --only=whereweare,changelog` - Selective updates
-- `/updatedocs` - Claude Code slash command
-
-**6 Core documents regenerated**:
-1. WHERE_WE_ARE.md (strategic assessment)
-2. docs/index.html (web documentation)
-3. CHANGELOG.md (version history)
-4. Test reports (platform health)
-5. Session state (development metrics)
-6. Documentation stats (status dashboard)
-
-**Orchestrates**: whereweare --generate, updatewebdocs, updatechangelog, runtests -q
-
-**Essential for**: ISO compliance auditing (ISO 11783, ISO 18497), stakeholder communication, synchronized platform state.
-
-**Reference**: [.claude/commands/updatedocs.md](.claude/commands/updatedocs.md)
-
-### updatechangelog
-
-**Purpose**: Regenerate CHANGELOG.md from git history with triple-layer loop protection.
-
-**Usage**: `./bin/updatechangelog`
-
-**When to use**: Before every git commit (enforced by pre-commit hooks).
-
-**Functionality**:
-- Regenerates complete version history from git log
-- Applies Keep a Changelog format with agricultural context
-- Hash-range protection prevents infinite regeneration loops
-- Mandatory inclusion in all commits
-
-**Reference**: [.claude/commands/updatechangelog.md](.claude/commands/updatechangelog.md)
-
-### updatewebdocs
-
-**Purpose**: Convert README.md → docs/index.html with professional styling.
-
-**Usage**: `./bin/updatewebdocs`
-
-**When to use**: Required when README.md changes (must commit both files together).
-
-**Functionality**:
-- Converts markdown to HTML with professional presentation
-- Creates docs/ directory if missing
-- Auto-stages docs/index.html for git commit
-- Preserves agricultural terminology and technical specifications
-
-**Essential for**: Equipment operators, safety engineers, compliance auditors accessing documentation via browsers.
-
-**Reference**: [.claude/commands/updatewebdocs.md](.claude/commands/updatewebdocs.md)
-
-### saveandpush
+#### saveandpush
 
 **Purpose**: Complete session state preservation and repository synchronization in a single command.
 
@@ -308,24 +216,107 @@ NEW COMMAND → Automatic Updates:
 
 **Reference**: [.claude/commands/saveandpush.md](.claude/commands/saveandpush.md)
 
+### Testing & Quality Assurance
+
+#### runtests
+
+**Purpose**: Execute comprehensive test suite with standardized reporting format.
+
+**Usage**:
+- `./bin/runtests` - Full test suite
+- `./bin/runtests --coverage` - With coverage analysis
+- `./bin/runtests -q` - Quiet mode
+- `./bin/runtests tests/unit/equipment/` - Specific directory
+
+**Required AI agent analysis** (6 sections):
+1. Executive Summary
+2. Insight Block
+3. Test Distribution
+4. Platform Health Indicators
+5. Agricultural Context
+6. Advisory Notes
+
+**Reference**: [.claude/commands/runtests.md](.claude/commands/runtests.md)
+
+### Documentation Management
+
+#### whereweare
+
+**Purpose**: Display or generate comprehensive WHERE_WE_ARE.md strategic assessment.
+
+**Usage**:
+- `./bin/whereweare` - Display existing 480+ line strategic documentation
+- `./bin/whereweare --generate` - Generate from current platform state
+- `/whereweare` - Claude Code slash command
+
+**Functionality**:
+- Extracts live metrics (git tags, test counts, README.md, SESSION_SUMMARY.md)
+- Essential for ISO compliance planning and stakeholder communication
+- Synthesizes strategic assessment from distributed platform state
+
+**Reference**: [.claude/commands/whereweare.md](.claude/commands/whereweare.md)
+
+#### updatedocs
+
+**Purpose**: Meta-command for unified regeneration of all 6 core documentation files.
+
+**Usage**:
+- `./bin/updatedocs` - Update all 6 core documents
+- `./bin/updatedocs --dry-run` - Preview without execution
+- `./bin/updatedocs --only=whereweare,changelog` - Selective updates
+- `/updatedocs` - Claude Code slash command
+
+**6 Core documents regenerated**:
+1. WHERE_WE_ARE.md (strategic assessment)
+2. docs/index.html (web documentation)
+3. CHANGELOG.md (version history)
+4. Test reports (platform health)
+5. Session state (development metrics)
+6. Documentation stats (status dashboard)
+
+**Orchestrates**: whereweare --generate, updatewebdocs, updatechangelog, runtests -q
+
+**Essential for**: ISO compliance auditing (ISO 11783, ISO 18497), stakeholder communication, synchronized platform state.
+
+**Reference**: [.claude/commands/updatedocs.md](.claude/commands/updatedocs.md)
+
+#### updatechangelog
+
+**Purpose**: Regenerate CHANGELOG.md from git history with triple-layer loop protection.
+
+**Usage**: `./bin/updatechangelog`
+
+**When to use**: Before every git commit (enforced by pre-commit hooks).
+
+**Functionality**:
+- Regenerates complete version history from git log
+- Applies Keep a Changelog format with agricultural context
+- Hash-range protection prevents infinite regeneration loops
+- Mandatory inclusion in all commits
+
+**Reference**: [.claude/commands/updatechangelog.md](.claude/commands/updatechangelog.md)
+
+#### updatewebdocs
+
+**Purpose**: Convert README.md → docs/index.html with professional styling.
+
+**Usage**: `./bin/updatewebdocs`
+
+**When to use**: Required when README.md changes (must commit both files together).
+
+**Functionality**:
+- Converts markdown to HTML with professional presentation
+- Creates docs/ directory if missing
+- Auto-stages docs/index.html for git commit
+- Preserves agricultural terminology and technical specifications
+
+**Essential for**: Equipment operators, safety engineers, compliance auditors accessing documentation via browsers.
+
+**Reference**: [.claude/commands/updatewebdocs.md](.claude/commands/updatewebdocs.md)
+
 ---
 
-## Session Initialization Architecture
-
-**6-Phase Execution** (28+ files working together):
-
-1. **Automatic Hook-Based**: [.claude/hooks/session_initialization.py](.claude/hooks/session_initialization.py) (5-min staleness detection)
-2. **Manual Fallback**: `bin/loadsession` (explicit context restoration)
-3. **Conceptual Context**: CLAUDE.md, SESSION_SUMMARY.md, AGENTS.md (requirements)
-4. **Enforcement & Validation**: Hooks validate compliance
-5. **Mandatory Requirement References**: Complete specifications
-6. **Helper Commands & Utilities**: Additional session tools
-
-**Complete Flow**: [docs/EXECUTION_ORDER.md](docs/EXECUTION_ORDER.md)
-
----
-
-## Development Workflow
+## Development Standards & Workflow
 
 ### Format-First Generation Standards
 
@@ -371,7 +362,22 @@ git commit -m "docs(readme): Update documentation"
 
 ---
 
-## Strategic Development Priorities
+## Platform Architecture
+
+### Session Initialization Architecture
+
+**6-Phase Execution** (28+ files working together):
+
+1. **Automatic Hook-Based**: [.claude/hooks/session_initialization.py](.claude/hooks/session_initialization.py) (5-min staleness detection)
+2. **Manual Fallback**: `bin/loadsession` (explicit context restoration)
+3. **Conceptual Context**: CLAUDE.md, SESSION_SUMMARY.md, AGENTS.md (requirements)
+4. **Enforcement & Validation**: Hooks validate compliance
+5. **Mandatory Requirement References**: Complete specifications
+6. **Helper Commands & Utilities**: Additional session tools
+
+**Complete Flow**: [docs/EXECUTION_ORDER.md](docs/EXECUTION_ORDER.md)
+
+### Strategic Development Priorities
 
 **v0.1.3+ Focus**: Multi-tractor synchronization infrastructure with Test-First Development enforcement.
 
@@ -388,44 +394,28 @@ git commit -m "docs(readme): Update documentation"
 
 ---
 
-## References
+## Reference Documentation
 
-### Core Documentation
+### Core Platform Documentation
 - **[WORKFLOW.md](WORKFLOW.md)**: Complete testing architecture (214 tests, 3-layer structure)
 - **[TDD_WORKFLOW.md](TDD_WORKFLOW.md)**: Test-First methodology with agricultural examples
 - **[EXECUTION_ORDER.md](docs/EXECUTION_ORDER.md)**: Session initialization architecture (6 phases)
 - **[WHERE_WE_ARE.md](docs/strategic/WHERE_WE_ARE.md)**: Strategic platform assessment
 
 ### Mandatory Compliance Specifications
-- **[TDD_FRAMEWORK_MANDATORY.md](TDD_FRAMEWORK_MANDATORY.md)**: Test-First enforcement
-- **[GIT_COMMIT_SEPARATION_MANDATORY.md](GIT_COMMIT_SEPARATION_MANDATORY.md)**: Commit separation
-- **[INVESTIGATION_PATTERN_MANDATORY.md](.claude/INVESTIGATION_PATTERN_MANDATORY.md)**: Structured investigation
-- **[TEST_REPORTING_MANDATORY.md](.claude/TEST_REPORTING_MANDATORY.md)**: Standardized test reporting
-- **[AUTOMATIC_COMMAND_SHARING_MANDATORY.md](.claude/AUTOMATIC_COMMAND_SHARING_MANDATORY.md)**: Cross-agent sharing
+- **[TDD_FRAMEWORK_MANDATORY.md](docs/implementation/TDD_FRAMEWORK_MANDATORY.md)**: Test-First enforcement framework
+- **[GIT_COMMIT_SEPARATION_MANDATORY.md](docs/processes/GIT_COMMIT_SEPARATION_MANDATORY.md)**: Commit separation requirements
+- **[INVESTIGATION_PATTERN_MANDATORY.md](.claude/INVESTIGATION_PATTERN_MANDATORY.md)**: Structured investigation methodology
+- **[TEST_REPORTING_MANDATORY.md](.claude/TEST_REPORTING_MANDATORY.md)**: Standardized test reporting format
+- **[AUTOMATIC_COMMAND_SHARING_MANDATORY.md](.claude/AUTOMATIC_COMMAND_SHARING_MANDATORY.md)**: Cross-agent infrastructure sharing
 
-### Implementation Guides
+### AI Agent Configuration
 - **[CLAUDE.md](CLAUDE.md)**: Project-specific instructions for Claude Code
-- **[AGENTS.md](AGENTS.md)**: Universal AI agent configuration
-- **[CONTRIBUTING.md](CONTRIBUTING.md)**: Development environment setup
-
----
-
-## Agricultural Context & Rationale
-
-**Safety-Critical Multi-Tractor Coordination**: AFS FastAPI implements distributed systems for autonomous agricultural equipment operating in shared field environments. Safety failures can cause equipment damage, crop loss, or operator injury.
-
-**ISO Compliance Requirements**:
-- **ISO 18497**: Agricultural machinery safety standards for autonomous systems
-- **ISO 11783**: ISOBUS communication protocols for tractor-implement coordination
-
-**Test-First Development**: Bulletproof reliability demands test-proven code. Every function validated against agricultural scenarios before deployment.
-
-**Documentation Integrity**: Complete version history (CHANGELOG.md) and strategic assessments (WHERE_WE_ARE.md) essential for compliance auditing, stakeholder communication, and emergency incident investigation.
-
-**Universal AI Agent Support**: Consistent development capabilities across all AI platforms ensures knowledge continuity, reduces training overhead, and maintains quality standards regardless of which assistant is used.
+- **[AGENTS.md](AGENTS.md)**: Universal AI agent configuration and requirements
+- **[CONTRIBUTING.md](CONTRIBUTING.md)**: Development environment setup and guidelines
 
 ---
 
 **Session Initialization**: Execute `./bin/loadsession` or trigger automatic hook for complete context restoration.
 
-**Mission**: Dual-purpose educational and functional platform advancing agricultural robotics while teaching enterprise-grade development practices.
+**Platform Mission**: Dual-purpose educational and functional platform advancing agricultural robotics while teaching enterprise-grade development practices.

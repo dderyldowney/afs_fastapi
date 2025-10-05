@@ -15,13 +15,12 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.core.conversation_manager import (
+from afs_fastapi.core.conversation_manager import (  # noqa: E402
+    configure_optimization,
     get_conversation_manager,
-    optimize_interaction,
     get_optimization_status,
-    configure_optimization
+    optimize_interaction,
 )
-from afs_fastapi.services.realtime_token_optimizer import OptimizationLevel
 
 
 def main():
@@ -45,47 +44,45 @@ Examples:
 
   # Test optimization with sample conversations
   ./bin/optimize-conversation --test-sample
-        """
+        """,
     )
 
     # Operation modes
-    parser.add_argument('--interactive', action='store_true',
-                        help='Start interactive optimization session')
-    parser.add_argument('--test-sample', action='store_true',
-                        help='Test with sample agricultural conversations')
-    parser.add_argument('--status', action='store_true',
-                        help='Show current optimization status')
-    parser.add_argument('--configure', action='store_true',
-                        help='Configure optimization settings')
+    parser.add_argument(
+        "--interactive", action="store_true", help="Start interactive optimization session"
+    )
+    parser.add_argument(
+        "--test-sample", action="store_true", help="Test with sample agricultural conversations"
+    )
+    parser.add_argument("--status", action="store_true", help="Show current optimization status")
+    parser.add_argument("--configure", action="store_true", help="Configure optimization settings")
 
     # Content processing
-    parser.add_argument('--input', type=str,
-                        help='User input to optimize')
-    parser.add_argument('--output', type=str,
-                        help='AI response to optimize')
-    parser.add_argument('--command-type', type=str, default='general',
-                        choices=['general', 'git', 'test', 'status', 'safety', 'agricultural'],
-                        help='Type of interaction for optimization tuning')
+    parser.add_argument("--input", type=str, help="User input to optimize")
+    parser.add_argument("--output", type=str, help="AI response to optimize")
+    parser.add_argument(
+        "--command-type",
+        type=str,
+        default="general",
+        choices=["general", "git", "test", "status", "safety", "agricultural"],
+        help="Type of interaction for optimization tuning",
+    )
 
     # Configuration options
-    parser.add_argument('--token-budget', type=int,
-                        help='Set token budget per conversation turn')
-    parser.add_argument('--adaptive', action='store_true',
-                        help='Enable adaptive optimization mode')
-    parser.add_argument('--no-adaptive', action='store_true',
-                        help='Disable adaptive optimization mode')
-    parser.add_argument('--debug', action='store_true',
-                        help='Enable debug mode')
-    parser.add_argument('--disable', action='store_true',
-                        help='Disable optimization system')
-    parser.add_argument('--enable', action='store_true',
-                        help='Enable optimization system')
+    parser.add_argument("--token-budget", type=int, help="Set token budget per conversation turn")
+    parser.add_argument("--adaptive", action="store_true", help="Enable adaptive optimization mode")
+    parser.add_argument(
+        "--no-adaptive", action="store_true", help="Disable adaptive optimization mode"
+    )
+    parser.add_argument("--debug", action="store_true", help="Enable debug mode")
+    parser.add_argument("--disable", action="store_true", help="Disable optimization system")
+    parser.add_argument("--enable", action="store_true", help="Enable optimization system")
 
     # Output options
-    parser.add_argument('--json', action='store_true',
-                        help='Output results in JSON format')
-    parser.add_argument('--verbose', action='store_true',
-                        help='Show detailed optimization information')
+    parser.add_argument("--json", action="store_true", help="Output results in JSON format")
+    parser.add_argument(
+        "--verbose", action="store_true", help="Show detailed optimization information"
+    )
 
     args = parser.parse_args()
 
@@ -155,7 +152,7 @@ def configure_optimization_settings(args):
 
     print("\nCurrent configuration:")
     status = get_optimization_status()
-    config = status.get('configuration', {})
+    config = status.get("configuration", {})
     print(f"  Optimization enabled: {status.get('optimization_enabled', False)}")
     print(f"  Token budget per turn: {config.get('token_budget_per_turn', 'unknown')}")
     print(f"  Adaptive mode: {config.get('adaptive_mode', False)}")
@@ -174,43 +171,43 @@ def show_optimization_status(json_output=False, verbose=False):
     print("=" * 45)
 
     # Basic status
-    enabled = status.get('optimization_enabled', False)
+    enabled = status.get("optimization_enabled", False)
     print(f"Optimization: {'🟢 ENABLED' if enabled else '🔴 DISABLED'}")
 
     # Global metrics
-    total_interactions = status.get('total_interactions', 0)
-    total_saved = status.get('total_tokens_saved', 0)
-    active_conversations = status.get('active_conversations', 0)
+    total_interactions = status.get("total_interactions", 0)
+    total_saved = status.get("total_tokens_saved", 0)
+    active_conversations = status.get("active_conversations", 0)
 
     print(f"Total interactions: {total_interactions}")
     print(f"Total tokens saved: {total_saved}")
     print(f"Active conversations: {active_conversations}")
 
     # Configuration
-    config = status.get('configuration', {})
+    config = status.get("configuration", {})
     print(f"Token budget per turn: {config.get('token_budget_per_turn', 'N/A')}")
     print(f"Adaptive mode: {'Yes' if config.get('adaptive_mode', False) else 'No'}")
 
     # Platform summary
-    platform = status.get('platform_summary', {})
+    platform = status.get("platform_summary", {})
     if platform:
         print("\nSession Summary:")
-        session_duration = platform.get('session_duration_minutes', 0)
+        session_duration = platform.get("session_duration_minutes", 0)
         print(f"  Session duration: {session_duration:.1f} minutes")
 
-        total_metrics = platform.get('total_metrics', {})
-        turns = total_metrics.get('turns', 0)
-        avg_reduction = total_metrics.get('average_reduction_percent', 0)
-        agricultural_turns = total_metrics.get('agricultural_turns', 0)
-        safety_turns = total_metrics.get('safety_critical_turns', 0)
+        total_metrics = platform.get("total_metrics", {})
+        turns = total_metrics.get("turns", 0)
+        avg_reduction = total_metrics.get("average_reduction_percent", 0)
+        agricultural_turns = total_metrics.get("agricultural_turns", 0)
+        safety_turns = total_metrics.get("safety_critical_turns", 0)
 
         print(f"  Conversation turns: {turns}")
         print(f"  Average reduction: {avg_reduction:.1f}%")
         print(f"  Agricultural focus: {agricultural_turns} turns")
         print(f"  Safety-critical: {safety_turns} turns")
 
-    if verbose and 'conversation_list' in status:
-        conversations = status['conversation_list']
+    if verbose and "conversation_list" in status:
+        conversations = status["conversation_list"]
         if conversations:
             print(f"\nActive conversations: {', '.join(conversations)}")
 
@@ -235,7 +232,7 @@ def run_interactive_session():
                 continue
 
             # Handle commands
-            if user_input.startswith('/'):
+            if user_input.startswith("/"):
                 handle_interactive_command(user_input, manager, conversation_id)
                 continue
 
@@ -244,36 +241,34 @@ def run_interactive_session():
 
             # Process through optimization
             result = manager.process_conversation_turn(
-                user_input=user_input,
-                ai_response=ai_response,
-                conversation_id=conversation_id
+                user_input=user_input, ai_response=ai_response, conversation_id=conversation_id
             )
 
             # Display results
-            optimized_content = result['optimized_content']
-            optimization_meta = result['optimization_metadata']
+            optimized_content = result["optimized_content"]
+            optimization_meta = result["optimization_metadata"]
 
             print(f"\nOptimized Input: {optimized_content['user_input']}")
             print(f"AI Response: {optimized_content['ai_response']}")
 
             # Show optimization metrics
-            total_saved = optimization_meta['total_tokens_saved']
-            input_meta = optimization_meta['input']
-            response_meta = optimization_meta['response']
+            total_saved = optimization_meta["total_tokens_saved"]
+            input_meta = optimization_meta["input"]
+            response_meta = optimization_meta["response"]
 
             if total_saved > 0:
                 print(f"💰 Tokens saved: {total_saved}")
-                if input_meta.get('tokens_saved', 0) > 0:
+                if input_meta.get("tokens_saved", 0) > 0:
                     print(f"   Input: {input_meta['tokens_saved']} tokens saved")
-                if response_meta.get('tokens_saved', 0) > 0:
+                if response_meta.get("tokens_saved", 0) > 0:
                     print(f"   Response: {response_meta['tokens_saved']} tokens saved")
 
             # Show agricultural compliance
-            compliance = result['agricultural_compliance']
-            if compliance['agricultural_keywords_detected']:
-                keywords = ', '.join(compliance['agricultural_keywords_detected'])
+            compliance = result["agricultural_compliance"]
+            if compliance["agricultural_keywords_detected"]:
+                keywords = ", ".join(compliance["agricultural_keywords_detected"])
                 print(f"🚜 Agricultural keywords: {keywords}")
-            if compliance['safety_critical']:
+            if compliance["safety_critical"]:
                 print("⚠️  Safety-critical content detected")
 
             print()
@@ -287,39 +282,39 @@ def run_interactive_session():
 
 def handle_interactive_command(command, manager, conversation_id):
     """Handle interactive session commands."""
-    if command == '/quit':
+    if command == "/quit":
         print("👋 Goodbye!")
         sys.exit(0)
 
-    elif command == '/status':
+    elif command == "/status":
         metrics = manager.get_conversation_metrics(conversation_id)
-        session = metrics.get('session_summary', {})
-        total_metrics = session.get('total_metrics', {})
+        session = metrics.get("session_summary", {})
+        total_metrics = session.get("total_metrics", {})
 
-        print(f"\nSession Status:")
+        print("\nSession Status:")
         print(f"  Turns: {total_metrics.get('turns', 0)}")
         print(f"  Tokens saved: {total_metrics.get('tokens_saved', 0)}")
         print(f"  Average reduction: {total_metrics.get('average_reduction_percent', 0):.1f}%")
         print()
 
-    elif command == '/config':
+    elif command == "/config":
         status = get_optimization_status()
-        config = status.get('configuration', {})
-        print(f"\nCurrent Configuration:")
+        config = status.get("configuration", {})
+        print("\nCurrent Configuration:")
         print(f"  Optimization: {'ON' if status.get('optimization_enabled', False) else 'OFF'}")
         print(f"  Token budget: {config.get('token_budget_per_turn', 'N/A')}")
         print(f"  Adaptive mode: {'ON' if config.get('adaptive_mode', False) else 'OFF'}")
         print()
 
-    elif command == '/export':
+    elif command == "/export":
         files = manager.export_conversation_data(conversation_id)
         if files:
             print(f"\n📁 Exported to: {files[0]}")
         print()
 
-    elif command == '/reset':
-        final_metrics = manager.reset_conversation(conversation_id)
-        print(f"\n🔄 Conversation reset. Final metrics exported.")
+    elif command == "/reset":
+        manager.reset_conversation(conversation_id)
+        print("\n🔄 Conversation reset. Final metrics exported.")
         print()
 
     else:
@@ -332,38 +327,46 @@ def generate_sample_ai_response(user_input):
     """Generate sample AI response based on input content."""
     input_lower = user_input.lower()
 
-    if any(word in input_lower for word in ['tractor', 'agricultural', 'farming', 'field']):
-        return ("I'll help you implement the agricultural equipment coordination system. "
-                "This involves ISO 11783 compliance, safety protocols, and fleet management. "
-                "Let me start with the basic tractor communication interface...")
+    if any(word in input_lower for word in ["tractor", "agricultural", "farming", "field"]):
+        return (
+            "I'll help you implement the agricultural equipment coordination system. "
+            "This involves ISO 11783 compliance, safety protocols, and fleet management. "
+            "Let me start with the basic tractor communication interface..."
+        )
 
-    elif any(word in input_lower for word in ['safety', 'emergency', 'critical', 'stop']):
-        return ("Safety is paramount in agricultural operations. Emergency stop procedures "
-                "must be implemented according to ISO standards with immediate equipment "
-                "shutdown capabilities and collision avoidance systems.")
+    elif any(word in input_lower for word in ["safety", "emergency", "critical", "stop"]):
+        return (
+            "Safety is paramount in agricultural operations. Emergency stop procedures "
+            "must be implemented according to ISO standards with immediate equipment "
+            "shutdown capabilities and collision avoidance systems."
+        )
 
-    elif any(word in input_lower for word in ['git', 'status', 'commit', 'branch']):
-        return ("Current git status shows modifications in the agricultural equipment modules. "
-                "Recent commits include safety enhancements and ISO compliance updates. "
-                "The main branch is stable for production deployment.")
+    elif any(word in input_lower for word in ["git", "status", "commit", "branch"]):
+        return (
+            "Current git status shows modifications in the agricultural equipment modules. "
+            "Recent commits include safety enhancements and ISO compliance updates. "
+            "The main branch is stable for production deployment."
+        )
 
-    elif any(word in input_lower for word in ['test', 'pytest', 'unittest']):
-        return ("Running comprehensive test suite for agricultural robotics platform. "
-                "This includes unit tests for equipment interfaces, integration tests "
-                "for fleet coordination, and compliance validation tests.")
+    elif any(word in input_lower for word in ["test", "pytest", "unittest"]):
+        return (
+            "Running comprehensive test suite for agricultural robotics platform. "
+            "This includes unit tests for equipment interfaces, integration tests "
+            "for fleet coordination, and compliance validation tests."
+        )
 
     else:
-        return ("I understand your request. Let me provide a comprehensive solution "
-                "that addresses your needs while maintaining agricultural safety standards "
-                "and following best practices for the AFS FastAPI platform.")
+        return (
+            "I understand your request. Let me provide a comprehensive solution "
+            "that addresses your needs while maintaining agricultural safety standards "
+            "and following best practices for the AFS FastAPI platform."
+        )
 
 
 def optimize_single_interaction(args):
     """Optimize a single input/output pair."""
     result = optimize_interaction(
-        user_input=args.input,
-        ai_response=args.output or "",
-        command_type=args.command_type
+        user_input=args.input, ai_response=args.output or "", command_type=args.command_type
     )
 
     if args.json:
@@ -371,8 +374,8 @@ def optimize_single_interaction(args):
         return
 
     # Display optimization results
-    optimized_content = result['optimized_content']
-    optimization_meta = result['optimization_metadata']
+    optimized_content = result["optimized_content"]
+    optimization_meta = result["optimization_metadata"]
 
     print("🔧 Token Optimization Results")
     print("=" * 35)
@@ -380,33 +383,35 @@ def optimize_single_interaction(args):
     print(f"\nOriginal Input: {result['original_content']['user_input']}")
     print(f"Optimized Input: {optimized_content['user_input']}")
 
-    if result['original_content']['ai_response']:
+    if result["original_content"]["ai_response"]:
         print(f"\nOriginal Response: {result['original_content']['ai_response']}")
         print(f"Optimized Response: {optimized_content['ai_response']}")
 
     # Show savings
-    total_saved = optimization_meta['total_tokens_saved']
+    total_saved = optimization_meta["total_tokens_saved"]
     print(f"\n💰 Total tokens saved: {total_saved}")
 
-    input_meta = optimization_meta['input']
-    if input_meta.get('optimization_applied', False):
-        input_saved = input_meta.get('tokens_saved', 0)
-        input_reduction = input_meta.get('reduction_percentage', 0)
+    input_meta = optimization_meta["input"]
+    if input_meta.get("optimization_applied", False):
+        input_saved = input_meta.get("tokens_saved", 0)
+        input_reduction = input_meta.get("reduction_percentage", 0)
         print(f"   Input optimization: {input_saved} tokens ({input_reduction:.1f}% reduction)")
 
-    response_meta = optimization_meta['response']
-    if response_meta.get('optimization_applied', False):
-        response_saved = response_meta.get('tokens_saved', 0)
-        response_reduction = response_meta.get('reduction_percentage', 0)
-        print(f"   Response optimization: {response_saved} tokens ({response_reduction:.1f}% reduction)")
+    response_meta = optimization_meta["response"]
+    if response_meta.get("optimization_applied", False):
+        response_saved = response_meta.get("tokens_saved", 0)
+        response_reduction = response_meta.get("reduction_percentage", 0)
+        print(
+            f"   Response optimization: {response_saved} tokens ({response_reduction:.1f}% reduction)"
+        )
 
     # Show agricultural compliance
-    compliance = result['agricultural_compliance']
-    if compliance['agricultural_keywords_detected']:
-        keywords = ', '.join(compliance['agricultural_keywords_detected'])
+    compliance = result["agricultural_compliance"]
+    if compliance["agricultural_keywords_detected"]:
+        keywords = ", ".join(compliance["agricultural_keywords_detected"])
         print(f"\n🚜 Agricultural keywords preserved: {keywords}")
 
-    if compliance['safety_critical']:
+    if compliance["safety_critical"]:
         print("⚠️  Safety-critical content detected and preserved")
 
 
@@ -421,32 +426,32 @@ def run_sample_tests(json_output=False, verbose=False):
             "name": "Agricultural Equipment Query",
             "input": "How do I implement multi-tractor coordination with ISO 11783 compliance for field operations?",
             "response": "To implement multi-tractor coordination with ISO 11783 compliance, you'll need to establish ISOBUS communication protocols, implement safety monitoring systems, configure fleet management interfaces, and ensure emergency stop procedures are in place according to agricultural safety standards.",
-            "type": "agricultural"
+            "type": "agricultural",
         },
         {
             "name": "Safety Emergency Procedure",
             "input": "What are the emergency stop procedures for agricultural equipment malfunction?",
             "response": "Emergency stop procedures must immediately halt all equipment operations, activate visual and audible alarms, engage mechanical brakes, shutdown power systems, and notify operators. Critical safety protocols require ISO compliance validation and automatic collision avoidance system activation.",
-            "type": "safety"
+            "type": "safety",
         },
         {
             "name": "Development Status Check",
             "input": "Show me the current git status and recent commits for the project",
             "response": "Current git status shows 3 modified files in the agricultural equipment modules. Recent commits include safety enhancements, ISO compliance updates, and fleet coordination improvements. The main branch is stable.",
-            "type": "git"
+            "type": "git",
         },
         {
             "name": "Test Execution",
             "input": "Run the test suite and show me the results",
             "response": "Executing comprehensive test suite: 214 tests total, 211 passing, 3 expected failures. Agricultural equipment tests passed, safety protocol validation successful, ISO compliance verified. Test coverage at 96%.",
-            "type": "test"
+            "type": "test",
         },
         {
             "name": "General Development",
             "input": "Help me refactor the equipment monitoring module",
             "response": "I'll help refactor the equipment monitoring module. This involves extracting common interfaces, implementing observer patterns for real-time updates, optimizing data structures for performance, and maintaining backward compatibility with existing systems.",
-            "type": "general"
-        }
+            "type": "general",
+        },
     ]
 
     results = []
@@ -457,51 +462,65 @@ def run_sample_tests(json_output=False, verbose=False):
         print(f"\nTesting: {scenario['name']}")
 
         result = optimize_interaction(
-            user_input=scenario['input'],
-            ai_response=scenario['response'],
-            command_type=scenario['type']
+            user_input=scenario["input"],
+            ai_response=scenario["response"],
+            command_type=scenario["type"],
         )
 
         # Calculate metrics
-        optimization_meta = result['optimization_metadata']
-        tokens_saved = optimization_meta['total_tokens_saved']
+        optimization_meta = result["optimization_metadata"]
+        tokens_saved = optimization_meta["total_tokens_saved"]
 
         # Estimate original vs optimized tokens
-        original_content = result['original_content']
-        optimized_content = result['optimized_content']
+        original_content = result["original_content"]
+        optimized_content = result["optimized_content"]
 
-        original_tokens = len(original_content['user_input'] + original_content['ai_response']) // 4
-        optimized_tokens = len(optimized_content['user_input'] + optimized_content['ai_response']) // 4
+        original_tokens = len(original_content["user_input"] + original_content["ai_response"]) // 4
+        optimized_tokens = (
+            len(optimized_content["user_input"] + optimized_content["ai_response"]) // 4
+        )
 
         total_original_tokens += original_tokens
         total_optimized_tokens += optimized_tokens
 
-        reduction_percent = ((original_tokens - optimized_tokens) / original_tokens * 100) if original_tokens > 0 else 0
+        reduction_percent = (
+            ((original_tokens - optimized_tokens) / original_tokens * 100)
+            if original_tokens > 0
+            else 0
+        )
 
-        print(f"  Tokens: {original_tokens} → {optimized_tokens} ({reduction_percent:.1f}% reduction)")
+        print(
+            f"  Tokens: {original_tokens} → {optimized_tokens} ({reduction_percent:.1f}% reduction)"
+        )
 
         # Show agricultural compliance
-        compliance = result['agricultural_compliance']
-        if compliance['agricultural_keywords_detected']:
-            keywords = ', '.join(compliance['agricultural_keywords_detected'])
+        compliance = result["agricultural_compliance"]
+        if compliance["agricultural_keywords_detected"]:
+            keywords = ", ".join(compliance["agricultural_keywords_detected"])
             print(f"  🚜 Agricultural: {keywords}")
-        if compliance['safety_critical']:
-            print(f"  ⚠️  Safety-critical content preserved")
+        if compliance["safety_critical"]:
+            print("  ⚠️  Safety-critical content preserved")
 
-        results.append({
-            'scenario': scenario['name'],
-            'original_tokens': original_tokens,
-            'optimized_tokens': optimized_tokens,
-            'tokens_saved': tokens_saved,
-            'reduction_percent': reduction_percent,
-            'agricultural_keywords': compliance['agricultural_keywords_detected'],
-            'safety_critical': compliance['safety_critical']
-        })
+        results.append(
+            {
+                "scenario": scenario["name"],
+                "original_tokens": original_tokens,
+                "optimized_tokens": optimized_tokens,
+                "tokens_saved": tokens_saved,
+                "reduction_percent": reduction_percent,
+                "agricultural_keywords": compliance["agricultural_keywords_detected"],
+                "safety_critical": compliance["safety_critical"],
+            }
+        )
 
     # Summary
-    overall_reduction = ((total_original_tokens - total_optimized_tokens) / total_original_tokens * 100) if total_original_tokens > 0 else 0
+    overall_reduction = (
+        ((total_original_tokens - total_optimized_tokens) / total_original_tokens * 100)
+        if total_original_tokens > 0
+        else 0
+    )
 
-    print(f"\n📊 Test Summary")
+    print("\n📊 Test Summary")
     print("=" * 20)
     print(f"Total scenarios: {len(test_scenarios)}")
     print(f"Original tokens: {total_original_tokens}")
@@ -509,8 +528,8 @@ def run_sample_tests(json_output=False, verbose=False):
     print(f"Overall reduction: {overall_reduction:.1f}%")
 
     # Agricultural and safety analysis
-    agricultural_scenarios = [r for r in results if r['agricultural_keywords']]
-    safety_scenarios = [r for r in results if r['safety_critical']]
+    agricultural_scenarios = [r for r in results if r["agricultural_keywords"]]
+    safety_scenarios = [r for r in results if r["safety_critical"]]
 
     print(f"Agricultural scenarios: {len(agricultural_scenarios)}")
     print(f"Safety-critical scenarios: {len(safety_scenarios)}")
@@ -520,5 +539,5 @@ def run_sample_tests(json_output=False, verbose=False):
         print(json.dumps(results, indent=2))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

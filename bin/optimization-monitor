@@ -15,13 +15,14 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
+from afs_fastapi.core.conversation_manager import get_optimization_status  # noqa: E402
+
 try:
     from dotenv import load_dotenv
+
     load_dotenv()
 except ImportError:
     pass
-
-from afs_fastapi.core.conversation_manager import get_optimization_status
 
 # Import mandatory enforcement system
 sys.path.insert(0, str(project_root / ".claude" / "hooks"))
@@ -29,8 +30,9 @@ try:
     from mandatory_optimization_enforcement import (
         get_enforcer,
         get_optimization_monitoring_report,
-        initialize_mandatory_optimization
+        initialize_mandatory_optimization,
     )
+
     ENFORCEMENT_AVAILABLE = True
 except ImportError:
     ENFORCEMENT_AVAILABLE = False
@@ -60,32 +62,35 @@ Examples:
 
   # Show enforcement status
   ./bin/optimization-monitor --enforcement
-        """
+        """,
     )
 
     # Operation modes
-    parser.add_argument('--status', action='store_true',
-                        help='Show current optimization status')
-    parser.add_argument('--report', action='store_true',
-                        help='Show comprehensive monitoring report')
-    parser.add_argument('--trends', action='store_true',
-                        help='Show optimization effectiveness trends')
-    parser.add_argument('--enforcement', action='store_true',
-                        help='Show mandatory enforcement status')
-    parser.add_argument('--initialize', action='store_true',
-                        help='Initialize monitoring for current session')
+    parser.add_argument("--status", action="store_true", help="Show current optimization status")
+    parser.add_argument(
+        "--report", action="store_true", help="Show comprehensive monitoring report"
+    )
+    parser.add_argument(
+        "--trends", action="store_true", help="Show optimization effectiveness trends"
+    )
+    parser.add_argument(
+        "--enforcement", action="store_true", help="Show mandatory enforcement status"
+    )
+    parser.add_argument(
+        "--initialize", action="store_true", help="Initialize monitoring for current session"
+    )
 
     # Data operations
-    parser.add_argument('--export', type=str, metavar='FILE',
-                        help='Export monitoring data to JSON file')
-    parser.add_argument('--reset', action='store_true',
-                        help='Reset monitoring data (use with caution)')
+    parser.add_argument(
+        "--export", type=str, metavar="FILE", help="Export monitoring data to JSON file"
+    )
+    parser.add_argument(
+        "--reset", action="store_true", help="Reset monitoring data (use with caution)"
+    )
 
     # Output options
-    parser.add_argument('--json', action='store_true',
-                        help='Output in JSON format')
-    parser.add_argument('--verbose', action='store_true',
-                        help='Show detailed information')
+    parser.add_argument("--json", action="store_true", help="Output in JSON format")
+    parser.add_argument("--verbose", action="store_true", help="Show detailed information")
 
     args = parser.parse_args()
 
@@ -172,13 +177,13 @@ def show_enforcement_status(json_output=False, verbose=False):
     if verbose:
         # Show configuration details
         config = enforcer.enforcement_config
-        print(f"\nConfiguration:")
+        print("\nConfiguration:")
         print(f"  Agricultural compliance required: {config['agricultural_compliance_required']}")
         print(f"  Minimum optimization level: {config['minimum_optimization_level']}")
         print(f"  Cross-session persistence: {config['cross_session_persistence']}")
         print(f"  Agent types enforced: {len(config['agent_types_enforced'])}")
 
-        if config['agent_types_enforced']:
+        if config["agent_types_enforced"]:
             print(f"  Supported agents: {', '.join(config['agent_types_enforced'])}")
 
 
@@ -195,7 +200,7 @@ def show_current_status(json_output=False, verbose=False):
     if json_output:
         combined_status = {
             "basic_optimization": basic_status,
-            "enforcement_monitoring": enforcement_report
+            "enforcement_monitoring": enforcement_report,
         }
         print(json.dumps(combined_status, indent=2))
         return
@@ -204,7 +209,7 @@ def show_current_status(json_output=False, verbose=False):
     print("=" * 35)
 
     # Basic status
-    enabled = basic_status.get('optimization_enabled', False)
+    enabled = basic_status.get("optimization_enabled", False)
     print(f"Optimization: {'🟢 ENABLED' if enabled else '🔴 DISABLED'}")
 
     # Current session stats
@@ -220,20 +225,24 @@ def show_current_status(json_output=False, verbose=False):
         if current_session["agricultural_interactions"] > 0:
             print(f"🚜 Agricultural interactions: {current_session['agricultural_interactions']}")
         if current_session["safety_critical_interactions"] > 0:
-            print(f"⚠️  Safety-critical interactions: {current_session['safety_critical_interactions']}")
+            print(
+                f"⚠️  Safety-critical interactions: {current_session['safety_critical_interactions']}"
+            )
 
     # All-time statistics
     if enforcement_report:
         all_time = enforcement_report["all_time_statistics"]
-        print(f"\nAll-time Statistics:")
+        print("\nAll-time Statistics:")
         print(f"  Total sessions monitored: {all_time['total_sessions']}")
         print(f"  Total interactions optimized: {all_time['total_interactions']}")
         print(f"  Total tokens saved: {all_time['total_tokens_saved']}")
-        print(f"  Overall effectiveness: {all_time['overall_effectiveness']:.1f} tokens/interaction")
+        print(
+            f"  Overall effectiveness: {all_time['overall_effectiveness']:.1f} tokens/interaction"
+        )
 
-        if all_time['compliance_violations'] > 0:
+        if all_time["compliance_violations"] > 0:
             print(f"  ⚠️  Compliance violations: {all_time['compliance_violations']}")
-        if all_time['enforcement_failures'] > 0:
+        if all_time["enforcement_failures"] > 0:
             print(f"  ❌ Enforcement failures: {all_time['enforcement_failures']}")
 
     if verbose and enforcement_report:
@@ -264,7 +273,7 @@ def show_monitoring_report(json_output=False, verbose=False):
     current = report["current_session"]
     effectiveness = report["current_session_effectiveness"]
 
-    print(f"\n📊 Current Session Analysis:")
+    print("\n📊 Current Session Analysis:")
     print(f"  Session ID: {current['current_session_id']}")
     print(f"  Started: {current['session_start']}")
     print(f"  Agent Type: {current['agent_type']}")
@@ -274,36 +283,42 @@ def show_monitoring_report(json_output=False, verbose=False):
     print(f"  Effectiveness: {effectiveness:.2f} tokens per interaction")
 
     # Agricultural and safety analysis
-    if current['agricultural_interactions'] > 0 or current['safety_critical_interactions'] > 0:
-        print(f"\n🚜 Agricultural & Safety Analysis:")
+    if current["agricultural_interactions"] > 0 or current["safety_critical_interactions"] > 0:
+        print("\n🚜 Agricultural & Safety Analysis:")
         print(f"  Agricultural interactions: {current['agricultural_interactions']}")
         print(f"  Safety-critical interactions: {current['safety_critical_interactions']}")
 
-        agri_percentage = (current['agricultural_interactions'] / max(1, current['interactions_this_session'])) * 100
-        safety_percentage = (current['safety_critical_interactions'] / max(1, current['interactions_this_session'])) * 100
+        agri_percentage = (
+            current["agricultural_interactions"] / max(1, current["interactions_this_session"])
+        ) * 100
+        safety_percentage = (
+            current["safety_critical_interactions"] / max(1, current["interactions_this_session"])
+        ) * 100
 
         print(f"  Agricultural focus: {agri_percentage:.1f}%")
         print(f"  Safety focus: {safety_percentage:.1f}%")
 
     # All-time statistics
     all_time = report["all_time_statistics"]
-    print(f"\n📈 All-Time Performance:")
+    print("\n📈 All-Time Performance:")
     print(f"  Sessions monitored: {all_time['total_sessions']}")
     print(f"  Total interactions: {all_time['total_interactions']}")
     print(f"  Total tokens saved: {all_time['total_tokens_saved']}")
     print(f"  Average effectiveness: {all_time['overall_effectiveness']:.2f} tokens/interaction")
 
     # Quality metrics
-    if all_time['total_interactions'] > 0:
-        optimization_rate = (current['optimization_applied_count'] / max(1, current['interactions_this_session'])) * 100
+    if all_time["total_interactions"] > 0:
+        optimization_rate = (
+            current["optimization_applied_count"] / max(1, current["interactions_this_session"])
+        ) * 100
         print(f"  Current optimization rate: {optimization_rate:.1f}%")
 
     # Issues and violations
-    if all_time['compliance_violations'] > 0 or all_time['enforcement_failures'] > 0:
-        print(f"\n⚠️  Quality Issues:")
-        if all_time['compliance_violations'] > 0:
+    if all_time["compliance_violations"] > 0 or all_time["enforcement_failures"] > 0:
+        print("\n⚠️  Quality Issues:")
+        if all_time["compliance_violations"] > 0:
             print(f"  Agricultural compliance violations: {all_time['compliance_violations']}")
-        if all_time['enforcement_failures'] > 0:
+        if all_time["enforcement_failures"] > 0:
             print(f"  Enforcement failures: {all_time['enforcement_failures']}")
 
     # Recent sessions
@@ -352,7 +367,9 @@ def show_effectiveness_trends(json_output=False, verbose=False):
             timestamp = trend["timestamp"][:19]  # Remove microseconds
             effectiveness = trend["effectiveness"]
             interactions = trend["interactions"]
-            print(f"  {timestamp}: {effectiveness:.2f} tokens/interaction ({interactions} interactions)")
+            print(
+                f"  {timestamp}: {effectiveness:.2f} tokens/interaction ({interactions} interactions)"
+            )
 
 
 def show_recent_sessions(sessions):
@@ -368,7 +385,9 @@ def show_recent_sessions(sessions):
         agent_type = session.get("agent_type", "unknown")
 
         effectiveness = total_tokens_saved / max(1, total_interactions)
-        print(f"  {session_id} ({agent_type}): {total_interactions} interactions, {total_tokens_saved} tokens saved ({effectiveness:.1f} avg)")
+        print(
+            f"  {session_id} ({agent_type}): {total_interactions} interactions, {total_tokens_saved} tokens saved ({effectiveness:.1f} avg)"
+        )
 
 
 def export_monitoring_data(filename, verbose=False):
@@ -380,7 +399,7 @@ def export_monitoring_data(filename, verbose=False):
     try:
         report = get_optimization_monitoring_report()
 
-        with open(filename, 'w') as f:
+        with open(filename, "w") as f:
             json.dump(report, f, indent=2)
 
         if verbose:
@@ -411,7 +430,7 @@ def reset_monitoring_data(verbose=False):
         project_root = Path(__file__).parent.parent
         monitoring_files = [
             project_root / ".claude" / "optimization_monitoring.json",
-            project_root / ".claude" / "session_optimization_tracking.json"
+            project_root / ".claude" / "session_optimization_tracking.json",
         ]
 
         for file_path in monitoring_files:
@@ -427,5 +446,5 @@ def reset_monitoring_data(verbose=False):
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
