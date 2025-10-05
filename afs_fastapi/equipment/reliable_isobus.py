@@ -15,6 +15,7 @@ import time
 import uuid
 from collections.abc import Callable
 from dataclasses import dataclass
+from typing import Any
 
 from afs_fastapi.equipment.farm_tractors import ISOBUSMessage
 
@@ -497,3 +498,93 @@ class ReliableISOBUSDevice:
             return self.delivery_tracker.handle_acknowledgment(message_id)
         except UnicodeDecodeError:
             return False
+
+    async def start(self) -> None:
+        """Start the ISOBUS device for fleet coordination."""
+        logger.info(f"Starting ISOBUS device at address {self.device_address}")
+        # Initialize device state for agricultural operations
+
+    async def stop(self) -> None:
+        """Stop the ISOBUS device gracefully."""
+        logger.info(f"Stopping ISOBUS device at address {self.device_address}")
+        # Clean up device state
+
+    async def broadcast_message(self, message: dict[str, Any]) -> None:
+        """Broadcast message to fleet via ISOBUS.
+
+        Parameters
+        ----------
+        message : dict
+            Message data to broadcast to fleet
+        """
+        from datetime import datetime
+
+        # Convert message dict to ISOBUS format
+        isobus_msg = ISOBUSMessage(
+            pgn=0xE000,  # Fleet coordination PGN
+            source_address=self.device_address,
+            destination_address=0xFF,  # Broadcast
+            data=str(message).encode(),
+            timestamp=datetime.now(),
+        )
+
+        # Send as reliable message
+        self.send_reliable_message(
+            isobus_msg,
+            priority=ISOBUSPriority.FIELD_COORDINATION,
+            requires_ack=False,  # Broadcast doesn't require individual acks
+        )
+
+    async def broadcast_priority_message(self, message: dict[str, Any]) -> None:
+        """Broadcast high-priority message to fleet via ISOBUS.
+
+        Parameters
+        ----------
+        message : dict
+            High-priority message data (e.g., emergency stop)
+        """
+        from datetime import datetime
+
+        # Convert message dict to ISOBUS format
+        isobus_msg = ISOBUSMessage(
+            pgn=0xE001,  # Emergency broadcast PGN
+            source_address=self.device_address,
+            destination_address=0xFF,  # Broadcast
+            data=str(message).encode(),
+            timestamp=datetime.now(),
+        )
+
+        # Send as high-priority reliable message
+        self.send_reliable_message(
+            isobus_msg,
+            priority=ISOBUSPriority.EMERGENCY_STOP,
+            requires_ack=True,  # Emergency messages require acknowledgment
+            max_retries=5,  # More retries for safety-critical messages
+            timeout=5.0,  # Longer timeout for emergency messages
+        )
+
+    async def send_message(self, target_address: int, message: dict[str, Any]) -> None:
+        """Send message to specific ISOBUS address.
+
+        Parameters
+        ----------
+        target_address : int
+            Destination ISOBUS address
+        message : dict
+            Message data to send
+        """
+        from datetime import datetime
+
+        # Convert message dict to ISOBUS format
+        isobus_msg = ISOBUSMessage(
+            pgn=0xE002,  # Direct message PGN
+            source_address=self.device_address,
+            destination_address=target_address,
+            data=str(message).encode(),
+            timestamp=datetime.now(),
+        )
+
+        # Send as reliable message with acknowledgment
+        self.send_reliable_message(
+            isobus_msg, priority=ISOBUSPriority.FIELD_COORDINATION, requires_ack=True
+        )
