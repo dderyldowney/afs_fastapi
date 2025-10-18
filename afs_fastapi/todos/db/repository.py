@@ -1,4 +1,3 @@
-
 """
 This module implements the repository pattern for accessing the ToDoWrite data.
 """
@@ -18,6 +17,7 @@ from afs_fastapi.todos.db.models import (
 
 class BaseRepository:
     """Base repository class with common CRUD operations."""
+
     def __init__(self, session: Session):
         self.session = session
 
@@ -47,8 +47,10 @@ class BaseRepository:
         self.session.delete(obj)
         self.session.commit()
 
+
 class NodeRepository(BaseRepository):
     """Repository for managing Node objects."""
+
     def __init__(self, session: Session):
         super().__init__(session)
 
@@ -79,7 +81,7 @@ class NodeRepository(BaseRepository):
             work_type=node_data["metadata"].get("work_type"),
         )
         self.session.add(db_node)
-        self.session.flush() # Flush to get the node ID for relationships
+        self.session.flush()  # Flush to get the node ID for relationships
 
         for parent_id in node_data["links"].get("parents", []):
             link = DBLink(parent_id=parent_id, child_id=db_node.id)
@@ -125,9 +127,21 @@ class NodeRepository(BaseRepository):
             db_node.title = node_data.get("title", db_node.title)
             db_node.description = node_data.get("description", db_node.description)
             db_node.status = node_data.get("status", db_node.status)
-            db_node.owner = node_data["metadata"].get("owner", db_node.owner) if "metadata" in node_data else db_node.owner
-            db_node.severity = node_data["metadata"].get("severity", db_node.severity) if "metadata" in node_data else db_node.severity
-            db_node.work_type = node_data["metadata"].get("work_type", db_node.work_type) if "metadata" in node_data else db_node.work_type
+            db_node.owner = (
+                node_data["metadata"].get("owner", db_node.owner)
+                if "metadata" in node_data
+                else db_node.owner
+            )
+            db_node.severity = (
+                node_data["metadata"].get("severity", db_node.severity)
+                if "metadata" in node_data
+                else db_node.severity
+            )
+            db_node.work_type = (
+                node_data["metadata"].get("work_type", db_node.work_type)
+                if "metadata" in node_data
+                else db_node.work_type
+            )
 
             # Update links (this is a simplified update, a full update would involve diffing and adding/removing)
             self.session.query(DBLink).filter(DBLink.child_id == node_id).delete()
@@ -150,7 +164,9 @@ class NodeRepository(BaseRepository):
 
             # Update command
             if "command" in node_data and node_data["command"]:
-                db_command = self.session.query(DBCommand).filter(DBCommand.node_id == node_id).first()
+                db_command = (
+                    self.session.query(DBCommand).filter(DBCommand.node_id == node_id).first()
+                )
                 if not db_command:
                     db_command = DBCommand(node_id=node_id)
                     self.session.add(db_command)

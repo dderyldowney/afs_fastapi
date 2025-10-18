@@ -42,9 +42,7 @@ def load_yaml_file(yaml_path: Path) -> dict[str, Any]:
 
 
 def validate_yaml_against_schema(
-    yaml_data: dict[str, Any],
-    schema: dict[str, Any],
-    file_path: Path
+    yaml_data: dict[str, Any], schema: dict[str, Any], file_path: Path
 ) -> bool:
     """Validate YAML data against JSON schema."""
     try:
@@ -82,7 +80,7 @@ def write_default_schema(schema_path: Path) -> None:
     if default_schema_path.exists():
         with open(default_schema_path) as src:
             schema_content = src.read()
-        with open(schema_path, 'w') as dst:
+        with open(schema_path, "w") as dst:
             dst.write(schema_content)
         print(f"✅ Schema written to {schema_path}")
     else:
@@ -99,18 +97,16 @@ def main() -> None:
         "--plans",
         type=Path,
         default=Path("plans"),
-        help="Plans directory containing YAML files (default: plans)"
+        help="Plans directory containing YAML files (default: plans)",
     )
     parser.add_argument(
         "--schema",
         type=Path,
         default=Path("schemas/todowrite.schema.json"),
-        help="JSON schema file (default: schemas/todowrite.schema.json)"
+        help="JSON schema file (default: schemas/todowrite.schema.json)",
     )
     parser.add_argument(
-        "--write-schema",
-        type=Path,
-        help="Write default schema to specified path and exit"
+        "--write-schema", type=Path, help="Write default schema to specified path and exit"
     )
 
     args = parser.parse_args()

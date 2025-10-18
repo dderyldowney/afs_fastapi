@@ -45,10 +45,10 @@ class TodoWriteMigrator:
     def generate_new_id(self, old_id: str, layer: str) -> str:
         """Generate new ID format based on layer."""
         # Extract meaningful part from old ID
-        id_part = old_id.replace('_', '-').upper()
+        id_part = old_id.replace("_", "-").upper()
 
         # Remove timestamp suffix if present
-        id_part = re.sub(r'-\d{8}-\d{6}$', '', id_part)
+        id_part = re.sub(r"-\d{8}-\d{6}$", "", id_part)
 
         layer_prefixes = {
             "Goal": "GOAL",
@@ -62,13 +62,13 @@ class TodoWriteMigrator:
             "Step": "STP",
             "Task": "TSK",
             "SubTask": "SUB",
-            "Command": "CMD"
+            "Command": "CMD",
         }
 
         prefix = layer_prefixes.get(layer, "UNKNOWN")
 
         # Create new ID
-        if id_part.startswith(prefix + '-'):
+        if id_part.startswith(prefix + "-"):
             new_id = id_part
         else:
             new_id = f"{prefix}-{id_part}"
@@ -97,12 +97,9 @@ class TodoWriteMigrator:
                 "owner": "product-team",
                 "labels": ["work:architecture", "agricultural"],
                 "severity": goal_data.get("priority", "med").lower(),
-                "work_type": "architecture"
+                "work_type": "architecture",
             },
-            "links": {
-                "parents": [],
-                "children": []
-            }
+            "links": {"parents": [], "children": []},
         }
 
         # Add migration metadata
@@ -125,12 +122,9 @@ class TodoWriteMigrator:
                 "owner": "development-team",
                 "labels": ["work:implementation", "phase"],
                 "severity": "med",
-                "work_type": "implementation"
+                "work_type": "implementation",
             },
-            "links": {
-                "parents": [goal_id],
-                "children": []
-            }
+            "links": {"parents": [goal_id], "children": []},
         }
 
         # Add migration metadata
@@ -153,12 +147,9 @@ class TodoWriteMigrator:
                 "owner": "development-team",
                 "labels": ["work:implementation", "step"],
                 "severity": "med",
-                "work_type": "implementation"
+                "work_type": "implementation",
             },
-            "links": {
-                "parents": [phase_id],
-                "children": []
-            }
+            "links": {"parents": [phase_id], "children": []},
         }
 
         # Add migration metadata
@@ -181,12 +172,9 @@ class TodoWriteMigrator:
                 "owner": "developer",
                 "labels": ["work:implementation", "task"],
                 "severity": "low",
-                "work_type": "implementation"
+                "work_type": "implementation",
             },
-            "links": {
-                "parents": [step_id],
-                "children": []
-            }
+            "links": {"parents": [step_id], "children": []},
         }
 
         # Add migration metadata
@@ -196,9 +184,7 @@ class TodoWriteMigrator:
         return migrated
 
     def migrate_subtask_and_command(
-        self,
-        subtask_data: dict[str, Any],
-        task_id: str
+        self, subtask_data: dict[str, Any], task_id: str
     ) -> tuple[dict[str, Any], dict[str, Any] | None]:
         """Migrate SubTask and create corresponding Command."""
         old_id = subtask_data.get("id", "")
@@ -214,12 +200,9 @@ class TodoWriteMigrator:
                 "owner": "developer",
                 "labels": ["work:implementation", "subtask"],
                 "severity": "low",
-                "work_type": "implementation"
+                "work_type": "implementation",
             },
-            "links": {
-                "parents": [task_id],
-                "children": []
-            }
+            "links": {"parents": [task_id], "children": []},
         }
 
         # Add migration metadata
@@ -242,25 +225,18 @@ class TodoWriteMigrator:
                 "metadata": {
                     "owner": "developer",
                     "labels": ["work:implementation", "command", "migrated"],
-                    "work_type": "implementation"
+                    "work_type": "implementation",
                 },
-                "links": {
-                    "parents": [ac_id],  # Commands must reference AC
-                    "children": []
-                },
+                "links": {"parents": [ac_id], "children": []},  # Commands must reference AC
                 "command": {
                     "ac_ref": ac_id,
                     "run": {
                         "shell": subtask_data.get("command", "echo 'No command specified'"),
                         "workdir": ".",
-                        "env": {
-                            "PATH": "/usr/bin:/bin"
-                        }
+                        "env": {"PATH": "/usr/bin:/bin"},
                     },
-                    "artifacts": [
-                        f"results/{command_id}/execution_log.txt"
-                    ]
-                }
+                    "artifacts": [f"results/{command_id}/execution_log.txt"],
+                },
             }
 
             # Add migration metadata
@@ -273,9 +249,7 @@ class TodoWriteMigrator:
         return subtask, command
 
     def create_synthetic_acceptance_criteria(
-        self,
-        subtask_data: dict[str, Any],
-        subtask_id: str
+        self, subtask_data: dict[str, Any], subtask_id: str
     ) -> dict[str, Any]:
         """Create synthetic Acceptance Criteria for migrated SubTasks."""
         old_id = subtask_data.get("id", "")
@@ -289,12 +263,9 @@ class TodoWriteMigrator:
             "metadata": {
                 "owner": "test-team",
                 "labels": ["work:validation", "migrated", "synthetic"],
-                "work_type": "validation"
+                "work_type": "validation",
             },
-            "links": {
-                "parents": [subtask_id],
-                "children": []
-            }
+            "links": {"parents": [subtask_id], "children": []},
         }
 
         # Add migration metadata
@@ -368,7 +339,7 @@ class TodoWriteMigrator:
             "Step": output_dir / "plans" / "steps",
             "Task": output_dir / "plans" / "tasks",
             "SubTask": output_dir / "plans" / "subtasks",
-            "Command": output_dir / "commands"
+            "Command": output_dir / "commands",
         }
 
         # Create directories
@@ -382,7 +353,7 @@ class TodoWriteMigrator:
             target_dir = layer_dirs[layer]
             file_path = target_dir / f"{node_id}.yaml"
 
-            with open(file_path, 'w') as f:
+            with open(file_path, "w") as f:
                 yaml.dump(node_data, f, default_flow_style=False, sort_keys=False)
 
             files_written += 1
@@ -397,11 +368,11 @@ class TodoWriteMigrator:
                 "source_system": "TodoWrite 5-layer JSON",
                 "target_system": "TodoWrite 12-layer YAML",
                 "nodes_migrated": len(self.migrated_nodes),
-                "id_mappings": len(self.id_mapping)
+                "id_mappings": len(self.id_mapping),
             },
             "layer_statistics": {},
             "id_mappings": self.id_mapping,
-            "migration_log": self.migration_log
+            "migration_log": self.migration_log,
         }
 
         # Calculate layer statistics
@@ -411,7 +382,7 @@ class TodoWriteMigrator:
 
         # Write report
         report_path = output_dir / "migration_report.json"
-        with open(report_path, 'w') as f:
+        with open(report_path, "w") as f:
             json.dump(report, f, indent=2)
 
         self.migration_log.append(f"✅ Migration report written to {report_path}")
@@ -446,18 +417,16 @@ def main() -> None:
         "--source",
         type=Path,
         default=Path(".claude/todos.json"),
-        help="Source todos.json file (default: .claude/todos.json)"
+        help="Source todos.json file (default: .claude/todos.json)",
     )
     parser.add_argument(
         "--output",
         type=Path,
         default=Path("."),
-        help="Output directory for migrated files (default: current directory)"
+        help="Output directory for migrated files (default: current directory)",
     )
     parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Show what would be migrated without writing files"
+        "--dry-run", action="store_true", help="Show what would be migrated without writing files"
     )
 
     args = parser.parse_args()
@@ -470,8 +439,18 @@ def main() -> None:
         if migrator.load_legacy_data(args.source):
             migrator.migrate_hierarchy()
             print(f"Would migrate {len(migrator.migrated_nodes)} nodes:")
-            for layer in ["Goal", "Phase", "Step", "Task", "SubTask", "Command", "AcceptanceCriteria"]:
-                count = sum(1 for node in migrator.migrated_nodes.values() if node["layer"] == layer)
+            for layer in [
+                "Goal",
+                "Phase",
+                "Step",
+                "Task",
+                "SubTask",
+                "Command",
+                "AcceptanceCriteria",
+            ]:
+                count = sum(
+                    1 for node in migrator.migrated_nodes.values() if node["layer"] == layer
+                )
                 if count > 0:
                     print(f"  {layer}: {count}")
     else:

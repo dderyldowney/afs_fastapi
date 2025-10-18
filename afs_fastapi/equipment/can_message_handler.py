@@ -4,7 +4,7 @@ import can
 
 
 class CANMessageHandler:
-    def __init__(self, channel='vcan0', bustype='virtual'):
+    def __init__(self, channel="vcan0", bustype="virtual"):
         """
         Initializes the CANMessageHandler.
 
@@ -31,7 +31,7 @@ class CANMessageHandler:
         """
         # PGN 65280 is 0xFE00
         arbitration_id = 0xFE00
-        data = struct.pack('<dd', latitude, longitude)
+        data = struct.pack("<dd", latitude, longitude)
         return can.Message(arbitration_id=arbitration_id, data=data, is_extended_id=True)
 
     def transmit_message(self, message: can.Message):

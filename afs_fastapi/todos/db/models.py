@@ -1,4 +1,3 @@
-
 """
 This module defines the SQLAlchemy models for the ToDoWrite data.
 """
@@ -17,8 +16,10 @@ node_labels = Table(
 )
 """Association table for Node and Label many-to-many relationship."""
 
+
 class Node(Base):
     """SQLAlchemy model for a ToDoWrite Node."""
+
     __tablename__ = "nodes"
 
     id = Column(String, primary_key=True)
@@ -40,22 +41,28 @@ class Node(Base):
     labels = relationship("Label", secondary=node_labels, back_populates="nodes")
     command = relationship("Command", uselist=False, back_populates="node")
 
+
 class Link(Base):
     """SQLAlchemy model for a link between ToDoWrite Nodes."""
+
     __tablename__ = "links"
 
     parent_id = Column(String, ForeignKey("nodes.id"), primary_key=True)
     child_id = Column(String, ForeignKey("nodes.id"), primary_key=True)
 
+
 class Label(Base):
     """SQLAlchemy model for a ToDoWrite Label."""
+
     __tablename__ = "labels"
 
     label = Column(String, primary_key=True)
     nodes = relationship("Node", secondary=node_labels, back_populates="labels")
 
+
 class Command(Base):
     """SQLAlchemy model for a ToDoWrite Command."""
+
     __tablename__ = "commands"
 
     node_id = Column(String, ForeignKey("nodes.id"), primary_key=True)
@@ -65,8 +72,10 @@ class Command(Base):
     node = relationship("Node", back_populates="command")
     artifacts = relationship("Artifact", back_populates="command")
 
+
 class Artifact(Base):
     """SQLAlchemy model for a Command Artifact."""
+
     __tablename__ = "artifacts"
 
     command_id = Column(String, ForeignKey("commands.node_id"), primary_key=True)

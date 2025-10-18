@@ -2,14 +2,15 @@
 # type: ignore
 
 import subprocess
-from pathlib import Path
 import sys
+from pathlib import Path
 
 # Add project root to sys.path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
 from afs_fastapi.todos.manager import load_todos
+
 
 def main():
     print("🚀 AFS FastAPI Enhanced Session Context Loader")

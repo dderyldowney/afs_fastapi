@@ -72,7 +72,7 @@ lint.ignore = [
   "E501",  # line length handled by formatter
 ]
 src = ["afs_fastapi", "tests"]
-exclude = ["bin"]
+exclude = ["bin", "afs_fastapi/__main__.py"]
 lint.per-file-ignores = {"tests/core/test_todos_manager.py" = ["E402"]}
 
 [tool.black]
@@ -80,7 +80,7 @@ line-length = 100
 target-version = ["py312"]
 include = "\\.pyi?$"
 exclude = '''
-/(
+(/ 
     \.git
   | \.venv
   | \.claude
@@ -88,7 +88,7 @@ exclude = '''
   | build
   | dist
   | bin
-)/
+)/ 
 '''
 
 [tool.mypy]
@@ -103,14 +103,15 @@ pretty = true
 # If you vendor optional libs, ignore their imports to keep signal clean:
 # ignore_missing_imports = true
 mypy_path = ["afs_fastapi"]
+exclude = ["afs_fastapi/__main__.py"]
 
 [tool.pyright]
 # Pyright can live in pyproject; this keeps VS Code/Pylance aligned.
 typeCheckingMode = "strict"
 pythonVersion = "3.12"
 # Point to your venv so editors pick it up automatically (works well with .venv pattern)
-venvPath = "."
-venv = ".venv"
+virtualenvPath = "."
+virtualenv = ".venv"
 reportMissingTypeStubs = "warning"
 reportUnknownMemberType = "warning"
 stubPath = "typings"

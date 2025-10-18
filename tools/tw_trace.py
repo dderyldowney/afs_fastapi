@@ -44,7 +44,7 @@ class TraceabilityNode:
             "file_path": str(self.file_path),
             "parents": list(self.parents),
             "children": list(self.children),
-            "metadata": self.metadata
+            "metadata": self.metadata,
         }
 
 
@@ -121,43 +121,57 @@ class TraceabilityBuilder:
             # Forward traceability (this node to children)
             if node.children:
                 for child_id in node.children:
-                    matrix.append({
+                    matrix.append(
+                        {
+                            "from_id": node.id,
+                            "from_layer": node.layer,
+                            "from_title": node.title,
+                            "to_id": child_id,
+                            "to_layer": self.nodes.get(
+                                child_id, TraceabilityNode("", "", "", Path(""))
+                            ).layer,
+                            "to_title": self.nodes.get(
+                                child_id, TraceabilityNode("", "", "", Path(""))
+                            ).title,
+                            "relationship": "parent_to_child",
+                            "valid": child_id in self.nodes,
+                        }
+                    )
+            else:
+                # Leaf node
+                matrix.append(
+                    {
                         "from_id": node.id,
                         "from_layer": node.layer,
                         "from_title": node.title,
-                        "to_id": child_id,
-                        "to_layer": self.nodes.get(child_id, TraceabilityNode("", "", "", Path(""))).layer,
-                        "to_title": self.nodes.get(child_id, TraceabilityNode("", "", "", Path(""))).title,
-                        "relationship": "parent_to_child",
-                        "valid": child_id in self.nodes
-                    })
-            else:
-                # Leaf node
-                matrix.append({
-                    "from_id": node.id,
-                    "from_layer": node.layer,
-                    "from_title": node.title,
-                    "to_id": "",
-                    "to_layer": "",
-                    "to_title": "",
-                    "relationship": "leaf",
-                    "valid": True
-                })
+                        "to_id": "",
+                        "to_layer": "",
+                        "to_title": "",
+                        "relationship": "leaf",
+                        "valid": True,
+                    }
+                )
 
             # Backward traceability (parents to this node)
             if node.parents:
                 for parent_id in node.parents:
                     if parent_id not in [m["from_id"] for m in matrix if m["to_id"] == node.id]:
-                        matrix.append({
-                            "from_id": parent_id,
-                            "from_layer": self.nodes.get(parent_id, TraceabilityNode("", "", "", Path(""))).layer,
-                            "from_title": self.nodes.get(parent_id, TraceabilityNode("", "", "", Path(""))).title,
-                            "to_id": node.id,
-                            "to_layer": node.layer,
-                            "to_title": node.title,
-                            "relationship": "child_to_parent",
-                            "valid": parent_id in self.nodes
-                        })
+                        matrix.append(
+                            {
+                                "from_id": parent_id,
+                                "from_layer": self.nodes.get(
+                                    parent_id, TraceabilityNode("", "", "", Path(""))
+                                ).layer,
+                                "from_title": self.nodes.get(
+                                    parent_id, TraceabilityNode("", "", "", Path(""))
+                                ).title,
+                                "to_id": node.id,
+                                "to_layer": node.layer,
+                                "to_title": node.title,
+                                "relationship": "child_to_parent",
+                                "valid": parent_id in self.nodes,
+                            }
+                        )
             elif not any(node.id in n.children for n in self.nodes.values()):
                 # Orphan node (no parents and not referenced as child)
                 self.orphan_nodes.add(node.id)
@@ -175,16 +189,12 @@ class TraceabilityBuilder:
                 "layer": node.layer,
                 "title": node.title,
                 "file_path": str(node.file_path),
-                "metadata": node.metadata
+                "metadata": node.metadata,
             }
 
             # Add edges for parent-child relationships
             for child_id in node.children:
-                edges.append({
-                    "from": node.id,
-                    "to": child_id,
-                    "type": "parent_child"
-                })
+                edges.append({"from": node.id, "to": child_id, "type": "parent_child"})
 
         return {
             "nodes": node_data,
@@ -193,8 +203,8 @@ class TraceabilityBuilder:
                 "total_nodes": len(self.nodes),
                 "total_edges": len(edges),
                 "orphan_nodes": list(self.orphan_nodes),
-                "missing_references": list(self.missing_references)
-            }
+                "missing_references": list(self.missing_references),
+            },
         }
 
     def validate_traceability(self) -> list[str]:
@@ -260,7 +270,7 @@ class TraceabilityBuilder:
         """Write traceability matrix to CSV file."""
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        with open(output_path, 'w', newline='') as f:
+        with open(output_path, "w", newline="") as f:
             if matrix:
                 writer = csv.DictWriter(f, fieldnames=matrix[0].keys())
                 writer.writeheader()
@@ -272,7 +282,7 @@ class TraceabilityBuilder:
         """Write dependency graph to JSON file."""
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        with open(output_path, 'w') as f:
+        with open(output_path, "w") as f:
             json.dump(graph, f, indent=2)
 
         print(f"📊 Dependency graph written to {output_path}")
@@ -287,24 +297,22 @@ def main() -> None:
         "--plans",
         type=Path,
         default=Path("plans"),
-        help="Plans directory containing YAML files (default: plans)"
+        help="Plans directory containing YAML files (default: plans)",
     )
     parser.add_argument(
         "--out-csv",
         type=Path,
         default=Path("trace/trace.csv"),
-        help="Output CSV file for traceability matrix (default: trace/trace.csv)"
+        help="Output CSV file for traceability matrix (default: trace/trace.csv)",
     )
     parser.add_argument(
         "--out-graph",
         type=Path,
         default=Path("trace/graph.json"),
-        help="Output JSON file for dependency graph (default: trace/graph.json)"
+        help="Output JSON file for dependency graph (default: trace/graph.json)",
     )
     parser.add_argument(
-        "--validate",
-        action="store_true",
-        help="Validate traceability and report issues"
+        "--validate", action="store_true", help="Validate traceability and report issues"
     )
 
     args = parser.parse_args()

@@ -1,4 +1,3 @@
-
 from unittest.mock import MagicMock
 
 import pytest
@@ -41,8 +40,9 @@ class TestCANMessageHandler:
         # as 4-byte floats.
         # We will need to unpack the data to verify it.
         import struct
+
         assert encoded_message.arbitration_id == 0xFE00
-        lat, lon = struct.unpack('<dd', encoded_message.data)
+        lat, lon = struct.unpack("<dd", encoded_message.data)
         assert pytest.approx(lat, 0.0001) == latitude
         assert pytest.approx(lon, 0.0001) == longitude
 

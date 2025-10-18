@@ -59,11 +59,7 @@ class CommandStubGenerator:
             return f"CMD-{ac_suffix.replace('-', '')}"
         return f"CMD-{ac_id}"
 
-    def create_command_stub(
-        self,
-        ac_data: dict[str, Any],
-        commands_dir: Path
-    ) -> Path:
+    def create_command_stub(self, ac_data: dict[str, Any], commands_dir: Path) -> Path:
         """Create a command stub for an acceptance criteria."""
         ac_id = ac_data["id"]
         ac_title = ac_data.get("title", "")
@@ -82,40 +78,35 @@ class CommandStubGenerator:
             "metadata": {
                 "owner": ac_data.get("metadata", {}).get("owner", "test-team"),
                 "labels": ["work:implementation", "test", "validation"],
-                "work_type": "implementation"
+                "work_type": "implementation",
             },
-            "links": {
-                "parents": [ac_id],
-                "children": []
-            },
+            "links": {"parents": [ac_id], "children": []},
             "command": {
                 "ac_ref": ac_id,
                 "run": {
                     "shell": self._generate_shell_script(ac_data),
                     "workdir": ".",
-                    "env": {
-                        "PATH": "/usr/bin:/bin"
-                    }
+                    "env": {"PATH": "/usr/bin:/bin"},
                 },
                 "artifacts": [
                     f"results/{cmd_id}/validation_report.json",
-                    f"results/{cmd_id}/test_output.log"
-                ]
-            }
+                    f"results/{cmd_id}/test_output.log",
+                ],
+            },
         }
 
         # Write YAML file
         yaml_file = commands_dir / f"{cmd_id}.yaml"
         commands_dir.mkdir(parents=True, exist_ok=True)
 
-        with open(yaml_file, 'w') as f:
+        with open(yaml_file, "w") as f:
             yaml.dump(command_yaml, f, default_flow_style=False, sort_keys=False)
 
         # Create executable shell script
         script_file = commands_dir / f"{cmd_id}.sh"
         script_content = self._generate_executable_script(cmd_id, ac_data)
 
-        with open(script_file, 'w') as f:
+        with open(script_file, "w") as f:
             f.write(script_content)
 
         # Make script executable
@@ -289,7 +280,7 @@ echo "✅ {ac_id} validation completed"'''
 
     def _generate_executable_script(self, cmd_id: str, ac_data: dict[str, Any]) -> str:
         """Generate the executable shell script."""
-        return f'''#!/bin/bash
+        return f"""#!/bin/bash
 # Generated command script for {cmd_id}
 # Proves acceptance criteria: {ac_data["id"]}
 
@@ -338,7 +329,7 @@ except subprocess.CalledProcessError as e:
 "
 
 echo "✅ {cmd_id} completed"
-'''
+"""
 
     def generate_all_stubs(self, acs_dir: Path, commands_dir: Path) -> None:
         """Generate command stubs for all acceptance criteria."""
@@ -371,13 +362,13 @@ def main() -> None:
         "--acs",
         type=Path,
         default=Path("plans/acceptance_criteria"),
-        help="Acceptance Criteria directory (default: plans/acceptance_criteria)"
+        help="Acceptance Criteria directory (default: plans/acceptance_criteria)",
     )
     parser.add_argument(
         "--out",
         type=Path,
         default=Path("commands"),
-        help="Output directory for commands (default: commands)"
+        help="Output directory for commands (default: commands)",
     )
 
     args = parser.parse_args()

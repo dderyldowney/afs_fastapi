@@ -1,4 +1,3 @@
-
 import unittest
 from unittest.mock import patch
 
@@ -59,7 +58,7 @@ class TestTodosManager(unittest.TestCase):
         # The setUp method has already inserted the test data
 
         # Act
-        with patch('afs_fastapi.todos.manager.SessionLocal') as mock_session_local:
+        with patch("afs_fastapi.todos.manager.SessionLocal") as mock_session_local:
             mock_session_local.return_value = self.session
             todos = load_todos()
 
@@ -132,6 +131,7 @@ class TestTodosManager(unittest.TestCase):
         node_data = {"layer": 123}  # Invalid type for layer
         with self.assertRaisesRegex(ValueError, "Layer must be a string"):
             self.repository.update("goal1", node_data)
+
 
 if __name__ == "__main__":
     unittest.main()
