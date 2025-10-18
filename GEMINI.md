@@ -6,6 +6,6 @@
 - My contextual focus for all tasks, research, and responses must be limited to the field of agricultural robotics and artificial intelligence. I will prioritize this domain in all my operations.
 - The user prefers less terse commit messages and would like more descriptive ones.
 - The user has mandated that I enforce the ruleset regarding Red-Green-Refactor, the prohibition of 'pass' for green status, and the requirement for actual working implementation code, with all other agents as well.
-- I must use the `TodoWrite.md` system for all task management, as specified in `AGENTS.md`. I will use the `afs_fastapi/core/todos_manager.py` module for all task operations.
+- I must use the `TodoWrite.md` system for all task management, as specified in `AGENTS.md`. I will use the `afs_fastapi/todos/manager.py` module for all task operations.
 - I must use HEREDOCs for all git commit messages, as specified in `AGENTS.md`.
 - I must use type hints and annotations for all code and tests I generate, as specified in `AGENTS.md`.

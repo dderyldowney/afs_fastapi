@@ -8,8 +8,7 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.core.todos_manager import get_active_items, load_todos  # noqa: E402
-
+from afs_fastapi.todos.manager import get_active_items, load_todos  # noqa: E402
 
 def main():
     print("💾 AFS FastAPI Session State Snapshot")
@@ -18,25 +17,28 @@ def main():
 
     # Gather data
     todos_data = load_todos()
-    goals = todos_data["goals"]
-    active_items = get_active_items()
-    active_phase = active_items["phase"]
+    goals = todos_data.get("goals", [])
+    active_items = get_active_items(todos_data)
+    active_phase = active_items.get("phases")
 
     # Calculate counts for strategic goals
     total_goals = len(goals)
     pending_goals = len(
-        [g for g in goals if g["status"] == "planned" or g["status"] == "in_progress"]
+        [g for g in goals if g.status == "planned" or g.status == "in_progress"]
     )
-    completed_goals = len([g for g in goals if g["status"] == "done"])
+    completed_goals = len([g for g in goals if g.status == "done"])
 
     # Calculate counts for active phase tasks
     total_active_phase_tasks = 0
     completed_active_phase_tasks = 0
     if active_phase:
-        for step in active_phase.get("steps", []):
-            for task in step.get("tasks", []):
-                total_active_phase_tasks += 1
-                if task["status"] == "done":
+        # The new data structure is flat, so we need to find the children of the active phase
+        steps = [s for s in todos_data.get("steps", []) if s.links.parents and active_phase.id in s.links.parents]
+        for step in steps:
+            tasks = [t for t in todos_data.get("tasks", []) if t.links.parents and step.id in t.links.parents]
+            total_active_phase_tasks += len(tasks)
+            for task in tasks:
+                if task.status == "done":
                     completed_active_phase_tasks += 1
 
     # Create summary content
@@ -51,7 +53,7 @@ def main():
 - Completed: {completed_goals}
 
 ### Active Phase
-- Name: {active_phase['title'] if active_phase else 'None'}
+- Name: {active_phase.title if active_phase else 'None'}
 - Status: {completed_active_phase_tasks}/{total_active_phase_tasks if total_active_phase_tasks > 0 else 'N/A'} tasks completed
 """
 

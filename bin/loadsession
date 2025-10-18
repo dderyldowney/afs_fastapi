@@ -3,20 +3,23 @@
 
 import subprocess
 from pathlib import Path
+import sys
 
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import load_todos
 
 def main():
     print("🚀 AFS FastAPI Enhanced Session Context Loader")
     print("===============================================")
     print()
 
-    project_root = Path(__file__).resolve().parent.parent
-    summary_file = project_root / "SESSION_SUMMARY.md"
-
-    if not summary_file.is_file():
-        print("⚠️  SESSION_SUMMARY.md not found.")
-        print("   Run './bin/savesession' to create it.")
-        return
+    print("📋 Loading ToDoWrite data...")
+    load_todos()
+    print("✅ ToDoWrite data loaded.")
+    print()
 
     # Enhanced: Initialize session monitoring
     print("📊 Initializing Session Monitoring...")
@@ -39,15 +42,6 @@ def main():
         print("⚠️  Pause structure specification missing")
     print()
 
-    print("📋 Loading Project Context from SESSION_SUMMARY.md...")
-    print()
-
-    with open(summary_file) as f:
-        summary_content = f.read()
-
-    print(summary_content)
-
-    print()
     print("🎉 Session Context Successfully Restored!")
     print()
 
@@ -93,6 +87,7 @@ def main():
     print('   • ./bin/strategic-milestone-pause "[goal]" "complete" - Strategic milestone')
     print("   • ./bin/session-monitor check - Check session duration and warnings")
     print()
+
     print("🔧 Development Workflow Reminders:")
     print("   • Follow TDD: RED → GREEN → REFACTOR → Quality Check → Commit")
     print("   • Pause every 2-3 completed tasks or at 2.5-hour session mark")

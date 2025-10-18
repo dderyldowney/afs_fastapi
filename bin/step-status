@@ -9,7 +9,7 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.core.todos_manager import get_active_items  # noqa: E402
+from afs_fastapi.todos.manager import get_active_items  # noqa: E402
 
 
 def main():
