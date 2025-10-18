@@ -9,16 +9,16 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import jsonschema
 import yaml
 
 
-def load_schema(schema_path: Path) -> Dict[str, Any]:
+def load_schema(schema_path: Path) -> dict[str, Any]:
     """Load JSON schema from file."""
     try:
-        with open(schema_path, 'r') as f:
+        with open(schema_path) as f:
             return json.load(f)
     except FileNotFoundError:
         print(f"❌ Schema file not found: {schema_path}")
@@ -28,10 +28,10 @@ def load_schema(schema_path: Path) -> Dict[str, Any]:
         sys.exit(1)
 
 
-def load_yaml_file(yaml_path: Path) -> Dict[str, Any]:
+def load_yaml_file(yaml_path: Path) -> dict[str, Any]:
     """Load and parse YAML file."""
     try:
-        with open(yaml_path, 'r') as f:
+        with open(yaml_path) as f:
             return yaml.safe_load(f)
     except FileNotFoundError:
         print(f"❌ YAML file not found: {yaml_path}")
@@ -42,8 +42,8 @@ def load_yaml_file(yaml_path: Path) -> Dict[str, Any]:
 
 
 def validate_yaml_against_schema(
-    yaml_data: Dict[str, Any],
-    schema: Dict[str, Any],
+    yaml_data: dict[str, Any],
+    schema: dict[str, Any],
     file_path: Path
 ) -> bool:
     """Validate YAML data against JSON schema."""
@@ -62,7 +62,7 @@ def validate_yaml_against_schema(
         return False
 
 
-def find_yaml_files(plans_dir: Path) -> List[Path]:
+def find_yaml_files(plans_dir: Path) -> list[Path]:
     """Find all YAML files in plans directory."""
     yaml_files = []
     if plans_dir.exists():
@@ -80,7 +80,7 @@ def write_default_schema(schema_path: Path) -> None:
     # Copy the schema from the schemas directory
     default_schema_path = Path("schemas/todowrite.schema.json")
     if default_schema_path.exists():
-        with open(default_schema_path, 'r') as src:
+        with open(default_schema_path) as src:
             schema_content = src.read()
         with open(schema_path, 'w') as dst:
             dst.write(schema_content)
@@ -142,7 +142,7 @@ def main() -> None:
 
     # Summary
     total_files = len([f for f in yaml_files if load_yaml_file(f)])
-    print(f"\n📊 Validation Summary:")
+    print("\n📊 Validation Summary:")
     print(f"   Valid: {valid_files}/{total_files}")
     print(f"   Invalid: {total_files - valid_files}/{total_files}")
 

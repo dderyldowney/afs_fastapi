@@ -10,7 +10,7 @@ import csv
 import json
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Set, Tuple
+from typing import Any
 
 import yaml
 
@@ -23,9 +23,9 @@ class TraceabilityNode:
         self.layer = layer
         self.title = title
         self.file_path = file_path
-        self.parents: Set[str] = set()
-        self.children: Set[str] = set()
-        self.metadata: Dict[str, Any] = {}
+        self.parents: set[str] = set()
+        self.children: set[str] = set()
+        self.metadata: dict[str, Any] = {}
 
     def add_parent(self, parent_id: str) -> None:
         """Add a parent relationship."""
@@ -35,7 +35,7 @@ class TraceabilityNode:
         """Add a child relationship."""
         self.children.add(child_id)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary representation."""
         return {
             "id": self.id,
@@ -52,9 +52,9 @@ class TraceabilityBuilder:
     """Builds traceability matrix and dependency graph."""
 
     def __init__(self) -> None:
-        self.nodes: Dict[str, TraceabilityNode] = {}
-        self.orphan_nodes: Set[str] = set()
-        self.missing_references: Set[str] = set()
+        self.nodes: dict[str, TraceabilityNode] = {}
+        self.orphan_nodes: set[str] = set()
+        self.missing_references: set[str] = set()
 
     def load_plans(self, plans_dir: Path) -> None:
         """Load all YAML files from plans directory."""
@@ -77,7 +77,7 @@ class TraceabilityBuilder:
     def _load_yaml_file(self, file_path: Path) -> None:
         """Load a single YAML file and extract node information."""
         try:
-            with open(file_path, 'r') as f:
+            with open(file_path) as f:
                 yaml_data = yaml.safe_load(f)
 
             if not yaml_data:
@@ -113,7 +113,7 @@ class TraceabilityBuilder:
         except Exception as e:
             print(f"❌ Error loading {file_path}: {e}")
 
-    def build_traceability_matrix(self) -> List[Dict[str, Any]]:
+    def build_traceability_matrix(self) -> list[dict[str, Any]]:
         """Build the traceability matrix."""
         matrix = []
 
@@ -164,7 +164,7 @@ class TraceabilityBuilder:
 
         return matrix
 
-    def build_dependency_graph(self) -> Dict[str, Any]:
+    def build_dependency_graph(self) -> dict[str, Any]:
         """Build the dependency graph."""
         edges = []
         node_data = {}
@@ -197,7 +197,7 @@ class TraceabilityBuilder:
             }
         }
 
-    def validate_traceability(self) -> List[str]:
+    def validate_traceability(self) -> list[str]:
         """Validate traceability and return issues."""
         issues = []
 
@@ -223,13 +223,13 @@ class TraceabilityBuilder:
 
         return issues
 
-    def _detect_cycles(self) -> List[List[str]]:
+    def _detect_cycles(self) -> list[list[str]]:
         """Detect circular dependencies using DFS."""
         cycles = []
         visited = set()
         rec_stack = set()
 
-        def dfs(node_id: str, path: List[str]) -> None:
+        def dfs(node_id: str, path: list[str]) -> None:
             if node_id in rec_stack:
                 # Found a cycle
                 cycle_start = path.index(node_id)
@@ -256,7 +256,7 @@ class TraceabilityBuilder:
 
         return cycles
 
-    def write_csv_matrix(self, output_path: Path, matrix: List[Dict[str, Any]]) -> None:
+    def write_csv_matrix(self, output_path: Path, matrix: list[dict[str, Any]]) -> None:
         """Write traceability matrix to CSV file."""
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -268,7 +268,7 @@ class TraceabilityBuilder:
 
         print(f"📄 Traceability matrix written to {output_path}")
 
-    def write_graph_json(self, output_path: Path, graph: Dict[str, Any]) -> None:
+    def write_graph_json(self, output_path: Path, graph: dict[str, Any]) -> None:
         """Write dependency graph to JSON file."""
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -333,7 +333,7 @@ def main() -> None:
             print("\n✅ Traceability validation passed!")
 
     # Print summary
-    print(f"\n📊 Traceability Summary:")
+    print("\n📊 Traceability Summary:")
     print(f"   Nodes: {len(builder.nodes)}")
     print(f"   Matrix entries: {len(matrix)}")
     print(f"   Graph edges: {len(graph['edges'])}")

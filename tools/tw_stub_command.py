@@ -6,11 +6,9 @@ Generates executable command stubs for Acceptance Criteria
 from __future__ import annotations
 
 import argparse
-import os
 import stat
-import sys
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any
 
 import yaml
 
@@ -19,10 +17,10 @@ class CommandStubGenerator:
     """Generates command stubs for acceptance criteria."""
 
     def __init__(self) -> None:
-        self.ac_files: List[Path] = []
-        self.generated_commands: List[Path] = []
+        self.ac_files: list[Path] = []
+        self.generated_commands: list[Path] = []
 
-    def find_acceptance_criteria(self, acs_dir: Path) -> List[Path]:
+    def find_acceptance_criteria(self, acs_dir: Path) -> list[Path]:
         """Find all Acceptance Criteria YAML files."""
         ac_files = []
         if acs_dir.exists():
@@ -30,10 +28,10 @@ class CommandStubGenerator:
                 ac_files.extend(acs_dir.glob(pattern))
         return sorted(ac_files)
 
-    def load_acceptance_criteria(self, ac_file: Path) -> Dict[str, Any]:
+    def load_acceptance_criteria(self, ac_file: Path) -> dict[str, Any]:
         """Load and validate an Acceptance Criteria file."""
         try:
-            with open(ac_file, 'r') as f:
+            with open(ac_file) as f:
                 yaml_data = yaml.safe_load(f)
 
             if not yaml_data:
@@ -63,13 +61,12 @@ class CommandStubGenerator:
 
     def create_command_stub(
         self,
-        ac_data: Dict[str, Any],
+        ac_data: dict[str, Any],
         commands_dir: Path
     ) -> Path:
         """Create a command stub for an acceptance criteria."""
         ac_id = ac_data["id"]
         ac_title = ac_data.get("title", "")
-        ac_description = ac_data.get("description", "")
 
         # Generate command details
         cmd_id = self.generate_command_id(ac_id)
@@ -129,7 +126,7 @@ class CommandStubGenerator:
 
         return yaml_file
 
-    def _generate_shell_script(self, ac_data: Dict[str, Any]) -> str:
+    def _generate_shell_script(self, ac_data: dict[str, Any]) -> str:
         """Generate shell script content based on acceptance criteria."""
         ac_id = ac_data["id"]
         ac_description = ac_data.get("description", "")
@@ -290,7 +287,7 @@ print('✅ Validation completed')
 
 echo "✅ {ac_id} validation completed"'''
 
-    def _generate_executable_script(self, cmd_id: str, ac_data: Dict[str, Any]) -> str:
+    def _generate_executable_script(self, cmd_id: str, ac_data: dict[str, Any]) -> str:
         """Generate the executable shell script."""
         return f'''#!/bin/bash
 # Generated command script for {cmd_id}

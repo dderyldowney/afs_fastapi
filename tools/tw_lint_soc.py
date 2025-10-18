@@ -10,7 +10,7 @@ import json
 import re
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Set
+from typing import Any
 
 import yaml
 
@@ -23,7 +23,7 @@ class SoCViolation:
         file_path: Path,
         violation_type: str,
         message: str,
-        line_number: Optional[int] = None
+        line_number: int | None = None
     ) -> None:
         self.file_path = file_path
         self.violation_type = violation_type
@@ -65,12 +65,12 @@ class SoCLinter:
     ]
 
     def __init__(self) -> None:
-        self.violations: List[SoCViolation] = []
+        self.violations: list[SoCViolation] = []
 
-    def lint_file(self, file_path: Path) -> List[SoCViolation]:
+    def lint_file(self, file_path: Path) -> list[SoCViolation]:
         """Lint a single YAML file for SoC violations."""
         try:
-            with open(file_path, 'r') as f:
+            with open(file_path) as f:
                 content = f.read()
                 yaml_data = yaml.safe_load(content)
 
@@ -103,9 +103,9 @@ class SoCLinter:
     def _check_non_executable_content(
         self,
         file_path: Path,
-        yaml_data: Dict[str, Any],
+        yaml_data: dict[str, Any],
         content: str
-    ) -> List[SoCViolation]:
+    ) -> list[SoCViolation]:
         """Check for executable content in non-executable layers."""
         violations = []
 
@@ -132,7 +132,6 @@ class SoCLinter:
 
         # Check for shell command patterns
         for line_num, line in enumerate(content.split('\n'), 1):
-            line_lower = line.lower()
             for pattern in self.SHELL_PATTERNS:
                 if re.search(pattern, line):
                     violations.append(SoCViolation(
@@ -147,8 +146,8 @@ class SoCLinter:
     def _check_single_concern(
         self,
         file_path: Path,
-        yaml_data: Dict[str, Any]
-    ) -> List[SoCViolation]:
+        yaml_data: dict[str, Any]
+    ) -> list[SoCViolation]:
         """Check for single concern violations."""
         violations = []
 
@@ -185,7 +184,7 @@ class SoCLinter:
 
         return violations
 
-    def lint_directory(self, plans_dir: Path) -> List[SoCViolation]:
+    def lint_directory(self, plans_dir: Path) -> list[SoCViolation]:
         """Lint all YAML files in a directory."""
         all_violations = []
 
@@ -207,7 +206,7 @@ class SoCLinter:
 
         return all_violations
 
-    def generate_report(self, violations: List[SoCViolation]) -> Dict[str, Any]:
+    def generate_report(self, violations: list[SoCViolation]) -> dict[str, Any]:
         """Generate a linting report."""
         violation_counts = {}
         for violation in violations:

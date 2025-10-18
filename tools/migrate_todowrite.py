@@ -11,7 +11,7 @@ import re
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set
+from typing import Any
 
 import yaml
 
@@ -20,10 +20,10 @@ class TodoWriteMigrator:
     """Migrates TodoWrite data from 5-layer JSON to 12-layer YAML system."""
 
     def __init__(self) -> None:
-        self.source_data: Dict[str, Any] = {}
-        self.migrated_nodes: Dict[str, Dict[str, Any]] = {}
-        self.migration_log: List[str] = []
-        self.id_mapping: Dict[str, str] = {}  # old_id -> new_id
+        self.source_data: dict[str, Any] = {}
+        self.migrated_nodes: dict[str, dict[str, Any]] = {}
+        self.migration_log: list[str] = []
+        self.id_mapping: dict[str, str] = {}  # old_id -> new_id
 
     def load_legacy_data(self, json_path: Path) -> bool:
         """Load legacy todos.json file."""
@@ -32,7 +32,7 @@ class TodoWriteMigrator:
                 self.migration_log.append(f"⚠️  Legacy file not found: {json_path}")
                 return False
 
-            with open(json_path, 'r') as f:
+            with open(json_path) as f:
                 self.source_data = json.load(f)
 
             self.migration_log.append(f"✅ Loaded legacy data from {json_path}")
@@ -83,7 +83,7 @@ class TodoWriteMigrator:
         self.id_mapping[old_id] = new_id
         return new_id
 
-    def migrate_goal(self, goal_data: Dict[str, Any]) -> Dict[str, Any]:
+    def migrate_goal(self, goal_data: dict[str, Any]) -> dict[str, Any]:
         """Migrate a Goal item."""
         old_id = goal_data.get("id", "")
         new_id = self.generate_new_id(old_id, "Goal")
@@ -111,7 +111,7 @@ class TodoWriteMigrator:
 
         return migrated
 
-    def migrate_phase(self, phase_data: Dict[str, Any], goal_id: str) -> Dict[str, Any]:
+    def migrate_phase(self, phase_data: dict[str, Any], goal_id: str) -> dict[str, Any]:
         """Migrate a Phase item."""
         old_id = phase_data.get("id", "")
         new_id = self.generate_new_id(old_id, "Phase")
@@ -139,7 +139,7 @@ class TodoWriteMigrator:
 
         return migrated
 
-    def migrate_step(self, step_data: Dict[str, Any], phase_id: str) -> Dict[str, Any]:
+    def migrate_step(self, step_data: dict[str, Any], phase_id: str) -> dict[str, Any]:
         """Migrate a Step item."""
         old_id = step_data.get("id", "")
         new_id = self.generate_new_id(old_id, "Step")
@@ -167,7 +167,7 @@ class TodoWriteMigrator:
 
         return migrated
 
-    def migrate_task(self, task_data: Dict[str, Any], step_id: str) -> Dict[str, Any]:
+    def migrate_task(self, task_data: dict[str, Any], step_id: str) -> dict[str, Any]:
         """Migrate a Task item."""
         old_id = task_data.get("id", "")
         new_id = self.generate_new_id(old_id, "Task")
@@ -197,9 +197,9 @@ class TodoWriteMigrator:
 
     def migrate_subtask_and_command(
         self,
-        subtask_data: Dict[str, Any],
+        subtask_data: dict[str, Any],
         task_id: str
-    ) -> tuple[Dict[str, Any], Optional[Dict[str, Any]]]:
+    ) -> tuple[dict[str, Any], dict[str, Any] | None]:
         """Migrate SubTask and create corresponding Command."""
         old_id = subtask_data.get("id", "")
         subtask_new_id = self.generate_new_id(old_id, "SubTask")
@@ -274,9 +274,9 @@ class TodoWriteMigrator:
 
     def create_synthetic_acceptance_criteria(
         self,
-        subtask_data: Dict[str, Any],
+        subtask_data: dict[str, Any],
         subtask_id: str
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """Create synthetic Acceptance Criteria for migrated SubTasks."""
         old_id = subtask_data.get("id", "")
         ac_id = self.generate_new_id(f"{old_id}-AC", "AcceptanceCriteria")
