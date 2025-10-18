@@ -7,7 +7,7 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.core.todos_manager import (  # noqa: E402
+from afs_fastapi.todos.manager import (  # noqa: E402
     GoalItem,
     PhaseItem,
     get_active_items,
@@ -57,7 +57,7 @@ def main():
     print("")
 
     todos_data = load_todos()
-    goals = todos_data["goals"]
+    goals = todos_data.get("Goal", [])
 
     # Strategic overview
     print("🎯 STRATEGIC DEVELOPMENT MOMENTUM")
@@ -94,8 +94,8 @@ def main():
     print("🔄 CURRENT PHASE IMPLEMENTATION")
     print("=" * 50)
 
-    active_items = get_active_items()
-    current_phase = active_items["phase"]
+    active_items = get_active_items(todos_data)
+    current_phase = active_items.get("Phase")
 
     if current_phase:
         phase_name = current_phase.get("title", "Unknown Phase")
@@ -146,7 +146,7 @@ def main():
 
     total_goals = len(goals)
     total_phases = sum(len(g["phases"]) for g in goals)
-    active_phase_count = 1 if active_items["phase"] else 0
+    active_phase_count = 1 if active_items.get("Phase") else 0
 
     print(f"Strategic Objectives: {total_goals}")
     print(f"Total Development Phases: {total_phases}")

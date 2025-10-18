@@ -10,7 +10,7 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.core.todos_manager import add_step, get_active_items  # noqa: E402
+from afs_fastapi.todos.manager import add_step, get_active_items, load_todos  # noqa: E402
 
 
 def main():
@@ -18,8 +18,9 @@ def main():
     parser.add_argument("name", type=str, help="The name of the step.")
     args = parser.parse_args()
 
-    active_items = get_active_items()
-    active_phase = active_items.get("phase")
+    todos_data = load_todos()
+    active_items = get_active_items(todos_data)
+    active_phase = active_items.get("Phase")
 
     if not active_phase:
         print(

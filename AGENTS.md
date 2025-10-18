@@ -62,7 +62,7 @@ All agents MUST adhere to the full specification defined in the `ToDoWrite.md` f
 - **Hierarchical Decomposition**: All work MUST be decomposed through the 5-level hierarchy.
 - **Single Concern Principle (SoC)**: Every item at every level MUST address exactly one concern.
 - **Atomicity**: The lowest level, `SubTask`, MUST map to a single, executable command.
-- **Validation**: All items are subject to a strict validation pipeline, as implemented in `afs_fastapi/core/todos_manager.py`.
+- **Validation**: All items are subject to a strict validation pipeline, afs_fastapi/todos/manager.py
 
 ### Reference Implementation
 

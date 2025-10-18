@@ -10,11 +10,11 @@ def main():
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     sys.path.insert(0, project_root)
 
-    from afs_fastapi.core.todos_manager import get_active_items, get_goals, load_todos
+    from afs_fastapi.todos.manager import get_active_items, get_goals, load_todos
 
-    load_todos()  # load_todos is called to trigger validation, but the result is not directly used.
+    todos_data = load_todos()
     goals = get_goals()
-    active_items = get_active_items()
+    active_items = get_active_items(todos_data)
 
     strategic_summary = {"total": 0, "completed": 0, "pending": 0, "progress_percentage": 0}
     if goals:

@@ -52,8 +52,8 @@ Before opening a PR, please run through this comprehensive checklist:
 
 ### Schema Management
 
-- **✅ `todos.json` Schema**: The JSON schema for `todos.json` is generated from `TypedDict` definitions in `afs_fastapi/core/todos_manager.py`.
-  - **Action**: After modifying any `TypedDict` related to `todos.json` in `afs_fastapi/core/todos_manager.py`, you **MUST** re-run `scripts/generate_todos_schema.py` to update `.claude/todos_schema.json`.
+- **✅ `todos.json` Schema**: The JSON schema for `todos.json` is generated from `TypedDict` definitions in `afs_fastapi/todos/manager.py`.
+  - **Action**: After modifying any `TypedDict` related to `todos.json` in `afs_fastapi/todos/manager.py`, you **MUST** re-run `scripts/generate_todos_schema.py` to update `.claude/todos_schema.json`.
   - **Purpose**: This ensures the schema remains synchronized with the data structure, providing consistent validation and initial file creation.
 
 ### 3. Agricultural Domain Compliance

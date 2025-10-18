@@ -2,7 +2,7 @@ import subprocess
 from unittest.mock import patch
 
 
-@patch('subprocess.run')
+@patch("subprocess.run")
 def test_git_working_directory_cleanliness(mock_subprocess_run):
     """
     Tests that the git working directory cleanliness check commands are actually run.
@@ -12,9 +12,16 @@ def test_git_working_directory_cleanliness(mock_subprocess_run):
     # Configure the mock to simulate a clean working directory
     mock_subprocess_run.side_effect = [
         # Mock for git status --porcelain
-        subprocess.CompletedProcess(args=['git', 'status', '--porcelain'], returncode=0, stdout='', stderr=''),
+        subprocess.CompletedProcess(
+            args=["git", "status", "--porcelain"], returncode=0, stdout="", stderr=""
+        ),
         # Mock for git ls-files --others --exclude-standard
-        subprocess.CompletedProcess(args=['git', 'ls-files', '--others', '--exclude-standard'], returncode=0, stdout='', stderr=''),
+        subprocess.CompletedProcess(
+            args=["git", "ls-files", "--others", "--exclude-standard"],
+            returncode=0,
+            stdout="",
+            stderr="",
+        ),
     ]
 
     # Call the function that performs the git cleanliness check
@@ -55,7 +62,11 @@ def test_git_working_directory_cleanliness(mock_subprocess_run):
             # Check if this line matches any temporary file pattern
             is_temp = False
             for pattern in temp_file_patterns:
-                if pattern in line or line.endswith(pattern.replace("*", "")) or pattern.strip('/') == line.strip():
+                if (
+                    pattern in line
+                    or line.endswith(pattern.replace("*", ""))
+                    or pattern.strip("/") == line.strip()
+                ):
                     is_temp = True
                     break
 
@@ -66,7 +77,7 @@ def test_git_working_directory_cleanliness(mock_subprocess_run):
 
     # Execute the git commands (which are now mocked)
     result_status = subprocess.run(
-        ['git', 'status', '--porcelain'],
+        ["git", "status", "--porcelain"],
         capture_output=True,
         text=True,
         check=False,
@@ -74,7 +85,7 @@ def test_git_working_directory_cleanliness(mock_subprocess_run):
     filtered_status = filter_temp_files(result_status.stdout)
 
     result_untracked = subprocess.run(
-        ['git', 'ls-files', '--others', '--exclude-standard'],
+        ["git", "ls-files", "--others", "--exclude-standard"],
         capture_output=True,
         text=True,
         check=False,
@@ -83,13 +94,13 @@ def test_git_working_directory_cleanliness(mock_subprocess_run):
 
     # Assert that the git commands were called as expected
     mock_subprocess_run.assert_any_call(
-        ['git', 'status', '--porcelain'],
+        ["git", "status", "--porcelain"],
         capture_output=True,
         text=True,
         check=False,
     )
     mock_subprocess_run.assert_any_call(
-        ['git', 'ls-files', '--others', '--exclude-standard'],
+        ["git", "ls-files", "--others", "--exclude-standard"],
         capture_output=True,
         text=True,
         check=False,
@@ -101,7 +112,6 @@ def test_git_working_directory_cleanliness(mock_subprocess_run):
 
     # Ensure no unexpected calls were made (optional, but good practice)
     assert mock_subprocess_run.call_count == 2, "Only two git commands should have been called"
-
 
 
 def test_compatible_with_various_shell_environments():

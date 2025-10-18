@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 from datetime import datetime
 from typing import Any
 
-from afs_fastapi.monitoring.sensor_data_schema import SensorDataSchema
+from afs_fastapi.monitoring.schemas import SensorDataSchema
 
 
 class SensorInterface(ABC):

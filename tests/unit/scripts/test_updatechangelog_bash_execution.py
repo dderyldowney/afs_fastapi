@@ -156,6 +156,7 @@ class TestUpdateChangelogBashExecution:
 
             # Test without actually changing directories
             import os
+
             original_cwd = os.getcwd()
             result = subprocess.run(
                 [f"{original_cwd}/bin/updatechangelog"], capture_output=True, text=True
@@ -334,7 +335,7 @@ class TestUpdateChangelogCommandLineRobustness:
                 args=["./bin/updatechangelog"],
                 returncode=0,
                 stdout="CHANGELOG.md Update Complete!",
-                stderr=""
+                stderr="",
             )
 
             # Test script compatibility with single mocked execution

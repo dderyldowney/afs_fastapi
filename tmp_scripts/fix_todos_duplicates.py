@@ -5,7 +5,7 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.core.todos_manager import load_todos, save_todos  # noqa: E402
+from afs_fastapi.todos.manager import load_todos, save_todos  # noqa: E402
 
 
 def clean_todos_duplicates(todos_data):

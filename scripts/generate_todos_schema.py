@@ -3,7 +3,7 @@ import os
 
 from pydantic import TypeAdapter
 
-from afs_fastapi.core.todos_manager import TodosData
+from afs_fastapi.todos.manager import TodosData
 
 
 def generate_schema():
