@@ -32,6 +32,9 @@ dependencies = [
   "httpx",                   # HTTP client for CRDT communication
   "tenacity",                # Retry mechanism for reliable messaging
   "pybreaker",               # Circuit breaker for network resilience
+  "SQLAlchemy>=2.0",         # SQLAlchemy ORM
+  "psycopg2-binary>=2.9",    # PostgreSQL adapter
+  "alembic>=1.13",           # Database migrations
   # add any concrete libs you use at runtime (DB client, sensors, etc.)
 ]
 

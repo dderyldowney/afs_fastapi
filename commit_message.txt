@@ -1,5 +1,7 @@
-docs(todos): update README for PostgreSQL support
+chore: remove unused dependencies and optimize imports
 
-Updated the README.md file in the afs_fastapi/todos directory to reflect
-the new PostgreSQL support and the use of SQLAlchemy ORM and Alembic for
-database interaction.
+Removed unused imports and added necessary dependencies to pyproject.toml.
+
+- Removed unused imports from `afs_fastapi/todos/manager.py`.
+- Added `SQLAlchemy`, `psycopg2-binary`, and `alembic` to `pyproject.toml`.
+- Updated `mypy.ini` to exclude `afs_fastapi/__main__.py`.
