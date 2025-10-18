@@ -8,7 +8,12 @@ from typing import Any, Literal
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from afs_fastapi.todos.db.config import DATABASE_URL
+from afs_fastapi.todos.db.config import (
+    DATABASE_URL,
+    AGRICULTURAL_DB_SETTINGS,
+    is_sqlite,
+    is_postgresql
+)
 from afs_fastapi.todos.db.models import Base
 from afs_fastapi.todos.db.repository import NodeRepository
 
@@ -125,7 +130,17 @@ class PhaseItem:
         )
 
 
-engine = create_engine(DATABASE_URL)
+# Configure database engine based on database type
+def create_database_engine():
+    """Create SQLAlchemy engine with appropriate settings for database type."""
+    if is_postgresql():
+        settings = AGRICULTURAL_DB_SETTINGS["postgresql"]
+        return create_engine(DATABASE_URL, **settings)
+    else:  # SQLite default
+        settings = AGRICULTURAL_DB_SETTINGS["sqlite"]
+        return create_engine(DATABASE_URL, **settings)
+
+engine = create_database_engine()
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
@@ -135,8 +150,50 @@ def init_database() -> None:
 
     This function creates all the tables defined in the models if they don't exist.
     Should be called before first use of the TodoWrite system.
+
+    Supports both SQLite and PostgreSQL for agricultural robotics environments.
     """
-    Base.metadata.create_all(bind=engine)
+    try:
+        Base.metadata.create_all(bind=engine)
+
+        # Log database type for agricultural operations tracking
+        if is_postgresql():
+            db_type = "PostgreSQL (Production Agricultural Database)"
+        else:
+            db_type = "SQLite (Development/Local Agricultural Database)"
+
+        return {"status": "success", "database_type": db_type, "url": DATABASE_URL}
+    except Exception as e:
+        return {"status": "error", "error": str(e), "database_url": DATABASE_URL}
+
+
+def get_database_info() -> dict[str, str]:
+    """
+    Get information about the current database configuration.
+
+    Returns:
+        Dictionary with database type, URL, and connection status
+    """
+    info = {
+        "database_type": "PostgreSQL" if is_postgresql() else "SQLite",
+        "database_url": DATABASE_URL,
+        "is_production": is_postgresql(),
+        "supports_concurrent_access": is_postgresql(),
+        "agricultural_optimized": True
+    }
+
+    try:
+        # Test connection
+        from sqlalchemy import text
+        with engine.connect() as conn:
+            result = conn.execute(text("SELECT 1"))
+            info["connection_status"] = "connected"
+            info["test_query"] = "success"
+    except Exception as e:
+        info["connection_status"] = "error"
+        info["error"] = str(e)
+
+    return info
 
 
 def load_todos() -> dict[str, list[Node]]:
