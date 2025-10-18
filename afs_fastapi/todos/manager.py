@@ -9,6 +9,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from afs_fastapi.todos.db.config import DATABASE_URL
+from afs_fastapi.todos.db.models import Base
 from afs_fastapi.todos.db.repository import NodeRepository
 
 LayerType = Literal[
@@ -17,8 +18,8 @@ LayerType = Literal[
     "Context",
     "Constraints",
     "Requirements",
-    "AcceptanceCriteria",
-    "InterfaceContract",
+    "Acceptance Criteria",
+    "Interface Contract",
     "Phase",
     "Step",
     "Task",
@@ -72,8 +73,70 @@ class Node:
     command: Command | None = None
 
 
+@dataclass
+class GoalItem:
+    """Represents a Goal-layer item for agricultural robotics strategic planning."""
+
+    id: str
+    title: str
+    description: str
+    status: StatusType
+    category: str = "general"
+    priority: str = "medium"
+    owner: str = ""
+    labels: list[str] = field(default_factory=list)
+
+    @classmethod
+    def from_node(cls, node: Node) -> "GoalItem":
+        """Create GoalItem from a Node."""
+        return cls(
+            id=node.id,
+            title=node.title,
+            description=node.description,
+            status=node.status,
+            category=node.metadata.labels[0] if node.metadata.labels else "general",
+            priority=node.metadata.severity or "medium",
+            owner=node.metadata.owner,
+            labels=node.metadata.labels,
+        )
+
+
+@dataclass
+class PhaseItem:
+    """Represents a Phase-layer item for agricultural robotics project phases."""
+
+    id: str
+    title: str
+    description: str
+    status: StatusType
+    owner: str = ""
+    labels: list[str] = field(default_factory=list)
+
+    @classmethod
+    def from_node(cls, node: Node) -> "PhaseItem":
+        """Create PhaseItem from a Node."""
+        return cls(
+            id=node.id,
+            title=node.title,
+            description=node.description,
+            status=node.status,
+            owner=node.metadata.owner,
+            labels=node.metadata.labels,
+        )
+
+
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+
+def init_database() -> None:
+    """
+    Initialize the database by creating all tables.
+
+    This function creates all the tables defined in the models if they don't exist.
+    Should be called before first use of the TodoWrite system.
+    """
+    Base.metadata.create_all(bind=engine)
 
 
 def load_todos() -> dict[str, list[Node]]:
@@ -221,3 +284,56 @@ def delete_node(node_id: str) -> None:
         repository.delete(node_id)
     finally:
         db.close()
+
+
+def get_goals() -> list[dict[str, Any]]:
+    """
+    Get all Goal-layer items for strategic planning.
+
+    Returns:
+        A list of goal dictionaries compatible with strategic-status command.
+    """
+    todos = load_todos()
+    goal_nodes = todos.get("Goal", [])
+
+    goals = []
+    for node in goal_nodes:
+        goal_dict = {
+            "id": node.id,
+            "title": node.title,
+            "description": node.description,
+            "status": node.status,
+            "category": node.metadata.labels[0] if node.metadata.labels else "general",
+            "priority": node.metadata.severity or "medium",
+            "owner": node.metadata.owner,
+            "labels": node.metadata.labels,
+        }
+        goals.append(goal_dict)
+
+    return goals
+
+
+def get_phases() -> list[PhaseItem]:
+    """
+    Get all Phase-layer items for project management.
+
+    Returns:
+        A list of PhaseItem objects.
+    """
+    todos = load_todos()
+    phase_nodes = todos.get("Phase", [])
+
+    return [PhaseItem.from_node(node) for node in phase_nodes]
+
+
+def get_goals_typed() -> list[GoalItem]:
+    """
+    Get all Goal-layer items as typed GoalItem objects.
+
+    Returns:
+        A list of GoalItem objects.
+    """
+    todos = load_todos()
+    goal_nodes = todos.get("Goal", [])
+
+    return [GoalItem.from_node(node) for node in goal_nodes]

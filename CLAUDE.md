@@ -82,9 +82,25 @@ The platform provides universal session management commands available to all AI 
 - Select commands are available as slash commands: `/loadsession`, `/whereweare`, `/updatedocs`
 - Command triggers are stored in `.claude/commands/` with complete specifications.
 
-### Mandatory TodoWrite.md Task Management
+### Mandatory TodoWrite Specification Compliance
 
-**CRITICAL REQUIREMENT**: Claude Code MUST follow the "Mandatory TodoWrite.md Task Management System" defined in `AGENTS.md` with zero exceptions.
+**CRITICAL REQUIREMENT**: ALL Claude Code sessions MUST correctly follow the TodoWrite specification with proper layer naming and execution boundaries as specified in `ToDoWrite.md` with zero exceptions.
+
+**Mandatory 12-Layer Structure**:
+- **VISION** → **MISSION** → **STRATEGY** → **INITIATIVE** → **PROGRAM** → **PROJECT** → **PHASE** → **MILESTONE** → **TASK** → **SUBTASK** → **ACTION** → **COMMAND**
+
+**Execution Boundaries**:
+- **ONLY COMMAND layer tasks can be executed** - all other layers are organizational/planning only
+- No deviations from layer naming convention permitted
+- No attempts to execute non-COMMAND layer tasks allowed
+- Specification compliance is non-negotiable for agricultural safety-critical systems
+
+**Agricultural Context Integration**:
+- All TodoWrite layers must maintain agricultural robotics domain focus
+- Safety-critical agricultural systems require systematic task breakdown
+- TodoWrite system ensures proper coordination for multi-tractor field operations
+
+**Reference**: See `ToDoWrite.md` for complete specification details and mandatory agent integration requirements.
 
 ### Mandatory Pause Structure for Claude Code
 

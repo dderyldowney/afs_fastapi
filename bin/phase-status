@@ -8,12 +8,13 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import get_active_items  # noqa: E402
+from afs_fastapi.todos.manager import get_active_items, load_todos  # noqa: E402
 
 
 def display_phase_status():
-    active_items = get_active_items()
-    active_phase = active_items["phase"]
+    todos_data = load_todos()
+    active_items = get_active_items(todos_data)
+    active_phase = active_items.get("Phase")
 
     if not active_phase:
         print("=== AFS FastAPI Development Phase Status ===")

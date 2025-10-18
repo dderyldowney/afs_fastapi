@@ -1,7 +1,0 @@
-chore: remove unused dependencies and optimize imports
-
-Removed unused imports and added necessary dependencies to pyproject.toml.
-
-- Removed unused imports from `afs_fastapi/todos/manager.py`.
-- Added `SQLAlchemy`, `psycopg2-binary`, and `alembic` to `pyproject.toml`.
-- Updated `mypy.ini` to exclude `afs_fastapi/__main__.py`.
