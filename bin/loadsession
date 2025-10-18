@@ -9,7 +9,97 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import load_todos
+from afs_fastapi.todos.manager import init_database, load_todos, get_goals, create_node
+
+
+def initialize_todowrite_system():
+    """Initialize and populate ToDoWrite system with agricultural robotics context."""
+    print("🏗️  Initializing ToDoWrite Database...")
+
+    # Ensure database is initialized
+    try:
+        init_database()
+        print("✅ ToDoWrite database initialized")
+    except Exception as e:
+        print(f"⚠️  Database initialization error: {e}")
+
+    # Load existing data
+    todos_data = load_todos()
+    goals = get_goals()
+
+    # Populate with agricultural robotics strategic context if empty
+    if not goals:
+        print("📋 Populating agricultural robotics strategic context...")
+
+        strategic_goals = [
+            {
+                'id': 'GOAL-AFS-AGRICULTURAL-AUTOMATION',
+                'layer': 'Goal',
+                'title': 'AFS FastAPI Agricultural Automation Platform',
+                'description': 'Develop comprehensive FastAPI platform for autonomous agricultural equipment coordination, safety compliance, and multi-tractor field operations with ISO 11783/18497 standards adherence',
+                'status': 'in_progress',
+                'metadata': {
+                    'owner': 'agricultural-automation-team',
+                    'severity': 'high',
+                    'work_type': 'architecture',
+                    'labels': ['agricultural', 'autonomous', 'safety-critical', 'multi-tractor']
+                },
+                'links': {
+                    'parents': [],
+                    'children': []
+                }
+            },
+            {
+                'id': 'GOAL-SAFETY-COMPLIANCE-SYSTEMS',
+                'layer': 'Goal',
+                'title': 'Safety-Critical Agricultural Systems Compliance',
+                'description': 'Implement and maintain ISO 25119, ISO 11783, and ISO 18497 compliance for agricultural robotics with emergency stop systems and real-time safety monitoring',
+                'status': 'in_progress',
+                'metadata': {
+                    'owner': 'safety-compliance-team',
+                    'severity': 'high',
+                    'work_type': 'validation',
+                    'labels': ['safety-critical', 'iso-compliance', 'emergency-systems']
+                },
+                'links': {
+                    'parents': [],
+                    'children': []
+                }
+            },
+            {
+                'id': 'GOAL-MULTI-TRACTOR-COORDINATION',
+                'layer': 'Goal',
+                'title': 'Multi-Tractor Field Coordination System',
+                'description': 'Enable coordinated autonomous field operations for multiple tractors with CAN bus communication, GPS synchronization, and collision avoidance for agricultural productivity optimization',
+                'status': 'planned',
+                'metadata': {
+                    'owner': 'field-operations-team',
+                    'severity': 'med',
+                    'work_type': 'implementation',
+                    'labels': ['multi-tractor', 'coordination', 'can-bus', 'field-operations']
+                },
+                'links': {
+                    'parents': [],
+                    'children': []
+                }
+            }
+        ]
+
+        # Create strategic goals
+        goals_created = 0
+        for goal_data in strategic_goals:
+            try:
+                create_node(goal_data)
+                goals_created += 1
+                print(f"   ✅ Created: {goal_data['title']}")
+            except Exception as e:
+                print(f"   ⚠️  Failed to create goal {goal_data['id']}: {e}")
+
+        print(f"✅ Created {goals_created} strategic goals for agricultural robotics")
+    else:
+        print(f"✅ Found {len(goals)} existing strategic goals")
+
+    return todos_data
 
 
 def main():
@@ -17,9 +107,8 @@ def main():
     print("===============================================")
     print()
 
-    print("📋 Loading ToDoWrite data...")
-    load_todos()
-    print("✅ ToDoWrite data loaded.")
+    print("🌾 Initializing Agricultural Robotics ToDoWrite System...")
+    todos_data = initialize_todowrite_system()
     print()
 
     # Enhanced: Initialize session monitoring
@@ -78,6 +167,42 @@ def main():
         print("   ❌ Git status check failed")
     print()
 
+    print("🌾 ToDoWrite Agricultural Robotics System Status:")
+    try:
+        # Display strategic overview
+        strategic_result = subprocess.run(
+            ["./bin/strategic-status"], cwd=project_root, capture_output=True, text=True, timeout=10
+        )
+        if strategic_result.returncode == 0:
+            lines = strategic_result.stdout.split('\n')
+            for line in lines:
+                if 'Total Strategic Objectives:' in line or 'Completed:' in line or 'In Progress:' in line:
+                    print(f"   📊 {line.strip()}")
+
+        # Display current development status
+        todo_result = subprocess.run(
+            ["./bin/todo-status"], cwd=project_root, capture_output=True, text=True, timeout=10
+        )
+        if todo_result.returncode == 0:
+            if "No active development phase" in todo_result.stdout:
+                print("   🔄 Ready to start new development phase")
+            else:
+                print("   🔄 Active development phase detected")
+
+    except Exception as e:
+        print(f"   ⚠️  TodoWrite status check failed: {e}")
+    print()
+
+    print("📋 ToDoWrite Management Commands:")
+    print("   • ./bin/strategic-status - View strategic goals progress")
+    print("   • ./bin/todo-status - Complete system overview")
+    print("   • ./bin/phase-status - Current development phase")
+    print("   • ./bin/phase-start \"<name>\" <goal-id> - Start new phase")
+    print("   • ./bin/step-add \"<name>\" - Add implementation step")
+    print("   • ./bin/task-add \"<title>\" - Add development task")
+    print("   • ./bin/saveandpush \"<message>\" - Save progress and push")
+    print()
+
     print("💾 Enhanced Session Management Commands:")
     print("   • ./bin/savesession - Save session state before ending")
     print("   • ./bin/loadsession - Restore session context")
@@ -96,8 +221,10 @@ def main():
     print("   • Use TodoWrite tool to track progress within sessions")
     print()
 
-    print("✨ AFS FastAPI Enterprise Platform Ready with Mandatory Pause Structure")
+    print("✨ AFS FastAPI Agricultural Robotics Platform Ready")
+    print("🌾 ToDoWrite 12-Layer System: Fully Initialized with Strategic Context")
     print("🚨 CRITICAL: Follow pause structure compliance - see PAUSE_STRUCTURE_SPECIFICATION.md")
+    print("📚 New User Guide: See ToDoWrite-HOWTO.md for complete usage instructions")
 
 
 if __name__ == "__main__":
