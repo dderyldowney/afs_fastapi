@@ -8,12 +8,7 @@ from typing import Any, Literal
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from afs_fastapi.todos.db.config import (
-    DATABASE_URL,
-    AGRICULTURAL_DB_SETTINGS,
-    is_sqlite,
-    is_postgresql
-)
+from afs_fastapi.todos.db.config import AGRICULTURAL_DB_SETTINGS, DATABASE_URL, is_postgresql
 from afs_fastapi.todos.db.models import Base
 from afs_fastapi.todos.db.repository import NodeRepository
 
@@ -186,7 +181,7 @@ def get_database_info() -> dict[str, str]:
         # Test connection
         from sqlalchemy import text
         with engine.connect() as conn:
-            result = conn.execute(text("SELECT 1"))
+            conn.execute(text("SELECT 1"))
             info["connection_status"] = "connected"
             info["test_query"] = "success"
     except Exception as e:
