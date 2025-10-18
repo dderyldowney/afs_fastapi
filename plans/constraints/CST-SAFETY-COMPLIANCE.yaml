@@ -1,0 +1,15 @@
+id: CST-SAFETY-COMPLIANCE
+layer: Constraints
+title: ISO 25119 agricultural machinery safety compliance
+description: >
+  All autonomous operations must comply with ISO 25119 functional safety
+  standards for agricultural machinery, including SIL 2 rating for
+  safety-critical functions and emergency stop capabilities.
+metadata:
+  owner: safety-team
+  labels: [work:spec, safety, iso-25119, compliance]
+  severity: high
+  work_type: spec
+links:
+  parents: [CTX-FIELD-OPERATIONS]
+  children: [R-CAN-COMMUNICATION]

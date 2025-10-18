@@ -1,0 +1,14 @@
+id: STP-CAN-DEVELOPMENT
+layer: Step
+title: Develop CAN message transmission module
+description: >
+  Create software module for transmitting tractor position data
+  via CAN bus using ISO 11783 protocol with timing validation.
+metadata:
+  owner: can-developer
+  labels: [work:implementation, can-module, software-development]
+  severity: med
+  work_type: implementation
+links:
+  parents: [PH-IMPLEMENTATION]
+  children: [TSK-MESSAGE-HANDLER]

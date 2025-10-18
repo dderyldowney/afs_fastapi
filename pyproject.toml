@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "afs_fastapi"
-version = "0.1.4.1"
+version = "0.1.5"
 description = "Automated Farming System API (FastAPI)."
 readme = "README.md"
 requires-python = ">=3.12,<3.13"

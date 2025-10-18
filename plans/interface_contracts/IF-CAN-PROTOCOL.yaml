@@ -1,0 +1,14 @@
+id: IF-CAN-PROTOCOL
+layer: InterfaceContract
+title: ISO 11783 CAN bus interface specification
+description: >
+  CAN bus interface using 250kbps bitrate, standard 11-bit identifiers,
+  PGN 65280 for position data with little-endian byte ordering,
+  GPS coordinates in WGS84 decimal degrees format.
+metadata:
+  owner: interface-team
+  labels: [work:interface, can-specification, iso-11783]
+  work_type: interface
+links:
+  parents: [AC-CAN-LATENCY]
+  children: [PH-IMPLEMENTATION]

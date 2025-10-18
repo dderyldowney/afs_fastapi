@@ -1,0 +1,15 @@
+id: CON-MULTI-TRACTOR-COORD
+layer: Concept
+title: Multi-tractor coordination architecture
+description: >
+  Distributed coordination system enabling multiple autonomous tractors to
+  communicate field positions, task assignments, and safety status through
+  standardized agricultural protocols.
+metadata:
+  owner: architecture-team
+  labels: [work:architecture, coordination, distributed-systems]
+  severity: high
+  work_type: architecture
+links:
+  parents: [GOAL-AUTONOMOUS-FARMING]
+  children: [CTX-FIELD-OPERATIONS]

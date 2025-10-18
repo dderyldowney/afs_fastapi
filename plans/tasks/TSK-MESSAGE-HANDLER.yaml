@@ -1,0 +1,14 @@
+id: TSK-MESSAGE-HANDLER
+layer: Task
+title: Implement CAN message handler class
+description: >
+  Create CANMessageHandler class with methods for encoding position data,
+  transmitting messages, and monitoring transmission timing performance.
+metadata:
+  owner: software-developer
+  labels: [work:implementation, python-class, can-handler]
+  severity: med
+  work_type: implementation
+links:
+  parents: [STP-CAN-DEVELOPMENT]
+  children: [SUB-CREATE-CLASS]

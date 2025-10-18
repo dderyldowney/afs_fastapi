@@ -1,0 +1,13 @@
+id: R-CAN-001
+layer: Requirements
+title: Tractor exchanges ISO 11783 messages on 250 kbps J1939 bus
+description: >
+  The ECU shall communicate using ISO 11783 PGNs over a 250 kbps J1939 CAN bus with ≤ 50 ms jitter.
+metadata:
+  owner: controls-team
+  labels: [work:spec, can, j1939, isobus]
+  severity: med
+  work_type: spec
+links:
+  parents: [GOAL-AGRICULTURAL-AUTOMATION]
+  children: [AC-CAN-001]

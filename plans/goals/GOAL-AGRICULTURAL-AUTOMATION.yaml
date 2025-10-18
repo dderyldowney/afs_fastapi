@@ -1,0 +1,14 @@
+id: GOAL-AGRICULTURAL-AUTOMATION
+layer: Goal
+title: Implement autonomous agricultural equipment coordination
+description: >
+  Enable multiple tractors and implements to coordinate field operations
+  autonomously while maintaining safety and efficiency standards.
+metadata:
+  owner: product-team
+  labels: [work:architecture, agricultural, autonomous]
+  severity: high
+  work_type: architecture
+links:
+  parents: []
+  children: [CON-MULTI-TRACTOR]

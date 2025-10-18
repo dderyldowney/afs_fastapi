@@ -1,0 +1,15 @@
+id: CTX-FIELD-OPERATIONS
+layer: Context
+title: Agricultural field operations environment
+description: >
+  Field cultivation environment with 2-5 autonomous tractors operating
+  simultaneously in 40-hectare plots, requiring coordinated path planning,
+  collision avoidance, and real-time task reallocation capabilities.
+metadata:
+  owner: domain-experts
+  labels: [work:spec, field-operations, environment]
+  severity: med
+  work_type: spec
+links:
+  parents: [CON-MULTI-TRACTOR-COORD]
+  children: [CST-SAFETY-COMPLIANCE]
