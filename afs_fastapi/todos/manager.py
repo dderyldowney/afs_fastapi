@@ -1,15 +1,12 @@
+
 """
 This module is responsible for managing the ToDoWrite data.
 """
 
-import os
 from dataclasses import dataclass, field
-from pathlib import Path
 from typing import Any, Literal
 
-import yaml
-
-PLANS_DIR = Path(__file__).parent / "plans"
+from afs_fastapi.todos.database import create_connection
 
 LayerType = Literal[
     "Goal",
@@ -65,34 +62,54 @@ class Node:
 
 def load_todos() -> dict[str, list[Node]]:
     """
-    Loads all the ToDoWrite data from the YAML files in the plans directory.
+    Loads all the ToDoWrite data from the database.
 
     Returns:
         A dictionary containing the loaded ToDoWrite data.
     """
+    conn = create_connection()
     todos: dict[str, list[Node]] = {}
-    for layer in os.listdir(PLANS_DIR):
-        layer_dir = PLANS_DIR / layer
-        if layer_dir.is_dir():
-            todos[layer] = []
-            for filename in os.listdir(layer_dir):
-                if filename.endswith(".yaml"):
-                    with open(layer_dir / filename) as f:
-                        data = yaml.safe_load(f)
-                        links_data = data.get("links", {})
-                        metadata_data = data.get("metadata", {})
-                        command_data = data.get("command")
-                        node = Node(
-                            id=data["id"],
-                            layer=data["layer"],
-                            title=data["title"],
-                            description=data["description"],
-                            links=Link(**links_data),
-                            metadata=Metadata(**metadata_data),
-                            status=data.get("status", "planned"),
-                            command=Command(**command_data) if command_data else None,
-                        )
-                        todos[layer].append(node)
+    if conn is not None:
+        c = conn.cursor()
+        c.execute("SELECT * FROM nodes")
+        nodes_data = c.fetchall()
+        for node_data in nodes_data:
+            node_id = node_data[0]
+
+            # Get links
+            c.execute("SELECT parent_id FROM links WHERE child_id = ?", (node_id,))
+            parents = [row[0] for row in c.fetchall()]
+            c.execute("SELECT child_id FROM links WHERE parent_id = ?", (node_id,))
+            children = [row[0] for row in c.fetchall()]
+            links = Link(parents=parents, children=children)
+
+            # Get labels
+            c.execute("SELECT label FROM labels WHERE node_id = ?", (node_id,))
+            labels = [row[0] for row in c.fetchall()]
+
+            # Get command
+            c.execute("SELECT ac_ref, run FROM commands WHERE node_id = ?", (node_id,))
+            command_data = c.fetchone()
+            command = None
+            if command_data:
+                c.execute("SELECT artifact FROM artifacts WHERE command_id = ?", (node_id,))
+                artifacts = [row[0] for row in c.fetchall()]
+                command = Command(ac_ref=command_data[0], run=eval(command_data[1]), artifacts=artifacts)
+
+            node = Node(
+                id=node_id,
+                layer=node_data[1],
+                title=node_data[2],
+                description=node_data[3],
+                links=links,
+                metadata=Metadata(owner=node_data[5], labels=labels, severity=node_data[6], work_type=node_data[7]),
+                status=node_data[4],
+                command=command,
+            )
+            if node.layer not in todos:
+                todos[node.layer] = []
+            todos[node.layer].append(node)
+        conn.close()
     return todos
 
 def get_active_items(todos: dict[str, list[Node]]) -> dict[str, Node]:

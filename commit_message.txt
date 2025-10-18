@@ -1,16 +1,14 @@
-refactor(todos): move ToDo system to a new module
+feat(todos): make ToDo system standalone with a local database
 
-This moves the entire ToDo system to a new `todos` module to better
-encapsulate its functionality and align with the new 12-layer ToDoWrite
-system.
+This makes the ToDo system standalone by implementing a local database
+solution using SQLite. This encapsulates all necessary configurations and
+data within a dedicated directory structure.
 
-- The `todos_manager.py` script has been moved to `afs_fastapi/todos/manager.py`
-  and refactored to work with the new 12-layer ToDoWrite system.
-- The `plans` directory has been moved to `afs_fastapi/todos/plans`.
-- The `.claude/todos.json` file has been moved to `afs_fastapi/todos/todos.json`.
-- All import paths have been updated to point to the new module.
-- New tests have been created for the `todos` module.
-- The `savesession` and `loadsession` scripts have been updated to use the
-  new `todos` module.
-- Type consistency has been ensured by running `mypy`.
-- The module API has been documented with docstrings.
+- A new `database.py` script has been created to manage the database.
+- The `manager.py` script has been updated to read from the database instead
+  of the YAML files.
+- A migration script has been created to migrate the data from the YAML
+  files to the database.
+- The tests have been updated to use the new database solution.
+- The documentation has been updated to reflect the new database solution.
+- The `plans` directory and the migration script have been removed.

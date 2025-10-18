@@ -1,58 +1,53 @@
 
+import sqlite3
 import unittest
-from unittest.mock import mock_open, patch
+from unittest.mock import patch
 
+from afs_fastapi.todos.database import create_tables
 from afs_fastapi.todos.manager import Link, Metadata, Node, get_active_items, load_todos
 
 
 class TestTodosManager(unittest.TestCase):
 
-    @patch("os.listdir")
-    @patch("builtins.open", new_callable=mock_open)
-    @patch("yaml.safe_load")
-    def test_load_todos(self, mock_yaml_load, mock_open_file, mock_listdir):
-        """Test that load_todos correctly loads and parses YAML files."""
+    def setUp(self):
+        """Set up an in-memory SQLite database for testing."""
+        self.conn = sqlite3.connect(":memory:")
+        create_tables(self.conn)
+        self.c = self.conn.cursor()
+
+        # Insert test data
+        self.c.execute("INSERT INTO nodes VALUES ('goal1', 'Goal', 'Test Goal', 'A test goal', 'in_progress', 'test', 'high', 'architecture')")
+        self.c.execute("INSERT INTO nodes VALUES ('phase1', 'Phase', 'Test Phase', 'A test phase', 'planned', 'test', 'medium', 'implementation')")
+        self.c.execute("INSERT INTO links VALUES ('goal1', 'phase1')")
+        self.c.execute("INSERT INTO labels VALUES ('goal1', 'test')")
+        self.conn.commit()
+
+    def tearDown(self):
+        """Close the database connection."""
+        self.conn.close()
+
+    def test_load_todos(self):
+        """Test that load_todos correctly loads data from the database."""
         # Arrange
-        mock_listdir.side_effect = [
-            ["goals", "phases"],
-            ["goal1.yaml"],
-            ["phase1.yaml"],
-        ]
-        mock_yaml_load.side_effect = [
-            {
-                "id": "goal1",
-                "layer": "Goal",
-                "title": "Test Goal",
-                "description": "A test goal",
-                "links": {"parents": [], "children": ["phase1"]},
-                "metadata": {"owner": "test"},
-                "status": "in_progress",
-            },
-            {
-                "id": "phase1",
-                "layer": "Phase",
-                "title": "Test Phase",
-                "description": "A test phase",
-                "links": {"parents": ["goal1"], "children": []},
-                "metadata": {"owner": "test"},
-            },
-        ]
+        # The setUp method has already inserted the test data
 
         # Act
-        todos = load_todos()
+        with patch('afs_fastapi.todos.manager.create_connection') as mock_create_connection:
+            mock_create_connection.return_value = self.conn
+            todos = load_todos()
 
         # Assert
-        self.assertIn("goals", todos)
-        self.assertIn("phases", todos)
-        self.assertEqual(len(todos["goals"]), 1)
-        self.assertEqual(len(todos["phases"]), 1)
+        self.assertIn("Goal", todos)
+        self.assertIn("Phase", todos)
+        self.assertEqual(len(todos["Goal"]), 1)
+        self.assertEqual(len(todos["Phase"]), 1)
 
-        goal = todos["goals"][0]
+        goal = todos["Goal"][0]
         self.assertIsInstance(goal, Node)
         self.assertEqual(goal.id, "goal1")
         self.assertEqual(goal.status, "in_progress")
 
-        phase = todos["phases"][0]
+        phase = todos["Phase"][0]
         self.assertIsInstance(phase, Node)
         self.assertEqual(phase.id, "phase1")
         self.assertEqual(phase.status, "planned")
@@ -61,7 +56,7 @@ class TestTodosManager(unittest.TestCase):
         """Test that get_active_items correctly identifies active items."""
         # Arrange
         todos = {
-            "goals": [
+            "Goal": [
                 Node(
                     id="goal1",
                     layer="Goal",
@@ -72,7 +67,7 @@ class TestTodosManager(unittest.TestCase):
                     status="in_progress",
                 )
             ],
-            "phases": [
+            "Phase": [
                 Node(
                     id="phase1",
                     layer="Phase",
@@ -89,9 +84,9 @@ class TestTodosManager(unittest.TestCase):
         active_items = get_active_items(todos)
 
         # Assert
-        self.assertIn("goals", active_items)
-        self.assertNotIn("phases", active_items)
-        self.assertEqual(active_items["goals"].id, "goal1")
+        self.assertIn("Goal", active_items)
+        self.assertNotIn("Phase", active_items)
+        self.assertEqual(active_items["Goal"].id, "goal1")
 
 if __name__ == "__main__":
     unittest.main()
