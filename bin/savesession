@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 # type: ignore
 
@@ -17,9 +18,9 @@ def main():
 
     # Gather data
     todos_data = load_todos()
-    goals = todos_data.get("goals", [])
+    goals = todos_data.get("Goal", [])
     active_items = get_active_items(todos_data)
-    active_phase = active_items.get("phases")
+    active_phase = active_items.get("Phase")
 
     # Calculate counts for strategic goals
     total_goals = len(goals)
@@ -33,9 +34,9 @@ def main():
     completed_active_phase_tasks = 0
     if active_phase:
         # The new data structure is flat, so we need to find the children of the active phase
-        steps = [s for s in todos_data.get("steps", []) if s.links.parents and active_phase.id in s.links.parents]
+        steps = [s for s in todos_data.get("Step", []) if active_phase.id in s.links.parents]
         for step in steps:
-            tasks = [t for t in todos_data.get("tasks", []) if t.links.parents and step.id in t.links.parents]
+            tasks = [t for t in todos_data.get("Task", []) if step.id in t.links.parents]
             total_active_phase_tasks += len(tasks)
             for task in tasks:
                 if task.status == "done":

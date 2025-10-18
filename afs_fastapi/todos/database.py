@@ -1,4 +1,3 @@
-
 """
 This module is responsible for managing the ToDoWrite database.
 """
@@ -44,10 +43,16 @@ def create_tables(conn):
         """)
         c.execute("""
             CREATE TABLE IF NOT EXISTS labels (
+                label TEXT PRIMARY KEY
+            );
+        """)
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS node_labels (
                 node_id TEXT NOT NULL,
                 label TEXT NOT NULL,
                 PRIMARY KEY (node_id, label),
-                FOREIGN KEY (node_id) REFERENCES nodes(id)
+                FOREIGN KEY (node_id) REFERENCES nodes(id),
+                FOREIGN KEY (label) REFERENCES labels(label)
             );
         """)
         c.execute("""
@@ -69,7 +74,9 @@ def create_tables(conn):
     except sqlite3.Error as e:
         print(e)
 
-def main():
+# The main function should only be called when the script is executed directly.
+# This prevents the tables from being created when the script is imported.
+if __name__ == "__main__":
     """Main function to create the database and tables."""
     conn = create_connection()
     if conn is not None:
@@ -77,6 +84,3 @@ def main():
         conn.close()
     else:
         print("Error! cannot create the database connection.")
-
-if __name__ == "__main__":
-    main()

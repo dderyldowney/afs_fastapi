@@ -1,9 +1,12 @@
 
-import sqlite3
 import unittest
 from unittest.mock import patch
 
-from afs_fastapi.todos.database import create_tables
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from afs_fastapi.todos.db.models import Base, Label as DBLabel, Link as DBLink, Node as DBNode
+from afs_fastapi.todos.db.repository import NodeRepository
 from afs_fastapi.todos.manager import Link, Metadata, Node, get_active_items, load_todos
 
 
@@ -11,20 +14,44 @@ class TestTodosManager(unittest.TestCase):
 
     def setUp(self):
         """Set up an in-memory SQLite database for testing."""
-        self.conn = sqlite3.connect(":memory:")
-        create_tables(self.conn)
-        self.c = self.conn.cursor()
+        self.engine = create_engine("sqlite:///:memory:")
+        Base.metadata.create_all(self.engine)
+        self.Session = sessionmaker(bind=self.engine)
+        self.session = self.Session()
+        self.repository = NodeRepository(self.session)
 
         # Insert test data
-        self.c.execute("INSERT INTO nodes VALUES ('goal1', 'Goal', 'Test Goal', 'A test goal', 'in_progress', 'test', 'high', 'architecture')")
-        self.c.execute("INSERT INTO nodes VALUES ('phase1', 'Phase', 'Test Phase', 'A test phase', 'planned', 'test', 'medium', 'implementation')")
-        self.c.execute("INSERT INTO links VALUES ('goal1', 'phase1')")
-        self.c.execute("INSERT INTO labels VALUES ('goal1', 'test')")
-        self.conn.commit()
+        node1 = DBNode(
+            id="goal1",
+            layer="Goal",
+            title="Test Goal",
+            description="A test goal",
+            status="in_progress",
+            owner="test",
+            severity="high",
+            work_type="architecture",
+        )
+        node2 = DBNode(
+            id="phase1",
+            layer="Phase",
+            title="Test Phase",
+            description="A test phase",
+            status="planned",
+            owner="test",
+            severity="medium",
+            work_type="implementation",
+        )
+        link = DBLink(parent_id="goal1", child_id="phase1")
+        label = DBLabel(label="test")
+        node1.labels.append(label)
+
+        self.session.add_all([node1, node2, link, label])
+        self.session.commit()
 
     def tearDown(self):
         """Close the database connection."""
-        self.conn.close()
+        self.session.close()
+        Base.metadata.drop_all(self.engine)
 
     def test_load_todos(self):
         """Test that load_todos correctly loads data from the database."""
@@ -32,8 +59,8 @@ class TestTodosManager(unittest.TestCase):
         # The setUp method has already inserted the test data
 
         # Act
-        with patch('afs_fastapi.todos.manager.create_connection') as mock_create_connection:
-            mock_create_connection.return_value = self.conn
+        with patch('afs_fastapi.todos.manager.SessionLocal') as mock_session_local:
+            mock_session_local.return_value = self.session
             todos = load_todos()
 
         # Assert
@@ -87,6 +114,24 @@ class TestTodosManager(unittest.TestCase):
         self.assertIn("Goal", active_items)
         self.assertNotIn("Phase", active_items)
         self.assertEqual(active_items["Goal"].id, "goal1")
+
+    def test_create_node_missing_fields(self):
+        """Test that create_node raises ValueError for missing required fields."""
+        node_data = {
+            "layer": "Goal",
+            "title": "Test Goal",
+            "description": "A test goal",
+            "links": {},
+            "metadata": {},
+        }
+        with self.assertRaisesRegex(ValueError, "Missing required field: id"):
+            self.repository.create(node_data)
+
+    def test_update_node_invalid_data_type(self):
+        """Test that update_node raises ValueError for invalid data types."""
+        node_data = {"layer": 123}  # Invalid type for layer
+        with self.assertRaisesRegex(ValueError, "Layer must be a string"):
+            self.repository.update("goal1", node_data)
 
 if __name__ == "__main__":
     unittest.main()

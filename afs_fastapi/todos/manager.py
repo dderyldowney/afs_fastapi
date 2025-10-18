@@ -1,4 +1,3 @@
-
 """
 This module is responsible for managing the ToDoWrite data.
 """
@@ -6,7 +5,11 @@ This module is responsible for managing the ToDoWrite data.
 from dataclasses import dataclass, field
 from typing import Any, Literal
 
-from afs_fastapi.todos.database import create_connection
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from afs_fastapi.todos.db.config import DATABASE_URL
+from afs_fastapi.todos.db.repository import NodeRepository
 
 LayerType = Literal[
     "Goal",
@@ -60,6 +63,9 @@ class Node:
     status: StatusType = "planned"
     command: Command | None = None
 
+engine = create_engine(DATABASE_URL)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
 def load_todos() -> dict[str, list[Node]]:
     """
     Loads all the ToDoWrite data from the database.
@@ -67,49 +73,44 @@ def load_todos() -> dict[str, list[Node]]:
     Returns:
         A dictionary containing the loaded ToDoWrite data.
     """
-    conn = create_connection()
+    db = SessionLocal()
+    repository = NodeRepository(db)
     todos: dict[str, list[Node]] = {}
-    if conn is not None:
-        c = conn.cursor()
-        c.execute("SELECT * FROM nodes")
-        nodes_data = c.fetchall()
-        for node_data in nodes_data:
-            node_id = node_data[0]
-
-            # Get links
-            c.execute("SELECT parent_id FROM links WHERE child_id = ?", (node_id,))
-            parents = [row[0] for row in c.fetchall()]
-            c.execute("SELECT child_id FROM links WHERE parent_id = ?", (node_id,))
-            children = [row[0] for row in c.fetchall()]
-            links = Link(parents=parents, children=children)
-
-            # Get labels
-            c.execute("SELECT label FROM labels WHERE node_id = ?", (node_id,))
-            labels = [row[0] for row in c.fetchall()]
-
-            # Get command
-            c.execute("SELECT ac_ref, run FROM commands WHERE node_id = ?", (node_id,))
-            command_data = c.fetchone()
+    try:
+        db_nodes = repository.list()
+        for db_node in db_nodes:
+            links = Link(
+                parents=[parent.id for parent in db_node.parents],
+                children=[child.id for child in db_node.children],
+            )
+            metadata = Metadata(
+                owner=db_node.owner,
+                labels=[label.label for label in db_node.labels],
+                severity=db_node.severity,
+                work_type=db_node.work_type,
+            )
             command = None
-            if command_data:
-                c.execute("SELECT artifact FROM artifacts WHERE command_id = ?", (node_id,))
-                artifacts = [row[0] for row in c.fetchall()]
-                command = Command(ac_ref=command_data[0], run=eval(command_data[1]), artifacts=artifacts)
-
+            if db_node.command:
+                command = Command(
+                    ac_ref=db_node.command.ac_ref,
+                    run=eval(db_node.command.run),
+                    artifacts=[artifact.artifact for artifact in db_node.command.artifacts],
+                )
             node = Node(
-                id=node_id,
-                layer=node_data[1],
-                title=node_data[2],
-                description=node_data[3],
+                id=db_node.id,
+                layer=db_node.layer,
+                title=db_node.title,
+                description=db_node.description,
                 links=links,
-                metadata=Metadata(owner=node_data[5], labels=labels, severity=node_data[6], work_type=node_data[7]),
-                status=node_data[4],
+                metadata=metadata,
+                status=db_node.status,
                 command=command,
             )
             if node.layer not in todos:
                 todos[node.layer] = []
             todos[node.layer].append(node)
-        conn.close()
+    finally:
+        db.close()
     return todos
 
 def get_active_items(todos: dict[str, list[Node]]) -> dict[str, Node]:
@@ -128,3 +129,73 @@ def get_active_items(todos: dict[str, list[Node]]) -> dict[str, Node]:
             if node.status == "in_progress":
                 active_items[layer] = node
     return active_items
+
+def create_node(node_data: dict[str, Any]) -> Node:
+    db = SessionLocal()
+    repository = NodeRepository(db)
+    try:
+        db_node = repository.create(node_data)
+        return Node(
+            id=db_node.id,
+            layer=db_node.layer,
+            title=db_node.title,
+            description=db_node.description,
+            links=Link(
+                parents=[link.parent_id for link in db_node.parents],
+                children=[link.child_id for link in db_node.children],
+            ),
+            metadata=Metadata(
+                owner=db_node.owner,
+                labels=[label.label for label in db_node.labels],
+                severity=db_node.severity,
+                work_type=db_node.work_type,
+            ),
+            status=db_node.status,
+            command=Command(
+                ac_ref=db_node.command.ac_ref,
+                run=eval(db_node.command.run),
+                artifacts=[artifact.artifact for artifact in db_node.command.artifacts],
+            ) if db_node.command else None,
+        )
+    finally:
+        db.close()
+
+def update_node(node_id: str, node_data: dict[str, Any]) -> Node | None:
+    db = SessionLocal()
+    repository = NodeRepository(db)
+    try:
+        db_node = repository.update(node_id, node_data)
+        if db_node:
+            return Node(
+                id=db_node.id,
+                layer=db_node.layer,
+                title=db_node.title,
+                description=db_node.description,
+                links=Link(
+                    parents=[link.parent_id for link in db_node.parents],
+                    children=[link.child_id for link in db_node.children],
+                ),
+                metadata=Metadata(
+                    owner=db_node.owner,
+                    labels=[label.label for label in db_node.labels],
+                    severity=db_node.severity,
+                    work_type=db_node.work_type,
+                ),
+                status=db_node.status,
+                command=Command(
+                    ac_ref=db_node.command.ac_ref,
+                    run=eval(db_node.command.run),
+                    artifacts=[artifact.artifact for artifact in db_node.command.artifacts],
+                ) if db_node.command else None,
+            )
+        return None
+    finally:
+        db.close()
+
+def delete_node(node_id: str) -> None:
+    db = SessionLocal()
+    repository = NodeRepository(db)
+    try:
+        repository.delete(node_id)
+    finally:
+        db.close()

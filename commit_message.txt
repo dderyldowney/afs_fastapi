@@ -1,14 +1,17 @@
-feat(todos): make ToDo system standalone with a local database
+feat(todos): add PostgreSQL support to the module
 
-This makes the ToDo system standalone by implementing a local database
-solution using SQLite. This encapsulates all necessary configurations and
-data within a dedicated directory structure.
+This integrates SQLAlchemy ORM for database interaction and defines schema
+migrations using Alembic. It also implements CRUD operations for the ToDoWrite
+data.
 
-- A new `database.py` script has been created to manage the database.
-- The `manager.py` script has been updated to read from the database instead
-  of the YAML files.
-- A migration script has been created to migrate the data from the YAML
-  files to the database.
-- The tests have been updated to use the new database solution.
-- The documentation has been updated to reflect the new database solution.
-- The `plans` directory and the migration script have been removed.
+- Installed `SQLAlchemy`, `psycopg2-binary`, and `alembic`.
+- Created a new `afs_fastapi/todos/db` directory to hold the database-related files.
+- Created a `config.py` file for database connection configuration.
+- Created a `models.py` file to define the SQLAlchemy models.
+- Created a `repository.py` file to implement the repository pattern.
+- Set up Alembic for schema migrations.
+- Updated the `manager.py` script to use the new repository.
+- Updated the `savesession` and `loadsession` scripts to use the repository.
+- Updated the tests to use the new repository and a test database.
+- Added data validation to the CRUD operations.
+- Documented the module API.
