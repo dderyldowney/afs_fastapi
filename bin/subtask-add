@@ -8,7 +8,7 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import add_subtask, get_active_items  # noqa: E402
+from afs_fastapi.todos.manager import add_subtask, get_active_items, load_todos  # noqa: E402
 
 
 def main():
@@ -26,8 +26,9 @@ def main():
     )
     args = parser.parse_args()
 
-    active_items = get_active_items()
-    active_task = active_items.get("task")
+    todos_data = load_todos()
+    active_items = get_active_items(todos_data)
+    active_task = active_items.get("Task")
 
     if not active_task:
         print("Error: No active task. Please activate a task first.")

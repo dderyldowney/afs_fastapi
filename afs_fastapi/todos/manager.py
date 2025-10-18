@@ -337,3 +337,149 @@ def get_goals_typed() -> list[GoalItem]:
     goal_nodes = todos.get("Goal", [])
 
     return [GoalItem.from_node(node) for node in goal_nodes]
+
+
+def add_step(phase_id: str, name: str, description: str) -> tuple[dict[str, Any] | None, str | None]:
+    """
+    Add a new Step to the specified Phase.
+
+    Args:
+        phase_id: The ID of the parent Phase.
+        name: The name of the Step.
+        description: The description of the Step.
+
+    Returns:
+        A tuple of (new_step_dict, error_message).
+    """
+    try:
+        import uuid
+
+        step_id = f"step-{uuid.uuid4().hex[:12]}"
+        step_data = {
+            "id": step_id,
+            "layer": "Step",
+            "title": name,
+            "description": description,
+            "status": "planned",
+            "owner": "system",
+            "severity": "",
+            "work_type": "",
+            "labels": [],
+            "parent_ids": [phase_id],
+            "child_ids": [],
+        }
+
+        node = create_node(step_data)
+        if node:
+            step_dict = {
+                "id": node.id,
+                "title": node.title,
+                "description": node.description,
+                "status": node.status,
+            }
+            return step_dict, None
+        else:
+            return None, "Failed to create step"
+    except Exception as e:
+        return None, str(e)
+
+
+def add_task(step_id: str, title: str, description: str) -> tuple[dict[str, Any] | None, str | None]:
+    """
+    Add a new Task to the specified Step.
+
+    Args:
+        step_id: The ID of the parent Step.
+        title: The title of the Task.
+        description: The description of the Task.
+
+    Returns:
+        A tuple of (new_task_dict, error_message).
+    """
+    try:
+        import uuid
+
+        task_id = f"task-{uuid.uuid4().hex[:12]}"
+        task_data = {
+            "id": task_id,
+            "layer": "Task",
+            "title": title,
+            "description": description,
+            "status": "planned",
+            "owner": "system",
+            "severity": "",
+            "work_type": "",
+            "labels": [],
+            "parent_ids": [step_id],
+            "child_ids": [],
+        }
+
+        node = create_node(task_data)
+        if node:
+            task_dict = {
+                "id": node.id,
+                "title": node.title,
+                "description": node.description,
+                "status": node.status,
+            }
+            return task_dict, None
+        else:
+            return None, "Failed to create task"
+    except Exception as e:
+        return None, str(e)
+
+
+def add_subtask(
+    task_id: str, title: str, description: str, command: str, command_type: str
+) -> tuple[dict[str, Any] | None, str | None]:
+    """
+    Add a new SubTask to the specified Task.
+
+    Args:
+        task_id: The ID of the parent Task.
+        title: The title of the SubTask.
+        description: The description of the SubTask.
+        command: The command to execute.
+        command_type: The type of command (bash, python, etc.).
+
+    Returns:
+        A tuple of (new_subtask_dict, error_message).
+    """
+    try:
+        import uuid
+
+        subtask_id = f"subtask-{uuid.uuid4().hex[:12]}"
+        subtask_data = {
+            "id": subtask_id,
+            "layer": "SubTask",
+            "title": title,
+            "description": description,
+            "status": "planned",
+            "owner": "system",
+            "severity": "",
+            "work_type": "",
+            "labels": [],
+            "parent_ids": [task_id],
+            "child_ids": [],
+            "command": {
+                "ac_ref": subtask_id,
+                "run": {"type": command_type, "command": command},
+                "artifacts": [],
+            },
+        }
+
+        node = create_node(subtask_data)
+        if node:
+            subtask_dict = {
+                "id": node.id,
+                "title": node.title,
+                "description": node.description,
+                "status": node.status,
+                "command": command,
+                "command_type": command_type,
+            }
+            return subtask_dict, None
+        else:
+            return None, "Failed to create subtask"
+    except Exception as e:
+        return None, str(e)
