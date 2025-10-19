@@ -90,7 +90,7 @@ All agents MUST adhere to the full specification defined in the `ToDoWrite.md` f
 
 ### Reference Implementation
 
-The `afs_fastapi/core/todos_manager.py` module provides the reference implementation for the `TodoWrite.md` system, including data structures, validation logic, and migration from legacy formats. All agents MUST use the functions provided in this module for all task management operations.
+The `afs_fastapi/todos/manager.py` module provides the reference implementation for the `TodoWrite.md` system, including data structures, validation logic, and migration from legacy formats. All agents MUST use the functions provided in this module for all task management operations.
 
 ### Enforcement
 

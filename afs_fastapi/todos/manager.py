@@ -15,43 +15,26 @@ from afs_fastapi.todos.db.repository import NodeRepository
 # ...
 
 LayerType = Literal[
-
     "Goal",
-
     "Concept",
-
     "Context",
-
     "Constraints",
-
     "Requirements",
-
     "Acceptance Criteria",
-
     "Interface Contract",
-
     "Phase",
-
     "Step",
-
     "Task",
-
     "SubTask",
-
     "Command",
-
 ]
 
 """The type of a ToDoWrite layer."""
 
 
-
 StatusType = Literal["planned", "in_progress", "blocked", "done", "rejected"]
 
 """The status of a ToDoWrite node."""
-
-
-
 
 
 def _validate_literal(value: str, literal_type: Any) -> str:
@@ -237,12 +220,32 @@ def load_todos() -> dict[str, list[Node]]:
     try:
         db_nodes = repository.list(DBNode)
         for db_node in db_nodes:
-            parent_ids: list[str] = [str(parent.id) for parent in cast(list[DBNode], db_node.parents) if parent.id is not None] if db_node.parents is not None else []
-            child_ids: list[str] = [str(child.id) for child in cast(list[DBNode], db_node.children) if child.id is not None] if db_node.children is not None else []
+            parent_ids: list[str] = (
+                [
+                    str(parent.id)
+                    for parent in cast(list[DBNode], db_node.parents)
+                    if parent.id is not None
+                ]
+                if db_node.parents is not None
+                else []
+            )
+            child_ids: list[str] = (
+                [
+                    str(child.id)
+                    for child in cast(list[DBNode], db_node.children)
+                    if child.id is not None
+                ]
+                if db_node.children is not None
+                else []
+            )
             links = Link(parents=parent_ids, children=child_ids)
             metadata = Metadata(
                 owner=db_node.owner or "",
-                labels=[str(label.label) for label in db_node.labels if label.label is not None] if db_node.labels else [],
+                labels=(
+                    [str(label.label) for label in db_node.labels if label.label is not None]
+                    if db_node.labels
+                    else []
+                ),
                 severity=db_node.severity or "",
                 work_type=db_node.work_type or "",
             )
@@ -251,7 +254,15 @@ def load_todos() -> dict[str, list[Node]]:
                 command = Command(
                     ac_ref=db_node.command.ac_ref or "",
                     run=eval(db_node.command.run) if db_node.command.run else {},
-                    artifacts=[str(artifact.artifact) for artifact in db_node.command.artifacts if artifact.artifact is not None] if db_node.command.artifacts else [],
+                    artifacts=(
+                        [
+                            str(artifact.artifact)
+                            for artifact in db_node.command.artifacts
+                            if artifact.artifact is not None
+                        ]
+                        if db_node.command.artifacts
+                        else []
+                    ),
                 )
             node = Node(
                 id=str(db_node.id),
@@ -295,13 +306,33 @@ def create_node(node_data: dict[str, Any]) -> Node:
     try:
         db_node = repository.create(node_data)
 
-        parent_ids: list[str] = [str(parent.id) for parent in cast(list[DBNode], db_node.parents) if parent.id is not None] if db_node.parents is not None else []
-        child_ids: list[str] = [str(child.id) for child in cast(list[DBNode], db_node.children) if child.id is not None] if db_node.children is not None else []
+        parent_ids: list[str] = (
+            [
+                str(parent.id)
+                for parent in cast(list[DBNode], db_node.parents)
+                if parent.id is not None
+            ]
+            if db_node.parents is not None
+            else []
+        )
+        child_ids: list[str] = (
+            [
+                str(child.id)
+                for child in cast(list[DBNode], db_node.children)
+                if child.id is not None
+            ]
+            if db_node.children is not None
+            else []
+        )
         links = Link(parents=parent_ids, children=child_ids)
 
         metadata = Metadata(
             owner=db_node.owner or "",
-            labels=[str(label.label) for label in db_node.labels if label.label is not None] if db_node.labels else [],
+            labels=(
+                [str(label.label) for label in db_node.labels if label.label is not None]
+                if db_node.labels
+                else []
+            ),
             severity=db_node.severity or "",
             work_type=db_node.work_type or "",
         )
@@ -310,7 +341,11 @@ def create_node(node_data: dict[str, Any]) -> Node:
             command = Command(
                 ac_ref=db_node.command.ac_ref or "",
                 run=eval(db_node.command.run) if db_node.command.run else {},
-                artifacts=[str(artifact.artifact) for artifact in db_node.command.artifacts] if db_node.command.artifacts is not None else [],
+                artifacts=(
+                    [str(artifact.artifact) for artifact in db_node.command.artifacts]
+                    if db_node.command.artifacts is not None
+                    else []
+                ),
             )
 
         return Node(
@@ -333,13 +368,33 @@ def update_node(node_id: str, node_data: dict[str, Any]) -> Node | None:
     try:
         db_node = repository.update_node_by_id(node_id, node_data)
         if db_node:
-            parent_ids: list[str] = [str(parent.id) for parent in cast(list[DBNode], db_node.parents) if parent.id is not None] if db_node.parents is not None else []
-            child_ids: list[str] = [str(child.id) for child in cast(list[DBNode], db_node.children) if child.id is not None] if db_node.children is not None else []
+            parent_ids: list[str] = (
+                [
+                    str(parent.id)
+                    for parent in cast(list[DBNode], db_node.parents)
+                    if parent.id is not None
+                ]
+                if db_node.parents is not None
+                else []
+            )
+            child_ids: list[str] = (
+                [
+                    str(child.id)
+                    for child in cast(list[DBNode], db_node.children)
+                    if child.id is not None
+                ]
+                if db_node.children is not None
+                else []
+            )
             links = Link(parents=parent_ids, children=child_ids)
 
             metadata = Metadata(
                 owner=db_node.owner or "",
-                labels=[str(label.label) for label in db_node.labels if label.label is not None] if db_node.labels else [],
+                labels=(
+                    [str(label.label) for label in db_node.labels if label.label is not None]
+                    if db_node.labels
+                    else []
+                ),
                 severity=db_node.severity or "",
                 work_type=db_node.work_type or "",
             )
@@ -348,7 +403,11 @@ def update_node(node_id: str, node_data: dict[str, Any]) -> Node | None:
                 command = Command(
                     ac_ref=db_node.command.ac_ref or "",
                     run=eval(db_node.command.run) if db_node.command.run else {},
-                    artifacts=[str(artifact.artifact) for artifact in db_node.command.artifacts] if db_node.command.artifacts is not None else [],
+                    artifacts=(
+                        [str(artifact.artifact) for artifact in db_node.command.artifacts]
+                        if db_node.command.artifacts is not None
+                        else []
+                    ),
                 )
 
             return Node(
@@ -544,28 +603,51 @@ def complete_goal(goal_id: str) -> tuple[Node | None, str | None]:
             return goal, None  # Already completed
 
         # Update the goal status to 'done' and add completion timestamp
-        updated_goal = repository.update_node_by_id(goal_id, {
-            'status': 'done',
-            'metadata': {
-                'owner': goal.metadata.owner,
-                'labels': goal.metadata.labels,
-                'severity': goal.metadata.severity,
-                'work_type': goal.metadata.work_type,
-                'date_completed': datetime.now().isoformat()
-            }
-        })
+        updated_goal = repository.update_node_by_id(
+            goal_id,
+            {
+                "status": "done",
+                "metadata": {
+                    "owner": goal.metadata.owner,
+                    "labels": goal.metadata.labels,
+                    "severity": goal.metadata.severity,
+                    "work_type": goal.metadata.work_type,
+                    "date_completed": datetime.now().isoformat(),
+                },
+            },
+        )
 
         if not updated_goal:
             return None, "Failed to update goal status in database"
 
         # Convert DBNode to Node before returning
-        parent_ids: list[str] = [str(parent.id) for parent in cast(list[DBNode], updated_goal.parents) if parent.id is not None] if updated_goal.parents is not None else []
-        child_ids: list[str] = [str(child.id) for child in cast(list[DBNode], updated_goal.children) if child.id is not None] if updated_goal.children is not None else []
+        parent_ids: list[str] = (
+            [
+                str(parent.id)
+                for parent in cast(list[DBNode], updated_goal.parents)
+                if parent.id is not None
+            ]
+            if updated_goal.parents is not None
+            else []
+        )
+        child_ids: list[str] = (
+            [
+                str(child.id)
+                for child in cast(list[DBNode], updated_goal.children)
+                if child.id is not None
+            ]
+            if updated_goal.children is not None
+            else []
+        )
         links = Link(parents=parent_ids, children=child_ids)
 
         metadata = Metadata(
             owner=updated_goal.owner or "",
-            labels=[str(label.label) for label in updated_goal.labels if label.label is not None] if updated_goal.labels else [],
+            labels=(
+                [str(label.label) for label in updated_goal.labels if label.label is not None]
+                if updated_goal.labels
+                else []
+            ),
             severity=updated_goal.severity or "",
             work_type=updated_goal.work_type or "",
         )
@@ -574,7 +656,11 @@ def complete_goal(goal_id: str) -> tuple[Node | None, str | None]:
             command = Command(
                 ac_ref=updated_goal.command.ac_ref or "",
                 run=eval(updated_goal.command.run) if updated_goal.command.run else {},
-                artifacts=[str(artifact.artifact) for artifact in updated_goal.command.artifacts] if updated_goal.command.artifacts is not None else [],
+                artifacts=(
+                    [str(artifact.artifact) for artifact in updated_goal.command.artifacts]
+                    if updated_goal.command.artifacts is not None
+                    else []
+                ),
             )
 
         node = Node(

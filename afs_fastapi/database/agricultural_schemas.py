@@ -79,11 +79,21 @@ class Equipment(Base):  # type: ignore[misc, valid-type]
     updated_at = Column(DateTime, onupdate=lambda: datetime.now(UTC))
 
     # Relationships
-    isobus_messages: Mapped[list[ISOBUSMessageRecord]] = relationship("ISOBUSMessageRecord", back_populates="equipment")
-    sensor_records: Mapped[list[AgriculturalSensorRecord]] = relationship("AgriculturalSensorRecord", back_populates="equipment")
-    telemetry_records: Mapped[list[TractorTelemetryRecord]] = relationship("TractorTelemetryRecord", back_populates="equipment")
-    yield_records: Mapped[list[YieldMonitorRecord]] = relationship("YieldMonitorRecord", back_populates="equipment")
-    operational_sessions: Mapped[list[OperationalSession]] = relationship("OperationalSession", back_populates="equipment")
+    isobus_messages: Mapped[list[ISOBUSMessageRecord]] = relationship(
+        "ISOBUSMessageRecord", back_populates="equipment"
+    )
+    sensor_records: Mapped[list[AgriculturalSensorRecord]] = relationship(
+        "AgriculturalSensorRecord", back_populates="equipment"
+    )
+    telemetry_records: Mapped[list[TractorTelemetryRecord]] = relationship(
+        "TractorTelemetryRecord", back_populates="equipment"
+    )
+    yield_records: Mapped[list[YieldMonitorRecord]] = relationship(
+        "YieldMonitorRecord", back_populates="equipment"
+    )
+    operational_sessions: Mapped[list[OperationalSession]] = relationship(
+        "OperationalSession", back_populates="equipment"
+    )
 
     # Indexes for performance
     __table_args__ = (
@@ -116,9 +126,15 @@ class Field(Base):  # type: ignore[misc, valid-type]
     )
 
     # Relationships
-    sensor_records: Mapped[list[AgriculturalSensorRecord]] = relationship("AgriculturalSensorRecord", back_populates="field")
-    yield_records: Mapped[list[YieldMonitorRecord]] = relationship("YieldMonitorRecord", back_populates="field")
-    operational_sessions: Mapped[list[OperationalSession]] = relationship("OperationalSession", back_populates="field")
+    sensor_records: Mapped[list[AgriculturalSensorRecord]] = relationship(
+        "AgriculturalSensorRecord", back_populates="field"
+    )
+    yield_records: Mapped[list[YieldMonitorRecord]] = relationship(
+        "YieldMonitorRecord", back_populates="field"
+    )
+    operational_sessions: Mapped[list[OperationalSession]] = relationship(
+        "OperationalSession", back_populates="field"
+    )
 
     # Indexes for geographic and crop queries
     __table_args__ = (

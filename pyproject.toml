@@ -76,7 +76,7 @@ lint.ignore = [
 ]
 src = ["afs_fastapi", "tests"]
 exclude = ["bin", "afs_fastapi/__main__.py"]
-lint.per-file-ignores = {"tests/core/test_todos_manager.py" = ["E402"]}
+
 
 [tool.black]
 line-length = 100

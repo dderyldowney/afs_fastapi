@@ -331,9 +331,13 @@ class AIProcessingPipeline:
                         if keyword in sentence.lower():
                             relevant_sentences.append(sentence.strip())
                     if relevant_sentences:
-                        assembled_context_parts.append(f"Context for '{keyword}': {'. '.join(relevant_sentences)}.")
+                        assembled_context_parts.append(
+                            f"Context for '{keyword}': {'. '.join(relevant_sentences)}."
+                        )
                     else:
-                        assembled_context_parts.append(f"Context for '{keyword}': {snippet['content']}")
+                        assembled_context_parts.append(
+                            f"Context for '{keyword}': {snippet['content']}"
+                        )
                     matched_snippet_ids.add(snippet["id"])
                     break  # Move to the next snippet once one keyword matches
 

@@ -2,7 +2,7 @@
 This module implements the repository pattern for accessing the ToDoWrite data.
 """
 
-from typing import Any, TypeVar
+from typing import Any, Protocol, TypeVar
 
 from sqlalchemy.orm import Session
 
@@ -14,7 +14,12 @@ from afs_fastapi.todos.db.models import (
     Node as DBNode,
 )
 
-T = TypeVar("T")
+
+class HasId(Protocol):
+    id: Any
+
+
+T = TypeVar("T", bound=HasId)
 
 
 class BaseRepository[T]:

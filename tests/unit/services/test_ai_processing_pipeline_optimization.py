@@ -1,4 +1,3 @@
-
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -18,15 +17,18 @@ class TestAIProcessingPipelineOptimization(unittest.TestCase):
     def test_selective_feature_extraction(self):
         user_input = "tell me about tractor safety"
         context = self.pipeline.optimize_pre_fill_stage(PipelineContext(user_input=user_input))
-        self.assertIn("AFS FastAPI: Production-ready agricultural robotics platform.", context.essential_content)
-        self.assertIn("ISO 18497: Agricultural machinery safety standards", context.essential_content)
+        self.assertIn(
+            "AFS FastAPI: Production-ready agricultural robotics platform.",
+            context.essential_content,
+        )
+        self.assertIn(
+            "ISO 18497: Agricultural machinery safety standards", context.essential_content
+        )
         self.assertNotIn("ISOBUS communication", context.essential_content)
 
     def test_intelligent_caching(self):
         user_input = "what is the status of the tractor?"
-        with patch.object(
-            self.pipeline, "optimize_pre_fill_stage"
-        ) as mock_optimize_pre_fill_stage:
+        with patch.object(self.pipeline, "optimize_pre_fill_stage") as mock_optimize_pre_fill_stage:
             # First call, should call the pipeline
             result1 = self.pipeline.process_complete_pipeline(user_input)
             self.assertEqual(mock_optimize_pre_fill_stage.call_count, 1)

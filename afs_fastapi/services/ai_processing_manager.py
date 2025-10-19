@@ -23,12 +23,14 @@ from .ai_processing_pipeline import AIProcessingPipeline, OptimizationLevel, Pip
 
 class ServiceConfig(TypedDict):
     """Configuration for individual platform services."""
+
     optimization_level: str
     priority: str
 
 
 class AIProcessingConfig(TypedDict):
     """Typed configuration schema for AI Processing Manager."""
+
     agricultural_safety_mode: bool
     default_optimization_level: str
     token_budget: int

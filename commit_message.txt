@@ -1,0 +1,8 @@
+refactor(todos): Update references to todos manager
+
+This commit updates all references to the `todos_manager` to use the new path `afs_fastapi/todos/manager.py` instead of the old `afs_fastapi/core/todos_manager.py`.
+
+The following files were modified:
+- `AGENTS.md`: Updated documentation to reflect the new path.
+- `pyproject.toml`: Removed an obsolete configuration that pointed to a deleted test file.
+- `afs_fastapi/core/todowrite_integration.py`: Corrected an import statement to use the new path.

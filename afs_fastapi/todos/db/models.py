@@ -40,8 +40,12 @@ class Node(Base):
         secondaryjoin="Node.id==links.c.parent_id",
         backref="children",
     )
-    labels: Mapped[list["Label"]] = relationship("Label", secondary=node_labels, back_populates="nodes")
-    command: Mapped[Optional["Command"]] = relationship("Command", uselist=False, back_populates="node")
+    labels: Mapped[list["Label"]] = relationship(
+        "Label", secondary=node_labels, back_populates="nodes"
+    )
+    command: Mapped[Optional["Command"]] = relationship(
+        "Command", uselist=False, back_populates="node"
+    )
 
 
 class Link(Base):
@@ -59,7 +63,9 @@ class Label(Base):
     __tablename__ = "labels"
 
     label = Column(String, primary_key=True)
-    nodes: Mapped[list["Node"]] = relationship("Node", secondary=node_labels, back_populates="labels")
+    nodes: Mapped[list["Node"]] = relationship(
+        "Node", secondary=node_labels, back_populates="labels"
+    )
 
 
 class Command(Base):
