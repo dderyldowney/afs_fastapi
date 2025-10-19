@@ -224,6 +224,7 @@ This project enforces strict type safety to ensure the reliability and maintaina
 
 - **Naming**: Clear, conversational naming following PEP 8 with agricultural domain context
 - **Type safety**: Precise type hints; maintain mypy strict mode compliance (zero warnings)
+- **Interface Contracts**: Utilize Python `Protocol` classes for defining clear and explicit interface contracts to enhance type safety, modularity, and maintainability across the codebase.
 - **Function design**: Compact, purposeful functions avoiding over-engineering
 - **Testing requirements**: Comprehensive tests with realistic agricultural scenarios and performance validation
 - **Documentation standards**: Professional tone with concrete agricultural examples and educational context
