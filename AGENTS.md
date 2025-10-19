@@ -49,6 +49,7 @@ All agents MUST adhere to the security protocols defined in [SECURITY_PROTOCOL.m
 
 -   Violation of these token efficiency guidelines will be considered a critical failure.
 -   Automated checks WILL be implemented and enforced to monitor token usage and CLI tool prioritization across ALL sessions, current and future. These checks will ensure adherence to token budget constraints and optimal search strategies.
+-   All token usage by AI agents MUST be logged using the `TokenUsageLogger` via the `/monitoring/token-usage` API endpoint.
 
 This is a non-negotiable requirement for ALL agents to ensure cost-effectiveness and operational efficiency.
 

@@ -636,7 +636,7 @@ class AIProcessingPipeline:
 
         return context
 
-    def process_complete_pipeline(
+    async def process_complete_pipeline(
         self, user_input: str, optimization_level: OptimizationLevel = OptimizationLevel.STANDARD
     ) -> PipelineResult:
         """
@@ -746,7 +746,7 @@ class AIProcessingPipeline:
         # Default to standard optimization
         return OptimizationLevel.STANDARD
 
-    def process_with_budget(self, user_input: str, token_budget: int) -> PipelineResult:
+    async def process_with_budget(self, user_input: str, token_budget: int) -> PipelineResult:
         """
         Process pipeline within specified token budget constraints.
 
@@ -764,7 +764,7 @@ class AIProcessingPipeline:
         else:
             optimization_level = OptimizationLevel.AGGRESSIVE
 
-        result = self.process_complete_pipeline(user_input, optimization_level)
+        result = await self.process_complete_pipeline(user_input, optimization_level)
 
         # Check budget compliance
         result.estimated_tokens = max(1, len(result.final_output) // 4)

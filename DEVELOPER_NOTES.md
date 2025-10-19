@@ -33,6 +33,14 @@
 - **Status**: Minimal implementation (1 line) - prime enhancement target
 - **Opportunity**: High-level orchestration layer for multi-tractor coordination
 
+**Token Usage Logger** (`afs_fastapi/monitoring/token_usage_logger.py`):
+- Asynchronous logging of token consumption for each agent action.
+- Stores usage data with task identifiers, agent IDs, model names, and timestamps.
+- Provides API endpoints for querying usage by agent, task, and time.
+- Ensures minimal performance overhead through asynchronous operations.
+- Supports log rotation and configurable logging levels.
+- Facilitates cost analysis and optimization of AI processing.
+
 ### 🔗 Integration Points Identified
 
 1. **Systems Designed for Composition**: All components built for integration but lack orchestration
