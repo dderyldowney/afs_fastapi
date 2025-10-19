@@ -1,10 +1,12 @@
+from __future__ import annotations
+
 import struct
 
 import can
 
 
 class CANMessageHandler:
-    def __init__(self, channel="vcan0", bustype="virtual"):
+    def __init__(self, channel: str = "vcan0", bustype: str = "virtual") -> None:
         """
         Initializes the CANMessageHandler.
 
@@ -13,7 +15,7 @@ class CANMessageHandler:
             bustype: The type of bus to use.
         """
         try:
-            self.bus = can.Bus(channel=channel, interface=bustype)
+            self.bus: can.BusABC | None = can.Bus(channel=channel, interface=bustype)
         except can.CanError as e:
             print(f"Error creating CAN bus: {e}")
             self.bus = None
@@ -34,7 +36,7 @@ class CANMessageHandler:
         data = struct.pack("<dd", latitude, longitude)
         return can.Message(arbitration_id=arbitration_id, data=data, is_extended_id=True)
 
-    def transmit_message(self, message: can.Message):
+    def transmit_message(self, message: can.Message) -> None:
         """
         Transmits a CAN message on the bus.
 
