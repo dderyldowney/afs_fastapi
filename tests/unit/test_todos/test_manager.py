@@ -130,7 +130,7 @@ class TestTodosManager(unittest.TestCase):
         """Test that update_node raises ValueError for invalid data types."""
         node_data = {"layer": 123}  # Invalid type for layer
         with self.assertRaisesRegex(ValueError, "Layer must be a string"):
-            self.repository.update("goal1", node_data)
+            self.repository.update_node_by_id("goal1", node_data)
 
 
 if __name__ == "__main__":

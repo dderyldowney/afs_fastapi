@@ -2,7 +2,7 @@
 This module implements the repository pattern for accessing the ToDoWrite data.
 """
 
-from typing import Any
+from typing import Any, TypeVar
 
 from sqlalchemy.orm import Session
 
@@ -14,53 +14,55 @@ from afs_fastapi.todos.db.models import (
     Node as DBNode,
 )
 
+T = TypeVar("T")
 
-class BaseRepository:
+
+class BaseRepository[T]:
     """Base repository class with common CRUD operations."""
 
     def __init__(self, session: Session):
         self.session = session
 
-    def add(self, obj):
+    def add(self, obj: T) -> T:
         """Adds a new object to the database."""
         self.session.add(obj)
         self.session.commit()
         self.session.refresh(obj)
         return obj
 
-    def get(self, model, id):
+    def get(self, model: type[T], id: Any) -> T | None:
         """Retrieves an object by its ID."""
         return self.session.query(model).filter(model.id == id).first()
 
-    def list(self, model):
+    def list(self, model: type[T]) -> list[T]:
         """Retrieves all objects of a given type."""
         return self.session.query(model).all()
 
-    def update(self, obj):
+    def update(self, obj: T) -> T:
         """Updates an existing object in the database."""
         self.session.commit()
         self.session.refresh(obj)
         return obj
 
-    def delete(self, obj):
+    def delete(self, obj: T) -> None:
         """Deletes an object from the database."""
         self.session.delete(obj)
         self.session.commit()
 
 
-class NodeRepository(BaseRepository):
+class NodeRepository(BaseRepository[DBNode]):
     """Repository for managing Node objects."""
 
     def __init__(self, session: Session):
         super().__init__(session)
 
-    def get(self, id: str) -> DBNode | None:
+    def get(self, model: type[DBNode], id: str) -> DBNode | None:
         """Retrieves a Node by its ID."""
-        return super().get(DBNode, id)
+        return super().get(model, id)
 
-    def list(self) -> list[DBNode]:
+    def list(self, model: type[DBNode]) -> list[DBNode]:
         """Retrieves all Node objects."""
-        return super().list(DBNode)
+        return super().list(model)
 
     def create(self, node_data: dict[str, Any]) -> DBNode:
         """Creates a new Node object in the database."""
@@ -112,9 +114,9 @@ class NodeRepository(BaseRepository):
         self.session.refresh(db_node)
         return db_node
 
-    def update(self, node_id: str, node_data: dict[str, Any]) -> DBNode | None:
+    def update_node_by_id(self, node_id: str, node_data: dict[str, Any]) -> DBNode | None:
         """Updates an existing Node object in the database."""
-        db_node = self.get(node_id)
+        db_node = self.get(DBNode, node_id)
         if db_node:
             # Data validation
             if "layer" in node_data and not isinstance(node_data["layer"], str):
@@ -181,13 +183,12 @@ class NodeRepository(BaseRepository):
                 self.session.query(DBCommand).filter(DBCommand.node_id == node_id).delete()
                 self.session.query(DBArtifact).filter(DBArtifact.command_id == node_id).delete()
 
-            self.session.commit()
-            self.session.refresh(db_node)
-        return db_node
+            return super().update(db_node)
+        return None
 
-    def delete(self, node_id: str):
+    def delete_node_by_id(self, node_id: str):
         """Deletes a Node object from the database."""
-        db_node = self.get(node_id)
+        db_node = self.get(DBNode, node_id)
         if db_node:
             self.session.delete(db_node)
             self.session.commit()
