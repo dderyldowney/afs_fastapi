@@ -44,7 +44,7 @@ MIT (project license)
 ### Enforcement:
 
 -   Violation of these token efficiency guidelines will be considered a critical failure.
--   Automated checks will be implemented to monitor token usage and CLI tool prioritization.
+-   Automated checks WILL be implemented and enforced to monitor token usage and CLI tool prioritization across ALL sessions, current and future. These checks will ensure adherence to token budget constraints and optimal search strategies.
 
 This is a non-negotiable requirement for ALL agents to ensure cost-effectiveness and operational efficiency.
 
