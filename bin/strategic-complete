@@ -9,7 +9,7 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import complete_goal, load_todos, save_todos  # noqa: E402
+from afs_fastapi.todos.manager import load_todos, complete_goal  # noqa: E402
 
 
 def main():
@@ -18,35 +18,37 @@ def main():
     args = parser.parse_args()
 
     todos = load_todos()
-    goals = todos["goals"]
+    goals = todos.get("Goal", [])  # Updated to use new structure
     matched_goal = None
     for goal in goals:
-        if goal['id'] == args.search_term or args.search_term.lower() in goal['title'].lower():
+        # Updated to use attribute access instead of dictionary access
+        if goal.id == args.search_term or args.search_term.lower() in goal.title.lower():
             matched_goal = goal
             break
-    
+
     if not matched_goal:
         print(f"Error: No goal found matching \"{args.search_term}\"")
         print("Use 'get_goals()' to see available goals.")
         sys.exit(1)
 
-    if matched_goal['status'] == 'done':
-        print(f"Goal already completed: {matched_goal['title']}")
+    if matched_goal.status == 'done':
+        print(f"Goal already completed: {matched_goal.title}")
         sys.exit(0)
 
     # Use complete_goal function for enhanced functionality
-    completed_goal, error = complete_goal(matched_goal['id'])
+    completed_goal, error = complete_goal(matched_goal.id)
 
     if error:
         print(f"Error: {error}")
         sys.exit(1)
 
     print("✓ Goal marked as completed!")
-    print(f"  ID: {completed_goal['id']}")
-    print(f"  Title: {completed_goal['title']}")
-    print(f"  Status: {completed_goal['status']}")
-    if 'date_completed' in completed_goal:
-        print(f"  Date completed: {completed_goal['date_completed']}")
+    print(f"  ID: {completed_goal.id}")
+    print(f"  Title: {completed_goal.title}")
+    print(f"  Status: {completed_goal.status}")
+    # Add date_completed if available in metadata
+    if hasattr(completed_goal.metadata, 'date_completed'):
+        print(f"  Date completed: {completed_goal.metadata.date_completed}")
     print("  Enhanced: Validation log updated")
 
 

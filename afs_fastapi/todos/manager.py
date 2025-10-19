@@ -487,6 +487,50 @@ def add_task(
         return None, str(e)
 
 
+def complete_goal(goal_id: str) -> tuple[Node | None, str | None]:
+    """Mark a strategic goal as complete.
+
+    Args:
+        goal_id: The ID of the goal to complete
+
+    Returns:
+        A tuple of (completed_goal, error_message)
+    """
+    from datetime import datetime
+
+    # First, load the goal to get its current state
+    todos = load_todos()
+    goals = todos.get("Goal", [])
+    goal = None
+    for g in goals:
+        if g.id == goal_id:
+            goal = g
+            break
+
+    if not goal:
+        return None, f"Goal with ID '{goal_id}' not found"
+
+    if goal.status == "done":
+        return goal, None  # Already completed
+
+    # Update the goal status to 'done' and add completion timestamp
+    updated_goal = update_node(goal_id, {
+        'status': 'done',
+        'metadata': {
+            'owner': goal.metadata.owner,
+            'labels': goal.metadata.labels,
+            'severity': goal.metadata.severity,
+            'work_type': goal.metadata.work_type,
+            'date_completed': datetime.now().isoformat()
+        }
+    })
+
+    if not updated_goal:
+        return None, "Failed to update goal status in database"
+
+    return updated_goal, None
+
+
 def add_subtask(
     task_id: str, title: str, description: str, command: str, command_type: str
 ) -> tuple[dict[str, Any] | None, str | None]:
