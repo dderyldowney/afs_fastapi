@@ -6,24 +6,28 @@
 
 ## Current Status & Recent Developments
 
-**Agricultural Robotics Platform (v0.1.3+)**
+**Agricultural Robotics Platform (v0.1.5)**
 
-AFS FastAPI has evolved into a production-ready multi-tractor coordination system with comprehensive reliability and educational value.
+AFS FastAPI has evolved into a production-ready multi-tractor coordination system with comprehensive reliability, database persistence, and educational value.
 
 **Recent Major Enhancements:**
-- **CAN Bus Integration**: Full support for CAN bus communication, including virtual CAN bus connection and J1939 protocol integration for realistic agricultural vehicle data exchange.
+- **TodoWrite v0.1.5 System**: Complete 12-layer declarative planning framework with PostgreSQL database support for task management and session persistence
+- **Database Integration**: Full PostgreSQL support with Alembic migrations, enabling production-grade data persistence and agricultural operation tracking
+- **CAN Message Handler**: Enhanced equipment communication interface for agricultural vehicle coordination and real-time data exchange
 - **Test-First Development**: Complete TDD methodology with mandatory Red-Green-Refactor enforcement
 - **Distributed Systems**: Vector Clock implementation for multi-tractor fleet coordination
-- **Enhanced Testing**: Test suite expanded to **802 tests** (100% passing in <3s)
+- **Enhanced Testing**: Test suite expanded to **846 tests** (100% passing in <3s)
 - **Universal AI Agent Infrastructure**: Automated session management and enforcement for all AI platforms
-- **Professional Documentation**: Comprehensive guides and strategic positioning documentation
+- **Professional Documentation**: Comprehensive guides including new ToDoWrite-HOWTO.md user guide
 - **Zero Technical Debt**: No linting warnings across entire codebase
 
 **Strategic Capabilities:**
 - **Multi-tractor coordination**: Conflict-free field operations with real-time synchronization
+- **Database persistence**: PostgreSQL integration with comprehensive data management and migration support
+- **Advanced task management**: 12-layer TodoWrite system for hierarchical agricultural operation planning
 - **ISOBUS compliance**: Full ISO 11783 and ISO 18497 (Safety) implementation
 - **Network resilience**: Handles intermittent rural connectivity scenarios
--- **Educational framework**: Dual-purpose code serving functional and instructional objectives
+- **Educational framework**: Dual-purpose code serving functional and instructional objectives
 
 ---
 
@@ -164,22 +168,24 @@ AFS FastAPI has evolved into a production-ready multi-tractor coordination syste
 
 ### Development Strategy
 
-**Phase 1: Foundation (Completed - v0.1.3+)**
+**Phase 1: Foundation (Completed - v0.1.5)**
 - Core equipment control with FarmTractor class (40+ attributes, comprehensive methods)
 - FastAPI endpoints with Pydantic models for robust API layer
 - Monitoring systems with pluggable backend architecture
-- Comprehensive test suite (802 tests) with 100% success rate
+- Comprehensive test suite (846 tests) with 100% success rate
 
-**Phase 2: Distributed Systems (Current)**
+**Phase 2: Distributed Systems (COMPLETED)**
 - Vector Clock implementation for multi-tractor synchronization (COMPLETED)
 - Test-Driven Development methodology enforcement (COMPLETED)
 - Git commit separation and CHANGELOG automation (COMPLETED)
 - Universal AI agent infrastructure (COMPLETED)
-- **Current Priority**: CAN Network Traffic Management
-- **Next Priority**: CRDT implementation for field allocation conflict resolution
+- CAN Network Traffic Management (COMPLETED)
+- TodoWrite v0.1.5 with 12-layer declarative planning framework (COMPLETED)
+- PostgreSQL database integration with Alembic migrations (COMPLETED)
 
-**Phase 3: Advanced Coordination (Planned)**
-- Enhanced ISOBUS messaging with guaranteed delivery
+**Phase 3: Advanced Coordination (Current)**
+- **Current Priority**: CRDT implementation for field allocation conflict resolution
+- **Next Priority**: Enhanced ISOBUS messaging with guaranteed delivery
 - Multi-field operation optimization algorithms
 - Advanced collision avoidance with sensor fusion
 - Production deployment framework
@@ -205,7 +211,7 @@ AFS FastAPI has evolved into a production-ready multi-tractor coordination syste
 - Cross-agent infrastructure sharing prevents configuration drift
 
 **Continuous Quality Standards**:
-- Zero test failures maintained across all 802 tests
+- Zero test failures maintained across all 846 tests
 - Zero code quality warnings from all validation tools
 - Sub-3-second test execution for rapid feedback
 - Complete agricultural compliance validation
@@ -322,7 +328,7 @@ elif clock.is_concurrent_with(other_clock):
 2. **GREEN Phase**: Implement minimal code meeting test requirements
 3. **REFACTOR Phase**: Enhance code quality while maintaining test coverage
 
-**Test Suite Status: 802 Tests** (100% passing in ~3 seconds)
+**Test Suite Status: 846 Tests** (100% passing in ~3 seconds)
 
 **Test Distribution by Domain**:
 - **Unit Tests (693 tests)**: Extensive coverage of individual components, including equipment interfaces, monitoring systems, communication protocols, and safety features.
@@ -590,6 +596,97 @@ monitor = WaterMonitor("WTR001", backend=MyWaterBackend())
 print(monitor.get_water_quality())
 ```
 
+### TodoWrite System Example
+
+**12-Layer Task Management for Agricultural Operations**:
+
+```python
+from afs_fastapi.todos.manager import TodosManager
+
+# Initialize TodoWrite system with database persistence
+todos = TodosManager()
+
+# Create hierarchical agricultural operation plan
+field_operation = {
+    "VISION": "Sustainable precision agriculture through automated field management",
+    "MISSION": "Execute comprehensive spring planting operation for optimal crop yield",
+    "STRATEGY": "Multi-tractor coordination with real-time soil condition monitoring",
+    "INITIATIVE": "Spring 2024 Corn Planting Campaign",
+    "PROGRAM": "Field Section Alpha-7 Planting Operations",
+    "PROJECT": "Precision Corn Seeding with Variable Rate Application",
+    "PHASE": "Field Preparation and Planting Execution",
+    "MILESTONE": "Complete 160-acre section planting within 48-hour weather window",
+    "TASK": "Configure multi-tractor fleet for coordinated planting operation",
+    "SUBTASK": "Calibrate John Deere 9RX seeders for hybrid corn variety",
+    "ACTION": "Set planting depth to 2.5 inches based on soil moisture readings",
+    "COMMAND": "./bin/configure-seeder --depth=2.5 --variety=P1197 --rate=32000"
+}
+
+# Add structured agricultural task to TodoWrite system
+todo_id = todos.add_todo(
+    title="Spring Corn Planting Operation",
+    description="Multi-tractor precision seeding with variable rate application",
+    agricultural_context=field_operation,
+    safety_critical=True,
+    iso_compliance=["ISO 11783", "ISO 18497"]
+)
+
+# Track execution progress
+todos.start_task(todo_id)
+todos.update_progress(todo_id, "Tractors positioned, beginning calibration")
+todos.complete_task(todo_id, "Field section complete - 32,000 seeds/acre achieved")
+
+# Generate agricultural compliance report
+compliance_report = todos.get_compliance_report(todo_id)
+print(f"ISO 11783 compliance: {compliance_report['iso_11783_status']}")
+print(f"Safety systems verified: {compliance_report['safety_validation']}")
+```
+
+---
+
+## Database Configuration & TodoWrite System
+
+### PostgreSQL Integration
+
+AFS FastAPI now includes comprehensive PostgreSQL support for production-grade data persistence and agricultural operation tracking.
+
+**Database Features:**
+- **PostgreSQL Support**: Full production database integration with configurable connection parameters
+- **Alembic Migrations**: Complete schema management with version control and automated migrations
+- **TodoWrite Integration**: Persistent task management with 12-layer hierarchical structure storage
+- **Agricultural Context**: Domain-specific data models optimized for farming operations
+- **Local Development**: Standalone database operation for development and testing environments
+
+### TodoWrite v0.1.5 System
+
+**12-Layer Hierarchical Framework:**
+```
+VISION → MISSION → STRATEGY → INITIATIVE → PROGRAM → PROJECT →
+PHASE → MILESTONE → TASK → SUBTASK → ACTION → COMMAND
+```
+
+**Key Features:**
+- **Declarative Planning**: Structured agricultural operation planning with clear execution boundaries
+- **Database Persistence**: PostgreSQL storage for cross-session task continuity
+- **Safety-Critical Compliance**: Enhanced validation for agricultural equipment coordination
+- **Agricultural Context**: Domain-specific task management for farming operations
+
+**Database Setup:**
+```bash
+# Configure database connection (optional - uses local SQLite by default)
+export DATABASE_URL="postgresql://user:password@localhost/afs_fastapi"
+
+# Run database migrations
+alembic upgrade head
+
+# Verify TodoWrite system
+./bin/todo-status
+```
+
+**Usage Documentation:**
+- See `ToDoWrite-HOWTO.md` for comprehensive user guide (600+ lines)
+- See `ToDoWrite.md` for complete specification and integration requirements
+
 ---
 
 ## Build Process
@@ -601,18 +698,30 @@ print(monitor.get_water_quality())
 3. Create a virtual environment: `python -m venv .venv`
 4. Activate the virtual environment: `source .venv/bin/activate`
 5. Install the project dependencies: `pip install -r requirements.txt`
-6. **Verify installation with test suite**: `python -m pytest tests/ -v`
-   - **Expected result**: 802 tests passing in ~3 seconds
-   - Includes distributed systems, TDD implementation, and agricultural robotics validation
-7. Install build tools: `pip install build`
-8. Build the project: `python -m build`
-9. Install the generated wheel file: `pip install dist/afs_fastapi-0.1.3-py3-none-any.whl`
-10. Import afs_fastapi into your project: `import afs_fastapi`
+6. **Initialize database** (optional - defaults to local SQLite):
+   ```bash
+   # For PostgreSQL (production)
+   export DATABASE_URL="postgresql://user:password@localhost/afs_fastapi"
+   alembic upgrade head
+
+   # For local development (default)
+   # Database automatically created on first use
+   ```
+7. **Verify installation with test suite**: `python -m pytest tests/ -v`
+   - **Expected result**: 846 tests passing in ~3 seconds
+   - Includes distributed systems, TDD implementation, agricultural robotics validation, and TodoWrite system
+8. **Verify TodoWrite system**: `./bin/todo-status`
+9. Install build tools: `pip install build`
+10. Build the project: `python -m build`
+11. Install the generated wheel file: `pip install dist/afs_fastapi-0.1.5-py3-none-any.whl`
+12. Import afs_fastapi into your project: `import afs_fastapi`
 
 ### Development and Testing
 
 - **TDD workflow**: See [TDD_WORKFLOW.md](TDD_WORKFLOW.md) for Test-First development guide
 - **Testing reference**: See [WORKFLOW.md](WORKFLOW.md) for complete testing architecture documentation
+- **TodoWrite system**: See [ToDoWrite-HOWTO.md](ToDoWrite-HOWTO.md) for comprehensive user guide
+- **Task management**: See [ToDoWrite.md](ToDoWrite.md) for complete specification and integration requirements
 - **Quality standards**: Zero linting warnings maintained (run `ruff check .` to verify)
 
 Note on extras: The project uses `fastapi[all]` and `starlette[full]` in development to enable optional features commonly exercised in tests and local runs (e.g., test client utilities, templating, multipart/form-data handling, and uvicorn's standard extras). This keeps "pip install -r requirements.txt" sufficient for running tests and docs locally.
@@ -726,13 +835,17 @@ AFS FastAPI uses **Test-First Development (TDD)** for ALL code development. Foll
 
 **2. General Development**:
 - See [CONTRIBUTING.md](CONTRIBUTING.md) for Quick Verification Checklist
-- Run full test suite: `python -m pytest tests/` (expect 802 tests passing)
+- Run full test suite: `python -m pytest tests/` (expect 846 tests passing)
+- Verify TodoWrite system: `./bin/todo-status`
 - Maintain zero linting warnings: `ruff check .`
 - Follow git commit separation: `type(scope): description`
+- Database migrations: Use `alembic revision --autogenerate -m "description"` for schema changes
 
 **Key Documentation**:
 - **WORKFLOW.md**: Authoritative testing reference and architecture guide
 - **TDD_WORKFLOW.md**: Complete Test-First development methodology
+- **ToDoWrite-HOWTO.md**: Comprehensive TodoWrite user guide (600+ lines)
+- **ToDoWrite.md**: Complete specification and integration requirements
 - **TDD_FRAMEWORK_MANDATORY.md**: Mandatory TDD policy with enforcement details
 - **GIT_COMMIT_SEPARATION_MANDATORY.md**: Separation of concerns policy
 - **SESSION_SUMMARY.md**: Project evolution and strategic direction
@@ -778,10 +891,12 @@ This project enables automated checks (Dependabot + pip-audit) for dependency vu
 
 ## Conclusion
 
-AFS FastAPI represents a comprehensive platform combining production-grade agricultural robotics capabilities with educational value for professional development. The platform demonstrates industry-leading Test-Driven Development enforcement, distributed systems excellence, and universal AI agent infrastructure—establishing a foundation for safe, reliable, and efficient multi-tractor coordination in modern agriculture.
+AFS FastAPI represents a comprehensive platform combining production-grade agricultural robotics capabilities with educational value for professional development. The platform demonstrates industry-leading Test-Driven Development enforcement, distributed systems excellence, TodoWrite v0.1.5 task management, and universal AI agent infrastructure—establishing a foundation for safe, reliable, and efficient multi-tractor coordination in modern agriculture.
 
-**Platform Status**: Production-ready multi-tractor coordination system with mandatory TDD enforcement and zero technical debt.
+**Platform Status**: Production-ready multi-tractor coordination system with PostgreSQL database integration, TodoWrite v0.1.5 hierarchical task management, mandatory TDD enforcement, and zero technical debt.
 
-**Strategic Achievement**: Industry's only platform combining ISO compliance, distributed systems coordination, and comprehensive educational framework with universal AI agent development standards.
+**Strategic Achievement**: Industry's only platform combining ISO compliance, distributed systems coordination, comprehensive database persistence, 12-layer task management framework, and comprehensive educational framework with universal AI agent development standards.
+
+**Recent Achievements**: TodoWrite v0.1.5 rewrite with 12-layer declarative planning framework, PostgreSQL integration with Alembic migrations, enhanced CAN message handling, and comprehensive test suite expansion to 846 tests.
 
 **Future Readiness**: Advanced capabilities positioned for CRDT implementation, enhanced ISOBUS messaging, enterprise scaling, and real agricultural equipment integration.

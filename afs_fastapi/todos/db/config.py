@@ -7,10 +7,7 @@ Supports both SQLite (default) and PostgreSQL databases through environment vari
 import os
 
 # Database configuration with environment variable support
-DATABASE_URL = os.getenv(
-    "TODOWRITE_DATABASE_URL",
-    "sqlite:///./todos.db"
-)
+DATABASE_URL = os.getenv("TODOWRITE_DATABASE_URL", "sqlite:///./todos.db")
 """The URL for the database connection.
 
 Environment Variables:
@@ -22,13 +19,14 @@ Examples:
     PostgreSQL (production): postgresql://user:password@db.example.com:5432/afs_agricultural_todos
 """
 
+
 # PostgreSQL configuration helpers
 def get_postgresql_url(
     user: str,
     password: str,
     host: str = "localhost",
     port: int = 5432,
-    database: str = "todowrite_agricultural"
+    database: str = "todowrite_agricultural",
 ) -> str:
     """
     Generate PostgreSQL connection URL for agricultural robotics environments.
@@ -69,5 +67,5 @@ AGRICULTURAL_DB_SETTINGS = {
         "pool_pre_ping": True,
         "pool_recycle": 3600,  # 1 hour for long-running agricultural operations
         "echo": False,  # Set to True for SQL debugging
-    }
+    },
 }
