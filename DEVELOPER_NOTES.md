@@ -129,10 +129,11 @@
 - **Risk Mitigation**: Comprehensive testing for safety-critical systems
 
 ### Cross-Session Continuity
-- Dual TODO system maintains development momentum
-- Strategic objectives provide long-term direction
-- Phase steps ensure tactical implementation progress
-- Complete session state preservation and restoration
+- The `TodoWrite.md` system is the single source of truth for all work items, with task persistence handled by the system.
+- All task operations are managed through the `afs_fastapi/todos/manager.py` module.
+- Strategic objectives provide long-term direction.
+- Phase steps ensure tactical implementation progress.
+- Complete session state preservation and restoration.
 
 ---
 
@@ -140,21 +141,21 @@
 
 **Context Restoration**:
 ```bash
-./bin/todo-restore          # Load complete development context
 ./bin/loadsession          # Standard session initialization
 ```
 
 **Development Management**:
 ```bash
-./bin/phase-status         # Check current phase progress
-./bin/todo-status          # Comprehensive development overview
-./bin/phase-complete "Design advanced fleet coordination protocol specification for multi-tractor operations"
+./bin/todo add "<task_description>" # Add a new task
+./bin/todo list              # List all tasks
+./bin/todo done <task_id>      # Mark a task as done
+./bin/todo remove <task_id>    # Remove a task
+./bin/todo status            # Comprehensive development overview
 ```
 
 **Continue with Step 4**:
 ```bash
-./bin/phase-complete "Design advanced fleet coordination protocol specification for multi-tractor operations"
-# Then begin RED phase: Write failing tests for advanced fleet coordination behaviors
+# Begin RED phase: Write failing tests for advanced fleet coordination behaviors
 ```
 
 ---

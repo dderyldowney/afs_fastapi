@@ -4,7 +4,7 @@
 
 This documentation aims to provide comprehensive guidance for users interacting with the AFS FastAPI Agricultural Robotics Platform. It will cover:
 
-*   **Platform Tools**: Usage and purpose of command-line interface (CLI) tools located in the `bin/` directory (e.g., `savesession`, `saveandpush`, `todo-status`, `phase-status`, `strategic-list`, `formatall`).
+*   **Platform Tools**: Usage and purpose of command-line interface (CLI) tools located in the `bin/` directory (e.g., `savesession`, `saveandpush`, `todo-status`, `strategic-list`, `formatall`).
 *   **Environment and Tooling**: Setup and configuration of the development environment, including dependency management, virtual environments, pre-commit hooks, testing procedures (`pytest`), and code quality tools (`black`, `ruff`, `isort`, `mypy`).
 *   **`afs_fastapi` Python Module**: Detailed API reference, core concepts, and usage examples for the Python modules within the `afs_fastapi/` directory, covering equipment control, monitoring, and API interactions.
 
@@ -37,7 +37,7 @@ The documentation will be organized into the following main sections:
 
 ### 4.2. Platform Tools
 *   Overview of CLI Tools
-*   Detailed Usage Guides for each `bin/` script (e.g., `savesession`, `saveandpush`, `todo-status`, `phase-status`, `strategic-list`, `formatall`)
+*   Detailed Usage Guides for each `bin/` script (e.g., `savesession`, `saveandpush`, `todo-status`, `strategic-list`, `formatall`)
 *   Command-line Examples
 
 ### 4.3. Development Environment

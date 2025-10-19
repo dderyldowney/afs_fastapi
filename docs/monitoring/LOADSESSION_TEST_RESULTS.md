@@ -137,7 +137,7 @@ Platform positioned for advanced synchronization infrastructure.
 afs_fastapi/
 ├── loadsession                    # ✅ Executable script (755 permissions)
 ├── SESSION_SUMMARY.md            # ✅ Project context file (848 lines)
-├── .claude/commands/loadsession.md # ✅ Command documentation
+├── afs_fastapi/todos/configs/commands/loadsession.md # ✅ Command documentation
 └── test_loadsession.sh           # ✅ Comprehensive test suite
 ```
 
@@ -199,7 +199,7 @@ afs_fastapi/
 
 ### Support Integration
 
-**Command Integration**: Use `.claude/commands/loadsession.md` for specification reference
+**Command Integration**: Use `afs_fastapi/todos/configs/commands/loadsession.md` for specification reference
 **Test Validation**: Run `./test_loadsession.sh` for comprehensive functionality verification
 **Documentation**: Refer to CLAUDE.md for session initialization workflow
 

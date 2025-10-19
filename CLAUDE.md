@@ -87,7 +87,7 @@ The platform provides universal session management commands available to all AI 
 **CRITICAL REQUIREMENT**: ALL Claude Code sessions MUST correctly follow the TodoWrite specification with proper layer naming and execution boundaries as specified in `ToDoWrite.md` with zero exceptions.
 
 **Mandatory 12-Layer Structure**:
-- **VISION** → **MISSION** → **STRATEGY** → **INITIATIVE** → **PROGRAM** → **PROJECT** → **PHASE** → **MILESTONE** → **TASK** → **SUBTASK** → **ACTION** → **COMMAND**
+- **Goal** → **Concept** → **Context** → **Constraints** → **Requirements** → **Acceptance Criteria** → **Interface Contract** → **Phase** → **Step** → **Task** → **SubTask** → **Command**
 
 **Execution Boundaries**:
 - **ONLY COMMAND layer tasks can be executed** - all other layers are organizational/planning only
@@ -120,8 +120,8 @@ The platform provides universal session management commands available to all AI 
 ./bin/pause-here "Task: [TASK_NAME] - [STATUS]" "[NEXT_STEPS]"
 
 # Phase-level pause (phase completion)
-./bin/phase-end
-./bin/pause-here "Phase: [PHASE_NAME] - Complete" "[NEXT_PHASE]"
+# Use todo status to check phase progress
+# ./bin/pause-here "Phase: [PHASE_NAME] - Complete" "[NEXT_PHASE]"
 
 # Strategic pause (strategic goal completion)
 ./bin/strategic-complete "[GOAL_DESCRIPTION]"

@@ -6,7 +6,7 @@
 - [ ] Check git status: `git status`
 - [ ] Check last commit: `git log -1 --oneline`
 - [ ] Check available resume points: `./bin/resume-from list`
-- [ ] Check current phase: `./bin/phase-status`
+- [ ] Check current todo status: `./bin/todo status`
 
 ### Step 2: Identify Last Known Good State
 **Last Commit:** [git hash and description]
@@ -32,13 +32,13 @@ git reset --hard [commit_hash]
 
 #### Option C: Manual Context Reconstruction
 1. Review git log: `git log --oneline -10`
-2. Check phase steps completed: `./bin/phase-status`
+2. Check todo status: `./bin/todo status`
 3. Review session summary: `cat SESSION_SUMMARY.md`
 4. Create new pause point: `./bin/pause-here "Recovery point" "[next action]"`
 
 ### Step 4: Validate Recovery
 - [ ] Verify git state is clean: `git status`
-- [ ] Confirm phase alignment: `./bin/phase-status`
+- [ ] Confirm todo alignment: `./bin/todo status`
 - [ ] Test basic functionality: [run key tests]
 - [ ] Document recovery process: [add notes below]
 

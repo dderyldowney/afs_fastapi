@@ -31,7 +31,7 @@
 ## 3) Current Repo Layout (Version 0.1.5)
 ```
 .
-├─ plans/                         # Declarative nodes (layers 1–11) as YAML
+├─ afs_fastapi/todos/configs/plans/ # Declarative nodes (layers 1–11) as YAML
 │  ├─ goals/
 │  ├─ concepts/
 │  ├─ contexts/
@@ -43,10 +43,10 @@
 │  ├─ steps/
 │  ├─ tasks/
 │  └─ subtasks/
-├─ commands/                      # Layer 12 only; runnable scripts/YAML
+├─ afs_fastapi/todos/configs/commands/ # Layer 12 only; runnable scripts/YAML
 │  ├─ CMD-CAN001.sh              # Executable shell scripts
 │  └─ CMD-<ID>.yaml              # Command definitions
-├─ schemas/
+├─ afs_fastapi/todos/configs/schemas/
 │  └─ todowrite.schema.json       # JSON Schema for all nodes
 ├─ tools/                         # Build-time validation ecosystem
 │  ├─ tw_validate.py              # JSON Schema validator
@@ -81,7 +81,7 @@ make tw-hooks
 ```
 
 **Session Management:** The `loadsession` command MUST populate the TodoWrite system by:
-1. Loading existing plans from `plans/` directories
+1. Loading existing plans from `afs_fastapi/todos/configs/plans/` directories
 2. Validating all YAML files against schema
 3. Building traceability matrix
 4. Generating missing command stubs
@@ -328,11 +328,16 @@ make tw-deps tw-init tw-hooks
 # Development cycle
 make tw-dev                    # Validate and generate commands
 git add -A
-git commit -m "feat(req): add R-CAN-001 for 250kbps bus with ≤50ms jitter"
+git commit -F - <<EOF
+feat(req): add R-CAN-001 for 250kbps bus with <=50ms jitter
+
+This commit adds the initial requirement for CAN bus communication
+with specific bitrate and jitter constraints, aligning with ISO 11783.
+EOF
 
 # Generate and execute commands
 make tw-prove                  # Generate command stubs
-./commands/CMD-CAN001.sh       # Execute specific command
+./afs_fastapi/todos/configs/commands/CMD-CAN001.sh       # Execute specific command
 
 # Quality validation
 make tw-check                  # Full validation before push
@@ -350,7 +355,7 @@ make tw-check                  # Full validation before push
 ## 14) Agent Requirements (NON-NEGOTIABLE)
 1. **Load this system on every session startup**
 2. **Use Makefile targets for all TodoWrite operations**
-3. **Create YAML files in appropriate `plans/` directories**
+3. **Create YAML files in appropriate `afs_fastapi/todos/configs/plans/` directories**
 4. **Generate Commands only from Acceptance Criteria**
 5. **Enforce Conventional Commit format on all commits**
 6. **Validate before any git operations**

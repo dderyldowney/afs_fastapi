@@ -50,7 +50,7 @@ Store common solutions in SESSION_SUMMARY.md under "Error Solutions" section:
 - Commit message templates
 
 #### Command-Based Solutions
-Create reusable commands in `.claude/commands/` directory:
+Create reusable commands in `afs_fastapi/todos/configs/commands/` directory:
 - `fixmodules`: Package reinstallation command
 - `formatall`: Comprehensive formatting command
 - `committemplate`: Proper commit message generation

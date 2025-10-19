@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The `savesession` command is a critical platform tool designed to capture and snapshot the current state of your development session within the AFS FastAPI Agricultural Robotics Platform. Its primary goal is to ensure that all relevant session data, including the dual TODO system (strategic and phase-level objectives), is preserved. This preservation is essential for maintaining development continuity, especially in a multi-agent or long-running development environment.
+The `savesession` command is a critical platform tool designed to capture and snapshot the current state of your development session within the AFS FastAPI Agricultural Robotics Platform. Its primary goal is to ensure that all relevant session data, including the dual TODO system (strategic and task-level objectives), is preserved. This preservation is essential for maintaining development continuity, especially in a multi-agent or long-running development environment.
 
 ## Usage
 
@@ -14,7 +14,7 @@ To save the current session state, execute the `savesession` command from your p
 
 ## Key Features
 
-*   **Session State Snapshot**: Captures the current state of the dual TODO system, including active phases, pending steps, and completed objectives.
+*   **Session State Snapshot**: Captures the current state of the dual TODO system, including active tasks, pending subtasks, and completed objectives.
 *   **Development Continuity**: Ensures that your progress and context are not lost across different development sessions or agent interactions.
 *   **Compaction Protocol**: The command is designed to work in conjunction with a session state compaction protocol. If a session state file for the current day already exists, it will issue a warning, indicating that the existing state should be reviewed or compacted into `SESSION_SUMMARY.md` before proceeding with further changes.
 

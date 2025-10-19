@@ -21,7 +21,7 @@ import sys
 from pathlib import Path
 
 # Load command definition
-with open('commands/CMD-CANLATENCY.yaml', 'r') as f:
+with open('afs_fastapi/todos/configs/commands/CMD-CANLATENCY.yaml', 'r') as f:
     cmd_data = yaml.safe_load(f)
 
 # Execute shell command

@@ -188,7 +188,7 @@ ruff check . > quality_results.log
 - **loadsession**: Session initialization with context restoration
 - **fulltest**: Complete test suite execution and reporting (future)
 - **whereweare**: Strategic project state assessment
-- **Version Control**: All command specifications maintained in `.claude/commands/`
+- **Version Control**: All command specifications maintained in `afs_fastapi/todos/configs/commands/`
 
 **Documentation Framework**:
 - **WORKFLOW.md**: Authoritative testing reference (360 lines)

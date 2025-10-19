@@ -82,12 +82,6 @@ Strategic Management:
   ./bin/strategic-add "Objective"         - Add strategic objective
   ./bin/strategic-status                  - Strategic overview
 
-Phase Management:
-  ./bin/phase-start "Phase Name"          - Start new phase
-  ./bin/phase-status                      - Current phase details
-  ./bin/phase-add "Step"                  - Add implementation step
-  ./bin/phase-complete "Step"             - Mark step completed
-
 Integrated Management:
   ./bin/todo-handoff                      - Prepare session handoff
   ./bin/todo-restore                      - Restore development context

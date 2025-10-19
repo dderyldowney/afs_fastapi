@@ -303,7 +303,7 @@ import sys
 from pathlib import Path
 
 # Load command definition
-with open('commands/{cmd_id}.yaml', 'r') as f:
+with open('afs_fastapi/todos/configs/commands/{cmd_id}.yaml', 'r') as f:
     cmd_data = yaml.safe_load(f)
 
 # Execute shell command
@@ -361,13 +361,13 @@ def main() -> None:
     parser.add_argument(
         "--acs",
         type=Path,
-        default=Path("plans/acceptance_criteria"),
-        help="Acceptance Criteria directory (default: plans/acceptance_criteria)",
+        default=Path("afs_fastapi/todos/configs/plans/acceptance_criteria"),
+        help="Acceptance Criteria directory (default: afs_fastapi/todos/configs/plans/acceptance_criteria)",
     )
     parser.add_argument(
         "--out",
         type=Path,
-        default=Path("commands"),
+        default=Path("afs_fastapi/todos/configs/commands"),
         help="Output directory for commands (default: commands)",
     )
 

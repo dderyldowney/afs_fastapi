@@ -2,7 +2,6 @@
 
 ## 🚀 Session Start Checklist
 
-- [ ] Check current phase: `./bin/phase-status`
 - [ ] Resume from last point: `./bin/resume-from list` → `./bin/resume-from <id>`
 - [ ] Review session strategy: [SESSION_MANAGEMENT_STRATEGY.md](../SESSION_MANAGEMENT_STRATEGY.md)
 - [ ] Identify work unit (< 30 min target)
@@ -11,7 +10,6 @@
 
 **Target:** [Describe what will be accomplished]
 **Estimated Time:** [< 30 minutes]
-**Phase Step:** [Current phase step from ./bin/phase-status]
 
 ## 🔄 Progress Checkpoints
 

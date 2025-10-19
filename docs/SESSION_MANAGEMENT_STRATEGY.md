@@ -150,8 +150,8 @@ Each phase step should be broken into these atomic units:
 # Resume from last point
 ./bin/resume-from <last_point_id>
 
-# Check current status
-./bin/phase-status
+# Check current status (using todo status)
+./bin/todo-status
 ```
 
 ## 🎨 **AI Workflow Integration**
@@ -244,13 +244,13 @@ docs/
 1. Check last git commit: `git log -1`
 2. List available resume points: `./bin/resume-from list`
 3. Resume from latest: `./bin/resume-from <latest_id>`
-4. Check current phase: `./bin/phase-status`
+4. Check current status: `./bin/todo-status`
 
 ### 🔧 **Corrupted State Recovery**
 1. Restore from git: `git reset --hard <last_good_commit>`
 2. Rebuild checkpoint data from git log
 3. Resume from closest known state
-4. Re-establish phase context
+4. Re-establish todo context
 
 ## 📚 **Best Practices**
 

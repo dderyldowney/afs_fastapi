@@ -76,7 +76,7 @@ def write_default_schema(schema_path: Path) -> None:
     schema_path.parent.mkdir(parents=True, exist_ok=True)
 
     # Copy the schema from the schemas directory
-    default_schema_path = Path("schemas/todowrite.schema.json")
+    default_schema_path = Path("afs_fastapi/todos/configs/schemas/todowrite.schema.json")
     if default_schema_path.exists():
         with open(default_schema_path) as src:
             schema_content = src.read()
@@ -96,14 +96,14 @@ def main() -> None:
     parser.add_argument(
         "--plans",
         type=Path,
-        default=Path("plans"),
-        help="Plans directory containing YAML files (default: plans)",
+        default=Path("afs_fastapi/todos/configs/plans"),
+        help="Plans directory containing YAML files (default: afs_fastapi/todos/configs/plans)",
     )
     parser.add_argument(
         "--schema",
         type=Path,
-        default=Path("schemas/todowrite.schema.json"),
-        help="JSON schema file (default: schemas/todowrite.schema.json)",
+        default=Path("afs_fastapi/todos/configs/schemas/todowrite.schema.json"),
+        help="JSON schema file (default: afs_fastapi/todos/configs/schemas/todowrite.schema.json)",
     )
     parser.add_argument(
         "--write-schema", type=Path, help="Write default schema to specified path and exit"

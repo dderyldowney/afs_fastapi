@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from afs_fastapi.todos.db.config import AGRICULTURAL_DB_SETTINGS, DATABASE_URL, is_postgresql
-from afs_fastapi.todos.db.models import Base, Node as DBNode
+from afs_fastapi.todos.db.models import Base, Node as SQLAModelNode
 from afs_fastapi.todos.db.repository import NodeRepository
 
 # ...
@@ -218,23 +218,16 @@ def load_todos() -> dict[str, list[Node]]:
     repository = NodeRepository(db)
     todos: dict[str, list[Node]] = {}
     try:
-        db_nodes = repository.list(DBNode)
-        for db_node in db_nodes:
+        db_nodes = repository.list(SQLAModelNode)
+        for db_node_item in db_nodes:
+            db_node = cast(SQLAModelNode, db_node_item)
             parent_ids: list[str] = (
-                [
-                    str(parent.id)
-                    for parent in cast(list[DBNode], db_node.parents)
-                    if parent.id is not None
-                ]
+                [str(parent.id) for parent in db_node.parents if parent.id is not None]
                 if db_node.parents is not None
                 else []
             )
             child_ids: list[str] = (
-                [
-                    str(child.id)
-                    for child in cast(list[DBNode], db_node.children)
-                    if child.id is not None
-                ]
+                [str(child.id) for child in db_node.children if child.id is not None]
                 if db_node.children is not None
                 else []
             )
@@ -266,12 +259,12 @@ def load_todos() -> dict[str, list[Node]]:
                 )
             node = Node(
                 id=str(db_node.id),
-                layer=_validate_literal(str(db_node.layer), LayerType),
+                layer=cast(LayerType, _validate_literal(str(db_node.layer), LayerType)),
                 title=str(db_node.title),
                 description=str(db_node.description),
                 links=links,
                 metadata=metadata,
-                status=_validate_literal(str(db_node.status), StatusType),
+                status=cast(StatusType, _validate_literal(str(db_node.status), StatusType)),
                 command=command,
             )
             if node.layer not in todos:
@@ -300,27 +293,40 @@ def get_active_items(todos: dict[str, list[Node]]) -> dict[str, Node]:
     return active_items
 
 
+def get_active_phase() -> dict[str, Any] | None:
+    """
+    Gets the active phase from the ToDoWrite data.
+
+    Returns:
+        A dictionary containing the active phase, or None if no phase is active.
+    """
+    todos = load_todos()
+    active_items = get_active_items(todos)
+    if "Phase" in active_items:
+        phase_node = active_items["Phase"]
+        return {
+            "id": phase_node.id,
+            "title": phase_node.title,
+            "description": phase_node.description,
+            "status": phase_node.status,
+            "tasks": [],  # Placeholder for tasks
+        }
+    return None
+
+
 def create_node(node_data: dict[str, Any]) -> Node:
     db = SessionLocal()
     repository = NodeRepository(db)
     try:
-        db_node = repository.create(node_data)
+        db_node = cast(SQLAModelNode, repository.create(node_data))
 
         parent_ids: list[str] = (
-            [
-                str(parent.id)
-                for parent in cast(list[DBNode], db_node.parents)
-                if parent.id is not None
-            ]
+            [str(parent.id) for parent in db_node.parents if parent.id is not None]
             if db_node.parents is not None
             else []
         )
         child_ids: list[str] = (
-            [
-                str(child.id)
-                for child in cast(list[DBNode], db_node.children)
-                if child.id is not None
-            ]
+            [str(child.id) for child in db_node.children if child.id is not None]
             if db_node.children is not None
             else []
         )
@@ -350,12 +356,12 @@ def create_node(node_data: dict[str, Any]) -> Node:
 
         return Node(
             id=str(db_node.id),
-            layer=_validate_literal(str(db_node.layer), LayerType),
+            layer=cast(LayerType, _validate_literal(str(db_node.layer), LayerType)),
             title=str(db_node.title),
             description=str(db_node.description),
             links=links,
             metadata=metadata,
-            status=_validate_literal(str(db_node.status), StatusType),
+            status=cast(StatusType, _validate_literal(str(db_node.status), StatusType)),
             command=command,
         )
     finally:
@@ -366,23 +372,15 @@ def update_node(node_id: str, node_data: dict[str, Any]) -> Node | None:
     db = SessionLocal()
     repository = NodeRepository(db)
     try:
-        db_node = repository.update_node_by_id(node_id, node_data)
+        db_node = cast(SQLAModelNode, repository.update_node_by_id(node_id, node_data))
         if db_node:
             parent_ids: list[str] = (
-                [
-                    str(parent.id)
-                    for parent in cast(list[DBNode], db_node.parents)
-                    if parent.id is not None
-                ]
+                [str(parent.id) for parent in db_node.parents if parent.id is not None]
                 if db_node.parents is not None
                 else []
             )
             child_ids: list[str] = (
-                [
-                    str(child.id)
-                    for child in cast(list[DBNode], db_node.children)
-                    if child.id is not None
-                ]
+                [str(child.id) for child in db_node.children if child.id is not None]
                 if db_node.children is not None
                 else []
             )
@@ -412,12 +410,12 @@ def update_node(node_id: str, node_data: dict[str, Any]) -> Node | None:
 
             return Node(
                 id=str(db_node.id),
-                layer=_validate_literal(str(db_node.layer), LayerType),
+                layer=cast(LayerType, _validate_literal(str(db_node.layer), LayerType)),
                 title=str(db_node.title),
                 description=str(db_node.description),
                 links=links,
                 metadata=metadata,
-                status=_validate_literal(str(db_node.status), StatusType),
+                status=cast(StatusType, _validate_literal(str(db_node.status), StatusType)),
                 command=command,
             )
         return None
@@ -732,18 +730,21 @@ def complete_goal(goal_id: str) -> tuple[Node | None, str | None]:
             return goal, None  # Already completed
 
         # Update the goal status to 'done' and add completion timestamp
-        updated_goal = repository.update_node_by_id(
-            goal_id,
-            {
-                "status": "done",
-                "metadata": {
-                    "owner": goal.metadata.owner,
-                    "labels": goal.metadata.labels,
-                    "severity": goal.metadata.severity,
-                    "work_type": goal.metadata.work_type,
-                    "date_completed": datetime.now().isoformat(),
+        updated_goal = cast(
+            SQLAModelNode,
+            repository.update_node_by_id(
+                goal_id,
+                {
+                    "status": "done",
+                    "metadata": {
+                        "owner": goal.metadata.owner,
+                        "labels": goal.metadata.labels,
+                        "severity": goal.metadata.severity,
+                        "work_type": goal.metadata.work_type,
+                        "date_completed": datetime.now().isoformat(),
+                    },
                 },
-            },
+            ),
         )
 
         if not updated_goal:
@@ -751,20 +752,12 @@ def complete_goal(goal_id: str) -> tuple[Node | None, str | None]:
 
         # Convert DBNode to Node before returning
         parent_ids: list[str] = (
-            [
-                str(parent.id)
-                for parent in cast(list[DBNode], updated_goal.parents)
-                if parent.id is not None
-            ]
+            [str(parent.id) for parent in updated_goal.parents if parent.id is not None]
             if updated_goal.parents is not None
             else []
         )
         child_ids: list[str] = (
-            [
-                str(child.id)
-                for child in cast(list[DBNode], updated_goal.children)
-                if child.id is not None
-            ]
+            [str(child.id) for child in updated_goal.children if child.id is not None]
             if updated_goal.children is not None
             else []
         )
@@ -794,12 +787,104 @@ def complete_goal(goal_id: str) -> tuple[Node | None, str | None]:
 
         node = Node(
             id=str(updated_goal.id),
-            layer=_validate_literal(str(updated_goal.layer), LayerType),
+            layer=cast(LayerType, _validate_literal(str(updated_goal.layer), LayerType)),
             title=str(updated_goal.title),
             description=str(updated_goal.description),
             links=links,
             metadata=metadata,
-            status=_validate_literal(str(updated_goal.status), StatusType),
+            status=cast(StatusType, _validate_literal(str(updated_goal.status), StatusType)),
+            command=command,
+        )
+        return node, None
+    finally:
+        db.close()
+
+
+def complete_phase(phase_id: str) -> tuple[Node | None, str | None]:
+    db = SessionLocal()
+    repository: NodeRepository = NodeRepository(db)
+    try:
+        from datetime import datetime
+
+        # First, load the phase to get its current state
+        todos = load_todos()
+        phases = todos.get("Phase", [])
+        phase = None
+        for p in phases:
+            if p.id == phase_id:
+                phase = p
+                break
+
+        if not phase:
+            return None, f"Phase with ID '{phase_id}' not found"
+
+        if phase.status == "done":
+            return phase, None  # Already completed
+
+        # Update the phase status to 'done' and add completion timestamp
+        updated_phase = cast(
+            SQLAModelNode,
+            repository.update_node_by_id(
+                phase_id,
+                {
+                    "status": "done",
+                    "metadata": {
+                        "owner": phase.metadata.owner,
+                        "labels": phase.metadata.labels,
+                        "severity": phase.metadata.severity,
+                        "work_type": phase.metadata.work_type,
+                        "date_completed": datetime.now().isoformat(),
+                    },
+                },
+            ),
+        )
+
+        if not updated_phase:
+            return None, "Failed to update phase status in database"
+
+        # Convert DBNode to Node before returning
+        parent_ids: list[str] = (
+            [str(parent.id) for parent in updated_phase.parents if parent.id is not None]
+            if updated_phase.parents is not None
+            else []
+        )
+        child_ids: list[str] = (
+            [str(child.id) for child in updated_phase.children if child.id is not None]
+            if updated_phase.children is not None
+            else []
+        )
+        links = Link(parents=parent_ids, children=child_ids)
+
+        metadata = Metadata(
+            owner=updated_phase.owner or "",
+            labels=(
+                [str(label.label) for label in updated_phase.labels if label.label is not None]
+                if updated_phase.labels
+                else []
+            ),
+            severity=updated_phase.severity or "",
+            work_type=updated_phase.work_type or "",
+        )
+        command = None
+        if updated_phase.command:
+            command = Command(
+                ac_ref=updated_phase.command.ac_ref or "",
+                run=eval(updated_phase.command.run) if updated_phase.command.run else {},
+                artifacts=(
+                    [str(artifact.artifact) for artifact in updated_phase.command.artifacts]
+                    if updated_phase.command.artifacts is not None
+                    else []
+                ),
+            )
+
+        node = Node(
+            id=str(updated_phase.id),
+            layer=cast(LayerType, _validate_literal(str(updated_phase.layer), LayerType)),
+            title=str(updated_phase.title),
+            description=str(updated_phase.description),
+            links=links,
+            metadata=metadata,
+            status=cast(StatusType, _validate_literal(str(updated_phase.status), StatusType)),
             command=command,
         )
         return node, None

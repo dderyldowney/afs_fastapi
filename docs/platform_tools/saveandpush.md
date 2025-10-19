@@ -14,7 +14,7 @@ To save and push your current session state and changes, execute the `saveandpus
 
 ## Key Features
 
-*   **TODO State Synchronization**: Automatically synchronizes the dual TODO system (strategic and phase-level objectives), ensuring the latest progress is captured.
+*   **TODO State Synchronization**: Automatically synchronizes the dual TODO system (strategic and task-level objectives), ensuring the latest progress is captured.
 *   **Session State Saving**: Attempts to save the current session state. It will issue a warning if a session state file for the current day already exists, prompting for compaction if necessary.
 *   **Git Status Check**: Identifies all modified and untracked files that need to be committed.
 *   **CHANGELOG.md Update**: Automatically updates `CHANGELOG.md` based on recent commit history, ensuring documentation of changes.

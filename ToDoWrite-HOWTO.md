@@ -84,9 +84,6 @@ The ToDoWrite system is a **12-layer hierarchical task management framework** de
 
 # Check strategic progress
 ./bin/strategic-status
-
-# View current development phase
-./bin/phase-status
 ```
 
 ### 2. Your First Project Setup
@@ -97,19 +94,16 @@ The ToDoWrite system is a **12-layer hierarchical task management framework** de
 # 1. Check what's currently active
 ./bin/todo-status
 
-# 2. Start a new development phase
-./bin/phase-start "CAN Communication Setup" GOAL-MULTI-TRACTOR
-
-# 3. Add implementation steps
+# 2. Add implementation steps
 ./bin/step-add "Hardware Configuration"
 ./bin/step-add "Software Integration"
 ./bin/step-add "Testing & Validation"
 
-# 4. Add specific tasks
+# 3. Add specific tasks
 ./bin/task-add "Install CAN hardware interfaces"
 ./bin/task-add "Configure network topology"
 
-# 5. Add executable subtasks (Layer 12 only)
+# 4. Add executable subtasks (Layer 12 only)
 ./bin/subtask-add "Setup CAN interface" "sudo modprobe can && sudo modprobe can-raw" bash
 ```
 
@@ -144,7 +138,6 @@ print('Strategic goal created successfully!')
 ```bash
 # Check that everything is working
 ./bin/strategic-status  # Should show your goal
-./bin/phase-status      # Should show active phase
 ./bin/step-status       # Should show current step
 ```
 
@@ -167,9 +160,6 @@ echo "📊 Strategic Progress:"
 echo -e "\n🔄 Current Development State:"
 ./bin/todo-status
 
-echo -e "\n📋 Today's Phase:"
-./bin/phase-status
-
 echo -e "\n⚡ Ready for Execution:"
 ./bin/step-status
 ```
@@ -180,7 +170,6 @@ echo -e "\n⚡ Ready for Execution:"
 
 ```bash
 # 1. Activate the work hierarchy
-./bin/phase-activate PHASE-ID     # Set active phase
 ./bin/step-activate STEP-ID       # Set active step
 ./bin/task-activate TASK-ID       # Set active task
 
@@ -201,7 +190,7 @@ echo -e "\n⚡ Ready for Execution:"
 # Scenario: Working on CAN bus configuration for tractor coordination
 
 # 1. Check current status
-./bin/phase-status  # Should show "CAN Communication Setup" active
+# (No active phase status command)
 
 # 2. Work on current step
 ./bin/step-status   # Shows "Hardware Configuration" step
@@ -234,8 +223,7 @@ echo -e "\n⚡ Ready for Execution:"
 ./bin/step-complete STEP-ID        # Mark step complete
 
 # Move to next phase when ready
-./bin/phase-complete PHASE-ID
-./bin/phase-start "Next Phase Name" GOAL-ID
+# (No direct phase complete/start commands - manage through todo system)
 ```
 
 ### 🌅 End-of-Day Routine
@@ -285,20 +273,13 @@ create_node({
 })
 "
 
-# 2. Set up development phases
-./bin/phase-add "System Architecture Design"
-./bin/phase-add "Communication Infrastructure"
-./bin/phase-add "Coordination Algorithm Development"
-./bin/phase-add "Safety System Integration"
-./bin/phase-add "Field Testing & Validation"
-./bin/phase-add "Production Deployment"
+# 2. Set up development phases (managed through the todo system)
 ```
 
 #### Implementation Breakdown
 
 ```bash
-# Phase 1: Communication Infrastructure
-./bin/phase-start "Communication Infrastructure" GOAL-FIELD-COORDINATION
+# Phase 1: Communication Infrastructure (managed through the todo system)
 
 # Steps for communication
 ./bin/step-add "CAN Bus Network Setup"
@@ -336,11 +317,7 @@ create_node({
 })
 "
 
-# Compliance phases
-./bin/phase-add "Standards Analysis"
-./bin/phase-add "Implementation"
-./bin/phase-add "Testing & Validation"
-./bin/phase-add "Certification"
+# Compliance phases (managed through the todo system)
 
 # Safety-specific tasks
 ./bin/step-add "Emergency Stop System Implementation"
@@ -360,7 +337,6 @@ create_node({
 ```bash
 # Morning: Check system status
 ./bin/todo-status                    # Overall progress
-./bin/phase-status                   # Current development phase
 
 # Active work: GPS coordination feature
 ./bin/task-add "Implement GPS position sharing between tractors"
@@ -393,13 +369,7 @@ create_node({
 
 | Command | Purpose | Example |
 |---------|---------|---------|
-| `./bin/phase-status` | Current phase status | Shows active phase details |
-| `./bin/phase-start <name> <goal>` | Start new phase | `./bin/phase-start "Hardware Setup" GOAL-001` |
-| `./bin/phase-add <name>` | Add phase to project | `./bin/phase-add "Testing Phase"` |
-| `./bin/phase-activate <id>` | Activate specific phase | `./bin/phase-activate PHASE-123` |
-| `./bin/phase-complete <id>` | Mark phase complete | `./bin/phase-complete PHASE-123` |
-| `./bin/phase-list-all` | List all phases | Shows all project phases |
-
+| (Phase management is now handled through the general todo commands) | | |
 ### Step Management
 
 | Command | Purpose | Example |
@@ -455,7 +425,7 @@ create_node({
 1. **Daily Rhythm**
    ```bash
    # Morning: ./bin/todo-status (what needs doing?)
-   # Midday: ./bin/phase-status (progress check)
+   # Midday: ./bin/todo-status (progress check)
    # Evening: ./bin/saveandpush (save progress)
    ```
 
@@ -532,14 +502,6 @@ create_node({
     'description': 'Test goal for learning the system'
 })
 "
-```
-
-#### "No active phase"
-```bash
-# Solution: Start or activate a phase
-./bin/phase-start "Learning Phase" GOAL-TEST
-# OR
-./bin/phase-activate EXISTING-PHASE-ID
 ```
 
 #### "Database errors"
