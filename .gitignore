@@ -354,3 +354,4 @@ afs_fastapi/core/todos_manager 2.py
 # Ignore the large todos.json file
 /.claude/todos.json
 trace/
+commit_message.txt

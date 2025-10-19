@@ -487,6 +487,135 @@ def get_goals_typed() -> list[GoalItem]:
     return [GoalItem.from_node(node) for node in goal_nodes]
 
 
+def add_goal(title: str, description: str) -> tuple[dict[str, Any] | None, str | None]:
+    """
+    Add a new Goal.
+    """
+    try:
+        import uuid
+
+        goal_id = f"goal-{uuid.uuid4().hex[:12]}"
+        goal_data = {
+            "id": goal_id,
+            "layer": "Goal",
+            "title": title,
+            "description": description,
+            "status": "planned",
+            "links": {"parents": [], "children": []},
+            "metadata": {
+                "owner": "system",
+                "labels": [],
+                "severity": "",
+                "work_type": "",
+            },
+        }
+
+        node = create_node(goal_data)
+        if node:
+            goal_dict = {
+                "id": node.id,
+                "title": node.title,
+                "description": node.description,
+                "status": node.status,
+            }
+            return goal_dict, None
+        else:
+            return None, "Failed to create goal"
+    except Exception as e:
+        return None, str(e)
+
+
+def add_phase(
+    goal_id: str, title: str, description: str
+) -> tuple[dict[str, Any] | None, str | None]:
+    """
+    Add a new Phase to the specified Goal.
+    """
+    try:
+        import uuid
+
+        phase_id = f"phase-{uuid.uuid4().hex[:12]}"
+        phase_data = {
+            "id": phase_id,
+            "layer": "Phase",
+            "title": title,
+            "description": description,
+            "status": "planned",
+            "links": {"parents": [goal_id], "children": []},
+            "metadata": {
+                "owner": "system",
+                "labels": [],
+                "severity": "",
+                "work_type": "",
+            },
+        }
+
+        node = create_node(phase_data)
+        if node:
+            phase_dict = {
+                "id": node.id,
+                "title": node.title,
+                "description": node.description,
+                "status": node.status,
+            }
+            return phase_dict, None
+        else:
+            return None, "Failed to create phase"
+    except Exception as e:
+        return None, str(e)
+
+
+def add_subtask(
+    task_id: str,
+    title: str,
+    description: str,
+    command: str | None = None,
+    command_type: str | None = None,
+) -> tuple[dict[str, Any] | None, str | None]:
+    """
+    Add a new SubTask to the specified Task.
+    """
+    try:
+        import uuid
+
+        subtask_id = f"subtask-{uuid.uuid4().hex[:12]}"
+        subtask_data = {
+            "id": subtask_id,
+            "layer": "SubTask",
+            "title": title,
+            "description": description,
+            "status": "planned",
+            "links": {"parents": [task_id], "children": []},
+            "metadata": {
+                "owner": "system",
+                "labels": [],
+                "severity": "",
+                "work_type": "",
+            },
+        }
+        if command:
+            subtask_data["command"] = {
+                "ac_ref": "",
+                "run": {"command": command, "type": command_type or "bash"},
+                "artifacts": [],
+            }
+
+        node = create_node(subtask_data)
+        if node:
+            subtask_dict = {
+                "id": node.id,
+                "title": node.title,
+                "description": node.description,
+                "status": node.status,
+                "command": node.command,
+            }
+            return subtask_dict, None
+        else:
+            return None, "Failed to create subtask"
+    except Exception as e:
+        return None, str(e)
+
+
 def add_step(
     phase_id: str, name: str, description: str
 ) -> tuple[dict[str, Any] | None, str | None]:

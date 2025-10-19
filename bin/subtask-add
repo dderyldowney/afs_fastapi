@@ -35,7 +35,7 @@ def main():
         sys.exit(1)
 
     new_subtask, error = add_subtask(
-        active_task["id"], args.title, args.description, args.command, args.command_type
+        active_task.id, args.title, args.description, args.command, args.command_type
     )
 
     if error:
