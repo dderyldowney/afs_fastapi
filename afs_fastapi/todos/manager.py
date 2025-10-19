@@ -3,33 +3,64 @@ This module is responsible for managing the ToDoWrite data.
 """
 
 from dataclasses import dataclass, field
-from typing import Any, Literal
+from typing import Any, Literal, cast
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from afs_fastapi.todos.db.config import AGRICULTURAL_DB_SETTINGS, DATABASE_URL, is_postgresql
-from afs_fastapi.todos.db.models import Base
+from afs_fastapi.todos.db.models import Base, Node as DBNode
 from afs_fastapi.todos.db.repository import NodeRepository
 
+# ...
+
 LayerType = Literal[
+
     "Goal",
+
     "Concept",
+
     "Context",
+
     "Constraints",
+
     "Requirements",
+
     "Acceptance Criteria",
+
     "Interface Contract",
+
     "Phase",
+
     "Step",
+
     "Task",
+
     "SubTask",
+
     "Command",
+
 ]
+
 """The type of a ToDoWrite layer."""
 
+
+
 StatusType = Literal["planned", "in_progress", "blocked", "done", "rejected"]
+
 """The status of a ToDoWrite node."""
+
+
+
+
+
+def _validate_literal(value: str, literal_type: Any) -> str:
+
+    if value not in literal_type.__args__:
+
+        raise ValueError(f"Invalid literal value: {value}. Expected one of {literal_type.__args__}")
+
+    return value
 
 
 @dataclass
@@ -140,7 +171,7 @@ engine = create_database_engine()
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
-def init_database() -> None:
+def init_database() -> dict[str, str]:
     """
     Initialize the database by creating all tables.
 
@@ -163,7 +194,7 @@ def init_database() -> None:
         return {"status": "error", "error": str(e), "database_url": DATABASE_URL}
 
 
-def get_database_info() -> dict[str, str]:
+def get_database_info() -> dict[str, Any]:
     """
     Get information about the current database configuration.
 
@@ -204,33 +235,32 @@ def load_todos() -> dict[str, list[Node]]:
     repository = NodeRepository(db)
     todos: dict[str, list[Node]] = {}
     try:
-        db_nodes = repository.list()
+        db_nodes = repository.list(DBNode)
         for db_node in db_nodes:
-            links = Link(
-                parents=[parent.id for parent in db_node.parents],
-                children=[child.id for child in db_node.children],
-            )
+            parent_ids: list[str] = [str(parent.id) for parent in cast(list[DBNode], db_node.parents) if parent.id is not None] if db_node.parents is not None else []
+            child_ids: list[str] = [str(child.id) for child in cast(list[DBNode], db_node.children) if child.id is not None] if db_node.children is not None else []
+            links = Link(parents=parent_ids, children=child_ids)
             metadata = Metadata(
-                owner=db_node.owner,
-                labels=[label.label for label in db_node.labels],
-                severity=db_node.severity,
-                work_type=db_node.work_type,
+                owner=db_node.owner or "",
+                labels=[str(label.label) for label in db_node.labels if label.label is not None] if db_node.labels else [],
+                severity=db_node.severity or "",
+                work_type=db_node.work_type or "",
             )
             command = None
             if db_node.command:
                 command = Command(
-                    ac_ref=db_node.command.ac_ref,
-                    run=eval(db_node.command.run),
-                    artifacts=[artifact.artifact for artifact in db_node.command.artifacts],
+                    ac_ref=db_node.command.ac_ref or "",
+                    run=eval(db_node.command.run) if db_node.command.run else {},
+                    artifacts=[str(artifact.artifact) for artifact in db_node.command.artifacts if artifact.artifact is not None] if db_node.command.artifacts else [],
                 )
             node = Node(
-                id=db_node.id,
-                layer=db_node.layer,
-                title=db_node.title,
-                description=db_node.description,
+                id=str(db_node.id),
+                layer=_validate_literal(str(db_node.layer), LayerType),
+                title=str(db_node.title),
+                description=str(db_node.description),
                 links=links,
                 metadata=metadata,
-                status=db_node.status,
+                status=_validate_literal(str(db_node.status), StatusType),
                 command=command,
             )
             if node.layer not in todos:
@@ -264,31 +294,34 @@ def create_node(node_data: dict[str, Any]) -> Node:
     repository = NodeRepository(db)
     try:
         db_node = repository.create(node_data)
+
+        parent_ids: list[str] = [str(parent.id) for parent in cast(list[DBNode], db_node.parents) if parent.id is not None] if db_node.parents is not None else []
+        child_ids: list[str] = [str(child.id) for child in cast(list[DBNode], db_node.children) if child.id is not None] if db_node.children is not None else []
+        links = Link(parents=parent_ids, children=child_ids)
+
+        metadata = Metadata(
+            owner=db_node.owner or "",
+            labels=[str(label.label) for label in db_node.labels if label.label is not None] if db_node.labels else [],
+            severity=db_node.severity or "",
+            work_type=db_node.work_type or "",
+        )
+        command = None
+        if db_node.command:
+            command = Command(
+                ac_ref=db_node.command.ac_ref or "",
+                run=eval(db_node.command.run) if db_node.command.run else {},
+                artifacts=[str(artifact.artifact) for artifact in db_node.command.artifacts] if db_node.command.artifacts is not None else [],
+            )
+
         return Node(
-            id=db_node.id,
-            layer=db_node.layer,
-            title=db_node.title,
-            description=db_node.description,
-            links=Link(
-                parents=[parent.id for parent in db_node.parents],
-                children=[child.id for child in db_node.children],
-            ),
-            metadata=Metadata(
-                owner=db_node.owner,
-                labels=[label.label for label in db_node.labels],
-                severity=db_node.severity,
-                work_type=db_node.work_type,
-            ),
-            status=db_node.status,
-            command=(
-                Command(
-                    ac_ref=db_node.command.ac_ref,
-                    run=eval(db_node.command.run),
-                    artifacts=[artifact.artifact for artifact in db_node.command.artifacts],
-                )
-                if db_node.command
-                else None
-            ),
+            id=str(db_node.id),
+            layer=_validate_literal(str(db_node.layer), LayerType),
+            title=str(db_node.title),
+            description=str(db_node.description),
+            links=links,
+            metadata=metadata,
+            status=_validate_literal(str(db_node.status), StatusType),
+            command=command,
         )
     finally:
         db.close()
@@ -298,33 +331,35 @@ def update_node(node_id: str, node_data: dict[str, Any]) -> Node | None:
     db = SessionLocal()
     repository = NodeRepository(db)
     try:
-        db_node = repository.update(node_id, node_data)
+        db_node = repository.update_node_by_id(node_id, node_data)
         if db_node:
+            parent_ids: list[str] = [str(parent.id) for parent in cast(list[DBNode], db_node.parents) if parent.id is not None] if db_node.parents is not None else []
+            child_ids: list[str] = [str(child.id) for child in cast(list[DBNode], db_node.children) if child.id is not None] if db_node.children is not None else []
+            links = Link(parents=parent_ids, children=child_ids)
+
+            metadata = Metadata(
+                owner=db_node.owner or "",
+                labels=[str(label.label) for label in db_node.labels if label.label is not None] if db_node.labels else [],
+                severity=db_node.severity or "",
+                work_type=db_node.work_type or "",
+            )
+            command = None
+            if db_node.command:
+                command = Command(
+                    ac_ref=db_node.command.ac_ref or "",
+                    run=eval(db_node.command.run) if db_node.command.run else {},
+                    artifacts=[str(artifact.artifact) for artifact in db_node.command.artifacts] if db_node.command.artifacts is not None else [],
+                )
+
             return Node(
-                id=db_node.id,
-                layer=db_node.layer,
-                title=db_node.title,
-                description=db_node.description,
-                links=Link(
-                    parents=[link.parent_id for link in db_node.parents],
-                    children=[link.child_id for link in db_node.children],
-                ),
-                metadata=Metadata(
-                    owner=db_node.owner,
-                    labels=[label.label for label in db_node.labels],
-                    severity=db_node.severity,
-                    work_type=db_node.work_type,
-                ),
-                status=db_node.status,
-                command=(
-                    Command(
-                        ac_ref=db_node.command.ac_ref,
-                        run=eval(db_node.command.run),
-                        artifacts=[artifact.artifact for artifact in db_node.command.artifacts],
-                    )
-                    if db_node.command
-                    else None
-                ),
+                id=str(db_node.id),
+                layer=_validate_literal(str(db_node.layer), LayerType),
+                title=str(db_node.title),
+                description=str(db_node.description),
+                links=links,
+                metadata=metadata,
+                status=_validate_literal(str(db_node.status), StatusType),
+                command=command,
             )
         return None
     finally:
@@ -335,7 +370,7 @@ def delete_node(node_id: str) -> None:
     db = SessionLocal()
     repository = NodeRepository(db)
     try:
-        repository.delete(node_id)
+        repository.delete_node_by_id(node_id)
     finally:
         db.close()
 
@@ -488,100 +523,70 @@ def add_task(
 
 
 def complete_goal(goal_id: str) -> tuple[Node | None, str | None]:
-    """Mark a strategic goal as complete.
-
-    Args:
-        goal_id: The ID of the goal to complete
-
-    Returns:
-        A tuple of (completed_goal, error_message)
-    """
-    from datetime import datetime
-
-    # First, load the goal to get its current state
-    todos = load_todos()
-    goals = todos.get("Goal", [])
-    goal = None
-    for g in goals:
-        if g.id == goal_id:
-            goal = g
-            break
-
-    if not goal:
-        return None, f"Goal with ID '{goal_id}' not found"
-
-    if goal.status == "done":
-        return goal, None  # Already completed
-
-    # Update the goal status to 'done' and add completion timestamp
-    updated_goal = update_node(goal_id, {
-        'status': 'done',
-        'metadata': {
-            'owner': goal.metadata.owner,
-            'labels': goal.metadata.labels,
-            'severity': goal.metadata.severity,
-            'work_type': goal.metadata.work_type,
-            'date_completed': datetime.now().isoformat()
-        }
-    })
-
-    if not updated_goal:
-        return None, "Failed to update goal status in database"
-
-    return updated_goal, None
-
-
-def add_subtask(
-    task_id: str, title: str, description: str, command: str, command_type: str
-) -> tuple[dict[str, Any] | None, str | None]:
-    """
-    Add a new SubTask to the specified Task.
-
-    Args:
-        task_id: The ID of the parent Task.
-        title: The title of the SubTask.
-        description: The description of the SubTask.
-        command: The command to execute.
-        command_type: The type of command (bash, python, etc.).
-
-    Returns:
-        A tuple of (new_subtask_dict, error_message).
-    """
+    db = SessionLocal()
+    repository: NodeRepository = NodeRepository(db)
     try:
-        import uuid
+        from datetime import datetime
 
-        subtask_id = f"subtask-{uuid.uuid4().hex[:12]}"
-        subtask_data = {
-            "id": subtask_id,
-            "layer": "SubTask",
-            "title": title,
-            "description": description,
-            "status": "planned",
-            "owner": "system",
-            "severity": "",
-            "work_type": "",
-            "labels": [],
-            "parent_ids": [task_id],
-            "child_ids": [],
-            "command": {
-                "ac_ref": subtask_id,
-                "run": {"type": command_type, "command": command},
-                "artifacts": [],
-            },
-        }
+        # First, load the goal to get its current state
+        todos = load_todos()
+        goals = todos.get("Goal", [])
+        goal = None
+        for g in goals:
+            if g.id == goal_id:
+                goal = g
+                break
 
-        node = create_node(subtask_data)
-        if node:
-            subtask_dict = {
-                "id": node.id,
-                "title": node.title,
-                "description": node.description,
-                "status": node.status,
-                "command": command,
-                "command_type": command_type,
+        if not goal:
+            return None, f"Goal with ID '{goal_id}' not found"
+
+        if goal.status == "done":
+            return goal, None  # Already completed
+
+        # Update the goal status to 'done' and add completion timestamp
+        updated_goal = repository.update_node_by_id(goal_id, {
+            'status': 'done',
+            'metadata': {
+                'owner': goal.metadata.owner,
+                'labels': goal.metadata.labels,
+                'severity': goal.metadata.severity,
+                'work_type': goal.metadata.work_type,
+                'date_completed': datetime.now().isoformat()
             }
-            return subtask_dict, None
-        else:
-            return None, "Failed to create subtask"
-    except Exception as e:
-        return None, str(e)
+        })
+
+        if not updated_goal:
+            return None, "Failed to update goal status in database"
+
+        # Convert DBNode to Node before returning
+        parent_ids: list[str] = [str(parent.id) for parent in cast(list[DBNode], updated_goal.parents) if parent.id is not None] if updated_goal.parents is not None else []
+        child_ids: list[str] = [str(child.id) for child in cast(list[DBNode], updated_goal.children) if child.id is not None] if updated_goal.children is not None else []
+        links = Link(parents=parent_ids, children=child_ids)
+
+        metadata = Metadata(
+            owner=updated_goal.owner or "",
+            labels=[str(label.label) for label in updated_goal.labels if label.label is not None] if updated_goal.labels else [],
+            severity=updated_goal.severity or "",
+            work_type=updated_goal.work_type or "",
+        )
+        command = None
+        if updated_goal.command:
+            command = Command(
+                ac_ref=updated_goal.command.ac_ref or "",
+                run=eval(updated_goal.command.run) if updated_goal.command.run else {},
+                artifacts=[str(artifact.artifact) for artifact in updated_goal.command.artifacts] if updated_goal.command.artifacts is not None else [],
+            )
+
+        node = Node(
+            id=str(updated_goal.id),
+            layer=_validate_literal(str(updated_goal.layer), LayerType),
+            title=str(updated_goal.title),
+            description=str(updated_goal.description),
+            links=links,
+            metadata=metadata,
+            status=_validate_literal(str(updated_goal.status), StatusType),
+            command=command,
+        )
+        return node, None
+    finally:
+        db.close()
