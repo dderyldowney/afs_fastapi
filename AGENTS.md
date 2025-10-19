@@ -24,6 +24,30 @@ MIT (project license)
 
 ## Instructions
 
+## Token Efficiency and CLI Usage Mandate
+
+**CRITICAL REQUIREMENT**: All AI agents MUST prioritize token efficiency and the use of command-line interface (CLI) tools for targeted data extraction and file content queries. Full file reads (`read_file`) and broad content searches (`search_file_content`) are token-intensive and MUST be minimized.
+
+### Core Principles:
+
+-   **Prioritize CLI Tools**: Agents MUST use `jq` for JSON parsing, `grep` for text pattern matching, `awk`, `find`, `sed`, `xargs`, and other appropriate CLI tools for efficient file system navigation and content manipulation.
+-   **Targeted Data Extraction**: `run_shell_command` is the primary tool for file content queries. Agents will craft precise CLI commands to extract only the necessary information.
+-   **Minimize Full File Reads**: `read_file` is to be used ONLY after targeted CLI extraction has identified small, confirmed relevant files or specific lines within files.
+-   **Minimize Broad Content Searches**: `search_file_content` is to be used ONLY for small, known files where the overhead of CLI tool setup outweighs the token cost, or when a quick, high-level overview is needed for a very limited scope.
+-   **Token Cost Analysis**:
+    *   Agents WILL log token usage for each file operation.
+    *   Agents WILL establish a token budget per task.
+    *   Agents WILL optimize search strategies for minimal token consumption.
+    *   Agents WILL measure and enforce token efficiency metrics.
+-   **Documentation**: Agents WILL document CLI tool usage and rationale in their thought processes.
+
+### Enforcement:
+
+-   Violation of these token efficiency guidelines will be considered a critical failure.
+-   Automated checks will be implemented to monitor token usage and CLI tool prioritization.
+
+This is a non-negotiable requirement for ALL agents to ensure cost-effectiveness and operational efficiency.
+
 ## How to Use
 
 **Universal Session Management Commands**: All AI agents have access to 7 session management commands (loadsession, savesession, runtests, whereweare, updatedocs, updatechangelog, updatewebdocs).
