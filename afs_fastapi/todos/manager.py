@@ -270,8 +270,8 @@ def create_node(node_data: dict[str, Any]) -> Node:
             title=db_node.title,
             description=db_node.description,
             links=Link(
-                parents=[link.parent_id for link in db_node.parents],
-                children=[link.child_id for link in db_node.children],
+                parents=[parent.id for parent in db_node.parents],
+                children=[child.id for child in db_node.children],
             ),
             metadata=Metadata(
                 owner=db_node.owner,
