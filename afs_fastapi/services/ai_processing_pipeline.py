@@ -55,6 +55,21 @@ except ImportError:
     ResponseCompressor = None
 
 
+class AIPipelineCache:
+    """A simple in-memory cache for AI processing pipeline results."""
+
+    def __init__(self):
+        self._cache = {}
+
+    def get(self, key: str) -> Any | None:
+        """Get an item from the cache."""
+        return self._cache.get(key)
+
+    def set(self, key: str, value: Any) -> None:
+        """Set an item in the cache."""
+        self._cache[key] = value
+
+
 class ProcessingStage(Enum):
     """AI processing pipeline stages for token optimization."""
 
@@ -201,6 +216,7 @@ class AIProcessingPipeline:
         self.context_library = self._load_context_library()
         self.essential_context = self._load_essential_context()
         self.md_parser = markdown_it.MarkdownIt() if markdown_it else None
+        self._cache = AIPipelineCache()
 
         # Cumulative optimization tracking
         self._cumulative_tokens_saved = 0
@@ -308,7 +324,16 @@ class AIProcessingPipeline:
         for snippet in self.context_library.get("context_snippets", []):
             for keyword in snippet.get("keywords", []):
                 if keyword in user_input_lower and snippet["id"] not in matched_snippet_ids:
-                    assembled_context_parts.append(f"Context for '{keyword}': {snippet['content']}")
+                    # Extract relevant sentences from the snippet
+                    relevant_sentences = []
+                    sentences = snippet["content"].split(".")
+                    for sentence in sentences:
+                        if keyword in sentence.lower():
+                            relevant_sentences.append(sentence.strip())
+                    if relevant_sentences:
+                        assembled_context_parts.append(f"Context for '{keyword}': {'. '.join(relevant_sentences)}.")
+                    else:
+                        assembled_context_parts.append(f"Context for '{keyword}': {snippet['content']}")
                     matched_snippet_ids.add(snippet["id"])
                     break  # Move to the next snippet once one keyword matches
 
@@ -616,6 +641,12 @@ class AIProcessingPipeline:
         Processes input through all four stages: pre-fill → prompt processing →
         generation → decoding, applying coordinated token optimization.
         """
+        # Check cache first
+        cache_key = f"{user_input}_{optimization_level.value}"
+        cached_result = self._cache.get(cache_key)
+        if cached_result:
+            return cached_result
+
         start_time = time.time()
 
         # Initialize context
@@ -678,6 +709,9 @@ class AIProcessingPipeline:
             "optimization_ratio": result.total_tokens_saved / max(1, len(user_input) // 4),
             "stage_breakdown": self._stage_metrics,
         }
+
+        # Cache the result
+        self._cache.set(cache_key, result)
 
         return result
 
