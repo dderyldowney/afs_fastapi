@@ -6,7 +6,7 @@
 
 ## Current Status & Recent Developments
 
-**Agricultural Robotics Platform (v0.1.5)**
+**Agricultural Robotics Platform (v0.1.5.1)**
 
 AFS FastAPI has evolved into a production-ready multi-tractor coordination system with comprehensive reliability, database persistence, and educational value.
 
