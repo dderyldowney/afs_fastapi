@@ -1,10 +1,10 @@
 {
-  "last_sync": "2025-10-18T14:37:17.130271",
+  "last_sync": "2025-10-18T21:45:10.411960",
   "strategic_summary": {
-    "total": 0,
+    "total": 3,
     "completed": 0,
-    "pending": 0,
-    "progress_percentage": 0
+    "pending": 3,
+    "progress_percentage": 0.0
   },
   "phase_summary": {
     "active_phase": "None",

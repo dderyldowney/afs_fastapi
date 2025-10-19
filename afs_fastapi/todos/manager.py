@@ -135,6 +135,7 @@ def create_database_engine():
         settings = AGRICULTURAL_DB_SETTINGS["sqlite"]
         return create_engine(DATABASE_URL, **settings)
 
+
 engine = create_database_engine()
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -174,12 +175,13 @@ def get_database_info() -> dict[str, str]:
         "database_url": DATABASE_URL,
         "is_production": is_postgresql(),
         "supports_concurrent_access": is_postgresql(),
-        "agricultural_optimized": True
+        "agricultural_optimized": True,
     }
 
     try:
         # Test connection
         from sqlalchemy import text
+
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
             info["connection_status"] = "connected"
@@ -391,7 +393,9 @@ def get_goals_typed() -> list[GoalItem]:
     return [GoalItem.from_node(node) for node in goal_nodes]
 
 
-def add_step(phase_id: str, name: str, description: str) -> tuple[dict[str, Any] | None, str | None]:
+def add_step(
+    phase_id: str, name: str, description: str
+) -> tuple[dict[str, Any] | None, str | None]:
     """
     Add a new Step to the specified Phase.
 
@@ -436,7 +440,9 @@ def add_step(phase_id: str, name: str, description: str) -> tuple[dict[str, Any]
         return None, str(e)
 
 
-def add_task(step_id: str, title: str, description: str) -> tuple[dict[str, Any] | None, str | None]:
+def add_task(
+    step_id: str, title: str, description: str
+) -> tuple[dict[str, Any] | None, str | None]:
     """
     Add a new Task to the specified Step.
 
@@ -479,6 +485,50 @@ def add_task(step_id: str, title: str, description: str) -> tuple[dict[str, Any]
             return None, "Failed to create task"
     except Exception as e:
         return None, str(e)
+
+
+def complete_goal(goal_id: str) -> tuple[Node | None, str | None]:
+    """Mark a strategic goal as complete.
+
+    Args:
+        goal_id: The ID of the goal to complete
+
+    Returns:
+        A tuple of (completed_goal, error_message)
+    """
+    from datetime import datetime
+
+    # First, load the goal to get its current state
+    todos = load_todos()
+    goals = todos.get("Goal", [])
+    goal = None
+    for g in goals:
+        if g.id == goal_id:
+            goal = g
+            break
+
+    if not goal:
+        return None, f"Goal with ID '{goal_id}' not found"
+
+    if goal.status == "done":
+        return goal, None  # Already completed
+
+    # Update the goal status to 'done' and add completion timestamp
+    updated_goal = update_node(goal_id, {
+        'status': 'done',
+        'metadata': {
+            'owner': goal.metadata.owner,
+            'labels': goal.metadata.labels,
+            'severity': goal.metadata.severity,
+            'work_type': goal.metadata.work_type,
+            'date_completed': datetime.now().isoformat()
+        }
+    })
+
+    if not updated_goal:
+        return None, "Failed to update goal status in database"
+
+    return updated_goal, None
 
 
 def add_subtask(

@@ -189,7 +189,7 @@ class TestStrategicCompleteDirectLogic(unittest.TestCase):
         script_content = script_path.read_text()
 
         # This test will fail until we refactor the script to import complete_goal
-        self.assertIn("from afs_fastapi.core.todos_manager import", script_content)
+        self.assertIn("from afs_fastapi.todos.manager import", script_content)
         self.assertIn(
             "complete_goal",
             script_content,

@@ -16,9 +16,25 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, TypedDict
 
 from .ai_processing_pipeline import AIProcessingPipeline, OptimizationLevel, PipelineResult
+
+
+class ServiceConfig(TypedDict):
+    """Configuration for individual platform services."""
+    optimization_level: str
+    priority: str
+
+
+class AIProcessingConfig(TypedDict):
+    """Typed configuration schema for AI Processing Manager."""
+    agricultural_safety_mode: bool
+    default_optimization_level: str
+    token_budget: int
+    enable_metrics_tracking: bool
+    safety_keyword_protection: bool
+    services: dict[str, ServiceConfig]
 
 
 class AIProcessingManager:
@@ -38,7 +54,7 @@ class AIProcessingManager:
         )
 
         # Load configuration
-        self.config = self._load_configuration()
+        self.config: AIProcessingConfig = self._load_configuration()
 
         # Initialize core pipeline
         self.pipeline = AIProcessingPipeline(project_root=self.project_root)
@@ -59,7 +75,7 @@ class AIProcessingManager:
             "safety_critical_requests": 0,
         }
 
-    def _load_configuration(self) -> dict[str, Any]:
+    def _load_configuration(self) -> AIProcessingConfig:
         """Load AI processing configuration from platform settings."""
         if self.config_path.exists():
             try:
@@ -249,7 +265,7 @@ class AIProcessingManager:
 
     def save_configuration(self) -> None:
         """Save current configuration to platform settings."""
-        config_to_save = {
+        config_to_save: dict[str, Any] = {
             "agricultural_safety_mode": self.agricultural_safety_mode,
             "default_optimization_level": self.default_optimization_level.value,
             "token_budget": self.token_budget,

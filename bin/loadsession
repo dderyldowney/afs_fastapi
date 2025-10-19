@@ -9,7 +9,7 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import init_database, load_todos, get_goals, create_node
+from afs_fastapi.todos.manager import create_node, get_goals, init_database, load_todos
 
 
 def initialize_todowrite_system():

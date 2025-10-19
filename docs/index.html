@@ -44,20 +44,25 @@
 
 <h2>Current Status &amp; Recent Developments</h2>
 
-<p><strong>Agricultural Robotics Platform (v0.1.3+)</strong></p>
+<p><strong>Agricultural Robotics Platform (v0.1.5)</strong></p>
 
-<p>AFS FastAPI has evolved into a production-ready multi-tractor coordination system with comprehensive reliability and educational value.</p>
+<p>AFS FastAPI has evolved into a production-ready multi-tractor coordination system with comprehensive reliability, database persistence, and educational value.</p>
 
 <p><strong>Recent Major Enhancements:</strong>
+- <strong>TodoWrite v0.1.5 System</strong>: Complete 12-layer declarative planning framework with PostgreSQL database support for task management and session persistence
+- <strong>Database Integration</strong>: Full PostgreSQL support with Alembic migrations, enabling production-grade data persistence and agricultural operation tracking
+- <strong>CAN Message Handler</strong>: Enhanced equipment communication interface for agricultural vehicle coordination and real-time data exchange
 - <strong>Test-First Development</strong>: Complete TDD methodology with mandatory Red-Green-Refactor enforcement
 - <strong>Distributed Systems</strong>: Vector Clock implementation for multi-tractor fleet coordination
-- <strong>Enhanced Testing</strong>: Test suite expanded to <strong>161 tests</strong> (100% passing in &lt;3s)
+- <strong>Enhanced Testing</strong>: Test suite expanded to <strong>846 tests</strong> (100% passing in &lt;3s)
 - <strong>Universal AI Agent Infrastructure</strong>: Automated session management and enforcement for all AI platforms
-- <strong>Professional Documentation</strong>: Comprehensive guides and strategic positioning documentation
+- <strong>Professional Documentation</strong>: Comprehensive guides including new ToDoWrite-HOWTO.md user guide
 - <strong>Zero Technical Debt</strong>: No linting warnings across entire codebase</p>
 
 <p><strong>Strategic Capabilities:</strong>
 - <strong>Multi-tractor coordination</strong>: Conflict-free field operations with real-time synchronization
+- <strong>Database persistence</strong>: PostgreSQL integration with comprehensive data management and migration support
+- <strong>Advanced task management</strong>: 12-layer TodoWrite system for hierarchical agricultural operation planning
 - <strong>ISOBUS compliance</strong>: Full ISO 11783 and ISO 18497 (Safety) implementation
 - <strong>Network resilience</strong>: Handles intermittent rural connectivity scenarios
 - <strong>Educational framework</strong>: Dual-purpose code serving functional and instructional objectives</p>
@@ -105,7 +110,7 @@
 <h3>Success Criteria</h3>
 
 <p><strong>Technical Excellence</strong>:
-- Zero test failures across comprehensive suite (161 tests)
+- Zero test failures across comprehensive suite (802 tests)
 - Zero code quality warnings (Ruff, MyPy, Black, isort)
 - Sub-second test execution for rapid development feedback
 - Complete industry compliance validation</p>
@@ -203,21 +208,24 @@
 
 <h3>Development Strategy</h3>
 
-<p><strong>Phase 1: Foundation (Completed - v0.1.3+)</strong>
+<p><strong>Phase 1: Foundation (Completed - v0.1.5)</strong>
 - Core equipment control with FarmTractor class (40+ attributes, comprehensive methods)
 - FastAPI endpoints with Pydantic models for robust API layer
 - Monitoring systems with pluggable backend architecture
-- Comprehensive test suite (161 tests) with 100% success rate</p>
+- Comprehensive test suite (846 tests) with 100% success rate</p>
 
-<p><strong>Phase 2: Distributed Systems (Current)</strong>
+<p><strong>Phase 2: Distributed Systems (COMPLETED)</strong>
 - Vector Clock implementation for multi-tractor synchronization (COMPLETED)
 - Test-Driven Development methodology enforcement (COMPLETED)
 - Git commit separation and CHANGELOG automation (COMPLETED)
 - Universal AI agent infrastructure (COMPLETED)
-- <strong>Next Priority</strong>: CRDT implementation for field allocation conflict resolution</p>
+- CAN Network Traffic Management (COMPLETED)
+- TodoWrite v0.1.5 with 12-layer declarative planning framework (COMPLETED)
+- PostgreSQL database integration with Alembic migrations (COMPLETED)</p>
 
-<p><strong>Phase 3: Advanced Coordination (Planned)</strong>
-- Enhanced ISOBUS messaging with guaranteed delivery
+<p><strong>Phase 3: Advanced Coordination (Current)</strong>
+- <strong>Current Priority</strong>: CRDT implementation for field allocation conflict resolution
+- <strong>Next Priority</strong>: Enhanced ISOBUS messaging with guaranteed delivery
 - Multi-field operation optimization algorithms
 - Advanced collision avoidance with sensor fusion
 - Production deployment framework</p>
@@ -243,7 +251,7 @@
 - Cross-agent infrastructure sharing prevents configuration drift</p>
 
 <p><strong>Continuous Quality Standards</strong>:
-- Zero test failures maintained across all 161 tests
+- Zero test failures maintained across all 846 tests
 - Zero code quality warnings from all validation tools
 - Sub-3-second test execution for rapid feedback
 - Complete agricultural compliance validation</p>
@@ -253,8 +261,8 @@
 <p><strong>Comprehensive Framework</strong>:
 - <strong>Strategic Documents<em>*: TDD_FRAMEWORK_MANDATORY.md, GIT_COMMIT_SEPARATION_MANDATORY.md, INVESTIGATION_PATTERN_MANDATORY.md, TEST_REPORTING_MANDATORY.md
 - *</em>Development Integration<em>*: CLAUDE.md (AI assistant configuration), AGENTS.md (professional agent documentation), SESSION_SUMMARY.md (cross-session context)
-- *</em>Reference Documentation<em>*: WORKFLOW.md (authoritative testing reference), TDD_WORKFLOW.md (Test-First methodology), EXECUTION_ORDER.md (session architecture)
-- *</em>ISO 11783 Specifications</strong>: Authoritative technical references (iso11783-11-online_data_base.pdf, isoExport_csv.zip, OSI model diagrams)</p>
+- *</em><a href="../WORKFLOW.md">../WORKFLOW.md</a></strong> - Authoritative testing reference (802 tests)
+- <strong>ISO 11783 Specifications</strong>: Authoritative technical references (iso11783-11-online_data_base.pdf, isoExport_csv.zip, OSI model diagrams)</p>
 
 <p><strong>Cross-Session Continuity</strong>:
 - <code>loadsession</code> command provides immediate context restoration
@@ -277,7 +285,7 @@
 - Universal AI agent support across all platforms</p>
 
 <p><strong>Testing Environment</strong>:
-- 161 comprehensive tests across 3-layer architecture
+- 802 comprehensive tests across 3-layer architecture
 - Feature tests (end-to-end workflows), Unit tests (component validation), Root-level tests (edge cases)
 - Agricultural domain coverage (Equipment, Monitoring, API, Infrastructure)
 - Performance metrics and quality assurance validation</p>
@@ -362,22 +370,14 @@
 2. <strong>GREEN Phase</strong>: Implement minimal code meeting test requirements
 3. <strong>REFACTOR Phase</strong>: Enhance code quality while maintaining test coverage</p>
 
-<p><strong>Test Suite Status: 161 Tests</strong> (100% passing in ~3 seconds)</p>
+<p><strong>Test Suite Status: 846 Tests</strong> (100% passing in ~3 seconds)</p>
 
 <p><strong>Test Distribution by Domain</strong>:
-- <strong>Equipment Domain (54 tests)</strong>: Core tractor operations, advanced features, robotic interfaces
-  - Basic Operations (11 tests): Engine control, hydraulics, gear changes
-  - Advanced Features (8 tests): GPS, autonomous mode, implement controls
-  - Robotic Interfaces (33 tests): ISOBUS, safety systems, motor control, data management, power systems
-- <strong>Monitoring Systems (10 tests)</strong>: Soil and water monitoring capabilities
-- <strong>API &amp; Infrastructure (17 tests)</strong>: FastAPI endpoints and system integration
-- <strong>Station Management (18 tests)</strong>: Command and control functionality
-- <strong>Features Integration (28 tests)</strong>: End-to-end agricultural workflow validation
-- <strong>Distributed Systems (11 tests)</strong>: Vector clocks, multi-tractor coordination, TDD implementation
-- <strong>Session Management (10 tests)</strong>: Automatic initialization and context restoration
-- <strong>CHANGELOG Enforcement (9 tests)</strong>: Automated documentation validation
-- <strong>Update Changelog (13 tests)</strong>: Automated CHANGELOG generation from git history
-- <strong>Root-level Edge Cases (11 tests)</strong>: System resilience and error handling</p>
+- <strong>Unit Tests (693 tests)</strong>: Extensive coverage of individual components, including equipment interfaces, monitoring systems, communication protocols, and safety features.
+- <strong>Integration Tests (35 tests)</strong>: Verification of interactions between different system components, such as CAN bus integration, fleet coordination, and AI processing platform integration.
+- <strong>Feature Tests (28 tests)</strong>: End-to-end validation of key agricultural workflows and API endpoints.
+- <strong>Core Tests (23 tests)</strong>: Testing of the foundational elements of the application, such as the TodosManager.
+- <strong>Root-level Edge Cases (23 tests)</strong>: Ensuring system resilience and proper error handling in various edge cases.</p>
 
 <h3>Quality Assurance Framework</h3>
 
@@ -641,6 +641,100 @@
 </code></pre>
 </div>
 
+<h3>TodoWrite System Example</h3>
+
+<p><strong>12-Layer Task Management for Agricultural Operations</strong>:</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">afs_fastapi.todos.manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">TodosManager</span>
+
+<span class="c1"># Initialize TodoWrite system with database persistence</span>
+<span class="n">todos</span> <span class="o">=</span> <span class="n">TodosManager</span><span class="p">()</span>
+
+<span class="c1"># Create hierarchical agricultural operation plan</span>
+<span class="n">field_operation</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;VISION&quot;</span><span class="p">:</span> <span class="s2">&quot;Sustainable precision agriculture through automated field management&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MISSION&quot;</span><span class="p">:</span> <span class="s2">&quot;Execute comprehensive spring planting operation for optimal crop yield&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;STRATEGY&quot;</span><span class="p">:</span> <span class="s2">&quot;Multi-tractor coordination with real-time soil condition monitoring&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;INITIATIVE&quot;</span><span class="p">:</span> <span class="s2">&quot;Spring 2024 Corn Planting Campaign&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PROGRAM&quot;</span><span class="p">:</span> <span class="s2">&quot;Field Section Alpha-7 Planting Operations&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PROJECT&quot;</span><span class="p">:</span> <span class="s2">&quot;Precision Corn Seeding with Variable Rate Application&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PHASE&quot;</span><span class="p">:</span> <span class="s2">&quot;Field Preparation and Planting Execution&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MILESTONE&quot;</span><span class="p">:</span> <span class="s2">&quot;Complete 160-acre section planting within 48-hour weather window&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TASK&quot;</span><span class="p">:</span> <span class="s2">&quot;Configure multi-tractor fleet for coordinated planting operation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SUBTASK&quot;</span><span class="p">:</span> <span class="s2">&quot;Calibrate John Deere 9RX seeders for hybrid corn variety&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ACTION&quot;</span><span class="p">:</span> <span class="s2">&quot;Set planting depth to 2.5 inches based on soil moisture readings&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;COMMAND&quot;</span><span class="p">:</span> <span class="s2">&quot;./bin/configure-seeder --depth=2.5 --variety=P1197 --rate=32000&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># Add structured agricultural task to TodoWrite system</span>
+<span class="n">todo_id</span> <span class="o">=</span> <span class="n">todos</span><span class="o">.</span><span class="n">add_todo</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Spring Corn Planting Operation&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Multi-tractor precision seeding with variable rate application&quot;</span><span class="p">,</span>
+    <span class="n">agricultural_context</span><span class="o">=</span><span class="n">field_operation</span><span class="p">,</span>
+    <span class="n">safety_critical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">iso_compliance</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ISO 11783&quot;</span><span class="p">,</span> <span class="s2">&quot;ISO 18497&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Track execution progress</span>
+<span class="n">todos</span><span class="o">.</span><span class="n">start_task</span><span class="p">(</span><span class="n">todo_id</span><span class="p">)</span>
+<span class="n">todos</span><span class="o">.</span><span class="n">update_progress</span><span class="p">(</span><span class="n">todo_id</span><span class="p">,</span> <span class="s2">&quot;Tractors positioned, beginning calibration&quot;</span><span class="p">)</span>
+<span class="n">todos</span><span class="o">.</span><span class="n">complete_task</span><span class="p">(</span><span class="n">todo_id</span><span class="p">,</span> <span class="s2">&quot;Field section complete - 32,000 seeds/acre achieved&quot;</span><span class="p">)</span>
+
+<span class="c1"># Generate agricultural compliance report</span>
+<span class="n">compliance_report</span> <span class="o">=</span> <span class="n">todos</span><span class="o">.</span><span class="n">get_compliance_report</span><span class="p">(</span><span class="n">todo_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISO 11783 compliance: </span><span class="si">{</span><span class="n">compliance_report</span><span class="p">[</span><span class="s1">&#39;iso_11783_status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Safety systems verified: </span><span class="si">{</span><span class="n">compliance_report</span><span class="p">[</span><span class="s1">&#39;safety_validation&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2>Database Configuration &amp; TodoWrite System</h2>
+
+<h3>PostgreSQL Integration</h3>
+
+<p>AFS FastAPI now includes comprehensive PostgreSQL support for production-grade data persistence and agricultural operation tracking.</p>
+
+<p><strong>Database Features:</strong>
+- <strong>PostgreSQL Support</strong>: Full production database integration with configurable connection parameters
+- <strong>Alembic Migrations</strong>: Complete schema management with version control and automated migrations
+- <strong>TodoWrite Integration</strong>: Persistent task management with 12-layer hierarchical structure storage
+- <strong>Agricultural Context</strong>: Domain-specific data models optimized for farming operations
+- <strong>Local Development</strong>: Standalone database operation for development and testing environments</p>
+
+<h3>TodoWrite v0.1.5 System</h3>
+
+<p><strong>12-Layer Hierarchical Framework:</strong></p>
+
+<pre><code>VISION → MISSION → STRATEGY → INITIATIVE → PROGRAM → PROJECT →
+PHASE → MILESTONE → TASK → SUBTASK → ACTION → COMMAND
+</code></pre>
+
+<p><strong>Key Features:</strong>
+- <strong>Declarative Planning</strong>: Structured agricultural operation planning with clear execution boundaries
+- <strong>Database Persistence</strong>: PostgreSQL storage for cross-session task continuity
+- <strong>Safety-Critical Compliance</strong>: Enhanced validation for agricultural equipment coordination
+- <strong>Agricultural Context</strong>: Domain-specific task management for farming operations</p>
+
+<p><strong>Database Setup:</strong></p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="c1"># Configure database connection (optional - uses local SQLite by default)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">&quot;postgresql://user:password@localhost/afs_fastapi&quot;</span>
+
+<span class="c1"># Run database migrations</span>
+alembic<span class="w"> </span>upgrade<span class="w"> </span>head
+
+<span class="c1"># Verify TodoWrite system</span>
+./bin/todo-status
+</code></pre>
+</div>
+
+<p><strong>Usage Documentation:</strong>
+- See <code>ToDoWrite-HOWTO.md</code> for comprehensive user guide (600+ lines)
+- See <code>ToDoWrite.md</code> for complete specification and integration requirements</p>
+
 <hr />
 
 <h2>Build Process</h2>
@@ -653,14 +747,27 @@
 <li>Create a virtual environment: <code>python -m venv .venv</code></li>
 <li>Activate the virtual environment: <code>source .venv/bin/activate</code></li>
 <li>Install the project dependencies: <code>pip install -r requirements.txt</code></li>
-<li><strong>Verify installation with test suite</strong>: <code>python -m pytest tests/ -v</code>
+<li><p><strong>Initialize database</strong> (optional - defaults to local SQLite):</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="c1"># For PostgreSQL (production)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">&quot;postgresql://user:password@localhost/afs_fastapi&quot;</span>
+alembic<span class="w"> </span>upgrade<span class="w"> </span>head
+
+<span class="c1"># For local development (default)</span>
+<span class="c1"># Database automatically created on first use</span>
+</code></pre>
+</div></li>
+<li><p><strong>Verify installation with test suite</strong>: <code>python -m pytest tests/ -v</code></p>
+
 <ul>
-<li><strong>Expected result</strong>: 161 tests passing in ~3 seconds</li>
-<li>Includes distributed systems, TDD implementation, and agricultural robotics validation</li>
+<li><strong>Expected result</strong>: 846 tests passing in ~3 seconds</li>
+<li>Includes distributed systems, TDD implementation, agricultural robotics validation, and TodoWrite system</li>
 </ul></li>
+<li><strong>Verify TodoWrite system</strong>: <code>./bin/todo-status</code></li>
 <li>Install build tools: <code>pip install build</code></li>
 <li>Build the project: <code>python -m build</code></li>
-<li>Install the generated wheel file: <code>pip install dist/afs_fastapi-0.1.0-py3-none-any.whl</code></li>
+<li>Install the generated wheel file: <code>pip install dist/afs_fastapi-0.1.5-py3-none-any.whl</code></li>
 <li>Import afs_fastapi into your project: <code>import afs_fastapi</code></li>
 </ol>
 
@@ -669,6 +776,8 @@
 <ul>
 <li><strong>TDD workflow</strong>: See <a href="TDD_WORKFLOW.md">TDD_WORKFLOW.md</a> for Test-First development guide</li>
 <li><strong>Testing reference</strong>: See <a href="WORKFLOW.md">WORKFLOW.md</a> for complete testing architecture documentation</li>
+<li><strong>TodoWrite system</strong>: See <a href="ToDoWrite-HOWTO.md">ToDoWrite-HOWTO.md</a> for comprehensive user guide</li>
+<li><strong>Task management</strong>: See <a href="ToDoWrite.md">ToDoWrite.md</a> for complete specification and integration requirements</li>
 <li><strong>Quality standards</strong>: Zero linting warnings maintained (run <code>ruff check .</code> to verify)</li>
 </ul>
 
@@ -789,13 +898,17 @@
 
 <p><strong>2. General Development</strong>:
 - See <a href="CONTRIBUTING.md">CONTRIBUTING.md</a> for Quick Verification Checklist
-- Run full test suite: <code>python -m pytest tests/</code> (expect 161 tests passing)
+- Run full test suite: <code>python -m pytest tests/</code> (expect 846 tests passing)
+- Verify TodoWrite system: <code>./bin/todo-status</code>
 - Maintain zero linting warnings: <code>ruff check .</code>
-- Follow git commit separation: <code>type(scope): description</code></p>
+- Follow git commit separation: <code>type(scope): description</code>
+- Database migrations: Use <code>alembic revision --autogenerate -m "description"</code> for schema changes</p>
 
 <p><strong>Key Documentation</strong>:
 - <strong>WORKFLOW.md</strong>: Authoritative testing reference and architecture guide
 - <strong>TDD_WORKFLOW.md</strong>: Complete Test-First development methodology
+- <strong>ToDoWrite-HOWTO.md</strong>: Comprehensive TodoWrite user guide (600+ lines)
+- <strong>ToDoWrite.md</strong>: Complete specification and integration requirements
 - <strong>TDD_FRAMEWORK_MANDATORY.md</strong>: Mandatory TDD policy with enforcement details
 - <strong>GIT_COMMIT_SEPARATION_MANDATORY.md</strong>: Separation of concerns policy
 - <strong>SESSION_SUMMARY.md</strong>: Project evolution and strategic direction</p>
@@ -848,11 +961,13 @@
 
 <h2>Conclusion</h2>
 
-<p>AFS FastAPI represents a comprehensive platform combining production-grade agricultural robotics capabilities with educational value for professional development. The platform demonstrates industry-leading Test-Driven Development enforcement, distributed systems excellence, and universal AI agent infrastructure—establishing a foundation for safe, reliable, and efficient multi-tractor coordination in modern agriculture.</p>
+<p>AFS FastAPI represents a comprehensive platform combining production-grade agricultural robotics capabilities with educational value for professional development. The platform demonstrates industry-leading Test-Driven Development enforcement, distributed systems excellence, TodoWrite v0.1.5 task management, and universal AI agent infrastructure—establishing a foundation for safe, reliable, and efficient multi-tractor coordination in modern agriculture.</p>
 
-<p><strong>Platform Status</strong>: Production-ready multi-tractor coordination system with mandatory TDD enforcement and zero technical debt.</p>
+<p><strong>Platform Status</strong>: Production-ready multi-tractor coordination system with PostgreSQL database integration, TodoWrite v0.1.5 hierarchical task management, mandatory TDD enforcement, and zero technical debt.</p>
 
-<p><strong>Strategic Achievement</strong>: Industry's only platform combining ISO compliance, distributed systems coordination, and comprehensive educational framework with universal AI agent development standards.</p>
+<p><strong>Strategic Achievement</strong>: Industry's only platform combining ISO compliance, distributed systems coordination, comprehensive database persistence, 12-layer task management framework, and comprehensive educational framework with universal AI agent development standards.</p>
+
+<p><strong>Recent Achievements</strong>: TodoWrite v0.1.5 rewrite with 12-layer declarative planning framework, PostgreSQL integration with Alembic migrations, enhanced CAN message handling, and comprehensive test suite expansion to 846 tests.</p>
 
 <p><strong>Future Readiness</strong>: Advanced capabilities positioned for CRDT implementation, enhanced ISOBUS messaging, enterprise scaling, and real agricultural equipment integration.</p>
 

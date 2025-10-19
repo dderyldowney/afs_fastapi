@@ -9,40 +9,42 @@ sys.path.insert(0, str(project_root))
 
 from afs_fastapi.todos.manager import (  # noqa: E402
     GoalItem,
+    Node,
     PhaseItem,
     get_active_items,
     load_todos,
 )
 
 
-def get_status_counts(goals: list[GoalItem]) -> tuple[int, int, int]:
+def get_status_counts(goals: list[Node]) -> tuple[int, int, int]:
     total = 0
     pending = 0
     completed = 0
     for goal in goals:
         total += 1
-        if goal["status"] == "planned" or goal["status"] == "in_progress":
+        if goal.status == "planned" or goal.status == "in_progress":
             pending += 1
-        elif goal["status"] == "done":
+        elif goal.status == "done":
             completed += 1
     return total, pending, completed
 
 
-def get_phase_status_counts(phase: PhaseItem) -> tuple[int, int, int, int]:
-    total_steps = 0
-    pending_steps = 0
-    in_progress_steps = 0
-    completed_steps = 0
-
-    for step in phase["steps"]:
-        total_steps += 1
-        if step["status"] == "planned":
-            pending_steps += 1
-        elif step["status"] == "in_progress":
-            in_progress_steps += 1
-        elif step["status"] == "done":
-            completed_steps += 1
-    return total_steps, pending_steps, in_progress_steps, completed_steps
+# TODO: Fix this function to work with the new Node-based data structure
+# def get_phase_status_counts(phase: PhaseItem) -> tuple[int, int, int, int]:
+#     total_steps = 0
+#     pending_steps = 0
+#     in_progress_steps = 0
+#     completed_steps = 0
+#
+#     for step in phase["steps"]:
+#         total_steps += 1
+#         if step["status"] == "planned":
+#             pending_steps += 1
+#         elif step["status"] == "in_progress":
+#             in_progress_steps += 1
+#         elif step["status"] == "done":
+#             completed_steps += 1
+#     return total_steps, pending_steps, in_progress_steps, completed_steps
 
 
 def print_progress_bar(progress: float, bar_width: int = 40):
@@ -78,12 +80,14 @@ def main():
         # This part needs more logic to determine "high-priority" and "next" based on the new schema
         # For now, just list all pending goals
         pending_strategic_goals = [
-            g for g in goals if g["status"] == "planned" or g["status"] == "in_progress"
+            g for g in goals if g.status == "planned" or g.status == "in_progress"
         ]
         if pending_strategic_goals:
             print("Next Strategic Objectives:")
             for i, goal in enumerate(pending_strategic_goals[:3], 1):
-                print(f'  {i}. {goal["title"]} (Priority: {goal["priority"]})')
+                # For Node objects, priority is in metadata.severity, title is direct attribute
+                priority = goal.metadata.severity if hasattr(goal, 'metadata') and goal.metadata.severity else "medium"
+                print(f'  {i}. {goal.title} (Priority: {priority})')
             print()
     else:
         print("No strategic objectives found.")
@@ -98,43 +102,17 @@ def main():
     current_phase = active_items.get("Phase")
 
     if current_phase:
-        phase_name = current_phase.get("title", "Unknown Phase")
+        # Fixed: Use attribute access instead of dict access
+        phase_name = current_phase.title if hasattr(current_phase, 'title') else "Unknown Phase"
         print(f"Active Phase: {phase_name}")
+        print(f"Status: {current_phase.status}")
         print()
 
-        total_steps, pending_steps, in_progress_steps, completed_steps = get_phase_status_counts(
-            current_phase
-        )
-        phase_progress = (completed_steps / total_steps * 100) if total_steps > 0 else 0
-
-        print(f"Phase Steps: {total_steps} total")
-        print(f"Completed: {completed_steps} ({phase_progress:.1f}%)\n")
-        print(f"In Progress: {in_progress_steps}")
-        print(f"Pending: {pending_steps}")
-        print()
-        print_progress_bar(phase_progress)
+        # TODO: Implement proper step counting with the new Node structure
+        # For now, just show the phase information
+        print("Phase details available. Step tracking needs to be implemented with Node relationships.")
         print()
 
-        # Show current and next steps (simplified for now)
-        in_progress_phase_steps = [
-            s for s in current_phase["steps"] if s["status"] == "in_progress"
-        ]
-        if in_progress_phase_steps:
-            print("Currently Working On:")
-            for step in in_progress_phase_steps:
-                print(f'  ◐ {step["title"]}')
-            print()
-
-        pending_phase_steps = [s for s in current_phase["steps"] if s["status"] == "planned"]
-        if pending_phase_steps:
-            print("Next Steps:")
-            for step in pending_phase_steps[:3]:
-                print(f'  ○ {step["title"]}')
-            print()
-
-        if pending_steps == 0 and in_progress_steps == 0:
-            print("🎉 Phase ready for completion!")
-            print('Use "end_phase" function to archive this phase.')
     else:
         print("No active development phase.")
         print('Use "add_phase" function to begin new development phase.')
@@ -145,13 +123,15 @@ def main():
     print("=" * 50)
 
     total_goals = len(goals)
-    total_phases = sum(len(g["phases"]) for g in goals)
+    # TODO: Calculate total phases when we implement proper Node relationship traversal
+    # For now, just count phases in the todos_data
+    phases = todos_data.get("Phase", [])
+    total_phases = len(phases)
     active_phase_count = 1 if active_items.get("Phase") else 0
 
     print(f"Strategic Objectives: {total_goals}")
     print(f"Total Development Phases: {total_phases}")
     print(f"Active Development Phases: {active_phase_count}")
-    print(f"Current Phase Steps: {total_steps if current_phase else 0}")
     print()
 
     # Show command quick reference (simplified for now)
