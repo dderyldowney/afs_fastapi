@@ -18,11 +18,27 @@ repos:
         language: system
         types: [python]
         files: ^(?!bin/|tmp_).*
-      # - id: mypy
-      #   name: MyPy (type check)
-      #   entry: mypy
+      - id: black
+        name: Black (formatting)
+        entry: black
+        args: ["--check"]
+        language: system
+        types: [python]
+        files: ^(?!bin/|tmp_).*
+      - id: mypy
+        name: MyPy (type check)
+        entry: mypy
+        language: system
+        types: [python]
+        files: ^(?!bin/|tmp_).*
+      # - id: pytest
+      #   name: Pytest (unit tests)
+      #   entry: pytest
       #   language: system
       #   types: [python]
+      #   files: ^(?!bin/|tmp_).*
+      #   pass_filenames: false
+      #   always_run: true
 
       # Mandatory TDD enforcement (always runs on commit)
       - id: tdd-enforcement
@@ -36,6 +52,13 @@ repos:
       - id: safety-validation
         name: Safety Standards Validation
         entry: python .claude/hooks/safety_validation.py
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: doc-update-reminder
+        name: Documentation Update Reminder
+        entry: bash tools/doc_update_reminder.sh
         language: system
         pass_filenames: false
         always_run: true

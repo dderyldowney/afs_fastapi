@@ -24,6 +24,10 @@ MIT (project license)
 
 ## Instructions
 
+### Security Protocols
+
+All agents MUST adhere to the security protocols defined in [SECURITY_PROTOCOL.md](SECURITY_PROTOCOL.md). This includes explicit approval for security-sensitive changes and adherence to automated safety standards validation.
+
 ## Token Efficiency and CLI Usage Mandate
 
 **CRITICAL REQUIREMENT**: All AI agents MUST prioritize token efficiency and the use of command-line interface (CLI) tools for targeted data extraction and file content queries. Full file reads (`read_file`) and broad content searches (`search_file_content`) are token-intensive and MUST be minimized.
@@ -101,29 +105,19 @@ The `afs_fastapi/todos/manager.py` module provides the reference implementation 
 
 ## Mandatory Git Commit Message Format
 
-**CRITICAL REQUIREMENT**: All AI agents MUST create git commit messages using HEREDOCs. This ensures that commit messages are well-formatted, multi-line, and easy to read.
+**CRITICAL REQUIREMENT**: All AI agents MUST create git commit messages using a temporary file (`commit_message.txt`) and the `git commit -F` command. This ensures that commit messages are well-formatted, multi-line, and easy to read, while adhering to the tool's operational constraints.
 
-### HEREDOC Format
+### Workflow:
 
-The commit message MUST be formatted as a HEREDOC, like this:
-
-```bash
-git commit -F - <<EOF
-feat(scope): Short description of the change
-
-Longer description of the change, explaining the what and the why.
-Can be multiple lines.
-
-- Bullet points are also good.
-
-Co-authored-by: Agent Name <agent@email.com>
-EOF
-```
+1.  **Create Temporary File**: For each commit, create a temporary file named `commit_message.txt` in the project root.
+2.  **Populate Message**: Write the draft commit message into `commit_message.txt`.
+3.  **Commit using File**: Execute `git commit -F commit_message.txt`.
+4.  **Delete Temporary File**: After a successful commit, delete `commit_message.txt`.
 
 ### Enforcement
 
-- All `git commit` commands MUST use the `-F -` option to read the commit message from stdin.
-- The commit message MUST be provided as a HEREDOC.
+- All `git commit` commands MUST use the `-F` option to read the commit message from a file.
+- The commit message MUST be provided via `commit_message.txt`.
 - Pre-commit hooks MAY be used to validate the commit message format.
 
 ## Mandatory Type Hinting and Annotation
