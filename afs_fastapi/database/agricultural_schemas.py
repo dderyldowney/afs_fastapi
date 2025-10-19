@@ -26,7 +26,7 @@ from sqlalchemy import (
     create_engine,
     event,
 )
-from sqlalchemy.orm import DeclarativeBase, declarative_base, relationship
+from sqlalchemy.orm import DeclarativeBase, Mapped, declarative_base, relationship
 from sqlalchemy.types import TypeDecorator
 
 Base = declarative_base()
@@ -79,11 +79,11 @@ class Equipment(Base):  # type: ignore[misc, valid-type]
     updated_at = Column(DateTime, onupdate=lambda: datetime.now(UTC))
 
     # Relationships
-    isobus_messages = relationship("ISOBUSMessageRecord", back_populates="equipment")
-    sensor_records = relationship("AgriculturalSensorRecord", back_populates="equipment")
-    telemetry_records = relationship("TractorTelemetryRecord", back_populates="equipment")
-    yield_records = relationship("YieldMonitorRecord", back_populates="equipment")
-    operational_sessions = relationship("OperationalSession", back_populates="equipment")
+    isobus_messages: Mapped[list[ISOBUSMessageRecord]] = relationship("ISOBUSMessageRecord", back_populates="equipment")
+    sensor_records: Mapped[list[AgriculturalSensorRecord]] = relationship("AgriculturalSensorRecord", back_populates="equipment")
+    telemetry_records: Mapped[list[TractorTelemetryRecord]] = relationship("TractorTelemetryRecord", back_populates="equipment")
+    yield_records: Mapped[list[YieldMonitorRecord]] = relationship("YieldMonitorRecord", back_populates="equipment")
+    operational_sessions: Mapped[list[OperationalSession]] = relationship("OperationalSession", back_populates="equipment")
 
     # Indexes for performance
     __table_args__ = (
@@ -116,9 +116,9 @@ class Field(Base):  # type: ignore[misc, valid-type]
     )
 
     # Relationships
-    sensor_records = relationship("AgriculturalSensorRecord", back_populates="field")
-    yield_records = relationship("YieldMonitorRecord", back_populates="field")
-    operational_sessions = relationship("OperationalSession", back_populates="field")
+    sensor_records: Mapped[list[AgriculturalSensorRecord]] = relationship("AgriculturalSensorRecord", back_populates="field")
+    yield_records: Mapped[list[YieldMonitorRecord]] = relationship("YieldMonitorRecord", back_populates="field")
+    operational_sessions: Mapped[list[OperationalSession]] = relationship("OperationalSession", back_populates="field")
 
     # Indexes for geographic and crop queries
     __table_args__ = (
@@ -148,7 +148,7 @@ class ISOBUSMessageRecord(Base):  # type: ignore[misc, valid-type]
     created_at = Column(DateTime, default=lambda: datetime.now(UTC))
 
     # Relationships
-    equipment = relationship("Equipment", back_populates="isobus_messages")
+    equipment: Mapped[Equipment] = relationship("Equipment", back_populates="isobus_messages")
 
     # Time-series optimized indexes
     __table_args__ = (
@@ -182,8 +182,8 @@ class AgriculturalSensorRecord(Base):  # type: ignore[misc, valid-type]
     created_at = Column(DateTime, default=lambda: datetime.now(UTC))
 
     # Relationships
-    equipment = relationship("Equipment", back_populates="sensor_records")
-    field = relationship("Field", back_populates="sensor_records")
+    equipment: Mapped[Equipment] = relationship("Equipment", back_populates="sensor_records")
+    field: Mapped[Field | None] = relationship("Field", back_populates="sensor_records")
 
     # Sensor analytics optimized indexes
     __table_args__ = (
@@ -218,7 +218,7 @@ class TractorTelemetryRecord(Base):  # type: ignore[misc, valid-type]
     created_at = Column(DateTime, default=lambda: datetime.now(UTC))
 
     # Relationships
-    equipment = relationship("Equipment", back_populates="telemetry_records")
+    equipment: Mapped[Equipment] = relationship("Equipment", back_populates="telemetry_records")
 
     # Telemetry analytics optimized indexes
     __table_args__ = (
@@ -253,8 +253,8 @@ class YieldMonitorRecord(Base):  # type: ignore[misc, valid-type]
     created_at = Column(DateTime, default=lambda: datetime.now(UTC))
 
     # Relationships
-    equipment = relationship("Equipment", back_populates="yield_records")
-    field = relationship("Field", back_populates="yield_records")
+    equipment: Mapped[Equipment] = relationship("Equipment", back_populates="yield_records")
+    field: Mapped[Field | None] = relationship("Field", back_populates="yield_records")
 
     # Yield analytics optimized indexes
     __table_args__ = (
@@ -295,8 +295,8 @@ class OperationalSession(Base):  # type: ignore[misc, valid-type]
     )
 
     # Relationships
-    equipment = relationship("Equipment", back_populates="operational_sessions")
-    field = relationship("Field", back_populates="operational_sessions")
+    equipment: Mapped[Equipment] = relationship("Equipment", back_populates="operational_sessions")
+    field: Mapped[Field | None] = relationship("Field", back_populates="operational_sessions")
 
     # Operation analytics optimized indexes
     __table_args__ = (

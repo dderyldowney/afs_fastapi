@@ -27,6 +27,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import Mapped
 
 # Database base for time-series tables
 TimeSeriesBase = declarative_base()
@@ -168,7 +169,7 @@ class AgriculturalMetrics(TimeSeriesBase):  # type: ignore
 
     # Quality indicators
     message_count = Column(Integer, nullable=False, default=0)
-    data_quality_score = Column(Float, nullable=True)  # 0-1
+    data_quality_score: Mapped[float | None] = Column(Float, nullable=True)  # 0-1
     uptime_percentage = Column(Float, nullable=True)
 
     # Computed timestamp
