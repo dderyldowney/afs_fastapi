@@ -419,7 +419,7 @@ chmod +x bin/savesession
 **How to update**:
 1. Edit `bin/savesession` script
 2. Test with `./bin/savesession` in clean state
-3. Update this documentation (.claude/commands/savesession.md)
+3. Update this documentation (docs/commands/savesession.md)
 4. Update references in CLAUDE.md, AGENTS.md
 5. Commit with `feat(commands): enhance savesession` or similar
 

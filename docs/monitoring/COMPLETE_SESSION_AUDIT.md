@@ -22,7 +22,7 @@
 - `M SESSION_SUMMARY.md` - Added current session comprehensive documentation
 
 **New Files Created (7)**:
-- `?? ToDoWrite/configs/commands/fulltest.md` - Command specification for test suite execution
+- `?? docs/commands/fulltest.md` - Command specification for test suite execution
 - `?? FULL_TEST_SUITE_REPORT.md` - Enterprise-grade test validation report
 - `?? LOADSESSION_TEST_RESULTS.md` - Professional command testing documentation
 - `?? SESSION_CHANGES_LOG.md` - Comprehensive change documentation with rationale
@@ -84,7 +84,7 @@
 - **Integration**: AFS FastAPI quality standards alignment
 - **Strategic Value**: Ensures methodology continuity across sessions
 
-**Command Specification**: `ToDoWrite/configs/commands/fulltest.md` (comprehensive)
+**Command Specification**: `docs/commands/fulltest.md` (comprehensive)
 - **Purpose**: Reusable workflow documentation for test execution
 - **Content**: Command sequence, strategic rationale, expected output
 - **Integration**: Version-controlled specifications for team consistency

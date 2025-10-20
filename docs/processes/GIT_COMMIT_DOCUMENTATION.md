@@ -56,8 +56,8 @@ git add . && git commit --amend --no-edit
 - **New Files (11)**:
   - `loadsession` (executable) - Session initialization script
   - `test_loadsession.sh` (executable) - Command test suite
-  - `ToDoWrite/configs/commands/fulltest.md` - Test execution specification
-  - `ToDoWrite/configs/commands/loadsession.md` - Session command specification
+  - `docs/commands/fulltest.md` - Test execution specification
+  - `docs/commands/loadsession.md` - Session command specification
   - `FULL_TEST_SUITE_REPORT.md` - Enterprise test validation
   - `TESTING_METHODOLOGY_GUIDE.md` - Knowledge preservation
   - `SESSION_CHANGES_LOG.md` - Comprehensive change documentation
@@ -120,7 +120,7 @@ git add . && git commit --amend --no-edit
 
 **Files Enhanced by Hooks**:
 1. `FULL_TEST_SUITE_REPORT.md` - Proper file ending
-2. `ToDoWrite/configs/commands/fulltest.md` - Formatting improvements
+2. `docs/commands/fulltest.md` - Formatting improvements
 3. `SESSION_CHANGES_LOG.md` - File ending standardization
 4. `TESTING_METHODOLOGY_GUIDE.md` - Whitespace cleanup
 5. `test_loadsession.sh` - Script formatting improvements

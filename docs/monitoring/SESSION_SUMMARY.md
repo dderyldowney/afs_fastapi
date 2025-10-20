@@ -171,7 +171,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 - Maintains dual-purpose educational and functional mission
 - 6-phase initialization architecture (automatic hook + manual fallback)
 
-**Reference**: [docs/EXECUTION_ORDER.md](docs/EXECUTION_ORDER.md), [ToDoWrite/configs/commands/loadsession.md](ToDoWrite/configs/commands/loadsession.md)
+**Reference**: [docs/EXECUTION_ORDER.md](docs/EXECUTION_ORDER.md), [docs/commands/loadsession.md](docs/commands/loadsession.md)
 
 #### savesession
 
@@ -187,7 +187,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 - Prevents knowledge fragmentation across sessions
 - Ensures SESSION_SUMMARY.md remains authoritative source
 
-**Reference**: [ToDoWrite/configs/commands/savesession.md](ToDoWrite/configs/commands/savesession.md)
+**Reference**: [docs/commands/savesession.md](docs/commands/savesession.md)
 
 #### saveandpush
 

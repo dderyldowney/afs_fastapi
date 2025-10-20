@@ -42,7 +42,7 @@
 **Files Created**:
 - `FULL_TEST_SUITE_REPORT.md` (229 lines) - Enterprise test validation report
 - `TESTING_METHODOLOGY_GUIDE.md` (219 lines) - Critical knowledge preservation
-- `ToDoWrite/configs/commands/fulltest.md` - Command specification for repeatable processes
+- `docs/commands/fulltest.md` - Command specification for repeatable processes
 
 **Why Essential**: Demonstrates platform maturity and stakeholder-ready documentation
 
@@ -99,7 +99,7 @@
 3. `LOADSESSION_TEST_RESULTS.md` - ✅ Documented in SESSION_CHANGES_LOG.md
 4. `FULL_TEST_SUITE_REPORT.md` - ✅ Documented in SESSION_CHANGES_LOG.md
 5. `TESTING_METHODOLOGY_GUIDE.md` - ✅ Documented in SESSION_CHANGES_LOG.md
-6. `ToDoWrite/configs/commands/fulltest.md` - ✅ Documented in SESSION_CHANGES_LOG.md
+6. `docs/commands/fulltest.md` - ✅ Documented in SESSION_CHANGES_LOG.md
 7. `SESSION_CHANGES_LOG.md` - ✅ Self-documenting comprehensive change log
 8. `COMPLETE_SESSION_AUDIT.md` - ✅ Complete session change inventory
 
