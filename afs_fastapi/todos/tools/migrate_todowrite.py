@@ -88,7 +88,7 @@ class TodoWriteMigrator:
         old_id = goal_data.get("id", "")
         new_id = self.generate_new_id(old_id, "Goal")
 
-        migrated = {
+        migrated: dict[str, Any] = {
             "id": new_id,
             "layer": "Goal",
             "title": goal_data.get("title", ""),
@@ -98,13 +98,11 @@ class TodoWriteMigrator:
                 "labels": ["work:architecture", "agricultural"],
                 "severity": goal_data.get("priority", "med").lower(),
                 "work_type": "architecture",
+                "migrated_from": old_id,
+                "migration_date": datetime.now().isoformat(),
             },
             "links": {"parents": [], "children": []},
         }
-
-        # Add migration metadata
-        migrated["metadata"]["migrated_from"] = old_id
-        migrated["metadata"]["migration_date"] = datetime.now().isoformat()
 
         return migrated
 
@@ -113,7 +111,7 @@ class TodoWriteMigrator:
         old_id = phase_data.get("id", "")
         new_id = self.generate_new_id(old_id, "Phase")
 
-        migrated = {
+        migrated: dict[str, Any] = {
             "id": new_id,
             "layer": "Phase",
             "title": phase_data.get("title", ""),
@@ -123,13 +121,11 @@ class TodoWriteMigrator:
                 "labels": ["work:implementation", "phase"],
                 "severity": "med",
                 "work_type": "implementation",
+                "migrated_from": old_id,
+                "migration_date": datetime.now().isoformat(),
             },
             "links": {"parents": [goal_id], "children": []},
         }
-
-        # Add migration metadata
-        migrated["metadata"]["migrated_from"] = old_id
-        migrated["metadata"]["migration_date"] = datetime.now().isoformat()
 
         return migrated
 
@@ -138,7 +134,7 @@ class TodoWriteMigrator:
         old_id = step_data.get("id", "")
         new_id = self.generate_new_id(old_id, "Step")
 
-        migrated = {
+        migrated: dict[str, Any] = {
             "id": new_id,
             "layer": "Step",
             "title": step_data.get("title", ""),
@@ -148,13 +144,11 @@ class TodoWriteMigrator:
                 "labels": ["work:implementation", "step"],
                 "severity": "med",
                 "work_type": "implementation",
+                "migrated_from": old_id,
+                "migration_date": datetime.now().isoformat(),
             },
             "links": {"parents": [phase_id], "children": []},
         }
-
-        # Add migration metadata
-        migrated["metadata"]["migrated_from"] = old_id
-        migrated["metadata"]["migration_date"] = datetime.now().isoformat()
 
         return migrated
 
@@ -163,7 +157,7 @@ class TodoWriteMigrator:
         old_id = task_data.get("id", "")
         new_id = self.generate_new_id(old_id, "Task")
 
-        migrated = {
+        migrated: dict[str, Any] = {
             "id": new_id,
             "layer": "Task",
             "title": task_data.get("title", ""),
@@ -173,13 +167,11 @@ class TodoWriteMigrator:
                 "labels": ["work:implementation", "task"],
                 "severity": "low",
                 "work_type": "implementation",
+                "migrated_from": old_id,
+                "migration_date": datetime.now().isoformat(),
             },
             "links": {"parents": [step_id], "children": []},
         }
-
-        # Add migration metadata
-        migrated["metadata"]["migrated_from"] = old_id
-        migrated["metadata"]["migration_date"] = datetime.now().isoformat()
 
         return migrated
 
@@ -191,7 +183,7 @@ class TodoWriteMigrator:
         subtask_new_id = self.generate_new_id(old_id, "SubTask")
 
         # Create SubTask (declarative)
-        subtask = {
+        subtask: dict[str, Any] = {
             "id": subtask_new_id,
             "layer": "SubTask",
             "title": subtask_data.get("title", ""),
@@ -201,23 +193,21 @@ class TodoWriteMigrator:
                 "labels": ["work:implementation", "subtask"],
                 "severity": "low",
                 "work_type": "implementation",
+                "migrated_from": old_id,
+                "migration_date": datetime.now().isoformat(),
             },
             "links": {"parents": [task_id], "children": []},
         }
 
-        # Add migration metadata
-        subtask["metadata"]["migrated_from"] = old_id
-        subtask["metadata"]["migration_date"] = datetime.now().isoformat()
-
         # Create Command if SubTask had executable content
-        command = None
+        command_to_return: dict[str, Any] | None = None
         if subtask_data.get("command"):
             command_id = self.generate_new_id(f"{old_id}-CMD", "Command")
 
             # Create a synthetic Acceptance Criteria reference
             ac_id = self.generate_new_id(f"{old_id}-AC", "AcceptanceCriteria")
 
-            command = {
+            command_to_return = {
                 "id": command_id,
                 "layer": "Command",
                 "title": f"Execute {subtask_data.get('title', '')}",
@@ -226,6 +216,8 @@ class TodoWriteMigrator:
                     "owner": "developer",
                     "labels": ["work:implementation", "command", "migrated"],
                     "work_type": "implementation",
+                    "migrated_from": old_id,
+                    "migration_date": datetime.now().isoformat(),
                 },
                 "links": {"parents": [ac_id], "children": []},  # Commands must reference AC
                 "command": {
@@ -239,14 +231,8 @@ class TodoWriteMigrator:
                 },
             }
 
-            # Add migration metadata
-            command["metadata"]["migrated_from"] = old_id
-            command["metadata"]["migration_date"] = datetime.now().isoformat()
-
             # Update SubTask to reference Command
-            subtask["links"]["children"] = [command_id]
-
-        return subtask, command
+        return subtask, command_to_return
 
     def create_synthetic_acceptance_criteria(
         self, subtask_data: dict[str, Any], subtask_id: str
@@ -255,7 +241,7 @@ class TodoWriteMigrator:
         old_id = subtask_data.get("id", "")
         ac_id = self.generate_new_id(f"{old_id}-AC", "AcceptanceCriteria")
 
-        ac = {
+        ac: dict[str, Any] = {
             "id": ac_id,
             "layer": "AcceptanceCriteria",
             "title": f"Verify completion of {subtask_data.get('title', '')}",
@@ -264,14 +250,12 @@ class TodoWriteMigrator:
                 "owner": "test-team",
                 "labels": ["work:validation", "migrated", "synthetic"],
                 "work_type": "validation",
+                "migrated_from": old_id,
+                "migration_date": datetime.now().isoformat(),
+                "synthetic": True,
             },
             "links": {"parents": [subtask_id], "children": []},
         }
-
-        # Add migration metadata
-        ac["metadata"]["migrated_from"] = old_id
-        ac["metadata"]["migration_date"] = datetime.now().isoformat()
-        ac["metadata"]["synthetic"] = True
 
         return ac
 
@@ -306,13 +290,13 @@ class TodoWriteMigrator:
 
                         # Migrate SubTasks and Commands
                         for subtask_data in task_data.get("subtasks", []):
-                            subtask, command = self.migrate_subtask_and_command(
+                            subtask, command_data_dict = self.migrate_subtask_and_command(
                                 subtask_data, task["id"]
                             )
                             self.migrated_nodes[subtask["id"]] = subtask
                             task["links"]["children"].append(subtask["id"])
 
-                            if command:
+                            if command_data_dict:
                                 # Create synthetic AC first
                                 ac = self.create_synthetic_acceptance_criteria(
                                     subtask_data, subtask["id"]
@@ -320,7 +304,7 @@ class TodoWriteMigrator:
                                 self.migrated_nodes[ac["id"]] = ac
 
                                 # Then add command
-                                self.migrated_nodes[command["id"]] = command
+                                self.migrated_nodes[command_to_return["id"]] = command_to_return
 
         self.migration_log.append(f"✅ Migrated {len(self.migrated_nodes)} nodes")
 
@@ -370,7 +354,7 @@ class TodoWriteMigrator:
                 "nodes_migrated": len(self.migrated_nodes),
                 "id_mappings": len(self.id_mapping),
             },
-            "layer_statistics": {},
+            "layer_statistics": dict[str, int],
             "id_mappings": self.id_mapping,
             "migration_log": self.migration_log,
         }

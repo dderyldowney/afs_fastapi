@@ -47,7 +47,7 @@
 │  └─ CMD-<ID>.sh
 ├─ ToDoWrite/configs/schemas/
 │  └─ todowrite.schema.json       # JSON Schema for all nodes
-├─ tools/
+├─ afs_fastapi/todos/tools/                         # Build-time validation ecosystem
 │  ├─ tw_lint_soc.py              # SoC linter (layers 1–11 non-executable)
 │  ├─ tw_validate.py              # JSON Schema validator
 │  ├─ tw_trace.py                 # Build trace matrix & graph
@@ -166,27 +166,27 @@ init:
 	@echo "Initialized ToDoWrite layout."
 
 schema:
-	@python3 tools/tw_validate.py --write-schema ToDoWrite/configs/schemas/todowrite.schema.json
+	@python3 afs_fastapi/todos/tools/tw_validate.py --write-schema ToDoWrite/configs/schemas/todowrite.schema.json
 
 lint:
-	@python3 tools/tw_lint_soc.py --plans ToDoWrite/configs/plans --report trace/lint_report.json
+	@python3 afs_fastapi/todos/tools/tw_lint_soc.py --plans ToDoWrite/configs/plans --report trace/lint_report.json
 
 validate:
-	@python3 tools/tw_validate.py --plans ToDoWrite/configs/plans --schema ToDoWrite/configs/schemas/todowrite.schema.json
+	@python3 afs_fastapi/todos/tools/tw_validate.py --plans ToDoWrite/configs/plans --schema ToDoWrite/configs/schemas/todowrite.schema.json
 
 trace:
-	@python3 tools/tw_trace.py --plans ToDoWrite/configs/plans --out-csv trace/trace.csv --out-graph trace/graph.json
+	@python3 afs_fastapi/todos/tools/tw_trace.py --plans ToDoWrite/configs/plans --out-csv trace/trace.csv --out-graph trace/graph.json
 
 prove:
-	@python3 tools/tw_stub_command.py --acs ToDoWrite/configs/plans/acceptance_criteria --out ToDoWrite/configs/commands
+	@python3 afs_fastapi/todos/tools/tw_stub_command.py --acs ToDoWrite/configs/plans/acceptance_criteria --out ToDoWrite/configs/commands
 
 hooks:
-	@chmod +x tools/git-commit-msg-hook.sh || true
-	@ln -sf ../../tools/git-commit-msg-hook.sh .git/hooks/commit-msg
+	@chmod +x afs_fastapi/todos/tools/git-commit-msg-hook.sh || true
+	@ln -sf ../../afs_fastapi/todos/tools/git-commit-msg-hook.sh .git/hooks/commit-msg
 	@echo "Local commit-msg hook installed."
 
 commitcheck:
-	@tools/git-commit-msg-hook.sh --check
+	@afs_fastapi/todos/tools/git-commit-msg-hook.sh --check
 ```
 
 ## 8) Git Commit Message Policy (Conventional + Semantic)
@@ -205,7 +205,7 @@ commitcheck:
 - `build(schema): generate todowrite.schema.json`
 - `docs(cmd): document CMD-CAN-AC001 artifacts`
 
-### Commit Hook (tools/git-commit-msg-hook.sh)
+### Commit Hook (afs_fastapi/todos/tools/git-commit-msg-hook.sh)
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
@@ -306,9 +306,7 @@ command:
       ip link set can0 type can bitrate 250000
       ip link set can0 up
       candump can0,0x18EEFF00:0x1FFFFFFF
-      python tools/send_pgn.py --pgn 65280 --rate 10
-      python tools/measure_jitter.py --pgn 65280 --duration 120 --out results/CMD-CAN-AC001/jitter.json
-    workdir: .
+          workdir: .
     env:
       PATH: "/usr/bin:/bin"
   artifacts:

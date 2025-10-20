@@ -63,7 +63,7 @@ class TraceabilityBuilder:
             return
 
         # Find all YAML files
-        yaml_files = []
+        yaml_files: list[Path] = []
         for pattern in ["*.yaml", "*.yml"]:
             yaml_files.extend(plans_dir.rglob(pattern))
 

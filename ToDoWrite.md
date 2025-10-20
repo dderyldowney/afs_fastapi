@@ -48,7 +48,7 @@
 │  └─ CMD-<ID>.yaml              # Command definitions
 ├─ ToDoWrite/configs/schemas/
 │  └─ todowrite.schema.json       # JSON Schema for all nodes
-├─ tools/                         # Build-time validation ecosystem
+├─ afs_fastapi/todos/tools/                         # Build-time validation ecosystem
 │  ├─ tw_validate.py              # JSON Schema validator
 │  ├─ tw_lint_soc.py              # SoC linter (layers 1–11 non-executable)
 │  ├─ tw_trace.py                 # Build trace matrix & graph
@@ -228,10 +228,10 @@ tw-test      # Test complete system
 
 ```bash
 # Migrate existing todos.json to new 12-layer YAML system
-python3 tools/migrate_todowrite.py --source .claude/todos.json --output .
+python3 afs_fastapi/todos/tools/migrate_todowrite.py --source .claude/todos.json --output .
 
 # Dry run (preview only)
-python3 tools/migrate_todowrite.py --dry-run
+python3 afs_fastapi/todos/tools/migrate_todowrite.py --dry-run
 ```
 
 The migration preserves all data while transforming to the new architecture.
@@ -311,9 +311,7 @@ command:
       ip link set can0 type can bitrate 250000
       ip link set can0 up
       candump can0,0x18EEFF00:0x1FFFFFFF
-      python tools/send_pgn.py --pgn 65280 --rate 10
-      python tools/measure_jitter.py --pgn 65280 --duration 120 --out results/CMD-CAN001/jitter.json
-    workdir: .
+          workdir: .
     env:
       PATH: "/usr/bin:/bin"
   artifacts:

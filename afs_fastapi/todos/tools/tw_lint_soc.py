@@ -231,7 +231,7 @@ class SoCLinter:
             ]
 
         # Find all YAML files
-        yaml_files = []
+        yaml_files: list[Path] = []
         for pattern in ["*.yaml", "*.yml"]:
             yaml_files.extend(plans_dir.rglob(pattern))
 
@@ -243,7 +243,7 @@ class SoCLinter:
 
     def generate_report(self, violations: list[SoCViolation]) -> dict[str, Any]:
         """Generate a linting report."""
-        violation_counts = {}
+        violation_counts: dict[str, int] = {}
         for violation in violations:
             violation_counts[violation.violation_type] = (
                 violation_counts.get(violation.violation_type, 0) + 1
