@@ -56,38 +56,38 @@ tw-all: tw-schema tw-lint tw-validate tw-trace
 # Initialize TodoWrite directory structure
 tw-init:
 	@echo "🏗️  Initializing TodoWrite directory structure..."
-	@mkdir -p afs_fastapi/todos/configs/plans/{goals,concepts,contexts,constraints,requirements,acceptance_criteria,interface_contracts,phases,steps,tasks,subtasks}
+	@mkdir -p ToDoWrite/configs/plans/{goals,concepts,contexts,constraints,requirements,acceptance_criteria,interface_contracts,phases,steps,tasks,subtasks}
 	@mkdir -p commands schemas tools trace results
 	@echo "✅ TodoWrite layout initialized"
 
 # Generate/refresh JSON Schema
 tw-schema:
 	@echo "📋 Generating TodoWrite JSON Schema..."
-	@python3 tools/tw_validate.py --write-schema afs_fastapi/todos/configs/schemas/todowrite.schema.json
-	@echo "✅ Schema generated at afs_fastapi/todos/configs/schemas/todowrite.schema.json"
+	@python3 tools/tw_validate.py --write-schema ToDoWrite/configs/schemas/todowrite.schema.json
+	@echo "✅ Schema generated at ToDoWrite/configs/schemas/todowrite.schema.json"
 
 # Lint for Separation of Concerns violations
 tw-lint:
 	@echo "🔍 Linting for SoC violations..."
-	@python3 tools/tw_lint_soc.py --plans plans --report trace/lint_report.json
+	@python3.12 tools/tw_lint_soc.py --plans ToDoWrite/configs/plans --report trace/lint_report.json
 	@echo "✅ SoC linting completed"
 
 # Validate all plan files against schema
 tw-validate:
 	@echo "✅ Validating YAML files against schema..."
-	@python3 tools/tw_validate.py --plans afs_fastapi/todos/configs/plans --schema afs_fastapi/todos/configs/schemas/todowrite.schema.json
+	@python3.12 tools/tw_validate.py --plans ToDoWrite/configs/plans --schema ToDoWrite/configs/schemas/todowrite.schema.json
 	@echo "✅ Schema validation completed"
 
 # Build traceability matrix and dependency graph
 tw-trace:
 	@echo "🔗 Building traceability matrix..."
-	@python3 tools/tw_trace.py --plans plans --out-csv trace/trace.csv --out-graph trace/graph.json --validate
+	@python3.12 tools/tw_trace.py --plans ToDoWrite/configs/plans --out-csv trace/trace.csv --out-graph trace/graph.json
 	@echo "✅ Traceability analysis completed"
 
 # Generate command stubs for pending Acceptance Criteria
 tw-prove:
 	@echo "⚡ Generating command stubs for Acceptance Criteria..."
-	@python3 tools/tw_stub_command.py --acs afs_fastapi/todos/configs/plans/acceptance_criteria --out afs_fastapi/todos/configs/commands
+	@python3.12 tools/tw_stub_command.py --acs ToDoWrite/configs/plans/acceptance_criteria --out ToDoWrite/configs/commands
 	@echo "✅ Command stubs generated"
 
 # Install git commit hooks
@@ -108,7 +108,7 @@ tw-clean:
 	@echo "🧹 Cleaning TodoWrite generated files..."
 	@rm -rf trace/*.json trace/*.csv
 	@rm -rf results/*
-	@rm -f afs_fastapi/todos/configs/schemas/todowrite.schema.json
+	@rm -f ToDoWrite/configs/schemas/todowrite.schema.json
 	@echo "✅ TodoWrite clean completed"
 
 # Full TodoWrite validation pipeline (strict mode)
@@ -135,10 +135,10 @@ tw-deps:
 # Generate example TodoWrite files for testing
 tw-examples:
 	@echo "📝 Creating example TodoWrite files..."
-	@mkdir -p afs_fastapi/todos/configs/plans/goals afs_fastapi/todos/configs/plans/requirements afs_fastapi/todos/configs/plans/acceptance_criteria
-	@echo 'id: GOAL-AGRICULTURAL-AUTOMATION\nlayer: Goal\ntitle: Implement autonomous agricultural equipment coordination\ndescription: >\n  Enable multiple tractors and implements to coordinate field operations\n  autonomously while maintaining safety and efficiency standards.\nmetadata:\n  owner: product-team\n  labels: [work:architecture, agricultural, autonomous]\n  severity: high\n  work_type: architecture\nlinks:\n  parents: []\n  children: [CON-MULTI-TRACTOR]' > afs_fastapi/todos/configs/plans/goals/GOAL-AGRICULTURAL-AUTOMATION.yaml
-	@echo 'id: R-CAN-001\nlayer: Requirements\ntitle: Tractor exchanges ISO 11783 messages on 250 kbps J1939 bus\ndescription: >\n  The ECU shall communicate using ISO 11783 PGNs over a 250 kbps J1939 CAN bus with ≤ 50 ms jitter.\nmetadata:\n  owner: controls-team\n  labels: [work:spec, can, j1939, isobus]\n  severity: med\n  work_type: spec\nlinks:\n  parents: [GOAL-AGRICULTURAL-AUTOMATION]\n  children: [AC-CAN-001]' > afs_fastapi/todos/configs/plans/requirements/R-CAN-001.yaml
-	@echo 'id: AC-CAN-001\nlayer: AcceptanceCriteria\ntitle: Address Claim ≤ 2 s; PGN 65280 at ≥ 10 Hz; jitter ≤ 50 ms\ndescription: |\n  Given a live 250 kbps bus, when ECU boots, then Address Claim completes ≤ 2 s.\n  PGN 65280 is observed at ≥ 10 Hz with jitter ≤ 50 ms (95th percentile).\nmetadata:\n  owner: test-team\n  labels: [work:validation, can, j1939]\n  work_type: validation\nlinks:\n  parents: [R-CAN-001]\n  children: []' > afs_fastapi/todos/configs/plans/acceptance_criteria/AC-CAN-001.yaml
+	@mkdir -p ToDoWrite/configs/plans/goals ToDoWrite/configs/plans/requirements ToDoWrite/configs/plans/acceptance_criteria
+	@echo 'id: GOAL-AGRICULTURAL-AUTOMATION\nlayer: Goal\ntitle: Implement autonomous agricultural equipment coordination\ndescription: >\n  Enable multiple tractors and implements to coordinate field operations\n  autonomously while maintaining safety and efficiency standards.\nmetadata:\n  owner: product-team\n  labels: [work:architecture, agricultural, autonomous]\n  severity: high\n  work_type: architecture\nlinks:\n  parents: []\n  children: [CON-MULTI-TRACTOR]' > ToDoWrite/configs/plans/goals/GOAL-AGRICULTURAL-AUTOMATION.yaml
+	@echo 'id: R-CAN-001\nlayer: Requirements\ntitle: Tractor exchanges ISO 11783 messages on 250 kbps J1939 bus\ndescription: >\n  The ECU shall communicate using ISO 11783 PGNs over a 250 kbps J1939 CAN bus with ≤ 50 ms jitter.\nmetadata:\n  owner: controls-team\n  labels: [work:spec, can, j1939, isobus]\n  severity: med\n  work_type: spec\nlinks:\n  parents: [GOAL-AGRICULTURAL-AUTOMATION]\n  children: [AC-CAN-001]' > ToDoWrite/configs/plans/requirements/R-CAN-001.yaml
+	@echo 'id: AC-CAN-001\nlayer: AcceptanceCriteria\ntitle: Address Claim ≤ 2 s; PGN 65280 at ≥ 10 Hz; jitter ≤ 50 ms\ndescription: |\n  Given a live 250 kbps bus, when ECU boots, then Address Claim completes ≤ 2 s.\n  PGN 65280 is observed at ≥ 10 Hz with jitter ≤ 50 ms (95th percentile).\nmetadata:\n  owner: test-team\n  labels: [work:validation, can, j1939]\n  work_type: validation\nlinks:\n  parents: [R-CAN-001]\n  children: []' > ToDoWrite/configs/plans/acceptance_criteria/AC-CAN-001.yaml
 	@echo "✅ Example TodoWrite files created"
 
 # Test the complete TodoWrite system with examples
@@ -148,7 +148,7 @@ tw-test: tw-examples tw-all tw-prove
 	@echo "   - Schema validation: $(shell python3 tools/tw_validate.py --plans plans >/dev/null 2>&1 && echo 'PASS' || echo 'FAIL')"
 	@echo "   - SoC linting: $(shell python3 tools/tw_lint_soc.py --plans plans >/dev/null 2>&1 && echo 'PASS' || echo 'FAIL')"
 	@echo "   - Traceability: $(shell python3 tools/tw_trace.py --plans plans --validate >/dev/null 2>&1 && echo 'PASS' || echo 'FAIL')"
-	@echo "   - Command generation: $(shell test -f afs_fastapi/todos/configs/commands/CMD-CANAC001.yaml && echo 'PASS' || echo 'FAIL')"
+	@echo "   - Command generation: $(shell test -f ToDoWrite/configs/commands/CMD-CANAC001.yaml && echo 'PASS' || echo 'FAIL')"
 	@echo "✅ TodoWrite system test completed"
 
 # Display TodoWrite help information

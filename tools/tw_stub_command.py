@@ -22,7 +22,7 @@ class CommandStubGenerator:
 
     def find_acceptance_criteria(self, acs_dir: Path) -> list[Path]:
         """Find all Acceptance Criteria YAML files."""
-        ac_files = []
+        ac_files: list[Path] = []
         if acs_dir.exists():
             for pattern in ["*.yaml", "*.yml"]:
                 ac_files.extend(acs_dir.glob(pattern))
@@ -303,7 +303,7 @@ import sys
 from pathlib import Path
 
 # Load command definition
-with open('afs_fastapi/todos/configs/commands/{cmd_id}.yaml', 'r') as f:
+with open('ToDoWrite/configs/commands/{cmd_id}.yaml', 'r') as f:
     cmd_data = yaml.safe_load(f)
 
 # Execute shell command
@@ -361,13 +361,13 @@ def main() -> None:
     parser.add_argument(
         "--acs",
         type=Path,
-        default=Path("afs_fastapi/todos/configs/plans/acceptance_criteria"),
-        help="Acceptance Criteria directory (default: afs_fastapi/todos/configs/plans/acceptance_criteria)",
+        default=Path("ToDoWrite/configs/plans/acceptance_criteria"),
+        help="Acceptance Criteria directory (default: ToDoWrite/configs/plans/acceptance_criteria)",
     )
     parser.add_argument(
         "--out",
         type=Path,
-        default=Path("afs_fastapi/todos/configs/commands"),
+        default=Path("ToDoWrite/configs/commands"),
         help="Output directory for commands (default: commands)",
     )
 

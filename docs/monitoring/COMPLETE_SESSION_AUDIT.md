@@ -22,7 +22,7 @@
 - `M SESSION_SUMMARY.md` - Added current session comprehensive documentation
 
 **New Files Created (7)**:
-- `?? afs_fastapi/todos/configs/commands/fulltest.md` - Command specification for test suite execution
+- `?? ToDoWrite/configs/commands/fulltest.md` - Command specification for test suite execution
 - `?? FULL_TEST_SUITE_REPORT.md` - Enterprise-grade test validation report
 - `?? LOADSESSION_TEST_RESULTS.md` - Professional command testing documentation
 - `?? SESSION_CHANGES_LOG.md` - Comprehensive change documentation with rationale
@@ -84,7 +84,7 @@
 - **Integration**: AFS FastAPI quality standards alignment
 - **Strategic Value**: Ensures methodology continuity across sessions
 
-**Command Specification**: `afs_fastapi/todos/configs/commands/fulltest.md` (comprehensive)
+**Command Specification**: `ToDoWrite/configs/commands/fulltest.md` (comprehensive)
 - **Purpose**: Reusable workflow documentation for test execution
 - **Content**: Command sequence, strategic rationale, expected output
 - **Integration**: Version-controlled specifications for team consistency
@@ -116,7 +116,7 @@
 ### 4. Command Infrastructure Framework
 
 #### A. Command Directory Structure
-**Location**: `afs_fastapi/todos/configs/commands/`
+**Location**: `ToDoWrite/configs/commands/`
 **Files Enhanced**:
 - `loadsession.md` (existing) - Session initialization specification
 - `whereweare.md` (existing) - Strategic project state assessment

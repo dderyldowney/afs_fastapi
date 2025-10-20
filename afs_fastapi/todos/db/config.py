@@ -7,7 +7,7 @@ Supports both SQLite (default) and PostgreSQL databases through environment vari
 import os
 
 # Database configuration with environment variable support
-DATABASE_URL = os.getenv("TODOWRITE_DATABASE_URL", "sqlite:///./todos.db")
+DATABASE_URL = os.getenv("TODOWRITE_DATABASE_URL", "sqlite:///ToDoWrite/todos.db")
 """The URL for the database connection.
 
 Environment Variables:

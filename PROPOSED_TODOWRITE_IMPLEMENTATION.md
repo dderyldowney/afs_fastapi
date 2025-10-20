@@ -30,7 +30,7 @@
 ## 3) Repo Layout (create if missing)
 ```
 . 
-├─ afs_fastapi/todos/configs/plans/                         # Declarative nodes (layers 1–11) as YAML
+├─ ToDoWrite/configs/plans/                         # Declarative nodes (layers 1–11) as YAML
 │  ├─ goals/
 │  ├─ concepts/
 │  ├─ contexts/
@@ -42,10 +42,10 @@
 │  ├─ steps/
 │  ├─ tasks/
 │  └─ subtasks/
-├─ afs_fastapi/todos/configs/commands/                      # Layer 12 only; runnable scripts/runbooks
+├─ ToDoWrite/configs/commands/                      # Layer 12 only; runnable scripts/runbooks
 │  ├─ CMD-CAN-AC001.sh
 │  └─ CMD-<ID>.sh
-├─ afs_fastapi/todos/configs/schemas/
+├─ ToDoWrite/configs/schemas/
 │  └─ todowrite.schema.json       # JSON Schema for all nodes
 ├─ tools/
 │  ├─ tw_lint_soc.py              # SoC linter (layers 1–11 non-executable)
@@ -162,23 +162,23 @@ This project uses **work-type tags** and **Conventional Commits** for every chan
 all: schema lint validate trace
 
 init:
-	mkdir -p afs_fastapi/todos/configs/plans/{goals,concepts,contexts,constraints,requirements,acceptance_criteria,interface_contracts,phases,steps,tasks,subtasks} afs_fastapi/todos/configs/commands afs_fastapi/todos/configs/schemas tools trace results
+	mkdir -p ToDoWrite/configs/plans/{goals,concepts,contexts,constraints,requirements,acceptance_criteria,interface_contracts,phases,steps,tasks,subtasks} ToDoWrite/configs/commands ToDoWrite/configs/schemas tools trace results
 	@echo "Initialized ToDoWrite layout."
 
 schema:
-	@python3 tools/tw_validate.py --write-schema afs_fastapi/todos/configs/schemas/todowrite.schema.json
+	@python3 tools/tw_validate.py --write-schema ToDoWrite/configs/schemas/todowrite.schema.json
 
 lint:
-	@python3 tools/tw_lint_soc.py --plans afs_fastapi/todos/configs/plans --report trace/lint_report.json
+	@python3 tools/tw_lint_soc.py --plans ToDoWrite/configs/plans --report trace/lint_report.json
 
 validate:
-	@python3 tools/tw_validate.py --plans afs_fastapi/todos/configs/plans --schema afs_fastapi/todos/configs/schemas/todowrite.schema.json
+	@python3 tools/tw_validate.py --plans ToDoWrite/configs/plans --schema ToDoWrite/configs/schemas/todowrite.schema.json
 
 trace:
-	@python3 tools/tw_trace.py --plans afs_fastapi/todos/configs/plans --out-csv trace/trace.csv --out-graph trace/graph.json
+	@python3 tools/tw_trace.py --plans ToDoWrite/configs/plans --out-csv trace/trace.csv --out-graph trace/graph.json
 
 prove:
-	@python3 tools/tw_stub_command.py --acs afs_fastapi/todos/configs/plans/acceptance_criteria --out afs_fastapi/todos/configs/commands
+	@python3 tools/tw_stub_command.py --acs ToDoWrite/configs/plans/acceptance_criteria --out ToDoWrite/configs/commands
 
 hooks:
 	@chmod +x tools/git-commit-msg-hook.sh || true

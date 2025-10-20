@@ -108,7 +108,7 @@
 - Success scenarios, error handling, and format validation
 - Professional testing framework for command reliability
 
-**3. afs_fastapi/todos/configs/commands/fulltest.md** (comprehensive specification)
+**3. ToDoWrite/configs/commands/fulltest.md** (comprehensive specification)
 - Complete command specification for test suite execution and reporting
 - Strategic rationale and expected output documentation
 - Version-controlled specifications for team consistency

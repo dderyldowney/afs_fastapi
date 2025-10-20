@@ -112,7 +112,7 @@ NEW COMMAND → Automatic Updates:
 ├─ AGENTS.md
 ├─ CLAUDE.md
 ├─ .claude/COMMANDNAME_COMMAND_UNIVERSAL.md
-├─ afs_fastapi/todos/configs/commands/commandname
+├─ ToDoWrite/configs/commands/commandname
 └─ tests/unit/test_commandname.py
 ```
 
@@ -153,7 +153,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 
 **All AI agents** can execute these commands with persistent cross-session knowledge transfer and consistent functionality across platforms.
 
-**Command trigger files**: All commands documented in `afs_fastapi/todos/configs/commands/` directory with complete specifications.
+**Command trigger files**: All commands documented in `ToDoWrite/configs/commands/` directory with complete specifications.
 
 ### Session Initialization & State Management
 
@@ -171,7 +171,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 - Maintains dual-purpose educational and functional mission
 - 6-phase initialization architecture (automatic hook + manual fallback)
 
-**Reference**: [docs/EXECUTION_ORDER.md](docs/EXECUTION_ORDER.md), [afs_fastapi/todos/configs/commands/loadsession.md](afs_fastapi/todos/configs/commands/loadsession.md)
+**Reference**: [docs/EXECUTION_ORDER.md](docs/EXECUTION_ORDER.md), [ToDoWrite/configs/commands/loadsession.md](ToDoWrite/configs/commands/loadsession.md)
 
 #### savesession
 
@@ -187,7 +187,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 - Prevents knowledge fragmentation across sessions
 - Ensures SESSION_SUMMARY.md remains authoritative source
 
-**Reference**: [afs_fastapi/todos/configs/commands/savesession.md](afs_fastapi/todos/configs/commands/savesession.md)
+**Reference**: [ToDoWrite/configs/commands/savesession.md](ToDoWrite/configs/commands/savesession.md)
 
 #### saveandpush
 
@@ -214,7 +214,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 
 **Essential for**: Cross-agent infrastructure sharing, ISO 11783/18497 compliance maintenance, automated session state preservation, and elimination of manual 8-step workflows.
 
-**Reference**: [afs_fastapi/todos/configs/commands/saveandpush.md](afs_fastapi/todos/configs/commands/saveandpush.md)
+**Reference**: [ToDoWrite/configs/commands/saveandpush.md](ToDoWrite/configs/commands/saveandpush.md)
 
 ### Testing & Quality Assurance
 
@@ -236,7 +236,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 5. Agricultural Context
 6. Advisory Notes
 
-**Reference**: [afs_fastapi/todos/configs/commands/runtests.md](afs_fastapi/todos/configs/commands/runtests.md)
+**Reference**: [ToDoWrite/configs/commands/runtests.md](ToDoWrite/configs/commands/runtests.md)
 
 ### Documentation Management
 
@@ -254,7 +254,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 - Essential for ISO compliance planning and stakeholder communication
 - Synthesizes strategic assessment from distributed platform state
 
-**Reference**: [afs_fastapi/todos/configs/commands/whereweare.md](afs_fastapi/todos/configs/commands/whereweare.md)
+**Reference**: [ToDoWrite/configs/commands/whereweare.md](ToDoWrite/configs/commands/whereweare.md)
 
 #### updatedocs
 
@@ -278,7 +278,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 
 **Essential for**: ISO compliance auditing (ISO 11783, ISO 18497), stakeholder communication, synchronized platform state.
 
-**Reference**: [afs_fastapi/todos/configs/commands/updatedocs.md](afs_fastapi/todos/configs/commands/updatedocs.md)
+**Reference**: [ToDoWrite/configs/commands/updatedocs.md](ToDoWrite/configs/commands/updatedocs.md)
 
 #### updatechangelog
 
@@ -294,7 +294,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 - Hash-range protection prevents infinite regeneration loops
 - Mandatory inclusion in all commits
 
-**Reference**: [afs_fastapi/todos/configs/commands/updatechangelog.md](afs_fastapi/todos/configs/commands/updatechangelog.md)
+**Reference**: [ToDoWrite/configs/commands/updatechangelog.md](ToDoWrite/configs/commands/updatechangelog.md)
 
 #### updatewebdocs
 
@@ -312,7 +312,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 
 **Essential for**: Equipment operators, safety engineers, compliance auditors accessing documentation via browsers.
 
-**Reference**: [afs_fastapi/todos/configs/commands/updatewebdocs.md](afs_fastapi/todos/configs/commands/updatewebdocs.md)
+**Reference**: [ToDoWrite/configs/commands/updatewebdocs.md](ToDoWrite/configs/commands/updatewebdocs.md)
 
 ---
 
