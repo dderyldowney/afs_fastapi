@@ -11,13 +11,13 @@ repos:
         types: [python]
         files: ^(?!bin/|tmp_).*
         files: ^(?!bin/|tmp_).*
-      # - id: isort
-      #   name: isort (imports check)
-      #   entry: isort
-      #   args: ["--check-only"]
-      #   language: system
-      #   types: [python]
-      #   files: ^(?!bin/|tmp_).*
+      - id: isort
+        name: isort (imports check)
+        entry: isort
+        args: ["--check-only"]
+        language: system
+        types: [python]
+        files: ^(?!bin/|tmp_).*
       - id: black
         name: Black (formatting)
         entry: black
