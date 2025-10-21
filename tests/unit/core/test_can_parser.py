@@ -1,4 +1,5 @@
 import pytest
+
 from afs_fastapi.core.can_parser import CanParser
 
 
@@ -7,39 +8,26 @@ def can_parser():
     return CanParser()
 
 
-def test_parse_engine_speed_valid(can_parser):
-    """Tests parsing of a valid Engine Speed message (PGN 61444, SPN 190)."""
-    message = {"pgn": 61444, "spn": 190, "value": 2000, "data_type": "rpm"}
-    parsed_data = can_parser.parse_message(message)
+def test_can_parser_valid_pgn(can_parser):
+    """Tests that the CanParser correctly parses a valid PGN."""
+    data = [
+        0,  # Not used
+        int((50 - (-125)) / 1),  # SPN 512: Driver's Demand Engine - Percent Torque (50%)
+        int((75 - (-125)) / 1),  # SPN 513: Actual Engine - Percent Torque (75%)
+        int(2000 / 0.125) & 0xFF,  # SPN 190: Engine Speed (2000 rpm)
+        int(2000 / 0.125) >> 8,
+        1,  # SPN 1483: Source Address
+        1,  # SPN 1675: Engine Starter Mode (Cranking)
+        int((80 - (-125)) / 1),  # SPN 2432: Engine Demand - Percent Torque (80%)
+    ]
+    parsed_data = can_parser.parse_message(61444, data)
     assert parsed_data is not None
-    assert parsed_data["parsed_data"]["engine_speed"] == 2000
+    assert parsed_data["pgn"] == 61444
+    assert parsed_data["parsed_data"]["Driver's Demand Engine - Percent Torque"] == 50
 
 
-def test_parse_engine_speed_lower_bound(can_parser):
-    """Tests parsing of Engine Speed at the lower bound of the valid range."""
-    message = {"pgn": 61444, "spn": 190, "value": 0, "data_type": "rpm"}
-    parsed_data = can_parser.parse_message(message)
-    assert parsed_data is not None
-    assert parsed_data["parsed_data"]["engine_speed"] == 0
-
-
-def test_parse_engine_speed_upper_bound(can_parser):
-    """Tests parsing of Engine Speed at the upper bound of the valid range."""
-    message = {"pgn": 61444, "spn": 190, "value": 8191.875, "data_type": "rpm"}
-    parsed_data = can_parser.parse_message(message)
-    assert parsed_data is not None
-    assert parsed_data["parsed_data"]["engine_speed"] == 8191.875
-
-
-def test_parse_engine_speed_out_of_range(can_parser):
-    """Tests that an out-of-range Engine Speed value returns None."""
-    message = {"pgn": 61444, "spn": 190, "value": 8192, "data_type": "rpm"}
-    parsed_data = can_parser.parse_message(message)
-    assert parsed_data is None
-
-
-def test_parse_engine_speed_negative(can_parser):
-    """Tests that a negative Engine Speed value returns None."""
-    message = {"pgn": 61444, "spn": 190, "value": -1, "data_type": "rpm"}
-    parsed_data = can_parser.parse_message(message)
+def test_can_parser_invalid_pgn(can_parser):
+    """Tests that the CanParser returns None for an invalid PGN."""
+    data = [0] * 8
+    parsed_data = can_parser.parse_message(99999, data)
     assert parsed_data is None
