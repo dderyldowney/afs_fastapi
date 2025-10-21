@@ -82,20 +82,21 @@ This is a non-negotiable requirement for ALL agents to ensure cost-effectiveness
 
 ### The `TodoWrite.md` Specification
 
-The `TodoWrite.md` system is a hierarchical task management system with a 5-level structure: **Goal → Phase → Step → Task → SubTask**. It enforces strict rules for single concern, traceability, and validation.
+The `TodoWrite.md` system is a hierarchical task management system with a **12-layer hierarchy**:
+**Goal → Concept → Context → Constraints → Requirements → Acceptance Criteria → Interface Contract → Phase → Step → Task → SubTask → Command**. It enforces strict rules for single concern, traceability, and validation.
 
 All agents MUST adhere to the full specification defined in the `ToDoWrite.md` file.
 
 ### Key Principles of `TodoWrite.md`
 
-- **Hierarchical Decomposition**: All work MUST be decomposed through the 5-level hierarchy.
+- **Hierarchical Decomposition**: All work MUST be decomposed through the **12-layer hierarchy**.
 - **Single Concern Principle (SoC)**: Every item at every level MUST address exactly one concern.
-- **Atomicity**: The lowest level, `SubTask`, MUST map to a single, executable command.
+- **Atomicity**: The lowest level, `Command`, MUST map to a single, executable command.
 - **Validation**: All items are subject to a strict validation pipeline, afs_fastapi/todos/manager.py
 
 ### Reference Implementation
 
-The `afs_fastapi/todos/manager.py` module provides the reference implementation for the `TodoWrite.md` system, including data structures, validation logic, and migration from legacy formats. All agents MUST use the functions provided in this module for all task management operations.
+The `afs_fastapi/todos/manager.py` module provides the reference implementation for the `TodoWrite.md` system, including data structures, validation logic, and current data management. All agents MUST use the functions provided in this module for all task management operations.
 
 ### Enforcement
 
