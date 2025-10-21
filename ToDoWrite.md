@@ -28,6 +28,82 @@
 11. **SubTask** — Smallest planning granule. *(Declarative)*
 12. **Command** — **Only executable** layer (CLI/API/scripts). *(Executable)*
 
+## 2.1) Functional Groupings of the 12-Layer Hierarchy
+
+To facilitate understanding and interaction for AI agents, the 12-layer hierarchy is grouped by functional role, ensuring clarity in purpose, agent interaction, and expected outputs for effective task decomposition and execution.
+
+### I. Strategic & High-Level Planning (Layers 1-4)
+These layers define the overarching vision, architectural concepts, environmental context, and limiting factors for the project. They are purely declarative and guide all subsequent layers.
+
+*   **1. Goal**
+    *   **Purpose:** Defines the ultimate outcome, value, or business/mission intent. It answers "Why are we doing this?"
+    *   **Agent Interaction:** Agents should read Goals to understand the high-level objective. When proposing new work, agents must link it to an existing Goal. New Goals are created at the project's inception or when a significant new strategic direction is adopted.
+    *   **Expected Outputs:** A clear, concise YAML definition of the Goal, linked to higher-level visions (if applicable) and lower-level Concepts or Requirements. Verifiable by its alignment with project vision and stakeholder needs.
+
+*   **2. Concept**
+    *   **Purpose:** Outlines big-picture ideas, architectural approaches, or fundamental principles that support a Goal. It answers "What is the high-level approach?"
+    *   **Agent Interaction:** Agents refer to Concepts to understand the chosen architectural patterns or major design decisions. New Concepts are typically derived from Goals and inform Contexts and Constraints.
+    *   **Expected Outputs:** A declarative YAML file describing the architectural concept, linked to its parent Goal and child Contexts/Constraints. Verifiable by its logical coherence and alignment with the Goal.
+
+*   **3. Context**
+    *   **Purpose:** Describes the environment, involved actors, system boundaries, and underlying assumptions. It answers "What is the operational environment and who/what is involved?"
+    *   **Agent Interaction:** Agents use Contexts to understand the operational landscape, external dependencies, and implicit assumptions. This layer is critical for identifying potential risks and informing Constraints.
+    *   **Expected Outputs:** A declarative YAML file detailing environmental factors, actors, system scope, and assumptions, linked to parent Concepts and child Constraints. Verifiable by its completeness and accuracy in describing the operational reality.
+
+*   **4. Constraints**
+    *   **Purpose:** Specifies standards, safety regulations, budget limitations, legal requirements, and technological boundaries. It answers "What are the non-negotiable limitations and rules?"
+    *   **Agent Interaction:** Agents *must* adhere to all defined Constraints. This layer acts as a critical filter for all subsequent design and implementation decisions. Agents should reference Constraints when evaluating solutions or identifying risks.
+    *   **Expected Outputs:** A declarative YAML file listing all applicable constraints, linked to parent Contexts and informing Requirements. Verifiable by its adherence to external regulations and internal policies.
+
+### II. Specification & Definition (Layers 5-7)
+These layers translate high-level planning into concrete, testable specifications that define what needs to be built and how its success will be measured.
+
+*   **5. Requirements**
+    *   **Purpose:** Defines atomic, testable statements of what the system must do (Functional Requirements) or how well it must perform (Non-Functional Requirements). It answers "What exactly must the system achieve?"
+    *   **Agent Interaction:** Agents create Requirements based on Goals, Concepts, Contexts, and Constraints. All implementation work (Tasks, SubTasks) must trace back to one or more Requirements. Agents use Requirements to guide the creation of Acceptance Criteria.
+    *   **Expected Outputs:** Declarative YAML files, each containing a single, unambiguous, and testable requirement, linked to parent Constraints/Goals and child Acceptance Criteria. Verifiable by its clarity, testability, and traceability.
+
+*   **6. Acceptance Criteria**
+    *   **Purpose:** Provides objective, measurable pass/fail conditions for each Requirement. It answers "How will we know if the Requirement is met?"
+    *   **Agent Interaction:** Agents develop Acceptance Criteria for each Requirement. These criteria directly inform the creation of executable Commands (Layer 12) and serve as the basis for testing and validation.
+    *   **Expected Outputs:** Declarative YAML files, each defining clear, measurable conditions for a specific Requirement, linked to its parent Requirement and child Commands. Verifiable by its objectivity and direct correlation to the Requirement.
+
+*   **7. Interface Contract**
+    *   **Purpose:** Specifies APIs, communication protocols, data schemas, timing requirements, units of measurement, unique identifiers, and versioning for system interfaces. It answers "How do system components interact?"
+    *   **Agent Interaction:** Agents refer to Interface Contracts when designing or implementing interactions between system components. This layer ensures interoperability and consistency.
+    *   **Expected Outputs:** Declarative YAML files detailing interface specifications, linked to relevant Requirements and informing implementation details in lower layers. Verifiable by its completeness, consistency, and adherence to established protocols.
+
+### III. Work Breakdown & Granular Units (Layers 8-11)
+These layers break down the specified work into manageable units for planning, assignment, and tracking, leading towards concrete implementation.
+
+*   **8. Phase**
+    *   **Purpose:** Represents a major delivery slice or significant milestone within the project. It answers "What are the major stages of development?"
+    *   **Agent Interaction:** Agents use Phases to organize large bodies of work. Progress through Phases is typically managed through the overall todo system, with Steps and Tasks being created within the context of an active Phase.
+    *   **Expected Outputs:** A declarative YAML file defining a major stage of work, linked to parent Interface Contracts/Requirements and child Steps. Verifiable by the completion of all its constituent Steps.
+
+*   **9. Step**
+    *   **Purpose:** A single-concern unit of work within a Phase, focused on achieving a specific outcome. It answers "What is a distinct, outcome-focused part of this Phase?"
+    *   **Agent Interaction:** Agents create Steps within an active Phase. Steps are activated to define the current focus of work. Tasks are then created under an active Step.
+    *   **Expected Outputs:** A declarative YAML file defining a single, outcome-oriented work unit, linked to its parent Phase and child Tasks. Verifiable by the completion of all its constituent Tasks.
+
+*   **10. Task**
+    *   **Purpose:** Represents a contributor's work unit, typically assigned to an individual or a small team. It answers "What specific work needs to be done by a contributor?"
+    *   **Agent Interaction:** Agents create Tasks under an active Step. Tasks are the primary unit of work assignment and progress tracking for individual contributors. SubTasks are created to break down complex Tasks.
+    *   **Expected Outputs:** A declarative YAML file defining a specific work item, linked to its parent Step and child SubTasks. Verifiable by the completion of all its constituent SubTasks.
+
+*   **11. SubTask**
+    *   **Purpose:** The smallest planning granule, breaking down a Task into highly granular, actionable items. It answers "What are the smallest actionable pieces of work?"
+    *   **Agent Interaction:** Agents create SubTasks under an active Task. SubTasks are often directly associated with specific code changes, documentation updates, or the execution of Commands.
+    *   **Expected Outputs:** A declarative YAML file defining a highly granular work item, linked to its parent Task and potentially to a Command. Verifiable by its direct completion or the successful execution of an associated Command.
+
+### IV. Execution (Layer 12)
+This is the only executable layer, responsible for performing actions and generating verifiable artifacts.
+
+*   **12. Command**
+    *   **Purpose:** The *only executable* layer. It defines specific CLI commands, API calls, or scripts that perform actions and generate verifiable outputs. It answers "How is the work actually performed and verified?"
+    *   **Agent Interaction:** Agents generate Commands from Acceptance Criteria or SubTasks. Agents *execute* Commands. The output of a Command is critical for verifying the completion of higher-level layers.
+    *   **Expected Outputs:** An executable script or command definition (e.g., `.sh`, `.py`, `.yaml` with `run` block), linked to its parent Acceptance Criteria or SubTask. The execution of a Command should produce verifiable artifacts (e.g., test reports, log files, data outputs) that confirm the successful completion of the intended action. Verifiable by the successful execution and the integrity of its generated artifacts.
+
 ## 3) Current Repo Layout (Version 0.1.5)
 ```
 .
@@ -223,18 +299,6 @@ tw-deps      # Install Python dependencies
 tw-test      # Test complete system
 ```
 
-## 10) Migration from Legacy System
-**SEAMLESS CONVERSION:** Use the migration tool to convert from old 5-layer JSON system:
-
-```bash
-# Migrate existing todos.json to new 12-layer YAML system
-python3 afs_fastapi/todos/tools/migrate_todowrite.py --source .claude/todos.json --output .
-
-# Dry run (preview only)
-python3 afs_fastapi/todos/tools/migrate_todowrite.py --dry-run
-```
-
-The migration preserves all data while transforming to the new architecture.
 
 ## 11) Node Templates (YAML) — Current Format
 
