@@ -79,4 +79,16 @@ PGN_61444_SPNS: list[SPNSpec] = [
 
 PGN_SPECS: dict[int, list[SPNSpec]] = {
     61444: PGN_61444_SPNS,
+    65265: [
+        SPNSpec(
+            spn=84,
+            name="Wheel-Based Vehicle Speed",
+            byte_offset=1,
+            length=2,
+            scale=1 / 256,
+            offset=0,
+            min_value=0,
+            max_value=250.996,
+        ),
+    ],
 }

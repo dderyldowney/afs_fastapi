@@ -1,0 +1,298 @@
+﻿industry_group_id,vehicle_system_id,vehicle_system_description,function_id,function_description,notes,date_created_or_last_modified
+0,0,"Non-specific System",128,Reserved,,
+0,0,"Non-specific System",129,"Off-board diagnostic-service tool",,
+0,0,"Non-specific System",130,"On-board data logger",,
+0,0,"Non-specific System",131,"PC Keyboard"," A user interface similar to a PC keyboard.",2004-02-18
+0,0,"Non-specific System",132,"Safety Restraint System","The safety restraint system can be for controlling  activation of airbags, belt tensioners, roll over protection systems, etc.",2004-02-18
+0,0,"Non-specific System",133,Turbocharger,"Turbocharger used on the engine.",2004-02-18
+0,0,"Non-specific System",134,"Ground based speed sensor","Measures actual ground speed of a vehicle with a device such as radar or other such devices.",2005-11-17
+0,0,"Non-specific System",135,Keypad,"An operator input device used to control machine functions or provide data.",2005-11-17
+0,0,"Non-specific System",136,"Humidity sensor","Device which measures air humidity",2006-02-09
+0,0,"Non-specific System",137,"Thermal Management System Controller","This device controls all devices that may be used in a thermal management system including Jacket Water Cooling, Charged Air Cooling, Transmission Cooling, Electronics Cooling, Aux Oil Cooling, etc.",2006-02-09
+0,0,"Non-specific System",138,"Brake Stroke Alert","The device that evaluates air brake stroke for normal stroke, over stroke, dragging brake, or a non-functioning brake actuator and is permanently mounted on the vehicle.",2007-02-22
+0,0,"Non-specific System",139,"On-board axle group scale","The device that determines axle group weights and is permanently mounted on the vehicle.",2013-02-28
+0,0,"Non-specific System",140,"On-board axle group display","The device that displays axle group weights and may be permanently mounted on the vehicle.  Additionally it provides for entry of calibration and other data related to the operation of an on-board scale.",2013-02-28
+0,0,"Non-specific System",141,"Battery Charger","A device used to charge batteries in a vehicle from an off-board source of electrical energy.",2007-11-15
+0,0,"Non-specific System",142,"Turbocharger Compressor Bypass","Device used to control the flow across the Compressor Bypass",2008-05-23
+0,0,"Non-specific System",143,"Turbocharger Wastegate","Device used to control the position of the Wastegate to adjust the exhaust flow.",2008-05-23
+0,0,"Non-specific System",144,Throttle,"Device used to control the air/fuel mixture into the cylinders for combustion.",2008-05-23
+0,0,"Non-specific System",145,"Inertial Sensor","Detects a change in geographic position, a change in velocity, and/or a change in orientation.  This may include but is not limited to an accelerometer, gyroscopes, and other motion sensing devices.",2008-08-14
+0,0,"Non-specific System",146,"Fuel Actuator","Device used to Control the flow of fuel (or fuel rack) on a engine.",2008-11-13
+0,0,"Non-specific System",147,"Engine Exhaust Gas Recirculation","Device that controls the engine exhaust gas recirculation system.",2009-11-19
+0,0,"Non-specific System",148,"Engine Exhaust Backpressure","Device that controls the engine exhaust backpressure.",2009-11-19
+0,0,"Non-specific System",149,"On-board bin weighing scale","Device that determines bin weights and is permanently mounted on the vehicle.",2013-02-28
+0,0,"Non-specific System",150,"On-board bin weighing scale display","Device that displays bin weights and may be permanently mounted on the vehicle. Additionally it provides for entry of calibration and other data related to the operation of an on-board bin scale.",2013-02-28
+0,0,"Non-specific System",151,"Engine Cylinder Pressure Monitoring System","System designed to monitor engine cylinder pressures and provide combustion information.",2014-08-07
+0,0,"Non-specific System",152,"Object Detection","System for detection of undesireable objects in the product flow.",2017-08-10
+0,0,"Non-specific System",153,"Object Detection Display","Display designed specifically for displaying and managing object detection information.",2017-08-10
+0,0,"Non-specific System",154,"Object Detection Sensor","Detects the presence of objects within a region.",2017-08-10
+0,0,"Non-specific System",155,"Personnel Detection Device","Device for the detection of personnel in proximity to a vehicle.",2018-05-10
+0,0,"Non-specific System",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+0,127,"Not Available",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+1,0,"Non-specific System",128,Tachograph,,
+1,0,"Non-specific System",129,"Door Controller",,
+1,0,"Non-specific System",130,"Articulation Turntable Control","Control of the articulation turntable for joined body buses.",2000-02-10
+1,0,"Non-specific System",131,"Body-to-Vehicle Interface Control","Interface controller managing interaction of vehicle functions and body functions.May be combination of body signals and gateway functionalities.",2000-02-10
+1,0,"Non-specific System",132,"Slope Sensor","Sensor for measuring a slope along an axis.",2004-05-18
+1,0,"Non-specific System",134,"Retarder Display","Display module that shows information pertaining to the retarder (driveline or exhaust or engine).",2005-02-09
+1,0,"Non-specific System",135,"Differential Lock Controller",,2005-02-10
+1,0,"Non-specific System",136,"Low-Voltage Disconnect","The device that monitors the voltage of the starting battery bank and disconnects predetermined auxiliary loads to assure enough power is left in the batteries for starting the vehicle, and is permanently mounted on the vehicle.",2008-05-22
+1,0,"Non-specific System",137,"Roadway Information","Devices that use this function will provide information relevant to the roadway in which the vehicle is traveling. This includes attributes such as intersections, grade, speed limit, number of lanes, location of fueling stations, etc. The roadway refers to the current road that the vehicle is traveling, nearby roads that may intersect the current road, and possibly information for a specific route._x000D_
+_x000D_
+This is different from ""Vehicle Navigation"" (Function ID 23) because a vehicle navigation device may use the information provided by the device with the ""Roadway Information"" Function ID for its purposes. These functions could be accomplished by two completely different devices.",2015-02-19
+1,0,"Non-specific System",138,"Automated Driving","Automated Driving System.  Note:  The hardware and software that are collectively capable of performing some or all of the dynamic driving task on a sustained basis, regardless of whether it is limited to a specific operational design domain.  Please reference SAE J3016.",2018-11-08
+1,0,"Non-specific System",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+1,1,Tractor,128,"Forward Road Image Processing","Determine vehicle position from lane markings. Performance, Advisory & Warning only",1999-05-01
+1,1,Tractor,129,"Fifth Wheel Smart System","Any systems relative to the operation & status/safety monitoring of the fifth  wheel coupler system (including mounting bracket).",2004-02-18
+1,1,Tractor,130,"Catalyst Fluid Sensor","The Catalyst Fluid Sensor can measure the catalyst fluid temperature, the catalyst fluid level and the catalyst fluid quality",2004-02-18
+1,1,Tractor,131,"Adaptive Front Lighting System","System used to adjust the vehicle front lighting for the current operating conditions (city, highway, country,etc.)",2005-11-17
+1,1,Tractor,132,"Idle Control System","The device automatically starts and stops the engine when the vehicle is stationary for the purpose of reducing excess idle time.",2007-08-16
+1,1,Tractor,133,"User Interface System","The User Interface System is a two way interface system.  Uses of this may include, but are not limited to, setting climate conditions, setting system parameters, and/or logging operating conditions of the system.",2007-08-16
+1,1,Tractor,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+1,2,Trailer,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+1,127,"Not Available",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,0,"Non-specific System",128,"Non Virtual Terminal Display","An operator display connected to the 11783 network that cannot perform as a Virtual Terminal and is not allowed to send a VT status message",2001-10-05
+2,0,"Non-specific System",129,"Operator Controls - Machine Specific","Operator interface controls, either auxiliary control inputs or a proprietary means, provided by a control function",2001-10-05
+2,0,"Non-specific System",130,"Task Controller (Mapping Computer)","A control function on the 11783 network that is responsible for the sending, receiving and logging of process data as defined in ISO11783-10.",2001-10-05
+2,0,"Non-specific System",131,"Position Control","Multiple axis position control of a devices application boom used for dispensing fertilizer, chemicals and seed",2001-10-05
+2,0,"Non-specific System",132,"Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2001-10-05
+2,0,"Non-specific System",133,"Foreign Object Detection","Detection of undesireable objects in the product flow",2001-10-05
+2,0,"Non-specific System",134,"Tractor ECU","An interface unit between the tractor and the implement bus representing the tractor and its messages on the 11783 network",2001-10-05
+2,0,"Non-specific System",135,"Sequence Control Master","The master controller in the Sequence Control System as defined in ISO11783-14",2012-05-21
+2,0,"Non-specific System",136,"Product Dosing","Control function that adds an active ingredient to a liquid carrier for application to fields",2012-05-21
+2,0,"Non-specific System",137,"Product Treatment","Control function that mixes a treatment to a dry product applied to or harvested from fields",2012-05-21
+2,0,"Non-specific System",138,reserved,"reserved, pending discussion and approval of an ""all operations stop function""",2012-05-21
+2,0,"Non-specific System",139,"Data Logger","Data logger as defined in ISO11783-10 for non-task related data logging",2012-05-21
+2,0,"Non-specific System",140,"Decision Support","A control function which is used by the operator or by another control function to configure an operation to perform optimally under the current circumstances.",2015-11-05
+2,0,"Non-specific System",141,"Lighting Controller","Control function that controls electrical power to the lights and reports the status of the lights. This control function can be used on trailers or implements.",2016-05-05
+2,0,"Non-specific System",142,"TIM Server","Control function that represents a Tractor Implement Management (TIM) Server.  TIM is an Operator Assistance System that enables TIM clients to request the control of certain TIM functions (for example speed, steering, hitch, PTO, hydraulic valves, etc.) from TIM servers.",2017-08-10
+2,0,"Non-specific System",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,1,Tractor,129,"Auxiliary Valve Control","Control of addressed tractor mounted auxiliary valves",2001-10-05
+2,1,Tractor,130,"Rear Hitch Control","Control of the rear hitch of an agricultural tractor",2001-10-05
+2,1,Tractor,131,"Front Hitch Control","Control of the front hitch of an agricultural tractor",2001-10-05
+2,1,Tractor,132,"Tractor Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2005-02-08
+2,1,Tractor,134,"Center Hitch Control","Control of center hitch of an agricultural tractor",2012-05-21
+2,1,Tractor,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,2,Tillage,132,"Tillage Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2001-10-05
+2,2,Tillage,135,"Tillage Depth Control","Control of the depth of the tillage tool in the soil",2012-05-21
+2,2,Tillage,136,"Frame Control","Control of the folding and unfolding of the frame of the device. Control used to change between transport and field operation position. Not to be used for field operations",2012-05-21
+2,2,Tillage,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,3,"Secondary Tillage",132,"Secondary Tillage Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2001-10-05
+2,3,"Secondary Tillage",135,"Secondary Tillage Depth Control","Control of the depth of the tillage tool in the soil. Secondary tillage is usually soil surface preparation.",2012-05-21
+2,3,"Secondary Tillage",136,"Frame Control","Control of the folding and unfolding of the frame of the device.  Control used to change between transport and field operation position.  Not to be used for field operations.",2012-05-21
+2,3,"Secondary Tillage",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,4,Planters/Seeders,128,"Seed Rate Control","Control of the rate of the product placed in the soil. This can be the primary control function of a seeder",1999-11-11
+2,4,Planters/Seeders,129,"Section On/Off Control","On/Off control of individual sections",2001-10-05
+2,4,Planters/Seeders,131,"Position Control","Multiple axis control of an application boom in the x & y coordinates which can be used for row guidance. Z coordinate control is achieved by depth/ height control.",2012-05-21
+2,4,Planters/Seeders,132,"Planters/ Seeders Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2001-10-05
+2,4,Planters/Seeders,133,"Product Flow","Measuring function to monitor the current product flow during operation",2003-11-18
+2,4,Planters/Seeders,134,"Product Level","Measuring function to monitor the current product level in the bin",2003-11-18
+2,4,Planters/Seeders,135,"Depth Control","Control of the depth of seed/tuber placement in the soil",2012-05-21
+2,4,Planters/Seeders,136,"Frame Control","Control of the folding and unfolding of the frame of the device.  Control used to change between transport and field operation position.  Not to be used for field operations.",2012-05-21
+2,4,Planters/Seeders,137,"Down Pressure","Control of the ground contact pressure on the product delivery unit for optimal operation e.g. pressure on openers for penetrating the ground",2012-05-21
+2,4,Planters/Seeders,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,5,Fertilizers,128,"Fertilize Rate Control","Control of the rate of product placed on or in the soil",2001-10-05
+2,5,Fertilizers,129,"Section On/Off Control","On/Off control of individual sections",2001-10-05
+2,5,Fertilizers,130,"Product Pressure","Monitoring of the pressure of the liquid in the sprayers delivery booms",2012-05-21
+2,5,Fertilizers,131,"Position Control","Multiple axis control of an application boom in the x & y coordinates which can be used for row guidance. Z coordinate control is achieved by depth/ height control.",2012-05-21
+2,5,Fertilizers,132,"Fertilizers Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2001-10-05
+2,5,Fertilizers,133,"Product Flow","Measuring function to monitor the current product flow.",2003-11-18
+2,5,Fertilizers,134,"Product Level","Measuring function to monitor the current product level in the bin",2003-11-18
+2,5,Fertilizers,135,"Height/Depth Control","Control of the height of the implement boom dispensing product on the soil or the depth of the product placement in the soil",2012-05-21
+2,5,Fertilizers,136,"Frame Control","Control of the folding and unfolding of the frame of the device.  Control used to change between transport and field operation position.  Not to be used for field operations.",2012-05-21
+2,5,Fertilizers,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,6,Sprayers,128,"Spray Rate Control","Control of the rate of crop protection product applied to a crop or on the soil",2001-10-05
+2,6,Sprayers,129,"Section On/Off Control","On/Off control of individual sections",2001-10-05
+2,6,Sprayers,130,"Product Pressure","Monitoring of the pressure of the product in the delivery booms",2003-11-18
+2,6,Sprayers,131,"Position Control","Multiple axis control of an application boom in the x & y coordinates which can be used for row guidance. Z coordinate control is achieved by depth/ height control.",2012-05-21
+2,6,Sprayers,132,"Sprayers Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2001-10-05
+2,6,Sprayers,133,"Product Flow","Measuring function to monitor the current product flow",2003-11-18
+2,6,Sprayers,134,"Product Level","Measuring function to monitor the current product level in the tank",2003-11-18
+2,6,Sprayers,135,"Boom Height Control","Control of the height of the boom above the surface of the soil or above the height of the standing crop",2012-05-21
+2,6,Sprayers,136,"Frame Control","Control of the folding and unfolding of the frame of the device.  Control used to change between transport and field operation position.  Not to be used for field operations.",2012-05-21
+2,6,Sprayers,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,7,Harvesters,128,"Tailing Monitor","Measuring system to monitor the quantity of unthreshed material returned to threshing machine",2001-10-05
+2,7,Harvesters,129,"Header Control","Control of the headers reel height and rotation and material delivery rate",2001-10-05
+2,7,Harvesters,130,"Product Loss Monitor","Measuring system to monitor the amount of grain being delivered back onto the soil",2001-10-05
+2,7,Harvesters,131,"Product Moisture","Measuring system to monitor the moisture content of the grain",2001-10-05
+2,7,Harvesters,132,"Harvester Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed functions such as the adjustment of the precleaner, chaffer, sieve, fan speed, concave clearance, and cylinder speed.",2001-10-05
+2,7,Harvesters,133,"Product Flow","Measuring function to monitor the rate of the grain flow into the harvesters grain tank (bin). This rate is used to determine the yield.",2003-11-18
+2,7,Harvesters,134,"Product Level","Measuring function to monitor the grain level in the harvesters tank (bin).",2003-11-18
+2,7,Harvesters,135,"Header Height Control","Control of the height of cutter bar above the surface of the soil or below the top of the standing crop",2012-05-21
+2,7,Harvesters,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,8,"Root Harvesters",132,"Root Harvesters Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2001-10-05
+2,8,"Root Harvesters",133,"Product Flow","Measuring function to monitor the product flow into the harvesters tank (bin). This rate is used to determine harvested yield.",2003-11-18
+2,8,"Root Harvesters",134,"Product Level","Measuring function to monitor the product level in the harvesters tank (bin).",2003-11-18
+2,8,"Root Harvesters",135,"Depth Control","Control of the depth of the harvestors lifter shares in the soil",2012-05-21
+2,8,"Root Harvesters",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,9,Forage,128,"Twine Wrapper Control","Control of the wrapping of twine around a bale before discharge from the baler",2002-07-29
+2,9,Forage,129,"Product Packaging Control","Control of packaging process for the forage material.",2012-05-21
+2,9,Forage,131,"Product Moisture","Measuring system to monitor the moisture of the forage content.",2012-05-21
+2,9,Forage,132,"Forage Machine Control","Control of outputs including adjustment of ancillary functions like position functions such as header up/down, cutterhead & feedroll control and/or any rotation speed functions.",2001-10-05
+2,9,Forage,133,"Product Flow","Measuring function to monitor the product flow through the machine. This rate is used to determine forage yield.",2003-11-18
+2,9,Forage,135,"Working Height Control","Control of the height of cutting header above the surface of the soil or below the top of the forage crop",2012-05-21
+2,9,Forage,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,10,Irrigation,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,11,Transport/Trailer,132,"Transport Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2012-05-21
+2,11,Transport/Trailer,136,"Unload Control","Control of trailer unloading process",2012-05-21
+2,11,Transport/Trailer,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,12,"Farm Yard Operations",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,13,"Powered Auxiliary Devices",132,"Powered Devices Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2012-05-21
+2,13,"Powered Auxiliary Devices",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,14,"Special Crops",132,"Special Crop Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2012-05-21
+2,14,"Special Crops",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,15,"Earth Work",128,"Material Rate Control","Control of the rate the material is processed.",2012-05-21
+2,15,"Earth Work",132,"Earthworks Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2012-05-21
+2,15,"Earth Work",133,"Material Flow","Measuring function to monitor the material flow",2012-05-21
+2,15,"Earth Work",134,"Material Level","Measuring function to monitor the material level",2012-05-21
+2,15,"Earth Work",135,"Depth Control","Control of working depth",2012-05-21
+2,15,"Earth Work",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+2,16,Skidder,132,"Skidder Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2012-05-21
+2,16,Skidder,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2003-11-18
+2,17,"Sensor Systems",128,"Guidance Feeler","Mechanical function for determining row position in the field",2012-05-21
+2,17,"Sensor Systems",129,"Camera System","Provides images or processed data for control operations.",2012-05-21
+2,17,"Sensor Systems",130,"Crop Scouting ","Measures vegetation parameters in a standing crop ",2012-05-21
+2,17,"Sensor Systems",131,"Material Properties Sensing","Sensing system to detect material properties like density, particle size, color or constitutens (moisture, starch, protein,…)",2012-05-21
+2,17,"Sensor Systems",132,"Inertial Measurement Unit (IMU)","A sensor unit providing inertial measurements",2012-05-21
+2,17,"Sensor Systems",133,"Product flow","Measuring function to monitor product flow",2012-05-21
+2,17,"Sensor Systems",134,"Product Level ","Measuring function to monitor the product level in the tank (bin)",2012-05-21
+2,17,"Sensor Systems",135,"Product Mass","Measuring function to monitor the mass of the product",2012-05-21
+2,17,"Sensor Systems",136,Vibration/Knock,"Measuring function to determine the vibration or knock behaviour of a system",2012-05-21
+2,17,"Sensor Systems",137,"Weather Instruments","The ""Weather Instruments"" function code shall be used by ISO11783 compliant Weather Instruments to identify themselves on the network. ",2012-05-21
+2,17,"Sensor Systems",138,"Soil Scouting","Soil Sensor to measure different soil physical parameters. One example of a soil sensor is a system that measures the apparent conductivity (in-Phase and Quadratur phase)",2019-05-09
+2,19,"Timber Harvesters",132,"Timber Harvestors Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2012-05-21
+2,20,Forwarders,132,"Forwarders Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2012-05-21
+2,21,"Timber Loaders",132,"Timber Loaders Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2012-05-21
+2,22,"Timber Processing Machines",132,"Timber Processing Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2012-05-21
+2,23,Mulchers,132,"Mulcher Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2012-05-21
+2,24,"Utility Vehicles",132,"Utility Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2012-05-21
+2,25,"Slurry/Manure Applicators",128,"Slurry/Manure Rate Control","Control of the rate of product placed on the soil",2015-11-05
+2,25,"Slurry/Manure Applicators",129,"Section On/Off Control","On/Off control of individual sections",2015-11-05
+2,25,"Slurry/Manure Applicators",130,"Product Pressure","Monitoring of the pressure of the product in the delivery booms",2015-11-05
+2,25,"Slurry/Manure Applicators",132,"Slurry/Manure Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2015-11-05
+2,25,"Slurry/Manure Applicators",133,"Product Flow","Measuring function to monitor the current product flow.",2015-11-05
+2,25,"Slurry/Manure Applicators",134,"Product Level","Measuring function to monitor the current product level in the bin",2015-11-05
+2,25,"Slurry/Manure Applicators",135,"Boom Height Control","Control of the height of delivery boom above the surface of the soil",2015-11-05
+2,26,Feeders/Mixers,128,"Feeder/Mixer Rate Control","Control of the rate of product distributed to cattle or livestock",2015-11-05
+2,26,Feeders/Mixers,129,"Section On/Off Control","On/Off control of individual sections, e.g. Left / Center / Right unloading of fodder",2015-11-05
+2,26,Feeders/Mixers,130,"Product Pressure","Monitoring of the pressure of the product in the delivery units",2015-11-05
+2,26,Feeders/Mixers,132,"Feeder/Mixer Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2015-11-05
+2,26,Feeders/Mixers,133,"Product Flow","Measuring function to monitor the current product flow.",2015-11-05
+2,26,Feeders/Mixers,134,"Product Level","Measuring function to monitor the current product level in the bin",2015-11-05
+2,26,Feeders/Mixers,135,"Boom Height Control","Control of the height of delivery boom above the surface of the soil",2015-11-05
+2,27,"Weeders - Non-chemical weed control. The device class Weeders is used by devices that control and eliminate weeds through the use of operation techniques other than spraying. Examples of non-spraying operation techniques for weed control are the use of mechanical actuators or hoes or the transfer of energy from electrical and irradiation sources or a combination of those.",132,"Weeder Machine Control","Control of outputs including adjustment of any ancillary functions like position and/or rotation speed. For VT or TC control, this function combines several control functions that communicate from the same SA",2019-05-09
+2,28,"Turf and Lawn Care Mowers",132,"Turf and Lawn Care Mowers Machine Control","The machine used for cutting grass",2022-11-10
+2,29,"Product/Material Handling",132,"Product/Material Handling Machine Control","Control of outputs including adjustment of equipment operational controls. For VT or TC control, this function combines several control functions that communicate from the same SA.",2023-11-16
+2,29,"Product/Material Handling",133,"Product/Material Handling Product Flow","Measuring function to monitor the current product flow.",2023-11-16
+2,29,"Product/Material Handling",134,"Product/Material Handling Product Level","Meauring function to monitor the current product level in the bin.",2023-11-16
+2,127,"Not Available",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+3,0,"Non-specific system",128,"Supplemental Engine Control Sensing",,1998-02-01
+3,0,"Non-specific system",129,"Laser Receiver",,1998-07-01
+3,0,"Non-specific system",130,"Land Leveling System Operator Interface","A component that allows the user to control the Land Leveling System and display information about the operation of the system.",2004-02-18
+3,0,"Non-specific system",131,"Land Leveling Electric Mast",,1998-07-01
+3,0,"Non-specific system",132,"Single Land Leveling System Supervisor",,1998-07-01
+3,0,"Non-specific system",133,"Land Leveling System Display",,1998-07-01
+3,0,"Non-specific system",134,"Laser Tracer",,1998-07-01
+3,0,"Non-specific system",135,"Loader Control",,1999-02-01
+3,0,"Non-specific system",136,"Slope Sensor","Measures the slope along a axis.",1999-11-11
+3,0,"Non-specific system",137,"Liftarm Control","Controller whose primary purpose is to control the lift arms and tilt functions on a construction loader, skid steer loader, or similar machine. Not a loader attachment.",2001-10-24
+3,0,"Non-specific system",138,"Supplemental Sensor Processing Units","An ECU functioning as an I/O module connected to the bus with the designed purpose of data collection (input or output) and not necessarily containing any control algorithms or processing intelligence.",2002-05-15
+3,0,"Non-specific system",139,"Hydraulic System Planner","Coordinates the functions of a number of valve controllers.",2003-02-20
+3,0,"Non-specific system",140,"Hydraulic Valve Controller","The valve controller will typically control the flow of oil to a specific cylinder.",2003-02-20
+3,0,"Non-specific system",141,"Joystick Control","Joystick Control",2003-02-20
+3,0,"Non-specific system",142,"Rotation Sensor","A device that measures the rotational angle around an axis.",2004-02-18
+3,0,"Non-specific system",143,"Sonic Sensor","A device that measures distance via ultrasonic pulse/echo range techniques.",2004-02-18
+3,0,"Non-specific System",144,"Survey Total Station Target","A survey total station target shall be located on a construction machine and shall be connected to the CAN network.  It is targeted by the total station device.",2006-08-10
+3,0,"Non-specific System",145,"Heading Sensor","A device that measures vehicle azimuth.",2009-11-19
+3,0,"Non-specific System",146,"Alarm device","Device that provides an audible and/or visual alarm",2012-08-09
+3,0,"Non-specific system",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+3,1,"Skid Steer Loader",128,"Main Controller",,1999-05-01
+3,1,"Skid Steer Loader",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+3,2,"Articulated Dump Truck",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-05-11
+3,3,Backhoe,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-05-11
+3,4,Crawler,128,"Blade Controller","Controller for blade height.",2004-05-18
+3,4,Crawler,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-05-11
+3,5,Excavator,128,"Slope Sensor","Measures the slope along a axis.",2007-11-15
+3,5,Excavator,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-05-11
+3,6,Forklift,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-05-11
+3,7,"Four Wheel Drive Loader",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-05-11
+3,8,Grader,128,"HFWD Controller","Hydraulic front wheel drive controller",2000-05-11
+3,8,Grader,255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-05-11
+3,9,"Milling Machine",255,"Not Available","The milling machine is used for cutting (or chipping) surface of the pavement and moves the material away from the road._x000D_
+This assignment can be used until an explicit function has been assigned.",2022-05-19
+3,10,"Recycler and Soil Stabilizer",255,"Not Available","Cold recyclers are used to prepare the asphalt pavement on site._x000D_
+This assignment can be used until an explicit function has been assigned.",2022-05-19
+3,11,"Binding Agent Spreader",255,"Not Available","Spreading large quantities of binding agents while adhering to the specified accuracy is of paramount importance in both soil stabilization and cold recycling._x000D_
+This assignment can be used until an explicit function has been assigned.",2022-05-19
+3,12,Paver,255,"Not Available","A paver (road paver for asphalt or slipform paver for concrete) is a piece of construction equipment used to lay surface of pavement on roads, bridges, parking lots, etc._x000D_
+This assignment can be used until an explicit function has been assigned.",2022-05-19
+3,13,Feeder,255,"Not Available","A feeder is used to convey paver material from a hopper to the prepared road surface._x000D_
+This assignment can be used until an explicit function has been assigned.",2022-05-19
+3,14,"Screening Plant",255,"Not Available","Mobile screening plants are used for screening natural stone used for recycling._x000D_
+This assignment can be used until an explicit function has been assigned.",2022-05-19
+3,15,Stacker,255,"Not Available","Stackers are used to improve tipping onto conical or kidney-shaped stockpiles._x000D_
+This assignment can be used until an explicit function has been assigned.",2022-05-19
+3,16,Roller,255,"Not Available","A roller is used for asphalt and earthwork constuction to compact soil, gravel, or asphalt._x000D_
+This assignment can be used until an explicit function has been assigned.",2022-05-19
+3,17,Crusher,255,"Not Available","The crusher is used for crushing natural stone and for recycling._x000D_
+This assignment can be used until an explicit function has been assigned.",2022-05-19
+3,127,"Not Available",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+4,0,"Non-specific System",128,"Alarm System Control for Marine Engines","The ECU that controls the Alarm functions on an engine of a Marine System.",2001-10-24
+4,0,"Non-specific System",129,"Protection System for Marine Engines","The first ECU that controls the Protection functions on the first engine of a Marine System.",2001-10-24
+4,0,"Non-specific System",130,"Display for Protection System for Marine Engines","The ECU that provides the display of information and/or indicators associated specifically with the protection system on an engine of a Marine System.",2001-10-24
+4,0,"Non-specific System",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+4,10,"System tools",255,"Not Available",,2003-09-30
+4,20,"Safety systems",255,"Not Available",,2003-09-30
+4,25,Gateway,130,,,2017-11-16
+4,30,"Power management and lighting systems",130,"Switch ",,2003-09-30
+4,30,"Power management and lighting systems",140,"Load ",,2003-09-30
+4,40,"Steering systems",130,"Follow-up Controller",,2003-09-30
+4,40,"Steering systems",140,"Mode Controller",,2003-09-30
+4,40,"Steering systems",150,"Automatic Steering Controller",,2003-09-30
+4,40,"Steering systems",160,"Heading Sensors",,2003-09-30
+4,50,"Propulsion systems",130,"Engineroom monitoring",,2003-09-30
+4,50,"Propulsion systems",140,"Engine Interface",,2003-09-30
+4,50,"Propulsion systems",150,"Engine Controller",,2003-09-30
+4,50,"Propulsion systems",160,"Engine Gateway",,2003-09-30
+4,50,"Propulsion systems",170,"Control Head",,2003-09-30
+4,50,"Propulsion systems",180,Actuator,,2003-09-30
+4,50,"Propulsion systems",190,"Gauge Interface",,2003-09-30
+4,50,"Propulsion systems",200,"Gauge Large",,2003-09-30
+4,50,"Propulsion systems",210,"Gauge Small",,2003-09-30
+4,50,"Propulsion systems",220,"Propulsion Sensors & Gateway",,2017-05-11
+4,60,"Navigation systems",130,"Sounder, depth   ",,2003-09-30
+4,60,"Navigation systems",140,,,2003-09-30
+4,60,"Navigation systems",145,"Global Navigation Satellite System (GNSS)",,2003-09-30
+4,60,"Navigation systems",150,"Loran C",,2003-09-30
+4,60,"Navigation systems",155,"Speed Sensors",,2003-09-30
+4,60,"Navigation systems",160,"Turn Rate Indicator",,2003-09-30
+4,60,"Navigation systems",170,"Integrated Navigation   ",,2003-09-30
+4,60,"Navigation systems",200,"Radar and/or Radar Plotting",,2003-09-30
+4,60,"Navigation systems",205,"Electronic Chart Display & Information System (ECDIS)",,2003-09-30
+4,60,"Navigation systems",210,"Electronic Chart System (ECS)",,2003-09-30
+4,60,"Navigation systems",220,"Direction Finder",,2003-09-30
+4,70,"Communications systems",130,"Emergency Position Indicating Beacon (EPIRB)",,2003-09-30
+4,70,"Communications systems",140,"Automatic Identification System",,2003-09-30
+4,70,"Communications systems",150,"Digital Selective Calling (DSC)",,2003-09-30
+4,70,"Communications systems",160,"Data Receiver",,2003-09-30
+4,70,"Communications systems",170,Satellite,,2003-09-30
+4,70,"Communications systems",180,"Radio-Telephone (MF/HF)",,2003-09-30
+4,70,"Communications systems",190,"Radio-Telephone (VHF)",,2003-09-30
+4,80,"Instrumentation/general systems",130,"Time/Date systems",,2003-09-30
+4,80,"Instrumentation/general systems",140,"Voyage Data Recorder",,2003-09-30
+4,80,"Instrumentation/general systems",150,"Integrated Instrumentation",,2003-09-30
+4,80,"Instrumentation/general systems",160,"General Purpose Displays",,2003-09-30
+4,80,"Instrumentation/general systems",170,"General Sensor Box",,2003-09-30
+4,80,"Instrumentation/general systems",180,"Weather Instruments",,2003-09-30
+4,80,"Instrumentation/general systems",190,Transducer/general,,2003-09-30
+4,80,"Instrumentation/general systems",200,"NMEA 0183 Converter",,2003-09-30
+4,90,"Environmental (HVAC) systems",255,"Not Available",,2003-09-30
+4,100,"Deck, cargo, and fishing equipment systems",255,"Not Available",,2003-09-30
+4,127,"Not Available",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+5,0,"Industrial-Process Control-Stationary (Gen-Sets)",128,"Supplemental Engine Control Sensing",,1998-02-01
+5,0,"Industrial-Process Control-Stationary (Gen-Sets)",129,"Generator Set Controller","Generator set controller used to collect data and control.",1999-11-11
+5,0,"Industrial-Process Control-Stationary (Gen-Sets)",130,"Generator Voltage Regulator",,2005-02-10
+5,0,"Industrial-Process Control-Stationary (Gen-Sets)",131,"Choke Actuator","Device used to Control the flow of air on a Gas Engine.",2009-02-17
+5,0,,132,"Well Stimulation Pump","Device which communicates operating parameters of a well stimulation pump used in oil and gas drilling applications.",2015-11-05
+5,0,"Industrial-Process Control-Stationary (Gen-Sets)",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07
+5,127,"Not Available",255,"Not Available","This assignment can be used until an explicit function has been assigned.",2000-02-07

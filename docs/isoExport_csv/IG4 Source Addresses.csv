@@ -1,0 +1,23 @@
+﻿source_address_id,name,notes,date_created_or_modified
+128,"thru 207 are reserved for future assignment by SAE","Used for dynamic address assignment (self-configurable)",2001-12-30
+208,"thru 227 are reserved for future assignment","Used for individual preassigned addresses",2001-12-30
+228,"Propulsion Sensor Hub & Gateway #1","The first device that interfaces with propulsion sensors and acts as a gateway to other networks in the system.",2017-05-11
+229,"Propulsion Sensor Hub & Gateway #2","The second device that interfaces with propulsion sensors and acts as a gateway to other networks in the system.",2017-05-11
+230,"Propulsion Sensor Hub & Gateway #3","The third device that interfaces with propulsion sensors and acts as a gateway to other networks in the system.",2017-05-11
+231,"Propulsion Sensor Hub & Gateway #4","The fourth device that interfaces with propulsion sensors and acts as a gateway to other networks in the system.",2017-05-11
+232,"Transmission #3","The Transmission ECU for the third transmission within a system",2012-05-17
+233,"Transmission #4","The Transmission ECU for the fourth transmission within a system",2012-05-17
+234,"Transmission #5","The Transmission ECU for the fifth transmission within a system",2012-05-17
+235,"Transmission #6","The Transmission ECU for the sixth transmission within a system",2012-05-17
+236,"Display #1 for Protection System for Marine Engines","The first ecu that provides the display of information and/or indicators associated specifically with the protection system on the first engine of a Marine System.",2001-10-24
+237,"Protection System for Marine Engines","The first ecu that controls the Protection functions on the first engine of a Marine System.",2001-10-24
+238,"Alarm System Control #1 for Marine Engines","The first ecu that controls the Alarm functions on the first engine of a Marine System.",2001-10-24
+239,"Engine #3","The Engine ECU for the third engine within a system.",2000-02-10
+240,"Engine #4","The Engine ECU for the fourth engine within a system.",2000-02-10
+241,"Engine #5","The Engine ECU for the fifth engine within a system.",2000-02-10
+242,"Marine Display #1","The first Marine Display for an engine.",2000-02-10
+243,"Marine Display #2","The second Marine Display for an engine.",2000-02-10
+244,"Marine Display #3","The third Marine Display for an engine.",2000-02-10
+245,"Marine Display #4","The fourth Marine Display for an engine.",2000-02-10
+246,"Marine Display #5","The fifth Marine Display for an engine.",2000-02-10
+247,"Marine Display #6","The sixth Marine Display for an engine.",2000-02-10

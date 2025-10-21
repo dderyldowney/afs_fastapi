@@ -1,0 +1,81 @@
+﻿source_address_id,name,notes,date_created_or_modified
+128,"thru 158 are reserved for future assignment by SAE but available for use by self configurable ECUs","Used for dynamic address assignment",2015-02-19
+156,"Automated Driving Controller 2","Second Automated Driving Controller _x000D_
+_x000D_
+Notes: The hardware and software that are collectively capable of performing some or all of the dynamic driving task on a sustained basis, regardless of whether it is limited to a specific operational design domain. Please reference SAE J3016.",2020-11-12
+157,"Electric Propulsion Control Unit #3","Third on-board device converting torque commands to current commands in an electric vehicle system.   Note that some applications have used SA 241 for this purpose.",2019-08-22
+158,"Automated Driving Controller 1","Automated Driving Controller._x000D_
+_x000D_
+Notes: The hardware and software that are collectively capable of performing some or all of the dynamic driving task on a sustained basis, regardless of whether it is limited to a specific operational design domain. Please reference SAE J3016.",2020-11-12
+159,"Roadway Information System","Controller applications that use this source address will provide information relevant to the roadway in which the vehicle is traveling. This includes items such as intersections, grade, speed limit, number of lanes, location of fueling stations, etc. The roadway refers to the current road that the vehicle is traveling, nearby roads that may intersect the road, and possibly information for a specific route._x000D_
+_x000D_
+This is different from ""Vehicle Navigation"" (Source Address 28) because a vehicle navigation device may use the information provided by the device with the ""Roadway Information"" source address for its purposes. These functions could be accomplished by two completely different devices.",2015-02-19
+160,"Advanced emergency braking system","A system which can detect a potential forward collision and automatically activate the vehicle braking system to decelerate the vehicle with the purpose of avoiding or mitigating a collision.",2010-08-05
+161,"Fifth Wheel Smart Systems","Any systems relative to the operation & status/safety monitoring of the fifth  wheel coupler system (including mounting bracket).",2004-05-18
+162,"Slope Sensor","A device that measures the slope along an axis.",2004-05-18
+163,"Catalyst Fluid Sensor","The Catalyst Fluid Sensor can measure the catalyst fluid temperature, the catalyst fluid level and the catalyst fluid quality.",2004-02-18
+164,"On Board Diagnostic Unit #2","Controller used to report On Board Diagnostics",2002-08-08
+165,"Rear Steering Axle Controller #2","Rear steering controller 2 for axle group",2002-08-08
+166,"Rear Steering Axle Controller #3","Rear steering controller 3 for axle group",2002-08-08
+167,"Instrument Cluster #2","A second optional, or auxiliary, gauge display for a vehicle",2001-02-15
+168,"Trailer #5 Bridge","Bridge for fifth towed Vehicle System (e.g. trailer or dolly)",
+169,"Trailer #5 Lighting-electrical",,
+170,"Trailer #5 Brakes (ABS-EBS)",,
+171,"Trailer #5 Reefer",,
+172,"Trailer #5 Cargo",,
+173,"Trailer #5 Chassis-Suspension",,
+174,"Other Trailer #5 Devices","Recommended address space for subnetwork devices",2001-12-30
+175,"Other Trailer #5 Devices","Recommended address space for subnetwork devices",2001-12-30
+176,"Trailer #4 Bridge","Bridge for fourth towed Vehicle System (e.g. trailer or dolly)",
+177,"Trailer #4 Lighting-electrical",,
+178,"Trailer #4 Brakes (ABS-EBS)",,
+179,"Trailer #4 Reefer",,
+180,"Trailer #4 Cargo",,
+181,"Trailer #4 Chassis-Suspension",,
+182,"Other Trailer #4 Devices","Recommended address space for subnetwork devices",2001-12-30
+183,"Other Trailer #4 Devices","Recommended address space for subnetwork devices",2001-12-30
+184,"Trailer #3 Bridge","Bridge for third towed Vehicle System (e.g. trailer or dolly)",
+185,"Trailer #3 Lighting-electrical",,
+186,"Trailer #3 Brakes (ABS-EBS)",,
+187,"Trailer #3 Reefer",,
+188,"Trailer #3 Cargo",,
+189,"Trailer #3 Chassis-Suspension",,
+190,"Other Trailer #3 Devices","Recommended address space for subnetwork devices",2001-12-30
+191,"Other Trailer #3 Devices","Recommended address space for subnetwork devices",2001-12-30
+192,"Trailer #2 Bridge","Bridge for second towed Vehicle System (e.g. trailer or dolly)",
+193,"Trailer #2 Lighting-electrical",,
+194,"Trailer #2 Brakes (ABS-EBS)",,
+195,"Trailer #2 Reefer",,
+196,"Trailer #2 Cargo",,
+197,"Trailer #2 Chassis-Suspension",,
+198,"Other Trailer #2 Devices","Recommended address space for subnetwork devices",2001-12-30
+199,"Other Trailer #2 Devices","Recommended address space for subnetwork devices",2001-12-30
+200,"Trailer #1 Bridge","Bridge for first towed Vehicle System (e.g. trailer or dolly)",
+201,"Trailer #1 Lighting-electrical",,
+202,"Trailer #1 Brakes (ABS-EBS)",,
+203,"Trailer #1 Reefer",,
+204,"Trailer #1 Cargo",,
+205,"Trailer #1 Chassis-Suspension",,
+206,"Other Trailer #1 Devices","Recommended address space for subnetwork devices",2001-12-30
+207,"Other Trailer #1 Devices","Recommended address space for subnetwork devices",2001-12-30
+208,"thru 227 are reserved for future assignment by SAE","To be used for individual preassigned addresses",2001-12-30
+228,"Steering Input Unit","May be used for measuring steering angle, steering torsion, steering force feedback, etc.",2005-11-17
+229,"Body Controller #2","This is for the second instance of a body controller on a chassis.",2005-11-17
+230,"Body-to-Vehicle Interface Control","Interface controller managing interaction of vehicle functions and body functions. May be a combination of body signals and gateway functionalities.",2000-02-10
+231,"Articulation Turntable Control","Controller managing the articulation turntable for joined body buses.",2000-02-10
+232,"Forward Road Image Processor","Views the road ahead for electronic recognition of several items",1999-05-01
+233,"Door Controller #3",,
+234,"Door Controller #4",,
+235,"Tractor/Trailer Bridge #2","Second tractor mounted bridge leading to trailer(s)",1999-02-10
+236,"Door Controller #1","cab drivers side or first door",
+237,"Door Controller #2","cab codrivers side or second door",
+238,Tachograph,,
+239,"Electric Propulsion Control Unit #1","First or only on-board device converting torque commands to current commands in an electric vehicle system",
+240,"Electric Propulsion Control Unit #2","Second on-board device converting torque commands to current commands in an electric vehicle system",
+241,"WWH-OBD Tester","SA for OBD tester as defined in WWH-OBD ISO 15765-4.   Note that some applications use this SA for Electric Propulsion Control Unit #3.",2019-08-22
+242,"Electric Propulsion Control Unit #4","Fourth on-board device converting torque commands to current commands in an electric vehicle system",
+243,"Battery Pack Monitor #1","Device to monitor battery pack #1",
+244,"Battery Pack Monitor #2 / APU #4","SA for either the device to monitor battery pack #2 or APU #4",2006-11-16
+245,"Battery Pack Monitor #3 / APU #3","SA for either the device to monitor battery pack #3 or APU #3",2006-11-16
+246,"Battery Pack Monitor #4 / APU #2","SA for either the device to monitor battery pack #4 or APU #2",2006-11-16
+247,"Auxiliary Power Unit (APU) #1","Device used to provide auxiliary power, such as electrical, hydraulic, pneumatic, or rotary",2006-11-16

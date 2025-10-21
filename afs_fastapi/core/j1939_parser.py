@@ -1,4 +1,8 @@
+import logging
+
 from .j1939_specs import PGN_SPECS
+
+logger = logging.getLogger(__name__)
 
 
 def parse_j1939_message(pgn: int, data: list[int]) -> dict[str, float] | None:
@@ -13,6 +17,7 @@ def parse_j1939_message(pgn: int, data: list[int]) -> dict[str, float] | None:
         A dictionary of parsed SPN data, or None if the PGN is not supported.
     """
     if pgn not in PGN_SPECS:
+        logger.warning(f"Unrecognized PGN: {pgn}")
         return None
 
     parsed_data: dict[str, float] = {}

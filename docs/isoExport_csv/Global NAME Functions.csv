@@ -1,0 +1,100 @@
+﻿function_id,function_description,notes,date_created_or_last_modified
+0,Engine,"While the function identifies what is typically the mechanical power source of the machine, the reference tends to be to the management system that controls the torque vs speed vs command (typically throttle) of said power source.",
+1,"Auxiliary Power Unit (APU)","Power source for operating systems without the use of the prime ‘drive’ engine.",
+2,"Electric Propulsion Control","Control system which operates the drive mechanism when it is electrically powered, such as battery-motor, or engine-generator-motor hybrids",
+3,Transmission,"A mechanical system for alter the speed vs torque output of the engine to a level usable by another system on the machine.  Although again the network reference is actually to the system which controls the operation of said transmission.",
+4,"Battery Pack Monitor","Monitors the condition - charge, temperature, power remaining, etc. for an internal battery pack - typically used with electric propulsion",
+5,"Shift Control/Console","The device which determines and transmit onto the network the gear, the range, the operating mode or any or all of these that the operator desires for the transmission. (Not to be confused with transmission control which is Transmission)",
+6,"Power TakeOff - (Main or Rear)","The system which controls the mechanical power derived from a prime engine and used to operate auxiliary items such as compressors in on highway vehicles and such as implements in ag applications.  This being the main or rear unit.",
+7,"Axle - Steering","Adjust attack angle as function of steering",
+8,"Axle - Drive",,
+9,"Brakes - System Controller","Controls service braking system electronically – might be any of a number of schemes – may also control (at least partly) the endurance braking system in the sense of an integrated control (application phased in with the service braking system).",
+10,"Brakes - Steer Axle","Control for actuating the service brakes on a steered axle",
+11,"Brakes - Drive axle","Control for actuating the service brakes on a drive axle",
+12,"Retarder - Engine","The control for the retarder capabilities of the engine. There are several types of retarders possible and these are defined within the parameter - Retarder Type, (SPN 901).",
+13,"Retarder - Driveline","The control for the retarder capabilities of the driveline. There are several types of retarders possible and these are defined within the parameter - Retarder Type, (SPN 901).",
+14,"Cruise Control","Control system for maintaining the vehicle’s speed at a fixed operator selectable value with various over-rides linked to other systems",
+15,"Fuel System","Controls fuel flow from the tank to the filter to the water-removal/separator to the engine and then back to the tank.",
+16,"Steering Controller","Controls steering in steer-by-wire",
+17,"Suspension - Steer Axle","Control system for the suspension of a steered axle",
+18,"Suspension - Drive Axle","Control system for the suspension of a driven axle",
+19,"Instrument Cluster","A gauge display for a vehicle. Typically mounted in the cab within the driver’s field of view and generally a somewhat limited display such as: dedicated dials or a small digit 7 segment display.  See Cab Display for larger more elaborate display.",
+20,"Trip Recorder","A system for accumulating data versus travel of the vehicle (machine), since a specific starting point sometimes expressed in terms of distance or time traveled.",
+21,"Cab Climate Control","A system for controlling the climate within the cab of the vehicle (machine).  Note: The operator controls (message) for this system should be designed to allow any source to transmit them.",
+22,"Aerodynamic Control","Modify drag by altering Body panels – lower air ferrings when dead heading, extend side panels when on interstate",
+23,"Vehicle Navigation","System associated with the vehicles physical location – may be as simple as display of current location, driving instructions from current to desired location, (do we need a separate guidance?).",
+24,"Vehicle Security","System for comparing operator provided data sequences against reference to verify that operation or certain operations should be allowed for the particular operator.  Also may include functions to prevent unauthorized operations.  Examples: unlocking doors, starting engine, …",
+25,"Network Interconnect ECU","ECU for connecting different network segments together – may be bridge or gateway  - see J1939 –31 for details For any vehicle system (tractor or trailer)",
+26,"Body Controller","May handle suspension control for the body sections independent from the axle sections - Controls the body (not chassis or cab) components",1999-11-11
+27,"Power TakeOff (Secondary or Front)","The system which controls the mechanical power derived from a prime engine and used to operate auxiliary items such as compressors in on highway vehicles and such as implements in ag applications.  This being the secondary or front unit.",
+28,"Off Vehicle Gateway","ECU for connecting between vehicle network(s) and an off-vehicle system or network, such as fleet management. Connection may be wireless. Performs Gateway functions, i.e., filters messages, translates between protocols...",
+29,"Virtual Terminal (in cab)","A general purpose ‘intelligent’ display with a specific message set (J1939-72 or ISO 11783 –6) specifically mounted in cab for the operators use, which may be connected to the drive train segment of the network or to the implement bus segment which exists in an ag application",
+30,"Management Computer","Manages vehicle systems, i.e. powertrain.",1999-02-01
+31,"Propulsion Battery Charger","A device used to charge propulsion batteries in an electric vehicle from an off-board source of electrical energy.",
+32,"Headway Controller","Forward-looking collision avoidance, collision warning, speed controller, or speed matching",1999-05-01
+33,"System Monitor",,
+34,"Hydraulic Pump Controller","Pump which provides hydraulic power to operate installed equipment, such as: Man buckets, cranes, augers, shredders Example vehicles: Digger Derrick – plants telephone poles, Bucket Truck - - thus this is the controller for said pump",
+35,"Suspension - System Controller","A controller responsible for co-ordinating the over-all suspension of a vehicle.  It may cause inter action between the axle suspension controls and the body controller",
+36,"Pneumatic - System Controller",,
+37,"Cab Controller","A controller located in/near vehicle cab to perform functions that are grouped together for convenience and proximity. May handle any number of vehicle specific items but not other specifically NAMEd functions, such as: Instrument Cluster. A prime use would be to read cab mounted operator controls (not handled by any other specific device) and to then transmit the associated messages onto the network.",
+38,"Tire Pressure Control","The device providing centralised tire inflation",
+39,"Ignition Control Module","A device for altering the ignition of an engine and with which an engine controller may communicate.",
+40,"Seat Control","A system for controlling the seats (operator and passenger) within the cab of the vehicle (machine).   May include position and suspension of seat. Note: The operator controls (message) for the seat system should be designed to allow any source to transmit them.",2000-08-10
+41,"Lighting - Operator Controls","The controller for sending the operator lighting controls messages when they are coming from a device dedicated to transmitting these specific messages on the network.",1998-02-01
+42,"Water Pump Control","Controller for a water pump mounted on the vehicle/machine. For Instance – Emergency equipment with pump for pumping water onto fire. A Utilities delivery truck for delivery fluids, such as water to remote areas.",1998-04-01
+43,"Transmission Display","Display designed specifically to display transmission information, such as the transmission gear.",1998-07-01
+44,"Exhaust Emission Control",,1999-02-01
+45,"Vehicle Dynamic Stability Control",,1999-02-01
+46,"Oil Sensor Unit",,1999-05-01
+47,"Information System Controller","Information management for the vehicle's application, such as transit passenger/fare monitoring, truck cargo management, etc. Handles grouping and processing data into information displays to be presented to driver.  It also enforces the DI rules for interfacing with driver.",1999-05-01
+48,"Ramp Control","Loading unloading – chairlift, ramps, lifts, or tailgates",1999-05-01
+49,"Clutch/Converter Control","When transmission is distributed this handles torque converter lock-up or engine - transmission connection",1999-05-01
+50,"Auxiliary Heater","Primary heat is typically taken from the engine coolant. This is the heater for use without the prime ‘drive’ engine operating or when it is unable to supply sufficient heat. Can be fuel fired, electrical or other type of heating source and may use air, water, or other transfer media.",1999-05-01
+51,"Forward-Looking Collision Warning System","A system which detects and warns of impending collision with object in path of present forward travel  - Not to be confused with #32, Headway Controller",1999-05-01
+52,"Chassis Controller","Controls the chassis (not body or cab) components",2020-05-07
+53,"Alternator/Charging System","Vehicle's primary on-board charging controller - Alternator used to generate electrical power for vehicle electrical system and storage battery.",2000-02-10
+54,"Communications Unit, Cellular","Radio communications device designed specifically to communicate via the ‘Cellular telephone system’. May be either receiver only, transmitter only or transceiver.",2000-02-10
+55,"Communications Unit, Satellite","Radio communications device designed specifically to communicate via some satellite system. May be either receiver only, transmitter only or transceiver.",2000-02-10
+56,"Communications Unit, Radio","Radio communications device designed specifically to communicate via a terrestrial point to point system.  May be either receiver only, transmitter only or transceiver.",2000-02-10
+57,"Steering Column Unit","Device that gathers the operator inputs from switches/levers/etc located in and/or around the steering wheel/column and transmits the associated messages on the network., when a separate NAME is needed for this device (i.e. other devices might be sending the messages and this device not exist on the network).",2000-02-10
+58,"Fan Drive Control","Primary control system affecting the operation of the main cooling fan on the engine coolant.  Other systems may send commands or requests to this device.",2000-05-11
+59,Starter,"A mechanical system for initiating rotation in an engine that is stopped.  Although here the reference is more to the system that controls the starter than the starter itself.",2001-06-17
+60,"Cab Display","Cab Display is for a fairly elaborate in cab display, typically capable of greater than 30 ‘ascii’ characters and differentiated from the Instrument Cluster and Virtual Terminal.",2001-06-17
+61,"File Server / Printer","A printing or file storage unit on the network - A permanent connection may exist and the unit is expected to be able to print (paper type output) or store data (as in magnetic or eerom devices).",2001-06-17
+62,"On-Board Diagnostic Unit","A tool which may be permanently mounted on the vehicle and that may not support all of the J1939-73 messages (services).",2001-06-17
+63,"Engine Valve Controller","Control system used to manipulate the actuation of engine intake and/or exhaust valves in response to other factors",2001-06-17
+64,"Endurance Braking","Sum of all devices in a vehicle which enable the driver with virtually no friction brake wear / tear to reduce the speed or to maintain the speed on a long descent.  May contain energy supplying device(s), control device(s), transmission(s), retarder(s) and energy dissipation device(s).  The control may be independent of the service brake system or  may be integrated with the service brake control such that both are applied simultaneously or in a phased fashion.  An integrated system may also have a control to prevent linking of operation.",2001-07-31
+65,"Gas Flow Measurement","Provides measurement of gas flow rates and associated parameters.",2002-02-21
+66,"I/O Controller","Reporting and/or control device for external input and output channels",2003-02-20
+67,"Electrical System Controller","This may include Load Centers, Fuseboxes, & Power Distribution boards",2003-11-19
+68,"Aftertreatment system gas measurement","Sensor for measuring gas properties before and after an aftertreatment system. For example measurement of NOx or Oxygen level.",2004-02-18
+69,"Engine Emission Aftertreatment System","Engine Emission Aftertreatment System",2004-02-18
+70,"Auxiliary Regeneration Device","Auxiliary Regeneration Device used as part of an after treatment system",2004-11-11
+71,"Transfer Case Control","The device which controls the selection of the number of drive wheels (for example 2 or 4 wheel drive).",2005-02-10
+72,"Coolant Valve Controller","Device used to control the flow of coolant (water, oil, air, etc…) for any thermal management system.",2006-05-11
+73,"Rollover Detection Control","Device designed for detection of vehicle rollover.",2007-08-16
+74,"Lubrication System","The Lubrication System pumps quantities of lubricant to each machine/vehicle joint that need to be lubricated.",2008-08-14
+75,"Supplemental Fan","This is an auxillary fan used for additional cooling. It is in addition to the primary cooling fan.",2009-05-21
+76,"Temperature Sensor","Device which measures temperature.",2011-02-03
+77,"Fuel Properties Sensor","Device which measures fuel properties",2011-05-12
+78,"Fire Suppression System","Fire Suppression System",2012-03-01
+79,"Power Systems Manager","Controller application that manages the power output of one or more power systems.  See also IG 5 Function 129 - Generator Set Controller.",2013-05-16
+80,"Electric Powertrain","Controller application in charge of controlling and coordinating the operation of an electric drive system.",2013-05-16
+81,"Hydraulic Powertrain","Controller application in charge of controlling and coordinating the operation of a hydraulic drive system.",2013-05-16
+82,"File Server","A file storage unit on the network - A permanent connection may exist and the unit is expected to store data (as in magnetic or eerom devices).   See Function 61 for a combination File Server/Printer unit",2014-11-13
+83,Printer,"A printing unit on the network - A permanent connection may exist and the unit is expected to be able to print (paper type output).  See Function 61 for a combination File Server/Printer unit",2014-11-13
+84,"Start Aid Device","Device that controls hardware and/or conveys information related to assisting an engine in starting, such as a glow plug, grid heater, etc.",2015-02-19
+85,"Engine Injection Control Module","A device for direct or port injection of fuel for engine combustion and with which an engine controller_x000D_
+may communicate.",2017-11-16
+86,"EV Communication Controller","A controller or application that manages the connection to an external power source, i.e. the Electric Vehicle Supply Equipment (EVSE). Relevant standards for this controller may include SAE J1772, SAE J3068, and/or IEC 61851-1.",2019-05-09
+87,"Driver Impairment Device","Device which prevents the starting of a vehicle motor due to driver impairment._x000D_
+_x000D_
+An example is an alcohol interlock device according to CENELEC EN 50436-4 which prevents the starting of a vehicle motor until presented with a breath sample with an alcohol concentration below a limit value.",2019-05-16
+88,"Electric Power Converter","An inverter or converter used to transform AC or DC power to or from an AC or DC source.",2019-11-07
+89,"Supply Equipment Communication Controller (SECC)","Typically part of an Electrical Vehicle Supply Equipment (EVSE) in an electric vehicle charging station",2021-08-11
+90,"Vehicle Adapter Communication Controller (VACC)","A controller inside of the adapter placed between an Electric Vehicle Supply Equipment (EVSE) vehicle connector and the vehicle inlet.",2021-08-11
+91,"Accessory Electric Motor Controller","Controller responsible for the operation and monitoring of electrified accessory components driven by electric motors.",2022-11-30
+92,"Current Sensor","Sensor for measuring current",2023-02-09
+93,"Fuel Cell System","Controller for a system that converts fuel (e.g., hydrogen) to electricity through an electrochemical process.",2023-08-10
+94,"Auxiliary Display","Auxiliary Display for displaying information.  It is located inside or outside the cab, but separate from the Cab Display, and differentiated from the Instrument Cluster and Virtual Terminal.",2024-11-14
+95,,"thru 127 are reserved",

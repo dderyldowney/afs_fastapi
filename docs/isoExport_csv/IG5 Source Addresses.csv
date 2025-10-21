@@ -1,0 +1,21 @@
+﻿source_address_id,name,notes,date_created_or_modified
+128,"thru 207 are reserved for future assignment by SAE","Used for dynamic address assignment (self-configurable)",2001-12-30
+208,"thru 229 are reserved for future assignment","Used for individual preassigned addresses",2001-12-30
+230,"Generator Voltage Regulator","The voltage regulator controls the generator output voltage",2005-02-10
+231,"Engine #3","The Engine ECU for the third engine within a system.",2000-02-10
+232,"Engine #4","The Engine ECU for the fourth engine within a system.",2000-02-10
+233,"Engine #5","The Engine ECU for the fourth engine within a system.",2000-02-10
+234,"Generator Set Controller","Used for data collection and control of a generator system",1999-11-11
+235,"Supplemental Sensor Processing Unit #1",,
+236,"Supplemental Sensor Processing Unit #2",,
+237,"Supplemental Sensor Processing Unit #3",,
+238,"Supplemental Sensor Processing Unit #4",,
+239,"Supplemental Sensor Processing Unit #5",,
+240,"Supplemental Sensor Processing Unit #6",,
+241,"Engine Monitor #1",,
+242,"Engine Monitor #2",,
+243,"Engine Monitor #3",,
+244,"Engine Monitor #4",,
+245,"Engine Monitor #5",,
+246,"Engine Monitor #6",,
+247,"Engine Monitor #7",,

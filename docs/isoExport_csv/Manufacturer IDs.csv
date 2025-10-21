@@ -1,0 +1,1592 @@
+﻿value,manufacturer,location,date_created_or_last_modified
+0,"Reserved for experimental use, not for production use.",N.A.,
+1,"Bendix Commercial Vehicle Systems LLC (formerly Allied Signal Inc.)","Elyria, OH   USA",2013-06-28
+2,"Allison Transmission, Inc.","Indianapolis, IN   USA",2015-04-28
+3,"Ametek, US Gauge Division","Sellersville, PA   USA",
+4,Ametek-Dixson,"Grand Junction, CO   USA",
+5,"AMP Inc.","Harrisburg, PA   USA",
+6,"Berifors Electronics AB","Stockholm, Sweden",
+7,"Case Corp.","Burr Ridge, IL   USA",
+8,"Caterpillar Inc.","Peoria, IL   USA",
+9,"Chrysler Corp.","Auburn Hills, MI   USA",
+10,"Cummins Inc (formerly Cummins Engine Co)","Columbus, IN   USA",
+11,"Dearborn Group Inc.","Indianapolis, IN & Farmington Hills, MI   USA",
+12,"Deere & Company, Precision Farming","East Moline, IL   USA",
+13,"Delco Electronics","Kokomo, IN   USA",
+14,"Detroit Diesel Corporation","Detroit, MI   USA",
+15,"DICKEY-john Corporation","Auburn, IL   USA",2015-07-27
+16,"Eaton Corp","Southfield, MI   USA",
+17,"Eaton Corp, Corp Res & Dev","Milwaukee, WI   USA",
+18,"Eaton Corp, Transmission Div.","Kalamazoo, MI   USA",
+19,"Eaton Corp. Trucking Info Services","Clemmons, NC   USA",
+20,"Eaton Ltd","Worsley, England",
+21,"Echlin Inc., Midland Brake Inc.","Kansas City, MO   USA",
+22,"Ford Motor Co., Electronic Concepts & Systems","Dearborn, MI   USA",
+23,"Ford Motor Co., Heavy Truck","Dearborn, MI   USA",
+24,"Ford Motor Co., Vehicle Controls","Dearborn, MI   USA",
+25,"Daimler Trucks North America LLC (formerly Freightliner LLC)","Portland, OR   USA",2008-05-21
+26,"General Motors Corp, Service Technology Grp","Romulus, MI   USA",
+27,GMC,"Troy, MI   USA",
+28,"Grote Ind. Inc.","Madison, IN   USA",
+29,"Hino Motors Ltd.","Tokyo, Japan",
+30,"Isuzu Motors Ltd","Kawasaki, Japan",
+31,"J Pollak Corp","Boston, MA   USA",
+32,"Jacobs Vehicle Systems","Bloomfield, CT   USA",1998-07-01
+33,"John Deere","Moline, IL   USA",2015-06-29
+34,"Kelsey Hayes Co.","Livonia, MI   USA",
+35,"Kenworth Truck Co.","Kirkland, WA   USA",
+36,"Lucas Ind.","Solihull, W Midlands  UK",
+37,"Mack Trucks Inc.","Hagerstown, MD   USA",
+38,"Micro Processor Systems Inc.","Sterling Hts, MI   USA",
+39,"Microfirm Inc.","Stillwater, OK   USA",
+40,"Motorola AIEG Inc.","Northbrook, IL   USA",
+41,"Motorola Inc.","Schaumburg, IL   USA",
+42,"International Truck and Engine Corporation - Engine Electronics  (formerly Navistar Intl Trans Co., Engine Electronics)","Warrenville, IL  USA",2003-01-07
+43,"International Truck and Engine Corporation - Vehicle Electronics (formerly Navistar Intl Trans Corp.)","Warrenville, IL  USA",2003-01-07
+44,"Nippondenso Co. Ltd.","Kariya, Aichi  Japan",
+45,PACCAR,"Mount Vernon, WA   USA",
+46,"Noregon Systems, LLC  (formerly Noregon Systems, Inc)","Greensboro, NC   USA",2022-01-28
+47,"Phillips Semiconductor","Sunnyvale, CA   USA",
+48,"Pollak Alphabet","El Paso, TX   USA",
+49,"RE America Inc.","Cleveland, OH   USA",
+50,"Robert Bosch Corp","Broadview, IL  USA",
+51,"Robert Bosch GmbH","Stuttgart, Germany",
+52,"Meritor Automotive, Inc. (formerly Rockwell Automotive)","Troy, MI   USA",1997-11-01
+53,"Continental Automotive Systems US, Inc. (formerly Rockwell Land Transportation)","Cedar Rapids, IA   USA",2008-11-09
+54,"Meritor Wabco","Troy, MI   USA",
+55,"Ryder System Inc.","Miami, FL   USA",
+56,SAIC,"San Diego, CA   USA",
+57,"Danfoss  (formerly Sauer Sundstrand Co, then Sauer-Danfoss Co)","Nordborg, Denmark",2013-11-07
+58,"SPX Corporation, OTC Div","Owatonna, MN   USA",
+59,"VES Inc.","Rock Hill, SC   USA",
+60,"Volvo Trucks North America Inc.","Greensboro, NC   USA",1999-02-01
+61,"Volvo Truck Corp.","Gothenburg, Sweden",
+62,Wabco,"Hanover, Germany",
+63,"ZF Industries Inc.","Vernon Hills, IL   USA",
+64,"Unused (formerly SpectraPrecision Laserplane, then SpectraPhysics)",,2001-02-15
+65,"MAN Nutzfahrzeuge AG","Munich, Germany",1999-02-01
+66,"John Deere Construction Equipment Division","Dubuque, IA   USA",1999-11-11
+67,"John Deere Coffeyville Works (formerly Funk Manufacturing Company)","Coffeyville, KS   USA",2006-12-22
+68,Scania,"Södertälje, Sweden",
+69,"Trimble Navigation",,
+70,"Flex-coil Limited","Saskatoon, SK   Canada",
+71,"Vansco Electronics Ltd.","Winnipeg, MB   Canada",
+72,"Sisu Corporation","ESPOO, Finland",
+73,"LeTourneau, Inc.","Longview, TX  USA",
+74,"Eaton Axle-Brake Division","Kalamazoo, MI   USA",
+75,"Deere & Co, Agricultural Division",,1998-02-01
+76,"unused (formerly Deere & Co, Construction Division)",,1999-11-11
+77,"Deere Power Systems Group",,1998-02-01
+78,"Frank W. Murphy Manufacturing, Inc","Tulsa, OK   USA",1998-02-01
+79,"Daimler Benz AG - Engine Division (PBM)","Stuttgart, Germany",1998-02-01
+80,"Twin Disc, Inc.","Racine, WI   USA",1998-04-01
+81,"Fire Research Corp.","Nesconset, NY   USA",1998-04-01
+82,"Bobcat/Ingersoll-Rand (formerly Melroe/Ingersoll-Rand)","Fargo, ND   USA",2000-05-11
+83,"Bendix VORAD Technologies (formerly Eaton VORAD Technologies)","San Diego, CA   USA",2012-04-13
+84,"New Holland UK Limited","Basildon, Essex  UK",1999-11-11
+85,"Kohler Co","Kohler, WI   USA",1999-11-11
+86,"C. E. Niehoff & Company","Evanston, IL   USA",1999-11-11
+87,"J.C. Bamford Excavators Ltd (JCB)","Rocester, Staffordshire  UK",1999-11-11
+88,"Hemisphere GPS Inc (formerly Satloc Precision GPS)","Scottsdale, AZ   USA",2017-09-03
+89,"Kverneland Group, Electronics Division","Nieuw-Vennep, The Netherlands",2000-02-10
+90,"Knorr-Bremse SfN GmbH","Munich, Germany",2000-05-11
+91,"BSG Bodensee Steuergeraete GmbH","Immenstaad, Germany",2000-05-11
+92,"Ag-Chem Equipment Co., Inc.","Duluth, GA   USA",2015-08-20
+93,"Perkins Engines Company Ltd.","Peterborough, UK",2000-08-10
+94,"CNH Industrial N.V. (formerly CNH Global N.V.)","Racine, WI   USA",2014-10-27
+95,"Pacific Insight Electronics Corp.","Nelson, BC   Canada",2000-08-10
+96,"Mech@tronic IT GmbH","Hetzenhausen, Germany",2000-11-09
+97,"Ag Leader Technology, Inc.","Ames, IA   USA",2000-11-09
+98,"PTx Trimble (formerly Mueller-Elektronik GmbH & Co)","Westminster, CO  USA",2024-08-02
+99,"International Transmissions Ltd (ITL)","Wrexham, North Wales  UK",2001-01-25
+100,"VDO Technik AG","Rüthi, Switzerland",2001-02-21
+101,Sensoria,"San Diego, CA   USA",2001-02-21
+102,"AGCO (formerly AGCO GmbH & Co.)","Duluth, GA   USA",2015-08-20
+103,"CLAAS E-Systems GmbH (formerly CLAAS E-Systems KGaA mbH & Co. KG)","Dissen, Germany",2018-12-10
+104,"CLAAS KGaA mbH (formerly CLAAS Selbstfahrende Erntemaschinen GmbH)","Harsewinkel, Germany",2015-08-03
+105,"Kiepe Elektrik GmbH & Co. KG","Duesseldorf, Germany",2001-05-25
+106,"BAE Systems Controls, Inc.","Endicott, NY   USA",2015-06-12
+107,"Grimme Landmaschinen GmbH & Co. KG","Damme, Germany",2001-06-28
+108,"PTx Trimble (formerly WTK-Elecktronik GmbH, now a duplicate entry; use MFR ID 98)","Westminster, CO  USA",2024-08-02
+109,"TeeJet Technologies Denmark (formerly LH Technologies ApS)","Aabybro, Denmark",2008-09-05
+110,"EPIQ Sensor-Nite","Fenton, MI   USA",2001-09-19
+111,"Bernard Krone Holding SE & Co. KG (formerly Maschinenfabrik Bernard Krone GmbH)","Spelle, Germany",2019-02-20
+112,MECALAC,"Annecy le Vieux, France",2001-12-31
+113,"Stress-Tek, Inc.","Kent, WA   USA",2002-01-14
+114,"EControls, Inc.","San Antonio, TX   USA",2002-04-21
+115,"NACCO Materials Handling Group, Inc.","Portland, OR   USA",2002-05-01
+116,"BEELINE Technologies","Brisbane, QLD  Australia",2002-05-01
+117,"HUSCO International","Waukesha, WI   USA",2002-05-29
+118,"Intron GmbH","Schwaebisch Hall, Germany",2002-07-28
+119,IntegriNautics  ,"Menlo Park, CA  USA",2002-07-30
+120,"RDS Technology Ltd","Minchinhampton, Stroud  UK",2002-08-24
+121,"HED (Hydro Electronic Devices, Inc.)","Hartford, WI  USA",2002-09-02
+122,"FG Wilson (Engineering) Limited","Larne, County Antrim  UK",2002-09-13
+123,"Basler Electric","Highland, IL  USA",2002-11-09
+124,"Hydac Electronic","Saarbruecken, Germany",2003-01-28
+125,"Nevada Automotive Test Center","Carson City, NV  USA",2003-02-20
+126,"Driver Tech","Salt Lake City, UT  USA",2003-02-20
+127,"Holland USA","Holland, MI  USA",2003-03-29
+128,"Gerhard Duecker GmbH & Co. KG","Stadtlohn, Germany",2003-03-29
+129,"OMNEX Control Systems Inc.","Port Coquitlam, BC  Canada",2003-03-31
+130,"Nido - Universal Machines B.V.","Holten, The Netherlands",2003-04-28
+131,"ITT Industries","Eden Prarie, MN  USA",2003-06-05
+132,Mulag-Fahrzeugwerk,"Oppenau, Germany",2003-07-13
+133,"Bucher Schoerling GmbH","Hannover, Germany",2003-07-13
+134,"Iris Technology Ltd","Lancaster, Lancs   UK",2003-07-20
+135,"Airmar Technology Corporation","Milford, NH USA",2003-08-20
+136,"Komatsu Ltd","Hiratsuka, Kanagawa  Japan",2003-08-20
+137,Maretron,"Phoenix AZ USA",
+138,"Georg Fritzmeier GmbH & Co. KG","Grosshelfendorf, Germany",2003-09-15
+139,"Caterpillar Trimble Control Technologies (CTCT), LLC","Dayton, OH  USA",2003-09-15
+140,"Lowrance Electronics, Inc.","Tulsa, OK  USA",2003-09-18
+141,"Thales Navigation Ltd.","Surrey, UK",2003-11-01
+142,"TRW Automotive (Commercial Steering Systems)","Lafayette, IN   USA",2003-12-20
+143,"W. Gmeiner GmbH & Co.","Kummersbruck, Germany",2003-12-20
+144,"Mercury Marine","Fond du Lac, WI   USA",2003-12-20
+145,"MurCal Controls","Palmdale, CA  USA",2003-12-31
+146,"Maxima Technologies","Lancaster, PA   USA",2004-01-12
+147,"Nautibus electronic GmbH","Quern, Germany",2004-01-24
+148,"Blue Water Data, Inc.","Salem, NJ  USA",2004-01-24
+149,Holset,"Charleston, SC  USA",2004-01-24
+150,Fleetguard,"Nashville, TN  USA",2004-01-24
+151,"Raven Industries, Inc.","Sioux Falls, SD   USA",2015-09-08
+152,"elobau GmbH & Co. KG","Leutkirch, Germany",2009-11-30
+153,"Woodward, Industrial Controls Division","Fort Collins, CO   USA",2004-05-01
+154,"Westerbeke Corporation","Taunton, MA   USA",2004-05-01
+155,"Vetronix Corporation","Santa Barbara, CA",2004-05-24
+156,"ITT Industries - Cannon","Shakopee, MN   USA",2004-07-20
+157,"ISSPRO Inc.","Portland, OR   USA",2004-07-20
+158,"Firestone Industrial Products Company","Carmel, IN USA",2004-10-05
+159,"NTech Industries Inc","Ukiah, CA   USA",2004-10-05
+160,Nido,"Holten, The Netherlands",2004-10-05
+161,"Offshore Systems (UK) Ltd","New Milton, Hampshire  UK",2004-10-05
+162,"Axiomatic Technologies","Mississauga, ON   Canada",2004-10-05
+163,"BRP Inc.","Waukegan, IL   USA",2004-10-05
+164,"MTU Friedrichshafen GmbH (formerly DaimlerChrysler Off-Highway)","Friedrichshafen, Germany",2006-11-14
+165,"CPAC Systems AB","Vastra Frolunda, Sweden",2004-10-05
+166,"John Deere Electronic Solutions (formerly Phoenix International)","Fargo, ND   USA",2014-03-28
+167,"JLG Industries Inc","McConnellsburg, PA  USA",2004-10-20
+168,Xantrex,"Burnaby, BC  Canada",2004-12-15
+169,"Marlin Technologies Inc.","Horicon, WI  USA",2004-12-15
+170,"Computronics Corporation Ltd.","Bentley, WA  Australia",2004-12-15
+171,"Topcon Electronics GmbH & Co. KG (formerly Wachendorff Elektronik GmbH & Co. KG)","Geisenheim, Germany",2018-06-14
+172,"Yanmar Co., Ltd. (formerly Yanmar Marine USA)","Maibara, Shiga  Japan",2015-07-14
+173,"Ryeso, Inc.","Palmdale, CA   USA",2005-01-20
+174,"AB Volvo Penta","Goteburg, Sweden",2005-01-20
+175,"Veris Technologies, Inc.","Salina, KS   USA",2005-01-20
+176,"Moritz Aerospace","Dublin, PA   USA",2005-01-25
+177,"Diagnostic Systems Associates","Kalamazoo, MI   USA",2005-03-02
+178,"Continental Automotive GmbH (formerly Siemens VDO Automotive AG)","Regensburg, Germany",2015-07-16
+179,"TeeJet Technologies Springfield (formerly Midwest Technologies Illinois, LLC)","Springfield, IL   USA",2008-09-05
+180,"Smart Power Systems","Reed City, MI    USA",2005-04-15
+181,"Coretronics, Inc.","Eagle, ID   USA",2005-04-15
+182,"Vehicle Systems Engineering B.V.","Veenendaal, The Netherlands",2005-06-05
+183,"KDS Controls, Inc","Troy, MI   USA",2005-06-05
+184,"EIA Electronics","Aartselaar, Belguim",2005-06-21
+185,"Beede Electrical Instrument Company","Penacock, NH  USA",2005-07-01
+186,"Altronic, Inc","Girard, OH  USA",2005-08-01
+187,Air-Weigh,"Eugene, OR   USA",2005-08-12
+188,"EMP Corp","Escanaba, MI   USA",2005-08-12
+189,QUALCOMM,"San Diego, CA   USA",2005-08-12
+190,"Hella KGaA Hueck & Co","Lippstadt, Germany",2005-08-12
+191,"XRS Corporation (formerly XATA Corporation)","Eden Prairie, MN  USA",2012-12-12
+192,Floscan,"Seattle, WA  USA",2005-08-31
+193,"Jeppesen Marine","Portland, OR  USA",2005-08-31
+194,"TriMark Corporation","New Hampton, IA  USA",2005-08-31
+195,"General Engine Products","Livonia, MI  USA",2005-10-21
+196,"LEMKEN GmbH & Co KG","Alpen,  Germany",2005-10-21
+197,"Mechron Power Systems","Ottawa, ON   Canada",2005-10-21
+198,"Mystic Valley Communications","Mystic, CT  USA",2005-10-21
+199,"ACTIA Group (formerly Actia Corp)","Toulouse, France",2017-07-11
+200,"MGM Brakes","Charlotte, NC  USA",2005-11-01
+201,"Disenos y Tecnologia S.A.","Barcelona, Spain",2005-11-10
+202,"Curtis Instruments, Inc","Mount Kisco, NY  USA",2005-11-14
+203,"MILtronik GmbH","Hilden, Germany",2006-01-03
+204,"The Morey Corporation","Woodridge, IL  USA",2006-01-13
+205,"SmarTire Systems Inc","Richmond, BC  Canada",2006-01-13
+206,"port GmbH","Halle, Germany",2006-02-02
+207,"Otto Engineering","Carpentersville, IL   USA",2006-02-09
+208,"Drew Technologies, Inc","Whitmore Lake, MI  USA",2006-02-09
+209,"Bell Equip. Co. SA (PTY) LTD","Richards Bay, South Africa",2006-03-14
+210,"Iteris, Inc.","Anaheim, CA  USA",2006-03-14
+211,"DNA Group","Raleigh, NC   USA",2006-03-22
+212,"Sure Power Industries, Inc","Tualatin, OR   USA",2006-03-22
+213,"CNH Belgium N.V.","Zedelgem, Belgium",2006-03-24
+214,"MC elettronica Srl","Fiesso Umbertiano, Rovigo, Italy",2006-03-24
+215,"Aetna Engineering/Fireboy-Xintex","Grand Rapids, MI  USA",2006-04-03
+216,"Paneltronics Inc.","Hialeah Gardens, FL  USA",2006-04-02
+217,"RM Michaelides Software & Elektronik GmbH","Fulda, Germany",2006-04-21
+218,"Gits Manufacturing Company","Creston, IA  USA",2006-04-21
+219,"Cat OEM Solutions","Mossville, IL  USA",2006-04-25
+220,"Beede Electrical Instrument Company, Inc","Penacook, NH  USA",2006-04-29
+221,SiE,"Kempten/Allgaeu, Germany",2006-06-05
+222,"Generac Power Systems, Inc.","Waukesha, WI, USA",2006-08-03
+223,"Vaueo Retarder Co., Ltd.","Shajin, Baoan, Shen Zhen  China",2006-08-20
+224,"EMMI Network, S.L.","Gandia, Spain",2006-08-20
+225,SKF,"Gothenburg, Sweden",2006-08-31
+226,"Monaco Coach Corporation","Bend, OR  USA",2006-09-16
+227,"Lykketronic A/S","Loegstoer, Denmark",2006-10-15
+228,"Unused (formerly ZF Marine Electronics)",,2015-07-27
+229,"Garmin International Inc.","Olathe, KS  USA",2006-10-15
+230,"Saucon Technologies","Bethlehem, PA  USA",2006-11-06
+231,"Topcon Positioning Systems, Inc.","Livermore, CA  USA",2006-11-13
+232,"TSD Integrated Controls","Minneapolis, MN  USA",2006-11-13
+233,"Yacht Monitoring Solutions Inc.","Corpus Christi, TX   USA",2006-11-14
+234,"Mondial electronic GmbH","Eggelsberg, Austria",2006-12-22
+235,"SailorMade Marine Telemetry - Tetra Technology Ltd.","Florianopolis, Brazil",2006-12-22
+236,"NORAC Systems International Inc","Saskatoon, SK  Canada",2015-07-27
+237,"Agtron Enterprises Inc","Saskatoon, SK  Canada",2007-01-20
+238,"ZF Friedrichshafen AG","Friedrichshafen, Germany",2007-01-20
+239,"May & Scofield Ltd","Basingstoke, Hants, UK",2007-01-20
+240,"Vanair Mfg","New Buffalo, MI   USA",2007-01-20
+241,"Schneider Automation SAS","Sophia Antipolis, France",2007-01-20
+242,"Kokusandenki Co. Ltd","Numazu, Shizuoka  Japan",2007-01-20
+243,"eRide, Inc.","San Francisco, CA   USA",2007-02-18
+244,Techno-Matic,"Aars, Denmark",2007-03-11
+245,"Capstan Ag Systems, Inc.","Topeka, KS   USA",2007-03-11
+246,"Class 1, Inc","Ocala, FL  USA",2007-04-24
+247,ePULSE,"Troy, MI  USA",2007-04-29
+248,"Cooper Standard Automotive Active Systems Group","Mitchell, ON  Canada",2008-02-15
+249,"Schaltbau GmbH","Munich, Germany",2007-06-15
+250,"Kuhn Group","Saverne, France",2007-06-15
+251,"German Agricultural Society, Test Center (DLG)","Gross-Ultstadt, Germany",2007-06-15
+252,"Sensor-Technik Wiedemann GmbH","Kaufbeuren, Germany",2007-06-15
+253,"Mobile Control Systems","Brussels, Belgium",2007-06-15
+254,"GE Sensing","St. Marys, PA  USA",2007-06-18
+255,"MEAS France","Toulouse, France",2007-07-20
+256,"Tyco Electronics AMP","Osan-Si, Kyunggi-Do, Korea",2007-07-20
+257,"Honda Motor Co., Ltd","Wako-city, Saitama  Japan",2007-07-28
+258,ARAG,"Rubiera, Italy",2007-08-13
+259,"Bucher Automation AG (formerly Jetter AG)","Ludwigsburg, Germany",2024-01-19
+260,"Reichhardt GmbH Steuerungstechnik","Hungen, Germany",2007-08-13
+261,"Red Dot Corporation","Seattle, WA  USA",2007-08-13
+262,"HydraForce, Inc","Lincolnshire, IL  USA",2007-08-13
+263,IMMI,"Westfield, IN  USA",2007-08-14
+264,Autolync,"Clayton, Victoria  Australia",2007-09-03
+265,"MTS Sensor Technologie GmbH","Luedenscheid, Germany",2007-09-05
+266,"International Thermal Research Ltd","Richmond, BC   Canada",2007-09-27
+267,"Red Lion Controls, Inc","York, PA  USA",2007-09-27
+268,"Accurate Technologies","Wixom, MI   USA",2007-10-13
+269,"Saft America Inc.,  Space & Defense Division","Cockeysville, MD  USA",2007-11-10
+270,Tennant,"Minneapolis, MN  USA",2007-11-10
+271,"Cole Hersee","South Boston, MA   USA",2007-11-10
+272,"Gross Mechanical Laboratories, Inc","Hanover, MD   USA",2007-11-30
+273,"Active Research Limited","Poole, Dorset, UK",2007-11-30
+274,"LTW Technology Co., LTD","Shinjuang City, Taipei Hsien, Taiwan  R.O.C.",2007-11-30
+275,"Navico Egersund AS","Egersund, Norway",2007-12-17
+276,"Aqua-Hot Heating Systems","Fort Lupton, CO  USA",2008-01-27
+277,"LHP Telematics","Columbus, IN  USA",2008-01-27
+278,"Takata Electronics","Farmington Hills, MI  USA",2008-02-15
+279,"Geometris LP","Houston, TX   USA",2008-02-15
+280,"Leica Geosystems Pty Ltd","Brisbane, Queensland   Australia",2008-02-18
+281,"Precision Governors LLC","Rockford, IL   USA",2008-02-23
+282,"Medallion Instrumentation Systems","Spring Lake, MI  USA",2008-03-14
+283,"CWF Hamilton & Co Ltd","Christchurch, New Zealand",2008-03-14
+284,"Mobile Tech Chile","Concepcion, Bio Bio  Chile",2008-05-11
+285,"Sea Recovery Corp","Rancho Dominguez, CA   USA",2008-05-11
+286,"Coelmo srl","Acerra, Italy",2008-05-11
+287,"NTech Industries, Inc","Ukiah, CA   USA",2008-05-11
+288,"Mitsubishi FUSO Truck & Bus Corp.","Kawasaki, Kanagawa  Japan",2008-05-21
+289,Watlow,"St. Louis, MO   USA",2008-05-21
+290,"Kuebler GmbH","VS-Schwenningen, Germany",2008-07-12
+291,"Groeneveld Transport Efficiency BV","Gorinchem, The Netherlands",2008-07-12
+292,"IKUSI - Angel Iglesias S.A.","San Sebastian, Guipuzcoa  Spain",2008-07-12
+293,"Spyder Controls Corp.","Lacombe, AB   Canada",2008-07-12
+294,"Grayhill Inc.","LaGrange, IL   USA",2008-07-12
+295,"BEP Marine","Albany, North Shore City  New Zealand",2008-07-12
+296,"micro dynamics GmbH","Cologne, Germany",2008-07-16
+297,"Zonar Systems Inc","Seattle, WA   USA",2008-07-26
+298,"Holley Performance","Bowling Green, KY   USA",2008-07-26
+299,Rauch,"Sinzheim, Germany",2008-08-11
+300,"Systron Donner Automotive","Concord, CA   USA",2008-08-11
+301,"Parker Hannifin (UK) Ltd FDE group","Thetford, Norfolk  UK",2008-08-14
+302,"Nissin Kogyo Co., LTD","Ueda-city, Nagano prefecture  Japan",2008-09-05
+303,"CTS Corporation","Elkhart, IN   USA",2008-09-05
+304,"EmpirBus AB","Uddevalla, Sweden",2008-09-05
+305,"NovAtel Inc","Calgary, AB   Canada",2008-09-20
+306,"Sleipner Motor AB","Fredrikstad, Norway",2008-09-20
+307,"MAS Technologies","Harleysville, PA  USA",2008-09-20
+308,Cyntrx,"De Pere, WI   USA",2008-10-31
+309,"Krauss-Maffei Wegmann GmbH & Co. KG","Munich, Germany",2008-10-31
+310,"TECNORD srl","Modena, Italy",2008-10-31
+311,"Patrick Power Products","Elkridge, MD   USA",2008-11-09
+312,"Lectronix, Inc.","Lansing, MI   USA",2008-11-20
+313,"Ilmor Engineering, Inc.","Plymouth, MI   USA",2008-12-02
+314,"CSM GmbH","Filderstadt, Germany",2008-12-08
+315,"Icom Incorporated","Osaka, Japan",2008-12-15
+316,"ITT Flow Control","Santa Ana, CA  USA",2008-12-18
+317,"Navtronics Bvba","Geel, Belgium",2009-01-19
+318,"SAT Plan","Beauvais Tillé, Oise  France",2009-01-19
+319,"Cadec Global","Manchester, NH   USA",2009-01-19
+320,"Miedema Landbouwwerktuigenfabriek B.V.","Winsum, The Netherlands",2009-01-19
+321,"Ultra Electronics, Electrics","Cheltenham, UK",2009-01-19
+322,"MICHENKA s.r.o.","Koprivnice, Czech Republic",2009-01-19
+323,"Mobileye Vision Technologies Ltd.","Jerusalem, Israel",2009-02-01
+324,"Snap-on Diagnostics","Lincolnshire, IL  USA",2009-02-01
+325,"ASM Automation Sensorik Messtechnik GmbH","Moosinning, Germany",2009-02-04
+326,"Akron Brass Company","Wooster, OH  USA",2009-02-12
+327,"Sonceboz SA","Sonceboz, Switzerland",2009-02-12
+328,"Qwerty Electronik AB","Bagarmossen, Sweden",2009-03-22
+329,"Deif A/S","Skive, Denmark",2009-03-22
+330,"Kidde Aerospace and Defense","Wilson, NC  USA",2009-03-22
+331,"Horton, Inc.","Roseville, MN  USA",2009-03-22
+332,"HWH Corporation","Moscow, IA  USA",2009-04-10
+333,"Link Manufacturing, Ltd. (formerly Hadley Products Corporation)","Sioux Center, IA  USA",2021-08-12
+334,"Takata-Petri AG","Aschaffenburg, Germany",2009-04-19
+335,"Evo Electric Ltd","Woking, Surrey, UK",2009-05-15
+336,"APE s.r.o.","Bradlec, Czech Republic",2009-05-18
+337,"Carraro S.p.A.","Campodarsego, Italy",2009-05-18
+338,GRAF-SYTECO,"Tuningen, Germany",2009-06-21
+339,"Competence Center ISOBUS e.V.","Osnabrück, Germany",2015-07-27
+340,"Continental AG","Hannover, Germany",2009-06-24
+341,"Boning GmbH & Co","Ganderkesee, Germany",2009-07-01
+342,"THOMAS MAGNETE GmbH","Herdorf, Germany",2009-07-25
+343,"Baumer Group","Villingen-Schwenningen, Germany",2009-07-25
+344,"Parvus Corporation","Salt Lake City, UT   USA",2009-07-25
+345,"Korean Maritime University","Busan, Korea",2009-07-25
+346,"Control Solutions","Aurora, IL  USA",2009-08-09
+347,Honeywell,"Morristown, NJ   USA",2009-08-21
+348,"Amazonen Werke H. Dreyer","Hasbergen, Germany",2009-08-21
+349,Suonentieto,"Kuopio, Finland",2009-08-21
+350,"Noris Marine Systems GmbH & Co KG","Nuremberg, Germany",2009-08-21
+351,"Thrane & Thrane","Gentofte, Denmark",2009-08-30
+352,"SAME DEUTZ-FAHR GROUP S.p.A.","Treviglio, Italy",2015-07-27
+353,"Hegemon Electronics, Inc.","Sterling Heights, MI  USA",2009-09-20
+354,"Junkkari OY","Yliharma, Finland",2009-10-08
+355,"Mastervolt International B.V.","Amsterdam, The Netherlands",2009-10-09
+356,"Fischer Panda Generators, Inc","Oakland Park, FL   USA",2009-10-20
+357,"Hardi International A/S","Taastrup, Denmark",2009-11-08
+358,"Victron Energy B.V.","Almere-Haven, The Netherlands",2009-11-08
+359,"Ludwig Bergmann GmbH","Goldenstedt, Germany",2009-11-08
+360,"HJS Emission Technology GmbH & Co KG   (formerly HJS Fahrzeugtechnik GmbH & Co KG)","Menden, Germany",2011-02-03
+361,InMach,"Ulm, Germany",2010-01-15
+362,"Poettinger Landtechnik GmbH (formerly Alois Poettinger Maschinenfabrik GmbH)","Grieskirchen, Austria",2017-01-05
+363,"BEI Duncan","Goleta, CA   USA",2010-01-30
+364,"OEM Controls Inc.","Shelton, CT   USA",2010-01-30
+365,"Digi-Star, LLC","Fort Atkinson, WI   USA",2010-01-30
+366,"Viewnyx Corp.","Kanata, ON   Canada",2010-01-30
+367,"Fliegl Agrartechnik","Muehldorf am Inn, Germany",2013-09-12
+368,HANSENHOF_electronic,"Reifland, Germany",2010-01-30
+369,"Power Torque Engineering Ltd","Coventry, UK",2010-02-14
+370,"Rolls-Royce Marine AS","Aalesund, Norway",2010-05-15
+371,"Heinzmann GmbH & Co. KG","Schoenau, Germany",2010-04-01
+372,Delphi,"Auburn Hills, MI  USA",2010-04-01
+373,"Electronic Design Inc.","Sheboygan, WI  USA",2010-05-15
+374,"Northern Lights, Inc.","Seattle, WA  USA",2010-05-15
+375,"Williams Controls Inc.","Portland, OR  USA",2010-05-15
+376,"Quake Global","San Diego, CA  USA",2010-06-15
+377,"ifm electronic gmbh","Essen, Germany",2010-06-15
+378,"Glendinning Marine Products","Conway, SC  USA",2010-06-15
+379,"Yamabiko Corporation","Iwate, Japan",2010-06-20
+380,"Suntech International Ltd.","Seoul, Korea",2010-06-20
+381,"B & G","Romsey, UK",2010-08-20
+382,"National Agriculture and Food Research Organization","Ibaraki, Japan",2011-07-01
+383,"MCL Industries","Pulaski, WI   USA",2010-08-20
+384,"Camano Light","Camano Island, WA  USA",2010-08-20
+385,"Johnson Outdoor Marine Electronics","Alpharetta, GA  USA",2010-08-20
+386,"JLG Automation BVBA","Gent, Belgium",2010-08-20
+387,"Orscheln Products, LLC","Moberly, MO  USA",2010-08-20
+388,"Innomatix, LLC","Iowa City, IA  USA",2010-08-20
+389,"Benchmark Electronics, Minnesota Division","Rochester, MN  USA",2010-08-20
+390,"Partech Inc.","Lake Orion, MI  USA",2010-08-20
+391,"Electronic Design for Industry, Inc","Belpre, OH  USA",2010-08-20
+392,"Tianyuan Technology Co Ltd.","Shijiazhuang, China",2010-08-28
+393,"Harvest Tec, Inc","Hudson, WI  USA",2010-08-28
+394,"Capi 2 Nederland B.V.","Nuenen, The Netherlands",2010-09-15
+395,"GENTEC S.R.L.","Villa Constitucion, Argentina",2010-09-20
+396,"Beyond Measure","Appleton, WI  USA",2011-01-03
+397,"Sanyo-kiki Co Ltd.","Okayama, Japan",2010-10-30
+398,"Hilite International","Marktheidenfeld, Germany",2010-10-30
+399,"ISEKI & Co., Ltd.","Ehime, Japan",2010-11-01
+400,"Livorsi Marine","Grayslake, IL  USA",2010-11-03
+401,"Torqeedo GmbH","Stamberg, Germany",2010-11-03
+402,"Simma Software, Inc.","Terre Haute, IN   USA",2010-12-15
+403,"Trackwell ADS, Inc.","Houston, TX  USA",2010-12-15
+404,"Com Nav Marine Ltd","Richmond, BC  Canada",2010-12-15
+405,"Wema System AS","Bergen, Norway",2010-12-15
+406,"Vecima Networks Inc.","Saskatoon, SK  Canada",2010-12-15
+407,"Comtech Mobile Datacom","Germantown, MD  USA",2010-12-15
+408,"Corvus Energy Ltd.","Richmond, BC Canada",2010-12-15
+409,"Transfluid S.r.L.","Gallarate, Italy",2010-12-15
+410,"COBO S.p.A. Divisione 3B6","Castelletto sopra Ticino, Italy",2010-12-15
+411,"Hy-Drive Technologies Ltd.","Mississauga, ON  Canada",2010-12-23
+412,"WebTech Wireless Inc.","Burnaby, BC  Canada",2010-12-23
+413,"Datapross Nijbroek bv","Nijbroek, The Netherlands",2011-01-04
+414,"Cattron Group International","Sharpsvillle, PA   USA",2011-01-06
+415,"Valid Manufacturing Ltd.","Salmon Arm, BC  Canada",2011-01-07
+416,"Kubota Corporation","Sakai, Japan",2011-01-14
+417,KZValve,"Greenwood, NE  USA",2011-01-26
+418,"Intellistick Inc","Santa Ana, CA  USA",2011-01-26
+419,"Fusion Electronics Ltd","Auckland, New Zealand",2011-01-29
+420,"Vermeer Corporation, ACS Group","Pella, IA  USA",2011-01-31
+421,"Vertex Standard Co, Ltd","Tokyo, Japan",2011-02-11
+422,"True Heading AB","Danderyd, Sweden",2011-02-11
+423,"BSM Wireless, Inc.","Toronto, ON  Canada",2011-03-05
+424,"Odyne LLC","Waukesha, WI  USA",2011-03-05
+425,"Methode Electronics Inc, MDI","Chicago, IL  USA",2011-03-05
+429,"Rota Engineering Ltd.","Bury, Manchester, UK",2011-04-27
+430,"Auteq Telematica S.A.","Sao Paulo, Brazil",2011-04-27
+431,"Tohatsu Corporation","Tokyo, Japan",2011-04-27
+432,"S&A Systems, Inc.","Rockwall, TX  USA",2011-04-27
+433,"Rowe Electronics","Norwalk, IA  USA",2011-04-29
+434,"Stored Energy Systems","Longmont, CO  USA",2011-04-29
+435,"Zunhammer GmbH","Traunreut, Germany",2011-05-06
+436,"Kinze Manufacturing","Williamsburg, IA",2011-05-18
+437,"Digital Yacht Limited","Bristol, UK",2011-05-18
+438,"Comar Systems Ltd","Cowes, Isle of Wight  UK",2011-05-18
+439,"HD Hyundai (formerly Hyundai Heavy Industries)","Ulsan, South Korea",2025-06-16
+440,"Cummins Power Generation","Fridley, MN   USA",2011-06-18
+441,"PTG Reifendruckregelsysteme GmbH","Neuss, Germany",2011-07-01
+442,"Horsch Maschinen GmbH","Schwandorf, Germany",2011-07-01
+443,"SignalQuest, Inc.","Lebanon, NH   USA",2011-07-01
+444,"ITT Power Solutions","West Springfield, MA   USA",2011-07-01
+445,"KAT MECHATRONIC, Electronic Product Division","Istanbul, Turkey",2011-07-01
+446,"CertTech, L.L.C.","Lenexa, KS  USA",2011-07-29
+447,"Great Plains Mfg.","Salina, KS   USA",2011-07-29
+448,"Stanadyne Corporation, Electronics Systems","Windsor, CT   USA",2011-08-09
+449,"Polaris Industries Inc","Medina, MN   USA",2011-08-22
+450,"Dycor Technologies Ltd.","Edmonton, AB   Canada",2011-08-22
+451,"Parker Hannifin Corp","Gardena, CA   USA",2011-08-22
+452,"WIKA Alexander Wiegand SE & Co. KG","Klingenberg, Germany",2011-10-15
+453,"Cooper Bussmann","Tualatin, OR   USA",2011-10-15
+454,"NGK Spark Plug Co. Ltd","Komaki, Japan",2011-10-15
+455,"ADZ NAGANO GmbH","Ottendorf-Okrilla, Germany",2011-10-31
+456,"General Kinetics","Manchester, NH   USA",2011-10-31
+457,"RUSELPROM-ElectricDrive Ltd","Moscow, Russian Federation",2011-10-31
+458,"Control Solutions, Inc.","St. Paul, MN   USA",2011-10-31
+459,"Alltek Marine Electronics Corp","Neihu, Taiwan",2011-11-06
+460,"San Giorgio S.E.I.N.","Genova, Italy",2011-11-06
+461,"HAWE Hydraulik SE","Munich, Germany",2011-11-13
+462,"IHI Shibaura Machinery Corporation","Matsumoto, Japan",2011-11-13
+463,PROBOTIQ,"Cuijk, The Netherlands",2012-01-02
+464,"Leach International Corporation","Buena Park, CA   USA",2012-01-02
+465,"Ashcroft Inc","Stratford, CT   USA",2012-01-02
+466,"Veethree Electronics and Marine LLC","Sarasota, FL   USA",2011-12-09
+467,"Lely Industries N.V.","Maassluis, The Netherlands",2012-01-02
+468,"Tyco Fire Protection Products","Marinette, WI  USA",2012-01-02
+469,"RA Consulting GmbH","Bruchsal, Germany",2012-01-21
+470,"SI-TEX Marine Electronics","Riverhead, NY   USA",2012-01-21
+471,"Sea Cross Marine AB","Udingo, Sweden",2012-02-07
+472,"Tenneco Inc.","Grass Lake, MI   USA",2012-02-07
+473,"Boss Industries, Inc.","La Porte, IN   USA",2012-02-07
+474,"Persen Technologies Inc.","Winnipeg, MB   Canada",2012-02-07
+475,GME,"New South Wales, Australia",2012-02-12
+476,"Hummingbird Marine Electronics","Alpharetta, GA  USA",2012-02-15
+477,"OilQuick AB","Hudiksvall, Sweden",2012-02-17
+478,"OceanSat B.V.","Nieuwendijk, The Netherlands",2012-02-21
+479,"Vapor Bus International","Buffalo Grove, IL  USA",2012-02-28
+480,"EnerDel, Inc.","Indianapolis, IN   USA",2012-02-29
+481,"Chetco Digital Instruments","Brookings, OR  USA",2012-03-12
+482,"Tricon Electronics","Kolding, Denmark",2012-03-12
+483,Valeo,"Creteil, France",2012-04-13
+484,"Headsight Inc.","Bremen, IN   USA",2012-04-13
+485,"MATT automotive","Koscian, Poland",2012-04-13
+486,"Westport Innovations Inc.","Vancouver, BC  Canada",2012-04-13
+487,"DSE Test Solutions A/S","Horsens, Denmark",2012-04-13
+488,"The Charles Machine Works, Inc.","Perry, OK   USA",2012-04-16
+489,"Appareo Systems, LLC","Fargo, ND   USA",2013-09-12
+490,QuikQ,"Franklin, TN   USA",2012-04-23
+491,"Penny and Giles Ltd","Wales, UK",2012-04-27
+492,"Inergy Automotive Systems","Troy, MI   USA",2012-05-03
+493,Watcheye,"Gouda, The Netherlands",2012-05-03
+494,Synerject,"Toulouse, France",2012-05-03
+495,"HOLMER Maschinenbau GmbH","Schierling, Germany",2012-05-03
+496,"W. Gessmann GmbH","Leingarten, Germany",2012-06-01
+497,"SENTRON Sistemas Embarcados","Sao Carlos, Brazil",2012-06-01
+498,"Innovative Design Solutions, Inc.","Troy, MI  USA",2012-06-01
+499,"LCJ Capteurs","Vertou, France",2012-07-10
+500,"Oxbo International Corporation","Byron, NY   USA",2012-07-12
+501,"Agrotronix S.A.","Douvrin, France",2012-07-18
+502,"Attwood Corporation","Lowell, MI  USA",2012-08-17
+503,"Naviop S.R.L.","Forli, Italy",2012-08-30
+504,"Vesper Marine","Auckland, New Zealand",2012-09-25
+505,"Yetter Farm Equipment","Colchester, IL   USA",2012-09-25
+506,"IHI STAR Machinery Corporation","Hokkaido, Japan",2012-09-25
+507,"ISOBUS Test Center","Osnabrück, Germany",2015-07-27
+508,"Transtech Innovations","Varennes, QC  Canada",2012-10-26
+509,"MOTORTECH GmbH","Celle, Germany",2012-10-26
+510,"Marinesoft Co. Ltd","Busan, South Korea",2012-10-26
+511,Sulky,"Chateaubourg, France",2012-10-26
+512,"Inpower LLC","Lewis Center, OH   USA",2012-11-01
+513,"Precision Technology","Toowoomba, QLD  Australia",2019-11-12
+514,"DISTek Integration, Inc.","Cedar Falls, IA   USA",2012-11-10
+515,"GINAF Trucks Nederland B.V.","Veenendaal, The Netherlands",2012-11-14
+516,"AVAT Automation GmbH","Tuebingen, Germany",2012-11-30
+517,"Noland Engineering","Melbourne, FL   USA",2012-12-06
+518,"Transas USA Inc.","Bothell, WA   USA",2012-12-06
+519,"Peeters Landbouwmachines b.v.","Etten-Leur, The Netherlands",2012-12-12
+520,Trapeze,"Cedar Rapids, IA   USA",2012-12-14
+521,"Clever Devices Ltd.","Woodbury, NY   USA",2013-02-15
+522,"Nebraska Tractor Test Laboratory","Lincoln, NE  USA",2013-02-15
+523,"Reggio Emilia Innovazione","Reggio Emilia  Italy",2013-02-15
+524,"Vomax Instrumentation Pty. Ltd.","Marleston, SA   Australia",2013-02-21
+525,"Rust Sales INC","Harwood, ND  USA",2013-02-26
+526,"LOFA Industries, Inc","Roswell, GA  USA",2013-02-26
+527,"GKN Walterscheid GmbH","Lohmar, Germany",2013-02-27
+528,"Hoganas AB, Electric Drive Systems","Hoganas, Sweden",2013-03-12
+529,"National Instruments Korea","Seoul, South Korea",2013-03-12
+530,NMEA,"Severna Park, MD  USA",2013-03-12
+531,"Genge & Thoma AG","Bern, Switzerland",2013-03-28
+532,"Onwa Marine Electronics Co Ltd.","Hong Kong, China",2013-03-28
+533,"Doran Manufacturing, LLC","Cincinnati, OH  USA",2013-04-14
+534,"Webasto Thermo & Comfort SE","Gilching, Germany",2013-04-14
+535,"MOTORPAL, a.s.","Jihlava, Czech Republic",2013-04-14
+536,"SSI Technologies","Janesville, WI  USA",2013-04-25
+537,"Schrader Electronics Ltd.","Antrim, N. Ireland",2013-04-25
+538,"Crop Ventures, Inc.","Omaha, NE  USA",2013-04-25
+539,Mobileview,"Costa Mesa, CA  USA",2013-04-25
+540,"Dinex A/S","Middelfart, Denmark",2013-04-25
+541,"Total Fire Systems, Inc.","Youngsville, NC  USA",2013-04-25
+542,"Dinamica Generale s.p.a.","Poggio Rusco, Italy",2013-05-08
+543,"BAUER Maschinen GmbH","Schrobenhausen, Germany",2013-05-23
+544,"Au Group Electronics","Windsor, ON   Canada",2013-05-23
+545,"GS Global Resources (formerly GS Hydraulics)","Mukwonago, WI   USA",2023-01-23
+546,"Maruyama Mfg Co, Inc.","Togane, Chiba, Japan",2013-06-11
+547,"Thomson Linear LLC","Marengo, IL  USA",2013-06-17
+548,"TM4 Inc.","Boucherville, QC  Canada",2013-06-28
+549,"ROAD Deutschland GmbH","Bretten, Germany",2013-06-28
+550,"SUN-A Corporation","Hiroshima, Japan",2013-07-17
+551,"Wexler CSD Ltd.","Rishon LeZion, Israel",2013-07-17
+552,"Matsuyama Plow Mfg Co, Ltd","Nagano, Japan",2013-07-23
+553,"KIB Electronics","Elkhart, IN   USA",2013-08-11
+554,"iris-GmbH infrared & intelligent sensors","Berlin, Germany",2013-08-20
+555,"Sasaki Corporation","Towada City, Japan",2013-08-21
+556,"HD Hyundai Infracore Norway (formerly Doosan Infracore Norway)","Elnesvagen, Norway",2025-02-11
+557,"Rockson Automation GmbH","Kiel, Germany",2013-09-12
+558,"Davis Instruments Corp.","Hayward, CA  USA",2013-10-12
+559,"Four Peaks Navigation","Overgaard, AZ  USA",2013-10-12
+560,"Iowa State University, Agricultural and Biosystems Engineering","Ames, IA   USA",2013-10-25
+561,"b-plus GmbH","Deggendorf, Germany",2013-10-25
+562,"Bombardier Transportation GmbH","Mannheim, Germany",2013-10-25
+563,"LOHR Sistemas Eletronicos LTDA","Caxias do Sul, Brazil",2013-10-31
+564,"Auto Power Electronic","Opole, Poland",2013-11-01
+565,"Micro-Trak Systems, Inc.","Eagle Lake, MN  USA",2013-11-12
+566,"Geode Technology, Inc.","Fredericton, NB  Canada",2013-11-13
+567,"Lithiumstart LLC","Healdsburg, CA  USA",2013-11-26
+568,"Makersan Ltd. Co.","Gebze, Turkey",2013-11-26
+569,"LORD MicroStrain Sensing Systems","Willison, VT  USA",2013-12-16
+570,"frenzel + berg electronic GmbH & Co. KG","Ulm, Germany",2014-01-04
+571,"Marinecraft Co., Ltd.","Pusan, South Korea",2014-01-04
+572,"Fasse Valves","Kearney, NE  USA",2014-01-04
+573,"Orolia Ltd","Portsmouth, Hampshire  UK",2014-01-07
+574,"Vishay Precision Group","Bradford, West Yorkshire  UK",2014-01-13
+575,Lytx,"San Diego, CA  USA",2014-01-14
+576,Vectia,"Irura, Guipuzcoa  Spain",2014-01-19
+577,"Denchi Power Ltd  (formerly ABSL Power Solutions Limited)","Thurso, Caithness  Scotland",2014-03-21
+578,advanSea,"Loriant, France",2014-01-30
+579,"KVH Industries, Inc.","Middletown, RI  USA",2014-01-30
+580,"San Jose Technology, Inc.","New Taipei City, Taiwan",2014-01-30
+581,"Väderstad AB","Väderstad, Sweden",2022-06-15
+582,"Innovative Software Engineering","Coralville, IA  USA",2014-02-14
+583,Yachtcontrol,"Hattern, The Netherlands",2014-03-17
+584,"CarMedialab GmbH","Bruchsal, Germany",2014-03-24
+585,"Industrial Electronic Controls","Rockford, IL  USA",2014-03-25
+586,"Suzuki Motor Corp","Hamamatsu, Japan",2014-03-25
+587,"JCA Electronics","Winnipeg, MB   Canada",2014-03-27
+588,"Vignal Systems","Venissieux, France",2014-03-28
+589,"MICO, Inc.","North Mankato, MN  USA",2014-04-01
+590,"ARGO-HYTOS GMBH","Kraichtal, Germany",2014-04-09
+591,"United States Coast Guard","New London, CT   USA",2014-04-09
+592,"tecsis GmbH","Offenbach, Germany",2014-04-16
+593,"Sensata Technologies","Attleboro, MA   USA",2014-04-17
+594,"Kongsberg Automotive","Kongsberg, Norway",2014-04-17
+595,CustomWare,"Assen, The Netherlands",2014-04-28
+596,"Brunelco Electronic Innovators B.V.","Haaksbergen, The Netherlands",2014-05-21
+597,"Hydac Filter Systems GmbH","Sulzbach/Saar, Germany",2014-05-23
+598,"ABB Turbo Systems Ltd","Baden, Switzerland",2014-05-23
+599,"Spudnik Equipment Co, LLC","Blackfoot, ID  USA",2014-05-23
+600,"Aquatic AV","San Jose, CA  USA",2014-05-23
+601,"Navitas Systems","Woodridge, IL  USA",2014-05-23
+602,"Nomad Digital Ltd.","Newcastle upon Tyne, UK",2014-06-10
+603,Kereval,"Thorigne Fouillard, France",2014-06-18
+604,"Rototilt Group AB (formerly Indexator Rototilt Systems AB)","Vindeln, Sweden",2020-02-21
+605,"Aventics GmbH","Laatzen, Germany",2014-07-11
+606,"Intellian Technologies","Irvine, CA   USA",2014-07-11
+607,Knappco/Civacon,"Kansas City, MO   USA",2014-07-15
+608,"Gale Banks Engineering","Azusa, CA   USA",2014-07-30
+609,"Walvoil S.p.A.","Reggio Emilia, Italy",2014-07-30
+610,"Trail Tech","Battle Ground, WA  USA",2014-07-30
+611,Esterline,"Coeur d'Alene, ID  USA",2014-07-30
+612,"Samwon IT","Busan, Korea",2014-08-04
+613,"HKS Co., Ltd.","Shizuoka, Japan",2014-08-21
+614,"ARLT Technologies GmbH","Netphen, Germany",2014-08-28
+615,"Networkfleet, Verizon Telematics","San Diego, CA   USA",2014-08-28
+616,"SMART-TEC s.r.o.","Velke Porici, Czech Republic",2014-09-07
+617,"Zero Emission Vehicles","Palmerston North, New Zealand",2014-09-07
+618,"Evrard SA","Beaurainville, France",2014-09-16
+619,"Right Weigh Load Scales","Sherwood, OR  USA",2014-09-16
+620,"BorgWarner Inc. (formerly Sevcon Ltd.)","Auburn Hills, MI   USA",2023-10-12
+621,"Hagie Manufacturing Company","Clarion, IA   USA",2014-09-29
+622,"Floyd Bell Inc","Columbus, OH   USA",2014-10-06
+623,"Xirgo Technologies","Camarillo, CA   USA",2014-10-08
+624,"Blackbox Machine Control Pty Ltd","Maida Vale, WA  Australia",2014-10-11
+625,"Global MRV Inc.","Buffalo, NY  USA",2014-10-14
+626,"AVL DiTEST GmbH","Fuerth, Germany",2014-10-21
+627,"Radio Ocean","Merignac, France",2014-10-27
+628,"Falck Schmidt Defence Systems","Odense C, Denmark",2014-10-27
+629,"Agri Info Design, Ltd.","Hokkaido, Japan",2014-10-29
+630,"SmartDrive Systems Inc.","San Diego, CA  USA",2014-10-29
+631,Reltima,"Woburn, MA  USA",2014-11-09
+632,"Pepperl+Fuchs GmbH","Mannheim, Germany",2014-11-25
+633,"TORC Robotics","Blacksburg, VA  USA",2014-11-25
+634,"Rocky Research","Huntsville, AL  USA",2014-12-09
+635,"Argo Tractors S.p.A.","Reggio Emilia, Italy",2014-12-09
+636,"Divelbiss Corporation","Fredericktown, OH  USA",2014-12-09
+637,"Bavaria Yachtbau GmbH","Giebelstadt, Germany",2014-12-09
+638,"KVH Industries, Inc.","Middletown, RI  USA",2015-01-06
+639,"Startec s.r.l.","Sesto al Reghena (PN), Italy",2015-01-06
+640,"Power Solutions International","Wood Dale, IL  USA",2015-01-12
+641,"Diverse Yacht Services","Southampton, Hampshire  UK",2015-01-16
+642,"Moog / Aspen Motion Technologies","Radford, VA   USA",2015-01-22
+643,"Bogballe A/S","Uldum, Denmark",2015-01-22
+644,"KUS USA","Ft. Lauderdale, FL  USA",2015-01-22
+645,"esd electronic system design gmbh","Hannover, Germany",2015-01-22
+646,"Veenhuis Machines B.V.","Raalte, The Netherlands",2015-01-22
+647,Siloking,"Tittmoning, Germany",2015-01-22
+648,"OJSC Ekran","Borisov, Belarus",2015-02-01
+649,"Control-Q B.V.","Vaassen, The Netherlands",2015-02-10
+650,"Seiko Epson Corp.","Nagano, Japan",2015-02-10
+651,"Takakita Co, Ltd.","Nabari, Japan",2015-02-10
+652,"MicroControl GmbH & Co. KG","Troisdorf, Germany",2015-02-12
+653,"AEV, spol. s r. o.","Kromeriz, Czech Republic",2015-02-12
+654,"Kohler Power Systems, Detroit Engine Development Center (DEDC)","Detroit, MI   USA",2015-03-03
+655,"Genge & Thoma AG","Lengnau, Switzerland",2015-03-03
+656,"PRO SOLUS do Brasil","Campo Mourão, Brazil",2015-03-03
+657,"Terzo Power Systems","Sacramento, CA   USA",2015-03-05
+658,"Shenzhen Jiuzhou Himunication Technology Co., Ltd","Shenzhen, China",2015-03-11
+659,"Data Panel Corp.","Plymouth, MN   USA",2015-03-17
+660,"Auto-Gaz Centrum","Radom, Poland",2015-03-30
+661,"SPAL Automotive S.r.l.","Correggio, Italy",2015-03-31
+662,"Kissling Elektrotechnik GmbH","Wildberg, Germany",2015-03-31
+663,"Delta Systems, Inc","Streetsboro, OH  USA",2015-04-01
+664,"Level Developments Ltd","Croydon, Surrey  UK",2015-04-09
+665,"Gebr. Bode GmbH & Co. KG","Kassel, Germany",2015-04-13
+666,"Schaeffler Technologies AG & Co., KG","Herzogenaurach, Germany",2015-04-24
+667,Bartec,"Gotteszell, Germany",2015-04-24
+668,"MacDon Industries Ltd.","Winnipeg, MB  Canada",2015-04-24
+669,"Quantum Fuel Systems Technologies Worldwide, Inc","Lake Forest, CA  USA",2015-04-28
+670,"STEMCO LP","Longview, TX  USA",2015-05-01
+671,"Innovative Controls Inc.","East Pittsburgh, PA   USA",2015-05-05
+672,"OPTIMA Concept","Ruitz, France",2015-05-19
+673,"Caruelle Nicolas","Saint Denis de l'Hotel, France",2015-05-28
+674,"Yara International ASA","Oslo, Norway",2015-05-28
+675,"Kawasaki Motors, Ltd. (formerly Kawasaki Motors Corp., USA)","Akashi, Hyogo, Japan",2025-01-09
+676,"Danfoss IXA A/S","Vejle, Denmark",2015-06-22
+677,"DSA Daten- und Systemtechnik GmbH","Aachen, Germany",2015-06-29
+678,"KeepTruckin, Inc.","Amherst, NY   USA",2015-06-30
+679,"OXE Marine AB (formerly Cimco Marine AB)","Ängelholm, Sweden",2020-03-03
+680,"AMVAC Chemical Corporation","Newport Beach, CA  USA",2015-07-14
+681,"BEDIA Motorentechnik GmbH & Co. KG","Altdorf bei Nuernberg, Germany",2015-07-14
+682,"Eckelmann AG","Wiesbaden, Germany",2015-07-27
+683,"Fosen Elektro","Hasselvika, Norway",2015-07-27
+684,KEB,"Barntrup, Germany",2015-07-27
+685,"ANEDO (formerly ANEDO Ltd.)","Eydelstedt, Germany",2019-05-24
+686,"Taigene Electric Machinery Corp.","Taipei, Taiwan",2015-07-27
+687,"Flight Systems, Inc.","Mechanicsburg, PA  USA",2015-07-31
+688,"Rockford Corp","Tempe, AZ   USA",2015-07-31
+689,"Aarcomm Systems Inc","Coquitlam, BC  Canada",2015-07-31
+690,"LINAK A/S","Guderup, Denmark",2015-08-03
+691,"Digitroll Agricultural Electronics","Hajduszoboszlo, Hungary",2015-08-06
+692,"Tanhay Corporation","Incheon, South Korea",2015-08-13
+693,"Agility Fuel Solutions (formerly Agility Fuel Systems)","Santa Ana, CA   USA",2016-10-05
+694,"GasTOPS Ltd.","Ottawa, ON   Canada",2015-09-03
+695,"Weldon Technologies","Columbus, OH   USA",2015-09-03
+696,"DRS Network & Imaging Systems, LLC (DRS Technologies)","Huntsville, AL   USA",2015-09-08
+697,"Ålö AB","Umeå, Sweden",2015-09-09
+698,"Scorpion Technologies Ltd.","Kamloops, BC  Canada",2015-10-13
+699,"Harman International (formerly Harman International Industries)","Stamford, CT   USA",2022-12-21
+700,"K-Tec Earthmovers Inc.","Rosenort, MB  Canada",2015-10-13
+701,"BigRoad Inc.","Kitchener, ON  Canada",2015-10-13
+702,"Weichai Power Co., Ltd.","Weifang, China",2015-10-13
+703,"Hydro Tab Marine Engineering","Athens, Greece",2015-10-13
+704,"JL Audio, Inc.","Miramar, FL  USA",2015-10-15
+705,"SVAB Hydraulik AB","Hallsberg, Sweden",2015-10-18
+706,"Shanghai Diesel Engine Corporation Limited","Shanghai, China",2015-10-22
+707,"Rochester Gauges Inc","Dallas, TX  USA",2015-10-26
+708,"Lars Thrane A/S","Vedbaek, Denmark",2015-10-26
+709,"Marquardt GmbH","Rietheim-Weilheim, Germany",2015-10-29
+710,"Greentronics Ltd.","Elmira, ON  Canada",2015-11-23
+711,"DAS Co., LTD","Hwaseong-si, South Korea",2015-11-23
+712,"LOR Manufacturing Company Inc.","Weidman, MI   USA",2015-11-23
+713,"US Hybrid Corporation","Torrance, CA   USA",2015-12-09
+714,"Kobashi Kogyo Co., Ltd.","Okayama, Japan",2015-12-09
+715,"Autonnic Research Ltd","Tollesbury, Essex   UK",2015-12-09
+716,"Eaton Control & Power Conversion Division (CPCD)","Tualatin, OR   USA",2015-12-20
+717,"Yacht Devices Ltd","Kaliningrad, Russia",2015-12-28
+718,"Micronet Inc","Salt Lake City, UT   USA",2016-01-05
+719,"Cojali S. L.","Campo de Criptana, Spain",2016-01-10
+720,"WITZ Corporation","Nagoya City, Japan",2016-01-11
+721,Hypro,"New Brighton, MN   USA",2016-01-13
+722,"Contelec AG","Biel/Bienne, Switzerland",2016-01-21
+723,"Jabil Inc.","Auburn Hills, MI   USA",2016-01-22
+724,"Electronic Applications, Inc.","Phoenix, AZ   USA",2016-01-26
+725,"Hitachi Construction Machinery Co., Ltd.","Kandatsu-machi, Japan",2016-01-26
+726,"MIDORI PRECISIONS","Tokyo, Japan",2016-02-03
+727,"Dhoot Transmission Pvt Ltd.","Aurangabad, India",2016-02-18
+728,"Streumaster (formerly Streumaster / Panien)","Egglkofen, Germany",2019-03-06
+729,Liebherr,"Bulle, Switzerland",2016-03-02
+730,"BERTHOUD AGRICOLE","Belleville sur Saone, France",2016-03-03
+731,"Modine Manufacturing Company","Racine, WI   USA",2016-03-04
+732,"Gefran S.p.A.","Provaglio d'Iseo, Italy",2016-03-04
+733,"Intendia S.L.","Madrid, Spain",2016-03-23
+734,REAPsystems,"St Denys, Southampton  UK",2016-03-23
+735,"AEM Performance Electronics","Hawthorne, CA  USA",2016-03-23
+736,"Terex Aerial Work Platforms - Genie","Redmond, WA  USA",2016-04-21
+737,"Balluff GmbH","Neuhausen, Germany",2016-04-29
+738,"Blue Ink Technologies","Huntington, WV  USA",2016-05-04
+739,"LXNAV d.o.o.","Celje, Slovenia",2016-05-19
+740,e-Traction,"Apeldoorn, The Netherlands",2016-05-19
+741,"Carling Technologies","Plainville, CT   USA",2016-05-19
+742,EROAD,"Auckland, New Zealand",2016-05-22
+743,"Daemyung Elevator Co., Ltd.","Ulsan, Republic of Korea",2016-05-25
+744,"Woosung Engineering Co., Ltd.","Gyengsangnam-do, Republic of Korea",2016-05-27
+745,"Cidra Corporate Services Inc.","Wallingford, CT  USA",2016-06-10
+746,"SurePoint Ag Systems (formerly SureFire Ag Systems, Inc.)","Atwood, KS  USA",2024-04-17
+747,Agratronix,"Streetsboro, OH  USA",2016-06-10
+748,ISOTTA,"Occhiobello, Italy",2016-06-10
+749,"Chart Inc.","Ball Ground, GA   USA",2016-06-20
+750,"Joskin SA","Soumagne, Belgium",2016-06-20
+751,"Pacific Track","Newport Beach, CA   USA",2016-06-24
+752,"Deep Sea Electronics Plc","Hunmanby, North Yorkshire   UK",2016-06-24
+753,"AIROD Technologies","Toulouse, France",2016-06-29
+754,"Parker Hannifin Corp., Automation Group","Cleveland, OH   USA",2016-07-01
+755,"Firefly Integrations","Middlebury, IN  USA",2016-07-21
+756,"Maschio Gaspardo S.P.A.","Campodarsego, Italy",2016-07-21
+757,"IMPCO Technologies","Calgary, AB   Canada",2016-07-21
+758,"Banner Engineering Corp.","Minneapolis, MN   USA",2016-07-21
+759,Hydro-Gear,"Sullivan, IL  USA",2016-07-28
+760,"Bernecker + Rainer Industrie Elektronik GmbH","Eggelsberg, Austria",2016-07-28
+761,"MITA OLEODINAMICA S.p.A.","Tregnago, Italy",2016-07-28
+762,"ROJ s.r.l.","Biella, Italy",2016-08-01
+763,"AT-Systems BVBA","Meerle, Belgium",2016-08-02
+764,"Bednar FMT s.r.o.","Prague, Czech Republic",2016-08-17
+765,GIGAVAC,"Carpinteria, CA   USA",2016-08-17
+766,"Epec Oy","Seinajoki, Finland",2016-08-17
+767,"Alliance Wireless Technologies Inc.","Houston, TX  USA",2016-08-30
+768,"Flores Automation, LLC","Muskego, WI  USA",2016-08-30
+769,Trombetta,"Milwaukee, WI  USA",2016-08-30
+770,MONOSEM,"Largeasse, France",2016-08-30
+771,"Shaw Development, LLC","Bonita Springs, FL  USA",2016-09-12
+772,"Blink Marine","Milano, Italy",2016-09-30
+773,"Clarion Corporation of America","Cypress, CA   USA",2016-09-30
+774,"Taisho Corporation","Mito, Japan",2016-09-30
+775,"ZIEHL-ABEGG Automotive GmbH","Kupferzell, Germany",2016-10-14
+776,"HMI Systems LLC","Lakeland, FL   USA",2016-10-25
+777,"Ocean Signal Ltd","Margate, Kent   UK",2016-10-25
+778,"Seakeeper Inc.","California, MD   USA",2016-10-25
+779,"RLC Electronic Systems","Sinking Spring, PA  USA",2016-11-01
+780,"Turntide Transport Limited (formerly AVID Technology Ltd)","Cramlington, Northumberland  UK",2022-05-17
+781,"Poly-Planar LLC","Hanover, MD   USA",2016-11-04
+782,"AVR nv","Roeselare, Belgium",2019-12-14
+783,"Loup Electronics Inc.","Lincoln, NE   USA",2016-12-02
+784,"CM Automotive Systems, Inc.","Walnut, CA   USA",2016-12-02
+785,"Fischer Panda GmbH","Paderborn, Germany",2016-12-17
+786,"Johnson Matthey Battery Systems","Milton Keynes, Bucks   UK",2016-12-17
+787,"Abertax Technologies Limited","Paola, Malta",2017-01-15
+788,"MoTeC Pty Ltd","Melbourne, Victoria   Australia",2017-01-15
+789,GRADALL,"New Philadelphia, OH  USA",2017-02-03
+790,VACALL,"New Philadelphia, OH  USA",2017-02-03
+791,AUTEC,"Caldogno, Italy",2017-02-07
+792,"Kostal Mexicana","Querétaro, Mexico",2017-02-07
+793,"James Fisher Prolec","Poole, Dorset   UK",2017-02-09
+794,"Shihlin Electric & Engineering Corporation","Suzhou, China",2017-02-09
+795,"Broyda Enterprises Pty Ltd","Sydney, Australia",2017-02-10
+796,"Canadian Automotive Industries Ltd","Stony Plain, AB   Canada",2017-02-10
+797,"Tides Marine","Deerfield Beach, FL   USA",2017-02-10
+798,"Lumishore Ltd","Swansea, Wales   UK",2017-02-10
+799,"Stillwater Designs and Audio, Inc. - KICKER","Stillwater, OK   USA",2017-02-10
+800,"Delta-Q Technologies","Burnaby, BC   Canada",2017-02-16
+801,"LOR Manufacturing Company Inc.","Weidman, MI   USA",2017-03-01
+802,"SPBI (Bj Technologie)","Dompierre-sur-Yon, France",2017-03-01
+803,"Gill Sensors & Controls Limited","Lymington, Hampshire   UK",2017-03-03
+804,"ASA Electronics","Elkhart, IN   USA",2017-03-09
+805,"Gundersen & Løken AS","Oslo, Norway",2017-03-17
+806,"Charge Automotive Ltd","Banbury, Oxfordshire   UK",2017-03-17
+807,Schneider-Electric,"Burnaby, BC   Canada",2017-03-27
+808,"RIMEX Supply Ltd.","Surrey, BC   Canada",2017-03-27
+809,"HMS Industrial Networks AB","Halmstad, Sweden",2017-04-04
+810,"Dutch Power Company","Giessen, The Netherlands",2017-04-07
+811,"Blue Water Desalination","Carson, CA   USA",2017-04-10
+812,"Torch Technologies","Huntsville, AL  USA",2017-04-12
+813,"Thales Suisse SA","Zurich, Switzerland",2017-04-12
+814,"Kronotech Srl (formerly Soltec Soluzioni Tecnologiche Srl)","Basaldella di Campoformido, Italy",2019-03-28
+815,"FLIR Systems, Inc.","Wilsonville, OR   USA",2017-04-21
+816,UniStrong,"Beijing, China",2017-04-21
+817,"TE Connectivity Sensor Solutions","Dormund, Germany",2017-04-21
+818,HGNSS,"Scottsdale, AZ   USA",2017-04-21
+819,"Preco Electronics","Boise, ID   USA",2017-04-30
+820,"DIaLOGIKa Gesellschaft fuer angewandte Informatik mbH","Saarbruecken, Germany",2017-04-30
+821,"Thorsen Teknik A/S","Farsø, Denmark",2017-05-01
+822,"Bren-Tronics, Inc.","Commack, NY  USA",2017-05-04
+823,"ACEINNA, Inc (formerly MEMSIC, Inc)","Andover, MA  USA",2017-09-03
+824,"Undheim Systems AS","Egersund, Norway",2017-05-04
+825,"BPW Hungária","Szombathely, Hungary",2017-05-04
+826,"Lewmar Marine Inc","Guilford, CT   USA",2017-05-05
+827,"INmatix Technology Group Ltd","Hattem, The Netherlands",2017-05-11
+828,"AgriBrink Inc.","Moorefield, ON  Canada",2017-05-21
+829,"Drov Technologies, Inc.","Oklahoma City, OK  USA",2017-05-22
+830,"Ultra Motion LLC","Cutchogue, NY   USA",2017-05-22
+831,"DOK-ING Ltd.","Zagreb, Croatia",2017-05-22
+832,"Heizomat Gerätebau-Energiesysteme GmbH","Gunzenhausen, Germany",2017-05-24
+833,"Electrum Automation AB","Umeå, Sweden",2017-05-24
+834,"Pioneer Microsystems, Inc.","Pittsburgh, PA   USA",2017-05-24
+835,"PetTrack Ltd.","Héreg, Hungary",2017-05-31
+836,Signature4,"Coldwater, OH   USA",2017-05-31
+837,"Famic Technologies Inc.","Montréal, QC   Canada",2017-06-11
+838,"Teamsurv Ltd","Didcot, Oxfordshire   UK",2017-06-12
+839,"Indexator Rotator Systems AB","Vindeln, Sweden",2017-06-27
+840,"E.S.T.E. srl","Ferrara, Italy",2017-07-14
+841,Agra-GPS,"Stony Plain, AB   Canada",2017-07-14
+842,"DigiDevice Srl","Calvisano, Italy",2017-07-14
+843,"Hendrickson Truck Commercial Vehicle Systems","Woodridge, IL   USA",2017-07-14
+844,"FELL AS","Lier, Norway",2017-07-14
+845,"GMB Güstrower Maschinenbau GmbH","Güstrow, Germany",2017-07-16
+846,"L3 Magnet-Motor","Starnberg, Germany",2017-07-19
+847,Oceanvolt,"Vantaa, Finland",2017-07-26
+848,ningupex,"Dresden, Germany",2017-07-31
+849,"MTS Maschinentechnik Schrode AG","Hayingen, Germany",2017-08-06
+850,"Geoprospectors GmbH","Traiskirchen, Austria",2017-08-08
+851,"Novotechnik Messwertaufnehmer OHG","Ostfildern (Ruit), Germany",2017-08-08
+852,"Velvac Inc","New Berlin, WI   USA",2017-08-24
+853,"Teledyne RESON B.V.","Rotterdam, The Netherlands",2017-09-05
+854,"GEMAC Chemnitz GmbH","Chemnitz, Germany",2017-09-05
+855,"Toshiba Infrastructure Systems & Solutions Corporation","Kawasaki, Japan",2017-09-10
+856,"FarmFacts GmbH","Pfarrkirchen, Germany",2017-09-10
+857,"Zoomlion Heavy Industry NA, Inc","Yorkville, WI   USA",2017-09-23
+858,Littelfuse,"Kaunas, Lithuania",2017-09-23
+859,Valor,"Burlington, ON   Canada",2017-09-23
+860,Michelin,"Clermont-Ferrand, France",2017-09-27
+861,"Adel System S.r.l.","Reggio Emilia, Italy",2017-09-27
+862,"Prospec Electronics","Mount Pleasant, SC   USA",2017-10-20
+863,SMAG,"Châlons-en-Champagne, France",2017-10-20
+864,"Streamline Transportation Technologies Inc.","Kamloops, BC   Canada",2017-10-20
+865,MyEasyFarm,"Prunay, France",2017-10-20
+866,"Netradyne, Inc.","San Diego, CA   USA",2017-10-30
+867,"Skeleton Technologies","Lubja, Estonia",2017-11-03
+868,"Data Panel Corp","Plymouth, MN   USA",2017-11-06
+869,Intercomp,"Medina, MN   USA",2017-11-13
+870,"Textron Fleet Management","Surrey, BC   Canada",2017-11-13
+871,"Agri-Fab (formerly Superior Tech Inc)","Sullivan, IL   USA",2021-12-09
+872,"Kählig Antriebstechnik GmbH","Hannover, Germany",2017-11-17
+873,"Garnet Instruments Ltd.","Sherwood Park, AB   Canada",2017-12-04
+874,"MTA S.p.A.","Codogno, Italy",2017-12-04
+875,"Salvarani S.r.l.","Poviglio (RE), Italy",2017-12-04
+876,"SUCO Robert Scheuffele GmbH & Co. KG","Bietigheim-Bissingen, Germany",2017-12-13
+877,"SICK ATech GmbH","Witten, Germany",2017-12-13
+878,FOTON,"Beijing, China",2017-12-13
+879,"PG Trionic, Inc.","Essex, MA   USA",2017-12-13
+880,"Revision Military","Ottawa, ON  Canada",2018-01-08
+881,Sovema,"Gaggio di Piano, Italy",2018-01-08
+882,"BHTronik GmbH & Co. KG","Oberviechtach, Germany",2018-01-08
+883,"Swift Navigation, Inc.","San Francisco, CA  USA",2018-01-08
+884,"Sure Grip Controls Inc.","Saanichton, BC  Canada",2018-01-09
+885,"SICK AG (formerly SICK Stegmann GmbH)","Donaueschingen, Germany",2021-10-26
+886,"Hitachi Zosen Corporation","Osaka, Japan",2018-01-23
+887,"Turntide Transport Limited (formerly Hyperdrive Innovation Limited)","Sunderland, Tyne and Wear  UK",2022-05-17
+888,"Carma Systems Inc","Albany, NY   USA",2018-01-23
+889,"SANY America Inc","Peachtree City, GA   USA",2018-01-23
+890,"L3 Technologies, Inc.","Sarasota, FL   USA",2018-01-26
+891,CarrierWeb,"Atlanta, GA   USA",2018-02-01
+892,"Mectronx Corp","Sun Prairie, WI   USA",2018-02-04
+893,"KlinkTechnics Ltd.","Beaver Dam, WI   USA",2018-02-07
+894,"Rhodan Marine Systems of Florida LLC (Duplicate entry; use MFR ID 1012)","Sarasota, FL   USA",2024-08-02
+895,"Peloton Technology","Mountain View, CA   USA",2018-02-10
+896,"NextFour Solutions Ltd","Turku, Finland",2018-02-10
+897,"Dot Technology Corp.","Emerald Park, SK   Canada",2018-02-14
+898,"Josef Kotte Landtechnik GmbH & Co. KG","Rieste, Germany",2018-02-20
+899,"Lippert Components, Inc","Sterling Heights, MI   USA",2018-03-04
+900,"OSB connagtive GmbH (formerly OSB AG)","Munich, Germany",2021-08-03
+901,"Zivan Srl","Poviglio, Italy",2018-03-04
+902,"Bucher Hydraulics","Neuheim, Switzerland",2018-03-04
+903,InMotion,"Blacksburg, VA   USA",2018-03-08
+904,"Equipment Safety Systems Pty. Ltd. (EQSS)","Seaford, Victoria   Australia",2018-03-08
+905,"ASA Electronics","Elkhart, IN   USA",2018-03-15
+906,"MOBA AG","Limburg, Germany",2018-04-25
+907,strautmann,"Bad Laer, Germany",2018-04-15
+908,"Chonbuk National University Department of Electronics","Jeonju, Republic of Korea",2018-04-15
+909,"Marines Co., Ltd.","Ulsan, Republic of Korea",2018-04-17
+910,"Hermann Paus Maschinenfabrik GmbH","Emsbüren, Germany",2018-04-25
+911,Nautic-On,"Chicago, IL   USA",2018-04-25
+912,"Steyr Motors GmbH","Steyr, Austria",2018-04-25
+913,"Toyota Motor Corporation","Toyota City, Japan",2018-04-25
+914,"ZETOR TRACTORS a.s.","Brno, Czech Republic",2018-05-07
+915,"Dosificacion y sistemas electronicos S.L. (DSE)","Mieres, Spain",2018-05-07
+916,"Hans Turck GmbH & Co. KG (formerly Turck Inc.)","Mülheim an der Ruhr, Germany",2022-06-21
+917,"Sentinel d.o.o.","Vodnjan, Crotia",2018-05-13
+918,"AMW Machine Control, Inc","Saranac, MI   USA",2018-05-16
+919,"Furrion LLC","Elkhart, IN   USA",2018-05-16
+920,"MTD Consumer Group Inc.","Valley City, OH   USA",2018-05-18
+921,"ROPA Fahrzeug- und Maschinenbau GmbH","Herrngiersdorf, Germany",2018-05-18
+922,"Terberg Benschop B.V.","Benschop, The Netherlands",2018-05-25
+923,"ELTEK S.p.A.","Casale Monferrato, Italy",2018-06-03
+924,"PAS Peschak Autonome Systeme GmbH","Großweikersdorf, Austria",2018-06-03
+925,"GW Lisk Company","Clifton Springs, NY   USA",2018-06-03
+926,"Buhler Industries Inc.","Winnipeg, MB   Canada",2018-06-03
+927,Saicon,"Passo Fundo, Brazil",2018-06-03
+928,"EAO Automotive GmbH & Co. KG","Auerbach, Germany",2018-06-05
+929,"Jl Marine Systems, Inc.","Tampa, FL   USA",2018-06-07
+930,"Ecotronix Corp.","Seoul, Republic of Korea",2018-06-07
+931,"Enertec Marine Ltd","Auckland, New Zealand",2018-06-14
+932,"Discover Battery","Richmond, BC   Canada",2018-06-25
+933,"Delta Mobile Systems, Inc.","Elgin, IL   USA",2018-06-25
+934,"Farmobile, Inc.","Leawood, KS   USA",2018-06-25
+935,"Meels GmbH & Co. KG","Fellheim, Germany",2018-06-29
+936,"Hi-tech Millennium","Corunna, MI, USA",2018-06-29
+937,"Precision Circuits Inc","Downers Grove, IL   USA",2018-06-29
+938,"LEVEL Systems","Náchod, Czech Republic",2018-06-29
+939,"Warn Industries, Inc.","Clackamas, OR   USA",2018-06-29
+940,"Dometal Oy","Loimaa, Finland",2018-06-29
+941,Navya,"Villeurbanne, France",2018-06-29
+942,"Vogelsang GmbH & Co. KG","Essen, Germany",2018-07-08
+943,"FISCHER AG Präzisionspindeln","Herzogenbuchsee, Switzerland",2018-07-08
+944,"ZONTISA Marine SL","Barcelona, Spain",2018-07-08
+945,"Equalizer AG","Cape Town, South Africa",2018-07-13
+946,"Hydac Tecnologia Ltda","São Bernardo do Campo, Brazil",2018-07-13
+947,"Gerd Bär GmbH","Heilbronn, Germany",2018-07-21
+948,Donix,"Cape Town, South Africa",2018-07-21
+949,"Škoda Electric a.s.","Plzeň, Czech Republic",2018-07-25
+950,"RE:Lab s.r.l.","Reggio Emilia, Italy",2018-08-01
+951,"Exor International S.p.A.","San Giovanni Lupatoto, Italy",2018-08-06
+952,"Tan Delta Systems Ltd","Sheffield, South Yorkshire   UK",2018-08-24
+953,Curtiss-Wright,"Davidson, NC   USA",2018-08-30
+954,"Setec Pty Ltd","Melbourne, Victoria   Australia",2018-08-30
+955,"Hottinger Baldwin (Suzhou) Electronic Measurement Technology Co., Ltd.","Suzhou, China",2018-08-30
+956,"Piher Sensors & Controls S.A.","Tudela, Spain",2018-09-08
+957,"Sierra Wireless Inc","Richmond, BC   Canada",2018-09-08
+958,"NHK MEC Corporation","Yokohama, Japan",2018-09-08
+959,"Cascade Corporation","Fairview, OR   USA",2018-09-21
+960,"Vemcon GmbH","Munich, Germany",2018-09-21
+961,"POK SAS","Nogent-sur-Seine, France",2018-10-03
+962,"Timbolier Industries, Inc.","Edgewater, MD   USA",2018-10-03
+963,"Thomason Jones Company, LLC","Anacortes, WA   USA",2018-10-05
+964,"AgroVIR Kft","Tata, Hungary",2018-10-05
+965,"Ro-Sys Software","Debrecen, Hungary",2018-10-05
+966,VisibleFarm,"Tata, Hungary",2018-10-05
+967,"Moteck Electric Corp.","New Taipei City, Taiwan",2018-10-21
+968,"Cox Powertrain Limited","Shoreham-by-Sea, West Sussex   UK",2018-10-24
+969,"Blue Sea Systems","Bellingham, WA   USA",2018-10-24
+970,"Jaboni Power Products, LLC","Elkhart, IN   USA",2018-10-27
+971,"B+B Smartworx","Ottawa, IL   USA",2018-11-06
+972,"Axion AG","Weissenhorn, Germany",2018-11-19
+973,"Zasso GmbH","Aachen, Germany",2018-11-19
+974,"Pico Technology Limited","St. Neots, Cambridgeshire   UK",2018-12-10
+975,"Siemens AG","Fuerth, Germany",2018-12-10
+976,"Derive Systems, Inc.","Sanford, FL   USA",2018-12-11
+977,"Copeland LP (formerly Emerson Electric Co.)","St. Louis, MO   USA",2023-06-16
+978,"Canfield Connector","Youngstown, OH   USA",2018-12-18
+979,McHale,"Ballinrobe, Ireland",2018-12-18
+980,"Gussi Italia S.R.L.","Tregnago, Italy",2018-12-18
+981,"Kobelt Manufacturing Co. Ltd","Surrey, BC   Canada",2018-12-18
+982,"Briggs & Stratton Corporation","Wauwatosa, WI   USA",2018-12-20
+983,"Dezwaef NV","Moerkerke, Belgium",2019-01-04
+984,"E-T-A Elektrotechnische Apparate GmbH","Altdorf, Germany",2019-01-04
+985,"NLR, LLC","Opelika, AL   USA",2019-02-03
+986,"AAMP Global","Bordon, Hampshire   UK",2019-02-08
+987,"Baltic Car Equipment","Kaunas, Lithuania",2019-02-08
+988,"Voith Turbo","Heidenheim, Germany",2019-02-08
+989,"Flux-Geräte GmbH","Maulbronn, Germany",2019-02-13
+990,"SAMSUNG SDI Co., Ltd.","Cheonan, Republic of Korea",2019-02-20
+991,"Deutronic Elektronik GmbH","Adlkofen, Germany",2019-02-28
+992,"MarineIOT LLC","Seattle, WA   USA",2019-03-06
+993,"Alelion Energy Systems AB","Gothenburg, Sweden",2019-03-10
+994,"Morris Industries Ltd.","Saskatoon, SK  Canada",2019-03-14
+995,"Circuitlink Pty Ltd.","Seven Hills, NSW  Australia",2019-03-14
+996,"Eniquest Pty Ltd","Bells Creek, QLD  Australia",2019-03-26
+997,"Xenta Systems Srl","Rome, Italy",2019-03-26
+998,"Transcell Technology Inc","Buffalo Grove, IL  USA",2019-04-02
+999,"TerraTroniq B.V.","Renkum, The Netherlands",2019-04-02
+1000,"Landmaschinen Wienhoff GmbH","Bawinkel, Germany",2019-04-11
+1001,"Cleral Inc.","Val-d'Or, QC  Canada",2019-04-19
+1002,"Kussmaul Electronics Co.","West Sayville, NY  USA",2019-04-19
+1003,"technotrans SE","Sassenberg, Germany",2019-04-19
+1004,"Ultraflex SpA","Casella, Italy",2019-04-19
+1005,"TSE Brakes, Inc.","Cullman, AL  USA",2019-04-19
+1006,Proterra,"Burlingame, CA   USA",2019-04-29
+1007,"Maschinenfabrik Meyer-Lohne GmbH","Lohne, Germany",2019-04-29
+1008,"Lintest Systems LLC","Boca Raton, FL   USA",2019-04-29
+1009,"TouchTronics, Inc.","Elkhart, IN   USA",2019-05-03
+1010,"Agricultural Industry Electronics Foundation e.V.","Frankfurt, Germany",2019-05-03
+1011,"Soundmax Electronics Ltd","Hong Kong, China",2019-05-07
+1012,"Rhodan Marine Systems of Florida LLC","Sarasota, FL   USA",2019-05-15
+1013,"Allochis E-Tec","Ferré, Argentina",2019-05-24
+1014,"Briri Maschinenbau GmbH","Bawinkel, Germany",2019-05-24
+1015,"SECURITAG SAS","Nantes, France",2019-05-24
+1016,"Röhren- und Pumpenwerk BAUER GmbH","Voitsberg, Austria",2019-06-14
+1017,"Caldaro AB","Stockholm, Sweden",2019-06-14
+1018,"Flex TTS","San Jose, CA   USA",2019-06-14
+1019,"Codek Foundries","Cedar Rapids, IA   USA",2019-06-14
+1020,"Onyx Marine Automation s.r.l.","Fano, Italy",2019-06-14
+1021,"Entratech Systems LLC","Sandusky, OH   USA",2019-06-14
+1022,"ITC Inc","Hudsonville, MI   USA",2019-06-14
+1023,"PEAK-System Technik GmbH","Darmstadt, Germany",2019-06-21
+1024,"Inventus Power","Woodridge, IL   USA",2019-06-21
+1025,"eze System, Inc.","Folsom, CA   USA",2019-06-25
+1026,"ZTR Control Systems, LLC","London, ON   Canada",2019-06-25
+1027,"Goldacres PTY LTD","Mitchell Park, Victoria   Australia",2019-06-25
+1028,"Autel Intelligent Technology Corp., Ltd","Shenzhen, China",2019-06-29
+1029,"The Marine Guardian LLC","Spring Hill, FL   USA",2019-06-29
+1030,"Tume-Agri Oy","Turenki, Finland",2019-07-11
+1031,"Flintec UK Ltd.","Cardiff, UK",2019-07-22
+1032,"SIMOL S.p.A.","Codisotto (RE), Italy",2019-07-22
+1033,"ECCO Safety Group","Boise, ID   USA",2019-08-02
+1034,"Siren Marine","Newport, RI   USA",2019-08-02
+1035,Agres,"Pinhais, Brazil",2019-08-16
+1036,"Bender GmbH & Co. KG","Grünberg, Germany",2019-08-16
+1037,"Dragonfly Energy Corp.","Sparks, NV   USA",2019-08-16
+1038,"EMIT Technologies, Inc.","Sheridan, WY   USA",2019-08-16
+1039,"Liugong Dressta Machinery","Stalowa Wola, Poland",2019-08-20
+1040,"BPE Electronics Srl","Campagnola Emilia (RE), Italy",2019-08-28
+1041,"EZ Lynk","Georgetown, Cayman Islands",2019-08-28
+1042,"engcon group","Strömsund, Sweden",2019-08-28
+1043,Hyva,"Alphen Aan Den Rijn, The Netherlands",2019-09-20
+1044,Xee,"Lille, France",2019-09-20
+1045,"CMR Group","Marseille, France",2019-09-20
+1046,Praxidyn,"Oakland, IA   USA",2019-10-02
+1047,"Sonic Corporation","Tokyo, Japan",2019-10-02
+1048,"Agrivation UG","Havixbeck, Germany",2019-10-02
+1049,"S&S Cycle","Viola, WI   USA",2019-10-07
+1050,"Spacenus GmbH","Darmstadt, Germany",2019-10-07
+1051,"ProNav AS","Egersund, Norway",2019-10-09
+1052,Pfreundt,"Südlohn, Germany",2019-10-16
+1053,"Vetus Maxwell, Inc.","Hanover, MD   USA",2019-10-16
+1054,"Schmotzer Hacktechnik GmbH & Co. KG","Bad Windsheim, Germany",2019-10-24
+1055,"EXA Computing GmbH","Hamm, Germany",2019-10-24
+1056,"Lithium Pros","Knoxville, TN   USA",2019-11-05
+1057,EquipmentShare,"Columbia, MO   USA",2019-11-12
+1058,"Bondioli & Pavesi SpA","Pieve di Cento, Italy",2019-11-12
+1059,Boatrax,"Miami, FL   USA",2019-11-18
+1060,Scale-Tec,"Anamosa, IA   USA",2019-12-01
+1061,"Volvo Construction Equipment","Shippensburg, PA   USA",2019-12-01
+1062,"Marol Co Ltd","Kobe, Japan",2019-12-01
+1063,SolSteer,"Pulborough, West Sussex  UK",2019-12-01
+1064,"Omnitech Robotics Inc.","Littleton, CO   USA",2019-12-14
+1065,"CALYPSO Instruments","Zaragoza, Spain",2019-12-14
+1066,"Spot Zero Water","Fort Lauderdale, FL   USA",2019-12-14
+1067,"Tecomec S.r.l.","Reggio Emilia (RE), Italy",2019-12-14
+1068,"Zapi S.p.A.","Poviglio (RE), Italy",2019-12-14
+1069,"Lithionics Battery LLC","Clearwater, FL   USA",2020-01-07
+1070,"Quick-teck Electronics Ltd","Newark Close, Royston   UK",2020-01-07
+1071,"MACH SYSTEMS s.r.o.","Prague, Czech Republic",2020-01-08
+1072,"La Marche Manufacturing Company","Des Plaines, IA   USA",2020-01-10
+1073,"Manitou Equipment America LLC","West Bend, WI   USA",2020-01-15
+1074,"Kindhelm / Navigs Oy","Espoo, Finland",2020-01-15
+1075,"Uniden America Corporation","Irving, TX   USA",2020-01-17
+1076,"DOGA S.A.","Abrera, Barcelona  Spain",2020-01-17
+1077,"Ymer Technology","Stockholm, Sweden",2020-01-17
+1078,"GE Appliances","Louisville, KY   USA",2020-01-25
+1079,"Carl Zeiss Spectroscopy GmbH","Jena, Germany",2020-01-28
+1080,"Epsilor-Electric Fuel Ltd.","Beit Shemesh, Israel",2020-01-30
+1081,"Imcon Electronics, s.r.o.","Šlapanice, Czech Republic",2020-02-11
+1082,"TÜMOSAN Engine and Tractor Co.","Istanbul, Turkey",2020-02-11
+1083,Nauticoncept,"Macon, France",2020-02-11
+1084,"Shadow-Caster LED lighting LLC","Clearwater, FL   USA",2020-02-11
+1085,"Wet Sounds, LLC","Houston, TX   USA",2020-02-21
+1086,"Life Racing Ltd","Basildon, Essex   UK",2020-02-21
+1087,"ITPhotonics S.r.l.","Fara Vicentino, Italy",2020-02-21
+1088,"E-T-A Circuit Breakers","Mt. Prospect, IL   USA",2020-02-21
+1089,"Carrosserie HESS AG","Bellach, Switzerland",2020-03-03
+1090,"E-T-A Circuit Breakers Ltd","Aylesbury, Buckinghamshire  UK",2020-03-05
+1091,"Wheel Monitor Inc.","Niagara-on-the-Lake, ON   Canada",2020-03-15
+1092,Scheiber,"Saint-Pierre du Chemin, France",2020-03-24
+1093,innolectric,"Bochum, Germany",2020-03-31
+1094,"Tokushu Denki","Iwata, Japan",2020-04-17
+1095,"WEG Drives and Controls - Automação Ltda","Jaraguá do Sul, Brazil",2020-04-23
+1096,"Texense Sensors","Varennes-Vauzelles, France",2020-04-28
+1097,"M2M Craft Co., Ltd","Sapporo, Japan",2020-04-28
+1098,"Preh GmbH","Bad Neustadt a. d. Saale, Germany",2020-05-12
+1099,"MadgeTech, Inc","Warner, NH  USA",2020-05-13
+1100,"LINK Marine Technologies (formerly Smart Yachts International Limited)","Allendale, Northumberland  UK",2025-02-11
+1101,"DIS Sensors B.V.","Soest, the Netherlands",2020-06-04
+1102,"Carl Geringhoff GmbH & Co. KG","Ahlen, Germany",2020-06-04
+1103,"Diesel Laptops","Irmo, SC   USA",2020-06-10
+1104,"The Toro Company","Bloomington, MN   USA",2020-06-12
+1105,"Redekop Manufacturing","Saskatoon, SK  Canada",2020-07-01
+1106,"Great Dane LLC","Chicago, IL   USA",2020-07-01
+1107,"Dräger Safety","Lübeck, Germany",2020-07-08
+1108,ORBCOMM,"Rochelle Park, NJ   USA",2020-07-08
+1109,Dockmate,"Boortmeerbeek, Belgium",2020-07-12
+1110,"Analytic Systems Ware (1993) Ltd.","Delta, BC   Canada",2020-07-19
+1111,"SEPPI M.","Caldaro, Italy",2020-07-24
+1112,"Bollinger Motors","Oak Park, MI   USA",2020-08-04
+1113,"iVolve Pty Ltd","South Brisbane, Australia",2020-08-04
+1114,"Bob's Machine","Tampa, FL   USA",2020-08-09
+1115,"Gems Sensors & Controls","Plainville, CT   USA",2020-08-14
+1116,"HR Agrartechnik GmbH","Velen, Germany",2020-08-14
+1117,"LG Chem, Ltd","Seoul, South Korea",2020-08-14
+1118,"L3Harris ASV","Portchester, Hampshire   UK",2020-08-18
+1119,"Balmar LLC","Huntsville, AL  USA",2020-08-27
+1120,"Elettromedia s.r.l.","Macerata, Italy",2020-08-27
+1121,"Platform Science","La Jolla, CA   USA",2020-09-02
+1122,"GT Inc.","Oak Ridge North, TX   USA",2020-09-02
+1123,"QP Hydraulics","Carol Stream, IL   USA",2020-09-08
+1124,"Fortron Agriculture","Campo Mourão, Brazil",2020-09-08
+1125,"Griffith-Elder & Co. Ltd.","Bury St. Edmunds, Suffolk  UK",2020-09-14
+1126,Auralix,"Maribor, Slovenia",2020-09-14
+1127,ElectroMaax,"Beamsville, ON   Canada",2020-09-14
+1128,"Citoon Electronic Technology (Tianjin) Co., Ltd.","Tianjin, China",2020-09-16
+1129,"Spectrolytic GmbH","Wernberg-Koeblitz, Germany",2020-09-22
+1130,"Vitesco Technologies","Regensburg, Germany",2020-09-22
+1131,"Guliwer electronics s.r.o.","Lanškroun, Czech republic",2020-09-29
+1132,"Tokachi Zaidan","Obihiro-shi, Japan",2020-09-29
+1133,"MEGATRON Elektronik GmbH & Co. KG","Putzbrunn, Germany",2020-09-29
+1134,"Master Schools at Ostbahnhof","Munich, Germany",2020-09-30
+1135,"Japan Aviation Electronics Industry, Limited","Tokyo, Japan",2020-09-30
+1136,"Primosensor GmbH","Dieburg, Germany",2020-10-04
+1137,"SIKO GmbH","Buchenbach, Germany",2020-10-12
+1138,"Micro-Sensor GmbH","Hermsdorf, Germany",2020-10-22
+1139,"ASP Technology","Grand Forks, ND   USA",2020-10-14
+1140,"Across Oceans Systems Ltd.","North Vancouver, BC   Canada",2020-10-29
+1141,"MRS Electronic GmbH & Co. KG","Rottweil, Germany",2020-10-29
+1142,Truma,"Putzbrunn, Germany",2020-10-29
+1143,"Elektro-Szoft 2000","Bátmonostor, Hungary",2020-11-02
+1144,"Troo Corporation","Ottawa, ON   Canada",2020-11-04
+1145,"Kiwi Yachting","Auckland, New Zealand",2020-11-05
+1146,Rometron,"Steenderen, the Netherlands",2020-11-09
+1147,"Dana Inc.","Maumee, OH   USA",2020-11-10
+1148,"Stercom Power Solutions GmbH","Weyarn, Germany",2020-11-10
+1149,"Wuxi Shengbang Electronics Co., Ltd","Wuxi, China",2020-11-23
+1150,"BSB Artificial Intelligence GmbH","Linz, Austria",2020-11-29
+1151,"Orca Technologies AS","Oslo, Norway",2020-11-29
+1152,"Vredo Dodewaard B.V.","Dodewaard, The Netherlands",2020-12-18
+1153,"Kawasaki Heavy Industries, Ltd.","Kobe, Japan",2020-12-24
+1154,"TBS Electronics BV","Zwaag, The Netherlands",2021-01-05
+1155,"LACOS GmbH (formerly LACOS Computerservice GmbH)","Zeulenroda, Germany",2023-10-04
+1156,"Nokian Tyres","Nokia, Finland",2021-01-14
+1157,Carriergistics,"Clover, SC   USA",2021-01-22
+1158,"Technoton Electronics","Minsk, Belarus",2021-01-26
+1159,"Bel Power Solutions","Dubnica nad Vahom, Slovakia",2021-02-04
+1160,"MG Energy Systems B.V.","Leeuwarden, The Netherlands",2021-02-04
+1161,"Griessbach GmbH","Luckenwalde, Germany",2021-02-08
+1162,"PEL-tuote Oy","Rantasalmi, Finland",2021-02-12
+1163,"DFX Technologies LLC","Roswell, GA   USA",2021-02-18
+1164,"SEG Automotive","Stuttgart, Germany",2021-03-08
+1165,"InnoTotal AB","Kungälv, Sweden",2021-03-14
+1166,"Wachendorff Automation GmbH & Co. KG","Geisenheim, Germany",2021-03-16
+1167,"Tevva Motors","Chelmsford, Essex  UK",2021-03-19
+1168,"Masats S.A.","Sant Salvador de Guardiola, Barcelona  Spain",2021-03-23
+1169,"Sea Machine Robotics Inc.","Boston, MA   USA",2021-04-01
+1170,"Poseidon Ocean Systems Ltd.","Campbell River, BC   Canada",2021-04-08
+1171,"Vista Manufacturing","Elkhart, IN   USA",2021-04-13
+1172,"Hyzon Motors","Honeoye Falls, NY   USA",2021-04-13
+1173,"philippi elektrische systeme gmbh","Remseck am Neckar, Germany",2021-04-13
+1174,"Agricon GmbH","Ostrau, Germany",2021-04-19
+1175,"MAGTEC Products, Inc.","Calgary, AB  Canada",2021-04-20
+1176,"Asuns Corp.","Dundee, IL   USA",2021-05-02
+1177,"RNG International Inc.","Ontario, CA   USA",2021-05-02
+1178,"ERO GmbH","Simmern, Germany",2021-05-02
+1179,"QS Control srl","Narni, Italy",2021-05-04
+1180,"Murata Power Solutions Inc.","Westborough, MA   USA",2021-05-25
+1181,"Banjo Corporation","Crawfordsville, IN   USA",2021-05-25
+1182,"Rottmann Automation","Ochtrup, Germany",2021-05-27
+1183,"Zipwake AB","Gothenburg, Sweden",2021-06-07
+1184,"AMA S.p.A.","Campogalliano, Italy",2021-06-07
+1185,"WFCO Electronics","Tang Xia Town, China",2021-06-07
+1186,"Sailmon BV","Den Haag, The Netherlands",2021-06-15
+1187,"TiTAN-Project LLC","Moscow, Russian Federation",2021-07-10
+1188,G-SNS,"Munich, Germany",2021-07-20
+1189,"Autotrasporti Cavallo G&V","Boves (CN), Italy",2021-07-26
+1190,"Sirros IoT","Novo Hamburgo, Brazil",2021-07-26
+1191,"Pacoma USA, Inc.","Halifax, PA   USA",2021-08-03
+1192,"Airmoniq Pro Kft.","Pécs, Hungary",2021-08-12
+1193,"emotas embedded communication GmbH","Merseburg, Germany",2021-08-26
+1194,"Sierra Marine","Litchfield, IL",2021-08-26
+1195,düvelsdorf,"Ottersberg, Germany",2021-09-10
+1196,"Terra Care GmbH","Neukirchen, Austria",2021-09-10
+1197,"SOLGE Corporation","Daegu, South Korea",2021-09-10
+1198,"ComLink Equipamentos Eletrônicos Ltda","Caxias do Sul, Brazil",2021-09-10
+1199,"ELEO Technologies B.V.","Helmond, The Netherlands",2021-09-10
+1200,"Xinuo Information Technology (Xiamen) Corporation Limited","Xiamen, China",2021-09-10
+1201,"Emisense Technologies, LLC","Ladera Ranch, CA   USA",2021-09-30
+1202,"OSCAR ELECTRONICS SRL (formerly OSCAR Elettronica)","Carpenedolo, Italy",2024-05-15
+1203,"Equipment Technologies, Inc.","Mooresville, IN   USA",2021-09-30
+1204,"Miller Technology Incorporated","North Bay, ON   Canada",2021-09-30
+1205,"Carbon Autonomous Robotic Systems","Seattle, WA   USA",2021-09-30
+1206,"STE Solutions B.V.","Wehl, The Netherlands",2021-09-30
+1207,"UEC Electronics","Hanahan, SC   USA",2021-09-30
+1208,"Afflield Kft. (MachineryGuide)","Budapest, Hungary",2021-09-30
+1209,"Bauser GmbH & Co. KG","Empfingen, Germany",2021-09-30
+1210,"Ambra Solutions","Trois-Rivieres, QC   Canada",2021-10-13
+1211,"Kiwon Electronics Co., Ltd.","Iksan, Republic of Korea",2021-10-13
+1212,"TAO Performance Limited","Paihia, New Zealand",2021-10-26
+1213,"Apollo Tyres Ltd","Gurgaon, India",2021-10-26
+1214,"Element 1","Bend, OR   USA",2021-10-31
+1215,"Power Control Systems","San Vendemiano, Italy",2021-11-06
+1216,"SMP Poland sp. z o.o.","Warsaw, Poland",2021-11-21
+1217,"FSG Fernsteuergeräte Kurt Oelsch GmbH","Berlin, Germany",2021-11-24
+1218,Septentrio,"Leuven, Belgium",2021-11-28
+1219,"Weidmueller Interface GmbH & Co. KG","Detmold, Germany",2021-11-30
+1220,"Catamaran Electronics LLC","West Melbourne, FL   USA",2021-12-03
+1221,"Norcold Inc.","Sidney, OH   USA",2021-12-03
+1222,"Tough Tech Ltd.","Whitchurch, Shropshire  UK",2021-12-03
+1223,"Toyo Agricultural Machinery Manufacturing Co., Ltd.","Obihiro, Japan",2021-12-03
+1224,"Neuser Elektrotechnik GmbH","Birkenbeul, Germany",2021-12-03
+1225,"SeedMaster Manufacturing Ltd.","Emerald Park, SK   Canada",2021-12-09
+1226,"Piippo Hydraulic","Kiuruvesi, Finland",2021-12-09
+1227,"YAHATA Co., Ltd.","YaoCity, Osaka  Japan",2021-12-09
+1228,"INTILION GmbH","Zwickau, Germany",2021-12-13
+1229,"Arcon Designs, LLC","Bloomington, IN   USA",2021-12-23
+1230,"Nick Abbey Digital Agriculture Ltd","Scarborough, Yorkshire   UK",2021-12-16
+1231,"Excidor AB","Bollnäs, Sweden",2021-12-23
+1232,"Treffler Maschinenbau GmbH & Co. KG","Pöttmes-Echsheim, Germany",2021-12-29
+1233,"nke Marine Electronics","Hennebont, France",2021-12-29
+1234,"American Battery Solutions","Lake Orion, MI   USA",2022-01-09
+1235,"NESAN Automotive Inc.","Izmir, Turkey",2022-01-17
+1236,Agrosystem,"Ribeirao Preto, Brazil",2022-01-17
+1237,"Changzhou Lambda Electronic Co., Ltd","Changzhou, China",2022-01-17
+1238,"Honda Electronics Co., Ltd","Toyohashi, Aichi   Japan",2022-01-21
+1239,"SuperTrack Aps","Egaa, Denmark",2022-01-21
+1240,TiMOTION,"New Taipei City, Taiwan",2022-01-21
+1241,"Ineo Systrans","Achères, France",2022-01-28
+1242,"Super Start Batteries","Lansvale, NSW   Australia",2022-01-28
+1243,"AvMap S.r.l.","Carrara (MS), Italy",2022-01-28
+1244,"Planti Center","Marialva, Brazil",2022-02-06
+1245,"Raritan Engineering Company, Inc","Millville, NJ   USA",2022-02-14
+1246,"Rother Industries & Technology","Cordoba, Spain",2022-02-14
+1247,GRIFA,"Pfullendorf, Germany",2022-02-14
+1248,"O.M.F.B. S.p.A. Hydraulic Components","Provaglio d'Iseo (BS), Italy",2022-02-18
+1249,"Integrated Power Solutions AG","Port, Switzerland",2022-03-06
+1250,ELHO,"Pännäinen, Finland",2022-03-29
+1251,"Valmet Automotive EV Power Ltd","Uusikaupunki, Finland",2022-04-11
+1252,"APV - Technische Produkte GmbH","Hötzelsdorf, Austria",2022-04-11
+1253,"Trafag AG","Bubikon, Switzerland",2022-04-11
+1254,"ARADEX AG","Lorch, Germany",2022-04-11
+1255,"Altec Industries, Inc.","Birmingham, AL   USA",2022-04-12
+1256,"Dimensions Agri Technologies AS","Oslo, Norway",2022-04-12
+1257,KOSTAL,"Hagen, Germany",2022-04-12
+1258,"AGC Technologies","Madrid, Spain",2022-04-12
+1259,"Grayson Automotive Services Limited","Birmingham, West Midlands  UK",2022-04-12
+1260,"Interactive Technologies, Inc.","Olathe, KS   USA",2022-04-12
+1261,AgXeed,"Oirlo, The Netherlands",2022-04-15
+1262,"Fort Robotics","Philadelphia, PA   USA",2022-04-15
+1263,"BOS Balance of Storage Systems AG","Neu-Ulm, Germany",2022-04-25
+1264,Microelect,"Villa Gobernador Gálvez, Argentina",2022-04-25
+1265,"IPETRONIK GmbH & Co KG","Baden-Baden, Germany",2022-05-02
+1266,"Hyundai Doosan Infracore","Incheon, Republic of Korea",2022-05-02
+1267,"Wacker Neuson SE","Munich, Germany",2022-05-02
+1268,"Back 40 Precision Inc.","Baldwin, IL   USA",2022-05-04
+1269,"VIS Hydraulics s.r.l.","Pavullo Nel Frignano, Italy",2022-05-09
+1270,"Versalift Denmark A/S","Farsø, Denmark",2022-05-09
+1271,"Raven Connected","Ottawa, ON   Canada",2022-05-14
+1272,"Samsara Inc.","San Francisco, CA   USA",2022-05-17
+1273,"Clearflame Engines Inc","Geneva, IL   USA",2022-05-22
+1274,"LDL Technology","Ramonville-Saint-Agne, France",2022-05-22
+1275,"O.M.P. Officine Mazzocco Pagnoni S.r.l.","Funo, Italy",2022-05-22
+1276,"Aspin Kemp & Associates","Montague, PE   Canada",2022-06-10
+1277,"BMZ Germany GmbH","Karlstein am Main, Germany",2022-06-10
+1278,"Comrod Communication Group","Stavanger, Norway",2022-06-21
+1279,"Ognibene Power S.p.A.","Reggio Emilia (RE), Italy",2022-06-21
+1280,"SANTEST CO., LTD.","Osaka-shi, Osaka  Japan",2022-07-05
+1281,iQuus,"Neerijnen, The Netherlands",2022-07-05
+1282,"COTEK ELECTRONIC IND. CO., LTD","Taoyuan City, Taiwan",2022-07-07
+1283,"LTG Tech","Metz, France",2022-07-18
+1284,"Robot Makers GmbH","Kaiserslautern, Germany",2022-07-18
+1285,"Graco Inc.","Minnepolis, MN   USA",2022-07-18
+1286,"NEXAT GmbH","Rieste, Germany",2022-07-21
+1287,"Spartan Radar","Los Alamitos, CA   USA",2022-08-03
+1288,"ANELLO Photonics","Santa Clara, CA   USA",2022-08-03
+1289,"Loadrite (Auckland) Ltd.","Auckland, New Zealand",2022-08-03
+1290,"WaveTamer Partners LLC","Greensboro, NC   USA",2022-08-03
+1291,"Forward Thinking Systems LLC","Jericho, NY   USA",2022-08-08
+1292,"SUMITOMO CONSTRUCTION MACHINERY Co., Ltd.","Tokyo, Japan",2022-08-09
+1293,POSITAL,"Aachen, Germany",2022-08-18
+1294,"TR-Electronic GmbH","Trossingen, Germany",2022-09-01
+1295,"SIP d.d.","Šempeter v Savinjski Dolini, Slovenia",2022-09-01
+1296,Hexagon,"Florianópolis, Brazil",2022-09-14
+1297,"Micro-Epsilon Messtechnik GmbH & Co. KG","Ortenburg, Germany",2022-09-14
+1298,"SFOGGIA Agriculture Division S.r.l.","Montebelluna, Italy",2022-09-14
+1299,"Energy Solutions","Rochester, Kent   UK",2022-09-15
+1300,"Watt Fuel Cell Corporation","Mount Pleasant, PA   USA",2022-09-15
+1301,"Tecumseh do Brasil Ltda","São Carlos, São Paulo   Brazil",2022-09-23
+1302,ProMariner,"Auburn, NH   USA",2022-09-23
+1303,"Carbon Bee AgTech","Valence, France",2022-10-19
+1304,"Palfinger Europe GmbH","Salzburg, Austria",2022-10-19
+1305,"dragonfly Energy","Reno, NV  USA",2022-10-22
+1306,"Koden Electronics Co., Ltd.","Tokyo, Japan",2022-10-22
+1307,"Smart AG Systems","Yeerongpilly, QLD  Australia",2022-10-31
+1308,Agtecnic,"Brisbane, QLD  Australia",2022-11-04
+1309,"Shanghai Zhichuan Electronic Tech Co., Ltd.","Shanghai, China",2022-11-04
+1310,"LPL Systems (formerly Loughborough Projects Ltd)","Loughborough, Leicestershire   UK",2022-11-19
+1311,"Humphree AB","Gothenburg, Sweden",2022-11-22
+1312,"Control Devices Pty Ltd","Alexandria, NSW  Australia",2022-12-01
+1313,"United States Army - Ground Vehicle Systems Center","Warren, MI   USA",2022-12-05
+1314,"Newton Crouch Company, LLC","Griffin, GA   USA",2022-12-07
+1315,"SMPC Technologies Ltd.","Burnaby, BC   Canada",2022-12-07
+1316,"Hinkley Yachts","Portsmouth, RI   USA",2022-12-07
+1317,"GMM - Global Maritime Management GmbH","Trittau, Germany",2022-12-07
+1318,"Atlis Motor Vehicles","Mesa, AZ   USA",2022-12-12
+1319,"I/O Controls Corporation","Azusa, CA   USA",2022-12-12
+1320,"Triskel Marine Ltd","Hayle, Cornwall   UK",2022-12-19
+1321,"PATLITE Corporation","Osaka, Japan",2022-12-19
+1322,Movimatica,"Cuneo, Italy",2023-01-03
+1323,"Briter Products, Inc.","South Bend, IN   USA",2023-01-03
+1324,"Bourgault Industries","Saint Brieux, SK   Canada",2023-01-14
+1325,"OPW (formerly BASE Engineering Inc.)","Hamilton, OH USA",2025-04-09
+1326,"HBC-radiomatic GmbH","Crailsheim, Germany",2023-01-14
+1327,"Frans Vervaet B.V.","Biervliet, The Netherlands",2023-01-20
+1328,"PerPlant ApS","København K, Denmark",2023-01-20
+1329,"IDM S.r.l.","Montebelluna, Italy",2023-01-20
+1330,"Warwick Control Technologies","Halesowen, West Midlands   UK",2023-01-20
+1331,"Dolphin Charger","Annecy, France",2023-01-20
+1332,"Fairbanks Scales, Inc.","Overland Park, KS   USA",2023-01-26
+1333,"xFarm Technologies SA","Manno, Switzerland",2023-02-17
+1334,"Greer Company","Jenks, OK   USA",2023-01-27
+1335,CPDEVICE,"Beijing, China",2023-02-03
+1336,"Aegis Power Systems, Inc.","Murphy, NC   USA",2023-02-03
+1337,"Barnacle Systems Inc.","Victoria, BC   Canada",2023-02-22
+1338,"Volta Trucks AB","Stockholm, Sweden",2023-02-24
+1339,"Tillett and Hague Technology Limited","Bedford, Bedfordshire  UK",2023-02-23
+1340,"ORELTEK Elektronik ve Yazılım Teknolojileri","Serdivan, Turkey",2023-02-23
+1341,"Ag Express Electronics","Des Moines, IA   USA",2023-03-04
+1342,"DKE-Data GmbH & Co. KG","Osnabrück, Germany",2023-03-04
+1343,"Heavy Data GmbH","Oberursel, Germany",2023-03-04
+1344,"Haulotte Group","Lorette, France",2023-03-07
+1345,"PRIGNITZ Mikrosystemtechnik GmbH","Wittenberge, Germany ",2023-03-16
+1346,"Einboeck GmbH","Dorf an der Pram, Austria",2023-03-16
+1347,"Munckhof Fruit Tech Innovators","Horst, The Netherlands",2023-03-16
+1348,"Radian IoT, Inc.","Okauche, WI   USA",2023-03-16
+1349,"ANNABURGER Nutzfahrzeug GmbH","Annaburg, Germany",2023-03-21
+1350,AGRONETIC,"Liege, Belgium",2023-03-21
+1351,"Motorenfabrik Hatz GmbH & Co. KG","Ruhstorf, Germany",2023-03-29
+1352,"NISHIYAMA Corporation","Tokyo, Japan",2023-03-29
+1353,"Ocean LED Marine Ltd","Hinkley, Leicestershire   UK",2023-04-09
+1354,"Técnicas de Electrónica y Automatismos, S.A.","Barcelona, Spain",2023-04-22
+1355,"DROP Agricultura Ltda","Piracicaba, Brazil",2023-04-22
+1356,"Nordic Lights Ltd","Jakobstad, Finland",2023-04-22
+1357,TireCheck,"Heidenheim, Germany",2023-05-07
+1358,"Fontaine Fifth Wheel","Jasper, AL  USA",2023-05-07
+1359,BlueNav,"Arcachon, France",2023-05-07
+1360,"Lemca Vision","Glabais, Belgium",2023-05-07
+1361,"Nantong Saiyang Electronics Co., Ltd.","Nantong, China",2023-05-18
+1362,"Zparq AB","Stockholm, Sweden",2023-05-18
+1363,"Calix AB","Eskilstuna, Sweden",2023-05-18
+1364,"Yashu Systems","Archbald, PA   USA",2023-06-02
+1365,"JVCKENWOOD Corporation","Kanagawa, Japan",2023-06-02
+1366,"Telemecanique Sensors & Switches","Rueil-Malmaison, France",2023-06-16
+1367,"Dewulf NV","Roeselare, Belgium",2023-06-25
+1368,"RAD Propulsion Ltd","Sarisbury Green, Southampton   UK",2023-06-25
+1369,"Electric Yacht","Golden Valley, MN   USA",2023-06-25
+1370,"Emtech S.A.","Bahia Blanca, Buenos Aires   Argentina",2023-08-04
+1371,"First Mode","Seattle, WA   USA",2023-06-25
+1372,"Elco Motor Yachts","Shelton, CT   USA",2023-06-30
+1373,"Centek Industries","Thomasville, GA   USA",2023-07-06
+1374,"CASAPPA S.p.A.","Parma, Italy",2023-07-06
+1375,"ŠKODA ELECTRIC a.s.","Plzeň, Czech republic",2023-08-14
+1376,"SUNS International, LLC","Chelmsford, MA   USA",2023-07-06
+1377,"ABD Solutions","Bradford on Avon, Wiltshire   UK",2023-07-24
+1378,"Bertini SA","Rosario, Santa Fe   Argentina",2023-07-24
+1379,"Novag SAS","Fressines, France",2023-07-24
+1380,"ADVES GmbH & Co. KG","Goldenstedt, Germany",2023-07-24
+1381,"Dr. Diesel Technologies","Murrieta, CA   USA",2023-07-24
+1382,"Thornwave Labs Inc.","Youngsville, NC   USA",2023-07-24
+1383,"Alpego S.p.A.","Lonigo, Italy",2023-07-24
+1384,"Tecnoseal Foundry S.r.l.","Grosseto, Italy",2023-07-24
+1385,"Pro Charging Systems, LLC","La Vergne, TN   USA",2023-07-24
+1386,"Smart Eye AB","Gothenburg, Sweden",2023-07-24
+1387,"Radel (Pty) Ltd","Olivedale, South Africa",2023-07-31
+1388,"Nira Technology","Eskisehir, Turkey",2023-08-15
+1389,"EVEX Co., LTD","Busan, Republic of Korea",2023-08-23
+1390,"FJ Dynamics International Limited","Shenzhen, China",2023-08-23
+1391,AriensCo,"Brillion, WI   USA",2023-08-29
+1392,"Phoenix America LLC","Fort Wayne, IN   USA",2023-08-29
+1393,"Powerland Technology Inc","Nanjing, China",2023-08-29
+1394,"Zhejiang Ruixing Electromechanical Technology Co., Ltd.","Zhejiang, China",2023-09-15
+1395,"MLB Industrial","Arundel, QLD  Australia",2023-09-15
+1396,"Fast Ag Solutions, LLC","Windom, MN   USA",2023-10-04
+1397,"SaMASZ Sp. Z o.o.","Zabludow, Poland",2023-10-04
+1398,"Gobius Sensor Technology AB","Ellös, Sweden",2023-10-12
+1399,"Hans Brantner & Sohn Fahrzeugbaugesellschaft mbH","Laa an der Thaya, Austria",2023-10-12
+1400,"IWN GmbH & Co. KG","Bielefeld, Germany",2023-10-12
+1401,"ROM Communications Inc.","Kelowna, BC   Canada",2023-10-12
+1402,"ComNav Technology Ltd.","Shanghai, China",2023-10-20
+1403,"Arco Marine","Pensacola, FL   USA",2023-10-23
+1404,"BRUSA HyPower AG","Buchs, Switzerland",2023-10-31
+1405,"TELIG Electronics","Passo Fundo, Brazil",2023-11-03
+1406,"Lumilex ALT SRL","Baicoi, PH   Romania",2023-11-08
+1407,Open-Agriculture,"Gescher, Germany",2023-11-10
+1408,"Lenco Marine Inc.","Stuart, FL   USA",2023-11-13
+1409,"Z Elektronika Kft.","Pécs, Hungary",2023-12-04
+1410,"Allan Equipment Manufacturing Ltd.","York, PE  Canada",2023-12-04
+1411,"Shanghai Huace Navigation Technology Ltd.","Shanghai, China",2023-12-04
+1412,"Naocontrol S.L.","A Coruña, Spain",2023-12-20
+1413,"OHNOH2O LLC","Lake Worth, FL   USA",2023-12-20
+1414,"INTRACOM DEFENSE S.A.","Koropi, Greece",2023-12-21
+1415,"Máquinas Agrícolas Jacto S.A.","Pompéia, São Paulo, Brazil",2024-01-04
+1416,"Wavetronix LLC","Springville, UT   USA",2024-01-04
+1417,"Revatek LLC","Menomonee Falls, WI   USA",2024-01-07
+1418,"Karluna Engineering","İzmir, Turkey",2024-01-07
+1419,"iPatch Marine","Camberwell, Australia",2024-01-11
+1420,"TALOS - Precision Measurement Technologies","Clearwater, FL   USA",2024-01-11
+1421,"Clarios, LLC","Glendale, WI   USA",2024-01-11
+1422,"xTCU AG","Vaduz, Liechtenstein",2024-01-11
+1423,"AC S.A.","Bialystok, Poland",2024-01-11
+1424,Bewis,"Wuxi, China",2024-05-07
+1425,"Electronics in Agriculture, School of Engineering, University of Galway","Galway, Ireland",2024-01-26
+1426,"Samson Group","Viborg, Denmark",2024-02-01
+1427,"REITER RESPIRO","Hofkirchen an der Trattnach, Austria",2024-02-11
+1428,"Samo Maschinenbau GmbH","Ottnang am Hausruck, Austria",2024-02-12
+1429,"Nikola Corporation","Phoenix, AZ   USA",2024-02-13
+1430,"Mantracourt Electronics Ltd","Exeter, Devon  UK",2024-02-13
+1431,"Nauto Inc.","Sunnyvale, CA  USA",2024-03-13
+1432,"MDH Defence Ltd.","Amesbury, Wiltshire  UK",2024-03-13
+1433,"Unicontrol ApS","Odense, Denmark",2024-03-13
+1434,"eSurvey GNSS Ltd.","Shanghai, China",2024-03-13
+1435,"Heilongjiang Huida Technology Co., Ltd","Harbin, Hei long jiang, China",2024-03-13
+1436,M-extend,"Acigné, France",2024-03-13
+1437,"DOKEN Technology Co. Ltd.","Konya, Turkey",2024-03-13
+1438,Aeolionics,"Mercer Island, WA  USA",2024-03-14
+1439,"PredictWind Ltd","Port England, Auckland, New Zealand",2024-03-13
+1440,"Egis Mobile Electric","Bellingham, WA  USA",2024-03-14
+1441,"Shanghai Allynav Technology Co.,Ltd.","Shanghai, China",2024-03-14
+1442,"EVYTRA GmbH","Villingen-Schwenningen, BW, Germany",2024-04-17
+1443,"SoilEssentials Limited","Brechin, Angus, UK",2024-04-17
+1444,"Micropower Group","Växjö, Småland, Sweden",2024-04-17
+1445,"Starboard Yacht Group","Dania Beach, FL",2024-04-17
+1446,"Roswell Marine","Rockledge, FL",2024-04-17
+1447,"Innotag Distributions Inc.","Beloeil, Quebec, Canada",2024-04-17
+1448,"Elmer's Manufacturing","Altona, Manitoba, Canada",2024-04-17
+1449,"Bontaz Centre","Marnaz, France",2024-04-17
+1450,Agrivaux,"Charleroi, France",2024-04-17
+1451,"Guangdong ePropulsion Technology Ltd.","Guangdong Province, MD, China",2024-04-17
+1452,"Micro-Air LLC","Hamilton, NJ  USA",2024-04-17
+1453,"Vital Battery","Taylors Beach, NSW, Australia",2024-04-17
+1454,"QTIS B.V.","	Sliedrecht, The Netherlands",2024-05-07
+1455,"Eberspächer Climate Control Systems International GmbH","	Esslingen, Germany",2024-05-07
+1456,"Krampe Fahrzeugbau GmbH","	Coesfeld, North Rhine Westphalia, Germany",2024-05-07
+1457,"Albach Maschinenbau AG","	Vohburg, Bayer, Germany",2024-05-07
+1458,"RideController LLC","Kansas City, MO  USA",2024-06-14
+1459,"Advanced Input Systems","Coeur d'Alene, ID  USA",2024-06-14
+1460,"Tocaro Blue","Pensacola, FL  USA",2024-06-14
+1461,"Vanquish Yachts","Marknesse, The Netherlands",2024-06-14
+1462,"Trackunit ApS","Aalborg, Denmark",2024-06-14
+1463,"STOK Electric","Lieshout, Noord-Brabant, The Netherlands",2024-06-14
+1464,"Hi-Target Surveying Instrument Co., Ltd.","Guangzhou, Guangdong, China",2024-07-01
+1465,Watteco,"Lanester, Brittany, France",2024-07-01
+1466,"Sveaverken Svea Agri AB","Katrineholm, Sweden",2024-07-01
+1467,"S.A.E.T. s.r.l.","Costigliole Saluzzo, Italy",2024-07-01
+1468,Senquip,"Taylors Beach, NSW, Australia",2024-08-02
+1469,"LS Mtron","Wanju-gun, Jeollabuk-do, Republic of Korea",2024-08-02
+1470,"GemOne NV","Waregem, Belgium",2024-08-02
+1471,"FT Technologies","Sunbury on Thames, UK",2024-08-02
+1472,"Acculon Energy","Columbus, OH USA",2024-09-16
+1473,"Cranesmart Systems, Inc.","Edmonton, Alberta, Canada",2024-09-16
+1474,"Calex Electronics Limited","Leighton Buzzard, Bedfordshire, UK",2024-09-16
+1475,"DSP Solutions, Inc.","Oxnard, CA USA",2024-09-16
+1476,"Wilhelm Stoll Maschinenfabrik GmbH","Lengede, Germany",2024-09-16
+1477,TOBROCO-GIANT,"Oisterwijk, The Netherlands",2024-09-16
+1478,"Alps Alpine Co., Ltd.","Tokyo, Japan",2024-09-16
+1479,A-Electronix,"Nybrostrand, Skane, Sweden",2024-09-16
+1480,"Thermo King","Bloomington, MN  USA",2024-10-14
+1481,"E-Force Marine","Miami Gardens, FL  USA",2024-10-14
+1482,"CMC Marine","Milano, Italy",2024-10-14
+1483,"Nanjing Sandemarine Information Technology Co., Ltd.","Nanjing, Jiangsu Providence, China",2024-10-14
+1484,AgroOSA,"Robakowo, WLKP, Poland",2024-11-09
+1485,"Lester Electrical","Lincoln, NE USA",2024-11-09
+1486,Xpanner,"Seoul, South Korea",2024-11-09
+1487,Geosoft,"Seoul, South Korea",2024-11-09
+1488,"Boetkin Technology Co., LTD","Dongguan City, Guangdong Province, China",2024-11-09
+1489,"Lite-Check LLC","Spokane, WA USA",2024-11-09
+1490,"Clean Republic SODO, LLC","Seattle, WA USA",2024-11-09
+1491,"Power Pollen","Ames, IA  USA",2024-11-09
+1492,Softivert,"Gabaston, France",2024-11-09
+1493,"Jantop Oy","Vieremä, Finland",2024-11-09
+1494,RAPITRONICS,"Makoszyn, Poland",2025-01-09
+1495,FlyAgData,"Zielona Góra, Poland",2025-01-06
+1496,AgriRobot,"Kongens Lyngby, Denmark",2025-01-06
+1497,"ERMO Spa","Casalbuttano ed Uniti, Italy",2025-01-06
+1498,"PM Pfanzelt Maschinenbau GmbH","Rettenbach, Germany",2025-01-06
+1499,"Hydrasystem SP. Z O.O.","Janki, Poland",2025-01-06
+1500,"Scanstrut Inc.","Westbrook, CT  USA",2025-01-06
+1501,"Reverso Pumps LLC","Davie, FL  USA",2025-01-06
+1502,Barantech,"Kiriyat Gat, Israel",2025-01-06
+1503,"Rosemount Specialty Products","East Wenatchee, WA  USA",2025-01-06
+1504,"Nimbus Power Systems, Inc.","Groton, CT  USA",2025-01-06
+1505,"BC Motion","Saginaw, MN  USA",2025-01-06
+1506,Expion360,"Redmond, OR  USA",2025-02-11
+1507,"Apex.AI, Inc.","Palo Alto, CA  USA",2025-02-11
+1508,"Xwatch Safety Solutions Ltd. part of Hexagon","Three Legged Cross, Wimborne, UK",2025-02-11
+1509,"Bondioli & Pavesi","Suzzara, MN, Italy",2025-02-11
+1510,"Austin Motor Works","Austin, TX  USA",2025-02-11
+1511,"APATOR METRA s.r.o.","Sumperk, Czech Republic",2025-02-11
+1512,"Lumitec LLC","Delray Beach, FL  USA",2025-02-11
+1513,"Sy-Klone International","Jacksonville, FL  USA",2025-02-11
+1514,SYMX.ai,"Sudbury, Ontario, Canada",2025-02-11
+1515,"Ingeniería y Sistemas Cerea","Valladolid, Castilla y León, Spain",2025-02-11
+1516,"THERMIS spol. s r.o.","Brno, Czech Republic",2025-02-11
+1517,"Daedong Corporation","Daegu, South Korea",2025-02-11
+1518,"Nova Kool Manufacturing ULC","Coquitlam, BC, Canada",2025-04-09
+1519,"Volboff Electron Science and Technology Co., Ltd.","Minhang District, Shanghai, China",2025-04-25
+1520,"SRT Marine Systems PLC","Bath, UK",2025-04-09
+1521,Agricolmeccanica,"Torviscosa, Udine, Italy",2025-04-09
+1522,"American Thermal Instruments","Dayton, OH USA",2025-04-09
+1523,"Carlson Software","Maysville, KY USA",2025-04-09
+1524,"Ocean Infinity Solutions Limited","London, UK",2025-04-09
+1525,Emsiso-emDrive,"Pesnica pri Mariboru, 	Slovenia",2025-04-09
+1526,"MITSUBISHI MAHINDRA AGRICULTURAL MACHINERY CO.,LTD.","Matsue, Shimane, Japan",2025-04-09
+1527,"Richardt Steuer- und Regelgeraete GmbH","Oberaula, 	Germany",2025-04-09
+1528,"Savant Technology","Casper, WY USA",2025-04-09
+1529,"Industrie Elektronik Brilon GmbH","Brilon, NRW, Germany",2025-04-09
+1530,"Roelama B.V.","Alphen, Noord-Brabant, The Netherlands",2025-04-09
+1531,"Kobelco Construction Machinery Co.,Ltd.","Hiroshima, Japan",2025-04-09
+1532,"E-Switch, Inc.","Brooklyn Park, MN USA",2025-04-09
+1533,"Rieker Inc.","Aston, PA USA",2025-04-09
+1534,BluVein,"Northgate, Queensland, Australia",2025-04-09
+1535,"LOX Container Technology AB","Stockholm, Sweden",2025-04-09
+1536,"Tatra Trucks a.s.","Koprivnice, Czech Republic",2025-04-09
+1537,"Anyload Weigh & Measure Inc.","Bournaby, BC, Canada",2025-04-25
+1538,"Quick S.p.A.","Piangipane - Ravenna, Italy",2025-04-25
+1539,"Ceday Information Technologies","Izmir, Bornova, Turkey",2025-04-25
+1540,"Ideas & Motion","Cherasco (CN), Italy",2025-04-25
+1541,"Solid State Marine","West Bridgewater, MA USA",2025-04-25
+1542,"Global Digital Instruments","Fairport, NY USA",2025-04-25
+1543,"GT Joysticks AG","Bruegg, BE, Switzerland",2025-04-25
+1544,"Geophysical Survey Systems, Inc.","	Nashua, NH, USA",2025-05-09
+1545,RoadEazy,"Sunnyvale, CA USA",2025-05-09
+1546,ESMART,"Indianapolis, IN USA",2025-05-09
+1547,"Weichai Lovol Intelligent Agricultural Technology Co., Ltd.","Weifang City, Shandong Province, China",2025-06-16
+1549,"AM Co., Ltd.","Gwacheon-si, Gyeonggi-do, South Korea",2025-05-09
+1550,"Mario Tanzi S.A.","Arequito, Santa Fe, Argentina",2025-05-09
+1551,"LMCE Group","Loimaa, Finland",2025-05-09
+1552,"Antoniosi Tecnologia Agroindustrial Ltda","Matão, São Paulo, Brasil",2025-06-16
+1553,"Boughton Engineering LTD","Wolverhampton, West Midlands, UK",2025-06-16
+1554,"Frigus AB","Gothenburg, Sweden",2025-06-16
+1555,Safiery,"Arundel, Australia",2025-06-16
+1556,"B. Kaufmann AG Landmaschinen","6246 Altishofen, Switzerland",2025-06-16
+1557,"Interfacom S.A.U.","Barcelona, Spain",2025-06-16
+1558,"Intangles Lab Private Limited","Pune, Maharashtra, India",2025-06-16
+1559,"Kar-Tech, Inc.","Delafield, WI, USA",2025-06-16
+1560,"MACOME CORPORATION","Kami-ina, Nagano, Japan",2025-06-16
+1561,"Fox Marine","Rising Sun, MD, USA",2025-06-16
+1562,"Kingsat Communications Co., Ltd","HuangGe Town, NanSha District, Guangzhou, China",2025-06-16
+1563,"Wabtec Graham White","Salem, VA, USA",2025-08-01
+1564,"Pro-Guide Batteries","Golden, MO, USA",2025-08-01
+1565,"Livemac Co., Ltd.","Jeonbuk, South Korea",2025-08-01
+1566,OUTSET,"Sandrigo, Vicenza, Italy",2025-08-01
+1567,"Hagedorn Software Engineering GmbH","Warendorf, Germany",2025-08-01
+1568,Aigro,"Best, Noord-Brabant, The Netherlands",2025-08-01
+1569,"621 Technologies Inc.","Petrolia, ON   Canada",2019-10-02
+1570,"Unverferth Manufacturing Company Inc.","Kalida, OH, USA",2025-08-01
+1571,"Super B","Hengelo, Overijssel, Netherlands",2025-08-01
+1572,"SMARTLINE Co., Ltd.","Seoul, South Korea",2025-08-01
+1573,"R.H. Sheppard","Hanover, PA, USA",2025-08-04
+1574,"SIGMA4 SRL","Russi, Italy",2025-08-12
+1575,DieselHeat,"Cygnet, Tasmania, Australia",2025-08-12
+1576,"RB International S.r.l.","Città Di Castello, Italy",2025-08-12
+1577,"Ironstone AG","Toodyay, WA, Australia",2025-08-12
+1579,"Hydro Engineering","Norwood Young America, MN, USA",2025-09-11
+1585,"Qianxun Spatial Intelligence (Zhejiang) Inc.","Huzhou, Zhejiang, China",2025-09-11
+1586,"XAG CO., LTD.","Guangzhou, Guangdong, China",2025-09-11
+1850,"Seastar Solutions (formerly Teleflex)","Litchfield, IL",2021-08-26
+1851,RayMarine,"Portsmouth, Hampshire  UK",2003-07-20
+1852,Navionics,"Wareham, MA  USA",2003-07-20
+1853,"Japan Radio Co","Seattle, WA  USA",2003-07-20
+1854,"Northstar Technologies","Acton, MA  USA",2003-07-20
+1855,"Furuno USA","Camas, WA  USA",2003-07-20
+1856,Trimble,"Sunnyvale, CA  USA",2003-07-20
+1857,Simrad,"Egersund, Norway",2003-07-20
+1858,Litton,"Charlottesville, VA  USA",2003-07-20
+1859,"Kvasar AB","Kinnahult, Sweden",2003-07-20
+1860,MMP,"Fircrest, WA  USA",2003-07-20
+1861,"Vector North America (formerly Vector Cantech)","Novi, MI  USA",2018-01-23
+1862,Sanshin,"Shizuoka, Japan",2003-07-20
+1863,"Thomas G. Faria Co.","Uncasville, CT  USA",2003-07-20
