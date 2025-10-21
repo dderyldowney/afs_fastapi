@@ -14,6 +14,8 @@ class CanParser:
         parsed_data = {}
 
         if pgn == 61444 and spn == 190:  # Engine Speed
+            if not (0 <= value <= 8191.875):
+                return None
             parsed_data["engine_speed"] = value
         elif pgn == 65265 and spn == 84:  # Vehicle Speed
             parsed_data["vehicle_speed"] = value
