@@ -40,6 +40,14 @@ class Node(Base):
         secondaryjoin="Node.id==links.c.parent_id",
         backref="children",
     )
+    children: Mapped[list["Node"]] = relationship(
+        "Node",
+        secondary="links",
+        primaryjoin="Node.id==links.c.parent_id",
+        secondaryjoin="Node.id==links.c.child_id",
+        foreign_keys="[links.c.parent_id, links.c.child_id]",
+        viewonly=True,
+    )
     labels: Mapped[list["Label"]] = relationship(
         "Label", secondary=node_labels, back_populates="nodes"
     )

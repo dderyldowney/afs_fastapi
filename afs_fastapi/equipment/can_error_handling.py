@@ -116,13 +116,13 @@ class CANFrameValidator:
     def __init__(self) -> None:
         """Initialize CAN frame validator with ISOBUS standards."""
         # ISOBUS/ISO 11783 specifications
-        self.max_can_data_length = 8  # Standard CAN frame limit
-        self.valid_pgn_range = (0x0000, 0xFFFF)  # 16-bit PGN range
-        self.valid_address_range = (0x00, 0xFF)  # 8-bit address range
+        self.max_can_data_length: int = 8  # Standard CAN frame limit
+        self.valid_pgn_range: tuple[int, int] = (0x0000, 0xFFFF)  # 16-bit PGN range
+        self.valid_address_range: tuple[int, int] = (0x00, 0xFF)  # 8-bit address range
 
         # Agricultural-specific PGN ranges
-        self.critical_pgns = {0xE001, 0xE002, 0xE003}  # Emergency, safety, collision
-        self.telemetry_pgns = {0xE004, 0xE005, 0xE006}  # Tractor telemetry
+        self.critical_pgns: set[int] = {0xE001, 0xE002, 0xE003}  # Emergency, safety, collision
+        self.telemetry_pgns: set[int] = {0xE004, 0xE005, 0xE006}  # Tractor telemetry
 
     def validate_frame(self, message: ISOBUSMessage) -> CANValidationResult:
         """Validate ISOBUS message frame for production use.
@@ -221,9 +221,9 @@ class CANErrorHandler:
         self.critical_pgns = set(critical_pgns or [0xE001, 0xE002])
 
         # Error tracking
-        self.total_errors_handled = 0
+        self.total_errors_handled: int = 0
         self.error_timestamps: list[float] = []
-        self.is_fallback_mode = False
+        self.is_fallback_mode: bool = False
         self.fallback_operations: list[str] = []
 
         # Initialize validator
@@ -249,12 +249,12 @@ class CANErrorHandler:
         metadata : dict, optional
             Additional error context
         """
-        current_time = time.time()
+        current_time: float = time.time()
         self.error_timestamps.append(current_time)
         self.total_errors_handled += 1
 
         # Clean old timestamps outside window
-        cutoff_time = current_time - self.error_window_seconds
+        cutoff_time: float = current_time - self.error_window_seconds
         self.error_timestamps = [ts for ts in self.error_timestamps if ts > cutoff_time]
 
         logger.warning(
@@ -466,7 +466,7 @@ class ISOBUSErrorLogger:
         ErrorRecord
             Created error record
         """
-        error_record = ErrorRecord(
+        error_record: ErrorRecord = ErrorRecord(
             error_type=error_type,
             timestamp=datetime.now(),
             message=message,
@@ -507,10 +507,10 @@ class ISOBUSErrorLogger:
         ErrorPatternAnalysis
             Error pattern analysis result
         """
-        cutoff_time = datetime.now() - timedelta(hours=time_window_hours)
+        cutoff_time: datetime = datetime.now() - timedelta(hours=time_window_hours)
 
         # Filter relevant error records
-        relevant_errors = [
+        relevant_errors: list[ErrorRecord] = [
             record
             for record in self.error_records
             if record.timestamp > cutoff_time
@@ -531,10 +531,10 @@ class ISOBUSErrorLogger:
         for record in relevant_errors:
             error_counts[record.error_type] = error_counts.get(record.error_type, 0) + 1
 
-        dominant_error = max(error_counts.keys(), key=lambda k: error_counts[k])
+        dominant_error: CANErrorType = max(error_counts.keys(), key=lambda k: error_counts[k])
 
         # Determine if maintenance alert needed (>5 errors or critical error types)
-        requires_maintenance = len(relevant_errors) > 5 or any(
+        requires_maintenance: bool = len(relevant_errors) > 5 or any(
             record.severity == "CRITICAL" for record in relevant_errors
         )
 

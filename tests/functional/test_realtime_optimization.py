@@ -206,8 +206,9 @@ class TestRealTimeTokenOptimizer:
     def test_error_handling_and_fallback(self, optimizer):
         """Test system handles errors gracefully without breaking."""
         # ACTUAL TEST: Force optimization errors and verify fallback
-        with patch.object(optimizer.pipeline, "process_complete_pipeline") as mock_pipeline:
-            mock_pipeline.side_effect = Exception("Optimization failed")
+        # Patch _estimate_tokens (which is called within the try block) to raise an exception
+        with patch.object(optimizer, "_estimate_tokens") as mock_estimate:
+            mock_estimate.side_effect = Exception("Optimization failed")
 
             # Should not crash when optimization fails
             turn = optimizer.optimize_conversation_turn(

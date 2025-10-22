@@ -634,7 +634,7 @@ class FarmTractor(
 
     def clear_waypoints(self) -> str:
         """Clear all navigation waypoints."""
-        waypoint_count = len(self.waypoints)
+        waypoint_count: int = len(self.waypoints)
         self.waypoints.clear()
         return f"Cleared {waypoint_count} waypoints"
 
@@ -716,7 +716,7 @@ class FarmTractor(
             raise ValueError("Distance must be positive")
 
         if self.implement_width > 0:
-            area_increment = (distance * self.implement_width) / 43560  # convert to acres
+            area_increment: float = (distance * self.implement_width) / 43560  # convert to acres
             self.area_covered += area_increment
 
         return f"Work progress updated. Total area covered: {self.area_covered:.2f} acres"
@@ -839,7 +839,7 @@ class FarmTractor(
             # Route through guaranteed delivery system
 
             # Determine priority based on PGN
-            priority = self._get_message_priority(message.pgn)
+            priority: int = self._get_message_priority(message.pgn)
 
             try:
                 self.reliable_isobus.send_reliable_message(
@@ -900,7 +900,7 @@ class FarmTractor(
         """
         # Check for basic queued messages (simulation/testing)
         if self.message_queue:
-            message = self.message_queue.pop(0)
+            message: ISOBUSMessage = self.message_queue.pop(0)
 
             # Process acknowledgments for guaranteed delivery system
             if message.pgn == 0xE800:  # ACK PGN
@@ -938,7 +938,7 @@ class FarmTractor(
         useful for critical agricultural operations where status confirmation
         is required for safety or coordination purposes.
         """
-        status_data = bytes(
+        status_data: bytes = bytes(
             [
                 self.gear,
                 int(self.speed),
@@ -948,7 +948,7 @@ class FarmTractor(
             ]
         )
 
-        message = ISOBUSMessage(
+        message: ISOBUSMessage = ISOBUSMessage(
             pgn=0xFE48,  # Tractor status PGN
             source_address=self.isobus_address,
             destination_address=0xFF,  # Broadcast
@@ -1011,9 +1011,9 @@ class FarmTractor(
         from afs_fastapi.equipment.reliable_isobus import ISOBUSPriority
 
         # Encode command parameters for ISOBUS transmission
-        command_data = self._encode_implement_command(command_type, parameters)
+        command_data: bytes = self._encode_implement_command(command_type, parameters)
 
-        implement_message = ISOBUSMessage(
+        implement_message: ISOBUSMessage = ISOBUSMessage(
             pgn=0xCF00,  # Implement control PGN
             source_address=self.isobus_address,
             destination_address=implement_address,
@@ -1052,7 +1052,7 @@ class FarmTractor(
         # Simplified encoding for demonstration
         # Real implementation would follow ISO 11783 application layer standards
 
-        command_codes = {
+        command_codes: dict[str, int] = {
             "raise": 0x01,
             "lower": 0x02,
             "enable": 0x03,
@@ -1060,12 +1060,12 @@ class FarmTractor(
             "configure": 0x05,
         }
 
-        command_code = command_codes.get(command_type, 0x00)
+        command_code: int = command_codes.get(command_type, 0x00)
 
         # Pack common agricultural parameters
-        depth = int(parameters.get("depth", 0) * 10)  # Depth in 0.1 inch units
-        rate = int(parameters.get("rate", 0))  # Application rate
-        speed = int(parameters.get("speed", 0) * 10)  # Speed in 0.1 mph units
+        depth: int = int(parameters.get("depth", 0) * 10)  # Depth in 0.1 inch units
+        rate: int = int(parameters.get("rate", 0))  # Application rate
+        speed: int = int(parameters.get("speed", 0) * 10)  # Speed in 0.1 mph units
 
         return bytes(
             [
@@ -1111,27 +1111,26 @@ class FarmTractor(
         allocation CRDTs to ensure coordinated agricultural operations across
         multiple implements without conflicts or work duplication.
         """
-
-        message_ids = []
+        message_ids: list[str] = []
 
         # Broadcast field allocation state
         if use_reliable:
-            allocation_msg_id = self.broadcast_field_allocation_reliable(field_crdt)
+            allocation_msg_id: str = self.broadcast_field_allocation_reliable(field_crdt)
             message_ids.append(allocation_msg_id)
 
         # Send operation commands to each implement
-        operation_parameters = {
+        operation_parameters: dict[str, dict[str, float]] = {
             "planting": {"seed_rate": 32000, "depth": 2.0, "speed": 6.0},
             "spraying": {"application_rate": 20, "pressure": 40, "speed": 12.0},
             "harvesting": {"header_height": 24, "ground_speed": 5.0},
             "tillage": {"depth": 8.0, "speed": 7.0, "overlap": 2.0},
         }
 
-        params = operation_parameters.get(operation_type, {})
+        params: dict[str, Any] = operation_parameters.get(operation_type, {})
 
         for implement_addr in implement_addresses:
             if use_reliable:
-                msg_id = self.send_implement_command(
+                msg_id: str | bool = self.send_implement_command(
                     implement_address=implement_addr,
                     command_type="configure",
                     parameters=params,
@@ -1203,16 +1202,19 @@ class FarmTractor(
 
         # Simple bounding box check as placeholder
         x, y = point
-        min_x = min(p[0] for p in polygon)
-        max_x = max(p[0] for p in polygon)
-        min_y = min(p[1] for p in polygon)
-        max_y = max(p[1] for p in polygon)
+        min_x: float = min(p[0] for p in polygon)
+        max_x: float = max(p[0] for p in polygon)
+        min_y: float = min(p[1] for p in polygon)
+        max_y: float = max(p[1] for p in polygon)
 
         return min_x <= x <= max_x and min_y <= y <= max_y
 
     def get_safety_status(self) -> dict[str, bool]:
         """Get comprehensive ISO 18497 safety status."""
-        current_position = (self.gps_latitude or 0.0, self.gps_longitude or 0.0)
+        current_position: tuple[float, float] = (
+            self.gps_latitude or 0.0,
+            self.gps_longitude or 0.0,
+        )
 
         return {
             "emergency_stop_active": self.emergency_stop_active,
@@ -1238,7 +1240,7 @@ class FarmTractor(
             print(f"Warning: Motor {command.motor_id} not found")
             return False
 
-        motor_status = self.motors[command.motor_id]
+        motor_status: dict[str, float] = self.motors[command.motor_id]
 
         # Update motor status based on command
         if command.command_type == "position":
@@ -1278,7 +1280,7 @@ class FarmTractor(
     def export_iso_xml(self, task_data: TaskData) -> str:
         """Export agricultural data in ISO 11783-10 XML format."""
         # Simplified ISO XML generation
-        xml_data = f"""<?xml version="1.0" encoding="UTF-8"?>
+        xml_data: str = f"""<?xml version="1.0" encoding="UTF-8"?>
 <ISO11783_TaskData>
     <TSK A="{task_data.task_id}" B="{task_data.operation_type}"
          C="{task_data.start_time.isoformat()}" D="1" E="{task_data.field_id}">
@@ -1297,8 +1299,8 @@ class FarmTractor(
             raise ValueError("Map data cannot be empty")
 
         # Simulate parsing different map sizes
-        data_size = len(map_data)
-        base_rate = 30000.0 + (data_size % 5000)  # Vary based on data size
+        data_size: int = len(map_data)
+        base_rate: float = 30000.0 + (data_size % 5000)  # Vary based on data size
 
         return {
             "seed_rate": base_rate,  # seeds per acre
@@ -1308,7 +1310,7 @@ class FarmTractor(
 
     def log_operation_data(self, data_point: dict[str, float]) -> bool:
         """Log operational data point for analysis."""
-        enhanced_data = data_point.copy()
+        enhanced_data: dict[str, float] = data_point.copy()
         enhanced_data.update(
             {
                 "timestamp": datetime.now().timestamp(),
@@ -1336,7 +1338,7 @@ class FarmTractor(
         """Stop current task recording."""
         if self.current_task:
             self.current_task.end_time = datetime.now()
-            task_id = self.current_task.task_id
+            task_id: str = self.current_task.task_id
             self.current_task = None
             return f"Task recording stopped: {task_id}"
         return "No active task to stop"
@@ -1347,10 +1349,10 @@ class FarmTractor(
 
     def get_power_status(self) -> dict[str, float]:
         """Get comprehensive power system status."""
-        total_available = sum(
+        total_available: float = sum(
             ps.voltage * ps.max_current * ps.efficiency for ps in self.power_sources
         )
-        total_consumption = sum(self.power_consumption.values())
+        total_consumption: float = sum(self.power_consumption.values())
 
         return {
             "total_available_power": total_available,
@@ -1392,9 +1394,9 @@ class FarmTractor(
         Returns:
             str: A string summarizing the tractor's details.
         """
-        engine_status = "On" if self.engine_on else "Off"
-        manual_info = self.manual_url if self.manual_url else "No manual available"
-        gps_info = (
+        engine_status: str = "On" if self.engine_on else "Off"
+        manual_info: str = self.manual_url if self.manual_url else "No manual available"
+        gps_info: str = (
             f"GPS: {self.gps_latitude:.6f}, {self.gps_longitude:.6f}"
             if self.gps_latitude
             else "GPS: Not Set"
@@ -1503,7 +1505,7 @@ class FarmTractor(
             priority = ISOBUSPriority.STATUS_UPDATE
 
         # Create standard status message
-        status_data = bytes(
+        status_data: bytes = bytes(
             [
                 self.gear,
                 int(self.speed),
@@ -1513,7 +1515,7 @@ class FarmTractor(
             ]
         )
 
-        status_message = ISOBUSMessage(
+        status_message: ISOBUSMessage = ISOBUSMessage(
             pgn=0xFE48,  # Tractor status PGN
             source_address=self.isobus_address,
             destination_address=0xFF,  # Broadcast
@@ -1565,9 +1567,9 @@ class FarmTractor(
             priority = ISOBUSPriority.FIELD_COORDINATION
 
         # Serialize CRDT for transmission
-        serialized_data = field_crdt.serialize()
+        serialized_data: str = field_crdt.serialize()
 
-        allocation_message = ISOBUSMessage(
+        allocation_message: ISOBUSMessage = ISOBUSMessage(
             pgn=0xEF00,  # Custom PGN for field allocation
             source_address=self.isobus_address,
             destination_address=0xFF,  # Broadcast
@@ -1613,16 +1615,16 @@ class FarmTractor(
         self.emergency_stop()
 
         # Create emergency broadcast message
-        emergency_data = b"\xFF\x00\x00\x00\x01"  # Emergency stop pattern
+        emergency_data: bytes = b"\xff\x00\x00\x00\x01"  # Emergency stop pattern
 
         # Send emergency broadcast with highest priority and guaranteed delivery
         from afs_fastapi.equipment.reliable_isobus import ISOBUSPriority
 
-        message_ids = []
+        message_ids: list[str] = []
 
         # Broadcast to multiple recipients for safety redundancy
         for destination in [0xFF, 0x81, 0x82, 0x83]:  # Broadcast + specific implements
-            emergency_msg = ISOBUSMessage(
+            emergency_msg: ISOBUSMessage = ISOBUSMessage(
                 pgn=0xFE49,
                 source_address=self.isobus_address,
                 destination_address=destination,
@@ -1630,7 +1632,7 @@ class FarmTractor(
                 timestamp=datetime.now(),
             )
 
-            message_id = self.reliable_isobus.send_reliable_message(
+            message_id: str = self.reliable_isobus.send_reliable_message(
                 emergency_msg,
                 delivery_callback=delivery_callback,
                 requires_ack=True,

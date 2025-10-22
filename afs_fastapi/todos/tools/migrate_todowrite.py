@@ -304,7 +304,7 @@ class TodoWriteMigrator:
                                 self.migrated_nodes[ac["id"]] = ac
 
                                 # Then add command
-                                self.migrated_nodes[command_to_return["id"]] = command_to_return
+                                self.migrated_nodes[command_data_dict["id"]] = command_data_dict
 
         self.migration_log.append(f"✅ Migrated {len(self.migrated_nodes)} nodes")
 
@@ -346,7 +346,8 @@ class TodoWriteMigrator:
 
     def create_migration_report(self, output_dir: Path) -> None:
         """Create a detailed migration report."""
-        report = {
+        layer_statistics: dict[str, int] = {}
+        report: dict[str, Any] = {
             "migration_summary": {
                 "timestamp": datetime.now().isoformat(),
                 "source_system": "TodoWrite 5-layer JSON",
@@ -354,7 +355,7 @@ class TodoWriteMigrator:
                 "nodes_migrated": len(self.migrated_nodes),
                 "id_mappings": len(self.id_mapping),
             },
-            "layer_statistics": dict[str, int],
+            "layer_statistics": layer_statistics,
             "id_mappings": self.id_mapping,
             "migration_log": self.migration_log,
         }
@@ -362,7 +363,7 @@ class TodoWriteMigrator:
         # Calculate layer statistics
         for node_data in self.migrated_nodes.values():
             layer = node_data["layer"]
-            report["layer_statistics"][layer] = report["layer_statistics"].get(layer, 0) + 1
+            layer_statistics[layer] = layer_statistics.get(layer, 0) + 1
 
         # Write report
         report_path = output_dir / "migration_report.json"

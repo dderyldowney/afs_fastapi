@@ -245,7 +245,7 @@ class PhysicalCANInterface(ABC):
 
         if self._bus and hasattr(self._bus, "get_stats"):
             try:
-                stats = self._bus.get_stats()
+                stats: dict[str, Any] = self._bus.get_stats()
                 self._status.bus_load_percentage = stats.get("bus_load", 0.0)
             except Exception as e:
                 logger.debug(f"Could not get bus statistics: {e}")
@@ -308,7 +308,7 @@ class SocketCANInterface(PhysicalCANInterface):
                 )
 
                 # Set up message listener
-                listener = can.BufferedReader()
+                listener: can.BufferedReader = can.BufferedReader()
                 self._listeners.append(listener)
                 self._notifier = can.Notifier(self._bus, [listener])
 
@@ -406,7 +406,7 @@ class SocketCANInterface(PhysicalCANInterface):
         """Background task for receiving messages."""
         while self._state == InterfaceState.CONNECTED:
             try:
-                message = listener.get_message(timeout=1.0)
+                message: can.Message | None = listener.get_message(timeout=1.0)
                 if message:
                     self._handle_received_message(message)
             except can.CanError as e:
@@ -646,7 +646,7 @@ class PhysicalCANManager:
             Formatted CAN message
         """
         # Construct 29-bit CAN ID for J1939
-        can_id = (
+        can_id: int = (
             (address.priority << 26)
             | (int(address.data_page) << 25)
             | (address.pdu_format << 16)

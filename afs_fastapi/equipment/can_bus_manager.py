@@ -17,7 +17,7 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from enum import Enum
-from typing import Any
+from typing import Any, cast
 
 import can
 
@@ -26,6 +26,8 @@ from afs_fastapi.equipment.can_error_handling import CANErrorHandler, ISOBUSErro
 from afs_fastapi.equipment.physical_can_interface import (
     InterfaceConfiguration,
     InterfaceState,
+    InterfaceStatus,
+    PhysicalCANInterface,
     PhysicalCANManager,
 )
 
@@ -162,28 +164,27 @@ class MessageRouter:
         Tuple[List[str], MessagePriority]
             (target_interfaces, message_priority)
         """
-        # Decode message to get PGN
-        decoded = self.codec.decode_message(message)
+        decoded: DecodedPGN | None = self.codec.decode_message(message)
         if not decoded:
             return available_interfaces, MessagePriority.LOW
 
-        pgn = decoded.pgn
-        source_address = decoded.source_address
+        pgn: int = decoded.pgn
+        source_address: int = decoded.source_address
 
         # Update statistics
         self.message_stats[pgn] += 1
 
         # Check cache first
         if pgn in self.route_cache:
-            cached_interfaces = [
+            cached_interfaces: list[str] = [
                 iface for iface in self.route_cache[pgn] if iface in available_interfaces
             ]
             if cached_interfaces:
                 return cached_interfaces, self._get_pgn_priority(pgn)
 
         # Apply routing rules
-        target_interfaces = []
-        message_priority = MessagePriority.NORMAL
+        target_interfaces: list[str] = []
+        message_priority: MessagePriority = MessagePriority.NORMAL
 
         for rule in self.routing_rules:
             if not rule.enabled:
@@ -236,17 +237,17 @@ class MessageRouter:
             Message priority level
         """
         # Critical PGNs (safety, emergency)
-        critical_pgns = {0xE001, 0xE002, 0xE003}  # Emergency, safety, collision
+        critical_pgns: set[int] = {0xE001, 0xE002, 0xE003}  # Emergency, safety, collision
         if pgn in critical_pgns:
             return MessagePriority.CRITICAL
 
         # High priority PGNs (engine, transmission)
-        high_priority_pgns = {0xF004, 0xF005, 0xFEF1}  # EEC1, ETC1, WVS
+        high_priority_pgns: set[int] = {0xF004, 0xF005, 0xFEF1}  # EEC1, ETC1, WVS
         if pgn in high_priority_pgns:
             return MessagePriority.HIGH
 
         # Diagnostic PGNs
-        diagnostic_pgns = {0xFECA, 0xFECB, 0xFECC}  # DM1, DM2, DM3
+        diagnostic_pgns: set[int] = {0xFECA, 0xFECB, 0xFECC}  # DM1, DM2, DM3
         if pgn in diagnostic_pgns:
             return MessagePriority.LOW
 
@@ -298,7 +299,7 @@ class ConnectionPool:
         self.last_health_check: dict[str, datetime] = {}
 
         self._health_check_task: asyncio.Task | None = None
-        self._failover_in_progress = False
+        self._failover_in_progress: bool = False
 
     async def initialize(self) -> bool:
         """Initialize the connection pool.
@@ -311,17 +312,19 @@ class ConnectionPool:
         try:
             # Initialize primary connections
             for interface_id in self.config.primary_interfaces:
-                success = await self.physical_manager.connect_interface(interface_id)
-                self.primary_connections[interface_id] = success
-                self.connection_health[interface_id] = 1.0 if success else 0.0
+                primary_success: bool = await self.physical_manager.connect_interface(interface_id)
+                self.primary_connections[interface_id] = primary_success
+                self.connection_health[interface_id] = 1.0 if primary_success else 0.0
                 self.last_health_check[interface_id] = datetime.now()
 
             # Initialize backup connections if auto-recovery enabled
             if self.config.auto_recovery:
                 for interface_id in self.config.backup_interfaces:
-                    success = await self.physical_manager.connect_interface(interface_id)
-                    self.backup_connections[interface_id] = success
-                    self.connection_health[interface_id] = 1.0 if success else 0.0
+                    backup_success: bool = await self.physical_manager.connect_interface(
+                        interface_id
+                    )
+                    self.backup_connections[interface_id] = backup_success
+                    self.connection_health[interface_id] = 1.0 if backup_success else 0.0
                     self.last_health_check[interface_id] = datetime.now()
 
             # Start health checking
@@ -356,7 +359,7 @@ class ConnectionPool:
         List[str]
             Active interface IDs
         """
-        active = []
+        active: list[str] = []
 
         # Check primary interfaces first
         for interface_id, is_connected in self.primary_connections.items():
@@ -384,9 +387,9 @@ class ConnectionPool:
         Optional[str]
             Best interface ID or None
         """
-        exclude = exclude or []
-        active_interfaces = [
-            iface for iface in self.get_active_interfaces() if iface not in exclude
+        excluded_ids: list[str] = exclude or []
+        active_interfaces: list[str] = [
+            iface for iface in self.get_active_interfaces() if iface not in excluded_ids
         ]
 
         if not active_interfaces:
@@ -409,25 +412,27 @@ class ConnectionPool:
 
     async def _perform_health_checks(self) -> None:
         """Perform health checks on all connections."""
-        current_time = datetime.now()
+        current_time: datetime = datetime.now()
 
         # Check all interfaces
-        all_interfaces = list(self.primary_connections.keys()) + list(
+        all_interfaces: list[str] = list(self.primary_connections.keys()) + list(
             self.backup_connections.keys()
         )
 
         for interface_id in all_interfaces:
             try:
                 # Get interface status
-                status = self.physical_manager.get_interface_status(interface_id)
+                status: InterfaceStatus | None = self.physical_manager.get_interface_status(
+                    interface_id
+                )
 
                 if status:
                     # Calculate health score based on various factors
-                    health_score = self._calculate_health_score(status)
+                    health_score: float = self._calculate_health_score(status)
                     self.connection_health[interface_id] = health_score
 
                     # Update connection status
-                    is_healthy = health_score > 0.5
+                    is_healthy: bool = health_score > 0.5
                     if interface_id in self.primary_connections:
                         self.primary_connections[interface_id] = is_healthy
                     if interface_id in self.backup_connections:
@@ -448,11 +453,11 @@ class ConnectionPool:
                 self.connection_health[interface_id] = 0.0
 
         # Check if failover is needed
-        active_primary = any(self.primary_connections.values())
+        active_primary: bool = any(self.primary_connections.values())
         if not active_primary and not self._failover_in_progress:
             await self._trigger_failover()
 
-    def _calculate_health_score(self, status) -> float:
+    def _calculate_health_score(self, status: InterfaceStatus) -> float:
         """Calculate health score for an interface.
 
         Parameters
@@ -465,7 +470,7 @@ class ConnectionPool:
         float
             Health score (0.0 to 1.0)
         """
-        score = 1.0
+        score: float = 1.0
 
         # Penalize for state issues
         if status.state != InterfaceState.CONNECTED:
@@ -473,8 +478,8 @@ class ConnectionPool:
 
         # Penalize for high error rates
         if status.errors_total > 0 and (status.messages_sent + status.messages_received) > 0:
-            total_messages = status.messages_sent + status.messages_received
-            error_rate = status.errors_total / total_messages
+            total_messages: int = status.messages_sent + status.messages_received
+            error_rate: float = status.errors_total / total_messages
             score *= max(0.1, 1.0 - error_rate * 5)  # Reduce score based on error rate
 
         # Penalize for high bus load
@@ -484,7 +489,7 @@ class ConnectionPool:
             score *= 0.9
 
         # Bonus for recent activity
-        time_since_update = datetime.now() - status.last_heartbeat
+        time_since_update: timedelta = datetime.now() - status.last_heartbeat
         if time_since_update.total_seconds() > 30:
             score *= 0.5
 
@@ -502,7 +507,7 @@ class ConnectionPool:
             # Attempt to activate backup interfaces
             for interface_id in self.config.backup_interfaces:
                 if not self.backup_connections.get(interface_id, False):
-                    success = await self.physical_manager.connect_interface(interface_id)
+                    success: bool = await self.physical_manager.connect_interface(interface_id)
                     if success:
                         self.backup_connections[interface_id] = True
                         self.connection_health[interface_id] = 1.0
@@ -573,7 +578,7 @@ class CANBusConnectionManager:
             self._state = ManagerState.INITIALIZING
 
             # Initialize connection pool
-            pool_success = await self.connection_pool.initialize()
+            pool_success: bool = await self.connection_pool.initialize()
             if not pool_success:
                 self._state = ManagerState.ERROR
                 return False
@@ -665,7 +670,7 @@ class CANBusConnectionManager:
                 )
 
                 # Decode message
-                decoded = self.codec.decode_message(message)
+                decoded: DecodedPGN | None = self.codec.decode_message(message)
                 if decoded:
                     # Call registered callbacks
                     for callback in self._message_callbacks:
@@ -704,10 +709,10 @@ class CANBusConnectionManager:
         self._statistics.manager_state = self._state
 
         # Count active/failed interfaces
-        active_interfaces = self.connection_pool.get_active_interfaces()
+        active_interfaces: list[str] = self.connection_pool.get_active_interfaces()
         self._statistics.active_interfaces = len(active_interfaces)
 
-        all_interfaces = list(self.connection_pool.primary_connections.keys()) + list(
+        all_interfaces: list[str] = list(self.connection_pool.primary_connections.keys()) + list(
             self.connection_pool.backup_connections.keys()
         )
         self._statistics.failed_interfaces = (
@@ -716,8 +721,8 @@ class CANBusConnectionManager:
 
     def _check_overall_health(self) -> None:
         """Check overall manager health and update state."""
-        active_interfaces = self.connection_pool.get_active_interfaces()
-        primary_active = any(self.connection_pool.primary_connections.values())
+        active_interfaces: list[str] = self.connection_pool.get_active_interfaces()
+        primary_active: bool = any(self.connection_pool.primary_connections.values())
 
         if not active_interfaces:
             self._state = ManagerState.ERROR
@@ -731,7 +736,7 @@ class CANBusConnectionManager:
     def _setup_default_routing_rules(self) -> None:
         """Setup default routing rules for agricultural operations."""
         # Emergency/safety messages - all interfaces
-        emergency_rule = RoutingRule(
+        emergency_rule: RoutingRule = RoutingRule(
             name="Emergency Safety",
             pgn_filters=[0xE001, 0xE002, 0xE003],  # Emergency, safety, collision
             source_filters=[],
@@ -742,7 +747,7 @@ class CANBusConnectionManager:
         )
 
         # Engine/transmission critical - primary interfaces
-        critical_rule = RoutingRule(
+        critical_rule: RoutingRule = RoutingRule(
             name="Engine Transmission Critical",
             pgn_filters=[0xF004, 0xF005],  # EEC1, ETC1
             source_filters=[],
@@ -752,7 +757,7 @@ class CANBusConnectionManager:
         )
 
         # Standard telemetry - load balanced
-        telemetry_rule = RoutingRule(
+        telemetry_rule: RoutingRule = RoutingRule(
             name="Standard Telemetry",
             pgn_filters=[0xFEF1, 0xFEF2, 0xFEF3],  # WVS, LFE, VP
             source_filters=[],
@@ -818,7 +823,9 @@ class CANBusConnectionManager:
             True if interface created successfully
         """
         try:
-            interface = await self.physical_manager.create_interface(interface_id, config)
+            interface: PhysicalCANInterface = await self.physical_manager.create_interface(
+                interface_id, config
+            )
             return interface is not None
 
         except Exception as e:
@@ -842,7 +849,7 @@ class CANBusConnectionManager:
         """
         try:
             # Check if we're in a test environment with mocked interface creation
-            interface = self._create_physical_interface(config)
+            interface: PhysicalCANInterface | Any = self._create_physical_interface(config)
 
             # Register the interface with the physical manager
             self.physical_manager._interfaces[interface_id] = interface
@@ -851,7 +858,7 @@ class CANBusConnectionManager:
             if hasattr(interface, "state") and hasattr(interface, "connect"):
                 # For real interfaces, connect them
                 if interface.state != InterfaceState.CONNECTED:
-                    success = await interface.connect()
+                    success: bool = await interface.connect()
                     if not success:
                         return False
                 # Mark as active
@@ -894,52 +901,58 @@ class CANBusConnectionManager:
         if isinstance(interface_name_or_message, str) and isinstance(
             message_or_target_interfaces, can.Message
         ):
-            interface_name = interface_name_or_message
-            message = message_or_target_interfaces
+            legacy_interface_name: str = interface_name_or_message
+            legacy_message: can.Message = message_or_target_interfaces
 
             try:
                 # Send to specific interface
-                interface = self.physical_manager._interfaces.get(interface_name)
-                if interface:
-                    success = await interface.send_message(message)
-                    if success:
+                legacy_interface: PhysicalCANInterface | None = (
+                    self.physical_manager._interfaces.get(legacy_interface_name)
+                )
+                if legacy_interface:
+                    legacy_success: bool = await legacy_interface.send_message(legacy_message)
+                    if legacy_success:
                         self._statistics.messages_routed += 1
                     else:
                         self._statistics.messages_dropped += 1
-                    return success
+                    return legacy_success
                 else:
                     self._statistics.messages_dropped += 1
                     return False
 
             except Exception as e:
-                logger.error(f"Failed to send message via {interface_name}: {e}")
+                logger.error(f"Failed to send message via {legacy_interface_name}: {e}")
                 return False
 
         # New API: send_message(message, target_interfaces, priority)
         elif isinstance(interface_name_or_message, can.Message):
-            message = interface_name_or_message
-            target_interfaces = message_or_target_interfaces
+            api_message: can.Message = interface_name_or_message
+            api_target_interfaces: list[str] | None = cast(
+                list[str] | None, message_or_target_interfaces
+            )
 
             try:
                 # Auto-route if no specific interfaces provided
-                if target_interfaces is None:
-                    available_interfaces = self.connection_pool.get_active_interfaces()
-                    target_interfaces, priority = self.message_router.route_message(
-                        message, available_interfaces
+                if api_target_interfaces is None:
+                    available_interfaces: list[str] = self.connection_pool.get_active_interfaces()
+                    api_target_interfaces, priority = self.message_router.route_message(
+                        api_message, available_interfaces
                     )
 
                 # Ensure target_interfaces is a list of strings for type safety
-                if not isinstance(target_interfaces, list):
+                if not isinstance(api_target_interfaces, list):
                     raise ValueError("target_interfaces must be a list of interface IDs")
 
                 # Send to target interfaces
-                results = {}
-                for interface_id in target_interfaces:
-                    interface = self.physical_manager._interfaces.get(interface_id)
-                    if interface:
-                        success = await interface.send_message(message)
-                        results[interface_id] = success
-                        if success:
+                results: dict[str, bool] = {}
+                for interface_id in api_target_interfaces:
+                    api_interface: PhysicalCANInterface | None = (
+                        self.physical_manager._interfaces.get(interface_id)
+                    )
+                    if api_interface:
+                        api_send_success: bool = await api_interface.send_message(api_message)
+                        results[interface_id] = api_send_success
+                        if api_send_success:
                             self._statistics.messages_routed += 1
                         else:
                             self._statistics.messages_dropped += 1
@@ -956,7 +969,9 @@ class CANBusConnectionManager:
         else:
             raise ValueError("Invalid arguments for send_message")
 
-    def _create_physical_interface(self, config: InterfaceConfiguration):
+    def _create_physical_interface(
+        self, config: InterfaceConfiguration
+    ) -> PhysicalCANInterface | Any:
         """Create physical interface (for test mocking compatibility).
 
         Parameters
@@ -978,7 +993,7 @@ class CANBusConnectionManager:
             def __init__(self):
                 self.state = InterfaceState.CONNECTED
 
-            async def send_message(self, message) -> bool:
+            async def send_message(self, message: can.Message) -> bool:
                 return True
 
             async def connect(self) -> bool:

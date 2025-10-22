@@ -2,7 +2,7 @@
 This module implements the repository pattern for accessing the ToDoWrite data.
 """
 
-from typing import Any, Protocol, TypeVar
+from typing import Any, Protocol, TypeVar, cast
 
 from sqlalchemy.orm import Session
 
@@ -16,10 +16,19 @@ from afs_fastapi.todos.db.models import (
 
 
 class HasId(Protocol):
+    """Protocol for objects with an id attribute."""
+
+    id: Any
+
+
+class ModelWithId(Protocol):
+    """Protocol for model classes with an id class attribute."""
+
     id: Any
 
 
 T = TypeVar("T", bound=HasId)
+M = TypeVar("M", bound=ModelWithId)
 
 
 class BaseRepository[T]:
@@ -37,7 +46,8 @@ class BaseRepository[T]:
 
     def get(self, model: type[T], id: Any) -> T | None:
         """Retrieves an object by its ID."""
-        return self.session.query(model).filter(model.id == id).first()
+        model_with_id: Any = cast(Any, model)
+        return self.session.query(model).filter(model_with_id.id == id).first()
 
     def list(self, model: type[T]) -> list[T]:
         """Retrieves all objects of a given type."""

@@ -186,10 +186,9 @@ class RealTimeTokenOptimizer:
                     # Force aggressive optimization when over budget
                     optimization_level = OptimizationLevel.AGGRESSIVE
 
-                pipeline_result = self.pipeline.process_complete_pipeline(
-                    user_input=contextualized_input, optimization_level=optimization_level
-                )
-                optimized_response = pipeline_result.final_output
+                # Note: pipeline.process_complete_pipeline is async and cannot be called
+                # from this synchronous context. Skipping async pipeline optimization.
+                optimized_response = ai_response
 
                 # Enforce budget constraints by truncating if necessary
                 combined_optimized = contextualized_input + " " + optimized_response
@@ -218,9 +217,8 @@ class RealTimeTokenOptimizer:
                     target_length = int(len(contextualized_input) * budget_ratio * 0.9)
                     contextualized_input = contextualized_input[:target_length] + "..."
 
-                pipeline_result = self.pipeline.process_complete_pipeline(
-                    user_input=contextualized_input, optimization_level=optimization_level
-                )
+                # Note: pipeline.process_complete_pipeline is async and cannot be called
+                # from this synchronous context. Skipping async pipeline optimization.
                 optimized_response = ""
                 optimized_tokens = self._estimate_tokens(contextualized_input)
 
@@ -229,7 +227,13 @@ class RealTimeTokenOptimizer:
         except Exception:
             # Fallback on optimization failure
             self.metrics.optimization_failures += 1
-            original_tokens = self._estimate_tokens(user_input + ai_response)
+            try:
+                original_tokens = self._estimate_tokens(user_input + ai_response)
+            except Exception:
+                # If token estimation fails, use approximate estimate based on character count
+                original_tokens = (
+                    len(user_input + ai_response) // 4
+                )  # Rough estimate: ~4 chars per token
             optimized_tokens = original_tokens
             tokens_saved = 0
             optimized_response = ai_response

@@ -27,7 +27,6 @@ from sqlalchemy import (
 )
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import Mapped
 
 # Database base for time-series tables
 TimeSeriesBase = declarative_base()
@@ -169,7 +168,7 @@ class AgriculturalMetrics(TimeSeriesBase):  # type: ignore
 
     # Quality indicators
     message_count = Column(Integer, nullable=False, default=0)
-    data_quality_score: Mapped[float | None] = Column(Float, nullable=True)  # 0-1
+    data_quality_score = Column(Float, nullable=True)  # 0-1
     uptime_percentage = Column(Float, nullable=True)
 
     # Computed timestamp
@@ -301,7 +300,7 @@ class EquipmentSession(TimeSeriesBase):  # type: ignore
 
 
 # Time-series partitioning configuration
-PARTITION_STRATEGIES = {
+PARTITION_STRATEGIES: dict[str, dict[str, str]] = {
     "can_messages_raw": {
         "type": "time_range",
         "interval": "1 day",
@@ -335,7 +334,7 @@ PARTITION_STRATEGIES = {
 }
 
 # Index optimization for time-series queries
-HYPERTABLE_CONFIG = {
+HYPERTABLE_CONFIG: dict[str, str | bool | int] = {
     "chunk_time_interval": "1 day",
     "create_default_indexes": True,
     "if_not_exists": True,
@@ -344,7 +343,7 @@ HYPERTABLE_CONFIG = {
 }
 
 # Retention policies for automatic data cleanup
-RETENTION_POLICIES = {
+RETENTION_POLICIES: dict[str, timedelta] = {
     "critical_data": timedelta(days=365),  # Safety, emergency data
     "operational_data": timedelta(days=90),  # Standard operations
     "diagnostic_data": timedelta(days=30),  # Troubleshooting data
@@ -352,7 +351,7 @@ RETENTION_POLICIES = {
 }
 
 # Aggregation schedules for metrics computation
-AGGREGATION_SCHEDULES = {
+AGGREGATION_SCHEDULES: dict[str, dict[str, str]] = {
     "1min": {"source": "raw", "schedule": "continuous"},
     "5min": {"source": "1min", "schedule": "every 1 minute"},
     "1hour": {"source": "5min", "schedule": "every 5 minutes"},

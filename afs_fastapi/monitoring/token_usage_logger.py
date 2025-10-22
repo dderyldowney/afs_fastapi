@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 class TokenUsageLogger:
     """Logs token usage to a database asynchronously."""
 
-    _instance: "TokenUsageLogger" | None = None
+    _instance: "TokenUsageLogger | None" = None
     _engine: Any | None = None
     _SessionLocal: Any | None = None
     _initialized: bool = False
