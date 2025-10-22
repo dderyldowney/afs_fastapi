@@ -990,7 +990,7 @@ class CANBusConnectionManager:
         class MockCANInterface:
             """Mock CAN interface for testing."""
 
-            def __init__(self):
+            def __init__(self) -> None:
                 self.state = InterfaceState.CONNECTED
 
             async def send_message(self, message: can.Message) -> bool:

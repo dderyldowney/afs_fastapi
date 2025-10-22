@@ -34,7 +34,7 @@ M = TypeVar("M", bound=ModelWithId)
 class BaseRepository[T]:
     """Base repository class with common CRUD operations."""
 
-    def __init__(self, session: Session):
+    def __init__(self, session: Session) -> None:
         self.session = session
 
     def add(self, obj: T) -> T:
@@ -68,7 +68,7 @@ class BaseRepository[T]:
 class NodeRepository(BaseRepository[DBNode]):
     """Repository for managing Node objects."""
 
-    def __init__(self, session: Session):
+    def __init__(self, session: Session) -> None:
         super().__init__(session)
 
     def get(self, model: type[DBNode], id: str) -> DBNode | None:
@@ -201,7 +201,7 @@ class NodeRepository(BaseRepository[DBNode]):
             return super().update(db_node)
         return None
 
-    def delete_node_by_id(self, node_id: str):
+    def delete_node_by_id(self, node_id: str) -> None:
         """Deletes a Node object from the database."""
         db_node = self.get(DBNode, node_id)
         if db_node:

@@ -34,10 +34,10 @@ except ImportError:
 
 # Universal Tree class that works with or without markdown_it
 class Tree:
-    def __init__(self, tokens):
+    def __init__(self, tokens: Any) -> None:
         self.tokens = tokens
 
-    def render(self):
+    def render(self) -> str:
         if markdown_it is None:
             return ""
         # Simple fallback rendering
@@ -58,8 +58,8 @@ except ImportError:
 class AIPipelineCache:
     """A simple in-memory cache for AI processing pipeline results."""
 
-    def __init__(self):
-        self._cache = {}
+    def __init__(self) -> None:
+        self._cache: dict[str, Any] = {}
 
     def get(self, key: str) -> Any | None:
         """Get an item from the cache."""
@@ -173,7 +173,7 @@ class PipelineResult:
 
     metrics: dict[str, Any] = field(default_factory=dict)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Initialize metrics dictionary with default values."""
         if not self.metrics:
             self.metrics = {
@@ -192,7 +192,7 @@ class AIProcessingPipeline:
     optimization across pre-fill, prompt processing, generation, and decoding stages.
     """
 
-    def __init__(self, project_root: Path | None = None):
+    def __init__(self, project_root: Path | None = None) -> None:
         """Initialize AI processing pipeline with token optimization components."""
         self.project_root = project_root or Path.cwd()
         self.claude_dir = self.project_root / ".claude"
