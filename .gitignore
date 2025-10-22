@@ -131,6 +131,8 @@ Thumbs.db
 
 # Claude specific files
 .claude/current_session.json
+.claude/optimization_monitoring.json
+.claude/session_optimization_tracking.json
 
 # VSCode configuration directory
 .vscode/
