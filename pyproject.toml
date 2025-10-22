@@ -96,6 +96,7 @@ exclude = '''
 
 [tool.mypy]
 python_version = "3.12"
+follow_imports = "normal"
 strict = true
 warn_unused_configs = true
 disallow_untyped_defs = true
@@ -105,8 +106,7 @@ show_error_codes = true
 pretty = true
 # If you vendor optional libs, ignore their imports to keep signal clean:
 # ignore_missing_imports = true
-mypy_path = ["afs_fastapi"]
-exclude = ["afs_fastapi/__main__.py"]
+packages = ["afs_fastapi", "tests"]
 
 [tool.pyright]
 # Pyright can live in pyproject; this keeps VS Code/Pylance aligned.
