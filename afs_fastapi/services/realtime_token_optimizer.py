@@ -80,7 +80,7 @@ class RealTimeTokenOptimizer:
     and maintains conversation context while maximizing token efficiency.
     """
 
-    def __init__(self, project_root: Path | None = None, max_history: int = 50):
+    def __init__(self, project_root: Path | None = None, max_history: int = 50) -> None:
         """Initialize real-time token optimizer."""
         self.project_root = project_root or Path.cwd()
         self.max_history = max_history
@@ -614,7 +614,7 @@ class ConversationOptimizationMiddleware:
     maintaining agricultural safety compliance and optimization transparency.
     """
 
-    def __init__(self, optimizer: RealTimeTokenOptimizer):
+    def __init__(self, optimizer: RealTimeTokenOptimizer) -> None:
         """Initialize middleware with optimizer instance."""
         self.optimizer = optimizer
         self.optimization_enabled = True

@@ -5,7 +5,7 @@ from .interfaces import DummyWaterSensorBackend, WaterSensorBackend
 
 
 class WaterMonitor:
-    def __init__(self, sensor_id: str, backend: WaterSensorBackend | None = None):
+    def __init__(self, sensor_id: str, backend: WaterSensorBackend | None = None) -> None:
         self.sensor_id = sensor_id
         self.backend: WaterSensorBackend = backend or DummyWaterSensorBackend()
         self.last_reading: dict[str, Any] = {}

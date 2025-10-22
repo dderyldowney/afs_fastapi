@@ -50,7 +50,7 @@ class AIProcessingManager:
     compliance monitoring.
     """
 
-    def __init__(self, project_root: Path | None = None, config_path: Path | None = None):
+    def __init__(self, project_root: Path | None = None, config_path: Path | None = None) -> None:
         """Initialize AI Processing Manager with platform integration."""
         self.project_root = project_root or Path.cwd()
         self.config_path = config_path or (

@@ -16,7 +16,7 @@ class CloudIntegrationService:
     Manages connections and data flow with agricultural cloud platforms.
     """
 
-    def __init__(self, config: dict[str, Any]):
+    def __init__(self, config: dict[str, Any]) -> None:
         self.config = config
         self.connected = False
         logger.info("CloudIntegrationService initialized with config: %s", config)

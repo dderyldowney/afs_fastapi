@@ -11,7 +11,7 @@ T = TypeVar("T", bound=TokenUsage)
 class TokenUsageRepository:
     """Repository for managing TokenUsage objects."""
 
-    def __init__(self, session: Session):
+    def __init__(self, session: Session) -> None:
         self.session = session
 
     def create(self, token_usage_data: dict[str, Any]) -> TokenUsage:

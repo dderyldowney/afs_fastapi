@@ -347,7 +347,7 @@ def get_database_engine(database_url: str = "sqlite:///agricultural_data.db") ->
     if "sqlite" in database_url:
 
         @event.listens_for(engine, "connect")
-        def configure_sqlite(dbapi_connection, connection_record):
+        def configure_sqlite(dbapi_connection: Any, connection_record: Any) -> None:
             """Configure SQLite for time-series performance."""
             cursor = dbapi_connection.cursor()
             # Enable Write-Ahead Logging for better concurrency

@@ -29,7 +29,7 @@ class AgriculturalAIIntegration:
     safety standards and compliance requirements.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize agricultural AI integration service."""
         self.ai_manager = ai_processing_manager
 
