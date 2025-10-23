@@ -294,7 +294,8 @@ class TestUpdateChangelogCommandLineRobustness:
         audits. Temporary files must not interfere with change tracking.
         """
         # Arrange: Ensure a clean git state before running the script
-        # (This test assumes the environment is clean before it starts)
+        # Clean any untracked files that may have been created by other processes
+        subprocess.run(["git", "clean", "-fd"], capture_output=True, text=True, check=False)
 
         # Act: Run the updatechangelog script
         result = subprocess.run(
