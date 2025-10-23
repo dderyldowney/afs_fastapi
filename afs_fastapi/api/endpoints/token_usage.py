@@ -3,13 +3,13 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, status
 
-from afs_fastapi.monitoring.token_usage_logger import TokenUsageLogger
+from afs_fastapi.monitoring.token_usage_logger import token_logger
 from afs_fastapi.monitoring.token_usage_schemas import TokenUsageCreate, TokenUsageInDB
 
 router = APIRouter()
 
-# Initialize the TokenUsageLogger (ensure it uses the correct database URL if different from default)
-token_logger = TokenUsageLogger()
+# Use the global token_logger instance from token_usage_logger module
+# This allows tests to reset the singleton and inject a test database
 
 
 @router.post("/token-usage", response_model=TokenUsageInDB, status_code=status.HTTP_201_CREATED)

@@ -1,32 +1,47 @@
+import time
 import unittest
 import uuid
 from datetime import datetime
 
+import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-import afs_fastapi.monitoring.token_usage_logger
-from afs_fastapi.api.main import app
-from afs_fastapi.monitoring.token_usage_logger import TokenUsageLogger
-from afs_fastapi.monitoring.token_usage_models import Base
-from afs_fastapi.monitoring.token_usage_repository import TokenUsageRepository
-
-# Use an in-memory SQLite database for testing
+# Use a test SQLite database for testing
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test_token_usage.db"
 
-# Re-initialize the logger with the test database
-test_logger = TokenUsageLogger(database_url=SQLALCHEMY_DATABASE_URL)
+# IMPORTANT: Reset singleton BEFORE importing app
+# This ensures the endpoint module uses the test database
+from afs_fastapi.monitoring.token_usage_logger import TokenUsageLogger  # noqa: E402
+from afs_fastapi.monitoring.token_usage_models import Base  # noqa: E402
+from afs_fastapi.monitoring.token_usage_repository import TokenUsageRepository  # noqa: E402
 
-# Override the global token_logger instance with the test instance
-# This is a bit hacky but necessary for testing the global instance
-afs_fastapi.monitoring.token_usage_logger.token_logger = test_logger
+# Reset the singleton with test database
+# The reset method updates the global token_logger variable automatically
+TokenUsageLogger.reset_for_testing(database_url=SQLALCHEMY_DATABASE_URL)
+
+# NOW import the app after resetting
+# The endpoint will use the updated global token_logger
+from afs_fastapi.api.main import app  # noqa: E402
 
 # Create a test client
 client = TestClient(app)
 
 
+@pytest.mark.serial
 class TestTokenUsageAPI(unittest.TestCase):
+    """Token Usage API tests that must run serially due to singleton pattern.
+
+    These tests use module-level singleton reset which doesn't work correctly
+    with pytest-xdist parallel execution. The @pytest.mark.serial decorator
+    ensures these tests run sequentially.
+
+    Agricultural Context: Token usage tracking for agricultural robotics AI
+    agents requires isolated test database to prevent cross-test contamination
+    in CI/CD pipelines.
+    """
+
     def setUp(self):
         self.engine = create_engine(SQLALCHEMY_DATABASE_URL)
         Base.metadata.create_all(bind=self.engine)
@@ -49,6 +64,10 @@ class TestTokenUsageAPI(unittest.TestCase):
         data = response.json()
         self.assertIn("id", data)
         self.assertEqual(data["agent_id"], "api_test_agent")
+
+        # Wait for async operation to complete
+        # The log_token_usage method uses asyncio.to_thread which may not complete immediately
+        time.sleep(0.5)
 
         # Verify in DB
         db = self.SessionLocal()
