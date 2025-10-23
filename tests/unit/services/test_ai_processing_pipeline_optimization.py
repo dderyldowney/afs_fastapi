@@ -2,6 +2,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+import pytest
+
 from afs_fastapi.services.ai_processing_pipeline import AIProcessingPipeline, PipelineContext
 
 
@@ -26,15 +28,16 @@ class TestAIProcessingPipelineOptimization(unittest.TestCase):
         )
         self.assertNotIn("ISOBUS communication", context.essential_content)
 
-    def test_intelligent_caching(self):
+    @pytest.mark.asyncio
+    async def test_intelligent_caching(self):
         user_input = "what is the status of the tractor?"
         with patch.object(self.pipeline, "optimize_pre_fill_stage") as mock_optimize_pre_fill_stage:
             # First call, should call the pipeline
-            result1 = self.pipeline.process_complete_pipeline(user_input)
+            result1 = await self.pipeline.process_complete_pipeline(user_input)
             self.assertEqual(mock_optimize_pre_fill_stage.call_count, 1)
 
             # Second call, should not call the pipeline again
-            result2 = self.pipeline.process_complete_pipeline(user_input)
+            result2 = await self.pipeline.process_complete_pipeline(user_input)
             self.assertEqual(mock_optimize_pre_fill_stage.call_count, 1)
 
             # Check that the results are the same
