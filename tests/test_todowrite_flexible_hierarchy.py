@@ -33,7 +33,9 @@ from afs_fastapi.todos.manager import (
 )
 
 
-def create_node_without_parent(layer: str, title: str, description: str) -> tuple[dict, str]:
+def create_node_without_parent(
+    layer: str, title: str, description: str
+) -> tuple[dict[str, Any] | None, str | None]:
     """Create a node without requiring a parent - for flexible entry points."""
     import uuid
 

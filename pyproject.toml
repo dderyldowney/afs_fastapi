@@ -107,6 +107,14 @@ pretty = true
 # If you vendor optional libs, ignore their imports to keep signal clean:
 # ignore_missing_imports = true
 packages = ["afs_fastapi", "tests"]
+# plugins = ["sqlalchemy.ext.mypy.plugin"]  # Disabled due to overly strict type checking
+
+# SQLAlchemy specific configuration - disable strict checking for database tests
+[[tool.mypy.overrides]]
+module = "tests.unit.database.*"
+# Allow float literals for SQLAlchemy Float columns in tests
+disable_error_code = ["arg-type"]
+warn_return_any = false
 
 [tool.pyright]
 # Pyright can live in pyproject; this keeps VS Code/Pylance aligned.

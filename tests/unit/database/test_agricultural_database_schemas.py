@@ -87,7 +87,7 @@ class TestAgriculturalDatabaseSchemas:
             field_id="NORTH_40_CORN",
             field_name="North 40 Acres - Corn",
             crop_type="corn",
-            field_area_hectares=16.19,  # 40 acres
+            field_area_hectares=16.19,  # type: ignore[arg-type]  # 40 acres
             boundary_coordinates=[
                 (40.7128, -74.0060),
                 (40.7130, -74.0050),
@@ -185,7 +185,7 @@ class TestAgriculturalDatabaseSchemas:
             field_id="SOUTH_FIELD",
             field_name="South Field",
             crop_type="soybeans",
-            field_area_hectares=20.0,
+            field_area_hectares=20.0,  # type: ignore[arg-type]
         )
         db_session.add(field)
         db_session.commit()
@@ -239,7 +239,7 @@ class TestAgriculturalDatabaseSchemas:
             field_id="HARVEST_FIELD",
             field_name="Harvest Field",
             crop_type="corn",
-            field_area_hectares=25.0,
+            field_area_hectares=25.0,  # type: ignore[arg-type]
         )
         db_session.add_all([equipment, field])
         db_session.commit()
@@ -295,7 +295,7 @@ class TestAgriculturalDatabaseSchemas:
             field_id="TEST_FIELD",
             field_name="Test Field",
             crop_type="wheat",
-            field_area_hectares=10.0,
+            field_area_hectares=10.0,  # type: ignore[arg-type]
         )
         db_session.add_all([equipment, field])
         db_session.commit()

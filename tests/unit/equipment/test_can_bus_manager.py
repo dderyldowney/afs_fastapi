@@ -462,6 +462,8 @@ class TestCANBusConnectionManager:
 
             results = await can_manager.send_message(message)
 
+            # Type assertion for MyPy - new API returns dict
+            assert isinstance(results, dict)
             assert "can0" in results
             assert results["can0"] is True
             mock_interface.send_message.assert_called_once_with(message)
@@ -480,6 +482,8 @@ class TestCANBusConnectionManager:
         with patch.object(can_manager.physical_manager, "_interfaces", {"can0": mock_interface}):
             results = await can_manager.send_message(message, ["can0"])
 
+            # Type assertion for MyPy - new API returns dict
+            assert isinstance(results, dict)
             assert results["can0"] is True
 
     def test_manager_status(self, can_manager: CANBusConnectionManager) -> None:
@@ -629,10 +633,14 @@ class TestIntegrationScenarios:
 
             # Send engine message - should route to appropriate interfaces
             engine_results = await manager.send_message(engine_message)
+            # Type assertion for MyPy - new API returns dict
+            assert isinstance(engine_results, dict)
             assert len(engine_results) > 0
 
             # Send emergency message - should route to all interfaces
             emergency_results = await manager.send_message(emergency_message)
+            # Type assertion for MyPy - new API returns dict
+            assert isinstance(emergency_results, dict)
             assert len(emergency_results) > 0
 
         await manager.shutdown()

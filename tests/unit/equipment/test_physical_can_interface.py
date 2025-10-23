@@ -9,7 +9,6 @@ Implementation follows Test-First Development (TDD) methodology.
 
 from __future__ import annotations
 
-import asyncio
 from datetime import datetime
 from unittest.mock import AsyncMock, MagicMock, PropertyMock, patch
 
@@ -167,7 +166,9 @@ class TestSocketCANInterface:
             patch("can.Notifier", return_value=mock_notifier),
             patch.object(socketcan_interface, "_heartbeat_loop", new_callable=AsyncMock),
             patch.object(socketcan_interface, "_message_reception_loop", new_callable=AsyncMock),
-            patch("asyncio.create_task", return_value=MagicMock(cancel=AsyncMock())),
+            patch(
+                "asyncio.create_task", return_value=MagicMock(cancel=AsyncMock())
+            ) as mock_create_task,
         ):
             # Test connection
             result = await socketcan_interface.connect()
@@ -181,7 +182,7 @@ class TestSocketCANInterface:
             assert mock_notifier is not None
 
             # Ensure the mocked tasks were created
-            asyncio.create_task.assert_called()
+            mock_create_task.assert_called()
 
     @pytest.mark.asyncio
     async def test_connection_failure(

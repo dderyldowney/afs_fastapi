@@ -5,6 +5,7 @@ import argparse
 import sys
 from pathlib import Path
 
+
 def main():
     parser = argparse.ArgumentParser(description="Display all available ToDoWrite 12-layer system commands.")
     parser.add_argument("--layer", type=str, help="Show commands for a specific layer.")
