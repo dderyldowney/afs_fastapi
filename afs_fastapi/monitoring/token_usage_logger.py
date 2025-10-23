@@ -29,29 +29,20 @@ class TokenUsageLogger:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-        def __init__(
-            self, database_url: str = "sqlite:///./token_usage.db", log_level: int = logging.INFO
-        ) -> None:
+    def __init__(
+        self, database_url: str = "sqlite:///./token_usage.db", log_level: int = logging.INFO
+    ) -> None:
+        if not self._initialized:
+            self.database_url = database_url
+            self._initialize_db()
+            self._initialized = True
+            self.set_logging_level(log_level)
+            logger.info(f"TokenUsageLogger initialized with database: {self.database_url}")
 
-            if not self._initialized:
-
-                self.database_url = database_url
-
-                self._initialize_db()
-
-                self._initialized = True
-
-                self.set_logging_level(log_level)
-
-                logger.info(f"TokenUsageLogger initialized with database: {self.database_url}")
-
-        def _initialize_db(self) -> None:
-
-            self._engine = create_engine(self.database_url)
-
-            self._SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self._engine)
-
-            Base.metadata.create_all(bind=self._engine)
+    def _initialize_db(self) -> None:
+        self._engine = create_engine(self.database_url)
+        self._SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self._engine)
+        Base.metadata.create_all(bind=self._engine)
 
     def set_logging_level(self, level: int) -> None:
         """Sets the logging level for the TokenUsageLogger."""

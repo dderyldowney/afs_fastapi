@@ -91,4 +91,38 @@ PGN_SPECS: dict[int, list[SPNSpec]] = {
             max_value=250.996,
         ),
     ],
+    65267: [
+        SPNSpec(
+            spn=584,
+            name="Latitude",
+            byte_offset=0,
+            length=4,
+            scale=1e-7,
+            offset=0,
+            min_value=-180,
+            max_value=180,
+        ),
+        SPNSpec(
+            spn=585,
+            name="Longitude",
+            byte_offset=4,
+            length=4,
+            scale=1e-7,
+            offset=0,
+            min_value=-180,
+            max_value=180,
+        ),
+    ],
+    65276: [
+        SPNSpec(
+            spn=96,
+            name="Fuel Level",
+            byte_offset=1,
+            length=1,
+            scale=0.4,
+            offset=0,
+            min_value=0,
+            max_value=100,
+        ),
+    ],
 }

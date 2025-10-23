@@ -163,14 +163,15 @@ class TestAIProcessingPipeline:
 
         assert optimized_output.final_output == "- First sentence.\n- Second sentence."
 
-    def test_integrated_pipeline_execution(self, pipeline):
+    @pytest.mark.asyncio
+    async def test_integrated_pipeline_execution(self, pipeline):
         """Test full pipeline integration across all four stages."""
         # RED: Test complete pipeline processes input through all optimization stages
         user_input = (
             "I need help implementing agricultural equipment safety monitoring with ISO compliance"
         )
 
-        result = pipeline.process_complete_pipeline(
+        result = await pipeline.process_complete_pipeline(
             user_input=user_input, optimization_level=OptimizationLevel.AGGRESSIVE
         )
 
@@ -191,7 +192,8 @@ class TestAIProcessingPipeline:
         assert safety_result == OptimizationLevel.CONSERVATIVE  # Preserve safety content
         assert routine_result == OptimizationLevel.AGGRESSIVE  # Maximum optimization
 
-    def test_agricultural_context_preservation(self, pipeline):
+    @pytest.mark.asyncio
+    async def test_agricultural_context_preservation(self, pipeline):
         """Test pipeline preserves critical agricultural and safety content."""
         # RED: Test agricultural and safety keywords are never optimized away
         context = PipelineContext(
@@ -199,7 +201,7 @@ class TestAIProcessingPipeline:
             optimization_target=0.8,  # High optimization that should preserve safety content
         )
 
-        result = pipeline.process_complete_pipeline(
+        result = await pipeline.process_complete_pipeline(
             user_input=context.user_input, optimization_level=OptimizationLevel.AGGRESSIVE
         )
 
@@ -207,12 +209,13 @@ class TestAIProcessingPipeline:
         assert "iso" in output_lower or "safety" in output_lower or "emergency" in output_lower
         assert result.agricultural_compliance_maintained is True
 
-    def test_token_budget_management(self, pipeline):
+    @pytest.mark.asyncio
+    async def test_token_budget_management(self, pipeline):
         """Test pipeline respects token budget constraints."""
         # RED: Test pipeline stays within specified token budgets
         token_budget = 1000  # Maximum tokens allowed
 
-        result = pipeline.process_with_budget(
+        result = await pipeline.process_with_budget(
             user_input="Complete agricultural robotics implementation guide",
             token_budget=token_budget,
         )
@@ -221,37 +224,40 @@ class TestAIProcessingPipeline:
         assert result.budget_exceeded is False
         assert result.optimization_applied is True
 
-    def test_cross_stage_coordination(self, pipeline):
+    @pytest.mark.asyncio
+    async def test_cross_stage_coordination(self, pipeline):
         """Test stages coordinate optimization strategies effectively."""
         # RED: Test stages share optimization state and cumulative savings
         context = PipelineContext(user_input="Test coordination")
 
         # Mock stage processors to verify coordination
         with patch.object(pipeline, "_track_cumulative_optimization") as mock_track:
-            pipeline.process_complete_pipeline(
+            await pipeline.process_complete_pipeline(
                 user_input=context.user_input, optimization_level=OptimizationLevel.STANDARD
             )
 
             # Verify coordination tracking was called for each stage
             assert mock_track.call_count == 4  # One for each processing stage
 
-    def test_error_handling_and_fallback(self, pipeline):
+    @pytest.mark.asyncio
+    async def test_error_handling_and_fallback(self, pipeline):
         """Test pipeline handles optimization failures gracefully."""
         # RED: Test pipeline falls back to standard processing on optimization errors
         with patch.object(pipeline, "optimize_pre_fill_stage") as mock_optimize:
             mock_optimize.side_effect = Exception("Optimization failed")
 
-            result = pipeline.process_complete_pipeline(
+            result = await pipeline.process_complete_pipeline(
                 user_input="Test input", optimization_level=OptimizationLevel.STANDARD
             )
 
             assert result.fallback_used is True
             assert result.final_output is not None  # Still produces output
 
-    def test_optimization_metrics_tracking(self, pipeline):
+    @pytest.mark.asyncio
+    async def test_optimization_metrics_tracking(self, pipeline):
         """Test pipeline tracks comprehensive optimization metrics."""
         # RED: Test pipeline collects detailed performance metrics
-        result = pipeline.process_complete_pipeline(
+        result = await pipeline.process_complete_pipeline(
             user_input="Agricultural robotics implementation",
             optimization_level=OptimizationLevel.STANDARD,
         )

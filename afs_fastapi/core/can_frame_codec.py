@@ -368,10 +368,47 @@ class J1939Decoder:
             spn_definitions=etc1_spns,
         )
 
+        # Dash Display (DD) - PGN 65276 (0xFEFC) - Fuel Level
+        dd_spns: list[SPNDefinition] = [
+            SPNDefinition(
+                spn=96,
+                name="Fuel Level",
+                description="Fuel tank level percentage",
+                data_type=J1939DataType.PERCENTAGE,
+                start_bit=8,
+                bit_length=8,
+                scale=0.4,
+                units="%",
+                min_value=0,
+                max_value=100,
+                not_available_value=0xFF,
+                error_value=0xFE,
+            ),
+        ]
+
+        dd_pgn: PGNDefinition = PGNDefinition(
+            pgn=0xFEFC,
+            name="Dash Display",
+            description="Dashboard display information including fuel level",
+            data_length=8,
+            transmission_rate=1000,
+            spn_definitions=dd_spns,
+        )
+
         # Register all PGN definitions
-        pgn_definitions: list[PGNDefinition] = [eec1_pgn, wvs_pgn, vp_pgn, lfe_pgn, etc1_pgn]
+        pgn_definitions: list[PGNDefinition] = [
+            eec1_pgn,
+            wvs_pgn,
+            vp_pgn,
+            lfe_pgn,
+            etc1_pgn,
+            dd_pgn,
+        ]
 
         for pgn_def in pgn_definitions:
+            # Register PGN definition
+            self.pgn_definitions[pgn_def.pgn] = pgn_def
+            # Register SPN definitions
             for spn_def in pgn_def.spn_definitions:
                 self.spn_definitions[spn_def.spn] = spn_def
 

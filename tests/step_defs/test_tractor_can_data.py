@@ -63,7 +63,12 @@ def ecu_broadcasts_data_with_value(tractor_ecu, isobus_network, data_type, pgn, 
 )
 def system_receives_and_parses_data(afs_fastapi_system, isobus_network, data_type, value):
     for message in isobus_network["messages_on_bus"]:
-        parsed_message = afs_fastapi_system["can_parser"].parse_message(message)
+        # Extract PGN and create data payload from message
+        pgn = message["pgn"]
+        # Create a simple data payload with the value encoded
+        # For testing purposes, encode value as bytes in little-endian format
+        data = list(value.to_bytes(8, byteorder="little"))
+        parsed_message = afs_fastapi_system["can_parser"].parse_message(pgn, data)
         if parsed_message:
             afs_fastapi_system["can_messages_received"].append(parsed_message)
 
