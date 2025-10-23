@@ -22,7 +22,7 @@ ACK_VALUE = 1  # 1 = command acknowledged
 def tractor_simulator():
     """Simulates a tractor on the CAN bus."""
     can_hal = MockCanHal()
-    can_hal.connect(channel="test", interface="mock")
+    can_hal.connect(channel="test", interface="virtual")
 
     print("Tractor simulator started")
     while True:

@@ -18,15 +18,32 @@ class CanHal(Protocol):
 
 
 class MockCanHal:
-    """Mock implementation of CanHal for testing purposes."""
+    """Mock implementation of CanHal for testing purposes.
+
+    Supports 'virtual' interface for testing CAN communication without hardware.
+    The 'virtual' interface creates an in-memory CAN bus for testing.
+    """
 
     def __init__(self) -> None:
         self._bus: can.BusABC | None = None
 
     def connect(self, channel: str, interface: str) -> None:
-        if interface != "mock":
-            raise ValueError("MockCanHal only supports 'mock' interface.")
-        self._bus = can.interface.Bus(channel=channel, interface=interface)
+        """Connect to CAN bus using specified interface.
+
+        Args:
+            channel: CAN channel identifier
+            interface: Interface type ('virtual' for testing, 'mock' deprecated)
+
+        Raises:
+            ValueError: If interface is not supported for testing
+        """
+        if interface not in ("mock", "virtual"):
+            raise ValueError(
+                f"MockCanHal only supports 'mock' or 'virtual' interface, got '{interface}'"
+            )
+        # Use 'virtual' interface for actual testing (python-can built-in)
+        actual_interface = "virtual" if interface in ("mock", "virtual") else interface
+        self._bus = can.interface.Bus(channel=channel, interface=actual_interface)
 
     def disconnect(self) -> None:
         if self._bus:

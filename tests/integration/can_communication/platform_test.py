@@ -25,7 +25,7 @@ PORT = 65433  # The port used by the server
 def platform_test():
     """Represents the platform and runs the test."""
     can_hal = MockCanHal()
-    can_hal.connect(channel="test", interface="mock")
+    can_hal.connect(channel="test", interface="virtual")
 
     print("Received start test message, sending command to CAN bus")
     msg = can.Message(
