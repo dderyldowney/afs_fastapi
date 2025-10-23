@@ -3,6 +3,7 @@ import unittest
 import uuid
 from datetime import datetime, timedelta
 
+import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -120,7 +121,19 @@ class TestTokenUsageRepository(unittest.TestCase):
         self.assertEqual(remaining_logs[0].agent_id, "agent2")
 
 
+@pytest.mark.serial
 class TestTokenUsageLogger(unittest.IsolatedAsyncioTestCase):
+    """Token Usage Logger tests that must run serially due to singleton pattern.
+
+    These tests use TokenUsageLogger singleton which doesn't work correctly
+    with pytest-xdist parallel execution. The @pytest.mark.serial decorator
+    ensures these tests run sequentially.
+
+    Agricultural Context: Token usage tracking for agricultural robotics AI
+    agents requires isolated test execution to prevent cross-test contamination
+    in CI/CD pipelines.
+    """
+
     def setUp(self):
         self.database_url = "sqlite:///:memory:"
         self.logger = TokenUsageLogger(database_url=self.database_url)
