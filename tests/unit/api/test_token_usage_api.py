@@ -11,14 +11,13 @@ from sqlalchemy.orm import sessionmaker
 # Use a test SQLite database for testing
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test_token_usage.db"
 
-# IMPORTANT: Reset singleton BEFORE importing app
-# This ensures the endpoint module uses the test database
 from afs_fastapi.monitoring.token_usage_logger import TokenUsageLogger  # noqa: E402
 from afs_fastapi.monitoring.token_usage_models import Base  # noqa: E402
 from afs_fastapi.monitoring.token_usage_repository import TokenUsageRepository  # noqa: E402
 
-# Reset the singleton with test database
-# The reset method updates the global token_logger variable automatically
+
+# Reset the singleton with test database BEFORE importing app
+# This must happen at module level before any imports that use the logger
 TokenUsageLogger.reset_for_testing(database_url=SQLALCHEMY_DATABASE_URL)
 
 # NOW import the app after resetting
@@ -43,7 +42,10 @@ class TestTokenUsageAPI(unittest.TestCase):
     """
 
     def setUp(self):
-        self.engine = create_engine(SQLALCHEMY_DATABASE_URL)
+        # Use the logger's engine to ensure we're reading from the same database connection
+        # This avoids SQLite multi-connection isolation issues
+        logger = TokenUsageLogger()
+        self.engine = logger._engine
         Base.metadata.create_all(bind=self.engine)
         self.SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
 
@@ -67,7 +69,7 @@ class TestTokenUsageAPI(unittest.TestCase):
 
         # Wait for async operation to complete
         # The log_token_usage method uses asyncio.to_thread which may not complete immediately
-        time.sleep(0.5)
+        time.sleep(2.0)
 
         # Verify in DB
         db = self.SessionLocal()
