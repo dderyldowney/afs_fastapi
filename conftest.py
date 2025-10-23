@@ -33,5 +33,4 @@ def pytest_collection_modifyitems(config: Any, items: list[Any]) -> None:
         if "serial" in item.keywords:
             # Assign all serial tests to the same xdist group
             # This ensures they run sequentially on the same worker
-            item.add_marker(pytest.mark.xdist_group(name="serial"))
-
+            item.add_marker(pytest.mark.xdist_group("serial"))
