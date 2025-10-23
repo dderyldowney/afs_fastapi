@@ -154,16 +154,44 @@ engine = create_database_engine()
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
+def reset_database_engine() -> None:
+    """
+    Reset the database engine and session factory.
+
+    This function should be called in test fixtures to ensure proper isolation.
+    It disposes of all existing connections and creates a fresh engine and session factory.
+
+    Agricultural Context: Ensures test isolation for agricultural robotics platform
+    where database state must be clean between independent operation scenarios.
+    """
+    global engine, SessionLocal
+
+    # Dispose of existing connections
+    engine.dispose()
+
+    # Create fresh engine and session factory
+    engine = create_database_engine()
+    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+
 def init_database() -> dict[str, str]:
     """
-    Initialize the database by creating all tables.
+    Initialize the database by clearing all data and recreating tables.
 
-    This function creates all the tables defined in the models if they don't exist.
-    Should be called before first use of the TodoWrite system.
+    This function drops all existing tables and recreates them, ensuring a clean state.
+    Should be called before first use of the TodoWrite system and in test fixtures
+    to ensure complete database isolation.
 
     Supports both SQLite and PostgreSQL for agricultural robotics environments.
+
+    Agricultural Context: Essential for test isolation in agricultural robotics
+    scenarios where clean state between different operation tests is critical.
     """
     try:
+        # Drop all existing tables to clear data
+        Base.metadata.drop_all(bind=engine)
+
+        # Create all tables fresh
         Base.metadata.create_all(bind=engine)
 
         # Log database type for agricultural operations tracking
@@ -278,6 +306,27 @@ def load_todos() -> dict[str, list[Node]]:
     finally:
         db.close()
     return todos
+
+
+def get_node_by_id(node_id: str) -> Node | None:
+    """
+    Get a node from the database by its ID.
+
+    Args:
+        node_id: The ID of the node to retrieve
+
+    Returns:
+        The Node object if found, None otherwise
+    """
+    db = SessionLocal()
+    repository = NodeRepository(db)
+    try:
+        db_node = repository.get(SQLAModelNode, node_id)
+        if db_node:
+            return _convert_db_node_to_node(db_node)
+    finally:
+        db.close()
+    return None
 
 
 def get_active_items(todos: dict[str, list[Node]]) -> dict[str, Node]:
@@ -1371,9 +1420,30 @@ def add_command(
     subtask_id: str | None = None,
     ac_ref: str = "",
 ) -> tuple[dict[str, Any] | None, str | None]:
-    """Add a new Command to the ToDoWrite system."""
+    """Add a new Command to the ToDoWrite system.
+
+    Commands must be direct children of SubTasks. This enforces the hierarchy:
+    Phase -> Step -> Task -> SubTask -> Command
+
+    Agricultural Context: Commands represent executable operations in farm
+    automation workflows. Enforcing proper hierarchy ensures command chains
+    are well-defined and traceable through the task structure.
+    """
     try:
         import uuid
+
+        # Validate parent layer if subtask_id is provided
+        if subtask_id:
+            parent_node = get_node_by_id(subtask_id)
+            if not parent_node:
+                return None, f"Parent node with ID '{subtask_id}' not found"
+
+            if parent_node.layer != "SubTask":
+                return (
+                    None,
+                    f"Commands can only be children of SubTasks, not {parent_node.layer}. "
+                    "Hierarchy violation: Phase -> Step -> Task -> SubTask -> Command",
+                )
 
         command_id = f"command-{uuid.uuid4().hex[:12]}"
         command_data = {

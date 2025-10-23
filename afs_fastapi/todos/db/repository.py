@@ -101,8 +101,9 @@ class NodeRepository(BaseRepository[DBNode]):
         self.session.flush()  # Flush to get the node ID for relationships
 
         for parent_id in node_data["links"].get("parents", []):
-            link = DBLink(parent_id=parent_id, child_id=db_node.id)
-            self.session.add(link)
+            if parent_id is not None:  # Skip None parents for flexible entry points
+                link = DBLink(parent_id=parent_id, child_id=db_node.id)
+                self.session.add(link)
 
         for label_text in node_data["metadata"].get("labels", []):
             label = self.session.query(DBLabel).filter(DBLabel.label == label_text).first()

@@ -6,7 +6,7 @@ This test demonstrates two key ToDoWrite system capabilities:
 2. MANDATORY COMPLETION: All layers below your starting point MUST be defined
 
 The 12-layer hierarchy:
-Goal → Concept → Context → Constraints → Requirements → Acceptance Criteria → 
+Goal → Concept → Context → Constraints → Requirements → Acceptance Criteria →
 Interface Contract → Phase → Step → Task → SubTask → Command
 """
 
@@ -19,7 +19,6 @@ from afs_fastapi.todos.manager import (
     add_step,
     add_subtask,
     add_task,
-    create_database_engine,
     create_node,
     init_database,
     load_todos,
@@ -64,11 +63,17 @@ class TestFlexibleEntryPoints:
     @pytest.fixture(autouse=True)
     def clean_database(self):
         """Clean database for each test."""
+        from afs_fastapi.todos import manager as manager_module
         from afs_fastapi.todos.db.models import Base
+        from afs_fastapi.todos.manager import reset_database_engine
 
-        engine = create_database_engine()
-        Base.metadata.drop_all(engine)
-        Base.metadata.create_all(engine)
+        # Reset the module-level singleton engine to dispose connections
+        reset_database_engine()
+
+        # Now get the fresh engine and drop/create tables
+        fresh_engine = manager_module.engine
+        Base.metadata.drop_all(fresh_engine)
+        Base.metadata.create_all(fresh_engine)
         init_database()
         yield
 

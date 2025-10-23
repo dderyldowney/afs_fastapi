@@ -6,8 +6,8 @@ This test suite validates two critical ToDoWrite system requirements:
 2. Mandatory Completion: All layers below your starting point MUST be defined
 
 The 12-layer hierarchy:
-1. Goal → 2. Concept → 3. Context → 4. Constraints → 5. Requirements → 
-6. Acceptance Criteria → 7. Interface Contract → 8. Phase → 9. Step → 
+1. Goal → 2. Concept → 3. Context → 4. Constraints → 5. Requirements →
+6. Acceptance Criteria → 7. Interface Contract → 8. Phase → 9. Step →
 10. Task → 11. SubTask → 12. Command
 """
 
@@ -83,11 +83,17 @@ class TestToDoWriteFlexibleHierarchy:
         """Initialize clean database for each test."""
         # Clear existing database and reinitialize
         from afs_fastapi.todos.db.models import Base
-        from afs_fastapi.todos.manager import create_database_engine
+        from afs_fastapi.todos.manager import reset_database_engine
 
-        engine = create_database_engine()
-        Base.metadata.drop_all(engine)
-        Base.metadata.create_all(engine)
+        # Reset the module-level singleton engine to dispose connections
+        reset_database_engine()
+
+        # Now get the fresh engine and drop/create tables
+        from afs_fastapi.todos import manager as manager_module
+
+        fresh_engine = manager_module.engine
+        Base.metadata.drop_all(fresh_engine)
+        Base.metadata.create_all(fresh_engine)
 
         # Initialize with empty database
         init_database()

@@ -33,13 +33,11 @@ def tractor_ecu():
 @given("the AFS FastAPI system is connected to an ISOBUS network")
 def system_connected_to_isobus(afs_fastapi_system, isobus_network):
     isobus_network["connected"] = True
-    pass
 
 
 @given("a Tractor ECU is present on the network")
 def tractor_ecu_present(tractor_ecu, isobus_network):
     tractor_ecu["present"] = True
-    pass
 
 
 # When Steps
@@ -52,7 +50,6 @@ def ecu_broadcasts_data_with_value(tractor_ecu, isobus_network, data_type, pgn, 
     isobus_network["messages_on_bus"].append(
         {"pgn": pgn, "spn": spn, "value": value, "data_type": data_type}
     )
-    pass
 
 
 # Then Steps
