@@ -145,3 +145,8 @@ commit_message.txt
 
 # Trace directory
 trace/
+
+# Token usage database files
+token_usage.db
+test_token_usage.db
+*_token_usage.db
