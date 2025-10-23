@@ -14,7 +14,7 @@ Feature: Tractor CAN Data Reception
       | Engine Speed      | 61444  | 190 | 2000  |
       | Vehicle Speed     | 65265  | 84  | 50    |
       | Fuel Level        | 65276  | 96  | 75    |
-      | GPS Coordinates   | 65267  | 162 | 12345 |
+      | GPS Coordinates   | 65267  | 584 | 12345 |
 
   Scenario: Handling Corrupted CAN Messages
     Given the AFS FastAPI system is connected to an ISOBUS network
