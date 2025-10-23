@@ -334,7 +334,7 @@ class TestUpdateChangelogCommandLineRobustness:
         )
         new_untracked_files = final_files - initial_files
 
-        assert len(new_untracked_files) == 0, f"Script created untracked files:\n" + "\n".join(
+        assert len(new_untracked_files) == 0, "Script created untracked files:\n" + "\n".join(
             f"  - {f}" for f in new_untracked_files
         )
 

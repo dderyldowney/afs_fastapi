@@ -5,7 +5,6 @@ from datetime import datetime
 
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 # Use a test SQLite database for testing
@@ -14,7 +13,6 @@ SQLALCHEMY_DATABASE_URL = "sqlite:///./test_token_usage.db"
 from afs_fastapi.monitoring.token_usage_logger import TokenUsageLogger  # noqa: E402
 from afs_fastapi.monitoring.token_usage_models import Base  # noqa: E402
 from afs_fastapi.monitoring.token_usage_repository import TokenUsageRepository  # noqa: E402
-
 
 # Reset the singleton with test database BEFORE importing app
 # This must happen at module level before any imports that use the logger
