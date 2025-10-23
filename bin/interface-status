@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import get_interface_contracts, load_todos  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Display status of all Interface Contracts in the ToDoWrite system.")
+    parser.add_argument("--interface-id", type=str, help="Show details for a specific interface ID.")
+    args = parser.parse_args()
+
+    if getattr(args, "interface_id", None):
+        # Show specific interface details
+        todos = load_todos()
+        interface_contracts = todos.get("Interface Contract", [])
+        interface = None
+        for item in interface_contracts:
+            if item.id == getattr(args, "interface_id"):
+                interface = item
+                break
+
+        if not interface:
+            print(f"Error: Interface Contract with ID '{getattr(args, 'interface_id')}' not found.")
+            sys.exit(1)
+
+        print(f"🔌 Interface Contract Details: {interface.id}")
+        print("=" * 50)
+        print(f"Title: {interface.title}")
+        print(f"Description: {interface.description}")
+        print(f"Status: {interface.status}")
+        print(f"Owner: {interface.metadata.owner}")
+        print(f"Labels: {', '.join(interface.metadata.labels) if interface.metadata.labels else 'None'}")
+        print(f"Parents: {', '.join(interface.links.parents) if interface.links.parents else 'None'}")
+        print(f"Children: {', '.join(interface.links.children) if interface.links.children else 'None'}")
+    else:
+        # Show all interface_contracts
+        interface_contracts = get_interface_contracts()
+        
+        if not interface_contracts:
+            print("No interface_contracts found in the ToDoWrite system.")
+            return
+
+        print("🔌 All Interface Contracts Status")
+        print("=" * 50)
+        
+        for item in interface_contracts:
+            status_icon = "✓" if item["status"] == "done" else "○" if item["status"] == "active" else "·"
+            print(f"{status_icon} {item['id']}")
+            print(f"   Title: {item['title']}")
+            print(f"   Status: {item['status']}")
+            print()
+
+        print(f"Total Interface Contracts: {len(interface_contracts)}")
+        completed = len([item for item in interface_contracts if item["status"] == "done"])
+        active = len([item for item in interface_contracts if item["status"] == "active"])
+        planned = len([item for item in interface_contracts if item["status"] == "planned"])
+        print(f"Completed: {completed}, Active: {active}, Planned: {planned}")
+
+
+if __name__ == "__main__":
+    main()

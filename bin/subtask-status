@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import load_todos  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Display status of all SubTasks in the ToDoWrite system.")
+    parser.add_argument("--subtask-id", type=str, help="Show details for a specific subtask ID.")
+    args = parser.parse_args()
+
+    todos = load_todos()
+    subtasks = todos.get("SubTask", [])
+
+    if args.subtask_id:
+        # Show specific subtask details
+        subtask = None
+        for s in subtasks:
+            if s.id == args.subtask_id:
+                subtask = s
+                break
+
+        if not subtask:
+            print(f"Error: SubTask with ID '{args.subtask_id}' not found.")
+            sys.exit(1)
+
+        print(f"🔧 SubTask Details: {subtask.id}")
+        print("=" * 50)
+        print(f"Title: {subtask.title}")
+        print(f"Description: {subtask.description}")
+        print(f"Status: {subtask.status}")
+        print(f"Owner: {subtask.metadata.owner}")
+        print(f"Labels: {', '.join(subtask.metadata.labels) if subtask.metadata.labels else 'None'}")
+        print(f"Parents: {', '.join(subtask.links.parents) if subtask.links.parents else 'None'}")
+        print(f"Children: {', '.join(subtask.links.children) if subtask.links.children else 'None'}")
+        if subtask.command:
+            print(f"Command: {subtask.command.run}")
+    else:
+        # Show all subtasks
+        if not subtasks:
+            print("No subtasks found in the ToDoWrite system.")
+            return
+
+        print("🔧 All SubTasks Status")
+        print("=" * 50)
+        
+        for subtask in subtasks:
+            status_icon = "✓" if subtask.status == "done" else "○" if subtask.status == "active" else "·"
+            print(f"{status_icon} {subtask.id}")
+            print(f"   Title: {subtask.title}")
+            print(f"   Status: {subtask.status}")
+            if subtask.command:
+                print(f"   Command: {subtask.command.run}")
+            print()
+
+        print(f"Total SubTasks: {len(subtasks)}")
+        completed = len([s for s in subtasks if s.status == "done"])
+        active = len([s for s in subtasks if s.status == "active"])
+        planned = len([s for s in subtasks if s.status == "planned"])
+        print(f"Completed: {completed}, Active: {active}, Planned: {planned}")
+
+
+if __name__ == "__main__":
+    main()

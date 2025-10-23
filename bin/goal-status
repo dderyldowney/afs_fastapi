@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import get_goals, load_todos  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Display status of all Goals in the ToDoWrite system.")
+    parser.add_argument("--goal-id", type=str, help="Show details for a specific goal ID.")
+    args = parser.parse_args()
+
+    if args.goal_id:
+        # Show specific goal details
+        todos = load_todos()
+        goals = todos.get("Goal", [])
+        goal = None
+        for g in goals:
+            if g.id == args.goal_id:
+                goal = g
+                break
+
+        if not goal:
+            print(f"Error: Goal with ID '{args.goal_id}' not found.")
+            sys.exit(1)
+
+        print(f"🎯 Goal Details: {goal.id}")
+        print("=" * 50)
+        print(f"Title: {goal.title}")
+        print(f"Description: {goal.description}")
+        print(f"Status: {goal.status}")
+        print(f"Owner: {goal.metadata.owner}")
+        print(f"Labels: {', '.join(goal.metadata.labels) if goal.metadata.labels else 'None'}")
+        print(f"Severity: {goal.metadata.severity}")
+        print(f"Work Type: {goal.metadata.work_type}")
+        print(f"Parents: {', '.join(goal.links.parents) if goal.links.parents else 'None'}")
+        print(f"Children: {', '.join(goal.links.children) if goal.links.children else 'None'}")
+    else:
+        # Show all goals
+        goals = get_goals()
+        
+        if not goals:
+            print("No goals found in the ToDoWrite system.")
+            return
+
+        print("🎯 All Goals Status")
+        print("=" * 50)
+        
+        for goal in goals:
+            status_icon = "✓" if goal["status"] == "done" else "○" if goal["status"] == "active" else "·"
+            print(f"{status_icon} {goal['id']}")
+            print(f"   Title: {goal['title']}")
+            print(f"   Status: {goal['status']}")
+            print(f"   Priority: {goal.get('priority', 'N/A')}")
+            print()
+
+        print(f"Total Goals: {len(goals)}")
+        completed = len([g for g in goals if g["status"] == "done"])
+        active = len([g for g in goals if g["status"] == "active"])
+        planned = len([g for g in goals if g["status"] == "planned"])
+        print(f"Completed: {completed}, Active: {active}, Planned: {planned}")
+
+
+if __name__ == "__main__":
+    main()

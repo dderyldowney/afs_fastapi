@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import get_phases, load_todos  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Display status of all Phases in the ToDoWrite system.")
+    parser.add_argument("--phase-id", type=str, help="Show details for a specific phase ID.")
+    args = parser.parse_args()
+
+    if getattr(args, "phase_id", None):
+        # Show specific phase details
+        todos = load_todos()
+        phases = todos.get("Phase", [])
+        phase = None
+        for item in phases:
+            if item.id == getattr(args, "phase_id"):
+                phase = item
+                break
+
+        if not phase:
+            print(f"Error: Phase with ID '{getattr(args, 'phase_id')}' not found.")
+            sys.exit(1)
+
+        print(f"📅 Phase Details: {phase.id}")
+        print("=" * 50)
+        print(f"Title: {phase.title}")
+        print(f"Description: {phase.description}")
+        print(f"Status: {phase.status}")
+        print(f"Owner: {phase.metadata.owner}")
+        print(f"Labels: {', '.join(phase.metadata.labels) if phase.metadata.labels else 'None'}")
+        print(f"Parents: {', '.join(phase.links.parents) if phase.links.parents else 'None'}")
+        print(f"Children: {', '.join(phase.links.children) if phase.links.children else 'None'}")
+    else:
+        # Show all phases
+        phases = get_phases()
+
+        if not phases:
+            print("No phases found in the ToDoWrite system.")
+            return
+
+        print("📅 All Phases Status")
+        print("=" * 50)
+
+        for item in phases:
+            status_icon = "✓" if item.status == "done" else "○" if item.status == "active" else "·"
+            print(f"{status_icon} {item.id}")
+            print(f"   Title: {item.title}")
+            print(f"   Status: {item.status}")
+            print()
+
+        print(f"Total Phases: {len(phases)}")
+        completed = len([item for item in phases if item.status == "done"])
+        active = len([item for item in phases if item.status == "active"])
+        planned = len([item for item in phases if item.status == "planned"])
+        print(f"Completed: {completed}, Active: {active}, Planned: {planned}")
+
+
+if __name__ == "__main__":
+    main()

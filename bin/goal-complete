@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import complete_goal  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Mark a Goal as complete in the ToDoWrite system.")
+    parser.add_argument("goal_id", type=str, help="The ID of the goal to complete.")
+    args = parser.parse_args()
+
+    completed_goal, error = complete_goal(args.goal_id)
+
+    if error:
+        print(f"Error: {error}")
+        sys.exit(1)
+
+    if completed_goal:
+        print("✓ Goal marked as completed!")
+        print(f"  ID: {completed_goal.id}")
+        print(f"  Title: {completed_goal.title}")
+        print(f"  Status: {completed_goal.status}")
+        print()
+        print("Use './bin/strategic-status' to view updated strategic progress.")
+
+
+if __name__ == "__main__":
+    main()

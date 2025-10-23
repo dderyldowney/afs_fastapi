@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import add_goal  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Add a new Goal to the ToDoWrite system.")
+    parser.add_argument("title", type=str, help="The title of the goal.")
+    parser.add_argument("--description", type=str, default="", help="The description of the goal.")
+    args = parser.parse_args()
+
+    new_goal, error = add_goal(args.title, args.description)
+
+    if error:
+        print(f"Error: {error}")
+        sys.exit(1)
+
+    if new_goal:
+        print("✓ Goal added successfully!")
+        print(f"  ID: {new_goal['id']}")
+        print(f"  Title: {new_goal['title']}")
+        print(f"  Status: {new_goal['status']}")
+        print()
+        print("Use './bin/goal-status' to view all goals or './bin/strategic-status' for strategic overview.")
+
+
+if __name__ == "__main__":
+    main()

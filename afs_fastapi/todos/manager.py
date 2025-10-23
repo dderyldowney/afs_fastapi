@@ -725,3 +725,764 @@ def complete_phase(phase_id: str) -> tuple[Node | None, str | None]:
         return node, None
     finally:
         db.close()
+
+
+# Layer 2: Concept functions
+def add_concept(
+    title: str, description: str, goal_id: str | None = None
+) -> tuple[dict[str, Any] | None, str | None]:
+    """Add a new Concept to the ToDoWrite system."""
+    try:
+        import uuid
+
+        concept_id = f"concept-{uuid.uuid4().hex[:12]}"
+        concept_data = {
+            "id": concept_id,
+            "layer": "Concept",
+            "title": title,
+            "description": description,
+            "status": "planned",
+            "links": {"parents": [goal_id] if goal_id else [], "children": []},
+            "metadata": {
+                "owner": "system",
+                "labels": [],
+                "severity": "",
+                "work_type": "",
+            },
+        }
+
+        node = create_node(concept_data)
+        if node:
+            concept_dict = {
+                "id": node.id,
+                "title": node.title,
+                "description": node.description,
+                "status": node.status,
+            }
+            return concept_dict, None
+        else:
+            return None, "Failed to create concept"
+    except Exception as e:
+        return None, str(e)
+
+
+def get_concepts() -> list[dict[str, Any]]:
+    """Get all Concept-layer items."""
+    todos = load_todos()
+    concept_nodes = todos.get("Concept", [])
+
+    concepts = []
+    for node in concept_nodes:
+        concept_dict = {
+            "id": node.id,
+            "title": node.title,
+            "description": node.description,
+            "status": node.status,
+            "owner": node.metadata.owner,
+            "labels": node.metadata.labels,
+        }
+        concepts.append(concept_dict)
+
+    return concepts
+
+
+def complete_concept(concept_id: str) -> tuple[Node | None, str | None]:
+    """Mark a Concept as complete."""
+    db = SessionLocal()
+    repository: NodeRepository = NodeRepository(db)
+    try:
+        from datetime import datetime
+
+        todos = load_todos()
+        concepts = todos.get("Concept", [])
+        concept = None
+        for c in concepts:
+            if c.id == concept_id:
+                concept = c
+                break
+
+        if not concept:
+            return None, f"Concept with ID '{concept_id}' not found"
+
+        if concept.status == "done":
+            return concept, None  # Already completed
+
+        updated_concept = cast(
+            SQLAModelNode,
+            repository.update_node_by_id(
+                concept_id,
+                {
+                    "status": "done",
+                    "metadata": {
+                        "owner": concept.metadata.owner,
+                        "labels": concept.metadata.labels,
+                        "severity": concept.metadata.severity,
+                        "work_type": concept.metadata.work_type,
+                        "date_completed": datetime.now().isoformat(),
+                    },
+                },
+            ),
+        )
+
+        if not updated_concept:
+            return None, "Failed to update concept status in database"
+
+        node = _convert_db_node_to_node(updated_concept)
+        return node, None
+    finally:
+        db.close()
+
+
+# Layer 3: Context functions
+def add_context(
+    title: str, description: str, concept_id: str | None = None
+) -> tuple[dict[str, Any] | None, str | None]:
+    """Add a new Context to the ToDoWrite system."""
+    try:
+        import uuid
+
+        context_id = f"context-{uuid.uuid4().hex[:12]}"
+        context_data = {
+            "id": context_id,
+            "layer": "Context",
+            "title": title,
+            "description": description,
+            "status": "planned",
+            "links": {"parents": [concept_id] if concept_id else [], "children": []},
+            "metadata": {
+                "owner": "system",
+                "labels": [],
+                "severity": "",
+                "work_type": "",
+            },
+        }
+
+        node = create_node(context_data)
+        if node:
+            context_dict = {
+                "id": node.id,
+                "title": node.title,
+                "description": node.description,
+                "status": node.status,
+            }
+            return context_dict, None
+        else:
+            return None, "Failed to create context"
+    except Exception as e:
+        return None, str(e)
+
+
+def get_contexts() -> list[dict[str, Any]]:
+    """Get all Context-layer items."""
+    todos = load_todos()
+    context_nodes = todos.get("Context", [])
+
+    contexts = []
+    for node in context_nodes:
+        context_dict = {
+            "id": node.id,
+            "title": node.title,
+            "description": node.description,
+            "status": node.status,
+            "owner": node.metadata.owner,
+            "labels": node.metadata.labels,
+        }
+        contexts.append(context_dict)
+
+    return contexts
+
+
+def complete_context(context_id: str) -> tuple[Node | None, str | None]:
+    """Mark a Context as complete."""
+    db = SessionLocal()
+    repository: NodeRepository = NodeRepository(db)
+    try:
+        from datetime import datetime
+
+        todos = load_todos()
+        contexts = todos.get("Context", [])
+        context = None
+        for c in contexts:
+            if c.id == context_id:
+                context = c
+                break
+
+        if not context:
+            return None, f"Context with ID '{context_id}' not found"
+
+        if context.status == "done":
+            return context, None  # Already completed
+
+        updated_context = cast(
+            SQLAModelNode,
+            repository.update_node_by_id(
+                context_id,
+                {
+                    "status": "done",
+                    "metadata": {
+                        "owner": context.metadata.owner,
+                        "labels": context.metadata.labels,
+                        "severity": context.metadata.severity,
+                        "work_type": context.metadata.work_type,
+                        "date_completed": datetime.now().isoformat(),
+                    },
+                },
+            ),
+        )
+
+        if not updated_context:
+            return None, "Failed to update context status in database"
+
+        node = _convert_db_node_to_node(updated_context)
+        return node, None
+    finally:
+        db.close()
+
+
+# Layer 4: Constraints functions
+def add_constraint(
+    title: str, description: str, context_id: str | None = None
+) -> tuple[dict[str, Any] | None, str | None]:
+    """Add a new Constraint to the ToDoWrite system."""
+    try:
+        import uuid
+
+        constraint_id = f"constraint-{uuid.uuid4().hex[:12]}"
+        constraint_data = {
+            "id": constraint_id,
+            "layer": "Constraints",
+            "title": title,
+            "description": description,
+            "status": "planned",
+            "links": {"parents": [context_id] if context_id else [], "children": []},
+            "metadata": {
+                "owner": "system",
+                "labels": [],
+                "severity": "",
+                "work_type": "",
+            },
+        }
+
+        node = create_node(constraint_data)
+        if node:
+            constraint_dict = {
+                "id": node.id,
+                "title": node.title,
+                "description": node.description,
+                "status": node.status,
+            }
+            return constraint_dict, None
+        else:
+            return None, "Failed to create constraint"
+    except Exception as e:
+        return None, str(e)
+
+
+def get_constraints() -> list[dict[str, Any]]:
+    """Get all Constraints-layer items."""
+    todos = load_todos()
+    constraint_nodes = todos.get("Constraints", [])
+
+    constraints = []
+    for node in constraint_nodes:
+        constraint_dict = {
+            "id": node.id,
+            "title": node.title,
+            "description": node.description,
+            "status": node.status,
+            "owner": node.metadata.owner,
+            "labels": node.metadata.labels,
+        }
+        constraints.append(constraint_dict)
+
+    return constraints
+
+
+def complete_constraint(constraint_id: str) -> tuple[Node | None, str | None]:
+    """Mark a Constraint as complete."""
+    db = SessionLocal()
+    repository: NodeRepository = NodeRepository(db)
+    try:
+        from datetime import datetime
+
+        todos = load_todos()
+        constraints = todos.get("Constraints", [])
+        constraint = None
+        for c in constraints:
+            if c.id == constraint_id:
+                constraint = c
+                break
+
+        if not constraint:
+            return None, f"Constraint with ID '{constraint_id}' not found"
+
+        if constraint.status == "done":
+            return constraint, None  # Already completed
+
+        updated_constraint = cast(
+            SQLAModelNode,
+            repository.update_node_by_id(
+                constraint_id,
+                {
+                    "status": "done",
+                    "metadata": {
+                        "owner": constraint.metadata.owner,
+                        "labels": constraint.metadata.labels,
+                        "severity": constraint.metadata.severity,
+                        "work_type": constraint.metadata.work_type,
+                        "date_completed": datetime.now().isoformat(),
+                    },
+                },
+            ),
+        )
+
+        if not updated_constraint:
+            return None, "Failed to update constraint status in database"
+
+        node = _convert_db_node_to_node(updated_constraint)
+        return node, None
+    finally:
+        db.close()
+
+
+# Layer 5: Requirements functions
+def add_requirement(
+    title: str, description: str, constraint_id: str | None = None
+) -> tuple[dict[str, Any] | None, str | None]:
+    """Add a new Requirement to the ToDoWrite system."""
+    try:
+        import uuid
+
+        requirement_id = f"requirement-{uuid.uuid4().hex[:12]}"
+        requirement_data = {
+            "id": requirement_id,
+            "layer": "Requirements",
+            "title": title,
+            "description": description,
+            "status": "planned",
+            "links": {"parents": [constraint_id] if constraint_id else [], "children": []},
+            "metadata": {
+                "owner": "system",
+                "labels": [],
+                "severity": "",
+                "work_type": "",
+            },
+        }
+
+        node = create_node(requirement_data)
+        if node:
+            requirement_dict = {
+                "id": node.id,
+                "title": node.title,
+                "description": node.description,
+                "status": node.status,
+            }
+            return requirement_dict, None
+        else:
+            return None, "Failed to create requirement"
+    except Exception as e:
+        return None, str(e)
+
+
+def get_requirements() -> list[dict[str, Any]]:
+    """Get all Requirements-layer items."""
+    todos = load_todos()
+    requirement_nodes = todos.get("Requirements", [])
+
+    requirements = []
+    for node in requirement_nodes:
+        requirement_dict = {
+            "id": node.id,
+            "title": node.title,
+            "description": node.description,
+            "status": node.status,
+            "owner": node.metadata.owner,
+            "labels": node.metadata.labels,
+        }
+        requirements.append(requirement_dict)
+
+    return requirements
+
+
+def complete_requirement(requirement_id: str) -> tuple[Node | None, str | None]:
+    """Mark a Requirement as complete."""
+    db = SessionLocal()
+    repository: NodeRepository = NodeRepository(db)
+    try:
+        from datetime import datetime
+
+        todos = load_todos()
+        requirements = todos.get("Requirements", [])
+        requirement = None
+        for r in requirements:
+            if r.id == requirement_id:
+                requirement = r
+                break
+
+        if not requirement:
+            return None, f"Requirement with ID '{requirement_id}' not found"
+
+        if requirement.status == "done":
+            return requirement, None  # Already completed
+
+        updated_requirement = cast(
+            SQLAModelNode,
+            repository.update_node_by_id(
+                requirement_id,
+                {
+                    "status": "done",
+                    "metadata": {
+                        "owner": requirement.metadata.owner,
+                        "labels": requirement.metadata.labels,
+                        "severity": requirement.metadata.severity,
+                        "work_type": requirement.metadata.work_type,
+                        "date_completed": datetime.now().isoformat(),
+                    },
+                },
+            ),
+        )
+
+        if not updated_requirement:
+            return None, "Failed to update requirement status in database"
+
+        node = _convert_db_node_to_node(updated_requirement)
+        return node, None
+    finally:
+        db.close()
+
+
+# Layer 6: Acceptance Criteria functions
+def add_acceptance_criteria(
+    title: str, description: str, requirement_id: str | None = None
+) -> tuple[dict[str, Any] | None, str | None]:
+    """Add new Acceptance Criteria to the ToDoWrite system."""
+    try:
+        import uuid
+
+        ac_id = f"acceptance-{uuid.uuid4().hex[:12]}"
+        ac_data = {
+            "id": ac_id,
+            "layer": "Acceptance Criteria",
+            "title": title,
+            "description": description,
+            "status": "planned",
+            "links": {"parents": [requirement_id] if requirement_id else [], "children": []},
+            "metadata": {
+                "owner": "system",
+                "labels": [],
+                "severity": "",
+                "work_type": "",
+            },
+        }
+
+        node = create_node(ac_data)
+        if node:
+            ac_dict = {
+                "id": node.id,
+                "title": node.title,
+                "description": node.description,
+                "status": node.status,
+            }
+            return ac_dict, None
+        else:
+            return None, "Failed to create acceptance criteria"
+    except Exception as e:
+        return None, str(e)
+
+
+def get_acceptance_criteria() -> list[dict[str, Any]]:
+    """Get all Acceptance Criteria items."""
+    todos = load_todos()
+    ac_nodes = todos.get("Acceptance Criteria", [])
+
+    acceptance_criteria = []
+    for node in ac_nodes:
+        ac_dict = {
+            "id": node.id,
+            "title": node.title,
+            "description": node.description,
+            "status": node.status,
+            "owner": node.metadata.owner,
+            "labels": node.metadata.labels,
+        }
+        acceptance_criteria.append(ac_dict)
+
+    return acceptance_criteria
+
+
+def complete_acceptance_criteria(ac_id: str) -> tuple[Node | None, str | None]:
+    """Mark Acceptance Criteria as complete."""
+    db = SessionLocal()
+    repository: NodeRepository = NodeRepository(db)
+    try:
+        from datetime import datetime
+
+        todos = load_todos()
+        ac_items = todos.get("Acceptance Criteria", [])
+        ac = None
+        for a in ac_items:
+            if a.id == ac_id:
+                ac = a
+                break
+
+        if not ac:
+            return None, f"Acceptance Criteria with ID '{ac_id}' not found"
+
+        if ac.status == "done":
+            return ac, None  # Already completed
+
+        updated_ac = cast(
+            SQLAModelNode,
+            repository.update_node_by_id(
+                ac_id,
+                {
+                    "status": "done",
+                    "metadata": {
+                        "owner": ac.metadata.owner,
+                        "labels": ac.metadata.labels,
+                        "severity": ac.metadata.severity,
+                        "work_type": ac.metadata.work_type,
+                        "date_completed": datetime.now().isoformat(),
+                    },
+                },
+            ),
+        )
+
+        if not updated_ac:
+            return None, "Failed to update acceptance criteria status in database"
+
+        node = _convert_db_node_to_node(updated_ac)
+        return node, None
+    finally:
+        db.close()
+
+
+# Layer 7: Interface Contract functions
+def add_interface_contract(
+    title: str, description: str, ac_id: str | None = None
+) -> tuple[dict[str, Any] | None, str | None]:
+    """Add a new Interface Contract to the ToDoWrite system."""
+    try:
+        import uuid
+
+        ic_id = f"interface-{uuid.uuid4().hex[:12]}"
+        ic_data = {
+            "id": ic_id,
+            "layer": "Interface Contract",
+            "title": title,
+            "description": description,
+            "status": "planned",
+            "links": {"parents": [ac_id] if ac_id else [], "children": []},
+            "metadata": {
+                "owner": "system",
+                "labels": [],
+                "severity": "",
+                "work_type": "",
+            },
+        }
+
+        node = create_node(ic_data)
+        if node:
+            ic_dict = {
+                "id": node.id,
+                "title": node.title,
+                "description": node.description,
+                "status": node.status,
+            }
+            return ic_dict, None
+        else:
+            return None, "Failed to create interface contract"
+    except Exception as e:
+        return None, str(e)
+
+
+def get_interface_contracts() -> list[dict[str, Any]]:
+    """Get all Interface Contract items."""
+    todos = load_todos()
+    ic_nodes = todos.get("Interface Contract", [])
+
+    interface_contracts = []
+    for node in ic_nodes:
+        ic_dict = {
+            "id": node.id,
+            "title": node.title,
+            "description": node.description,
+            "status": node.status,
+            "owner": node.metadata.owner,
+            "labels": node.metadata.labels,
+        }
+        interface_contracts.append(ic_dict)
+
+    return interface_contracts
+
+
+def complete_interface_contract(ic_id: str) -> tuple[Node | None, str | None]:
+    """Mark an Interface Contract as complete."""
+    db = SessionLocal()
+    repository: NodeRepository = NodeRepository(db)
+    try:
+        from datetime import datetime
+
+        todos = load_todos()
+        ic_items = todos.get("Interface Contract", [])
+        ic = None
+        for i in ic_items:
+            if i.id == ic_id:
+                ic = i
+                break
+
+        if not ic:
+            return None, f"Interface Contract with ID '{ic_id}' not found"
+
+        if ic.status == "done":
+            return ic, None  # Already completed
+
+        updated_ic = cast(
+            SQLAModelNode,
+            repository.update_node_by_id(
+                ic_id,
+                {
+                    "status": "done",
+                    "metadata": {
+                        "owner": ic.metadata.owner,
+                        "labels": ic.metadata.labels,
+                        "severity": ic.metadata.severity,
+                        "work_type": ic.metadata.work_type,
+                        "date_completed": datetime.now().isoformat(),
+                    },
+                },
+            ),
+        )
+
+        if not updated_ic:
+            return None, "Failed to update interface contract status in database"
+
+        node = _convert_db_node_to_node(updated_ic)
+        return node, None
+    finally:
+        db.close()
+
+
+# Layer 12: Command functions
+def add_command(
+    title: str,
+    description: str,
+    command_shell: str,
+    subtask_id: str | None = None,
+    ac_ref: str = "",
+) -> tuple[dict[str, Any] | None, str | None]:
+    """Add a new Command to the ToDoWrite system."""
+    try:
+        import uuid
+
+        command_id = f"command-{uuid.uuid4().hex[:12]}"
+        command_data = {
+            "id": command_id,
+            "layer": "Command",
+            "title": title,
+            "description": description,
+            "status": "planned",
+            "links": {"parents": [subtask_id] if subtask_id else [], "children": []},
+            "metadata": {
+                "owner": "system",
+                "labels": [],
+                "severity": "",
+                "work_type": "",
+            },
+            "command": {
+                "ac_ref": ac_ref or f"AC-{uuid.uuid4().hex[:8].upper()}",
+                "run": {"shell": command_shell},
+                "artifacts": [],
+            },
+        }
+
+        node = create_node(command_data)
+        if node:
+            command_dict = {
+                "id": node.id,
+                "title": node.title,
+                "description": node.description,
+                "status": node.status,
+                "command": {
+                    "ac_ref": node.command.ac_ref if node.command else "",
+                    "shell": node.command.run.get("shell", "") if node.command else "",
+                    "artifacts": node.command.artifacts if node.command else [],
+                },
+            }
+            return command_dict, None
+        else:
+            return None, "Failed to create command"
+    except Exception as e:
+        return None, str(e)
+
+
+def get_commands() -> list[dict[str, Any]]:
+    """Get all Command-layer items."""
+    todos = load_todos()
+    command_nodes = todos.get("Command", [])
+
+    commands = []
+    for node in command_nodes:
+        command_dict = {
+            "id": node.id,
+            "title": node.title,
+            "description": node.description,
+            "status": node.status,
+            "owner": node.metadata.owner,
+            "labels": node.metadata.labels,
+            "command": {
+                "ac_ref": node.command.ac_ref if node.command else "",
+                "shell": node.command.run.get("shell", "") if node.command else "",
+                "artifacts": node.command.artifacts if node.command else [],
+            },
+        }
+        commands.append(command_dict)
+
+    return commands
+
+
+def complete_command(command_id: str) -> tuple[Node | None, str | None]:
+    """Mark a Command as complete."""
+    db = SessionLocal()
+    repository: NodeRepository = NodeRepository(db)
+    try:
+        from datetime import datetime
+
+        todos = load_todos()
+        commands = todos.get("Command", [])
+        command = None
+        for c in commands:
+            if c.id == command_id:
+                command = c
+                break
+
+        if not command:
+            return None, f"Command with ID '{command_id}' not found"
+
+        if command.status == "done":
+            return command, None  # Already completed
+
+        updated_command = cast(
+            SQLAModelNode,
+            repository.update_node_by_id(
+                command_id,
+                {
+                    "status": "done",
+                    "metadata": {
+                        "owner": command.metadata.owner,
+                        "labels": command.metadata.labels,
+                        "severity": command.metadata.severity,
+                        "work_type": command.metadata.work_type,
+                        "date_completed": datetime.now().isoformat(),
+                    },
+                },
+            ),
+        )
+
+        if not updated_command:
+            return None, "Failed to update command status in database"
+
+        node = _convert_db_node_to_node(updated_command)
+        return node, None
+    finally:
+        db.close()

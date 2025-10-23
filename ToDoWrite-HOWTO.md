@@ -7,15 +7,17 @@
 1. [Introduction](#introduction)
 2. [Understanding the 12-Layer Hierarchy](#understanding-the-12-layer-hierarchy)
 3. [Core Concepts & Data Structures](#core-concepts--data-structures)
-4. [Detailed Layer Management (CRUD Operations)](#detailed-layer-management-crud-operations)
-5. [ToDoWrite Node JSON Schema](#todowrite-node-json-schema)
-6. [Workflow & Process Diagrams](#workflow--process-diagrams)
-7. [Getting Started](#getting-started)
-8. [Daily Development Workflow](#daily-development-workflow)
-9. [Agricultural Robotics Examples](#agricultural-robotics-examples)
-10. [Command Reference (CLI Tools)](#command-reference-cli-tools)
-11. [Best Practices](#best-practices)
-12. [Troubleshooting](#troubleshooting)
+4. [Command-Line Interface (CLI) Usage](#command-line-interface-cli-usage)
+5. [Python Module Programming Interface](#python-module-programming-interface)
+6. [Detailed Layer Management (CRUD Operations)](#detailed-layer-management-crud-operations)
+7. [ToDoWrite Node JSON Schema](#todowrite-node-json-schema)
+8. [Workflow & Process Diagrams](#workflow--process-diagrams)
+9. [Getting Started](#getting-started)
+10. [Daily Development Workflow](#daily-development-workflow)
+11. [Agricultural Robotics Examples](#agricultural-robotics-examples)
+12. [Advanced Integration Patterns](#advanced-integration-patterns)
+13. [Best Practices](#best-practices)
+14. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -89,6 +91,517 @@ The ToDoWrite system is designed to accommodate various project initiation point
 5.  **Complete Hierarchy to Command:** The ultimate objective for any defined work is to trace it down to executable 'Command' nodes. This ensures that all planning eventually leads to actionable implementation.
 
 This flexibility allows for agile planning while guaranteeing the structural integrity and comprehensive traceability essential for safety-critical agricultural robotics development.
+
+---
+
+## Command-Line Interface (CLI) Usage
+
+The ToDoWrite system provides a comprehensive set of command-line tools for managing all 12 layers of the hierarchy. This section covers practical usage patterns for intermediate programmers.
+
+### Command Discovery and Overview
+
+```bash
+# View all available commands organized by layer
+./bin/todowrite-commands
+
+# View commands for a specific layer
+./bin/todowrite-commands --layer Goal
+./bin/todowrite-commands --layer Phase
+
+# View commands by operation type
+./bin/todowrite-commands --operation add
+./bin/todowrite-commands --operation status
+```
+
+### Layer-Specific Command Patterns
+
+Each layer follows consistent CRUD (Create, Read, Update, Delete) patterns:
+
+#### Strategic Planning Layers (1-7)
+
+```bash
+# Goal Layer (Layer 1)
+./bin/goal-add "Autonomous Multi-Tractor Coordination"
+./bin/goal-status                    # List all goals
+./bin/goal-status --goal-id goal-123 # Specific goal details
+./bin/goal-complete goal-123
+./bin/goal-delete goal-123 --confirm
+
+# Concept Layer (Layer 2)
+./bin/concept-add "Distributed Control Architecture" --goal-id goal-123
+./bin/concept-status
+
+# Context Layer (Layer 3)
+./bin/context-status
+
+# Requirements Layer (Layer 5)
+./bin/requirement-status
+
+# Acceptance Criteria Layer (Layer 6)
+./bin/acceptance-status
+
+# Interface Contract Layer (Layer 7)
+./bin/interface-status
+```
+
+#### Implementation Layers (8-11)
+
+```bash
+# Phase Layer (Layer 8)
+./bin/phase-add "Hardware Integration Phase" --goal-id goal-123
+./bin/phase-status
+./bin/phase-complete phase-456
+./bin/phase-delete phase-456
+
+# Step Layer (Layer 9)
+./bin/step-add "Configure CAN Bus Network" --description "Set up 250kbps CAN network"
+./bin/step-status
+./bin/step-activate step-789
+./bin/step-complete step-789
+
+# Task Layer (Layer 10)
+./bin/task-add "Install CAN Transceivers" --description "Mount hardware on tractors"
+./bin/task-status
+./bin/task-activate task-101
+./bin/task-complete task-101
+./bin/task-pause task-101
+./bin/task-resume task-101
+
+# SubTask Layer (Layer 11)
+./bin/subtask-add "Test CAN Message Throughput" --description "Validate 250kbps performance"
+./bin/subtask-status
+./bin/subtask-complete subtask-202
+```
+
+#### Execution Layer (12)
+
+```bash
+# Command Layer (Layer 12) - The only executable layer
+./bin/command-add "Configure CAN Interface" "sudo ip link set can0 type can bitrate 250000" \
+  --description "Set CAN bus to 250kbps" \
+  --subtask-id subtask-202
+
+./bin/command-status
+./bin/command-execute command-303                    # Execute command
+./bin/command-execute command-303 --dry-run          # Preview execution
+./bin/command-execute command-303 --auto-complete    # Auto-mark complete on success
+```
+
+### Workflow Integration Commands
+
+```bash
+# System status and management
+./bin/todo-status              # Complete system overview
+./bin/strategic-status         # Strategic goals progress
+./bin/loadsession             # Initialize development session
+./bin/savesession             # Save current state
+./bin/whereweare              # Current project status
+
+# Session management with pause structure
+./bin/quality-check-and-pause "Task completion" "Next: Hardware testing"
+./bin/strategic-milestone-pause "Phase 1 Complete" "complete"
+```
+
+### Advanced CLI Usage Patterns
+
+#### Hierarchical Workflow Example
+
+```bash
+# 1. Create strategic foundation
+./bin/goal-add "Implement Precision Agriculture System"
+GOAL_ID=$(./bin/goal-status | grep "goal-" | head -1 | awk '{print $2}')
+
+# 2. Add implementation phases
+./bin/phase-add "Sensor Integration" --goal-id $GOAL_ID
+PHASE_ID=$(./bin/phase-status | grep "phase-" | head -1 | awk '{print $2}')
+
+# 3. Break down into steps
+./bin/step-add "Install GPS Modules" --description "RTK-GPS installation on tractors"
+STEP_ID=$(./bin/step-status | grep "step-" | head -1 | awk '{print $2}')
+
+# 4. Create specific tasks
+./bin/task-add "Mount GPS Antenna" --description "Physical installation"
+TASK_ID=$(./bin/task-status | grep "task-" | head -1 | awk '{print $2}')
+
+# 5. Define executable commands
+./bin/command-add "Test GPS Signal" "gpsd -D 5 -N -n /dev/ttyUSB0" \
+  --description "Validate GPS receiver functionality"
+```
+
+#### Batch Operations and Scripting
+
+```bash
+#!/bin/bash
+# Example: Batch status check across all layers
+
+echo "=== ToDoWrite System Status ==="
+echo "Goals: $(./bin/goal-status | grep "Total Goals" | cut -d: -f2)"
+echo "Phases: $(./bin/phase-status | grep "Total Phases" | cut -d: -f2)"
+echo "Tasks: $(./bin/task-status | grep "Total Tasks" | cut -d: -f2)"
+echo "Commands: $(./bin/command-status | grep "Total Commands" | cut -d: -f2)"
+
+# Find and execute all planned commands
+./bin/command-status | grep "planned" | awk '{print $2}' | while read cmd_id; do
+    echo "Executing: $cmd_id"
+    ./bin/command-execute $cmd_id --auto-complete
+done
+```
+
+---
+
+## Python Module Programming Interface
+
+For programmatic access, the ToDoWrite system provides a comprehensive Python API through the `afs_fastapi.todos.manager` module. This section demonstrates integration patterns for intermediate Python developers.
+
+### Core Manager Functions
+
+```python
+from afs_fastapi.todos.manager import (
+    # Node management
+    create_node, update_node, delete_node, load_todos,
+
+    # Layer-specific functions
+    add_goal, get_goals, complete_goal,
+    add_concept, get_concepts, complete_concept,
+    add_phase, get_phases, complete_phase,
+    add_step, add_task, add_subtask,
+    add_command, get_commands, complete_command,
+
+    # System functions
+    get_active_items, get_active_phase,
+    init_database, get_database_info
+)
+```
+
+### Basic CRUD Operations
+
+#### Creating Nodes Programmatically
+
+```python
+# Strategic layer creation
+new_goal, error = add_goal(
+    title="Autonomous Field Operations",
+    description="Enable tractors to perform field operations without human intervention"
+)
+
+if error:
+    print(f"Error creating goal: {error}")
+else:
+    goal_id = new_goal["id"]
+    print(f"Created goal: {goal_id}")
+
+# Implementation layer creation with parent linking
+new_phase, error = add_phase(
+    goal_id=goal_id,
+    title="Sensor Integration Phase",
+    description="Install and configure all required sensors"
+)
+
+if new_phase:
+    phase_id = new_phase["id"]
+
+    # Create step under phase
+    new_step, error = add_step(
+        phase_id=phase_id,
+        name="GPS Module Installation",
+        description="Install RTK-GPS modules on all tractors"
+    )
+```
+
+#### Reading and Querying Data
+
+```python
+# Load all todos and filter by layer
+todos = load_todos()
+goals = todos.get("Goal", [])
+phases = todos.get("Phase", [])
+commands = todos.get("Command", [])
+
+# Get active items across all layers
+active_items = get_active_items(todos)
+active_phase = active_items.get("Phase")
+
+if active_phase:
+    print(f"Currently working on: {active_phase.title}")
+
+# Get typed data for specific layers
+goal_items = get_goals()  # Returns list of dictionaries
+phase_items = get_phases()  # Returns list of PhaseItem objects
+
+# Filter and search
+agricultural_goals = [g for g in goal_items if "agricultural" in g.get("labels", [])]
+high_priority_phases = [p for p in phase_items if p.metadata.severity == "high"]
+```
+
+#### Updating and Completing Nodes
+
+```python
+# Update node metadata
+updated_node, error = update_node(goal_id, {
+    "status": "in_progress",
+    "metadata": {
+        "owner": "agricultural-team",
+        "labels": ["autonomous", "field-ops", "safety-critical"],
+        "severity": "high",
+        "work_type": "implementation"
+    }
+})
+
+# Complete nodes with automatic timestamping
+completed_goal, error = complete_goal(goal_id)
+if completed_goal:
+    print(f"Goal completed: {completed_goal.title}")
+    print(f"Completion time: {completed_goal.metadata.date_completed}")
+```
+
+### Advanced Programming Patterns
+
+#### Hierarchical Data Processing
+
+```python
+def analyze_project_hierarchy(goal_id: str) -> dict:
+    """Analyze complete project hierarchy from goal down to commands."""
+    todos = load_todos()
+
+    # Find goal
+    goals = todos.get("Goal", [])
+    goal = next((g for g in goals if g.id == goal_id), None)
+    if not goal:
+        return {"error": "Goal not found"}
+
+    # Traverse hierarchy
+    analysis = {
+        "goal": {"id": goal.id, "title": goal.title, "status": goal.status},
+        "phases": [],
+        "total_commands": 0,
+        "completed_commands": 0
+    }
+
+    # Find child phases
+    phases = todos.get("Phase", [])
+    goal_phases = [p for p in phases if goal_id in p.links.parents]
+
+    for phase in goal_phases:
+        phase_data = {
+            "id": phase.id,
+            "title": phase.title,
+            "status": phase.status,
+            "steps": []
+        }
+
+        # Find child steps
+        steps = todos.get("Step", [])
+        phase_steps = [s for s in steps if phase.id in s.links.parents]
+
+        for step in phase_steps:
+            # Continue traversal through tasks -> subtasks -> commands
+            commands = find_commands_for_step(step.id, todos)
+            analysis["total_commands"] += len(commands)
+            analysis["completed_commands"] += len([c for c in commands if c.status == "done"])
+
+            phase_data["steps"].append({
+                "id": step.id,
+                "title": step.title,
+                "command_count": len(commands)
+            })
+
+        analysis["phases"].append(phase_data)
+
+    return analysis
+
+def find_commands_for_step(step_id: str, todos: dict) -> list:
+    """Find all commands that trace back to a specific step."""
+    commands = []
+
+    # Get tasks for step
+    tasks = todos.get("Task", [])
+    step_tasks = [t for t in tasks if step_id in t.links.parents]
+
+    for task in step_tasks:
+        # Get subtasks for task
+        subtasks = todos.get("SubTask", [])
+        task_subtasks = [st for st in subtasks if task.id in st.links.parents]
+
+        for subtask in task_subtasks:
+            # Get commands for subtask
+            all_commands = todos.get("Command", [])
+            subtask_commands = [c for c in all_commands if subtask.id in c.links.parents]
+            commands.extend(subtask_commands)
+
+    return commands
+```
+
+#### Batch Operations and Automation
+
+```python
+def create_agricultural_project_template(project_name: str) -> dict:
+    """Create a complete agricultural project template."""
+
+    # Create strategic foundation
+    goal, error = add_goal(
+        title=f"{project_name} - Agricultural Automation",
+        description=f"Implement autonomous agricultural operations for {project_name}"
+    )
+
+    if error:
+        return {"error": f"Failed to create goal: {error}"}
+
+    goal_id = goal["id"]
+    project_structure = {"goal_id": goal_id, "phases": []}
+
+    # Define standard agricultural phases
+    standard_phases = [
+        ("Planning & Design", "System architecture and component selection"),
+        ("Hardware Integration", "Install sensors, actuators, and communication systems"),
+        ("Software Development", "Implement control algorithms and safety systems"),
+        ("Field Testing", "Validate system performance in agricultural conditions"),
+        ("Deployment", "Full-scale implementation and monitoring")
+    ]
+
+    for phase_title, phase_desc in standard_phases:
+        phase, error = add_phase(goal_id, phase_title, phase_desc)
+        if phase:
+            project_structure["phases"].append({
+                "id": phase["id"],
+                "title": phase_title,
+                "steps": []
+            })
+
+    return project_structure
+
+def execute_command_pipeline(command_ids: list[str],
+                           stop_on_error: bool = True) -> dict:
+    """Execute a series of commands in sequence."""
+    import subprocess
+
+    results = {"executed": [], "failed": [], "skipped": []}
+    todos = load_todos()
+    commands = todos.get("Command", [])
+
+    for cmd_id in command_ids:
+        # Find command
+        command = next((c for c in commands if c.id == cmd_id), None)
+        if not command:
+            results["skipped"].append({"id": cmd_id, "reason": "Command not found"})
+            continue
+
+        if not command.command or not command.command.run:
+            results["skipped"].append({"id": cmd_id, "reason": "No executable command"})
+            continue
+
+        shell_cmd = command.command.run.get("shell", "")
+        if not shell_cmd:
+            results["skipped"].append({"id": cmd_id, "reason": "Empty shell command"})
+            continue
+
+        try:
+            # Execute command
+            result = subprocess.run(
+                shell_cmd, shell=True, capture_output=True, text=True, timeout=300
+            )
+
+            execution_result = {
+                "id": cmd_id,
+                "title": command.title,
+                "command": shell_cmd,
+                "exit_code": result.returncode,
+                "stdout": result.stdout,
+                "stderr": result.stderr
+            }
+
+            if result.returncode == 0:
+                results["executed"].append(execution_result)
+                # Auto-complete successful commands
+                complete_command(cmd_id)
+            else:
+                results["failed"].append(execution_result)
+                if stop_on_error:
+                    break
+
+        except subprocess.TimeoutExpired:
+            results["failed"].append({
+                "id": cmd_id,
+                "title": command.title,
+                "error": "Command timeout (300s)"
+            })
+            if stop_on_error:
+                break
+        except Exception as e:
+            results["failed"].append({
+                "id": cmd_id,
+                "title": command.title,
+                "error": str(e)
+            })
+            if stop_on_error:
+                break
+
+    return results
+```
+
+#### Integration with External Systems
+
+```python
+def export_to_project_management(goal_id: str, format: str = "json") -> dict:
+    """Export ToDoWrite hierarchy to external project management format."""
+
+    hierarchy = analyze_project_hierarchy(goal_id)
+
+    if format == "json":
+        return hierarchy
+    elif format == "gantt":
+        # Convert to Gantt chart format
+        gantt_data = {
+            "project": hierarchy["goal"]["title"],
+            "tasks": []
+        }
+
+        for phase in hierarchy["phases"]:
+            gantt_data["tasks"].append({
+                "id": phase["id"],
+                "name": phase["title"],
+                "type": "phase",
+                "children": [step["id"] for step in phase["steps"]]
+            })
+
+            for step in phase["steps"]:
+                gantt_data["tasks"].append({
+                    "id": step["id"],
+                    "name": step["title"],
+                    "type": "step",
+                    "parent": phase["id"],
+                    "duration": step.get("command_count", 1)  # Estimate based on commands
+                })
+
+        return gantt_data
+
+    return {"error": "Unsupported format"}
+
+def sync_with_git_issues(goal_id: str, repo_url: str) -> dict:
+    """Synchronize ToDoWrite tasks with Git repository issues."""
+    # This would integrate with GitHub/GitLab APIs
+    # Implementation depends on specific Git platform
+
+    todos = load_todos()
+    tasks = todos.get("Task", [])
+
+    # Find tasks related to the goal (through hierarchy)
+    goal_tasks = find_tasks_for_goal(goal_id, todos)
+
+    sync_results = {"created": [], "updated": [], "errors": []}
+
+    for task in goal_tasks:
+        if task.status == "planned":
+            # Create new issue
+            issue_data = {
+                "title": task.title,
+                "body": task.description,
+                "labels": task.metadata.labels + ["todowrite", "agricultural"]
+            }
+            # API call to create issue would go here
+            sync_results["created"].append(task.id)
+
+    return sync_results
+```
 
 ---
 
@@ -1177,78 +1690,747 @@ if new_goal:
 
 ---
 
-## Command Reference (CLI Tools)
+## Advanced Integration Patterns
 
-This section outlines the primary CLI tools available in the `./bin/` directory for interacting with the ToDoWrite system. These tools often wrap the underlying Python manager functions for convenient shell usage.
+This section covers advanced usage patterns for integrating the ToDoWrite system with external tools and workflows, building on the CLI and Python API foundations covered earlier.
 
-### Core System Status
+### CI/CD Pipeline Integration
 
-| Command | Purpose | Example |
-|---------|---------|---------|
-| `./bin/todo-status` | Provides a complete overview of the ToDoWrite system status, including strategic objectives, active phases, and pending tasks. | `$./bin/todo-status` |
-| `./bin/strategic-status` | Displays the progress and details of all strategic goals. | `$./bin/strategic-status` |
+The ToDoWrite system integrates seamlessly with continuous integration workflows:
 
-### Workflow Management (via Python Manager)
+```yaml
+# .github/workflows/todowrite-validation.yml
+name: ToDoWrite Validation
+on: [push, pull_request]
 
-While specific CLI commands for every CRUD operation on every layer might not be directly exposed as `./bin/` scripts, the underlying `afs_fastapi.todos.manager` module provides the full programmatic interface. You can execute these functions directly via Python one-liners or scripts.
+jobs:
+  validate-hierarchy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
 
-**Example: Listing all Goals (Python Manager via CLI)**
-```bash
-python -c 'from afs_fastapi.todos.manager import get_goals; import json; print(json.dumps(get_goals(), indent=2))'
+      - name: Validate ToDoWrite Structure
+        run: |
+          python -c "
+          from afs_fastapi.todos.manager import load_todos, get_goals
+          todos = load_todos()
+          goals = get_goals()
+          print(f'✓ Loaded {len(goals)} strategic goals')
+
+          # Validate all goals have phases
+          for goal in goals:
+              phases = [p for p in todos.get('Phase', []) if goal['id'] in p.links.parents]
+              if not phases:
+                  raise ValueError(f'Goal {goal[\"id\"]} has no phases')
+          print('✓ All goals have implementation phases')
+          "
+
+      - name: Execute Planned Commands
+        run: |
+          # Find and execute all validation commands
+          python -c "
+          from afs_fastapi.todos.manager import get_commands
+          import subprocess
+
+          commands = get_commands()
+          validation_commands = [c for c in commands if 'test' in c['title'].lower()]
+
+          for cmd in validation_commands:
+              if cmd['status'] == 'planned':
+                  print(f'Executing: {cmd[\"title\"]}')
+                  result = subprocess.run(cmd['command']['shell'], shell=True)
+                  if result.returncode != 0:
+                      raise RuntimeError(f'Command failed: {cmd[\"title\"]}')
+          "
 ```
 
-**Example: Updating a Node's Status (Python Manager via CLI)**
+### Docker Integration
+
+```dockerfile
+# Dockerfile.todowrite
+FROM python:3.12-slim
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+
+# Initialize ToDoWrite database
+RUN python -c "from afs_fastapi.todos.manager import init_database; init_database()"
+
+# Expose management interface
+EXPOSE 8000
+CMD ["python", "-m", "afs_fastapi"]
+```
+
 ```bash
-# Assuming you have the node_id, its parents, children, and metadata
-python -c 'from afs_fastapi.todos.manager import update_node; import json; node_id = "GOAL-YOUR-ID"; node_data = {"status": "done", "links": {"parents": [], "children": []}, "metadata": {"owner": "your-team", "labels": [], "severity": "med", "work_type": ""}}; updated_node, error = update_node(node_id, node_data); print(json.dumps({"result": updated_node.id if updated_node else None, "error": error}))'
+# Docker Compose for development
+# docker-compose.todowrite.yml
+version: '3.8'
+services:
+  todowrite:
+    build:
+      context: .
+      dockerfile: Dockerfile.todowrite
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ToDoWrite:/app/ToDoWrite
+      - ./bin:/app/bin
+    environment:
+      - TODOWRITE_DB_URL=postgresql://user:pass@db:5432/todowrite
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: todowrite
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - todowrite_data:/var/lib/postgresql/data
+
+volumes:
+  todowrite_data:
+```
+
+### IDE Integration Patterns
+
+#### VS Code Integration
+
+```json
+// .vscode/tasks.json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "ToDoWrite: System Status",
+            "type": "shell",
+            "command": "./bin/todo-status",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "ToDoWrite: Execute Commands",
+            "type": "shell",
+            "command": "python",
+            "args": ["-c", "from afs_fastapi.todos.manager import get_commands; [print(f'./bin/command-execute {c[\"id\"]}') for c in get_commands() if c['status'] == 'planned']"],
+            "group": "build"
+        },
+        {
+            "label": "ToDoWrite: Create Phase",
+            "type": "shell",
+            "command": "./bin/phase-add",
+            "args": ["${input:phaseTitle}", "--goal-id", "${input:goalId}"],
+            "group": "build"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "phaseTitle",
+            "description": "Phase title",
+            "default": "New Development Phase",
+            "type": "promptString"
+        },
+        {
+            "id": "goalId",
+            "description": "Parent Goal ID",
+            "type": "promptString"
+        }
+    ]
+}
+```
+
+#### PyCharm/IntelliJ Integration
+
+```python
+# todowrite_plugin.py - Custom PyCharm plugin integration
+import subprocess
+from typing import List, Dict
+
+class ToDoWriteIntegration:
+    """PyCharm plugin integration for ToDoWrite system."""
+
+    @staticmethod
+    def get_project_structure() -> Dict:
+        """Get current project structure for IDE display."""
+        result = subprocess.run(
+            ["python", "-c", "from afs_fastapi.todos.manager import load_todos; import json; print(json.dumps(load_todos()))"],
+            capture_output=True, text=True
+        )
+        return json.loads(result.stdout) if result.returncode == 0 else {}
+
+    @staticmethod
+    def create_task_from_todo(todo_comment: str, file_path: str, line_number: int):
+        """Convert TODO comment to ToDoWrite task."""
+        # Extract TODO content
+        todo_text = todo_comment.replace("# TODO:", "").strip()
+
+        # Create task via CLI
+        subprocess.run([
+            "./bin/task-add", todo_text,
+            "--description", f"From {file_path}:{line_number}"
+        ])
+```
+
+### Monitoring and Alerting
+
+```python
+# monitoring/todowrite_metrics.py
+from afs_fastapi.todos.manager import load_todos, get_goals, get_commands
+import time
+import json
+
+def collect_metrics():
+    """Collect ToDoWrite system metrics for monitoring."""
+    todos = load_todos()
+    goals = get_goals()
+    commands = get_commands()
+
+    metrics = {
+        "timestamp": time.time(),
+        "goals": {
+            "total": len(goals),
+            "completed": len([g for g in goals if g["status"] == "done"]),
+            "in_progress": len([g for g in goals if g["status"] == "in_progress"]),
+            "planned": len([g for g in goals if g["status"] == "planned"])
+        },
+        "commands": {
+            "total": len(commands),
+            "executed": len([c for c in commands if c["status"] == "done"]),
+            "pending": len([c for c in commands if c["status"] == "planned"])
+        },
+        "hierarchy_health": {
+            "orphaned_nodes": count_orphaned_nodes(todos),
+            "max_depth": calculate_max_depth(todos),
+            "completion_rate": calculate_completion_rate(todos)
+        }
+    }
+
+    return metrics
+
+def count_orphaned_nodes(todos: dict) -> int:
+    """Count nodes without proper parent-child relationships."""
+    orphaned = 0
+    for layer, nodes in todos.items():
+        if layer == "Goal":
+            continue  # Goals can be root nodes
+        for node in nodes:
+            if not node.links.parents:
+                orphaned += 1
+    return orphaned
+
+def calculate_completion_rate(todos: dict) -> float:
+    """Calculate overall project completion rate."""
+    total_nodes = sum(len(nodes) for nodes in todos.values())
+    completed_nodes = sum(
+        len([n for n in nodes if n.status == "done"])
+        for nodes in todos.values()
+    )
+    return completed_nodes / total_nodes if total_nodes > 0 else 0.0
+
+# Prometheus metrics export
+def export_prometheus_metrics():
+    """Export metrics in Prometheus format."""
+    metrics = collect_metrics()
+
+    prometheus_output = f"""
+# HELP todowrite_goals_total Total number of goals
+# TYPE todowrite_goals_total gauge
+todowrite_goals_total {metrics['goals']['total']}
+
+# HELP todowrite_goals_completed Number of completed goals
+# TYPE todowrite_goals_completed gauge
+todowrite_goals_completed {metrics['goals']['completed']}
+
+# HELP todowrite_commands_pending Number of pending commands
+# TYPE todowrite_commands_pending gauge
+todowrite_commands_pending {metrics['commands']['pending']}
+
+# HELP todowrite_completion_rate Overall completion rate
+# TYPE todowrite_completion_rate gauge
+todowrite_completion_rate {metrics['hierarchy_health']['completion_rate']}
+"""
+
+    return prometheus_output.strip()
+```
+
+### Error Handling and Debugging Patterns
+
+#### Robust Error Handling in Python
+
+```python
+from afs_fastapi.todos.manager import add_goal, add_phase, load_todos
+import logging
+from typing import Optional, Tuple, Dict, Any
+
+# Configure logging for ToDoWrite operations
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("todowrite")
+
+class ToDoWriteError(Exception):
+    """Base exception for ToDoWrite operations."""
+    pass
+
+class HierarchyValidationError(ToDoWriteError):
+    """Raised when hierarchy validation fails."""
+    pass
+
+class NodeCreationError(ToDoWriteError):
+    """Raised when node creation fails."""
+    pass
+
+def safe_create_goal(title: str, description: str) -> Tuple[Optional[Dict], Optional[str]]:
+    """Safely create a goal with comprehensive error handling."""
+    try:
+        logger.info(f"Creating goal: {title}")
+
+        # Validate inputs
+        if not title or not title.strip():
+            raise ValueError("Goal title cannot be empty")
+
+        if len(title) > 200:
+            raise ValueError("Goal title too long (max 200 characters)")
+
+        # Attempt creation
+        goal, error = add_goal(title.strip(), description.strip())
+
+        if error:
+            logger.error(f"Goal creation failed: {error}")
+            raise NodeCreationError(f"Failed to create goal: {error}")
+
+        if not goal:
+            raise NodeCreationError("Goal creation returned None without error")
+
+        logger.info(f"Successfully created goal: {goal['id']}")
+        return goal, None
+
+    except ValueError as e:
+        logger.error(f"Validation error: {e}")
+        return None, f"Validation error: {e}"
+    except NodeCreationError as e:
+        logger.error(f"Creation error: {e}")
+        return None, str(e)
+    except Exception as e:
+        logger.error(f"Unexpected error creating goal: {e}")
+        return None, f"Unexpected error: {e}"
+
+def validate_hierarchy_integrity() -> Dict[str, Any]:
+    """Validate the integrity of the entire ToDoWrite hierarchy."""
+    try:
+        todos = load_todos()
+        validation_results = {
+            "valid": True,
+            "errors": [],
+            "warnings": [],
+            "statistics": {}
+        }
+
+        # Check for orphaned nodes
+        for layer_name, nodes in todos.items():
+            if layer_name == "Goal":
+                continue  # Goals can be root nodes
+
+            for node in nodes:
+                if not node.links.parents:
+                    validation_results["errors"].append(
+                        f"Orphaned {layer_name} node: {node.id} ({node.title})"
+                    )
+                    validation_results["valid"] = False
+
+        # Check for broken parent-child relationships
+        all_node_ids = set()
+        for nodes in todos.values():
+            all_node_ids.update(node.id for node in nodes)
+
+        for layer_name, nodes in todos.items():
+            for node in nodes:
+                # Check parent references
+                for parent_id in node.links.parents:
+                    if parent_id not in all_node_ids:
+                        validation_results["errors"].append(
+                            f"Broken parent reference: {node.id} -> {parent_id}"
+                        )
+                        validation_results["valid"] = False
+
+                # Check child references
+                for child_id in node.links.children:
+                    if child_id not in all_node_ids:
+                        validation_results["errors"].append(
+                            f"Broken child reference: {node.id} -> {child_id}"
+                        )
+                        validation_results["valid"] = False
+
+        # Generate statistics
+        validation_results["statistics"] = {
+            "total_nodes": sum(len(nodes) for nodes in todos.values()),
+            "layers_with_data": len([layer for layer, nodes in todos.items() if nodes]),
+            "completion_rate": calculate_completion_rate(todos)
+        }
+
+        return validation_results
+
+    except Exception as e:
+        return {
+            "valid": False,
+            "errors": [f"Validation failed: {e}"],
+            "warnings": [],
+            "statistics": {}
+        }
+
+# CLI debugging commands
+def debug_node_relationships(node_id: str) -> None:
+    """Debug parent-child relationships for a specific node."""
+    todos = load_todos()
+
+    # Find the node
+    target_node = None
+    target_layer = None
+
+    for layer_name, nodes in todos.items():
+        for node in nodes:
+            if node.id == node_id:
+                target_node = node
+                target_layer = layer_name
+                break
+        if target_node:
+            break
+
+    if not target_node:
+        print(f"❌ Node {node_id} not found")
+        return
+
+    print(f"🔍 Debugging Node: {node_id}")
+    print(f"   Layer: {target_layer}")
+    print(f"   Title: {target_node.title}")
+    print(f"   Status: {target_node.status}")
+    print()
+
+    # Check parents
+    print("👆 Parent Nodes:")
+    if not target_node.links.parents:
+        print("   (No parents - this is a root node)")
+    else:
+        for parent_id in target_node.links.parents:
+            parent_node = find_node_by_id(parent_id, todos)
+            if parent_node:
+                print(f"   ✓ {parent_id}: {parent_node.title}")
+            else:
+                print(f"   ❌ {parent_id}: NOT FOUND (broken reference)")
+
+    print()
+    print("👇 Child Nodes:")
+    if not target_node.links.children:
+        print("   (No children)")
+    else:
+        for child_id in target_node.links.children:
+            child_node = find_node_by_id(child_id, todos)
+            if child_node:
+                print(f"   ✓ {child_id}: {child_node.title}")
+            else:
+                print(f"   ❌ {child_id}: NOT FOUND (broken reference)")
+
+def find_node_by_id(node_id: str, todos: dict) -> Optional[Any]:
+    """Find a node by ID across all layers."""
+    for nodes in todos.values():
+        for node in nodes:
+            if node.id == node_id:
+                return node
+    return None
+```
+
+#### CLI Debugging Commands
+
+```bash
+#!/bin/bash
+# bin/todowrite-debug
+
+case "$1" in
+    "validate")
+        echo "🔍 Validating ToDoWrite hierarchy integrity..."
+        python -c "
+from todowrite_debug import validate_hierarchy_integrity
+import json
+result = validate_hierarchy_integrity()
+print(json.dumps(result, indent=2))
+if not result['valid']:
+    exit(1)
+"
+        ;;
+
+    "node")
+        if [ -z "$2" ]; then
+            echo "Usage: $0 node <node_id>"
+            exit 1
+        fi
+        echo "🔍 Debugging node: $2"
+        python -c "
+from todowrite_debug import debug_node_relationships
+debug_node_relationships('$2')
+"
+        ;;
+
+    "orphans")
+        echo "🔍 Finding orphaned nodes..."
+        python -c "
+from afs_fastapi.todos.manager import load_todos
+todos = load_todos()
+orphans = []
+for layer_name, nodes in todos.items():
+    if layer_name == 'Goal':
+        continue
+    for node in nodes:
+        if not node.links.parents:
+            orphans.append((layer_name, node.id, node.title))
+
+if orphans:
+    print('❌ Found orphaned nodes:')
+    for layer, node_id, title in orphans:
+        print(f'   {layer}: {node_id} - {title}')
+else:
+    print('✅ No orphaned nodes found')
+"
+        ;;
+
+    "stats")
+        echo "📊 ToDoWrite System Statistics"
+        python -c "
+from afs_fastapi.todos.manager import load_todos, get_goals, get_commands
+todos = load_todos()
+goals = get_goals()
+commands = get_commands()
+
+print(f'Goals: {len(goals)}')
+print(f'Total Nodes: {sum(len(nodes) for nodes in todos.values())}')
+print(f'Commands: {len(commands)}')
+print(f'Layers with Data: {len([layer for layer, nodes in todos.items() if nodes])}')
+
+# Completion statistics
+for layer_name, nodes in todos.items():
+    if nodes:
+        completed = len([n for n in nodes if n.status == 'done'])
+        total = len(nodes)
+        print(f'{layer_name}: {completed}/{total} ({completed/total*100:.1f}% complete)')
+"
+        ;;
+
+    *)
+        echo "ToDoWrite Debug Utility"
+        echo "Usage: $0 {validate|node|orphans|stats}"
+        echo ""
+        echo "Commands:"
+        echo "  validate     - Validate hierarchy integrity"
+        echo "  node <id>    - Debug specific node relationships"
+        echo "  orphans      - Find orphaned nodes"
+        echo "  stats        - Show system statistics"
+        ;;
+esac
 ```
 
 ---
 
 ## Best Practices
 
-### 🛡️ Safety-First Development
+### 🛡️ Safety-First Development for Agricultural Robotics
 
 1.  **Always Start with Safety Constraints:**
     ```bash
-    # Before any implementation, define safety requirements
-    # Example: Emergency stop response time < 500ms
+    # Define safety requirements before any implementation
+    ./bin/constraint-add "Emergency Stop Response" \
+      --description "All equipment must respond to emergency stop within 500ms"
+
+    # Link safety constraints to acceptance criteria
+    ./bin/acceptance-add "Emergency Stop Test" \
+      --description "Verify <500ms response time under all conditions"
     ```
 
-2.  **Link Everything to Strategic Goals:**
+2.  **Establish Traceability from Goals to Commands:**
     ```bash
-    # Every task should trace back to a business goal
-    # Use ./bin/strategic-status to verify alignment
+    # Every executable command should trace back to strategic goals
+    ./bin/strategic-status  # Verify goal alignment
+
+    # Use the hierarchy validation
+    ./bin/todowrite-debug validate
     ```
 
-3.  **Document Before Implementing:**
+3.  **Document Before Implementing (Layers 1-11 Planning):**
     ```bash
-    # Layers 1-11 are planning - document thoroughly
-    # Only Layer 12 executes - keep commands simple and testable
+    # Complete planning layers before execution
+    ./bin/goal-add "Autonomous Harvesting System"
+    ./bin/concept-add "Vision-Based Navigation" --goal-id goal-123
+    ./bin/requirement-add "GPS Accuracy ±2cm" --constraint-id constraint-456
+
+    # Only Layer 12 executes - keep commands atomic and testable
+    ./bin/command-add "Test GPS Accuracy" "python test_gps_precision.py" \
+      --description "Validate GPS meets ±2cm requirement"
     ```
 
-### 🔄 Workflow Optimization
+### 🔄 CLI and Python API Integration Patterns
 
-1.  **Daily Rhythm:**
+1.  **Daily Development Rhythm:**
     ```bash
-    # Morning: ./bin/todo-status (what needs doing?)
-    # Midday: ./bin/todo-status (progress check)
-    # Evening: ./bin/saveandpush (save progress)
+    # Morning: System overview
+    ./bin/loadsession
+    ./bin/todo-status
+    ./bin/strategic-status
+
+    # Development: Use appropriate interface
+    ./bin/task-add "Implement CAN driver"  # CLI for simple operations
+
+    # Complex operations: Use Python API
+    python -c "
+    from afs_fastapi.todos.manager import create_agricultural_project_template
+    template = create_agricultural_project_template('Corn Harvester Fleet')
+    print(f'Created project: {template[\"goal_id\"]}')
+    "
+
+    # Evening: Save progress
+    ./bin/saveandpush 'Daily progress: CAN driver implementation'
     ```
 
-2.  **Granular Progress Tracking:**
+2.  **Choose the Right Interface:**
     ```bash
-    # Mark completion immediately when finished
-    # Example: python -c 'from afs_fastapi.todos.manager import update_node; ...'
+    # CLI for simple, interactive operations
+    ./bin/phase-add "Testing Phase" --goal-id goal-123
+    ./bin/command-execute command-456 --auto-complete
 
-    # Don't batch completions - update in real-time
+    # Python API for complex, programmatic operations
+    python -c "
+    from afs_fastapi.todos.manager import execute_command_pipeline
+    results = execute_command_pipeline(['cmd-1', 'cmd-2', 'cmd-3'])
+    print(f'Executed: {len(results[\"executed\"])} commands')
+    "
     ```
 
-3.  **Clear Naming Conventions:**
+3.  **Error Handling and Validation:**
     ```bash
-    # Use descriptive names
-    # Good: "Configure CAN bus for ISO 11783 compliance"
-    # Bad: "Fix CAN stuff"
+    # Regular integrity checks
+    ./bin/todowrite-debug validate
+    ./bin/todowrite-debug orphans
+
+    # Debug specific issues
+    ./bin/todowrite-debug node goal-123
+
+    # Use safe creation patterns in Python
+    python -c "
+    from todowrite_debug import safe_create_goal
+    goal, error = safe_create_goal('New Goal', 'Description')
+    if error:
+        print(f'Error: {error}')
+    else:
+        print(f'Created: {goal[\"id\"]}')
+    "
+    ```
+
+### 🌾 Agricultural Robotics Specific Practices
+
+1.  **Multi-Equipment Coordination:**
+    ```bash
+    # Create equipment-specific phases
+    ./bin/phase-add "Tractor Fleet Coordination" --goal-id goal-agricultural
+    ./bin/step-add "Configure Inter-Tractor Communication"
+    ./bin/task-add "Install CAN Bus Network"
+    ./bin/command-add "Test CAN Throughput" "cansend can0 123#DEADBEEF"
+    ```
+
+2.  **Safety-Critical Command Validation:**
+    ```bash
+    # Always test commands in dry-run mode first
+    ./bin/command-execute emergency-stop-test --dry-run
+
+    # Use validation commands before field deployment
+    ./bin/command-add "Validate Safety Systems" \
+      "python validate_emergency_systems.py --strict" \
+      --description "Comprehensive safety system validation"
+    ```
+
+3.  **Field Operation Workflows:**
+    ```python
+    # Python API for complex field operations
+    from afs_fastapi.todos.manager import (
+        create_agricultural_project_template,
+        execute_command_pipeline,
+        validate_hierarchy_integrity
+    )
+
+    # Create field operation project
+    project = create_agricultural_project_template("Corn Field Harvest - Section 7")
+
+    # Validate before field deployment
+    validation = validate_hierarchy_integrity()
+    if not validation["valid"]:
+        raise RuntimeError(f"Validation failed: {validation['errors']}")
+
+    # Execute pre-operation checks
+    safety_commands = ["cmd-safety-check", "cmd-gps-validation", "cmd-can-test"]
+    results = execute_command_pipeline(safety_commands, stop_on_error=True)
+
+    if results["failed"]:
+        raise RuntimeError("Safety checks failed - aborting field operation")
+    ```
+
+### 🚀 Performance and Scalability Considerations
+
+1.  **Database Optimization:**
+    ```python
+    # Use batch operations for large datasets
+    from afs_fastapi.todos.manager import create_node
+
+    # Batch create nodes instead of individual calls
+    nodes_to_create = [
+        {"id": f"task-{i}", "layer": "Task", "title": f"Task {i}", ...}
+        for i in range(100)
+    ]
+
+    # Use database transactions for consistency
+    from afs_fastapi.todos.db.config import create_database_engine
+    from sqlalchemy.orm import sessionmaker
+
+    engine = create_database_engine()
+    Session = sessionmaker(bind=engine)
+
+    with Session() as session:
+        # Batch operations within transaction
+        for node_data in nodes_to_create:
+            create_node(node_data)
+        session.commit()
+    ```
+
+2.  **CLI Command Optimization:**
+    ```bash
+    # Use specific queries instead of loading all data
+    ./bin/goal-status --goal-id specific-goal  # Instead of ./bin/goal-status
+
+    # Batch command execution
+    ./bin/command-status | grep "planned" | awk '{print $2}' | \
+      xargs -I {} ./bin/command-execute {} --auto-complete
+    ```
+
+3.  **Memory Management for Large Projects:**
+    ```python
+    # Stream large datasets instead of loading everything
+    def process_large_hierarchy():
+        todos = load_todos()
+
+        # Process layer by layer to manage memory
+        for layer_name in ["Goal", "Phase", "Step", "Task", "SubTask", "Command"]:
+            nodes = todos.get(layer_name, [])
+            for node in nodes:
+                # Process individual nodes
+                yield process_node(node)
+                # Allow garbage collection
+                del node
     ```
 
 ### 🌾 Agricultural Context Integration
@@ -1256,12 +2438,18 @@ python -c 'from afs_fastapi.todos.manager import update_node; import json; node_
 1.  **Equipment-Specific Planning:**
     ```bash
     # Consider specific tractor models, GPS systems, etc.
-    # Example: "Configure for John Deere 8R series with StarFire 6000"
+    ./bin/context-add "John Deere 8R Series Fleet" \
+      --description "5 tractors with StarFire 6000 GPS, ISO 11783 compatible"
+
+    ./bin/constraint-add "Equipment Compatibility" \
+      --description "All systems must work with existing John Deere ISOBUS"
     ```
 
 2.  **Field Condition Awareness:**
     ```bash
     # Factor in weather, terrain, crop conditions
+    ./bin/context-add "500-acre Corn Field - Section 7" \
+      --description "Rolling terrain, GPS coverage verified, harvest season conditions"
     # Example: "Test coordination in muddy field conditions"
     ```
 
@@ -1295,59 +2483,408 @@ python -c 'from afs_fastapi.todos.manager import update_node; import json; node_
 
 ## Troubleshooting
 
-### Common Issues
+This section covers common issues when using both the CLI and Python API interfaces of the ToDoWrite system.
+
+### CLI Command Issues
+
+#### "Command not found" or Permission Denied
+
+```bash
+# Ensure commands are executable
+chmod +x bin/goal-add bin/phase-add bin/task-add
+
+# Check if command exists
+ls -la bin/ | grep goal-add
+
+# Verify Python path in commands
+head -1 bin/goal-add  # Should show correct Python shebang
+```
 
 #### "No strategic goals found"
 
 ```bash
-# Solution: Create a strategic goal first using the Python manager
-python -c 'from afs_fastapi.todos.manager import add_goal; new_goal, err = add_goal(title="My First Goal", description="A test goal."); print(new_goal["id"] if new_goal else err)'
+# Check if database is initialized
+python -c "from afs_fastapi.todos.manager import get_database_info; print(get_database_info())"
+
+# Create a strategic goal using CLI
+./bin/goal-add "Test Goal" --description "Initial test goal"
+
+# Or using Python API
+python -c "
+from afs_fastapi.todos.manager import add_goal
+goal, error = add_goal('Test Goal', 'Initial test goal')
+print(f'Created: {goal[\"id\"]}' if goal else f'Error: {error}')
+"
 ```
 
-#### "Database errors"
+#### "Database connection errors"
 
 ```bash
-# Solution: Reinitialize database (WARNING: This will clear all existing data!)
-python -c "from afs_fastapi.todos.manager import init_database; print(init_database())"
+# Check database status
+python -c "
+from afs_fastapi.todos.manager import get_database_info
+try:
+    info = get_database_info()
+    print(f'Database OK: {info}')
+except Exception as e:
+    print(f'Database Error: {e}')
+"
+
+# Reinitialize database (WARNING: This will clear all existing data!)
+python -c "
+from afs_fastapi.todos.manager import init_database
+result = init_database()
+print(f'Database initialized: {result}')
+"
+```
+
+#### "Import errors with Python API"
+
+```bash
+# Verify Python path and module installation
+python -c "import sys; print('\\n'.join(sys.path))"
+
+# Check if module is accessible
+python -c "
+try:
+    from afs_fastapi.todos.manager import load_todos
+    print('✓ Module import successful')
+except ImportError as e:
+    print(f'✗ Import error: {e}')
+"
+
+# Add project root to Python path if needed
+export PYTHONPATH="${PYTHONPATH}:$(pwd)"
 ```
 
 #### "Commands not executing"
 
 ```bash
-# Remember: Only Layer 12 (Commands) execute.
-# Layers 1-11 are documentation only.
-# Commands are stored in subtasks - retrieve and execute them manually as needed.
+# Verify command layer structure
+./bin/command-status
+
+# Check specific command details
+./bin/command-status --command-id command-123
+
+# Test command execution with dry-run
+./bin/command-execute command-123 --dry-run
+
+# Debug command execution issues
+python -c "
+from afs_fastapi.todos.manager import load_todos
+todos = load_todos()
+commands = todos.get('Command', [])
+for cmd in commands:
+    if cmd.command and cmd.command.run:
+        print(f'{cmd.id}: {cmd.command.run.get(\"shell\", \"No shell command\")}')
+    else:
+        print(f'{cmd.id}: No executable command defined')
+"
 ```
 
-### Getting Help
+### Python API Issues
 
-1.  **Check System Status**
-    ```bash
-    ./bin/todo-status      # Overall health check
-    ./bin/strategic-status # Strategic progress
-    ```
+#### "Node creation fails silently"
 
-2.  **Verify Database**
-    ```bash
-    ls -la todos.db        # Database file exists?
-    ```
+```python
+# Use error handling patterns
+from afs_fastapi.todos.manager import add_goal
 
-3.  **Review Recent Activity**
-    ```bash
-    git log --oneline -5   # Recent changes
-    ```
+goal, error = add_goal("Test Goal", "Description")
+if error:
+    print(f"Creation failed: {error}")
+    # Check common issues:
+    # 1. Database connection
+    # 2. Invalid characters in title/description
+    # 3. Database permissions
+else:
+    print(f"Success: {goal['id']}")
+```
+
+#### "Hierarchy validation errors"
+
+```python
+# Use the debugging utilities
+from todowrite_debug import validate_hierarchy_integrity
+
+validation = validate_hierarchy_integrity()
+if not validation["valid"]:
+    print("Validation errors:")
+    for error in validation["errors"]:
+        print(f"  - {error}")
+
+    print("Warnings:")
+    for warning in validation["warnings"]:
+        print(f"  - {warning}")
+```
+
+#### "Performance issues with large datasets"
+
+```python
+# Use pagination for large queries
+from afs_fastapi.todos.manager import load_todos
+
+def load_todos_paginated(layer_name: str, page_size: int = 100):
+    """Load todos in chunks to manage memory."""
+    todos = load_todos()
+    nodes = todos.get(layer_name, [])
+
+    for i in range(0, len(nodes), page_size):
+        yield nodes[i:i + page_size]
+
+# Process in chunks
+for chunk in load_todos_paginated("Task", 50):
+    # Process chunk
+    for task in chunk:
+        process_task(task)
+```
+
+### Diagnostic Commands and Getting Help
+
+#### System Health Checks
+
+```bash
+# Comprehensive system status
+./bin/todo-status           # Overall system health
+./bin/strategic-status      # Strategic goals progress
+./bin/todowrite-commands    # Available commands overview
+
+# Detailed debugging
+./bin/todowrite-debug validate    # Hierarchy integrity check
+./bin/todowrite-debug stats       # System statistics
+./bin/todowrite-debug orphans     # Find orphaned nodes
+```
+
+#### Database Diagnostics
+
+```bash
+# Check database connectivity
+python -c "
+from afs_fastapi.todos.manager import get_database_info, load_todos
+try:
+    db_info = get_database_info()
+    print(f'✓ Database: {db_info}')
+
+    todos = load_todos()
+    total_nodes = sum(len(nodes) for nodes in todos.values())
+    print(f'✓ Loaded {total_nodes} nodes across {len(todos)} layers')
+except Exception as e:
+    print(f'✗ Database issue: {e}')
+"
+
+# Database file verification (SQLite)
+ls -la *.db 2>/dev/null || echo "No local database files found"
+```
+
+#### Command-Specific Debugging
+
+```bash
+# Debug specific layer commands
+./bin/goal-status --goal-id goal-123
+./bin/phase-status --phase-id phase-456
+./bin/task-status --task-id task-789
+
+# Debug node relationships
+./bin/todowrite-debug node goal-123
+
+# Test command execution
+./bin/command-execute command-456 --dry-run
+```
+
+#### Python API Debugging
+
+```python
+# Comprehensive system check
+def system_health_check():
+    """Perform comprehensive ToDoWrite system health check."""
+    from afs_fastapi.todos.manager import (
+        get_database_info, load_todos, get_goals, get_commands
+    )
+
+    try:
+        # Database connectivity
+        db_info = get_database_info()
+        print(f"✓ Database connected: {db_info}")
+
+        # Data loading
+        todos = load_todos()
+        print(f"✓ Loaded {len(todos)} layers")
+
+        # Layer-specific checks
+        goals = get_goals()
+        commands = get_commands()
+
+        print(f"✓ Goals: {len(goals)}")
+        print(f"✓ Commands: {len(commands)}")
+
+        # Hierarchy validation
+        from todowrite_debug import validate_hierarchy_integrity
+        validation = validate_hierarchy_integrity()
+
+        if validation["valid"]:
+            print("✓ Hierarchy validation passed")
+        else:
+            print(f"✗ Hierarchy issues: {len(validation['errors'])} errors")
+            for error in validation["errors"][:3]:  # Show first 3 errors
+                print(f"  - {error}")
+
+        return True
+
+    except Exception as e:
+        print(f"✗ System check failed: {e}")
+        return False
+
+# Run health check
+if __name__ == "__main__":
+    system_health_check()
+```
+
+#### Common Resolution Steps
+
+1. **Reset and Reinitialize (Nuclear Option)**
+   ```bash
+   # Backup existing data
+   cp todos.db todos.db.backup 2>/dev/null || echo "No database to backup"
+
+   # Reinitialize system
+   python -c "
+   from afs_fastapi.todos.manager import init_database
+   result = init_database()
+   print(f'Database reinitialized: {result}')
+   "
+
+   # Verify initialization
+   ./bin/todo-status
+   ```
+
+2. **Permission and Path Issues**
+   ```bash
+   # Fix command permissions
+   find bin/ -name "*.py" -exec chmod +x {} \;
+   find bin/ -type f ! -name "*.py" -exec chmod +x {} \;
+
+   # Verify Python path
+   python -c "import sys; print('Project root in path:', '$(pwd)' in sys.path)"
+
+   # Add to path if needed
+   export PYTHONPATH="${PYTHONPATH}:$(pwd)"
+   ```
+
+3. **Development Environment Issues**
+   ```bash
+   # Check Python version
+   python --version  # Should be 3.12+
+
+   # Verify dependencies
+   pip list | grep -E "(sqlalchemy|pydantic|fastapi)"
+
+   # Check virtual environment
+   which python
+   echo $VIRTUAL_ENV
+   ```
 
 ---
 
 ## Conclusion
 
-The ToDoWrite system provides a **systematic approach to agricultural robotics development** that ensures:
+The ToDoWrite system provides a **comprehensive 12-layer hierarchical task management framework** specifically designed for safety-critical agricultural robotics development. This guide has covered both command-line and programmatic interfaces to give intermediate programmers complete control over their agricultural automation projects.
 
--   ✅ **Safety compliance** through structured requirements
--   ✅ **Strategic alignment** from goals to execution
--   ✅ **Full traceability** for agricultural standards
--   ✅ **Systematic progress** through clear workflows
--   ✅ **Quality assurance** with separation of planning and execution
+### Key Capabilities Covered
+
+#### **🖥️ Command-Line Interface (CLI)**
+-   ✅ **Complete CRUD operations** across all 12 layers
+-   ✅ **100% command coverage** with 46 implemented commands
+-   ✅ **Hierarchical workflow support** from strategic goals to executable commands
+-   ✅ **Agricultural-specific tooling** for multi-tractor coordination
+-   ✅ **Integrated debugging utilities** for system validation
+
+#### **🐍 Python Programming Interface**
+-   ✅ **Full programmatic access** via `afs_fastapi.todos.manager` module
+-   ✅ **Batch operations and automation** for complex agricultural workflows
+-   ✅ **Advanced integration patterns** with CI/CD, Docker, and IDEs
+-   ✅ **Error handling and validation** with comprehensive debugging tools
+-   ✅ **Performance optimization** for large-scale agricultural operations
+
+#### **🌾 Agricultural Robotics Focus**
+-   ✅ **Safety-first development** with structured constraint management
+-   ✅ **Equipment-specific planning** for John Deere, Case IH, and other platforms
+-   ✅ **ISO 11783 compliance tracking** through acceptance criteria
+-   ✅ **Multi-equipment coordination** with CAN bus and GPS integration
+-   ✅ **Field operation workflows** with safety validation pipelines
+
+### Integration Flexibility
+
+The ToDoWrite system supports multiple integration approaches:
+
+- **Interactive Development**: Use CLI commands for daily task management
+- **Automated Workflows**: Leverage Python API for CI/CD integration
+- **Hybrid Approaches**: Combine CLI and Python for optimal productivity
+- **External Tool Integration**: Connect with project management and monitoring systems
+
+### Next Steps for Implementation
+
+1. **Start with CLI exploration**: Use `./bin/todowrite-commands` to discover available tools
+2. **Create your first agricultural project**: Follow the hierarchical workflow examples
+3. **Integrate with your development environment**: Use the IDE integration patterns
+4. **Implement monitoring and validation**: Set up the debugging and health check utilities
+5. **Scale to production**: Apply the performance optimization and error handling patterns
+
+The ToDoWrite system ensures that every line of code in your agricultural robotics project traces back to strategic business goals while maintaining the safety standards critical for autonomous agricultural equipment operation.
+
+---
+
+## Quick Reference
+
+### Essential CLI Commands
+
+```bash
+# System Overview
+./bin/todowrite-commands              # All available commands
+./bin/todo-status                     # Complete system status
+./bin/strategic-status                # Strategic goals overview
+
+# Layer Management (Examples)
+./bin/goal-add "Project Title"        # Create strategic goal
+./bin/phase-add "Phase Name" --goal-id goal-123
+./bin/task-add "Task Name"            # Add to active step
+./bin/command-add "Title" "shell_cmd" # Create executable command
+
+# Execution and Validation
+./bin/command-execute cmd-123         # Execute command
+./bin/todowrite-debug validate        # Validate hierarchy
+./bin/loadsession && ./bin/savesession # Session management
+```
+
+### Essential Python API
+
+```python
+# Core imports
+from afs_fastapi.todos.manager import (
+    add_goal, add_phase, add_task, add_command,
+    get_goals, load_todos, complete_goal,
+    validate_hierarchy_integrity
+)
+
+# Basic operations
+goal, error = add_goal("Title", "Description")
+todos = load_todos()
+validation = validate_hierarchy_integrity()
+
+# Advanced patterns
+from todowrite_debug import safe_create_goal
+goal, error = safe_create_goal("Safe Goal Creation", "With error handling")
+```
+
+### Layer Hierarchy Quick Reference
+
+```
+🎯 Strategic (1-4): Goal → Concept → Context → Constraints
+📋 Specification (5-7): Requirements → Acceptance Criteria → Interface Contract
+🚀 Implementation (8-11): Phase → Step → Task → SubTask
+⚡ Execution (12): Command (ONLY executable layer)
+```
+
+**Remember**: Layers 1-11 are planning only. Layer 12 (Command) is the only executable layer.
 
 ### Next Steps
 

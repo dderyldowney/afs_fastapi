@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import add_concept  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Add a new Concept to the ToDoWrite system.")
+    parser.add_argument("title", type=str, help="The title of the concept.")
+    parser.add_argument("--description", type=str, default="", help="The description of the concept.")
+    parser.add_argument("--goal-id", type=str, help="The parent goal ID.")
+    args = parser.parse_args()
+
+    parent_id = getattr(args, "goal_id", None)
+    new_concept, error = add_concept(args.title, args.description, parent_id)
+
+    if error:
+        print(f"Error: {error}")
+        sys.exit(1)
+
+    if new_concept:
+        print("✓ Concept added successfully!")
+        print(f"  ID: {new_concept['id']}")
+        print(f"  Title: {new_concept['title']}")
+        print(f"  Status: {new_concept['status']}")
+        print()
+        print("Use './bin/concept-status' to view all concepts.")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import load_todos  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Display status of all Tasks in the ToDoWrite system.")
+    parser.add_argument("--task-id", type=str, help="Show details for a specific task ID.")
+    args = parser.parse_args()
+
+    todos = load_todos()
+    tasks = todos.get("Task", [])
+
+    if args.task_id:
+        # Show specific task details
+        task = None
+        for t in tasks:
+            if t.id == args.task_id:
+                task = t
+                break
+
+        if not task:
+            print(f"Error: Task with ID '{args.task_id}' not found.")
+            sys.exit(1)
+
+        print(f"📝 Task Details: {task.id}")
+        print("=" * 50)
+        print(f"Title: {task.title}")
+        print(f"Description: {task.description}")
+        print(f"Status: {task.status}")
+        print(f"Owner: {task.metadata.owner}")
+        print(f"Labels: {', '.join(task.metadata.labels) if task.metadata.labels else 'None'}")
+        print(f"Severity: {task.metadata.severity}")
+        print(f"Work Type: {task.metadata.work_type}")
+        print(f"Parents: {', '.join(task.links.parents) if task.links.parents else 'None'}")
+        print(f"Children: {', '.join(task.links.children) if task.links.children else 'None'}")
+    else:
+        # Show all tasks
+        if not tasks:
+            print("No tasks found in the ToDoWrite system.")
+            return
+
+        print("📝 All Tasks Status")
+        print("=" * 50)
+        
+        for task in tasks:
+            status_icon = "✓" if task.status == "done" else "○" if task.status == "active" else "·"
+            print(f"{status_icon} {task.id}")
+            print(f"   Title: {task.title}")
+            print(f"   Status: {task.status}")
+            print(f"   Owner: {task.metadata.owner}")
+            print()
+
+        print(f"Total Tasks: {len(tasks)}")
+        completed = len([t for t in tasks if t.status == "done"])
+        active = len([t for t in tasks if t.status == "active"])
+        planned = len([t for t in tasks if t.status == "planned"])
+        print(f"Completed: {completed}, Active: {active}, Planned: {planned}")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,55 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import delete_node, load_todos  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Delete a Goal from the ToDoWrite system.")
+    parser.add_argument("goal_id", type=str, help="The ID of the goal to delete.")
+    parser.add_argument("--confirm", action="store_true", help="Confirm deletion without prompt.")
+    args = parser.parse_args()
+
+    # Verify goal exists
+    todos = load_todos()
+    goals = todos.get("Goal", [])
+    goal = None
+    for g in goals:
+        if g.id == args.goal_id:
+            goal = g
+            break
+
+    if not goal:
+        print(f"Error: Goal with ID '{args.goal_id}' not found.")
+        sys.exit(1)
+
+    # Confirm deletion
+    if not args.confirm:
+        print(f"Are you sure you want to delete goal '{goal.title}' ({args.goal_id})? [y/N]: ", end="")
+        response = input().strip().lower()
+        if response not in ['y', 'yes']:
+            print("Deletion cancelled.")
+            sys.exit(0)
+
+    try:
+        delete_node(args.goal_id)
+        print("✓ Goal deleted successfully!")
+        print(f"  ID: {args.goal_id}")
+        print(f"  Title: {goal.title}")
+        print()
+        print("Use './bin/strategic-status' to view updated strategic goals.")
+    except Exception as e:
+        print(f"Error deleting goal: {e}")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
