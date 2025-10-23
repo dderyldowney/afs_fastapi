@@ -16,7 +16,7 @@ which will serve as the foundation for more complex agricultural data types.
 
 from __future__ import annotations
 
-from afs_fastapi.services.crdt import GSet  # type: ignore
+from afs_fastapi.services.crdt import GSet
 
 
 class TestGSet:
