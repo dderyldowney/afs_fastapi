@@ -159,7 +159,7 @@ class TestStrategicCompleteDirectLogic(unittest.TestCase):
         from afs_fastapi.todos.manager import init_database, reset_database_engine
 
         reset_database_engine()
-        init_database() # Calling init_database again will drop and recreate, effectively cleaning
+        init_database()  # Calling init_database again will drop and recreate, effectively cleaning
 
     def setUp(self) -> None:
         """Set up test environment."""

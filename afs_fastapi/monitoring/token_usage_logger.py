@@ -1,9 +1,9 @@
-import os
 import asyncio
 import logging
+import os
 import uuid
 from datetime import UTC, datetime, timedelta
-from typing import Any
+from typing import Any, cast
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -33,11 +33,12 @@ class TokenUsageLogger:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    def __init__(
-        self, database_url: str | None = None, log_level: int = logging.INFO
-    ) -> None:
+    def __init__(self, database_url: str | None = None, log_level: int = logging.INFO) -> None:
         if not self._initialized:
-            self.database_url = database_url or os.getenv("TOKEN_USAGE_DATABASE_URL", "sqlite:///./token_usage.db")
+            self.database_url: str = cast(
+                str,
+                database_url or os.getenv("TOKEN_USAGE_DATABASE_URL", "sqlite:///./token_usage.db"),
+            )
             self._initialize_db()
             self._initialized = True
             self.set_logging_level(log_level)

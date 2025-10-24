@@ -1,23 +1,23 @@
 import os
+import shutil
+import tempfile
 import time
 import unittest
 import uuid
 from datetime import datetime
-import tempfile
-import shutil
+from typing import Any, ClassVar
 
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import text
 from sqlalchemy.orm import sessionmaker
 
-from afs_fastapi.monitoring.token_usage_logger import TokenUsageLogger
-from afs_fastapi.monitoring.token_usage_models import Base
-from afs_fastapi.monitoring.token_usage_repository import TokenUsageRepository
-
 # The app import must happen AFTER the logger is reset for testing
 # This ensures the app uses the test database configuration
 from afs_fastapi.api.main import app
+from afs_fastapi.monitoring.token_usage_logger import TokenUsageLogger
+from afs_fastapi.monitoring.token_usage_models import Base
+from afs_fastapi.monitoring.token_usage_repository import TokenUsageRepository
 
 # Create a test client
 client = TestClient(app)
@@ -25,16 +25,13 @@ client = TestClient(app)
 
 @pytest.mark.serial
 class TestTokenUsageAPI(unittest.TestCase):
-    """Token Usage API tests that must run serially due to singleton pattern.
+    """Token Usage API tests that must run serially due to singleton pattern."""
 
-    These tests use module-level singleton reset which doesn't work correctly
-    with pytest-xdist parallel execution. The @pytest.mark.serial decorator
-    ensures these tests run sequentially.
-
-    Agricultural Context: Token usage tracking for agricultural robotics AI
-    agents requires isolated test database to prevent cross-test contamination
-    in CI/CD pipelines.
-    """
+    temp_dir: ClassVar[str]
+    test_db_path: ClassVar[str]
+    SQLALCHEMY_DATABASE_URL: ClassVar[str]
+    logger_instance: ClassVar[TokenUsageLogger]
+    SessionLocal: ClassVar[Any]  # SQLAlchemy sessionmaker type is complex, use Any for simplicity
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -44,11 +41,16 @@ class TestTokenUsageAPI(unittest.TestCase):
         cls.SQLALCHEMY_DATABASE_URL = f"sqlite:///{cls.test_db_path}"
 
         # Reset the singleton with test database
-        cls.logger_instance = TokenUsageLogger.reset_for_testing(database_url=cls.SQLALCHEMY_DATABASE_URL)
+        cls.logger_instance = TokenUsageLogger.reset_for_testing(
+            database_url=cls.SQLALCHEMY_DATABASE_URL
+        )
 
         # Ensure tables are created for this logger instance
+        assert cls.logger_instance._engine is not None
         Base.metadata.create_all(bind=cls.logger_instance._engine)
-        cls.SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=cls.logger_instance._engine)
+        cls.SessionLocal = sessionmaker(
+            autocommit=False, autoflush=False, bind=cls.logger_instance._engine
+        )
 
     @classmethod
     def tearDownClass(cls) -> None:
@@ -72,7 +74,7 @@ class TestTokenUsageAPI(unittest.TestCase):
             db.close()
 
     def tearDown(self):
-        pass # Cleanup is handled by setUpClass and tearDownClass
+        pass  # Cleanup is handled by setUpClass and tearDownClass
 
     def test_log_token_usage_endpoint(self):
         response = client.post(
@@ -91,7 +93,7 @@ class TestTokenUsageAPI(unittest.TestCase):
 
         # Wait for async operation to complete
         # The log_token_usage method uses asyncio.to_thread which may not complete immediately
-        time.sleep(0.1) # Reduced sleep time for faster tests
+        time.sleep(0.1)  # Reduced sleep time for faster tests
 
         # Verify in DB
         db = self.SessionLocal()
