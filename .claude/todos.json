@@ -1,0 +1,782 @@
+{
+  "strategic_goals": [
+    {
+      "id": "strategic-004",
+      "description": "Add IoT sensor network integration with guaranteed delivery",
+      "category": "monitoring",
+      "priority": "medium",
+      "status": "completed",
+      "date_added": "2025-10-03T06:45:00Z",
+      "date_completed": "2025-10-07T11:03:51Z",
+      "phases": [
+        {
+          "id": "phase-3",
+          "name": "Phase 3",
+          "status": "completed",
+          "date_started": "2025-10-07T09:01:00Z",
+          "date_completed": "2025-10-07T11:03:51Z",
+          "tasks": []
+        },
+        {
+          "id": "phase-20251007_084332",
+          "name": "Implement cloud integration",
+          "status": "completed",
+          "date_started": "2025-10-07T08:43:32Z",
+          "date_completed": "2025-10-07T08:45:07Z",
+          "tasks": []
+        },
+        {
+          "id": "phase-2",
+          "name": "Phase 2",
+          "status": "completed",
+          "date_started": "2025-10-07T09:00:00Z",
+          "date_completed": "2025-10-07T11:03:35Z",
+          "tasks": []
+        },
+        {
+          "id": "phase-20251007_084734",
+          "name": "Task Reordering Test",
+          "status": "completed",
+          "date_started": "2025-10-07T08:47:34Z",
+          "date_completed": "2025-10-07T10:53:27Z",
+          "tasks": [
+            {
+              "id": "task-20251007_084759",
+              "description": "Task 2",
+              "status": "completed",
+              "date_completed": "2025-10-07T10:47:50Z"
+            },
+            {
+              "id": "task-20251007_084750",
+              "description": "Task 1",
+              "status": "completed",
+              "date_completed": "2025-10-07T10:47:18Z"
+            },
+            {
+              "id": "task-20251007_090130",
+              "description": "Test pause/resume",
+              "status": "completed",
+              "date_completed": "2025-10-07T10:48:10Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "strategic-003",
+      "description": "Implement cloud integration for agricultural data services",
+      "category": "api",
+      "priority": "medium",
+      "status": "completed",
+      "date_added": "2025-10-03T06:45:00Z",
+      "date_completed": "2025-10-07T12:25:23Z",
+      "phases": [
+        {
+          "id": "phase-20251007_113846",
+          "name": "Phase 1 Implement cloud integration for agricultural data services",
+          "status": "completed",
+          "date_started": "2025-10-07T11:38:46Z",
+          "date_completed": "2025-10-07T12:25:23Z",
+          "tasks": [
+            {
+              "id": "task-20251007_113953",
+              "description": "Investigate existing agricultural cloud platforms and APIs (e.g., John Deere Operations Center, Climate FieldView).",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:10:18Z"
+            },
+            {
+              "id": "task-20251007_114001",
+              "description": "Define key data points for integration (e.g., sensor data, equipment telemetry, field boundaries, yield data).",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:10:45Z"
+            },
+            {
+              "id": "task-20251007_114007",
+              "description": "Identify security and privacy requirements for agricultural data in the cloud.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:11:08Z"
+            },
+            {
+              "id": "task-20251007_114011",
+              "description": "Document data formats and protocols for cloud communication.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:11:38Z"
+            },
+            {
+              "id": "task-20251007_114015",
+              "description": "Design the high-level architecture for cloud integration within AFS FastAPI.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:12:13Z"
+            },
+            {
+              "id": "task-20251007_114020",
+              "description": "Choose appropriate cloud services (e.g., AWS IoT, Azure IoT Hub, Google Cloud IoT Core) for data ingestion and processing.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:12:57Z"
+            },
+            {
+              "id": "task-20251007_114024",
+              "description": "Define data models for cloud-integrated agricultural data.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:13:28Z"
+            },
+            {
+              "id": "task-20251007_114029",
+              "description": "Design authentication and authorization mechanisms for secure cloud access.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:13:55Z"
+            },
+            {
+              "id": "task-20251007_114034",
+              "description": "RED: Write failing unit tests for cloud platform API client (e.g., for connecting, authenticating, sending data).",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:14:34Z"
+            },
+            {
+              "id": "task-20251007_114038",
+              "description": "GREEN: Implement minimal cloud platform API client functionality to pass tests.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:15:09Z"
+            },
+            {
+              "id": "task-20251007_114043",
+              "description": "REFACTOR: Refactor API client for robustness, error handling, and efficiency.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:15:51Z"
+            },
+            {
+              "id": "task-20251007_114047",
+              "description": "RED: Write failing integration tests for data ingestion pipeline (e.g., sending sensor data to cloud).",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:16:41Z"
+            },
+            {
+              "id": "task-20251007_114052",
+              "description": "GREEN: Implement minimal data ingestion pipeline to pass tests.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:17:18Z"
+            },
+            {
+              "id": "task-20251007_114056",
+              "description": "REFACTOR: Refactor data ingestion pipeline for scalability and fault tolerance.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:17:56Z"
+            },
+            {
+              "id": "task-20251007_114102",
+              "description": "RED: Write failing tests for data synchronization (e.g., two-way sync of field boundaries).",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:19:00Z"
+            },
+            {
+              "id": "task-20251007_114106",
+              "description": "GREEN: Implement minimal data synchronization logic to pass tests.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:19:15Z"
+            },
+            {
+              "id": "task-20251007_114112",
+              "description": "REFACTOR: Refactor data synchronization for conflict resolution and performance.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:20:21Z"
+            },
+            {
+              "id": "task-20251007_114116",
+              "description": "Perform end-to-end testing of the cloud integration with a simulated agricultural environment.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:21:48Z"
+            },
+            {
+              "id": "task-20251007_114121",
+              "description": "Conduct security audits and penetration testing for cloud communication.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:22:30Z"
+            },
+            {
+              "id": "task-20251007_114126",
+              "description": "Validate data integrity and consistency between local and cloud systems.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:22:59Z"
+            },
+            {
+              "id": "task-20251007_114130",
+              "description": "Document the cloud integration module, including API usage, configuration, and troubleshooting.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:23:30Z"
+            },
+            {
+              "id": "task-20251007_114135",
+              "description": "Create deployment scripts and instructions for cloud integration components.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:24:15Z"
+            },
+            {
+              "id": "task-20251007_114146",
+              "description": "Update user documentation for agricultural engineers on how to configure and use cloud features.",
+              "status": "completed",
+              "date_completed": "2025-10-07T12:24:43Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "strategic-001",
+      "description": "Phase 6 ISOBUS guaranteed delivery - COMPLETE (enterprise-grade reliability achieved)",
+      "category": "equipment",
+      "priority": "high",
+      "status": "completed",
+      "date_added": "2025-10-03T06:00:00Z",
+      "date_completed": "2025-10-03T06:45:00Z",
+      "phases": []
+    },
+    {
+      "id": "strategic-20251003_151113_4657",
+      "description": "Implement comprehensive token usage reduction strategy for session management and AI communication efficiency",
+      "category": "infrastructure",
+      "priority": "high",
+      "status": "completed",
+      "date_added": "2025-10-03T06:00:00Z",
+      "date_completed": "2025-10-03T15:38:08Z",
+      "phases": []
+    },
+    {
+      "id": "strategic-002",
+      "description": "Advance to Phase 7 agricultural robotics enhancement",
+      "category": "equipment",
+      "priority": "high",
+      "status": "completed",
+      "date_added": "2025-10-03T06:45:00Z",
+      "date_completed": "2025-10-03T21:27:38Z",
+      "phases": []
+    },
+    {
+      "id": "strategic-005",
+      "description": "Develop advanced fleet coordination capabilities",
+      "category": "coordination",
+      "priority": "high",
+      "status": "completed",
+      "date_added": "2025-10-03T06:45:00Z",
+      "date_completed": "2025-10-05T21:21:18Z",
+      "phases": []
+    },
+    {
+      "id": "strategic-006",
+      "description": "Create comprehensive user documentation for agricultural engineers",
+      "category": "docs",
+      "priority": "high",
+      "status": "completed",
+      "date_added": "2025-10-03T06:45:00Z",
+      "date_completed": "2025-10-06T17:23:31Z",
+      "phases": [
+        {
+          "id": "phase-2025-10-06T15:47:14Z",
+          "name": "Create comprehensive user documentation for agricultural engineers",
+          "status": "completed",
+          "date_started": "2025-10-06T15:47:14Z",
+          "date_completed": "2025-10-07T08:27:42Z",
+          "tasks": [
+            {
+              "id": "task-001",
+              "description": "Define documentation scope and target audience needs.",
+              "status": "completed"
+            },
+            {
+              "id": "task-002",
+              "description": "Outline documentation structure (e.g., sections for platform tools, environment, `afs_fastapi` module).",
+              "status": "completed"
+            },
+            {
+              "id": "task-003",
+              "description": "Choose documentation format and tools (e.g., Markdown, Sphinx, Read the Docs).",
+              "status": "completed"
+            },
+            {
+              "id": "task-004",
+              "description": "Establish writing guidelines and style guide.",
+              "status": "completed"
+            },
+            {
+              "id": "task-005",
+              "description": "Document `bin/` scripts (e.g., `savesession`, `saveandpush`, `todo-status`, `phase-status`, `strategic-list`, `formatall`).",
+              "status": "completed"
+            },
+            {
+              "id": "task-006",
+              "description": "Provide usage examples for each platform tool.",
+              "status": "completed"
+            },
+            {
+              "id": "task-007",
+              "description": "Explain the purpose and agricultural context of each tool.",
+              "status": "completed"
+            },
+            {
+              "id": "task-008",
+              "description": "Document project setup (e.g., cloning repo, installing dependencies, virtual environments).",
+              "status": "completed"
+            },
+            {
+              "id": "task-009",
+              "description": "Explain pre-commit hooks and their purpose.",
+              "status": "completed"
+            },
+            {
+              "id": "task-010",
+              "description": "Document testing procedures (e.g., running `pytest`, understanding test reports).",
+              "status": "completed"
+            },
+            {
+              "id": "task-011",
+              "description": "Document code formatting and linting (e.g., `black`, `ruff`, `isort`, `mypy`).",
+              "status": "completed"
+            },
+            {
+              "id": "task-012",
+              "description": "Document core modules and classes (e.g., `afs_fastapi/equipment`, `afs_fastapi/monitoring`, `afs_fastapi/api`).",
+              "status": "completed"
+            },
+            {
+              "id": "task-013",
+              "description": "Provide API reference for key functions and classes.",
+              "status": "pending"
+            },
+            {
+              "id": "task-014",
+              "description": "Include code examples for common use cases (e.g., interacting with equipment, fetching monitoring data).",
+              "status": "pending"
+            },
+            {
+              "id": "task-015",
+              "description": "Explain the agricultural robotics context and relevance of each module.",
+              "status": "pending"
+            },
+            {
+              "id": "task-016",
+              "description": "Conduct internal review of documentation with project team.",
+              "status": "pending"
+            },
+            {
+              "id": "task-017",
+              "description": "Gather feedback from target audience (agricultural engineers, AI engineers).",
+              "status": "pending"
+            },
+            {
+              "id": "task-018",
+              "description": "Refine documentation based on feedback.",
+              "status": "pending"
+            },
+            {
+              "id": "task-019",
+              "description": "Publish documentation to an accessible platform (e.g., GitHub Pages, Read the Docs).",
+              "status": "pending"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "strategic-20251003_214232_5470",
+      "description": "Implement advanced token reduction for AI processing pipeline (pre-fill, prompt processing, generation, decoding)",
+      "category": "general",
+      "priority": "medium",
+      "status": "completed",
+      "date_added": "2025-10-03T21:42:32Z",
+      "date_completed": "2025-10-05T16:55:08Z",
+      "phases": []
+    },
+    {
+      "id": "strategic-20251005_183103_0130",
+      "description": "Fix Infrastructure Python Environment Detection - Critical updatechangelog bash execution failures preventing reliable commits and development workflow",
+      "category": "general",
+      "priority": "medium",
+      "status": "completed",
+      "date_added": "2025-10-05T18:31:03Z",
+      "date_completed": "2025-10-05T18:46:21Z",
+      "phases": []
+    },
+    {
+      "id": "strategic-20251005_183115_8286",
+      "description": "Rebuild AI Processing Pipeline Context System - Critical failures in context handling, prompt distillation, and format-aware parsing breaking session management",
+      "category": "general",
+      "priority": "medium",
+      "status": "completed",
+      "date_added": "2025-10-05T18:31:15Z",
+      "date_completed": "2025-10-05T19:01:45Z",
+      "phases": []
+    },
+    {
+      "id": "strategic-20251005_214104_9378",
+      "description": "Implement comprehensive safety-critical systems for agricultural fleet coordination (EmergencyStopPropagation, CommunicationLossFailSafe, CollisionAvoidanceSystem)",
+      "category": "general",
+      "priority": "medium",
+      "status": "completed",
+      "date_added": "2025-10-05T21:41:04Z",
+      "date_completed": "2025-10-05T21:41:12Z",
+      "phases": []
+    },
+    {
+      "id": "strategic-20251006_124847_4833",
+      "description": "Apply TDD_REMEDIATION_LIST.md: Rework placeholder tests to validate infrastructure.",
+      "category": "general",
+      "priority": "high",
+      "status": "completed",
+      "date_added": "2025-10-06T12:48:47Z",
+      "date_completed": "2025-10-06T15:44:26Z",
+      "phases": []
+    },
+    {
+      "id": "strategic-20251007_135458",
+      "description": "Cloud-Based Data Management & Analytics Platform",
+      "category": "Platform Enhancement",
+      "priority": "high",
+      "status": "completed",
+      "date_added": "2025-10-07T13:54:58Z",
+      "date_completed": "2025-10-07T16:32:25Z",
+      "phases": [
+        {
+          "id": "phase-20251007_135501",
+          "name": "Cloud Infrastructure Setup",
+          "status": "completed",
+          "date_started": "2025-10-07T13:55:01Z",
+          "date_completed": "2025-10-07T16:32:25Z",
+          "tasks": [
+            {
+              "id": "task-20251007_135504",
+              "description": "Research cloud providers (AWS, Azure, GCP) for agricultural data.",
+              "status": "completed",
+              "date_completed": "2025-10-07T16:31:47Z"
+            },
+            {
+              "id": "task-20251007_135507",
+              "description": "Select cloud provider and set up initial infrastructure (VPC, databases, storage).",
+              "status": "completed",
+              "date_completed": "2025-10-07T16:32:05Z"
+            },
+            {
+              "id": "task-20251007_135511",
+              "description": "Implement secure data ingestion pipelines from on-premise systems.",
+              "status": "completed",
+              "date_completed": "2025-10-07T16:32:20Z"
+            }
+          ],
+          "paused_at": null,
+          "resumed_at": null,
+          "strategic_goal_id": "strategic-20251007_135458"
+        },
+        {
+          "id": "phase-20251007_135523",
+          "name": "Data Model & Storage Design",
+          "status": "paused",
+          "date_started": "2025-10-07T13:55:23Z",
+          "date_completed": null,
+          "tasks": [
+            {
+              "id": "task-20251007_135526",
+              "description": "Define data models for various agricultural data (sensor, equipment, yield).",
+              "status": "pending",
+              "date_completed": null
+            },
+            {
+              "id": "task-20251007_135528",
+              "description": "Design scalable database schemas for time-series and relational data.",
+              "status": "pending",
+              "date_completed": null
+            },
+            {
+              "id": "task-20251007_135532",
+              "description": "Implement data archiving and retention policies.",
+              "status": "pending",
+              "date_completed": null
+            }
+          ],
+          "paused_at": "2025-10-07T14:23:31Z",
+          "resumed_at": null,
+          "strategic_goal_id": "strategic-20251007_135458"
+        },
+        {
+          "id": "phase-20251007_135540",
+          "name": "Analytics & Reporting Engine",
+          "status": "completed",
+          "date_started": "2025-10-07T13:55:40Z",
+          "date_completed": "2025-10-07T13:55:53Z",
+          "tasks": [
+            {
+              "id": "task-20251007_135544",
+              "description": "Develop data processing and analytics modules.",
+              "status": "pending",
+              "date_completed": null
+            },
+            {
+              "id": "task-20251007_135546",
+              "description": "Integrate with visualization tools for dashboards and reports.",
+              "status": "pending",
+              "date_completed": null
+            },
+            {
+              "id": "task-20251007_135549",
+              "description": "Implement APIs for external access to aggregated data.",
+              "status": "pending",
+              "date_completed": null
+            }
+          ],
+          "paused_at": null,
+          "resumed_at": null,
+          "strategic_goal_id": "strategic-20251007_135458"
+        }
+      ]
+    },
+    {
+      "id": "strategic-20251007_135555",
+      "description": "Robust IoT Sensor Integration with Edge Processing Capabilities",
+      "category": "Platform Enhancement",
+      "priority": "high",
+      "status": "completed",
+      "date_added": "2025-10-07T13:55:55Z",
+      "date_completed": "2025-10-07T16:46:30Z",
+      "phases": [
+        {
+          "id": "phase-20251007_135604",
+          "name": "Sensor Hardware & Protocol Standardization",
+          "status": "completed",
+          "date_started": "2025-10-07T13:56:04Z",
+          "date_completed": "2025-10-07T16:43:40Z",
+          "tasks": [
+            {
+              "id": "task-20251007_135609",
+              "description": "Research common agricultural IoT sensors and communication protocols (LoRaWAN, MQTT).",
+              "status": "completed",
+              "date_completed": "2025-10-07T16:42:54Z"
+            },
+            {
+              "id": "task-20251007_135613",
+              "description": "Define standard data formats for sensor readings.",
+              "status": "completed",
+              "date_completed": "2025-10-07T16:43:12Z"
+            },
+            {
+              "id": "task-20251007_135615",
+              "description": "Develop generic sensor interface module.",
+              "status": "completed",
+              "date_completed": "2025-10-07T16:43:34Z"
+            }
+          ],
+          "paused_at": null,
+          "resumed_at": null,
+          "strategic_goal_id": "strategic-20251007_135555"
+        },
+        {
+          "id": "phase-20251007_135633",
+          "name": "Edge Gateway Development",
+          "status": "completed",
+          "date_started": "2025-10-07T13:56:33Z",
+          "date_completed": "2025-10-07T16:46:30Z",
+          "tasks": [
+            {
+              "id": "task-20251007_135645",
+              "description": "Select edge computing hardware for tractors/stations.",
+              "status": "completed",
+              "date_completed": "2025-10-07T16:45:40Z"
+            },
+            {
+              "id": "task-20251007_135656",
+              "description": "Develop edge software for data aggregation and local processing.",
+              "status": "completed",
+              "date_completed": "2025-10-07T16:46:01Z"
+            },
+            {
+              "id": "task-20251007_135705",
+              "description": "Implement offline data buffering and synchronization mechanisms.",
+              "status": "completed",
+              "date_completed": "2025-10-07T16:46:23Z"
+            }
+          ],
+          "paused_at": null,
+          "resumed_at": null,
+          "strategic_goal_id": "strategic-20251007_135555"
+        },
+        {
+          "id": "phase-20251007_135718",
+          "name": "Real-time Edge Analytics & Control",
+          "status": "completed",
+          "date_started": "2025-10-07T13:57:18Z",
+          "date_completed": "2025-10-07T16:39:52Z",
+          "tasks": [
+            {
+              "id": "task-20251007_135725",
+              "description": "Implement lightweight analytics models for edge devices.",
+              "status": "completed",
+              "date_completed": "2025-10-07T16:39:21Z"
+            },
+            {
+              "id": "task-20251007_135727",
+              "description": "Develop local control logic based on edge insights (e.g., localized irrigation).",
+              "status": "completed",
+              "date_completed": "2025-10-07T16:39:34Z"
+            },
+            {
+              "id": "task-20251007_135734",
+              "description": "Ensure secure communication between edge and cloud.",
+              "status": "completed",
+              "date_completed": "2025-10-07T16:39:46Z"
+            }
+          ],
+          "paused_at": null,
+          "resumed_at": null,
+          "strategic_goal_id": "strategic-20251007_135555"
+        }
+      ]
+    },
+    {
+      "id": "strategic-20251007_135740",
+      "description": "Intuitive User Interface (UI) for Farm Management and Operational Control",
+      "category": "Platform Enhancement",
+      "priority": "high",
+      "status": "completed",
+      "date_added": "2025-10-07T13:57:40Z",
+      "date_completed": "2025-10-07T17:28:41Z",
+      "phases": [
+        {
+          "id": "phase-20251007_135744",
+          "name": "UI/UX Design & Prototyping",
+          "status": "completed",
+          "date_started": "2025-10-07T13:57:44Z",
+          "date_completed": "2025-10-07T17:23:32Z",
+          "tasks": [
+            {
+              "id": "task-20251007_135748",
+              "description": "Conduct user research with agricultural engineers and farmers.",
+              "status": "completed",
+              "date_completed": "2025-10-07T17:18:38Z"
+            },
+            {
+              "id": "task-20251007_135756",
+              "description": "Create wireframes and mockups for key UI screens (dashboard, field view, equipment control).",
+              "status": "completed",
+              "date_completed": "2025-10-07T17:22:54Z"
+            },
+            {
+              "id": "task-20251007_135803",
+              "description": "Develop interactive prototypes for user feedback.",
+              "status": "completed",
+              "date_completed": "2025-10-07T17:23:23Z"
+            }
+          ],
+          "paused_at": null,
+          "resumed_at": null,
+          "strategic_goal_id": "strategic-20251007_135740"
+        },
+        {
+          "id": "phase-20251007_135817",
+          "name": "Frontend Development Framework Selection & Setup",
+          "status": "completed",
+          "date_started": "2025-10-07T13:58:17Z",
+          "date_completed": "2025-10-07T17:26:15Z",
+          "tasks": [
+            {
+              "id": "task-20251007_135838",
+              "description": "Evaluate frontend frameworks (React, Vue, Angular) for suitability.",
+              "status": "completed",
+              "date_completed": "2025-10-07T17:24:14Z"
+            },
+            {
+              "id": "task-20251007_135841",
+              "description": "Set up development environment and basic project structure.",
+              "status": "completed",
+              "date_completed": "2025-10-07T17:25:31Z"
+            },
+            {
+              "id": "task-20251007_135844",
+              "description": "Implement core UI components and design system.",
+              "status": "completed",
+              "date_completed": "2025-10-07T17:26:06Z"
+            }
+          ],
+          "paused_at": null,
+          "resumed_at": null,
+          "strategic_goal_id": "strategic-20251007_135740"
+        },
+        {
+          "id": "phase-20251007_135852",
+          "name": "Feature Implementation & Integration",
+          "status": "completed",
+          "date_started": "2025-10-07T13:58:52Z",
+          "date_completed": "2025-10-07T17:28:41Z",
+          "tasks": [
+            {
+              "id": "task-20251007_135856",
+              "description": "Implement real-time tractor tracking and status display.",
+              "status": "completed",
+              "date_completed": "2025-10-07T17:26:57Z"
+            },
+            {
+              "id": "task-20251007_135859",
+              "description": "Develop field management tools (boundary drawing, task assignment).",
+              "status": "completed",
+              "date_completed": "2025-10-07T17:27:57Z"
+            },
+            {
+              "id": "task-20251007_135902",
+              "description": "Integrate with API for operational control and data visualization.",
+              "status": "completed",
+              "date_completed": "2025-10-07T17:28:31Z"
+            }
+          ],
+          "paused_at": null,
+          "resumed_at": null,
+          "strategic_goal_id": "strategic-20251007_135740"
+        }
+      ]
+    },
+    {
+      "id": "strategic-20251007_155220",
+      "description": "Implement error handling for corrupted or unexpected CAN messages",
+      "category": "Platform Enhancement",
+      "priority": "high",
+      "status": "pending",
+      "date_added": "2025-10-07T15:52:20Z",
+      "date_completed": null,
+      "phases": []
+    },
+    {
+      "id": "strategic-20251007_155226",
+      "description": "Manage network traffic and message prioritization for CAN communication",
+      "category": "Platform Enhancement",
+      "priority": "medium",
+      "status": "pending",
+      "date_added": "2025-10-07T15:52:26Z",
+      "date_completed": null,
+      "phases": []
+    },
+    {
+      "id": "strategic-20251007_155232",
+      "description": "Integrate with a physical CAN interface for real-world tractor connectivity",
+      "category": "Platform Enhancement",
+      "priority": "high",
+      "status": "pending",
+      "date_added": "2025-10-07T15:52:32Z",
+      "date_completed": null,
+      "phases": []
+    },
+    {
+      "id": "strategic-20251007_155237",
+      "description": "Store parsed CAN data in a time-series database for historical analysis",
+      "category": "Data Management",
+      "priority": "medium",
+      "status": "pending",
+      "date_added": "2025-10-07T15:52:37Z",
+      "date_completed": null,
+      "phases": []
+    },
+    {
+      "id": "strategic-20251007_155241",
+      "description": "Handle other critical tractor data (e.g., vehicle speed, fuel level, GPS coordinates) from ISOBUS",
+      "category": "Platform Enhancement",
+      "priority": "high",
+      "status": "pending",
+      "date_added": "2025-10-07T15:52:41Z",
+      "date_completed": null,
+      "phases": []
+    }
+  ]
+}

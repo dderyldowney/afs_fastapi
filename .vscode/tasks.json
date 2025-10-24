@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json.schemastore.org/tasks.json",
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run API (reload)",
+      "type": "shell",
+      "command": "AFS_API_RELOAD=1 python -m afs_fastapi",
+      "problemMatcher": []
+    },
+    {
+      "label": "Tests: pytest -q",
+      "type": "shell",
+      "command": "pytest -q",
+      "problemMatcher": []
+    },
+    {
+      "label": "Lint: ruff",
+      "type": "shell",
+      "command": "ruff check .",
+      "problemMatcher": []
+    },
+    {
+      "label": "Format: black + isort",
+      "type": "shell",
+      "command": "black . && isort .",
+      "problemMatcher": []
+    },
+    {
+      "label": "Type-check: mypy",
+      "type": "shell",
+      "command": "mypy .",
+      "problemMatcher": []
+    }
+    ,
+    {
+      "label": "Pre-commit: run all",
+      "type": "shell",
+      "command": "pre-commit run --all-files",
+      "problemMatcher": []
+    }
+  ]
+}

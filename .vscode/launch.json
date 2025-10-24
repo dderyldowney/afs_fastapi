@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/launch.json",
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: API (uvicorn)",
+      "type": "python",
+      "request": "launch",
+      "module": "afs_fastapi",
+      "justMyCode": true,
+      "env": {
+        "AFS_API_RELOAD": "1",
+        "AFS_API_LOG_LEVEL": "debug"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python: Debug Tests (pytest)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/.venv/bin/pytest",
+      "args": [
+        "-q",
+        "tests"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}
+
