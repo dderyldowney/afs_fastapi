@@ -14,9 +14,11 @@
           "commands": ["status", "log", "diff", "show"]
         },
         "test_commands": {
-          "enabled": true,
+          "enabled": false,
           "optimization_level": "standard",
-          "commands": ["pytest", "unittest", "nose2"]
+          "auto_execution_disabled": true,
+          "commands": ["pytest", "unittest", "nose2"],
+          "note": "Disabled automatic pytest execution per user request"
         },
         "status_commands": {
           "enabled": true,

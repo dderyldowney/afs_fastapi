@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+"""
+Check and disable automatic pytest execution based on Claude Code settings.
+
+This script checks the Claude Code configuration and ensures that pytest
+is not running automatically if the user has disabled auto-execution.
+"""
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+
+def load_claude_settings() -> dict:
+    """Load Claude Code settings configuration."""
+    project_root = Path.cwd()
+    settings_file = project_root / ".claude" / "settings.json"
+
+    if not settings_file.exists():
+        return {}
+
+    try:
+        with open(settings_file) as f:
+            return json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def is_pytest_auto_disabled() -> bool:
+    """Check if pytest auto-execution is disabled in settings."""
+    settings = load_claude_settings()
+    testing_config = settings.get("testing", {})
+
+    # Check multiple flags for pytest auto-execution
+    auto_execute_disabled = not testing_config.get("autoExecutePytest", True)
+    session_load_disabled = testing_config.get("disableOnSessionLoad", False)
+
+    return auto_execute_disabled or session_load_disabled
+
+
+def kill_background_pytest() -> bool:
+    """Kill any background pytest processes."""
+    try:
+        # Find pytest processes
+        result = subprocess.run(
+            ["pgrep", "-f", "pytest"],
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode == 0 and result.stdout.strip():
+            pids = result.stdout.strip().split('\n')
+            print(f"🛑 Found {len(pids)} pytest process(es) running - terminating...")
+
+            for pid in pids:
+                try:
+                    subprocess.run(["kill", pid.strip()], check=True)
+                    print(f"   ✅ Terminated pytest process {pid.strip()}")
+                except subprocess.CalledProcessError:
+                    print(f"   ⚠️  Could not terminate pytest process {pid.strip()}")
+
+            return True
+
+        return False
+
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        # pgrep not available or other error - try alternative approach
+        return False
+
+
+def main():
+    """Main execution for pytest auto-disable check."""
+    print("🔍 Checking pytest auto-execution settings...", file=sys.stderr)
+
+    if is_pytest_auto_disabled():
+        print("✅ Pytest auto-execution is disabled in Claude Code settings", file=sys.stderr)
+
+        # Kill any running pytest processes
+        if kill_background_pytest():
+            print("🛑 Stopped automatic pytest processes", file=sys.stderr)
+
+        print("📋 To run tests manually, use: pytest --tb=short -v", file=sys.stderr)
+        print("📋 Or use the /runtests slash command", file=sys.stderr)
+
+    else:
+        print("⚠️  Pytest auto-execution is still enabled", file=sys.stderr)
+        print("💡 To disable: Set testing.autoExecutePytest=false in .claude/settings.json", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()

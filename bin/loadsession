@@ -111,6 +111,17 @@ def main():
     todos_data = initialize_todowrite_system()
     print()
 
+    # Check and disable automatic pytest execution if configured
+    print("🧪 Checking pytest auto-execution settings...")
+    try:
+        subprocess.run(
+            ["./bin/check-pytest-auto-disable"], cwd=project_root, check=True, capture_output=True
+        )
+        print("✅ Pytest configuration check completed")
+    except subprocess.CalledProcessError:
+        print("⚠️  Pytest configuration check failed (continuing)")
+    print()
+
     # Enhanced: Initialize session monitoring
     print("📊 Initializing Session Monitoring...")
     try:

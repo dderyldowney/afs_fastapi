@@ -14,5 +14,10 @@
     "safetyLevel": "standard",
     "complianceMode": true,
     "costTracking": true
+  },
+  "testing": {
+    "autoExecutePytest": false,
+    "disableOnSessionLoad": true,
+    "note": "Disabled automatic pytest execution per user request - can be manually run when needed"
   }
 }
