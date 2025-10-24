@@ -5,10 +5,14 @@ This module defines the SQLAlchemy models for the ToDoWrite data.
 from typing import Optional
 
 from sqlalchemy import Column, ForeignKey, String, Table
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import Mapped, relationship
+from sqlalchemy.orm import DeclarativeBase, Mapped, relationship
 
-Base = declarative_base()
+
+class Base(DeclarativeBase):
+    """Base class for all SQLAlchemy models using SQLAlchemy 2.0 API."""
+
+    pass
+
 
 node_labels = Table(
     "node_labels",

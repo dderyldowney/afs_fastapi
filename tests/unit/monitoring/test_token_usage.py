@@ -1,7 +1,7 @@
 import asyncio
 import unittest
 import uuid
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
 import pytest
 from sqlalchemy import create_engine
@@ -32,7 +32,7 @@ class TestTokenUsageRepository(unittest.TestCase):
             "task_id": "test_task",
             "tokens_used": 100.5,
             "model_name": "gpt-3.5-turbo",
-            "timestamp": datetime.utcnow(),
+            "timestamp": datetime.now(UTC),
         }
         token_usage = self.repository.create(token_usage_data)
         self.assertIsNotNone(token_usage.id)
@@ -97,7 +97,7 @@ class TestTokenUsageRepository(unittest.TestCase):
                 "task_id": "taskA",
                 "tokens_used": 10.0,
                 "model_name": "modelX",
-                "timestamp": datetime.utcnow() - timedelta(days=60),
+                "timestamp": datetime.now(UTC) - timedelta(days=60),
             }
         )
         self.repository.create(
@@ -107,12 +107,12 @@ class TestTokenUsageRepository(unittest.TestCase):
                 "task_id": "taskB",
                 "tokens_used": 20.0,
                 "model_name": "modelY",
-                "timestamp": datetime.utcnow() - timedelta(days=10),
+                "timestamp": datetime.now(UTC) - timedelta(days=10),
             }
         )
 
         # Prune logs older than 30 days
-        cutoff_date = datetime.utcnow() - timedelta(days=30)
+        cutoff_date = datetime.now(UTC) - timedelta(days=30)
         deleted_count = self.repository.delete_old_logs(cutoff_date)
         self.assertEqual(deleted_count, 1)
 
@@ -177,10 +177,10 @@ class TestTokenUsageLogger(unittest.IsolatedAsyncioTestCase):
     async def test_prune_old_logs_async(self):
         # Log old and new data
         await self.logger.log_token_usage(
-            "agent_old", "task_old", 5.0, "model_old", datetime.utcnow() - timedelta(days=60)
+            "agent_old", "task_old", 5.0, "model_old", datetime.now(UTC) - timedelta(days=60)
         )
         await self.logger.log_token_usage(
-            "agent_new", "task_new", 15.0, "model_new", datetime.utcnow() - timedelta(days=10)
+            "agent_new", "task_new", 15.0, "model_new", datetime.now(UTC) - timedelta(days=10)
         )
 
         await self.logger.prune_old_logs(days_to_keep=30)

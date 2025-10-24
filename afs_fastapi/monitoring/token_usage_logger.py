@@ -1,7 +1,7 @@
 import asyncio
 import logging
 import uuid
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from sqlalchemy import create_engine
@@ -117,7 +117,7 @@ class TokenUsageLogger:
     ) -> None:
         """Logs token usage asynchronously."""
         if timestamp is None:
-            timestamp = datetime.utcnow()
+            timestamp = datetime.now(UTC)
 
         log_entry = {
             "id": str(uuid.uuid4()),
@@ -163,7 +163,7 @@ class TokenUsageLogger:
 
     async def prune_old_logs(self, days_to_keep: int = 30) -> None:
         """Prunes token usage logs older than a specified number of days asynchronously."""
-        cutoff_date = datetime.utcnow() - timedelta(days=days_to_keep)
+        cutoff_date = datetime.now(UTC) - timedelta(days=days_to_keep)
         try:
             await asyncio.to_thread(self._perform_prune, cutoff_date)
             logger.info(f"Pruned token usage logs older than {days_to_keep} days.")
