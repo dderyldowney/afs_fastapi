@@ -1,3 +1,4 @@
+import os
 import asyncio
 import logging
 import uuid
@@ -7,9 +8,8 @@ from typing import Any
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from afs_fastapi.monitoring.token_usage_models import TokenUsage
+from afs_fastapi.monitoring.token_usage_models import Base, TokenUsage
 from afs_fastapi.monitoring.token_usage_repository import TokenUsageRepository
-from afs_fastapi.todos.db.models import Base
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -34,10 +34,10 @@ class TokenUsageLogger:
         return cls._instance
 
     def __init__(
-        self, database_url: str = "sqlite:///./token_usage.db", log_level: int = logging.INFO
+        self, database_url: str | None = None, log_level: int = logging.INFO
     ) -> None:
         if not self._initialized:
-            self.database_url = database_url
+            self.database_url = database_url or os.getenv("TOKEN_USAGE_DATABASE_URL", "sqlite:///./token_usage.db")
             self._initialize_db()
             self._initialized = True
             self.set_logging_level(log_level)

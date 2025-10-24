@@ -37,11 +37,21 @@ def pytest_configure(config: Any) -> None:
     # Store temp directory path for cleanup
     config.todowrite_temp_dir = temp_dir
 
+    # Create a temporary directory for token usage test databases
+    token_usage_temp_dir = tempfile.mkdtemp(prefix="token_usage_test_")
+    token_usage_db_path = os.path.join(token_usage_temp_dir, "test_token_usage.db")
+
+    # Set environment variable for token usage database
+    os.environ["TOKEN_USAGE_DATABASE_URL"] = f"sqlite:///{token_usage_db_path}"
+
+    # Store temp directory path for cleanup
+    config.token_usage_temp_dir = token_usage_temp_dir
+
 
 def pytest_sessionfinish(session: Any, exitstatus: int) -> None:
-    """Clean up TodoWrite test database after all tests complete.
+    """Clean up TodoWrite and Token Usage test databases after all tests complete.
 
-    Removes the temporary directory created during pytest_configure.
+    Removes the temporary directories created during pytest_configure.
 
     Agricultural Context: Ensures no leftover test artifacts on disk.
     """
@@ -49,6 +59,11 @@ def pytest_sessionfinish(session: Any, exitstatus: int) -> None:
         temp_dir = session.config.todowrite_temp_dir
         if os.path.exists(temp_dir):
             shutil.rmtree(temp_dir, ignore_errors=True)
+
+    if hasattr(session.config, "token_usage_temp_dir"):
+        token_usage_temp_dir = session.config.token_usage_temp_dir
+        if os.path.exists(token_usage_temp_dir):
+            shutil.rmtree(token_usage_temp_dir, ignore_errors=True)
 
 
 def pytest_collection_modifyitems(config: Any, items: list[Any]) -> None:

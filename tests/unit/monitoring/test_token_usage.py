@@ -142,7 +142,8 @@ class TestTokenUsageLogger(unittest.IsolatedAsyncioTestCase):
 
     async def asyncTearDown(self):
         # Clean up database after each test
-        await asyncio.to_thread(Base.metadata.drop_all, self.logger._engine)
+        Base.metadata.drop_all(self.logger._engine)
+        self.logger._engine.dispose()
 
     async def test_log_token_usage(self):
         agent_id = "test_agent_async"

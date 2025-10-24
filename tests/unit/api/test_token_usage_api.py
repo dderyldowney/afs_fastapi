@@ -3,38 +3,21 @@ import time
 import unittest
 import uuid
 from datetime import datetime
+import tempfile
+import shutil
 
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import text
 from sqlalchemy.orm import sessionmaker
 
-# Use a file-based SQLite database with proper connection pooling for testing
-# File is placed in project root for reliable access
-test_db_path = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "test_token_usage_temp.db"
-)
-SQLALCHEMY_DATABASE_URL = f"sqlite:///{test_db_path}"
+from afs_fastapi.monitoring.token_usage_logger import TokenUsageLogger
+from afs_fastapi.monitoring.token_usage_models import Base
+from afs_fastapi.monitoring.token_usage_repository import TokenUsageRepository
 
-from afs_fastapi.monitoring.token_usage_logger import TokenUsageLogger  # noqa: E402
-from afs_fastapi.monitoring.token_usage_models import Base  # noqa: E402
-from afs_fastapi.monitoring.token_usage_repository import TokenUsageRepository  # noqa: E402
-
-# Clean up any existing test database before resetting
-if os.path.exists(test_db_path):
-    try:
-        os.remove(test_db_path)
-    except OSError:
-        pass
-
-# Reset the singleton with test database BEFORE importing app
-# This must happen at module level before any imports that use the logger
-# SQLite pragmas for WAL mode are automatically configured in _initialize_db
-logger_instance = TokenUsageLogger.reset_for_testing(database_url=SQLALCHEMY_DATABASE_URL)
-
-# NOW import the app after resetting
-# The endpoint will use the updated global token_logger
-from afs_fastapi.api.main import app  # noqa: E402
+# The app import must happen AFTER the logger is reset for testing
+# This ensures the app uses the test database configuration
+from afs_fastapi.api.main import app
 
 # Create a test client
 client = TestClient(app)
@@ -54,32 +37,42 @@ class TestTokenUsageAPI(unittest.TestCase):
     """
 
     @classmethod
+    def setUpClass(cls) -> None:
+        """Set up a temporary database for all tests in this class."""
+        cls.temp_dir = tempfile.mkdtemp(prefix="token_usage_api_test_")
+        cls.test_db_path = os.path.join(cls.temp_dir, "test_token_usage_api.db")
+        cls.SQLALCHEMY_DATABASE_URL = f"sqlite:///{cls.test_db_path}"
+
+        # Reset the singleton with test database
+        cls.logger_instance = TokenUsageLogger.reset_for_testing(database_url=cls.SQLALCHEMY_DATABASE_URL)
+
+        # Ensure tables are created for this logger instance
+        Base.metadata.create_all(bind=cls.logger_instance._engine)
+        cls.SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=cls.logger_instance._engine)
+
+    @classmethod
     def tearDownClass(cls) -> None:
-        """Clean up test database file after all tests in the class complete."""
-        if os.path.exists(test_db_path):
+        """Clean up test database file and temporary directory after all tests in the class complete."""
+        if os.path.exists(cls.test_db_path):
             try:
-                os.remove(test_db_path)
+                os.remove(cls.test_db_path)
             except OSError:
                 pass
+        if os.path.exists(cls.temp_dir):
+            shutil.rmtree(cls.temp_dir, ignore_errors=True)
 
     def setUp(self):
-        # Use the logger's engine to ensure we're reading from the same database connection
-        # This avoids SQLite multi-connection isolation issues
-        logger = TokenUsageLogger()
-        self.engine = logger._engine
-        Base.metadata.create_all(bind=self.engine)
-        self.SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
-
-    def tearDown(self):
-        """Clean up after each test by clearing all data."""
+        # Clear all data before each test
         db = self.SessionLocal()
         try:
-            # Clear all tables by truncating them
             for table in reversed(Base.metadata.sorted_tables):
                 db.execute(text(f"DELETE FROM {table.name}"))
             db.commit()
         finally:
             db.close()
+
+    def tearDown(self):
+        pass # Cleanup is handled by setUpClass and tearDownClass
 
     def test_log_token_usage_endpoint(self):
         response = client.post(
@@ -98,7 +91,7 @@ class TestTokenUsageAPI(unittest.TestCase):
 
         # Wait for async operation to complete
         # The log_token_usage method uses asyncio.to_thread which may not complete immediately
-        time.sleep(2.0)
+        time.sleep(0.1) # Reduced sleep time for faster tests
 
         # Verify in DB
         db = self.SessionLocal()
