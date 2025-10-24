@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "afs_fastapi"
-version = "0.1.5"
+version = "0.1.5.1"
 description = "Automated Farming System API (FastAPI)."
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -106,8 +106,8 @@ show_error_codes = true
 pretty = true
 # If you vendor optional libs, ignore their imports to keep signal clean:
 # ignore_missing_imports = true
-packages = ["afs_fastapi", "tests"]
-# plugins = ["sqlalchemy.ext.mypy.plugin"]  # Disabled due to overly strict type checking
+packages = ["afs_fastapi"]
+explicit_package_bases = true
 
 # SQLAlchemy specific configuration - disable strict checking for database tests
 [[tool.mypy.overrides]]
