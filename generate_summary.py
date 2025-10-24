@@ -18,6 +18,7 @@ def count_tests() -> int:
         pass
     return 0
 
+
 def main() -> None:
     """Generate a new SESSION_SUMMARY.md file with current project status."""
     project_root = Path(__file__).resolve().parent
@@ -25,7 +26,7 @@ def main() -> None:
 
     # Get test count
     test_count = count_tests()
-    
+
     # Generate summary content
     content = f"""# AFS FastAPI Session Summary
 
@@ -62,9 +63,9 @@ def main() -> None:
 """
 
     # Write to file
-    with open(summary_file, 'w') as f:
+    with open(summary_file, "w") as f:
         f.write(content)
-    
+
     print("🎉 Session summary generated!")
     print(f"📝 Written to: {summary_file}")
 
