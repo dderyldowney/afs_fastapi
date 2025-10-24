@@ -19,7 +19,10 @@ from datetime import datetime, timedelta
 from enum import Enum
 from typing import Any, cast
 
-import can
+try:
+    import can
+except ImportError:
+    can = None  # type: ignore
 
 from afs_fastapi.core.can_frame_codec import CANFrameCodec, DecodedPGN
 from afs_fastapi.equipment.can_error_handling import CANErrorHandler, ISOBUSErrorLogger

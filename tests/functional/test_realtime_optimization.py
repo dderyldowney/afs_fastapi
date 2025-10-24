@@ -8,6 +8,7 @@ token optimization implementation. NO FAKE PASSES - all tests verify real behavi
 
 import json
 import subprocess
+import sys
 import time
 from pathlib import Path
 from unittest.mock import patch
@@ -398,7 +399,7 @@ class TestCommandLineIntegration:
 
         # Test status command
         result = subprocess.run(
-            [str(cmd_path), "--status"], capture_output=True, text=True, timeout=30
+            [sys.executable, str(cmd_path), "--status"], capture_output=True, text=True, timeout=30
         )
 
         # VERIFY ACTUAL EXECUTION
@@ -417,6 +418,7 @@ class TestCommandLineIntegration:
 
         result = subprocess.run(
             [
+                sys.executable,
                 str(cmd_path),
                 "--input",
                 test_input,
@@ -441,7 +443,7 @@ class TestCommandLineIntegration:
         cmd_path = project_root / "bin" / "optimize-conversation"
 
         result = subprocess.run(
-            [str(cmd_path), "--test-sample"],
+            [sys.executable, str(cmd_path), "--test-sample"],
             capture_output=True,
             text=True,
             timeout=60,  # Longer timeout for comprehensive tests
@@ -461,7 +463,15 @@ class TestCommandLineIntegration:
 
         # Test enable optimization
         result = subprocess.run(
-            [str(cmd_path), "--configure", "--enable", "--token-budget", "1500", "--adaptive"],
+            [
+                sys.executable,
+                str(cmd_path),
+                "--configure",
+                "--enable",
+                "--token-budget",
+                "1500",
+                "--adaptive",
+            ],
             capture_output=True,
             text=True,
             timeout=30,

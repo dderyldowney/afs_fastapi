@@ -18,7 +18,10 @@ from datetime import datetime
 from enum import Enum
 from typing import Any
 
-import can
+try:
+    import can
+except ImportError:
+    can = None  # type: ignore
 
 logger = logging.getLogger(__name__)
 
