@@ -5,7 +5,13 @@ set -euo pipefail
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
 cd "$PROJECT_ROOT"
 
-PYTEST_ARGS="-v --tb=short -n auto"
+# pytest-xdist configuration:
+# -n auto: Use all available CPU cores for parallel execution
+# --dist loadfile: Distribute tests by file (ensures all tests in same file run on same worker)
+#   This is critical for singleton-based tests (e.g., TokenUsageLogger) that require
+#   module-level initialization to happen once per worker without race conditions.
+#   loadfile is more aggressive than loadscope and ensures file-level isolation.
+PYTEST_ARGS="-v --tb=short -n auto --dist loadfile"
 TIMEOUT=60
 COVERAGE=false
 SERIAL=false

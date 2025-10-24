@@ -145,6 +145,22 @@ class TestStrategicCompleteScript(unittest.TestCase):
 class TestStrategicCompleteDirectLogic(unittest.TestCase):
     """Direct tests of strategic-complete script logic to verify complete_goal usage."""
 
+    @classmethod
+    def setUpClass(cls) -> None:
+        """Set up the test database for ToDoWrite."""
+        from afs_fastapi.todos.manager import init_database, reset_database_engine
+
+        reset_database_engine()
+        init_database()
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        """Clean up the test database for ToDoWrite."""
+        from afs_fastapi.todos.manager import init_database, reset_database_engine
+
+        reset_database_engine()
+        init_database()  # Calling init_database again will drop and recreate, effectively cleaning
+
     def setUp(self) -> None:
         """Set up test environment."""
         self.script_path = project_root / "bin" / "strategic-complete"

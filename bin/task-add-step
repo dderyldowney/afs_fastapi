@@ -10,7 +10,7 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import add_task_to_active_step  # noqa: E402
+from afs_fastapi.todos.manager import add_task, get_active_items, load_todos
 
 
 def main():
@@ -18,15 +18,21 @@ def main():
     parser.add_argument("description", type=str, help="The description of the task.")
     args = parser.parse_args()
 
-    new_task, error = add_task_to_active_step(args.description)
+    todos = load_todos()
+    active_items = get_active_items(todos)
+    active_step = active_items.get("Step")
+
+    if not active_step:
+        print("Error: No active step found.")
+        print()
+        print("Try:")
+        print("  ./bin/step-activate <step_id>    - Activate a specific step")
+        sys.exit(1)
+
+    new_task, error = add_task(active_step.id, args.description, args.description)
 
     if error:
         print(f"Error: {error}")
-        if "No active step found" in error:
-            print()
-            print("Try:")
-            print("  ./bin/step-activate <step_id>    - Activate a specific step")
-            print("  ./bin/task-add <description>     - Add task to phase (creates step if needed)")
         sys.exit(1)
 
     if new_task:

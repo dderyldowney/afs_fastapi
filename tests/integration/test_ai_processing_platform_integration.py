@@ -50,7 +50,8 @@ class TestAIProcessingPlatformIntegration:
         yield
         # Stats reset for next test
 
-    def test_tractor_status_communication_optimization(self, sample_tractor, reset_ai_stats):
+    @pytest.mark.asyncio
+    async def test_tractor_status_communication_optimization(self, sample_tractor, reset_ai_stats):
         """Test AI optimization of tractor status communications."""
         # RED: Test tractor status message optimization
         status_message = (
@@ -63,7 +64,7 @@ class TestAIProcessingPlatformIntegration:
         )
 
         # GREEN: Process through agricultural AI integration
-        result = agricultural_ai.optimize_tractor_communication(
+        result = await agricultural_ai.optimize_tractor_communication(
             tractor_id=sample_tractor.device_name,
             message=status_message,
             message_type="status",
@@ -82,7 +83,10 @@ class TestAIProcessingPlatformIntegration:
         assert agricultural_ai.integration_stats["equipment_optimizations"] == 1
         assert agricultural_ai.integration_stats["iso_compliance_maintained"] >= 1
 
-    def test_safety_critical_isobus_message_optimization(self, sample_tractor, reset_ai_stats):
+    @pytest.mark.asyncio
+    async def test_safety_critical_isobus_message_optimization(
+        self, sample_tractor, reset_ai_stats
+    ):
         """Test AI optimization preserves safety-critical ISOBUS messages."""
         # RED: Test safety-critical ISOBUS message handling
         emergency_payload = (
@@ -92,7 +96,7 @@ class TestAIProcessingPlatformIntegration:
         )
 
         # GREEN: Process emergency ISOBUS message
-        result = agricultural_ai.optimize_isobus_message(
+        result = await agricultural_ai.optimize_isobus_message(
             pgn=0xFE49,  # Emergency message PGN
             source_address=sample_tractor.isobus_address,
             data_payload=emergency_payload,
@@ -117,7 +121,8 @@ class TestAIProcessingPlatformIntegration:
         # Verify integration statistics
         assert agricultural_ai.integration_stats["safety_critical_preservations"] >= 1
 
-    def test_sensor_data_processing_optimization(self, reset_ai_stats):
+    @pytest.mark.asyncio
+    async def test_sensor_data_processing_optimization(self, reset_ai_stats):
         """Test AI optimization of agricultural sensor data."""
         # RED: Test sensor data processing
         sensor_reading = (
@@ -135,7 +140,7 @@ class TestAIProcessingPlatformIntegration:
         )
 
         # GREEN: Process sensor data through AI optimization
-        result = agricultural_ai.optimize_sensor_data_processing(
+        result = await agricultural_ai.optimize_sensor_data_processing(
             sensor_id="SOIL_001",
             sensor_type="soil_quality",
             reading_data=sensor_reading,
@@ -154,7 +159,8 @@ class TestAIProcessingPlatformIntegration:
         # Verify integration statistics
         assert agricultural_ai.integration_stats["monitoring_optimizations"] == 1
 
-    def test_multi_tractor_fleet_coordination_optimization(self, reset_ai_stats):
+    @pytest.mark.asyncio
+    async def test_multi_tractor_fleet_coordination_optimization(self, reset_ai_stats):
         """Test AI optimization of multi-tractor fleet coordination."""
         # RED: Test fleet coordination message processing
         coordination_message = (
@@ -175,7 +181,7 @@ class TestAIProcessingPlatformIntegration:
         }
 
         # GREEN: Process fleet coordination through AI optimization
-        result = agricultural_ai.optimize_fleet_coordination(
+        result = await agricultural_ai.optimize_fleet_coordination(
             coordinator_id="FLEET_CONTROL_01",
             tractors=tractors,
             operation_type="cultivation",
@@ -196,7 +202,8 @@ class TestAIProcessingPlatformIntegration:
         # Verify integration statistics
         assert agricultural_ai.integration_stats["fleet_optimizations"] == 1
 
-    def test_safety_protocol_message_preservation(self, reset_ai_stats):
+    @pytest.mark.asyncio
+    async def test_safety_protocol_message_preservation(self, reset_ai_stats):
         """Test AI optimization preserves safety protocol integrity."""
         # RED: Test safety protocol message handling
         safety_message = (
@@ -208,7 +215,7 @@ class TestAIProcessingPlatformIntegration:
         )
 
         # GREEN: Process safety protocol through AI optimization
-        result = agricultural_ai.optimize_safety_protocol_message(
+        result = await agricultural_ai.optimize_safety_protocol_message(
             protocol_type="emergency_stop",
             safety_message=safety_message,
             iso_standard="ISO_18497",
@@ -233,7 +240,8 @@ class TestAIProcessingPlatformIntegration:
         # Verify integration statistics
         assert agricultural_ai.integration_stats["safety_critical_preservations"] >= 1
 
-    def test_ai_processing_manager_service_registration(self):
+    @pytest.mark.asyncio
+    async def test_ai_processing_manager_service_registration(self):
         """Test AI processing manager properly registers agricultural services."""
         # Verify agricultural services are registered
         stats = ai_processing_manager.get_platform_statistics()
@@ -254,10 +262,11 @@ class TestAIProcessingPlatformIntegration:
         fleet_service = service_stats.get("fleet", {})
         assert fleet_service.get("priority") == "medium"
 
-    def test_agricultural_ai_integration_health_check(self):
+    @pytest.mark.asyncio
+    async def test_agricultural_ai_integration_health_check(self):
         """Test agricultural AI integration health check functionality."""
         # Perform health check
-        health = agricultural_ai.health_check()
+        health = await agricultural_ai.health_check()
 
         # Verify health check results
         assert health["integration_status"] == "healthy"
@@ -278,26 +287,27 @@ class TestAIProcessingPlatformIntegration:
         assert "optimization" in service_registrations["monitoring"]
         assert "optimization" in service_registrations["fleet"]
 
-    def test_cross_service_ai_processing_coordination(self, sample_tractor, reset_ai_stats):
+    @pytest.mark.asyncio
+    async def test_cross_service_ai_processing_coordination(self, sample_tractor, reset_ai_stats):
         """Test AI processing coordination across multiple agricultural services."""
         # RED: Test cross-service coordination scenario
         # Simulate a complex agricultural operation involving multiple services
 
         # 1. Equipment status optimization
         tractor_status = f"Tractor {sample_tractor.device_name} engine operational"
-        equipment_result = agricultural_ai.optimize_tractor_communication(
+        equipment_result = await agricultural_ai.optimize_tractor_communication(
             tractor_id=sample_tractor.device_name, message=tractor_status, message_type="status"
         )
 
         # 2. Sensor data optimization
         sensor_data = "Soil conditions favorable for operation, moisture 35%"
-        sensor_result = agricultural_ai.optimize_sensor_data_processing(
+        sensor_result = await agricultural_ai.optimize_sensor_data_processing(
             sensor_id="FIELD_A7_SOIL", sensor_type="soil_moisture", reading_data=sensor_data
         )
 
         # 3. Fleet coordination optimization
         fleet_message = "Begin coordinated planting operation in field A7"
-        fleet_result = agricultural_ai.optimize_fleet_coordination(
+        fleet_result = await agricultural_ai.optimize_fleet_coordination(
             coordinator_id="CENTRAL_CONTROL",
             tractors=[sample_tractor.device_name],
             operation_type="planting",
@@ -321,13 +331,14 @@ class TestAIProcessingPlatformIntegration:
         compliance_stats = stats["agricultural_compliance"]
         assert compliance_stats["iso_compliance_rate"] > 0
 
-    def test_ai_processing_with_different_optimization_levels(self):
+    @pytest.mark.asyncio
+    async def test_ai_processing_with_different_optimization_levels(self):
         """Test AI processing respects different optimization levels per service."""
         # Test message that should trigger different optimization levels
         test_message = "Agricultural equipment operational status with safety systems active"
 
         # Equipment service (conservative optimization)
-        equipment_result = agricultural_ai.optimize_tractor_communication(
+        equipment_result = await agricultural_ai.optimize_tractor_communication(
             tractor_id="TEST_TRACTOR",
             message=test_message,
             message_type="status",
@@ -335,12 +346,12 @@ class TestAIProcessingPlatformIntegration:
         )
 
         # Monitoring service (standard optimization)
-        monitoring_result = agricultural_ai.optimize_sensor_data_processing(
+        monitoring_result = await agricultural_ai.optimize_sensor_data_processing(
             sensor_id="TEST_SENSOR", sensor_type="general", reading_data=test_message
         )
 
         # Fleet service (aggressive optimization)
-        fleet_result = agricultural_ai.optimize_fleet_coordination(
+        fleet_result = await agricultural_ai.optimize_fleet_coordination(
             coordinator_id="TEST_COORDINATOR",
             tractors=["TEST_TRACTOR"],
             operation_type="routine",
@@ -357,7 +368,8 @@ class TestAIProcessingPlatformIntegration:
         # Aggressive optimization should maximize token savings
         assert fleet_result["tokens_saved"] >= 0
 
-    def test_agricultural_compliance_preservation_across_platform(self, reset_ai_stats):
+    @pytest.mark.asyncio
+    async def test_agricultural_compliance_preservation_across_platform(self, reset_ai_stats):
         """Test that agricultural compliance is preserved across all platform operations."""
         agricultural_messages = [
             "ISO 11783 ISOBUS communication protocol active",
@@ -372,37 +384,29 @@ class TestAIProcessingPlatformIntegration:
 
         for message in agricultural_messages:
             # Process each message type through different services
-            services = [
-                (
-                    "equipment",
-                    lambda m: agricultural_ai.optimize_tractor_communication("TEST", m, "status"),
-                ),
-                (
-                    "monitoring",
-                    lambda m: agricultural_ai.optimize_sensor_data_processing("TEST", "general", m),
-                ),
-                (
-                    "fleet",
-                    lambda m: agricultural_ai.optimize_fleet_coordination(
-                        "TEST", ["TRACTOR"], "test", m
-                    ),
-                ),
-            ]
+            # Equipment service
+            equipment_result = await agricultural_ai.optimize_tractor_communication(
+                "TEST", message, "status"
+            )
+            total_processed += 1
+            if equipment_result.get("agricultural_compliance"):
+                compliance_preserved_count += 1
 
-            for service_name, processor in services:
-                result = processor(message)
-                total_processed += 1
+            # Monitoring service
+            monitoring_result = await agricultural_ai.optimize_sensor_data_processing(
+                "TEST", "general", message
+            )
+            total_processed += 1
+            if monitoring_result.get("agricultural_context_preserved"):
+                compliance_preserved_count += 1
 
-                # Check if agricultural compliance was maintained
-                if service_name == "equipment" and result.get("agricultural_compliance"):
-                    compliance_preserved_count += 1
-                elif service_name == "monitoring" and result.get("agricultural_context_preserved"):
-                    compliance_preserved_count += 1
-                elif (
-                    service_name == "fleet"
-                    and "agricultural" in result.get("optimized_coordination", "").lower()
-                ):
-                    compliance_preserved_count += 1
+            # Fleet service
+            fleet_result = await agricultural_ai.optimize_fleet_coordination(
+                "TEST", ["TRACTOR"], "test", message
+            )
+            total_processed += 1
+            if "agricultural" in fleet_result.get("optimized_coordination", "").lower():
+                compliance_preserved_count += 1
 
         # Verify high rate of agricultural compliance preservation
         compliance_rate = compliance_preserved_count / total_processed
@@ -418,7 +422,8 @@ class TestAIProcessingPlatformIntegration:
 class TestAIProcessingAPIIntegration:
     """Test AI processing API endpoint integration."""
 
-    def test_ai_processing_general_endpoint_integration(self):
+    @pytest.mark.asyncio
+    async def test_ai_processing_general_endpoint_integration(self):
         """Test general AI processing API endpoint."""
         # Create API request
         request = AIProcessingRequest(
@@ -429,7 +434,7 @@ class TestAIProcessingAPIIntegration:
         )
 
         # Process through AI manager (simulating API endpoint)
-        result = ai_processing_manager.process_agricultural_request(
+        result = await ai_processing_manager.process_agricultural_request(
             user_input=request.user_input,
             service_name=request.service_name,
             optimization_level=OptimizationLevel.STANDARD,
@@ -442,7 +447,8 @@ class TestAIProcessingAPIIntegration:
         assert isinstance(result.optimization_applied, bool)
         assert isinstance(result.agricultural_compliance_maintained, bool)
 
-    def test_equipment_optimization_api_integration(self) -> None:
+    @pytest.mark.asyncio
+    async def test_equipment_optimization_api_integration(self) -> None:
         """Test equipment-specific API endpoint integration."""
         request = EquipmentOptimizationRequest(
             message="ISOBUS emergency stop protocol activation for tractor safety",
@@ -450,12 +456,13 @@ class TestAIProcessingAPIIntegration:
             priority="critical",
         )
 
-        result = ai_processing_manager.optimize_equipment_communication(request.message)
+        result = await ai_processing_manager.optimize_equipment_communication(request.message)
 
         assert result.final_output is not None
         assert result.agricultural_compliance_maintained is True
 
-    def test_monitoring_optimization_api_integration(self) -> None:
+    @pytest.mark.asyncio
+    async def test_monitoring_optimization_api_integration(self) -> None:
         """Test monitoring-specific API endpoint integration."""
         request = MonitoringOptimizationRequest(
             sensor_data="Soil moisture 34%, pH 6.8, nitrogen 120ppm",
@@ -463,12 +470,13 @@ class TestAIProcessingAPIIntegration:
             data_type="soil_quality",
         )
 
-        result = ai_processing_manager.optimize_monitoring_data(request.sensor_data)
+        result = await ai_processing_manager.optimize_monitoring_data(request.sensor_data)
 
         assert result.final_output is not None
         assert result.optimization_applied is True
 
-    def test_fleet_optimization_api_integration(self) -> None:
+    @pytest.mark.asyncio
+    async def test_fleet_optimization_api_integration(self) -> None:
         """Test fleet-specific API endpoint integration."""
         request = FleetOptimizationRequest(
             coordination_message="Coordinate three tractors for parallel cultivation",
@@ -476,7 +484,9 @@ class TestAIProcessingAPIIntegration:
             tractor_count=3,
         )
 
-        result = ai_processing_manager.optimize_fleet_coordination(request.coordination_message)
+        result = await ai_processing_manager.optimize_fleet_coordination(
+            request.coordination_message
+        )
 
         assert result.final_output is not None
         assert result.total_tokens_saved >= 0

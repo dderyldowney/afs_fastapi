@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import get_acceptance_criteria, load_todos  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Display status of all Acceptance Criterias in the ToDoWrite system.")
+    parser.add_argument("--acceptance-id", type=str, help="Show details for a specific acceptance ID.")
+    args = parser.parse_args()
+
+    if getattr(args, "acceptance_id", None):
+        # Show specific acceptance details
+        todos = load_todos()
+        acceptance_criteria = todos.get("Acceptance Criteria", [])
+        acceptance = None
+        for item in acceptance_criteria:
+            if item.id == getattr(args, "acceptance_id"):
+                acceptance = item
+                break
+
+        if not acceptance:
+            print(f"Error: Acceptance Criteria with ID '{getattr(args, 'acceptance_id')}' not found.")
+            sys.exit(1)
+
+        print(f"✅ Acceptance Criteria Details: {acceptance.id}")
+        print("=" * 50)
+        print(f"Title: {acceptance.title}")
+        print(f"Description: {acceptance.description}")
+        print(f"Status: {acceptance.status}")
+        print(f"Owner: {acceptance.metadata.owner}")
+        print(f"Labels: {', '.join(acceptance.metadata.labels) if acceptance.metadata.labels else 'None'}")
+        print(f"Parents: {', '.join(acceptance.links.parents) if acceptance.links.parents else 'None'}")
+        print(f"Children: {', '.join(acceptance.links.children) if acceptance.links.children else 'None'}")
+    else:
+        # Show all acceptance_criteria
+        acceptance_criteria = get_acceptance_criteria()
+        
+        if not acceptance_criteria:
+            print("No acceptance_criteria found in the ToDoWrite system.")
+            return
+
+        print("✅ All Acceptance Criterias Status")
+        print("=" * 50)
+        
+        for item in acceptance_criteria:
+            status_icon = "✓" if item["status"] == "done" else "○" if item["status"] == "active" else "·"
+            print(f"{status_icon} {item['id']}")
+            print(f"   Title: {item['title']}")
+            print(f"   Status: {item['status']}")
+            print()
+
+        print(f"Total Acceptance Criterias: {len(acceptance_criteria)}")
+        completed = len([item for item in acceptance_criteria if item["status"] == "done"])
+        active = len([item for item in acceptance_criteria if item["status"] == "active"])
+        planned = len([item for item in acceptance_criteria if item["status"] == "planned"])
+        print(f"Completed: {completed}, Active: {active}, Planned: {planned}")
+
+
+if __name__ == "__main__":
+    main()

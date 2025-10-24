@@ -34,10 +34,10 @@ except ImportError:
 
 # Universal Tree class that works with or without markdown_it
 class Tree:
-    def __init__(self, tokens):
+    def __init__(self, tokens: Any) -> None:
         self.tokens = tokens
 
-    def render(self):
+    def render(self) -> str:
         if markdown_it is None:
             return ""
         # Simple fallback rendering
@@ -53,6 +53,21 @@ try:
 except ImportError:
     # Fallback if response compressor not available
     ResponseCompressor = None
+
+
+class AIPipelineCache:
+    """A simple in-memory cache for AI processing pipeline results."""
+
+    def __init__(self) -> None:
+        self._cache: dict[str, Any] = {}
+
+    def get(self, key: str) -> Any | None:
+        """Get an item from the cache."""
+        return self._cache.get(key)
+
+    def set(self, key: str, value: Any) -> None:
+        """Set an item in the cache."""
+        self._cache[key] = value
 
 
 class ProcessingStage(Enum):
@@ -158,7 +173,7 @@ class PipelineResult:
 
     metrics: dict[str, Any] = field(default_factory=dict)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Initialize metrics dictionary with default values."""
         if not self.metrics:
             self.metrics = {
@@ -177,7 +192,7 @@ class AIProcessingPipeline:
     optimization across pre-fill, prompt processing, generation, and decoding stages.
     """
 
-    def __init__(self, project_root: Path | None = None):
+    def __init__(self, project_root: Path | None = None) -> None:
         """Initialize AI processing pipeline with token optimization components."""
         self.project_root = project_root or Path.cwd()
         self.claude_dir = self.project_root / ".claude"
@@ -201,6 +216,7 @@ class AIProcessingPipeline:
         self.context_library = self._load_context_library()
         self.essential_context = self._load_essential_context()
         self.md_parser = markdown_it.MarkdownIt() if markdown_it else None
+        self._cache = AIPipelineCache()
 
         # Cumulative optimization tracking
         self._cumulative_tokens_saved = 0
@@ -308,7 +324,20 @@ class AIProcessingPipeline:
         for snippet in self.context_library.get("context_snippets", []):
             for keyword in snippet.get("keywords", []):
                 if keyword in user_input_lower and snippet["id"] not in matched_snippet_ids:
-                    assembled_context_parts.append(f"Context for '{keyword}': {snippet['content']}")
+                    # Extract relevant sentences from the snippet
+                    relevant_sentences = []
+                    sentences = snippet["content"].split(".")
+                    for sentence in sentences:
+                        if keyword in sentence.lower():
+                            relevant_sentences.append(sentence.strip())
+                    if relevant_sentences:
+                        assembled_context_parts.append(
+                            f"Context for '{keyword}': {'. '.join(relevant_sentences)}."
+                        )
+                    else:
+                        assembled_context_parts.append(
+                            f"Context for '{keyword}': {snippet['content']}"
+                        )
                     matched_snippet_ids.add(snippet["id"])
                     break  # Move to the next snippet once one keyword matches
 
@@ -607,7 +636,7 @@ class AIProcessingPipeline:
 
         return context
 
-    def process_complete_pipeline(
+    async def process_complete_pipeline(
         self, user_input: str, optimization_level: OptimizationLevel = OptimizationLevel.STANDARD
     ) -> PipelineResult:
         """
@@ -616,6 +645,12 @@ class AIProcessingPipeline:
         Processes input through all four stages: pre-fill → prompt processing →
         generation → decoding, applying coordinated token optimization.
         """
+        # Check cache first
+        cache_key = f"{user_input}_{optimization_level.value}"
+        cached_result = self._cache.get(cache_key)
+        if cached_result:
+            return cached_result
+
         start_time = time.time()
 
         # Initialize context
@@ -679,6 +714,9 @@ class AIProcessingPipeline:
             "stage_breakdown": self._stage_metrics,
         }
 
+        # Cache the result
+        self._cache.set(cache_key, result)
+
         return result
 
     def detect_optimization_level(self, user_input: str) -> OptimizationLevel:
@@ -708,7 +746,7 @@ class AIProcessingPipeline:
         # Default to standard optimization
         return OptimizationLevel.STANDARD
 
-    def process_with_budget(self, user_input: str, token_budget: int) -> PipelineResult:
+    async def process_with_budget(self, user_input: str, token_budget: int) -> PipelineResult:
         """
         Process pipeline within specified token budget constraints.
 
@@ -726,7 +764,7 @@ class AIProcessingPipeline:
         else:
             optimization_level = OptimizationLevel.AGGRESSIVE
 
-        result = self.process_complete_pipeline(user_input, optimization_level)
+        result = await self.process_complete_pipeline(user_input, optimization_level)
 
         # Check budget compliance
         result.estimated_tokens = max(1, len(result.final_output) // 4)

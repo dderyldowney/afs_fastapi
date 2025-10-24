@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import get_constraints, load_todos  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Display status of all Constraintss in the ToDoWrite system.")
+    parser.add_argument("--constraint-id", type=str, help="Show details for a specific constraint ID.")
+    args = parser.parse_args()
+
+    if getattr(args, "constraint_id", None):
+        # Show specific constraint details
+        todos = load_todos()
+        constraints = todos.get("Constraints", [])
+        constraint = None
+        for item in constraints:
+            if item.id == getattr(args, "constraint_id"):
+                constraint = item
+                break
+
+        if not constraint:
+            print(f"Error: Constraints with ID '{getattr(args, 'constraint_id')}' not found.")
+            sys.exit(1)
+
+        print(f"⚠️ Constraints Details: {constraint.id}")
+        print("=" * 50)
+        print(f"Title: {constraint.title}")
+        print(f"Description: {constraint.description}")
+        print(f"Status: {constraint.status}")
+        print(f"Owner: {constraint.metadata.owner}")
+        print(f"Labels: {', '.join(constraint.metadata.labels) if constraint.metadata.labels else 'None'}")
+        print(f"Parents: {', '.join(constraint.links.parents) if constraint.links.parents else 'None'}")
+        print(f"Children: {', '.join(constraint.links.children) if constraint.links.children else 'None'}")
+    else:
+        # Show all constraints
+        constraints = get_constraints()
+        
+        if not constraints:
+            print("No constraints found in the ToDoWrite system.")
+            return
+
+        print("⚠️ All Constraintss Status")
+        print("=" * 50)
+        
+        for item in constraints:
+            status_icon = "✓" if item["status"] == "done" else "○" if item["status"] == "active" else "·"
+            print(f"{status_icon} {item['id']}")
+            print(f"   Title: {item['title']}")
+            print(f"   Status: {item['status']}")
+            print()
+
+        print(f"Total Constraintss: {len(constraints)}")
+        completed = len([item for item in constraints if item["status"] == "done"])
+        active = len([item for item in constraints if item["status"] == "active"])
+        planned = len([item for item in constraints if item["status"] == "planned"])
+        print(f"Completed: {completed}, Active: {active}, Planned: {planned}")
+
+
+if __name__ == "__main__":
+    main()

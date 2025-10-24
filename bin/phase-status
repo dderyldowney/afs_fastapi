@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # type: ignore
 
+import argparse
 import sys
 from pathlib import Path
 
@@ -8,84 +9,61 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import get_active_items, load_todos  # noqa: E402
+from afs_fastapi.todos.manager import get_phases, load_todos  # noqa: E402
 
 
-def display_phase_status():
-    todos_data = load_todos()
-    active_items = get_active_items(todos_data)
-    active_phase = active_items.get("Phase")
+def main():
+    parser = argparse.ArgumentParser(description="Display status of all Phases in the ToDoWrite system.")
+    parser.add_argument("--phase-id", type=str, help="Show details for a specific phase ID.")
+    args = parser.parse_args()
 
-    if not active_phase:
-        print("=== AFS FastAPI Development Phase Status ===")
-        print()
-        print("No active development phase found.")
-        print(
-            'Use "./bin/phase-start" to start a new phase or "./bin/phase-activate <ID>" to activate an existing one.'
-        )
-        return
+    if getattr(args, "phase_id", None):
+        # Show specific phase details
+        todos = load_todos()
+        phases = todos.get("Phase", [])
+        phase = None
+        for item in phases:
+            if item.id == getattr(args, "phase_id"):
+                phase = item
+                break
 
-    print("=== AFS FastAPI Development Phase Status ===")
-    print()
+        if not phase:
+            print(f"Error: Phase with ID '{getattr(args, 'phase_id')}' not found.")
+            sys.exit(1)
 
-    phase_name = active_phase.get("title", "Unknown Phase")
-    phase_status = active_phase.get("status", "unknown")
-    status_icon = {
-        "planned": "⚪",
-        "in_progress": "🚀",
-        "blocked": "🚫",
-        "done": "✅",
-        "rejected": "❌",
-    }.get(phase_status, "❓")
-    print(f"{status_icon} Current Phase: {phase_name} ({phase_status})")
-
-    if active_items["goal"]:
-        print(f"   Strategic Alignment: {active_items["goal"]["title"]}")
-    print()
-
-    steps = active_phase.get("steps", [])
-    total_steps = len(steps)
-    if total_steps > 0:
-        completed_steps = len([s for s in steps if s["status"] == "done"])
-        pending_steps = len([s for s in steps if s["status"] == "planned"])
-        in_progress_steps = len([s for s in steps if s["status"] == "in_progress"])
-        progress_percentage = (completed_steps / total_steps * 100) if total_steps > 0 else 0
-
-        print("📊 Phase Progress")
-        print(f"   Total Steps: {total_steps}")
-        print(f"   Completed: {completed_steps} ({progress_percentage:.1f}%)")
-        print(f"   In Progress: {in_progress_steps}")
-        print(f"   Pending: {pending_steps}")
-        print()
-
-        bar_width = 40
-        completed_bars = int(progress_percentage / 100 * bar_width)
-        pending_bars = bar_width - completed_bars
-        progress_bar = "█" * completed_bars + "░" * pending_bars
-        print(f"   Progress: [{progress_bar}] {progress_percentage:.1f}%")
-        print()
-
-        print("📋 Phase Steps")
-        for i, step in enumerate(steps, 1):
-            status_icon = {
-                "planned": "○",
-                "in_progress": "◐",
-                "done": "●",
-                "blocked": "🚫",
-                "rejected": "❌",
-            }.get(step["status"], "?")
-            print(f"{i:2d}. {status_icon} {step['title']}")
-        print()
-
+        print(f"📅 Phase Details: {phase.id}")
+        print("=" * 50)
+        print(f"Title: {phase.title}")
+        print(f"Description: {phase.description}")
+        print(f"Status: {phase.status}")
+        print(f"Owner: {phase.metadata.owner}")
+        print(f"Labels: {', '.join(phase.metadata.labels) if phase.metadata.labels else 'None'}")
+        print(f"Parents: {', '.join(phase.links.parents) if phase.links.parents else 'None'}")
+        print(f"Children: {', '.join(phase.links.children) if phase.links.children else 'None'}")
     else:
-        print("No phase steps found.")
-        print('Use "./bin/phase-add" to add implementation steps.')
+        # Show all phases
+        phases = get_phases()
 
-    print("Commands:")
-    print('  ./bin/phase-add "Step Description"     - Add implementation step')
-    print('  ./bin/phase-complete "Step"            - Mark step as completed')
-    print("  ./bin/phase-end                          - Complete and archive phase")
+        if not phases:
+            print("No phases found in the ToDoWrite system.")
+            return
+
+        print("📅 All Phases Status")
+        print("=" * 50)
+
+        for item in phases:
+            status_icon = "✓" if item.status == "done" else "○" if item.status == "active" else "·"
+            print(f"{status_icon} {item.id}")
+            print(f"   Title: {item.title}")
+            print(f"   Status: {item.status}")
+            print()
+
+        print(f"Total Phases: {len(phases)}")
+        completed = len([item for item in phases if item.status == "done"])
+        active = len([item for item in phases if item.status == "active"])
+        planned = len([item for item in phases if item.status == "planned"])
+        print(f"Completed: {completed}, Active: {active}, Planned: {planned}")
 
 
 if __name__ == "__main__":
-    display_phase_status()
+    main()

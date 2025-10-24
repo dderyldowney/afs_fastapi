@@ -606,10 +606,3 @@ class TestCANInterfaceIntegration:
                 mock_backup.connect.call_count >= 0
             )  # May or may not be called during initialization
             assert not mock_backup.send_message.called  # No automatic failover occurred
-
-    @pytest.mark.asyncio
-    async def test_memory_and_resource_management(self, can_manager):
-        """Test memory usage and resource cleanup."""
-        # This test uses old API methods that don't exist in current implementation
-        # TODO: Rewrite for current CANBusConnectionManager interface
-        pass

@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import add_command  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Add a new Command to the ToDoWrite system.")
+    parser.add_argument("title", type=str, help="The title of the command.")
+    parser.add_argument("shell_command", type=str, help="The shell command to execute.")
+    parser.add_argument("--description", type=str, default="", help="The description of the command.")
+    parser.add_argument("--subtask-id", type=str, help="The parent subtask ID.")
+    parser.add_argument("--ac-ref", type=str, help="The acceptance criteria reference.")
+    args = parser.parse_args()
+
+    new_command, error = add_command(
+        args.title, 
+        args.description, 
+        args.shell_command, 
+        getattr(args, "subtask_id", None),
+        getattr(args, "ac_ref", "")
+    )
+
+    if error:
+        print(f"Error: {error}")
+        sys.exit(1)
+
+    if new_command:
+        print("✓ Command added successfully!")
+        print(f"  ID: {new_command['id']}")
+        print(f"  Title: {new_command['title']}")
+        print(f"  Status: {new_command['status']}")
+        print(f"  Shell Command: {new_command['command']['shell']}")
+        print(f"  AC Reference: {new_command['command']['ac_ref']}")
+        print()
+        print("Use './bin/command-status' to view all commands.")
+        print("Use './bin/command-execute <command_id>' to execute this command.")
+
+
+if __name__ == "__main__":
+    main()

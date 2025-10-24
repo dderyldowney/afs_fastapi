@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# type: ignore
 
 import argparse
 import sys
@@ -8,24 +9,15 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import activate_phase, end_phase  # noqa: E402
+from afs_fastapi.todos.manager import complete_phase  # noqa: E402
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Mark a phase as complete.")
+    parser = argparse.ArgumentParser(description="Mark a Phase as complete in the ToDoWrite system.")
     parser.add_argument("phase_id", type=str, help="The ID of the phase to complete.")
-    parser.add_argument(
-        "--force", action="store_true", help="Force completion even if steps are incomplete."
-    )
     args = parser.parse_args()
 
-    # To complete a phase, it must first be active.
-    _, error = activate_phase(args.phase_id)
-    if error:
-        print(f"Error activating phase: {error}")
-        sys.exit(1)
-
-    completed_phase, error = end_phase(force=args.force)
+    completed_phase, error = complete_phase(args.phase_id)
 
     if error:
         print(f"Error: {error}")
@@ -33,11 +25,11 @@ def main():
 
     if completed_phase:
         print("✓ Phase marked as completed!")
-        print(f"  ID: {completed_phase['id']}")
-        print(f"  Title: {completed_phase['title']}")
-        print(f"  Completed at: {completed_phase['date_completed']}")
+        print(f"  ID: {completed_phase.id}")
+        print(f"  Title: {completed_phase.title}")
+        print(f"  Status: {completed_phase.status}")
         print()
-        print("Use './bin/phase-list-all' to view all phases.")
+        print("Use './bin/phase-status' to view updated phase progress.")
 
 
 if __name__ == "__main__":

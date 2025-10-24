@@ -18,6 +18,7 @@ import struct
 import time
 from dataclasses import dataclass
 from enum import IntEnum
+from typing import Any
 
 
 class J1939Priority(IntEnum):
@@ -137,7 +138,7 @@ class J1939AddressManager:
     agricultural devices in ISOBUS networks.
     """
 
-    def __init__(self, device_name: str, preferred_address: int, device_class: str):
+    def __init__(self, device_name: str, preferred_address: int, device_class: str) -> None:
         """
         Initialize address manager for agricultural equipment.
 
@@ -209,7 +210,7 @@ class J1939PriorityManager:
     communications receive appropriate priority levels.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize priority manager with agricultural system priorities."""
         self.system_priorities = {
             "emergency_stop": J1939Priority.EMERGENCY_STOP,
@@ -240,7 +241,7 @@ class J1939PGNParser:
     applications including engine data, position, and implement status.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize PGN parser with agricultural message definitions."""
         self.pgn_definitions = {
             0xFEEE: "Engine Temperature 1",
@@ -305,7 +306,7 @@ class TransportSegment:
 class J1939TransportError(Exception):
     """J1939 transport protocol error for agricultural applications."""
 
-    def __init__(self, message: str, error_code: str):
+    def __init__(self, message: str, error_code: str) -> None:
         super().__init__(message)
         self.error_code = error_code
 
@@ -431,7 +432,7 @@ class J1939DiagnosticManager:
     for agricultural equipment maintenance and safety monitoring.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize diagnostic manager for agricultural equipment."""
         self.safety_critical_spns = {9999}  # Emergency stop and safety systems
 
@@ -529,7 +530,7 @@ class J1939ISobusAdapter:
     ISOBUS agricultural application layer.
     """
 
-    def convert_to_isobus(self, j1939_message: J1939Message):
+    def convert_to_isobus(self, j1939_message: J1939Message) -> Any:
         """
         Convert J1939 message to ISOBUS format.
 
@@ -542,7 +543,7 @@ class J1939ISobusAdapter:
 
         # Mock ISOBUS message object
         class ISOBUSMessage:
-            def __init__(self):
+            def __init__(self) -> None:
                 self.function_code = j1939_message.pgn & 0xFF
                 self.agricultural_context = (
                     "Position Data" if j1939_message.pgn == 0xFEF3 else "Unknown"
@@ -560,10 +561,10 @@ class J1939Stack:
     agricultural robotics and precision agriculture applications.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize J1939 stack for agricultural equipment."""
-        self.message_buffer = []
-        self.memory_usage = 0
+        self.message_buffer: list[J1939Message] = []
+        self.memory_usage: int = 0
 
     def create_message(self, pgn: int, data: bytes, priority: int = 6) -> J1939Message:
         """

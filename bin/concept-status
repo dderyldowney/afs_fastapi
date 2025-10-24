@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import get_concepts, load_todos  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Display status of all Concepts in the ToDoWrite system.")
+    parser.add_argument("--concept-id", type=str, help="Show details for a specific concept ID.")
+    args = parser.parse_args()
+
+    if args.concept_id:
+        # Show specific concept details
+        todos = load_todos()
+        concepts = todos.get("Concept", [])
+        concept = None
+        for c in concepts:
+            if c.id == args.concept_id:
+                concept = c
+                break
+
+        if not concept:
+            print(f"Error: Concept with ID '{args.concept_id}' not found.")
+            sys.exit(1)
+
+        print(f"💡 Concept Details: {concept.id}")
+        print("=" * 50)
+        print(f"Title: {concept.title}")
+        print(f"Description: {concept.description}")
+        print(f"Status: {concept.status}")
+        print(f"Owner: {concept.metadata.owner}")
+        print(f"Labels: {', '.join(concept.metadata.labels) if concept.metadata.labels else 'None'}")
+        print(f"Parents: {', '.join(concept.links.parents) if concept.links.parents else 'None'}")
+        print(f"Children: {', '.join(concept.links.children) if concept.links.children else 'None'}")
+    else:
+        # Show all concepts
+        concepts = get_concepts()
+        
+        if not concepts:
+            print("No concepts found in the ToDoWrite system.")
+            return
+
+        print("💡 All Concepts Status")
+        print("=" * 50)
+        
+        for concept in concepts:
+            status_icon = "✓" if concept["status"] == "done" else "○" if concept["status"] == "active" else "·"
+            print(f"{status_icon} {concept['id']}")
+            print(f"   Title: {concept['title']}")
+            print(f"   Status: {concept['status']}")
+            print()
+
+        print(f"Total Concepts: {len(concepts)}")
+        completed = len([c for c in concepts if c["status"] == "done"])
+        active = len([c for c in concepts if c["status"] == "active"])
+        planned = len([c for c in concepts if c["status"] == "planned"])
+        print(f"Completed: {completed}, Active: {active}, Planned: {planned}")
+
+
+if __name__ == "__main__":
+    main()

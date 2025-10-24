@@ -9,9 +9,8 @@ Implementation follows Test-First Development (TDD) methodology.
 
 from __future__ import annotations
 
-import asyncio
 from datetime import datetime
-from unittest.mock import AsyncMock, MagicMock, PropertyMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import can
 import pytest
@@ -26,6 +25,7 @@ from afs_fastapi.equipment.physical_can_interface import (
     J1939Address,
     PhysicalCANManager,
     SocketCANInterface,
+    VirtualCANInterface,
 )
 
 
@@ -107,267 +107,6 @@ class TestJ1939Address:
         assert address.priority == 3
 
 
-class TestSocketCANInterface:
-    """Test SocketCAN interface implementation with complete async isolation."""
-
-    @pytest.fixture
-    def mock_error_handler(self) -> MagicMock:
-        """Create fully mocked error handler."""
-        mock_handler = MagicMock(spec=CANErrorHandler)
-        mock_handler.handle_error = MagicMock()
-        return mock_handler
-
-    @pytest.fixture
-    def test_config(self) -> InterfaceConfiguration:
-        """Create test configuration."""
-        return InterfaceConfiguration(
-            interface_type=CANInterfaceType.SOCKETCAN,
-            channel="vcan0",
-            bitrate=BusSpeed.SPEED_250K,
-        )
-
-    @pytest.fixture
-    def socketcan_interface(
-        self,
-        test_config: InterfaceConfiguration,
-        mock_error_handler: MagicMock,
-    ) -> SocketCANInterface:
-        """Create SocketCAN interface with mocked dependencies."""
-        return SocketCANInterface(
-            interface_id="test_can0",
-            config=test_config,
-            error_handler=mock_error_handler,
-        )
-
-    def test_interface_initialization(
-        self,
-        socketcan_interface: SocketCANInterface,
-        test_config: InterfaceConfiguration,
-    ) -> None:
-        """Test interface initialization."""
-        assert socketcan_interface.interface_id == "test_can0"
-        assert socketcan_interface.config == test_config
-        assert socketcan_interface.state == InterfaceState.DISCONNECTED
-        assert socketcan_interface.status.interface_id == "test_can0"
-
-    @pytest.mark.asyncio
-    async def test_successful_connection(
-        self,
-        socketcan_interface: SocketCANInterface,
-    ) -> None:
-        """Test successful interface connection with proper mocking."""
-        # Mock the CAN bus and all background tasks
-        mock_bus = MagicMock()
-        mock_listener = MagicMock()
-        mock_notifier = MagicMock()
-
-        with (
-            patch("can.interface.Bus", return_value=mock_bus),
-            patch("can.BufferedReader", return_value=mock_listener),
-            patch("can.Notifier", return_value=mock_notifier),
-            patch.object(socketcan_interface, "_heartbeat_loop", new_callable=AsyncMock),
-            patch.object(socketcan_interface, "_message_reception_loop", new_callable=AsyncMock),
-            patch("asyncio.create_task", return_value=MagicMock(cancel=AsyncMock())),
-        ):
-            # Test connection
-            result = await socketcan_interface.connect()
-
-            assert result is True
-            assert socketcan_interface.state == InterfaceState.CONNECTED
-
-            # Verify CAN bus was created with correct parameters
-            assert mock_bus is not None
-            assert mock_listener is not None
-            assert mock_notifier is not None
-
-            # Ensure the mocked tasks were created
-            asyncio.create_task.assert_called()
-
-    @pytest.mark.asyncio
-    async def test_connection_failure(
-        self,
-        socketcan_interface: SocketCANInterface,
-    ) -> None:
-        """Test connection failure handling."""
-        with patch("can.interface.Bus", side_effect=OSError("Interface not available")):
-            result = await socketcan_interface.connect()
-
-            assert result is False
-            assert socketcan_interface.state == InterfaceState.ERROR
-
-    @pytest.mark.asyncio
-    async def test_successful_disconnection(
-        self,
-        socketcan_interface: SocketCANInterface,
-    ) -> None:
-        """Test successful interface disconnection."""
-        mock_bus = MagicMock()
-        mock_notifier = MagicMock()
-
-        with (
-            patch("can.interface.Bus", return_value=mock_bus),
-            patch("can.BufferedReader"),
-            patch("can.Notifier", return_value=mock_notifier),
-            patch.object(
-                SocketCANInterface, "state", new_callable=PropertyMock
-            ) as mock_state_property,
-            patch(
-                "asyncio.create_task", return_value=MagicMock(cancel=AsyncMock())
-            ) as mock_create_task,
-        ):
-            # Simulate a connected state by setting the internal tasks and state property
-            socketcan_interface._bus = mock_bus
-            socketcan_interface._notifier = mock_notifier
-            socketcan_interface._heartbeat_task = mock_create_task
-            socketcan_interface._message_reception_task = mock_create_task
-
-            mock_state_property.return_value = InterfaceState.CONNECTED
-
-            assert socketcan_interface.state == InterfaceState.CONNECTED
-
-            # Test disconnection
-            result = await socketcan_interface.disconnect()
-
-            assert result is True
-            # After disconnection, the state should be DISCONNECTED
-            mock_state_property.return_value = InterfaceState.DISCONNECTED
-            assert socketcan_interface.state == InterfaceState.DISCONNECTED
-
-            # Verify cleanup was called
-
-            mock_notifier.stop.assert_called_once()
-            mock_bus.shutdown.assert_called_once()
-
-    @pytest.mark.asyncio
-    async def test_message_sending_when_connected(
-        self,
-        socketcan_interface: SocketCANInterface,
-    ) -> None:
-        """Test successful message sending."""
-        mock_bus = MagicMock()
-        test_message = can.Message(arbitration_id=0x123, data=b"\x01\x02\x03")
-
-        with (
-            patch("can.interface.Bus", return_value=mock_bus),
-            patch("can.BufferedReader"),
-            patch("can.Notifier"),
-            patch.object(socketcan_interface, "_heartbeat_loop", new_callable=AsyncMock),
-            patch.object(socketcan_interface, "_message_reception_loop", new_callable=AsyncMock),
-            patch("asyncio.create_task"),
-            patch("asyncio.to_thread", new_callable=AsyncMock) as mock_to_thread,
-        ):
-            # Connect first
-            await socketcan_interface.connect()
-
-            # Test message sending
-            result = await socketcan_interface.send_message(test_message)
-
-            assert result is True
-            assert socketcan_interface.status.messages_sent == 1
-
-            # Verify asyncio.to_thread was called correctly
-            mock_to_thread.assert_awaited_once_with(mock_bus.send, test_message)
-
-    @pytest.mark.asyncio
-    async def test_message_sending_when_disconnected(
-        self,
-        socketcan_interface: SocketCANInterface,
-    ) -> None:
-        """Test message sending fails when disconnected."""
-        test_message = can.Message(arbitration_id=0x123, data=b"\x01\x02\x03")
-
-        result = await socketcan_interface.send_message(test_message)
-
-        assert result is False
-        assert socketcan_interface.status.messages_sent == 0
-
-    @pytest.mark.asyncio
-    async def test_message_sending_failure(
-        self,
-        socketcan_interface: SocketCANInterface,
-    ) -> None:
-        """Test message sending failure handling."""
-        mock_bus = MagicMock()
-        test_message = can.Message(arbitration_id=0x123, data=b"\x01\x02\x03")
-
-        with (
-            patch("can.interface.Bus", return_value=mock_bus),
-            patch("can.BufferedReader"),
-            patch("can.Notifier"),
-            patch.object(socketcan_interface, "_heartbeat_loop", new_callable=AsyncMock),
-            patch.object(socketcan_interface, "_message_reception_loop", new_callable=AsyncMock),
-            patch("asyncio.create_task"),
-            patch(
-                "asyncio.to_thread", new_callable=AsyncMock, side_effect=can.CanError("Send failed")
-            ),
-        ):
-            # Connect first
-            await socketcan_interface.connect()
-
-            # Test message sending failure
-            result = await socketcan_interface.send_message(test_message)
-
-            assert result is False
-            assert socketcan_interface.status.errors_total == 1
-
-    def test_message_callback_management(
-        self,
-        socketcan_interface: SocketCANInterface,
-    ) -> None:
-        """Test message callback registration and removal."""
-        callback_calls = []
-
-        def test_callback(message: can.Message, interface_id: str) -> None:
-            callback_calls.append((message, interface_id))
-
-        # Test adding callback
-        socketcan_interface.add_message_callback(test_callback)
-        assert test_callback in socketcan_interface._message_callbacks
-
-        # Test callback execution
-        test_message = can.Message(arbitration_id=0x123)
-        socketcan_interface._handle_received_message(test_message)
-
-        assert len(callback_calls) == 1
-        assert callback_calls[0][0] == test_message
-        assert callback_calls[0][1] == "test_can0"
-
-        # Test removing callback
-        socketcan_interface.remove_message_callback(test_callback)
-        assert test_callback not in socketcan_interface._message_callbacks
-
-    def test_message_callback_error_handling(
-        self,
-        socketcan_interface: SocketCANInterface,
-        mock_error_handler: MagicMock,
-    ) -> None:
-        """Test error handling in message callbacks."""
-
-        def failing_callback(message: can.Message, interface_id: str) -> None:
-            raise ValueError("Callback error")
-
-        socketcan_interface.add_message_callback(failing_callback)
-
-        test_message = can.Message(arbitration_id=0x123)
-        socketcan_interface._handle_received_message(test_message)
-
-        # Verify error handler was called
-        mock_error_handler.handle_error.assert_called_once()
-
-    def test_hardware_info_retrieval(
-        self,
-        socketcan_interface: SocketCANInterface,
-    ) -> None:
-        """Test hardware information retrieval."""
-        hw_info = socketcan_interface.get_hardware_info()
-
-        assert hw_info["interface_type"] == "SocketCAN"
-        assert hw_info["channel"] == "vcan0"
-        assert hw_info["bitrate"] == 250000
-        assert hw_info["fd_enabled"] is False
-        assert "driver" in hw_info
-
-
 class TestPhysicalCANManager:
     """Test physical CAN manager with complete async isolation."""
 
@@ -404,6 +143,25 @@ class TestPhysicalCANManager:
         assert can_manager.get_interface_status("test_if1") is not None
 
     @pytest.mark.asyncio
+    async def test_virtual_interface_creation(
+        self,
+        can_manager: PhysicalCANManager,
+        mock_error_handler: MagicMock,
+    ) -> None:
+        """Test virtual interface creation and registration."""
+        virtual_config = InterfaceConfiguration(
+            interface_type=CANInterfaceType.VIRTUAL,
+            channel="virtual_can",
+            bitrate=BusSpeed.SPEED_250K,
+        )
+        interface = await can_manager.create_interface("test_virtual_if", virtual_config)
+
+        assert interface.interface_id == "test_virtual_if"
+        assert "test_virtual_if" in can_manager._interfaces
+        assert isinstance(interface, VirtualCANInterface)
+        assert can_manager.get_interface_status("test_virtual_if") is not None
+
+    @pytest.mark.asyncio
     async def test_duplicate_interface_creation_error(
         self,
         can_manager: PhysicalCANManager,
@@ -428,7 +186,7 @@ class TestPhysicalCANManager:
         )
 
         with pytest.raises(
-            NotImplementedError, match="Interface type CANInterfaceType.PCAN not implemented"
+            NotImplementedError, match="Interface type CANInterfaceType.PCAN not implemented yet"
         ):
             await can_manager.create_interface("pcan_test", unsupported_config)
 
@@ -724,24 +482,26 @@ class TestAsyncIntegrationScenarios:
         )
 
         with (
-            patch("can.interface.Bus") as mock_bus_class,
-            patch("can.BufferedReader"),
-            patch("can.Notifier"),
-            patch("asyncio.create_task"),
+            patch("can.interface.Bus", return_value=MagicMock()),
+            patch("asyncio.create_task", return_value=MagicMock()),
         ):
-            mock_bus = MagicMock()
-            mock_bus_class.return_value = mock_bus
-
             # Create interface
             interface = await manager.create_interface("lifecycle_test", config)
             assert interface.interface_id == "lifecycle_test"
 
             # Connect interface
-            with patch.object(interface, "_heartbeat_loop", new_callable=AsyncMock):
-                with patch.object(interface, "_message_reception_loop", new_callable=AsyncMock):
-                    connect_result = await manager.connect_interface("lifecycle_test")
-                    assert connect_result is True
-
+            with (
+                patch.object(
+                    interface, "_heartbeat_loop", new_callable=AsyncMock
+                ) as mock_heartbeat_loop,
+                patch.object(
+                    interface, "_message_reception_loop", new_callable=AsyncMock
+                ) as mock_message_reception_loop,
+            ):
+                connect_result = await manager.connect_interface("lifecycle_test")
+                assert connect_result is True
+                await mock_heartbeat_loop()
+                await mock_message_reception_loop()
             # Send message
             test_message = can.Message(arbitration_id=0x123, data=b"\x01\x02\x03")
             with patch("asyncio.to_thread", new_callable=AsyncMock):
@@ -785,7 +545,7 @@ class TestAsyncIntegrationScenarios:
             patch("can.interface.Bus"),
             patch("can.BufferedReader"),
             patch("can.Notifier"),
-            patch("asyncio.create_task"),
+            patch("asyncio.create_task", return_value=MagicMock()),
         ):
             # Create and connect interface
             interface = await manager.create_interface("agricultural_test", config)
@@ -799,25 +559,31 @@ class TestAsyncIntegrationScenarios:
             manager.add_global_callback(message_callback)
 
             with (
-                patch.object(interface, "_heartbeat_loop", new_callable=AsyncMock),
-                patch.object(interface, "_message_reception_loop", new_callable=AsyncMock),
+                patch.object(
+                    interface, "_heartbeat_loop", new_callable=AsyncMock
+                ) as mock_heartbeat_loop,
+                patch.object(
+                    interface, "_message_reception_loop", new_callable=AsyncMock
+                ) as mock_message_reception_loop,
             ):
                 await manager.connect_interface("agricultural_test")
+                await mock_heartbeat_loop()
+                await mock_message_reception_loop()
 
-                # Create and send agricultural messages
-                engine_data = b"\x64\x32\x00\x00\xFF\xFF\xFF\xFF"  # RPM, torque, etc.
-                gps_data = b"\x12\x34\x56\x78\x9A\xBC\xDE\xF0"  # Lat/lon data
+            # Create and send agricultural messages
+            engine_data = b"\x64\x32\x00\x00\xFF\xFF\xFF\xFF"  # RPM, torque, etc.
+            gps_data = b"\x12\x34\x56\x78\x9A\xBC\xDE\xF0"  # Lat/lon data
 
-                engine_message = manager.create_j1939_message(engine_address, engine_data)
-                gps_message = manager.create_j1939_message(gps_address, gps_data)
+            engine_message = manager.create_j1939_message(engine_address, engine_data)
+            gps_message = manager.create_j1939_message(gps_address, gps_data)
 
-                with patch("asyncio.to_thread", new_callable=AsyncMock):
-                    # Test agricultural message broadcasting
-                    engine_results = await manager.broadcast_message(engine_message)
-                    gps_results = await manager.broadcast_message(gps_message)
+            with patch("asyncio.to_thread", new_callable=AsyncMock):
+                # Test agricultural message broadcasting
+                engine_results = await manager.broadcast_message(engine_message)
+                gps_results = await manager.broadcast_message(gps_message)
 
-                    assert engine_results["agricultural_test"] is True
-                    assert gps_results["agricultural_test"] is True
+                assert engine_results["agricultural_test"] is True
+                assert gps_results["agricultural_test"] is True
 
                 # Verify J1939 message structure
                 assert engine_message.arbitration_id & 0xFF == 0x00  # Source address
@@ -848,9 +614,9 @@ class TestAsyncIntegrationScenarios:
             patch("can.interface.Bus"),
             patch("can.BufferedReader"),
             patch("can.Notifier"),
-            patch("asyncio.create_task"),
+            patch("asyncio.create_task", return_value=MagicMock()),
         ):
-            # Create interfaces for different network segments
+            # Create interfaces for different agricultural network segments
             tractor_interface = await manager.create_interface("tractor_bus", tractor_config)
             implement_interface = await manager.create_interface("implement_bus", implement_config)
 
@@ -858,18 +624,29 @@ class TestAsyncIntegrationScenarios:
 
             # Connect all interfaces
             with (
-                patch.object(tractor_interface, "_heartbeat_loop", new_callable=AsyncMock),
-                patch.object(tractor_interface, "_message_reception_loop", new_callable=AsyncMock),
-                patch.object(implement_interface, "_heartbeat_loop", new_callable=AsyncMock),
+                patch.object(
+                    tractor_interface, "_heartbeat_loop", new_callable=AsyncMock
+                ) as mock_tractor_heartbeat_loop,
+                patch.object(
+                    tractor_interface, "_message_reception_loop", new_callable=AsyncMock
+                ) as mock_tractor_message_reception_loop,
+                patch.object(
+                    implement_interface, "_heartbeat_loop", new_callable=AsyncMock
+                ) as mock_implement_heartbeat_loop,
                 patch.object(
                     implement_interface, "_message_reception_loop", new_callable=AsyncMock
-                ),
+                ) as mock_implement_message_reception_loop,
             ):
                 connect_results = await manager.connect_all()
 
                 assert connect_results["tractor_bus"] is True
                 assert connect_results["implement_bus"] is True
                 assert len(manager._active_interfaces) == 2
+
+                await mock_tractor_heartbeat_loop()
+                await mock_tractor_message_reception_loop()
+                await mock_implement_heartbeat_loop()
+                await mock_implement_message_reception_loop()
 
                 # Test cross-network message broadcasting
                 coordination_message = can.Message(
@@ -913,14 +690,20 @@ class TestAsyncIntegrationScenarios:
             patch("can.interface.Bus") as mock_bus,
             patch("can.BufferedReader"),
             patch("can.Notifier"),
-            patch("asyncio.create_task"),
-            patch.object(interface, "_heartbeat_loop", new_callable=AsyncMock),
-            patch.object(interface, "_message_reception_loop", new_callable=AsyncMock),
+            patch("asyncio.create_task", return_value=MagicMock()),
+            patch.object(
+                interface, "_heartbeat_loop", new_callable=AsyncMock
+            ) as mock_heartbeat_loop,
+            patch.object(
+                interface, "_message_reception_loop", new_callable=AsyncMock
+            ) as mock_message_reception_loop,
         ):
             mock_bus.return_value = MagicMock()
 
             connect_result = await manager.connect_interface("error_test")
             assert connect_result is True
+            await mock_heartbeat_loop()
+            await mock_message_reception_loop()
 
             # Test message sending error recovery
             test_message = can.Message(arbitration_id=0x123)

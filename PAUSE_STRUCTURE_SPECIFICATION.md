@@ -45,13 +45,13 @@ This document defines the mandatory **Recommended Pause Structure for Session Op
 **IMPLEMENTATION:**
 ```bash
 # Execute at phase completion
-./bin/phase-end
+./bin/todo status # Check current phase progress
 ./bin/pause-here "Phase: [PHASE_NAME] - Complete" "Ready for next phase: [NEXT_PHASE_NAME]"
 ```
 
 **EXAMPLE:**
 ```bash
-./bin/phase-end
+./bin/todo status
 ./bin/pause-here "Phase: CAN Network Traffic Management - Complete with full test coverage" "Ready for next phase: Physical CAN Interface Integration"
 ```
 
@@ -128,7 +128,7 @@ This document defines the mandatory **Recommended Pause Structure for Session Op
 1. ✅ Load session context: `./bin/loadsession`
 2. ✅ Verify test suite: `pytest --tb=short`
 3. ✅ Check git status: `git status`
-4. ✅ Validate project state: `./bin/phase-status`, `./bin/strategic-status`
+4. ✅ Validate project state: `./bin/todo status`, `./bin/strategic-status`
 
 ## Context Preservation Requirements
 
@@ -138,7 +138,7 @@ This document defines the mandatory **Recommended Pause Structure for Session Op
 - **Timestamp**: Exact pause time with timezone
 - **Git Hash**: Current commit hash for resumption
 - **Task Status**: Current progress within active task
-- **Phase Status**: Progress within current development phase
+- **Step Status**: Progress within current development step
 - **Strategic Status**: Progress toward strategic goals
 - **Next Steps**: Clear, actionable resumption instructions
 - **Dependencies**: Any external dependencies or blockers
@@ -152,7 +152,7 @@ This document defines the mandatory **Recommended Pause Structure for Session Op
 **Reason:** [DETAILED_PAUSE_REASON]
 **Timestamp:** [ISO_TIMESTAMP_WITH_TIMEZONE]
 **Git Hash:** [FULL_COMMIT_HASH]
-**Current Phase:** [PHASE_NAME]
+**Current Step:** [STEP_NAME]
 
 ## Task Progress
 - [X] Completed Task 1
@@ -171,12 +171,12 @@ This document defines the mandatory **Recommended Pause Structure for Session Op
 ## Strategic Context
 **Current Strategic Goal:** [GOAL_NAME]
 **Progress:** [X/Y] strategic goals completed
-**Phase Progress:** [X/Y] phase tasks completed
+**Step Progress:** [X/Y] step tasks completed
 
 ## Resume Instructions
 1. **Load Context:** `./bin/resume-from [PAUSE_ID]`
 2. **Verify Quality:** `pytest --tb=short`
-3. **Check Status:** `./bin/phase-status`, `./bin/strategic-status`
+3. **Check Status:** `./bin/todo status`, `./bin/strategic-status`
 4. **Continue Work:** [SPECIFIC_NEXT_STEPS]
 
 ## Dependencies and Blockers
@@ -282,12 +282,7 @@ fi
 - Enforces quality gates before saving
 - Creates resumption context automatically
 
-### Phase Management Integration
 
-**PHASE COMMAND INTEGRATION:**
-- `./bin/phase-complete` triggers automatic pause evaluation
-- `./bin/phase-end` requires mandatory pause
-- `./bin/phase-start` validates resumption context
 
 ### Strategic Management Integration
 
@@ -304,7 +299,7 @@ fi
 1. ✅ Previous session properly paused and documented
 2. ✅ All quality gates passed in previous session
 3. ✅ Git status clean with latest work committed
-4. ✅ Strategic and phase status validated
+4. ✅ Strategic and task/step status validated
 
 ### During-Session Monitoring
 

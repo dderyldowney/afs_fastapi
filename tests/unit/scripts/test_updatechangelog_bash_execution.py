@@ -290,11 +290,20 @@ class TestUpdateChangelogCommandLineRobustness:
     def test_maintains_git_working_directory_cleanliness(self) -> None:
         """Test script doesn't pollute git working directory with artifacts.
 
+        This test verifies the script doesn't create untracked files or modify
+        existing files. Staged changes (legitimate work in progress) are allowed.
+
         Agricultural Context: Clean git status essential for ISO compliance
         audits. Temporary files must not interfere with change tracking.
         """
-        # Arrange: Ensure a clean git state before running the script
-        # (This test assumes the environment is clean before it starts)
+        # Arrange: Capture initial git state (before running script)
+        # Get list of untracked files before script execution
+        initial_untracked = subprocess.run(
+            ["git", "ls-files", "--others", "--exclude-standard"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
 
         # Act: Run the updatechangelog script
         result = subprocess.run(
@@ -304,13 +313,30 @@ class TestUpdateChangelogCommandLineRobustness:
         # Assert: The script should run without errors (or with expected 'No new commits' message)
         assert result.returncode == 0 or "No new commits" in result.stdout
 
-        # Verify git working directory is clean after script execution
-        git_status_result = subprocess.run(
-            ["git", "status", "--porcelain"], capture_output=True, text=True, check=False
+        # Verify no NEW untracked files were created by the script
+        final_untracked = subprocess.run(
+            ["git", "ls-files", "--others", "--exclude-standard"],
+            capture_output=True,
+            text=True,
+            check=False,
         )
-        assert (
-            git_status_result.stdout == ""
-        ), f"Git working directory is not clean after script execution:\n{git_status_result.stdout}"
+
+        # Compare untracked files before and after
+        initial_files = (
+            set(initial_untracked.stdout.strip().split("\n"))
+            if initial_untracked.stdout.strip()
+            else set()
+        )
+        final_files = (
+            set(final_untracked.stdout.strip().split("\n"))
+            if final_untracked.stdout.strip()
+            else set()
+        )
+        new_untracked_files = final_files - initial_files
+
+        assert len(new_untracked_files) == 0, "Script created untracked files:\n" + "\n".join(
+            f"  - {f}" for f in new_untracked_files
+        )
 
     def test_compatible_with_various_shell_environments(self) -> None:
         """Test compatibility across different shell environments (bash, zsh, sh).

@@ -44,7 +44,7 @@ class ConversationManager:
     while maintaining agricultural safety compliance and conversation context.
     """
 
-    def __init__(self, project_root: Path | None = None):
+    def __init__(self, project_root: Path | None = None) -> None:
         """Initialize conversation manager with real-time optimization."""
         self.project_root = project_root or Path.cwd()
 
@@ -450,11 +450,11 @@ def configure_optimization(
 
 
 # Integration decorator for automatic optimization
-def optimize_ai_interaction(command_type: str = "general"):
+def optimize_ai_interaction(command_type: str = "general") -> Callable:
     """Decorator to automatically optimize AI interactions."""
 
-    def decorator(func):
-        def wrapper(*args, **kwargs):
+    def decorator(func: Callable) -> Callable:
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             # Execute original function
             result = func(*args, **kwargs)
 

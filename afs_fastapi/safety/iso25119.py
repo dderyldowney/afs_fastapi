@@ -114,7 +114,7 @@ class ISO25119SafetyClassifier:
     agricultural equipment type, operation mode, and risk factors.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize safety classifier with agricultural equipment profiles."""
         self.sil_mapping = {
             "emergency_stop": SafetyIntegrityLevel.SIL_3,

@@ -137,7 +137,7 @@ Resources:
     Type: AWS::Kinesis::Stream
     Properties:
       Name: AFSFastAPIDataStream
-      ShardCount: 1
+      ShardCount: 4
       Tags:
         - Key: Name
           Value: AFSFastAPIDataStream

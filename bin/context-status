@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import get_contexts, load_todos  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Display status of all Contexts in the ToDoWrite system.")
+    parser.add_argument("--context-id", type=str, help="Show details for a specific context ID.")
+    args = parser.parse_args()
+
+    if getattr(args, "context_id", None):
+        # Show specific context details
+        todos = load_todos()
+        contexts = todos.get("Context", [])
+        context = None
+        for item in contexts:
+            if item.id == getattr(args, "context_id"):
+                context = item
+                break
+
+        if not context:
+            print(f"Error: Context with ID '{getattr(args, 'context_id')}' not found.")
+            sys.exit(1)
+
+        print(f"🌍 Context Details: {context.id}")
+        print("=" * 50)
+        print(f"Title: {context.title}")
+        print(f"Description: {context.description}")
+        print(f"Status: {context.status}")
+        print(f"Owner: {context.metadata.owner}")
+        print(f"Labels: {', '.join(context.metadata.labels) if context.metadata.labels else 'None'}")
+        print(f"Parents: {', '.join(context.links.parents) if context.links.parents else 'None'}")
+        print(f"Children: {', '.join(context.links.children) if context.links.children else 'None'}")
+    else:
+        # Show all contexts
+        contexts = get_contexts()
+        
+        if not contexts:
+            print("No contexts found in the ToDoWrite system.")
+            return
+
+        print("🌍 All Contexts Status")
+        print("=" * 50)
+        
+        for item in contexts:
+            status_icon = "✓" if item["status"] == "done" else "○" if item["status"] == "active" else "·"
+            print(f"{status_icon} {item['id']}")
+            print(f"   Title: {item['title']}")
+            print(f"   Status: {item['status']}")
+            print()
+
+        print(f"Total Contexts: {len(contexts)}")
+        completed = len([item for item in contexts if item["status"] == "done"])
+        active = len([item for item in contexts if item["status"] == "active"])
+        planned = len([item for item in contexts if item["status"] == "planned"])
+        print(f"Completed: {completed}, Active: {active}, Planned: {planned}")
+
+
+if __name__ == "__main__":
+    main()

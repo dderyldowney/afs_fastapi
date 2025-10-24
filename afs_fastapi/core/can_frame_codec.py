@@ -18,7 +18,10 @@ from datetime import datetime
 from enum import Enum
 from typing import Any
 
-import can
+try:
+    import can
+except ImportError:
+    can = None  # type: ignore
 
 logger = logging.getLogger(__name__)
 
@@ -162,7 +165,7 @@ class J1939Decoder:
         """Load standard agricultural/ISOBUS PGN and SPN definitions."""
 
         # Electronic Engine Controller 1 (EEC1) - PGN 61444 (0xF004)
-        eec1_spns = [
+        eec1_spns: list[SPNDefinition] = [
             SPNDefinition(
                 spn=190,
                 name="Engine Speed",
@@ -208,7 +211,7 @@ class J1939Decoder:
             ),
         ]
 
-        eec1_pgn = PGNDefinition(
+        eec1_pgn: PGNDefinition = PGNDefinition(
             pgn=0xF004,
             name="Electronic Engine Controller 1",
             description="Engine parameters",
@@ -218,7 +221,7 @@ class J1939Decoder:
         )
 
         # Wheel-Based Vehicle Speed (WVS) - PGN 65265 (0xFEF1)
-        wvs_spns = [
+        wvs_spns: list[SPNDefinition] = [
             SPNDefinition(
                 spn=84,
                 name="Wheel-Based Vehicle Speed",
@@ -235,7 +238,7 @@ class J1939Decoder:
             ),
         ]
 
-        wvs_pgn = PGNDefinition(
+        wvs_pgn: PGNDefinition = PGNDefinition(
             pgn=0xFEF1,
             name="Wheel-Based Vehicle Speed",
             description="Vehicle speed information",
@@ -245,7 +248,7 @@ class J1939Decoder:
         )
 
         # Vehicle Position (VP) - PGN 65267 (0xFEF3)
-        vp_spns = [
+        vp_spns: list[SPNDefinition] = [
             SPNDefinition(
                 spn=584,
                 name="Latitude",
@@ -276,7 +279,7 @@ class J1939Decoder:
             ),
         ]
 
-        vp_pgn = PGNDefinition(
+        vp_pgn: PGNDefinition = PGNDefinition(
             pgn=0xFEF3,
             name="Vehicle Position",
             description="GPS coordinates",
@@ -286,7 +289,7 @@ class J1939Decoder:
         )
 
         # Fuel Economy (LFE) - PGN 65266 (0xFEF2)
-        lfe_spns = [
+        lfe_spns: list[SPNDefinition] = [
             SPNDefinition(
                 spn=183,
                 name="Engine Fuel Rate",
@@ -317,7 +320,7 @@ class J1939Decoder:
             ),
         ]
 
-        lfe_pgn = PGNDefinition(
+        lfe_pgn: PGNDefinition = PGNDefinition(
             pgn=0xFEF2,
             name="Fuel Economy",
             description="Fuel consumption data",
@@ -327,7 +330,7 @@ class J1939Decoder:
         )
 
         # Electronic Transmission Controller 1 (ETC1) - PGN 61445 (0xF005)
-        etc1_spns = [
+        etc1_spns: list[SPNDefinition] = [
             SPNDefinition(
                 spn=191,
                 name="Transmission Output Shaft Speed",
@@ -359,7 +362,7 @@ class J1939Decoder:
             ),
         ]
 
-        etc1_pgn = PGNDefinition(
+        etc1_pgn: PGNDefinition = PGNDefinition(
             pgn=0xF005,
             name="Electronic Transmission Controller 1",
             description="Transmission data",
@@ -368,13 +371,47 @@ class J1939Decoder:
             spn_definitions=etc1_spns,
         )
 
+        # Dash Display (DD) - PGN 65276 (0xFEFC) - Fuel Level
+        dd_spns: list[SPNDefinition] = [
+            SPNDefinition(
+                spn=96,
+                name="Fuel Level",
+                description="Fuel tank level percentage",
+                data_type=J1939DataType.PERCENTAGE,
+                start_bit=8,
+                bit_length=8,
+                scale=0.4,
+                units="%",
+                min_value=0,
+                max_value=100,
+                not_available_value=0xFF,
+                error_value=0xFE,
+            ),
+        ]
+
+        dd_pgn: PGNDefinition = PGNDefinition(
+            pgn=0xFEFC,
+            name="Dash Display",
+            description="Dashboard display information including fuel level",
+            data_length=8,
+            transmission_rate=1000,
+            spn_definitions=dd_spns,
+        )
+
         # Register all PGN definitions
-        pgn_definitions = [eec1_pgn, wvs_pgn, vp_pgn, lfe_pgn, etc1_pgn]
+        pgn_definitions: list[PGNDefinition] = [
+            eec1_pgn,
+            wvs_pgn,
+            vp_pgn,
+            lfe_pgn,
+            etc1_pgn,
+            dd_pgn,
+        ]
 
         for pgn_def in pgn_definitions:
+            # Register PGN definition
             self.pgn_definitions[pgn_def.pgn] = pgn_def
-
-            # Index SPNs for quick lookup
+            # Register SPN definitions
             for spn_def in pgn_def.spn_definitions:
                 self.spn_definitions[spn_def.spn] = spn_def
 
@@ -397,7 +434,9 @@ class J1939Decoder:
                 logger.debug(f"Ignoring standard frame: {message.arbitration_id:08X}")
                 return None
 
-            j1939_id = self._parse_j1939_id(message.arbitration_id)
+            j1939_id: tuple[int, int, int, int, int] | None = self._parse_j1939_id(
+                message.arbitration_id
+            )
             if not j1939_id:
                 return None
 
@@ -405,8 +444,8 @@ class J1939Decoder:
 
             # Calculate PGN
             if pdu_format >= 240:  # PDU Format 240-255
-                pgn = (data_page << 16) | (pdu_format << 8) | pdu_specific
-                destination_address = 255  # Global
+                pgn: int = (data_page << 16) | (pdu_format << 8) | pdu_specific
+                destination_address: int = 255  # Global
             else:  # PDU Format 0-239
                 pgn = (data_page << 16) | (pdu_format << 8)
                 destination_address = pdu_specific
@@ -426,12 +465,12 @@ class J1939Decoder:
                 logger.debug(f"Unknown PGN: {pgn:04X}")
                 return None
 
-            pgn_def = self.pgn_definitions[pgn]
+            pgn_def: PGNDefinition = self.pgn_definitions[pgn]
 
             # Decode SPNs
-            decoded_spns = []
+            decoded_spns: list[DecodedSPN] = []
             for spn_def in pgn_def.spn_definitions:
-                decoded_spn = self._decode_spn(spn_def, message.data)
+                decoded_spn: DecodedSPN | None = self._decode_spn(spn_def, message.data)
                 if decoded_spn:
                     decoded_spns.append(decoded_spn)
 
@@ -467,12 +506,12 @@ class J1939Decoder:
         if can_id > 0x1FFFFFFF:  # 29-bit limit
             return None
 
-        priority = (can_id >> 26) & 0x07
+        priority: int = (can_id >> 26) & 0x07
         # reserved = (can_id >> 25) & 0x01  # Reserved bit - not used in parsing
-        data_page = (can_id >> 24) & 0x01
-        pdu_format = (can_id >> 16) & 0xFF
-        pdu_specific = (can_id >> 8) & 0xFF
-        source_address = can_id & 0xFF
+        data_page: int = (can_id >> 24) & 0x01
+        pdu_format: int = (can_id >> 16) & 0xFF
+        pdu_specific: int = (can_id >> 8) & 0xFF
+        source_address: int = can_id & 0xFF
 
         return priority, data_page, pdu_format, pdu_specific, source_address
 
@@ -493,12 +532,12 @@ class J1939Decoder:
         """
         try:
             # Extract raw value from data
-            raw_value = self._extract_bits(data, spn_def.start_bit, spn_def.bit_length)
+            raw_value: int = self._extract_bits(data, spn_def.start_bit, spn_def.bit_length)
 
             # Check for special values
-            is_not_available = False
-            is_error = False
-            is_valid = True
+            is_not_available: bool = False
+            is_error: bool = False
+            is_valid: bool = True
 
             if spn_def.not_available_value is not None and raw_value == spn_def.not_available_value:
                 is_not_available = True
@@ -524,7 +563,7 @@ class J1939Decoder:
                     elif spn_def.bit_length <= 32:
                         raw_value = struct.unpack("i", struct.pack("I", raw_value))[0]
 
-                scaled_value = (raw_value * spn_def.scale) + spn_def.offset
+                scaled_value: float = (raw_value * spn_def.scale) + spn_def.offset
 
                 # Range validation
                 if spn_def.min_value is not None and scaled_value < spn_def.min_value:
@@ -532,7 +571,7 @@ class J1939Decoder:
                 if spn_def.max_value is not None and scaled_value > spn_def.max_value:
                     is_valid = False
 
-                value = scaled_value
+                value: Any = scaled_value
             else:
                 value = None
 

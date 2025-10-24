@@ -22,6 +22,7 @@ from .ai_processing_schemas import (
     OptimizationLevelEnum,
     PlatformStatisticsResponse,
 )
+from .endpoints import token_usage
 
 app = FastAPI(
     title="Automated Farming System API",
@@ -31,6 +32,9 @@ app = FastAPI(
 
 # Global instance of the FieldAllocationCRDT
 field_allocation_crdt = FieldAllocationCRDT()
+
+# Include the token usage router
+app.include_router(token_usage.router, prefix="/monitoring", tags=["monitoring"])
 
 # Optional CORS configuration via env var AFS_CORS_ORIGINS (comma-separated)
 _cors_origins = os.getenv("AFS_CORS_ORIGINS")
@@ -140,13 +144,13 @@ async def process_with_ai_optimization(request: AIProcessingRequest) -> AIProces
 
     # Process with or without budget constraint
     if request.token_budget:
-        result = ai_processing_manager.process_with_budget_constraint(
+        result = await ai_processing_manager.process_with_budget_constraint(
             user_input=request.user_input,
             token_budget=request.token_budget,
             service_name=request.service_name or "platform",
         )
     else:
-        result = ai_processing_manager.process_agricultural_request(
+        result = await ai_processing_manager.process_agricultural_request(
             user_input=request.user_input,
             service_name=request.service_name or "platform",
             optimization_level=optimization_level,
@@ -184,7 +188,7 @@ async def optimize_equipment_communication(
     communication remains accurate and compliant with agricultural standards.
     Ideal for tractor commands, emergency protocols, and equipment status updates.
     """
-    result = ai_processing_manager.optimize_equipment_communication(request.message)
+    result = await ai_processing_manager.optimize_equipment_communication(request.message)
 
     return AIProcessingResponse(
         final_output=result.final_output,
@@ -214,7 +218,7 @@ async def optimize_monitoring_data(request: MonitoringOptimizationRequest) -> AI
     Uses standard optimization for soil quality, water monitoring, and environmental
     sensor data while preserving critical measurement values and agricultural context.
     """
-    result = ai_processing_manager.optimize_monitoring_data(request.sensor_data)
+    result = await ai_processing_manager.optimize_monitoring_data(request.sensor_data)
 
     return AIProcessingResponse(
         final_output=result.final_output,
@@ -245,7 +249,7 @@ async def optimize_fleet_coordination(request: FleetOptimizationRequest) -> AIPr
     essential operational details. Ideal for coordinating multiple tractors,
     field assignments, and synchronized agricultural operations.
     """
-    result = ai_processing_manager.optimize_fleet_coordination(request.coordination_message)
+    result = await ai_processing_manager.optimize_fleet_coordination(request.coordination_message)
 
     return AIProcessingResponse(
         final_output=result.final_output,
@@ -301,7 +305,7 @@ async def ai_processing_health_check() -> HealthCheckResponse:
     agricultural safety compliance mode. Essential for monitoring the health
     of AI optimization capabilities in production agricultural environments.
     """
-    health_data = ai_processing_manager.health_check()
+    health_data = await ai_processing_manager.health_check()
 
     return HealthCheckResponse(**health_data)
 

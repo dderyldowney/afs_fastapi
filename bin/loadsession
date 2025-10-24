@@ -111,6 +111,17 @@ def main():
     todos_data = initialize_todowrite_system()
     print()
 
+    # Check and disable automatic pytest execution if configured
+    print("🧪 Checking pytest auto-execution settings...")
+    try:
+        subprocess.run(
+            ["./bin/check-pytest-auto-disable"], cwd=project_root, check=True, capture_output=True
+        )
+        print("✅ Pytest configuration check completed")
+    except subprocess.CalledProcessError:
+        print("⚠️  Pytest configuration check failed (continuing)")
+    print()
+
     # Enhanced: Initialize session monitoring
     print("📊 Initializing Session Monitoring...")
     try:
@@ -225,6 +236,12 @@ def main():
     print("🌾 ToDoWrite 12-Layer System: Fully Initialized with Strategic Context")
     print("🚨 CRITICAL: Follow pause structure compliance - see PAUSE_STRUCTURE_SPECIFICATION.md")
     print("📚 New User Guide: See ToDoWrite-HOWTO.md for complete usage instructions")
+
+    # Explicit confirmation prompt for the user
+    print("\n--- Session Loaded ---")
+    print("The session context has been successfully loaded.")
+    print("Please explicitly confirm your next action to proceed.")
+    print("----------------------")
 
 
 if __name__ == "__main__":

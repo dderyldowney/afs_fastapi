@@ -19,7 +19,7 @@ def get_station_type(station_type_str: str) -> StationType:
 
 
 class MasterStation:
-    def __init__(self, station_id: int, system: str):
+    def __init__(self, station_id: int, system: str) -> None:
         self.station_id = station_id
         self.system = system
 
@@ -35,7 +35,7 @@ class DiagnosticsStation(MasterStation):
     A diagnostics station responsible for system diagnostics and reporting.
     """
 
-    def __init__(self, station_id: int, system: str, diagnostic_tools: list[str]):
+    def __init__(self, station_id: int, system: str, diagnostic_tools: list[str]) -> None:
         super().__init__(station_id, system)
         self.station_type = StationType.DIAGNOSTIC
         self.diagnostic_tools: list[str] = diagnostic_tools
@@ -50,7 +50,7 @@ class DroidDispatchStation(MasterStation):
     A droid dispatch station responsible for managing and deploying droids.
     """
 
-    def __init__(self, station_id: int, system: str, droid_count: int):
+    def __init__(self, station_id: int, system: str, droid_count: int) -> None:
         super().__init__(station_id, system)
         self.station_type = StationType.DROID_DISPATCH
         self.droid_count: int = droid_count
@@ -68,7 +68,7 @@ class ServiceDispatchStation(MasterStation):
     A service dispatch station handling service task assignments.
     """
 
-    def __init__(self, station_id: int, system: str, active_tasks: int):
+    def __init__(self, station_id: int, system: str, active_tasks: int) -> None:
         super().__init__(station_id, system)
         self.station_type = StationType.SERVICE_DISPATCH
         self.active_tasks: int = active_tasks
@@ -84,7 +84,7 @@ class RepairStation(MasterStation):
     A repair station responsible for repairing damaged systems or units.
     """
 
-    def __init__(self, station_id: int, system: str, repair_capacity: int):
+    def __init__(self, station_id: int, system: str, repair_capacity: int) -> None:
         super().__init__(station_id, system)
         self.station_type = StationType.REPAIR_SERVICE
         self.repair_capacity: int = repair_capacity

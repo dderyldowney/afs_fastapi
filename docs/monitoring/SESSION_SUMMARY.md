@@ -112,7 +112,7 @@ NEW COMMAND → Automatic Updates:
 ├─ AGENTS.md
 ├─ CLAUDE.md
 ├─ .claude/COMMANDNAME_COMMAND_UNIVERSAL.md
-├─ .claude/commands/commandname
+├─ ToDoWrite/configs/commands/commandname
 └─ tests/unit/test_commandname.py
 ```
 
@@ -153,7 +153,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 
 **All AI agents** can execute these commands with persistent cross-session knowledge transfer and consistent functionality across platforms.
 
-**Command trigger files**: All commands documented in `.claude/commands/` directory with complete specifications.
+**Command trigger files**: All commands documented in `ToDoWrite/configs/commands/` directory with complete specifications.
 
 ### Session Initialization & State Management
 
@@ -171,7 +171,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 - Maintains dual-purpose educational and functional mission
 - 6-phase initialization architecture (automatic hook + manual fallback)
 
-**Reference**: [docs/EXECUTION_ORDER.md](docs/EXECUTION_ORDER.md), [.claude/commands/loadsession.md](.claude/commands/loadsession.md)
+**Reference**: [docs/EXECUTION_ORDER.md](docs/EXECUTION_ORDER.md), [docs/commands/loadsession.md](docs/commands/loadsession.md)
 
 #### savesession
 
@@ -187,7 +187,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 - Prevents knowledge fragmentation across sessions
 - Ensures SESSION_SUMMARY.md remains authoritative source
 
-**Reference**: [.claude/commands/savesession.md](.claude/commands/savesession.md)
+**Reference**: [docs/commands/savesession.md](docs/commands/savesession.md)
 
 #### saveandpush
 
@@ -214,7 +214,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 
 **Essential for**: Cross-agent infrastructure sharing, ISO 11783/18497 compliance maintenance, automated session state preservation, and elimination of manual 8-step workflows.
 
-**Reference**: [.claude/commands/saveandpush.md](.claude/commands/saveandpush.md)
+**Reference**: [ToDoWrite/configs/commands/saveandpush.md](ToDoWrite/configs/commands/saveandpush.md)
 
 ### Testing & Quality Assurance
 
@@ -236,7 +236,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 5. Agricultural Context
 6. Advisory Notes
 
-**Reference**: [.claude/commands/runtests.md](.claude/commands/runtests.md)
+**Reference**: [ToDoWrite/configs/commands/runtests.md](ToDoWrite/configs/commands/runtests.md)
 
 ### Documentation Management
 
@@ -254,7 +254,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 - Essential for ISO compliance planning and stakeholder communication
 - Synthesizes strategic assessment from distributed platform state
 
-**Reference**: [.claude/commands/whereweare.md](.claude/commands/whereweare.md)
+**Reference**: [ToDoWrite/configs/commands/whereweare.md](ToDoWrite/configs/commands/whereweare.md)
 
 #### updatedocs
 
@@ -278,7 +278,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 
 **Essential for**: ISO compliance auditing (ISO 11783, ISO 18497), stakeholder communication, synchronized platform state.
 
-**Reference**: [.claude/commands/updatedocs.md](.claude/commands/updatedocs.md)
+**Reference**: [ToDoWrite/configs/commands/updatedocs.md](ToDoWrite/configs/commands/updatedocs.md)
 
 #### updatechangelog
 
@@ -294,7 +294,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 - Hash-range protection prevents infinite regeneration loops
 - Mandatory inclusion in all commits
 
-**Reference**: [.claude/commands/updatechangelog.md](.claude/commands/updatechangelog.md)
+**Reference**: [ToDoWrite/configs/commands/updatechangelog.md](ToDoWrite/configs/commands/updatechangelog.md)
 
 #### updatewebdocs
 
@@ -312,7 +312,7 @@ These standards ensure interoperability, safety, and regulatory compliance acros
 
 **Essential for**: Equipment operators, safety engineers, compliance auditors accessing documentation via browsers.
 
-**Reference**: [.claude/commands/updatewebdocs.md](.claude/commands/updatewebdocs.md)
+**Reference**: [ToDoWrite/configs/commands/updatewebdocs.md](ToDoWrite/configs/commands/updatewebdocs.md)
 
 ---
 

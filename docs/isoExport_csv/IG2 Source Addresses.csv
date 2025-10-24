@@ -1,0 +1,14 @@
+﻿source_address_id,device_class,device_class_instance,name,notes,function_instance,ecu_instance,date_created_or_modified
+128,,,"thru 235 are reserved by ISO for the self-configurable address capability","All devices in IG2 using preferred addresses shall be self-configurable.  IG2 devices shall include the value of the first full 32 bits of NAME field.  The self-configurable address capability is specified in ISO 11783-5",,,2020-09-21
+236,0,0,"Data Logger","A data logging server that provides the LOG functionality as specified in ISO 11783-10",0,0,2020-09-21
+237,0,0,"TIM Server","Control function that represents a Tractor Implement Management (TIM) Server.  TIM is an Operator Assistance System that enables TIM clients to request the control of certain TIM functions (for example speed, steering, hitch, PTO, hydraulic valves, etc.) from TIM servers.",0,0,2018-02-02
+238,0,0,"Sequence Controller","The master in the Sequence Control System as defined in ISO11783-14",0,0,2015-11-05
+239,0,0,"Position Control","Multiple axis position control of a devices movable device elements",0,0,2015-11-05
+240,0,0,"Tractor ECU","A gateway (see ISO 11783-4) between the tractor and the implement bus representing the tractor and its messages on the 11783 network",0,0,2015-11-05
+241,7,0,"Tailings Monitoring","Monitoring of the quantity of unthreshed material returned to threshing machine",0,0,2015-11-05
+242,7,0,"Header Control","Control of the headers reel rate and material delivery rate",0,0,2015-11-05
+243,7,0,"Product Loss Monitoring","Monitoring of the amount of produce being lost from e.g. a harvesting process",0,0,2015-11-05
+244,7,0,"Product Moisture Sensing","Monitoring of the produce moisture content",0,0,2015-11-05
+245,0,0,"Non Virtual Terminal Display (Implement Bus)","A non Virtual Terminal cab display connected to the implement bus",0,0,2001-10-05
+246,0,0,"Operator Controls - Machine Specific","Non auxiliary operator control inputs ",0,0,2015-11-05
+247,0,0,"Task Control (Mapping Computer)","A control function on the 11783 network that is responsible for the sending, receiving and logging of process data",0,0,2015-11-05

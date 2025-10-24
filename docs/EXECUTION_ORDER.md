@@ -462,7 +462,7 @@ Applies to: Claude, GPT, Gemini, Copilot, CodeWhisperer, all AI agents
 
 ### 6.1 Command Documentation
 
-**Directory**: [.claude/commands/](../.claude/commands/)
+**Directory**: [ToDoWrite/configs/commands/](../ToDoWrite/configs/commands/)
 
 **Files**:
 - `loadsession.md` - Command usage documentation

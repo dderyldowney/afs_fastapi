@@ -15,7 +15,6 @@ from datetime import UTC, datetime
 from typing import Any
 
 from sqlalchemy import (
-    Column,
     DateTime,
     Float,
     ForeignKey,
@@ -26,14 +25,12 @@ from sqlalchemy import (
     create_engine,
     event,
 )
-from sqlalchemy.orm import DeclarativeBase, declarative_base, relationship
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy.types import TypeDecorator
 
-Base = declarative_base()
 
-
-class BaseModel(DeclarativeBase):
-    """Base model for type-safe SQLAlchemy models."""
+class Base(DeclarativeBase):
+    """Base model for type-safe SQLAlchemy 2.0 models."""
 
     pass
 
@@ -57,7 +54,7 @@ class JSONType(TypeDecorator):
         return value
 
 
-class Equipment(Base):  # type: ignore[misc, valid-type]
+class Equipment(Base):
     """Equipment registry for ISOBUS-compatible agricultural machinery.
 
     Stores metadata for tractors, implements, and other agricultural equipment
@@ -66,24 +63,40 @@ class Equipment(Base):  # type: ignore[misc, valid-type]
 
     __tablename__ = "equipment"
 
-    equipment_id = Column(String(50), primary_key=True)
-    isobus_address = Column(Integer, unique=True, nullable=False)
-    equipment_type = Column(String(20), nullable=False)  # tractor, implement, sensor
-    manufacturer = Column(String(50), nullable=False)
-    model = Column(String(50), nullable=True)
-    serial_number = Column(String(100), nullable=True)
-    firmware_version = Column(String(20), nullable=True)
-    installation_date = Column(DateTime, nullable=True)
-    status = Column(String(20), default="active")  # active, maintenance, retired
-    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
-    updated_at = Column(DateTime, onupdate=lambda: datetime.now(UTC))
+    equipment_id: Mapped[str] = mapped_column(String(50), primary_key=True)
+    isobus_address: Mapped[int] = mapped_column(Integer, unique=True, nullable=False)
+    equipment_type: Mapped[str] = mapped_column(
+        String(20), nullable=False
+    )  # tractor, implement, sensor
+    manufacturer: Mapped[str] = mapped_column(String(50), nullable=False)
+    model: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    serial_number: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    firmware_version: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    installation_date: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    status: Mapped[str] = mapped_column(
+        String(20), default="active"
+    )  # active, maintenance, retired
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(UTC))
+    updated_at: Mapped[datetime | None] = mapped_column(
+        DateTime, onupdate=lambda: datetime.now(UTC)
+    )
 
     # Relationships
-    isobus_messages = relationship("ISOBUSMessageRecord", back_populates="equipment")
-    sensor_records = relationship("AgriculturalSensorRecord", back_populates="equipment")
-    telemetry_records = relationship("TractorTelemetryRecord", back_populates="equipment")
-    yield_records = relationship("YieldMonitorRecord", back_populates="equipment")
-    operational_sessions = relationship("OperationalSession", back_populates="equipment")
+    isobus_messages: Mapped[list[ISOBUSMessageRecord]] = relationship(
+        "ISOBUSMessageRecord", back_populates="equipment"
+    )
+    sensor_records: Mapped[list[AgriculturalSensorRecord]] = relationship(
+        "AgriculturalSensorRecord", back_populates="equipment"
+    )
+    telemetry_records: Mapped[list[TractorTelemetryRecord]] = relationship(
+        "TractorTelemetryRecord", back_populates="equipment"
+    )
+    yield_records: Mapped[list[YieldMonitorRecord]] = relationship(
+        "YieldMonitorRecord", back_populates="equipment"
+    )
+    operational_sessions: Mapped[list[OperationalSession]] = relationship(
+        "OperationalSession", back_populates="equipment"
+    )
 
     # Indexes for performance
     __table_args__ = (
@@ -92,7 +105,7 @@ class Equipment(Base):  # type: ignore[misc, valid-type]
     )
 
 
-class Field(Base):  # type: ignore[misc, valid-type]
+class Field(Base):
     """Agricultural field boundaries and metadata for operation planning.
 
     Stores field information including GPS boundaries, crop types, and soil
@@ -101,24 +114,32 @@ class Field(Base):  # type: ignore[misc, valid-type]
 
     __tablename__ = "fields"
 
-    field_id = Column(String(50), primary_key=True)
-    field_name = Column(String(100), nullable=False)
-    crop_type = Column(String(30), nullable=True)
-    field_area_hectares = Column(Float, nullable=True)
-    boundary_coordinates = Column(JSONType, nullable=True)  # List of (lat, lon) tuples
-    soil_type = Column(String(30), nullable=True)
-    drainage_class = Column(String(30), nullable=True)
-    elevation_meters = Column(Float, nullable=True)
-    slope_percentage = Column(Float, nullable=True)
-    created_date = Column(DateTime, default=lambda: datetime.now(UTC))
-    last_updated = Column(
+    field_id: Mapped[str] = mapped_column(String(50), primary_key=True)
+    field_name: Mapped[str] = mapped_column(String(100), nullable=False)
+    crop_type: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    field_area_hectares: Mapped[float | None] = mapped_column(Float, nullable=True)
+    boundary_coordinates: Mapped[list | None] = mapped_column(
+        JSONType, nullable=True
+    )  # List of (lat, lon) tuples
+    soil_type: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    drainage_class: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    elevation_meters: Mapped[float | None] = mapped_column(Float, nullable=True)
+    slope_percentage: Mapped[float | None] = mapped_column(Float, nullable=True)
+    created_date: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(UTC))
+    last_updated: Mapped[datetime] = mapped_column(
         DateTime, default=lambda: datetime.now(UTC), onupdate=lambda: datetime.now(UTC)
     )
 
     # Relationships
-    sensor_records = relationship("AgriculturalSensorRecord", back_populates="field")
-    yield_records = relationship("YieldMonitorRecord", back_populates="field")
-    operational_sessions = relationship("OperationalSession", back_populates="field")
+    sensor_records: Mapped[list[AgriculturalSensorRecord]] = relationship(
+        "AgriculturalSensorRecord", back_populates="field"
+    )
+    yield_records: Mapped[list[YieldMonitorRecord]] = relationship(
+        "YieldMonitorRecord", back_populates="field"
+    )
+    operational_sessions: Mapped[list[OperationalSession]] = relationship(
+        "OperationalSession", back_populates="field"
+    )
 
     # Indexes for geographic and crop queries
     __table_args__ = (
@@ -127,7 +148,7 @@ class Field(Base):  # type: ignore[misc, valid-type]
     )
 
 
-class ISOBUSMessageRecord(Base):  # type: ignore[misc, valid-type]
+class ISOBUSMessageRecord(Base):
     """Time-series storage for ISOBUS messages with high-frequency capability.
 
     Stores raw ISOBUS communication messages for fleet coordination,
@@ -136,19 +157,23 @@ class ISOBUSMessageRecord(Base):  # type: ignore[misc, valid-type]
 
     __tablename__ = "isobus_messages"
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
 
-    timestamp = Column(DateTime, nullable=False, index=True)
-    equipment_id = Column(String(50), ForeignKey("equipment.equipment_id"), nullable=False)
-    pgn = Column(Integer, nullable=False)  # Parameter Group Number
-    source_address = Column(Integer, nullable=False)
-    destination_address = Column(Integer, nullable=False)
-    data_payload = Column(JSONType, nullable=True)  # Parsed message data
-    priority_level = Column(Integer, nullable=False, default=0)
-    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
+    timestamp: Mapped[datetime] = mapped_column(DateTime, nullable=False, index=True)
+    equipment_id: Mapped[str] = mapped_column(
+        String(50), ForeignKey("equipment.equipment_id"), nullable=False
+    )
+    pgn: Mapped[int] = mapped_column(Integer, nullable=False)  # Parameter Group Number
+    source_address: Mapped[int] = mapped_column(Integer, nullable=False)
+    destination_address: Mapped[int] = mapped_column(Integer, nullable=False)
+    data_payload: Mapped[dict | None] = mapped_column(
+        JSONType, nullable=True
+    )  # Parsed message data
+    priority_level: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(UTC))
 
     # Relationships
-    equipment = relationship("Equipment", back_populates="isobus_messages")
+    equipment: Mapped[Equipment] = relationship("Equipment", back_populates="isobus_messages")
 
     # Time-series optimized indexes
     __table_args__ = (
@@ -158,7 +183,7 @@ class ISOBUSMessageRecord(Base):  # type: ignore[misc, valid-type]
     )
 
 
-class AgriculturalSensorRecord(Base):  # type: ignore[misc, valid-type]
+class AgriculturalSensorRecord(Base):
     """Time-series storage for agricultural sensor data with field mapping.
 
     Stores sensor readings from various agricultural monitoring systems
@@ -167,23 +192,29 @@ class AgriculturalSensorRecord(Base):  # type: ignore[misc, valid-type]
 
     __tablename__ = "agricultural_sensor_data"
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
 
-    timestamp = Column(DateTime, nullable=False, index=True)
-    equipment_id = Column(String(50), ForeignKey("equipment.equipment_id"), nullable=False)
-    field_id = Column(String(50), ForeignKey("fields.field_id"), nullable=True)
-    sensor_type = Column(String(30), nullable=False)
-    sensor_value = Column(Float, nullable=False)
-    unit = Column(String(20), nullable=False)
-    gps_latitude = Column(Float, nullable=True)
-    gps_longitude = Column(Float, nullable=True)
-    quality_indicator = Column(String(20), default="good")  # good, warning, error
-    calibration_date = Column(DateTime, nullable=True)
-    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
+    timestamp: Mapped[datetime] = mapped_column(DateTime, nullable=False, index=True)
+    equipment_id: Mapped[str] = mapped_column(
+        String(50), ForeignKey("equipment.equipment_id"), nullable=False
+    )
+    field_id: Mapped[str | None] = mapped_column(
+        String(50), ForeignKey("fields.field_id"), nullable=True
+    )
+    sensor_type: Mapped[str] = mapped_column(String(30), nullable=False)
+    sensor_value: Mapped[float] = mapped_column(Float, nullable=False)
+    unit: Mapped[str] = mapped_column(String(20), nullable=False)
+    gps_latitude: Mapped[float | None] = mapped_column(Float, nullable=True)
+    gps_longitude: Mapped[float | None] = mapped_column(Float, nullable=True)
+    quality_indicator: Mapped[str] = mapped_column(
+        String(20), default="good"
+    )  # good, warning, error
+    calibration_date: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(UTC))
 
     # Relationships
-    equipment = relationship("Equipment", back_populates="sensor_records")
-    field = relationship("Field", back_populates="sensor_records")
+    equipment: Mapped[Equipment] = relationship("Equipment", back_populates="sensor_records")
+    field: Mapped[Field | None] = relationship("Field", back_populates="sensor_records")
 
     # Sensor analytics optimized indexes
     __table_args__ = (
@@ -194,7 +225,7 @@ class AgriculturalSensorRecord(Base):  # type: ignore[misc, valid-type]
     )
 
 
-class TractorTelemetryRecord(Base):  # type: ignore[misc, valid-type]
+class TractorTelemetryRecord(Base):
     """Time-series storage for tractor operational telemetry data.
 
     Stores real-time tractor operational parameters for fleet monitoring,
@@ -203,22 +234,24 @@ class TractorTelemetryRecord(Base):  # type: ignore[misc, valid-type]
 
     __tablename__ = "tractor_telemetry"
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
 
-    timestamp = Column(DateTime, nullable=False, index=True)
-    equipment_id = Column(String(50), ForeignKey("equipment.equipment_id"), nullable=False)
-    vehicle_speed = Column(Float, nullable=False)  # km/h
-    fuel_level = Column(Float, nullable=False)  # percent (0-100)
-    engine_temperature = Column(Float, nullable=False)  # celsius
-    gps_latitude = Column(Float, nullable=True)
-    gps_longitude = Column(Float, nullable=True)
-    operational_mode = Column(String(30), nullable=False)
-    engine_hours = Column(Float, nullable=True)
-    hydraulic_pressure = Column(Float, nullable=True)  # bar
-    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
+    timestamp: Mapped[datetime] = mapped_column(DateTime, nullable=False, index=True)
+    equipment_id: Mapped[str] = mapped_column(
+        String(50), ForeignKey("equipment.equipment_id"), nullable=False
+    )
+    vehicle_speed: Mapped[float] = mapped_column(Float, nullable=False)  # km/h
+    fuel_level: Mapped[float] = mapped_column(Float, nullable=False)  # percent (0-100)
+    engine_temperature: Mapped[float] = mapped_column(Float, nullable=False)  # celsius
+    gps_latitude: Mapped[float | None] = mapped_column(Float, nullable=True)
+    gps_longitude: Mapped[float | None] = mapped_column(Float, nullable=True)
+    operational_mode: Mapped[str] = mapped_column(String(30), nullable=False)
+    engine_hours: Mapped[float | None] = mapped_column(Float, nullable=True)
+    hydraulic_pressure: Mapped[float | None] = mapped_column(Float, nullable=True)  # bar
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(UTC))
 
     # Relationships
-    equipment = relationship("Equipment", back_populates="telemetry_records")
+    equipment: Mapped[Equipment] = relationship("Equipment", back_populates="telemetry_records")
 
     # Telemetry analytics optimized indexes
     __table_args__ = (
@@ -229,7 +262,7 @@ class TractorTelemetryRecord(Base):  # type: ignore[misc, valid-type]
     )
 
 
-class YieldMonitorRecord(Base):  # type: ignore[misc, valid-type]
+class YieldMonitorRecord(Base):
     """Time-series storage for yield monitoring data from harvest operations.
 
     Stores harvest yield information with GPS mapping for precision
@@ -238,23 +271,27 @@ class YieldMonitorRecord(Base):  # type: ignore[misc, valid-type]
 
     __tablename__ = "yield_monitor_data"
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    timestamp = Column(DateTime, nullable=False, index=True)
-    equipment_id = Column(String(50), ForeignKey("equipment.equipment_id"), nullable=False)
-    field_id = Column(String(50), ForeignKey("fields.field_id"), nullable=True)
-    crop_type = Column(String(30), nullable=False)
-    yield_volume = Column(Float, nullable=False)  # tons per hectare
-    moisture_content = Column(Float, nullable=False)  # percent
-    gps_latitude = Column(Float, nullable=False)
-    gps_longitude = Column(Float, nullable=False)
-    harvest_width = Column(Float, nullable=False)  # meters
-    harvest_speed = Column(Float, nullable=False)  # km/h
-    grain_temperature = Column(Float, nullable=True)  # celsius
-    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    timestamp: Mapped[datetime] = mapped_column(DateTime, nullable=False, index=True)
+    equipment_id: Mapped[str] = mapped_column(
+        String(50), ForeignKey("equipment.equipment_id"), nullable=False
+    )
+    field_id: Mapped[str | None] = mapped_column(
+        String(50), ForeignKey("fields.field_id"), nullable=True
+    )
+    crop_type: Mapped[str] = mapped_column(String(30), nullable=False)
+    yield_volume: Mapped[float] = mapped_column(Float, nullable=False)  # tons per hectare
+    moisture_content: Mapped[float] = mapped_column(Float, nullable=False)  # percent
+    gps_latitude: Mapped[float] = mapped_column(Float, nullable=False)
+    gps_longitude: Mapped[float] = mapped_column(Float, nullable=False)
+    harvest_width: Mapped[float] = mapped_column(Float, nullable=False)  # meters
+    harvest_speed: Mapped[float] = mapped_column(Float, nullable=False)  # km/h
+    grain_temperature: Mapped[float | None] = mapped_column(Float, nullable=True)  # celsius
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(UTC))
 
     # Relationships
-    equipment = relationship("Equipment", back_populates="yield_records")
-    field = relationship("Field", back_populates="yield_records")
+    equipment: Mapped[Equipment] = relationship("Equipment", back_populates="yield_records")
+    field: Mapped[Field | None] = relationship("Field", back_populates="yield_records")
 
     # Yield analytics optimized indexes
     __table_args__ = (
@@ -265,7 +302,7 @@ class YieldMonitorRecord(Base):  # type: ignore[misc, valid-type]
     )
 
 
-class OperationalSession(Base):  # type: ignore[misc, valid-type]
+class OperationalSession(Base):
     """Operational session tracking for agricultural field operations.
 
     Tracks complete field operations from start to finish with performance
@@ -274,29 +311,39 @@ class OperationalSession(Base):  # type: ignore[misc, valid-type]
 
     __tablename__ = "operational_sessions"
 
-    session_id = Column(String(50), primary_key=True)
-    equipment_id = Column(String(50), ForeignKey("equipment.equipment_id"), nullable=False)
-    field_id = Column(String(50), ForeignKey("fields.field_id"), nullable=True)
-    operation_type = Column(String(30), nullable=False)  # planting, cultivation, harvesting
-    start_time = Column(DateTime, nullable=False)
-    end_time = Column(DateTime, nullable=True)
-    total_area_covered = Column(Float, nullable=True)  # hectares
-    total_yield = Column(Float, nullable=True)  # tons (for harvest operations)
-    average_speed = Column(Float, nullable=True)  # km/h
-    fuel_consumed = Column(Float, nullable=True)  # liters
-    operator_id = Column(String(50), nullable=True)
-    weather_conditions = Column(String(100), nullable=True)
-    soil_conditions = Column(String(100), nullable=True)
-    notes = Column(Text, nullable=True)
-    session_status = Column(String(20), default="active")  # active, completed, aborted
-    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
-    updated_at = Column(
+    session_id: Mapped[str] = mapped_column(String(50), primary_key=True)
+    equipment_id: Mapped[str] = mapped_column(
+        String(50), ForeignKey("equipment.equipment_id"), nullable=False
+    )
+    field_id: Mapped[str | None] = mapped_column(
+        String(50), ForeignKey("fields.field_id"), nullable=True
+    )
+    operation_type: Mapped[str] = mapped_column(
+        String(30), nullable=False
+    )  # planting, cultivation, harvesting
+    start_time: Mapped[datetime] = mapped_column(DateTime, nullable=False)
+    end_time: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    total_area_covered: Mapped[float | None] = mapped_column(Float, nullable=True)  # hectares
+    total_yield: Mapped[float | None] = mapped_column(
+        Float, nullable=True
+    )  # tons (for harvest operations)
+    average_speed: Mapped[float | None] = mapped_column(Float, nullable=True)  # km/h
+    fuel_consumed: Mapped[float | None] = mapped_column(Float, nullable=True)  # liters
+    operator_id: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    weather_conditions: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    soil_conditions: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    notes: Mapped[str | None] = mapped_column(Text, nullable=True)
+    session_status: Mapped[str] = mapped_column(
+        String(20), default="active"
+    )  # active, completed, aborted
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(UTC))
+    updated_at: Mapped[datetime] = mapped_column(
         DateTime, default=lambda: datetime.now(UTC), onupdate=lambda: datetime.now(UTC)
     )
 
     # Relationships
-    equipment = relationship("Equipment", back_populates="operational_sessions")
-    field = relationship("Field", back_populates="operational_sessions")
+    equipment: Mapped[Equipment] = relationship("Equipment", back_populates="operational_sessions")
+    field: Mapped[Field | None] = relationship("Field", back_populates="operational_sessions")
 
     # Operation analytics optimized indexes
     __table_args__ = (
@@ -331,7 +378,7 @@ def get_database_engine(database_url: str = "sqlite:///agricultural_data.db") ->
     if "sqlite" in database_url:
 
         @event.listens_for(engine, "connect")
-        def configure_sqlite(dbapi_connection, connection_record):
+        def configure_sqlite(dbapi_connection: Any, connection_record: Any) -> None:
             """Configure SQLite for time-series performance."""
             cursor = dbapi_connection.cursor()
             # Enable Write-Ahead Logging for better concurrency

@@ -1,0 +1,111 @@
+﻿source_address_id,name,notes,date_created_or_modified
+0,"Engine #1","The #1 on the Engine CA is to identify that this is the first PA being used for the particular function, Engine. It may only be used for the NAME Function of 0, Function Instance 0, and an ecu instance of 0, which is commonly know as the “first engine”.",
+1,"Engine #2","The #2 on the Engine CA is to identify that this is the second PA available for use for the  function, Engine. It may be used by the “second” engine (Function 0, Function Instance 1, ECU Instance 0), but it may also be used by the second ecu on the first engine (Function 0, Function Instance 0, ECU Instance 1), if there is no second engine.",
+2,Turbocharger,"Turbocharger used on the engine.  May only be used for the NAME Function of 133, Industry Group 0, Vehicle System 0.",2004-02-19
+3,"Transmission #1","The first transmission - may only be used for the NAME Function of 3, Function Instance 0, and an ecu instance of 0.",
+4,"Transmission #2","The second PA available for use for the function, Transmission. It may be used by the “second” transmission (Function 3, Function Instance 1, ECU Instance 0), but it may also be used by the second ecu on the first transmission (Function 3, Function Instance 0, ECU Instance 1), if there is no second transmission.",
+5,"Shift Console - Primary","The shift console mounted in the normal drivers position",
+6,"Shift Console - Secondary","A shift console mounted remotely from the normal drivers position (May not be used for any ecu instances of the primary shift console)",
+7,"Power TakeOff - (Main or Rear)",,
+8,"Axle - Steering",,
+9,"Axle - Drive #1","The first drive axle - may only be used for the NAME Function of 8, Function Instance 0, and an ecu instance of 0.",
+10,"Axle - Drive #2","The second PA available for use for the  function, Axle, Drive. It may be used by the “second” drive axle (Function 8, Function Instance 1, ECU Instance 0), but it may also be used by the second ecu on the first drive axle (Function 8, Function Instance 0, ECU Instance 1), if there is no second drive axle.",
+11,"Brakes - System Controller",,
+12,"Brakes - Steer Axle",,
+13,"Brakes - Drive axle #1","The brakes on the first drive axle - may only be used for the NAME Function of 11, Function Instance 0, and an ecu instance of 0.",
+14,"Brakes - Drive Axle #2","The second PA available for use for the function, Brakes on a Drive Axle. It may be used by the “second” drive axle brakes (Function 11, Function Instance 1, ECU Instance 0), but it may also be used by the second ecu on the first drive axle brakes (Function 11, Function Instance 0, ECU Instance 1), if there is no second drive axle brakes.",
+15,"Retarder - Engine","Engine Compression Braking",
+16,"Retarder - Driveline",,
+17,"Cruise Control","Speed-based control",
+18,"Fuel System",,
+19,"Steering Controller",,
+20,"Suspension - Steer Axle",,
+21,"Suspension - Drive Axle #1","The suspension on the first drive axle - may only be used for the NAME Function of 18, Function Instance 0, and an ecu instance of 0.",
+22,"Suspension - Drive Axle #2","The second PA available for use for the  function, suspension on drive axle. It may be used by the “second” drive axle’s suspension system (Function 18, Function Instance 1, ECU Instance 0), but when there is no second drive axle it may be used by the second ecu on the first drive axle’s suspension (Function 18, Function Instance 0, ECU Instance 1).",
+23,"Instrument Cluster #1","The first instrument cluster - may only be used for the NAME Function of 19, Function Instance 0, and an ecu instance of 0.",2001-06-17
+24,"Trip Recorder",,
+25,"Passenger-Operator Climate Control #1","The first climate control - may only be used for the NAME Function of 21, Function Instance 0, and an ecu instance of 0, and must be associated with the driver (operator) climate control, when there are multiple climate control systems.",
+26,"Alternator/Electrical Charging System","Vehicle's primary charging controller",2000-02-10
+27,"Aerodynamic Control",,
+28,"Vehicle Navigation",,
+29,"Vehicle Security",,
+30,"Electrical System","This may include Load Centers, Fuseboxes, & Power Distribution boards",2003-11-19
+31,"Starter System",,
+32,"Tractor-Trailer Bridge #1","The first Tractor mounted bridge leading to trailer(s) - may only be used for the NAME Function of , Function Instance 0, and an ecu instance of 0.",1999-02-10
+33,"Body Controller",,
+34,"Auxiliary Valve Control or Engine Air System Valve Control","This should be used for auxiliary valve control or engine air system valve control.  May be used with NAME Function 142, 143, 144, 146, 147, or 148 in Industry group 0, Vehicle system group 0.",2017-11-16
+35,"Hitch Control","Straight truck hitch (NOT Ag hitch – it is in IG 2)",
+36,"Power TakeOff (Front or Secondary)",,
+37,"Off Vehicle Gateway","General gateway controller (off board to on board) that may include, but not limited to, an Electric Vehicle Communication Controller (EVCC).",2020-05-07
+38,"Virtual Terminal (in cab)",,
+39,"Management Computer #1","The first Management Computer - may only be used for the NAME Function of 30, Function Instance 0, and an ecu instance of 0.",1999-02-10
+40,"Cab Display #1","The first Cab Display - may only be used for the NAME Function of 60, Function Instance 0, and an ecu instance of 0.",2001-06-17
+41,"Retarder, Exhaust, Engine #1","The first engine exhaust retarder - may only be used for the NAME Function of 12, Function Instance 0, and an ecu instance of 0.",
+42,"Headway Controller","Forward-looking collision warning, collision avoidance, speed controller, or speed matching",
+43,"On-Board Diagnostic Unit",,
+44,"Retarder, Exhaust, Engine #2","The second PA available for use for the function, engine exhaust retarder.  It may be used by the “second” engine’s exhaust retarder (Function 12, Function Instance 1, ECU Instance 0), but in cases without a second engine it may also be used by the second exhaust retarder on the first engine or by the second ecu on the first exhaust retarder on the first engine (Function 12, Function Instance 0, ECU Instance 1).",
+45,"Endurance Braking System",,
+46,"Hydraulic Pump Controller",,
+47,"Suspension - System Controller #1","The first Suspension - System Controller - may only be used for the NAME Function of 35, Function Instance 0, and an ecu instance of 0.",
+48,"Pneumatic - System Controller",,
+49,"Cab Controller - Primary",,
+50,"Cab Controller - Secondary",,
+51,"Tire Pressure Controller",,
+52,"Ignition Control Module #1","The first Ignition Control Module - may only be used for the NAME Function of 39, Function Instance 0, and an ecu instance of 0.",
+53,"Ignition Control Module #2","The second SA available for use with the Global Function, Ignition Control Module (39). It may be used as an Ignition Control Module by a second engine on the same network (Function 39, Function Instance 1, ECU Instance 0). In cases without a second engine where there are two Ignition Control Modules on_x000D_
+one engine this SA should be used with Function 39, Function Instance 0, ECU Instance 1 to set it apart from the first instance.",2018-08-09
+54,"Seat Control #1","The first seat control module - may only be used for the NAME Function of 40, Function Instance 0, and an ecu instance of 0, and must be associated with the driver seat, when there are multiple seats with separate controls.",2000-08-10
+55,"Lighting - Operator Controls",,
+56,"Rear Axle Steering Controller #1",,
+57,"Water Pump Controller",,
+58,"Passenger-Operator Climate Control #2","The second SA available for climate control - must be associated with the passenger climate control (NAME Function of 21, function instance 1, and an ecu instance of 0), when there are multiple climate control systems.  If only one climate control system then may be used for the second ecu of the climate control (Function 21, Function Instance 0, ECU Instance of 1).",2018-08-09
+59,"Transmission Display - Primary","Display to operate specifically in conjunction with the transmission control mounted in the normal drivers position",
+60,"Transmission Display - Secondary","Secondary display to operate specifically in conjunction with the transmission control mounted remotely from the normal drivers position (May not be used for any ecu instances of the primary transmission display)",
+61,"Exhaust Emission Controller",,1999-02-10
+62,"Vehicle Dynamic Stability Controller",,1999-02-10
+63,"Oil Sensor",,1999-05-20
+64,"Suspension - System Controller #2",,1999-05-20
+65,"Information System Controller #1","The first Information System Controller - may only be used for the NAME Function of 47, Function Instance 0, and an ecu instance of 0.",1999-05-20
+66,"Ramp Control","Control of ramps, lifts, or tailgates",1999-05-20
+67,"Clutch/Converter Unit","Control of either the clutch and/or converter",1999-05-20
+68,"Auxiliary Heater #1","The first Auxiliary Heater - may only be used for the NAME Function of 50, Function Instance 0, and an ecu instance of 0.",1999-05-20
+69,"Auxiliary Heater #2","The second PA available for auxiliary heater - must be associated with the second auxiliary heater control (NAME Function of 50, Function Instance 1, and an ecu instance of 0), when there are multiple auxiliary heaters.  If only one auxiliary heater control on the vehicle then may be used for the second ecu of the first auxiliary heater (Function 50, Function Instance 0, ECU Instance of 1).",1999-05-20
+70,"Engine Valve Controller","Electronic control used to control actuation of engine intake and/or exhaust valves",2001-06-17
+71,"Chassis Controller #1","The first Chassis Controller - may only be used for the NAME Function of 52, Function Instance 0, and an ecu instance of 0.",1999-11-11
+72,"Chassis Controller #2","The second PA available for chassis control - must be associated with the second chassis (NAME Function of 52, Function Instance 1, and an ecu instance of 0), when there are multiple chassis.  If only one chassis on the vehicle then may be used for the second ecu of the first chassis (Function 52, Function Instance 0, ECU Instance of 1).",1999-11-11
+73,"Propulsion Battery Charger","A device used to charge propulsion batteries in an electric vehicle from an off-board source of electrical energy.",2000-02-10
+74,"Communications Unit, Cellular","Cellular communications device",2000-02-10
+75,"Communications Unit, Satellite","Satellite communications device",2000-02-10
+76,"Communications Unit, Radio","Radio communications device, either receiver only, transmitter only or transceiver",2000-02-10
+77,"Steering Column Unit","Device that gathers the operator inputs from switches/levers/etc located in and/or around the steering wheel/column",2000-02-10
+78,"Fan Drive Controller","Controls the main cooling fan operation",2000-05-11
+79,"Seat Control #2","The second PA available for seat controls - must be associated with the passenger seat (NAME Function of 40, Function Instance 1, and an ecu instance of 0), when there are multiple seats with separate controls.  If only one seat then may be used for the second ecu of the seat control (Function 40, Function Instance 0, ECU Instance of 1).",2000-08-10
+80,"Parking brake controller","Module controlling the parking brake",2003-08-21
+81,"Aftertreatment #1 system gas intake","Used for exhaust gas measurement such NOx or oxygen, etc.",2004-02-18
+82,"Aftertreatment #1 system gas outlet","Used for exhaust gas measurement such NOx or oxygen, etc.",2004-02-18
+83,"Safety Restraint System","The safety restraint system can be for controlling activation of airbags, belt tensioners, roll over protection systems, etc.",2004-02-18
+84,"Cab Display #2","The second Cab Display, this can used for supplemental displays such as retarder display, driver information display, etc.",2005-02-10
+85,"Diesel Particulate Filter Controller","Used for Diesel Particulate Filter operation and monitoring such as pressure drop, intake temperature, outlet temperature, soot loading, HC injection, etc.",2007-08-16
+86,"Aftertreatment #2 system gas intake","Used for exhaust gas measurement such as NOx or oxygen, etc. for exhaust bank #2.",2007-11-15
+87,"Aftertreatment #2 system gas outlet","Used for exhaust gas measurement such NOx or oxygen, etc. for exhaust bank #2.",2007-11-15
+88,"Safety Restraint System #2","The second safety restraint system that can be for controlling activation of airbags, belt tensioners, roll over protection systems, etc.",2007-11-15
+89,"Atmospheric Sensor","Used for sensors which measure conditions such as air temperature, pressure and/or humidity",2007-11-15
+90,"Powertrain Control Module","Electronic control module in charge of controlling and coordinating the operation of a hybrid propulsion system.",2013-01-01
+91,"Power Systems Manager","This controller application will be used to manage one or more power systems. It might exist in an ECU with no other controller applications, or it might exist in an ECU with multiple controller applications",2013-02-28
+92,"Engine Injection Control Module","For use with an Injection Control Module (function 85) to inject liquid or gaseous fuel via port or direct injection for combustion use.",2017-11-16
+93,"Fire Protection System","Controller for Fire Detection and Fire Extinguishing",2018-08-09
+94,"Driver Impairment Device","Device which prevents the starting of a vehicle motor due to driver impairment (e.g. Alcohol Interlock)",2019-05-16
+95,"Supply Equipment Communication Controller (SECC)","Typically part of an Electrical Vehicle Supply Equipment (EVSE) in an electric vehicle charging station.",2021-08-11
+96,"Vehicle Adapter Communication Controller (VACC)","A controller inside of the adapter placed between an Electric Vehicle Supply Equipment (EVSE) vehicle connector and the vehicle inlet.",2021-08-11
+97,"Fuel Cell System 1","The controller application that controls the first fuel cell system, including managing the fuel cell stack(s) and balance of plant (BoP) devices.",2024-08-09
+98,"Fuel Cell System 2","The controller application that controls the second fuel cell system, including managing the fuel cell stack(s) and balance of plant (BoP) devices.",2024-08-09
+99,"thru 127 are reserved for future assignment by SAE",,
+128,"thru 247","Used for dynamic address assignment",2017-08-10
+248,"File Server / Printer","On-board file and/or print server",2001-06-17
+249,"Off Board Diagnostic-Service Tool #1","The address for the first off board diagnostic service tool - may only be used for the NAME Function of 129, Industry Group 0, Function Instance 0, and an ECU instance of 0.",
+250,"Off Board Diagnostic-Service Tool #2","The second preferred address available for use for the function “Off Board Diagnostic-Service Tool”. It should only be used by the “second” Off Board Diagnostic-Service Tool (Function 129, Industry Group 0, Function Instance 1, ECU Instance 0).",
+251,"On-Board Data Logger",,
+252,"Reserved for Experimental Use",,
+253,"Reserved for OEM",,
+254,"Null Address","The NULL address is only for use within J1939-81 Network Management communications to indicate the Controller Application (CA) has not yet successfully claimed an address. The NULL address is only permitted in the Source Address field of the J1939 message identifier.",2015-08-06
+255,"GLOBAL (All-Any Node)","The Global address is only is permitted in the Destination Address field of a J1939 message to indicate the J1939 message is being sent to all Controller Applications (CAs). The Global address is never permitted in the Source Address field of a J1939 message.",2015-08-06

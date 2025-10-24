@@ -9,22 +9,47 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import delete_phase  # noqa: E402
+from afs_fastapi.todos.manager import delete_node, load_todos  # noqa: E402
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Delete a phase.")
+    parser = argparse.ArgumentParser(description="Delete a Phase from the ToDoWrite system.")
     parser.add_argument("phase_id", type=str, help="The ID of the phase to delete.")
+    parser.add_argument("--confirm", action="store_true", help="Confirm deletion without prompt.")
     args = parser.parse_args()
 
-    success, error = delete_phase(args.phase_id)
+    # Verify phase exists
+    todos = load_todos()
+    phases = todos.get("Phase", [])
+    phase = None
+    for p in phases:
+        if p.id == args.phase_id:
+            phase = p
+            break
 
-    if error:
-        print(f"Error: {error}")
+    if not phase:
+        print(f"Error: Phase with ID '{args.phase_id}' not found.")
         sys.exit(1)
-    
-    if success:
-        print(f"✓ Phase ''{args.phase_id}'' deleted successfully!")
+
+    # Confirm deletion
+    if not args.confirm:
+        print(f"Are you sure you want to delete phase '{phase.title}' ({args.phase_id})? [y/N]: ", end="")
+        response = input().strip().lower()
+        if response not in ['y', 'yes']:
+            print("Deletion cancelled.")
+            sys.exit(0)
+
+    try:
+        delete_node(args.phase_id)
+        print("✓ Phase deleted successfully!")
+        print(f"  ID: {args.phase_id}")
+        print(f"  Title: {phase.title}")
+        print()
+        print("Use './bin/phase-status' to view updated phases.")
+    except Exception as e:
+        print(f"Error deleting phase: {e}")
+        sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

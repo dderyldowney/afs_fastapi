@@ -327,7 +327,7 @@ class CANTimeSeriesStorage:
                         avg_speed=row.avg_speed,
                         max_speed=row.max_speed,
                         message_count=row.message_count,
-                        data_quality_score=self._calculate_data_quality(row.message_count),
+                        data_quality_score=self._calculate_data_quality(row.message_count),  # type: ignore
                     )
                     metrics_records.append(metric_record)
 

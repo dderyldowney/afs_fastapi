@@ -2,13 +2,22 @@
 
 This document provides a comprehensive guide to the new hierarchical TODOs system used in the AFS FastAPI project. The system is designed to be accessible and manageable by both humans and AI agents, ensuring a clear and structured development workflow.
 
-## Three-Level Hierarchy
+## 12-Layer Hierarchy
 
-The TODOs system is organized into a three-level hierarchy:
+The TODOs system is organized into a 12-layer hierarchy as defined in `ToDoWrite.md`:
 
-1.  **Strategic Goals:** High-level objectives that define the long-term vision for the project.
-2.  **Phases:** A collection of tasks that represent a single development phase to achieve a part of a strategic goal.
-3.  **Tasks:** Individual, actionable steps required to complete a phase.
+1.  **Goal**
+2.  **Concept**
+3.  **Context**
+4.  **Constraints**
+5.  **Requirements**
+6.  **Acceptance Criteria**
+7.  **Interface Contract**
+8.  **Phase**
+9.  **Step**
+10. **Task**
+11. **SubTask**
+12. **Command**
 
 This structure ensures that all development work is aligned with the strategic goals of the project.
 
@@ -32,17 +41,7 @@ A set of command-line scripts are provided in the `bin` directory to manage the 
 -   `strategic-pause <goal_id>`: Pauses a pending strategic goal.
 -   `strategic-resume <goal_id>`: Resumes a paused strategic goal.
 
-### Phase Commands
 
--   `phase-list-all`: Lists all phases.
--   `phase-status`: Shows the status of the active phase.
--   `phase-start "<name>" --strategic-id <goal_id>`: Starts a new phase aligned with a strategic goal.
--   `phase-end [--force]`: Ends the active phase.
--   `phase-activate <phase_id>`: Activates a phase.
--   `phase-pause`: Pauses the active phase.
--   `phase-resume`: Resumes a paused phase.
--   `phase-delete <phase_id>`: Deletes a phase.
--   `phase-reorder <phase_id> <new_position>`: Reorders a phase within its strategic goal.
 
 ### Task Commands
 

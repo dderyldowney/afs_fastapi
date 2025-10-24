@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# type: ignore
 
 import argparse
 import sys
@@ -12,14 +13,10 @@ from afs_fastapi.todos.manager import add_phase  # noqa: E402
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Add a new phase to a goal.")
-    parser.add_argument(
-        "--goal-id", required=True, type=str, help="The ID of the goal to add the phase to."
-    )
-    parser.add_argument("--title", required=True, type=str, help="The title of the new phase.")
-    parser.add_argument(
-        "--description", required=True, type=str, help="The description of the new phase."
-    )
+    parser = argparse.ArgumentParser(description="Add a new Phase to the ToDoWrite system.")
+    parser.add_argument("title", type=str, help="The title of the phase.")
+    parser.add_argument("--description", type=str, default="", help="The description of the phase.")
+    parser.add_argument("--goal-id", type=str, required=True, help="The parent goal ID.")
     args = parser.parse_args()
 
     new_phase, error = add_phase(args.goal_id, args.title, args.description)
@@ -32,10 +29,9 @@ def main():
         print("✓ Phase added successfully!")
         print(f"  ID: {new_phase['id']}")
         print(f"  Title: {new_phase['title']}")
-        print(f"  Description: {new_phase['description']}")
         print(f"  Status: {new_phase['status']}")
         print()
-        print("Use './bin/phase-list-all' to view all phases.")
+        print("Use './bin/phase-status' to view all phases.")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import get_commands, load_todos  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Display status of all Commands in the ToDoWrite system.")
+    parser.add_argument("--command-id", type=str, help="Show details for a specific command ID.")
+    args = parser.parse_args()
+
+    if getattr(args, "command_id", None):
+        # Show specific command details
+        todos = load_todos()
+        commands = todos.get("Command", [])
+        command = None
+        for item in commands:
+            if item.id == getattr(args, "command_id"):
+                command = item
+                break
+
+        if not command:
+            print(f"Error: Command with ID '{getattr(args, 'command_id')}' not found.")
+            sys.exit(1)
+
+        print(f"⚡ Command Details: {command.id}")
+        print("=" * 50)
+        print(f"Title: {command.title}")
+        print(f"Description: {command.description}")
+        print(f"Status: {command.status}")
+        print(f"Owner: {command.metadata.owner}")
+        print(f"Labels: {', '.join(command.metadata.labels) if command.metadata.labels else 'None'}")
+        print(f"Parents: {', '.join(command.links.parents) if command.links.parents else 'None'}")
+        print(f"Children: {', '.join(command.links.children) if command.links.children else 'None'}")
+    else:
+        # Show all commands
+        commands = get_commands()
+        
+        if not commands:
+            print("No commands found in the ToDoWrite system.")
+            return
+
+        print("⚡ All Commands Status")
+        print("=" * 50)
+        
+        for item in commands:
+            status_icon = "✓" if item["status"] == "done" else "○" if item["status"] == "active" else "·"
+            print(f"{status_icon} {item['id']}")
+            print(f"   Title: {item['title']}")
+            print(f"   Status: {item['status']}")
+            print()
+
+        print(f"Total Commands: {len(commands)}")
+        completed = len([item for item in commands if item["status"] == "done"])
+        active = len([item for item in commands if item["status"] == "active"])
+        planned = len([item for item in commands if item["status"] == "planned"])
+        print(f"Completed: {completed}, Active: {active}, Planned: {planned}")
+
+
+if __name__ == "__main__":
+    main()

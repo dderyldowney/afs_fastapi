@@ -16,19 +16,23 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, TypedDict
+from typing import Any, TypedDict, cast
+
+from afs_fastapi.monitoring.token_usage_logger import token_logger
 
 from .ai_processing_pipeline import AIProcessingPipeline, OptimizationLevel, PipelineResult
 
 
 class ServiceConfig(TypedDict):
     """Configuration for individual platform services."""
+
     optimization_level: str
     priority: str
 
 
 class AIProcessingConfig(TypedDict):
     """Typed configuration schema for AI Processing Manager."""
+
     agricultural_safety_mode: bool
     default_optimization_level: str
     token_budget: int
@@ -46,7 +50,7 @@ class AIProcessingManager:
     compliance monitoring.
     """
 
-    def __init__(self, project_root: Path | None = None, config_path: Path | None = None):
+    def __init__(self, project_root: Path | None = None, config_path: Path | None = None) -> None:
         """Initialize AI Processing Manager with platform integration."""
         self.project_root = project_root or Path.cwd()
         self.config_path = config_path or (
@@ -112,7 +116,7 @@ class AIProcessingManager:
             "tokens_saved": 0,
         }
 
-    def process_agricultural_request(
+    async def process_agricultural_request(
         self,
         user_input: str,
         service_name: str = "platform",
@@ -153,7 +157,19 @@ class AIProcessingManager:
             optimization_level = OptimizationLevel.CONSERVATIVE
 
         # Process through AI pipeline
-        result = self.pipeline.process_complete_pipeline(user_input, optimization_level)
+        result = cast(
+            PipelineResult,
+            await self.pipeline.process_complete_pipeline(user_input, optimization_level),
+        )
+
+        # Log token usage
+        if result.estimated_tokens is not None:
+            await token_logger.log_token_usage(
+                agent_id="AIProcessingManager",
+                task_id=service_name,
+                tokens_used=result.estimated_tokens,
+                model_name="unknown",  # TODO: Get actual model name from pipeline result
+            )
 
         # Update service statistics
         if service_name in self._registered_services:
@@ -166,13 +182,24 @@ class AIProcessingManager:
 
         return result
 
-    def process_with_budget_constraint(
+    async def process_with_budget_constraint(
         self, user_input: str, token_budget: int, service_name: str = "platform"
     ) -> PipelineResult:
         """Process request within specified token budget constraints."""
         self._processing_stats["total_requests"] += 1
 
-        result = self.pipeline.process_with_budget(user_input, token_budget)
+        result = cast(
+            PipelineResult, await self.pipeline.process_with_budget(user_input, token_budget)
+        )
+
+        # Log token usage
+        if result.estimated_tokens is not None:
+            await token_logger.log_token_usage(
+                agent_id="AIProcessingManager",
+                task_id=service_name,
+                tokens_used=result.estimated_tokens,
+                model_name="unknown",  # TODO: Get actual model name from pipeline result
+            )
 
         # Update statistics
         self._processing_stats["tokens_saved"] += result.total_tokens_saved
@@ -183,28 +210,42 @@ class AIProcessingManager:
 
         return result
 
-    def optimize_equipment_communication(self, message: str) -> PipelineResult:
+    async def optimize_equipment_communication(self, message: str) -> PipelineResult:
         """Optimize equipment communication messages (ISOBUS, safety protocols)."""
         # Equipment communication requires conservative optimization for safety
-        return self.process_agricultural_request(
-            message, service_name="equipment", optimization_level=OptimizationLevel.CONSERVATIVE
+        result = cast(
+            PipelineResult,
+            await self.process_agricultural_request(
+                message, service_name="equipment", optimization_level=OptimizationLevel.CONSERVATIVE
+            ),
         )
+        return result
 
-    def optimize_monitoring_data(self, sensor_data: str) -> PipelineResult:
+    async def optimize_monitoring_data(self, sensor_data: str) -> PipelineResult:
         """Optimize monitoring data processing (soil, water quality readings)."""
         # Monitoring data can use standard optimization
-        return self.process_agricultural_request(
-            sensor_data, service_name="monitoring", optimization_level=OptimizationLevel.STANDARD
+        result = cast(
+            PipelineResult,
+            await self.process_agricultural_request(
+                sensor_data,
+                service_name="monitoring",
+                optimization_level=OptimizationLevel.STANDARD,
+            ),
         )
+        return result
 
-    def optimize_fleet_coordination(self, coordination_message: str) -> PipelineResult:
+    async def optimize_fleet_coordination(self, coordination_message: str) -> PipelineResult:
         """Optimize fleet coordination messages and commands."""
         # Fleet coordination can use aggressive optimization for routine operations
-        return self.process_agricultural_request(
-            coordination_message,
-            service_name="fleet",
-            optimization_level=OptimizationLevel.AGGRESSIVE,
+        result = cast(
+            PipelineResult,
+            await self.process_agricultural_request(
+                coordination_message,
+                service_name="fleet",
+                optimization_level=OptimizationLevel.AGGRESSIVE,
+            ),
         )
+        return result
 
     def _is_agricultural_request(self, user_input: str) -> bool:
         """Check if request contains agricultural robotics keywords."""
@@ -287,11 +328,11 @@ class AIProcessingManager:
         with open(self.config_path, "w") as f:
             json.dump(config_to_save, f, indent=2)
 
-    def health_check(self) -> dict[str, Any]:
+    async def health_check(self) -> dict[str, Any]:
         """Perform AI processing pipeline health check."""
         try:
             # Test basic pipeline functionality
-            test_result = self.pipeline.process_complete_pipeline(
+            test_result = await self.pipeline.process_complete_pipeline(
                 "health check test", OptimizationLevel.CONSERVATIVE
             )
 

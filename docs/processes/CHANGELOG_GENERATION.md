@@ -148,7 +148,7 @@ git log --pretty=format:"%h - %s (%an, %ad)" --date=short > temp_changelog.txt
 
 ### Command Storage
 
-**`.claude/commands/updatechangelog.md`**:
+**`ToDoWrite/configs/commands/updatechangelog.md`**:
 - Automated CHANGELOG.md generation command
 - Formatting and agricultural context application
 - Integration with existing git workflow

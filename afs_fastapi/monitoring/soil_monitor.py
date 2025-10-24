@@ -8,6 +8,7 @@ from .interfaces import DummySoilSensorBackend, SoilSensorBackend
 
 class SoilReading(TypedDict):
     """Structure for soil sensor reading data."""
+
     timestamp: datetime
     readings: dict[str, float]
 

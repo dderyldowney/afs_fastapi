@@ -8,6 +8,7 @@ token optimization implementation. NO FAKE PASSES - all tests verify real behavi
 
 import json
 import subprocess
+import sys
 import time
 from pathlib import Path
 from unittest.mock import patch
@@ -206,8 +207,9 @@ class TestRealTimeTokenOptimizer:
     def test_error_handling_and_fallback(self, optimizer):
         """Test system handles errors gracefully without breaking."""
         # ACTUAL TEST: Force optimization errors and verify fallback
-        with patch.object(optimizer.pipeline, "process_complete_pipeline") as mock_pipeline:
-            mock_pipeline.side_effect = Exception("Optimization failed")
+        # Patch _estimate_tokens (which is called within the try block) to raise an exception
+        with patch.object(optimizer, "_estimate_tokens") as mock_estimate:
+            mock_estimate.side_effect = Exception("Optimization failed")
 
             # Should not crash when optimization fails
             turn = optimizer.optimize_conversation_turn(
@@ -397,7 +399,7 @@ class TestCommandLineIntegration:
 
         # Test status command
         result = subprocess.run(
-            [str(cmd_path), "--status"], capture_output=True, text=True, timeout=30
+            [sys.executable, str(cmd_path), "--status"], capture_output=True, text=True, timeout=30
         )
 
         # VERIFY ACTUAL EXECUTION
@@ -416,6 +418,7 @@ class TestCommandLineIntegration:
 
         result = subprocess.run(
             [
+                sys.executable,
                 str(cmd_path),
                 "--input",
                 test_input,
@@ -440,7 +443,7 @@ class TestCommandLineIntegration:
         cmd_path = project_root / "bin" / "optimize-conversation"
 
         result = subprocess.run(
-            [str(cmd_path), "--test-sample"],
+            [sys.executable, str(cmd_path), "--test-sample"],
             capture_output=True,
             text=True,
             timeout=60,  # Longer timeout for comprehensive tests
@@ -460,7 +463,15 @@ class TestCommandLineIntegration:
 
         # Test enable optimization
         result = subprocess.run(
-            [str(cmd_path), "--configure", "--enable", "--token-budget", "1500", "--adaptive"],
+            [
+                sys.executable,
+                str(cmd_path),
+                "--configure",
+                "--enable",
+                "--token-budget",
+                "1500",
+                "--adaptive",
+            ],
             capture_output=True,
             text=True,
             timeout=30,

@@ -24,6 +24,35 @@ MIT (project license)
 
 ## Instructions
 
+### Security Protocols
+
+All agents MUST adhere to the security protocols defined in [SECURITY_PROTOCOL.md](SECURITY_PROTOCOL.md). This includes explicit approval for security-sensitive changes and adherence to automated safety standards validation.
+
+## Token Efficiency and CLI Usage Mandate
+
+**CRITICAL REQUIREMENT**: All AI agents MUST prioritize token efficiency and the use of command-line interface (CLI) tools for targeted data extraction and file content queries. Full file reads (`read_file`) and broad content searches (`search_file_content`) are token-intensive and MUST be minimized.
+
+### Core Principles:
+
+-   **Prioritize CLI Tools**: Agents MUST use `jq` for JSON parsing, `grep` for text pattern matching, `awk`, `find`, `sed`, `xargs`, and other appropriate CLI tools for efficient file system navigation and content manipulation.
+-   **Targeted Data Extraction**: `run_shell_command` is the primary tool for file content queries. Agents will craft precise CLI commands to extract only the necessary information.
+-   **Minimize Full File Reads**: `read_file` is to be used ONLY after targeted CLI extraction has identified small, confirmed relevant files or specific lines within files.
+-   **Minimize Broad Content Searches**: `search_file_content` is to be used ONLY for small, known files where the overhead of CLI tool setup outweighs the token cost, or when a quick, high-level overview is needed for a very limited scope.
+-   **Token Cost Analysis**:
+    *   Agents WILL log token usage for each file operation.
+    *   Agents WILL establish a token budget per task.
+    *   Agents WILL optimize search strategies for minimal token consumption.
+    *   Agents WILL measure and enforce token efficiency metrics.
+-   **Documentation**: Agents WILL document CLI tool usage and rationale in their thought processes.
+
+### Enforcement:
+
+-   Violation of these token efficiency guidelines will be considered a critical failure.
+-   Automated checks WILL be implemented and enforced to monitor token usage and CLI tool prioritization across ALL sessions, current and future. These checks will ensure adherence to token budget constraints and optimal search strategies.
+-   All token usage by AI agents MUST be logged using the `TokenUsageLogger` via the `/monitoring/token-usage` API endpoint.
+
+This is a non-negotiable requirement for ALL agents to ensure cost-effectiveness and operational efficiency.
+
 ## How to Use
 
 **Universal Session Management Commands**: All AI agents have access to 7 session management commands (loadsession, savesession, runtests, whereweare, updatedocs, updatechangelog, updatewebdocs).
@@ -38,7 +67,7 @@ MIT (project license)
 **Seven Mandatory Requirements** (see [SESSION_SUMMARY.md](SESSION_SUMMARY.md#mandatory-requirements-for-all-ai-agents) for complete details):
 - Test-First Development, Structured Investigation Pattern, Standardized Test Reporting, CHANGELOG Loop Protection, Git Commit Separation, Cross-Agent Infrastructure Sharing, **Mandatory Pause Structure Enforcement**
 - **ABSOLUTE Red-Green-Refactor (RGR) adherence**: See [RED_GREEN_REFACTOR_ABSOLUTE_ENFORCEMENT.md](RED_GREEN_REFACTOR_ABSOLUTE_ENFORCEMENT.md) for zero-exceptions policy. Green status must only be achieved through actual working implementation code; 'pass' is prohibited as a means to gain green status. No code is to be generated until a well-defined and detailed set of tests defining the expected behavior(s) have been generated and their logic verified.
-- **MANDATORY Pause Structure Compliance**: See [PAUSE_STRUCTURE_SPECIFICATION.md](PAUSE_STRUCTURE_SPECIFICATION.md) for complete requirements. ALL AI agents MUST implement the "Recommended Pause Structure for Session Optimization" with zero exceptions. This includes task-level pauses (every 2-3 tasks), phase-level pauses (phase completion), and strategic milestone pauses (strategic goal completion). Session limits of 3 hours MUST be enforced with automatic pause triggers.
+- **MANDATORY Pause Structure Compliance**: See [PAUSE_STRUCTURE_SPECIFICATION.md](PAUSE_STRUCTURE_SPECIFICATION.md) for complete requirements. ALL AI agents MUST implement the "Recommended Pause Structure for Session Optimization" with zero exceptions. This includes task-level pauses (every 2-3 tasks), and strategic milestone pauses (strategic goal completion). Session limits of 3 hours MUST be enforced with automatic pause triggers.
 
 **Essential documentation**:
 - Session architecture: `docs/EXECUTION_ORDER.md` (6-phase initialization, 28+ files)
@@ -53,20 +82,21 @@ MIT (project license)
 
 ### The `TodoWrite.md` Specification
 
-The `TodoWrite.md` system is a hierarchical task management system with a 5-level structure: **Goal → Phase → Step → Task → SubTask**. It enforces strict rules for single concern, traceability, and validation.
+The `TodoWrite.md` system is a hierarchical task management system with a **12-layer hierarchy**:
+**Goal → Concept → Context → Constraints → Requirements → Acceptance Criteria → Interface Contract → Phase → Step → Task → SubTask → Command**. It enforces strict rules for single concern, traceability, and validation.
 
 All agents MUST adhere to the full specification defined in the `ToDoWrite.md` file.
 
 ### Key Principles of `TodoWrite.md`
 
-- **Hierarchical Decomposition**: All work MUST be decomposed through the 5-level hierarchy.
+- **Hierarchical Decomposition**: All work MUST be decomposed through the **12-layer hierarchy**.
 - **Single Concern Principle (SoC)**: Every item at every level MUST address exactly one concern.
-- **Atomicity**: The lowest level, `SubTask`, MUST map to a single, executable command.
+- **Atomicity**: The lowest level, `Command`, MUST map to a single, executable command.
 - **Validation**: All items are subject to a strict validation pipeline, afs_fastapi/todos/manager.py
 
 ### Reference Implementation
 
-The `afs_fastapi/core/todos_manager.py` module provides the reference implementation for the `TodoWrite.md` system, including data structures, validation logic, and migration from legacy formats. All agents MUST use the functions provided in this module for all task management operations.
+The `afs_fastapi/todos/manager.py` module provides the reference implementation for the `TodoWrite.md` system, including data structures, validation logic, and current data management. All agents MUST use the functions provided in this module for all task management operations.
 
 ### Enforcement
 
@@ -77,29 +107,19 @@ The `afs_fastapi/core/todos_manager.py` module provides the reference implementa
 
 ## Mandatory Git Commit Message Format
 
-**CRITICAL REQUIREMENT**: All AI agents MUST create git commit messages using HEREDOCs. This ensures that commit messages are well-formatted, multi-line, and easy to read.
+**CRITICAL REQUIREMENT**: All AI agents MUST create git commit messages using a temporary file (`commit_message.txt`) and the `git commit -F` command. This ensures that commit messages are well-formatted, multi-line, and easy to read, while adhering to the tool's operational constraints.
 
-### HEREDOC Format
+### Workflow:
 
-The commit message MUST be formatted as a HEREDOC, like this:
-
-```bash
-git commit -F - <<EOF
-feat(scope): Short description of the change
-
-Longer description of the change, explaining the what and the why.
-Can be multiple lines.
-
-- Bullet points are also good.
-
-Co-authored-by: Agent Name <agent@email.com>
-EOF
-```
+1.  **Create Temporary File**: For each commit, create a temporary file named `commit_message.txt` in the project root.
+2.  **Populate Message**: Write the draft commit message into `commit_message.txt`.
+3.  **Commit using File**: Execute `git commit -F commit_message.txt`.
+4.  **Delete Temporary File**: After a successful commit, delete `commit_message.txt`.
 
 ### Enforcement
 
-- All `git commit` commands MUST use the `-F -` option to read the commit message from stdin.
-- The commit message MUST be provided as a HEREDOC.
+- All `git commit` commands MUST use the `-F` option to read the commit message from a file.
+- The commit message MUST be provided via `commit_message.txt`.
 - Pre-commit hooks MAY be used to validate the commit message format.
 
 ## Mandatory Type Hinting and Annotation
@@ -224,6 +244,7 @@ This project enforces strict type safety to ensure the reliability and maintaina
 
 - **Naming**: Clear, conversational naming following PEP 8 with agricultural domain context
 - **Type safety**: Precise type hints; maintain mypy strict mode compliance (zero warnings)
+- **Interface Contracts**: Utilize Python `Protocol` classes for defining clear and explicit interface contracts to enhance type safety, modularity, and maintainability across the codebase.
 - **Function design**: Compact, purposeful functions avoiding over-engineering
 - **Testing requirements**: Comprehensive tests with realistic agricultural scenarios and performance validation
 - **Documentation standards**: Professional tone with concrete agricultural examples and educational context

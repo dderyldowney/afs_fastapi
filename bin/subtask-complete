@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import load_todos, update_node  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Mark a SubTask as complete in the ToDoWrite system.")
+    parser.add_argument("subtask_id", type=str, help="The ID of the subtask to complete.")
+    args = parser.parse_args()
+
+    # Verify subtask exists
+    todos = load_todos()
+    subtasks = todos.get("SubTask", [])
+    subtask = None
+    for s in subtasks:
+        if s.id == args.subtask_id:
+            subtask = s
+            break
+
+    if not subtask:
+        print(f"Error: SubTask with ID '{args.subtask_id}' not found.")
+        sys.exit(1)
+
+    if subtask.status == "done":
+        print(f"SubTask '{args.subtask_id}' is already completed.")
+        return
+
+    # Update subtask status
+    from datetime import datetime
+    updated_subtask, error = update_node(args.subtask_id, {
+        "status": "done",
+        "metadata": {
+            "owner": subtask.metadata.owner,
+            "labels": subtask.metadata.labels,
+            "severity": subtask.metadata.severity,
+            "work_type": subtask.metadata.work_type,
+            "date_completed": datetime.now().isoformat(),
+        },
+    })
+
+    if error:
+        print(f"Error: {error}")
+        sys.exit(1)
+
+    if updated_subtask:
+        print("✓ SubTask marked as completed!")
+        print(f"  ID: {updated_subtask.id}")
+        print(f"  Title: {updated_subtask.title}")
+        print(f"  Status: {updated_subtask.status}")
+        print()
+        print("Use './bin/subtask-status' to view updated subtask progress.")
+
+
+if __name__ == "__main__":
+    main()

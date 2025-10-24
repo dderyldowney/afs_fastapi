@@ -51,7 +51,7 @@ The AFS FastAPI agricultural robotics platform has been reorganized to follow st
 
 **Configuration Files Updated**:
 - **`.claude/settings.local.json`** - Updated all script permissions and paths
-- **`.claude/commands/*.md`** - Updated command documentation with new paths
+- **`ToDoWrite/configs/commands/*.md`** - Updated command documentation with new paths
 - **`.claude/hooks/session_initialization.py`** - Updated loadsession script path
 
 **Documentation Updated**:

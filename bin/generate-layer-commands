@@ -1,0 +1,213 @@
+#!/usr/bin/env python3
+"""
+Generate all missing ToDoWrite layer commands for the 12-layer system.
+This script creates CRUD commands for each layer following the established patterns.
+"""
+
+import os
+from pathlib import Path
+
+# Layer definitions with their properties
+LAYERS = [
+    {"name": "concept", "layer": "Concept", "parent": "goal_id"},
+    {"name": "context", "layer": "Context", "parent": "concept_id"},
+    {"name": "constraint", "layer": "Constraints", "parent": "context_id"},
+    {"name": "requirement", "layer": "Requirements", "parent": "constraint_id"},
+    {"name": "acceptance", "layer": "Acceptance Criteria", "parent": "requirement_id"},
+    {"name": "interface", "layer": "Interface Contract", "parent": "ac_id"},
+    {"name": "phase", "layer": "Phase", "parent": "goal_id"},
+    {"name": "command", "layer": "Command", "parent": "subtask_id"},
+]
+
+def create_add_command(layer_info):
+    """Create an add command for a layer."""
+    name = layer_info["name"]
+    layer = layer_info["layer"]
+    parent = layer_info["parent"]
+    parent_arg = parent.replace('_', '-')
+    parent_attr = parent.replace('-', '_')
+    parent_name = parent.replace('_id', '')
+
+    content = f'''#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import add_{name}  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Add a new {layer} to the ToDoWrite system.")
+    parser.add_argument("title", type=str, help="The title of the {name}.")
+    parser.add_argument("--description", type=str, default="", help="The description of the {name}.")
+    parser.add_argument("--{parent_arg}", type=str, help="The parent {parent_name} ID.")
+    args = parser.parse_args()
+
+    parent_id = getattr(args, "{parent_attr}", None)
+    new_{name}, error = add_{name}(args.title, args.description, parent_id)
+
+    if error:
+        print(f"Error: {{error}}")
+        sys.exit(1)
+
+    if new_{name}:
+        print("✓ {layer} added successfully!")
+        print(f"  ID: {{new_{name}['id']}}")
+        print(f"  Title: {{new_{name}['title']}}")
+        print(f"  Status: {{new_{name}['status']}}")
+        print()
+        print("Use './bin/{name}-status' to view all {name}s.")
+
+
+if __name__ == "__main__":
+    main()'''
+
+    return content
+
+def create_complete_command(layer_info):
+    """Create a complete command for a layer."""
+    name = layer_info["name"]
+    layer = layer_info["layer"]
+    
+    content = f'''#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import complete_{name}  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Mark a {layer} as complete in the ToDoWrite system.")
+    parser.add_argument("{name}_id", type=str, help="The ID of the {name} to complete.")
+    args = parser.parse_args()
+
+    completed_{name}, error = complete_{name}(args.{name}_id)
+
+    if error:
+        print(f"Error: {{error}}")
+        sys.exit(1)
+
+    if completed_{name}:
+        print("✓ {layer} marked as completed!")
+        print(f"  ID: {{completed_{name}.id}}")
+        print(f"  Title: {{completed_{name}.title}}")
+        print(f"  Status: {{completed_{name}.status}}")
+        print()
+        print("Use './bin/{name}-status' to view updated {name} progress.")
+
+
+if __name__ == "__main__":
+    main()'''
+    
+    return content
+
+def create_delete_command(layer_info):
+    """Create a delete command for a layer."""
+    name = layer_info["name"]
+    layer = layer_info["layer"]
+    
+    content = f'''#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import delete_node, load_todos  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Delete a {layer} from the ToDoWrite system.")
+    parser.add_argument("{name}_id", type=str, help="The ID of the {name} to delete.")
+    parser.add_argument("--confirm", action="store_true", help="Confirm deletion without prompt.")
+    args = parser.parse_args()
+
+    # Verify {name} exists
+    todos = load_todos()
+    {name}s = todos.get("{layer}", [])
+    {name} = None
+    for item in {name}s:
+        if item.id == args.{name}_id:
+            {name} = item
+            break
+
+    if not {name}:
+        print(f"Error: {layer} with ID '{{args.{name}_id}}' not found.")
+        sys.exit(1)
+
+    # Confirm deletion
+    if not args.confirm:
+        print(f"Are you sure you want to delete {name} '{{item.title}}' ({{args.{name}_id}})? [y/N]: ", end="")
+        response = input().strip().lower()
+        if response not in ['y', 'yes']:
+            print("Deletion cancelled.")
+            sys.exit(0)
+
+    try:
+        delete_node(args.{name}_id)
+        print("✓ {layer} deleted successfully!")
+        print(f"  ID: {{args.{name}_id}}")
+        print(f"  Title: {{{name}.title}}")
+        print()
+        print("Use './bin/{name}-status' to view updated {name}s.")
+    except Exception as e:
+        print(f"Error deleting {name}: {{e}}")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()'''
+    
+    return content
+
+def main():
+    """Generate all missing layer commands."""
+    bin_dir = Path(__file__).parent
+    
+    print("🏗️  Generating missing ToDoWrite layer commands...")
+    
+    for layer_info in LAYERS:
+        name = layer_info["name"]
+        
+        # Create add command
+        add_file = bin_dir / f"{name}-add"
+        if not add_file.exists():
+            add_file.write_text(create_add_command(layer_info))
+            add_file.chmod(0o755)
+            print(f"✓ Created {name}-add")
+        
+        # Create complete command
+        complete_file = bin_dir / f"{name}-complete"
+        if not complete_file.exists():
+            complete_file.write_text(create_complete_command(layer_info))
+            complete_file.chmod(0o755)
+            print(f"✓ Created {name}-complete")
+        
+        # Create delete command
+        delete_file = bin_dir / f"{name}-delete"
+        if not delete_file.exists():
+            delete_file.write_text(create_delete_command(layer_info))
+            delete_file.chmod(0o755)
+            print(f"✓ Created {name}-delete")
+    
+    print("✅ All missing layer commands generated!")
+
+if __name__ == "__main__":
+    main()

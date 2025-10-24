@@ -29,7 +29,7 @@ class AgriculturalAIIntegration:
     safety standards and compliance requirements.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize agricultural AI integration service."""
         self.ai_manager = ai_processing_manager
 
@@ -74,7 +74,7 @@ class AgriculturalAIIntegration:
             priority="medium",
         )
 
-    def optimize_tractor_communication(
+    async def optimize_tractor_communication(
         self,
         tractor_id: str,
         message: str,
@@ -99,14 +99,14 @@ class AgriculturalAIIntegration:
         # Use conservative optimization for safety-critical messages
         service_name = "equipment"
         if is_safety_critical:
-            result = self.ai_manager.process_agricultural_request(
+            result = await self.ai_manager.process_agricultural_request(
                 user_input=agricultural_context,
                 service_name=service_name,
                 optimization_level=self.ai_manager.default_optimization_level.__class__.CONSERVATIVE,
             )
             self.integration_stats["safety_critical_preservations"] += 1
         else:
-            result = self.ai_manager.optimize_equipment_communication(agricultural_context)
+            result = await self.ai_manager.optimize_equipment_communication(agricultural_context)
 
         # Track optimization statistics
         self.integration_stats["equipment_optimizations"] += 1
@@ -123,7 +123,7 @@ class AgriculturalAIIntegration:
             "processing_time_ms": result.metrics.get("processing_time_ms", 0),
         }
 
-    def optimize_isobus_message(
+    async def optimize_isobus_message(
         self, pgn: int, source_address: int, data_payload: str, is_emergency: bool = False
     ) -> dict[str, Any]:
         """
@@ -143,7 +143,7 @@ class AgriculturalAIIntegration:
 
         # Emergency messages use highest priority conservative optimization
         if is_emergency:
-            result = self.ai_manager.process_agricultural_request(
+            result = await self.ai_manager.process_agricultural_request(
                 user_input=isobus_message,
                 service_name="equipment",
                 optimization_level=self.ai_manager.default_optimization_level.__class__.CONSERVATIVE,
@@ -151,7 +151,7 @@ class AgriculturalAIIntegration:
             # Track safety critical processing
             self.integration_stats["safety_critical_preservations"] += 1
         else:
-            result = self.ai_manager.optimize_equipment_communication(isobus_message)
+            result = await self.ai_manager.optimize_equipment_communication(isobus_message)
 
         # Track equipment optimization
         self.integration_stats["equipment_optimizations"] += 1
@@ -166,7 +166,7 @@ class AgriculturalAIIntegration:
             "optimization_applied": result.optimization_applied,
         }
 
-    def optimize_sensor_data_processing(
+    async def optimize_sensor_data_processing(
         self, sensor_id: str, sensor_type: str, reading_data: str, field_context: str | None = None
     ) -> dict[str, Any]:
         """
@@ -189,7 +189,7 @@ class AgriculturalAIIntegration:
         agricultural_sensor_data = " - ".join(context_parts)
 
         # Process through monitoring optimization
-        result = self.ai_manager.optimize_monitoring_data(agricultural_sensor_data)
+        result = await self.ai_manager.optimize_monitoring_data(agricultural_sensor_data)
 
         # Track monitoring optimization
         self.integration_stats["monitoring_optimizations"] += 1
@@ -205,7 +205,7 @@ class AgriculturalAIIntegration:
             "processing_efficiency": result.metrics.get("optimization_ratio", 0),
         }
 
-    def optimize_fleet_coordination(
+    async def optimize_fleet_coordination(
         self,
         coordinator_id: str,
         tractors: list[str],
@@ -237,7 +237,7 @@ class AgriculturalAIIntegration:
             full_message += f" Field assignments: {assignments_text}"
 
         # Process through fleet coordination optimization
-        result = self.ai_manager.optimize_fleet_coordination(full_message)
+        result = await self.ai_manager.optimize_fleet_coordination(full_message)
 
         # Track fleet optimization
         self.integration_stats["fleet_optimizations"] += 1
@@ -254,7 +254,7 @@ class AgriculturalAIIntegration:
             "coordination_efficiency": result.metrics.get("optimization_ratio", 0),
         }
 
-    def optimize_safety_protocol_message(
+    async def optimize_safety_protocol_message(
         self,
         protocol_type: str,
         safety_message: str,
@@ -277,7 +277,7 @@ class AgriculturalAIIntegration:
         safety_context = f"{iso_standard} {protocol_type} ({emergency_level}): {safety_message}"
 
         # Always use conservative optimization for safety protocols
-        result = self.ai_manager.process_agricultural_request(
+        result = await self.ai_manager.process_agricultural_request(
             user_input=safety_context,
             service_name="equipment",
             optimization_level=self.ai_manager.default_optimization_level.__class__.CONSERVATIVE,
@@ -366,9 +366,9 @@ class AgriculturalAIIntegration:
             "optimization_level": service_stats.get("optimization_level", "unknown"),
         }
 
-    def health_check(self) -> dict[str, Any]:
+    async def health_check(self) -> dict[str, Any]:
         """Perform comprehensive agricultural AI integration health check."""
-        ai_health = self.ai_manager.health_check()
+        ai_health = await self.ai_manager.health_check()
 
         return {
             "integration_status": "healthy",

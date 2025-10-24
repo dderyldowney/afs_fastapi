@@ -76,7 +76,7 @@ class AgriculturalComponent:
 #### Changes Made
 - **ERROR_MONITORING_SOLUTIONS.md** (150+ lines): Comprehensive error pattern documentation
 - **SESSION_SUMMARY.md enhancement**: Error solutions section for cross-session persistence
-- **Command storage system**: Reusable solutions in `.claude/commands/`
+- **Command storage system**: Reusable solutions in `ToDoWrite/configs/commands/`
   - `fixmodules.md`: Module import error resolution
   - `formatall.md`: Comprehensive formatting and quality tools
   - `committemplate.md`: Separation of concerns commit templates

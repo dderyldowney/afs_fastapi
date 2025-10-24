@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+# type: ignore
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+from afs_fastapi.todos.manager import get_requirements, load_todos  # noqa: E402
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Display status of all Requirementss in the ToDoWrite system.")
+    parser.add_argument("--requirement-id", type=str, help="Show details for a specific requirement ID.")
+    args = parser.parse_args()
+
+    if getattr(args, "requirement_id", None):
+        # Show specific requirement details
+        todos = load_todos()
+        requirements = todos.get("Requirements", [])
+        requirement = None
+        for item in requirements:
+            if item.id == getattr(args, "requirement_id"):
+                requirement = item
+                break
+
+        if not requirement:
+            print(f"Error: Requirements with ID '{getattr(args, 'requirement_id')}' not found.")
+            sys.exit(1)
+
+        print(f"📋 Requirements Details: {requirement.id}")
+        print("=" * 50)
+        print(f"Title: {requirement.title}")
+        print(f"Description: {requirement.description}")
+        print(f"Status: {requirement.status}")
+        print(f"Owner: {requirement.metadata.owner}")
+        print(f"Labels: {', '.join(requirement.metadata.labels) if requirement.metadata.labels else 'None'}")
+        print(f"Parents: {', '.join(requirement.links.parents) if requirement.links.parents else 'None'}")
+        print(f"Children: {', '.join(requirement.links.children) if requirement.links.children else 'None'}")
+    else:
+        # Show all requirements
+        requirements = get_requirements()
+        
+        if not requirements:
+            print("No requirements found in the ToDoWrite system.")
+            return
+
+        print("📋 All Requirementss Status")
+        print("=" * 50)
+        
+        for item in requirements:
+            status_icon = "✓" if item["status"] == "done" else "○" if item["status"] == "active" else "·"
+            print(f"{status_icon} {item['id']}")
+            print(f"   Title: {item['title']}")
+            print(f"   Status: {item['status']}")
+            print()
+
+        print(f"Total Requirementss: {len(requirements)}")
+        completed = len([item for item in requirements if item["status"] == "done"])
+        active = len([item for item in requirements if item["status"] == "active"])
+        planned = len([item for item in requirements if item["status"] == "planned"])
+        print(f"Completed: {completed}, Active: {active}, Planned: {planned}")
+
+
+if __name__ == "__main__":
+    main()
