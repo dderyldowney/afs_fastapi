@@ -29,7 +29,7 @@ async def log_token_usage_endpoint(token_usage_data: TokenUsageCreate) -> Any:
         # Since log_token_usage is async and doesn't return the created object directly,
         # we'll simulate it for the API response. In a real scenario, log_token_usage
         # might return the persisted object or its ID.
-        return TokenUsageInDB(id="temp_id", **token_usage_data.dict())
+        return TokenUsageInDB(id="temp_id", **token_usage_data.model_dump())
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)) from e
 
@@ -47,6 +47,6 @@ def query_token_usage_endpoint(
         usage_records = token_usage_module.token_logger.query_token_usage(
             agent_id, task_id, start_time, end_time
         )
-        return [TokenUsageInDB.from_orm(record) for record in usage_records]
+        return [TokenUsageInDB.model_validate(record) for record in usage_records]
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)) from e

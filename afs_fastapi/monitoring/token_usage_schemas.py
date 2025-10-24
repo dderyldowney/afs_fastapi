@@ -1,6 +1,6 @@
-from datetime import datetime
+from datetime import UTC, datetime
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class TokenUsageBase(BaseModel):
@@ -11,7 +11,7 @@ class TokenUsageBase(BaseModel):
     tokens_used: float = Field(..., description="Number of tokens consumed.")
     model_name: str = Field(..., description="Name of the AI model used.")
     timestamp: datetime = Field(
-        default_factory=datetime.utcnow, description="Timestamp of the token usage event."
+        default_factory=lambda: datetime.now(UTC), description="Timestamp of the token usage event."
     )
 
 
@@ -22,8 +22,7 @@ class TokenUsageCreate(TokenUsageBase):
 class TokenUsageInDB(TokenUsageBase):
     id: str = Field(..., description="Unique identifier for the token usage log entry.")
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class TokenUsageQuery(BaseModel):
