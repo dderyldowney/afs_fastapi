@@ -7,7 +7,7 @@ FastAPI application module.
 
 from fastapi import FastAPI
 
-app = FastAPI(title="AFS FastAPI", version="0.1.5.1")
+app = FastAPI(title="AFS FastAPI", version="0.1.6")
 
 
 @app.get("/health", tags=["ops"])
