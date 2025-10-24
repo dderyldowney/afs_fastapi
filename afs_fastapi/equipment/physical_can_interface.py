@@ -603,6 +603,7 @@ class PhysicalCANManager:
                 raise ValueError(f"Interface {interface_id} already exists")
 
             # Create appropriate interface type
+            interface: PhysicalCANInterface
             if config.interface_type == CANInterfaceType.SOCKETCAN:
                 interface = SocketCANInterface(interface_id, config, self.error_handler)
             elif config.interface_type == CANInterfaceType.VIRTUAL:

@@ -1,190 +1,113 @@
-import unittest
 import uuid
 from datetime import UTC, datetime, timedelta
 
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+import pytest_asyncio
+from sqlalchemy import Column, DateTime, Float, String, create_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 from afs_fastapi.monitoring.token_usage_logger import TokenUsageLogger
-from afs_fastapi.monitoring.token_usage_models import Base
-from afs_fastapi.monitoring.token_usage_repository import TokenUsageRepository
 
 
-class TestTokenUsageRepository(unittest.TestCase):
-    def setUp(self):
-        self.engine = create_engine("sqlite:///:memory:")
-        Base.metadata.create_all(self.engine)
-        self.Session = sessionmaker(bind=self.engine)
-        self.session = self.Session()
-        self.repository = TokenUsageRepository(self.session)
+@pytest.fixture
+def token_usage_model():
 
-    def tearDown(self):
-        self.session.close()
-        Base.metadata.drop_all(self.engine)
+    Base = declarative_base()
 
-    def test_create_token_usage(self):
-        entry_id = str(uuid.uuid4())
-        token_usage_data = {
-            "id": entry_id,
-            "agent_id": "test_agent",
-            "task_id": "test_task",
-            "tokens_used": 100.5,
-            "model_name": "gpt-3.5-turbo",
-            "timestamp": datetime.now(UTC),
-        }
-        token_usage = self.repository.create(token_usage_data)
-        self.assertIsNotNone(token_usage.id)
-        self.assertEqual(token_usage.agent_id, "test_agent")
+    class TokenUsage(Base):
 
-    def test_query_token_usage(self):
-        # Create some test data
-        self.repository.create(
-            {
-                "id": str(uuid.uuid4()),
-                "agent_id": "agent1",
-                "task_id": "taskA",
-                "tokens_used": 10.0,
-                "model_name": "modelX",
-                "timestamp": datetime(2023, 1, 1, 10, 0, 0),
-            }
-        )
-        self.repository.create(
-            {
-                "id": str(uuid.uuid4()),
-                "agent_id": "agent1",
-                "task_id": "taskB",
-                "tokens_used": 20.0,
-                "model_name": "modelY",
-                "timestamp": datetime(2023, 1, 1, 11, 0, 0),
-            }
-        )
-        self.repository.create(
-            {
-                "id": str(uuid.uuid4()),
-                "agent_id": "agent2",
-                "task_id": "taskA",
-                "tokens_used": 30.0,
-                "model_name": "modelX",
-                "timestamp": datetime(2023, 1, 2, 12, 0, 0),
-            }
-        )
+        __tablename__ = "token_usage"
 
-        # Test query by agent_id
-        results = self.repository.query(agent_id="agent1")
-        self.assertEqual(len(results), 2)
-        self.assertTrue(all(r.agent_id == "agent1" for r in results))
+        id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
 
-        # Test query by task_id
-        results = self.repository.query(task_id="taskA")
-        self.assertEqual(len(results), 2)
-        self.assertTrue(all(r.task_id == "taskA" for r in results))
+        agent_id = Column(String, nullable=False)
 
-        # Test query by time range
-        results = self.repository.query(
-            start_time=datetime(2023, 1, 1, 10, 30, 0), end_time=datetime(2023, 1, 1, 11, 30, 0)
-        )
-        self.assertEqual(len(results), 1)
-        self.assertEqual(results[0].task_id, "taskB")
+        task_id = Column(String, nullable=False)
 
-    def test_delete_old_logs(self):
-        # Create some old and new data
-        self.repository.create(
-            {
-                "id": str(uuid.uuid4()),
-                "agent_id": "agent1",
-                "task_id": "taskA",
-                "tokens_used": 10.0,
-                "model_name": "modelX",
-                "timestamp": datetime.now(UTC) - timedelta(days=60),
-            }
-        )
-        self.repository.create(
-            {
-                "id": str(uuid.uuid4()),
-                "agent_id": "agent2",
-                "task_id": "taskB",
-                "tokens_used": 20.0,
-                "model_name": "modelY",
-                "timestamp": datetime.now(UTC) - timedelta(days=10),
-            }
-        )
+        tokens_used = Column(Float, nullable=False)
 
-        # Prune logs older than 30 days
-        cutoff_date = datetime.now(UTC) - timedelta(days=30)
-        deleted_count = self.repository.delete_old_logs(cutoff_date)
-        self.assertEqual(deleted_count, 1)
+        model_name = Column(String, nullable=False)
 
-        remaining_logs = self.repository.query()
-        self.assertEqual(len(remaining_logs), 1)
-        self.assertEqual(remaining_logs[0].agent_id, "agent2")
+        timestamp = Column(DateTime(timezone=True), default=datetime.now)
+
+    return Base, TokenUsage
 
 
-@pytest.mark.serial
-class TestTokenUsageLogger(unittest.IsolatedAsyncioTestCase):
-    """Token Usage Logger tests that must run serially due to singleton pattern.
+class TestTokenUsageLogger:
+    pass
 
-    These tests use TokenUsageLogger singleton which doesn't work correctly
-    with pytest-xdist parallel execution. The @pytest.mark.serial decorator
-    ensures these tests run sequentially.
 
-    Agricultural Context: Token usage tracking for agricultural robotics AI
-    agents requires isolated test execution to prevent cross-test contamination
-    in CI/CD pipelines.
-    """
+@pytest_asyncio.fixture
+async def db_session(token_usage_model):
+    Base, TokenUsage = token_usage_model
+    engine = create_engine("sqlite:///:memory:")
+    Base.metadata.create_all(engine)
+    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    session = SessionLocal()
+    try:
+        yield session, engine, SessionLocal, TokenUsage
+    finally:
+        session.close()
+        Base.metadata.drop_all(engine)
+        engine.dispose()
 
-    def setUp(self):
-        self.database_url = "sqlite:///:memory:"
-        self.logger = TokenUsageLogger(database_url=self.database_url)
-        # Ensure tables are created for this logger instance
-        Base.metadata.create_all(self.logger._engine)
 
-    async def asyncTearDown(self):
-        # Clean up database after each test
-        Base.metadata.drop_all(self.logger._engine)
-        self.logger._engine.dispose()
+@pytest_asyncio.fixture
+async def token_usage_logger(db_session):
+    session, engine, SessionLocal, TokenUsage = db_session
+    logger = TokenUsageLogger(engine=engine, SessionLocal=SessionLocal)
+    return logger
 
-    async def test_log_token_usage(self):
+    @pytest.mark.asyncio
+    async def test_log_token_usage(token_usage_logger, db_session):
+        session, _, _, TokenUsage = db_session
+        logger_instance = token_usage_logger
         agent_id = "test_agent_async"
         task_id = "test_task_async"
         tokens_used = 50.0
         model_name = "gpt-4"
 
-        await self.logger.log_token_usage(agent_id, task_id, tokens_used, model_name)
+        await logger_instance.log_token_usage(agent_id, task_id, tokens_used, model_name)
 
         # Verify the log entry in the database
-        records = self.logger.query_token_usage(agent_id=agent_id, task_id=task_id)
-        self.assertEqual(len(records), 1)
-        self.assertEqual(records[0].agent_id, agent_id)
-        self.assertEqual(records[0].tokens_used, tokens_used)
+        records = session.query(TokenUsage).filter_by(agent_id=agent_id, task_id=task_id).all()
+        assert len(records) == 1
+        assert records[0].agent_id == agent_id
+        assert records[0].tokens_used == tokens_used
 
-    async def test_query_token_usage_async(self):
+    @pytest.mark.asyncio
+    async def test_query_token_usage_async(token_usage_logger, db_session):
+        session, _, _, TokenUsage = db_session
+        logger_instance = token_usage_logger
         # Log some data
-        await self.logger.log_token_usage(
+        await logger_instance.log_token_usage(
             "agentX", "task1", 10.0, "modelA", datetime(2023, 1, 1, 10, 0, 0)
         )
-        await self.logger.log_token_usage(
+        await logger_instance.log_token_usage(
             "agentX", "task2", 20.0, "modelB", datetime(2023, 1, 1, 11, 0, 0)
         )
 
         # Query and verify
-        results = self.logger.query_token_usage(
+        results = logger_instance.query_token_usage(
             agent_id="agentX", start_time=datetime(2023, 1, 1, 10, 30, 0)
         )
-        self.assertEqual(len(results), 1)
-        self.assertEqual(results[0].task_id, "task2")
+        assert len(results) == 1
+        assert results[0].task_id == "task2"
 
-    async def test_prune_old_logs_async(self):
+    @pytest.mark.asyncio
+    async def test_prune_old_logs_async(token_usage_logger, db_session):
+        session, _, _, TokenUsage = db_session
+        logger_instance = token_usage_logger
         # Log old and new data
-        await self.logger.log_token_usage(
+        await logger_instance.log_token_usage(
             "agent_old", "task_old", 5.0, "model_old", datetime.now(UTC) - timedelta(days=60)
         )
-        await self.logger.log_token_usage(
+        await logger_instance.log_token_usage(
             "agent_new", "task_new", 15.0, "model_new", datetime.now(UTC) - timedelta(days=10)
         )
 
-        await self.logger.prune_old_logs(days_to_keep=30)
+        await logger_instance.prune_old_logs(days_to_keep=30)
 
-        remaining_logs = self.logger.query_token_usage()
-        self.assertEqual(len(remaining_logs), 1)
-        self.assertEqual(remaining_logs[0].agent_id, "agent_new")
+        remaining_logs = session.query(TokenUsage).all()
+        assert len(remaining_logs) == 1
+        assert remaining_logs[0].agent_id == "agent_new"

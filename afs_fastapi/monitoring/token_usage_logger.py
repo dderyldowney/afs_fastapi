@@ -3,7 +3,7 @@ import logging
 import os
 import uuid
 from datetime import UTC, datetime, timedelta
-from typing import Any, cast
+from typing import Any
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -23,31 +23,17 @@ class TokenUsageLogger:
     Use reset_for_testing() to reinitialize with a test database.
     """
 
-    _instance: "TokenUsageLogger | None" = None
-    _engine: Any | None = None
-    _SessionLocal: Any | None = None
-    _initialized: bool = False
+    _instance = None
+    _initialized = False
 
-    def __new__(cls, *args: Any, **kwargs: Any) -> "TokenUsageLogger":
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-        return cls._instance
-
-    def __init__(self, database_url: str | None = None, log_level: int = logging.INFO) -> None:
-        if not self._initialized:
-            self.database_url: str = cast(
-                str,
-                database_url or os.getenv("TOKEN_USAGE_DATABASE_URL", "sqlite:///./token_usage.db"),
-            )
-            self._initialize_db()
-            self._initialized = True
-            self.set_logging_level(log_level)
-            logger.info(f"TokenUsageLogger initialized with database: {self.database_url}")
+    def __init__(self, engine: Any, SessionLocal: Any, log_level: int = logging.INFO) -> None:
+        self._engine = engine
+        self._SessionLocal = SessionLocal
+        self.set_logging_level(log_level)
+        logger.info("TokenUsageLogger initialized with injected engine and SessionLocal")
 
     @classmethod
-    def reset_for_testing(
-        cls, database_url: str = "sqlite:///./test_token_usage.db"
-    ) -> "TokenUsageLogger":
+    def reset_for_testing(cls, database_url: str) -> "TokenUsageLogger":
         """Reset singleton instance for testing with a new database.
 
         This method is intended for testing only. It allows tests to reinitialize
@@ -63,46 +49,20 @@ class TokenUsageLogger:
         tracking in agricultural robotics CI/CD pipelines without affecting
         production database or other test runs.
         """
-        # Close existing database connections if any
-        if cls._instance is not None and cls._engine is not None:
-            cls._engine.dispose()
+        engine = create_engine(database_url, echo=False)
+        SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-        # Reset class variables to force re-initialization
-        cls._instance = None
-        cls._engine = None
-        cls._SessionLocal = None
-        cls._initialized = False
+        # Create tables
+        Base.metadata.create_all(bind=engine)
 
-        # Create new instance with test database
-        logger.info(f"TokenUsageLogger reset for testing with database: {database_url}")
-        new_instance = cls(database_url=database_url)
+        cls._instance = cls(engine=engine, SessionLocal=SessionLocal)
+        cls._initialized = True
 
-        # Update the global token_logger variable in this module
-        import afs_fastapi.monitoring.token_usage_logger as module
+        # Update the global token_logger instance for API usage
+        global token_logger
+        token_logger = cls._instance
 
-        module.token_logger = new_instance
-
-        return new_instance
-
-    def _initialize_db(self) -> None:
-        self._engine = create_engine(self.database_url)
-        self._SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self._engine)
-        Base.metadata.create_all(bind=self._engine)
-        # Configure SQLite pragmas for proper multi-threaded and async operation
-        # This applies to both production and test databases
-        self._configure_sqlite_pragmas()
-
-    def _configure_sqlite_pragmas(self) -> None:
-        """Configure SQLite pragmas for reliable multi-threaded and async operation."""
-        from sqlalchemy import event as sa_event
-
-        @sa_event.listens_for(self._engine, "connect")
-        def set_sqlite_pragma(dbapi_conn: Any, connection_record: Any) -> None:  # noqa: ARG001
-            """Enable WAL mode and other settings for reliable SQLite operation."""
-            cursor = dbapi_conn.cursor()
-            cursor.execute("PRAGMA journal_mode=WAL")
-            cursor.execute("PRAGMA synchronous=NORMAL")
-            cursor.close()
+        return cls._instance
 
     def set_logging_level(self, level: int) -> None:
         """Sets the logging level for the TokenUsageLogger."""
@@ -138,7 +98,6 @@ class TokenUsageLogger:
 
     def _perform_log(self, log_entry: dict[str, Any]) -> None:
         """Synchronously performs the database logging operation."""
-        assert self._SessionLocal is not None
         db = self._SessionLocal()
         try:
             repository = TokenUsageRepository(db)
@@ -154,7 +113,6 @@ class TokenUsageLogger:
         end_time: datetime | None = None,
     ) -> list[TokenUsage]:
         """Queries token usage data from the database."""
-        assert self._SessionLocal is not None
         db = self._SessionLocal()
         try:
             repository = TokenUsageRepository(db)
@@ -173,7 +131,6 @@ class TokenUsageLogger:
 
     def _perform_prune(self, cutoff_date: datetime) -> None:
         """Synchronously performs the database pruning operation."""
-        assert self._SessionLocal is not None
         db = self._SessionLocal()
         try:
             repository = TokenUsageRepository(db)
@@ -183,5 +140,27 @@ class TokenUsageLogger:
             db.close()
 
 
-# Global instance for easy access
-token_logger = TokenUsageLogger()
+# Module-level database setup and token_logger instance creation
+def _create_token_logger() -> TokenUsageLogger:
+    """Create TokenUsageLogger instance based on environment configuration.
+
+    Uses TOKEN_USAGE_DATABASE_URL environment variable if available,
+    otherwise defaults to sqlite:///token_usage.db for development.
+
+    Agricultural Context: Ensures reliable token usage tracking across
+    agricultural robotics deployment environments with flexible database
+    configuration for development, testing, and production.
+    """
+    database_url = os.environ.get("TOKEN_USAGE_DATABASE_URL", "sqlite:///token_usage.db")
+
+    engine = create_engine(database_url, echo=False)
+    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+    # Create tables
+    Base.metadata.create_all(bind=engine)
+
+    return TokenUsageLogger(engine=engine, SessionLocal=SessionLocal)
+
+
+# Global token_logger instance for import by other modules
+token_logger = _create_token_logger()
