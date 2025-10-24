@@ -226,6 +226,12 @@ def main():
     print("🚨 CRITICAL: Follow pause structure compliance - see PAUSE_STRUCTURE_SPECIFICATION.md")
     print("📚 New User Guide: See ToDoWrite-HOWTO.md for complete usage instructions")
 
+    # Explicit confirmation prompt for the user
+    print("\n--- Session Loaded ---")
+    print("The session context has been successfully loaded.")
+    print("Please explicitly confirm your next action to proceed.")
+    print("----------------------")
+
 
 if __name__ == "__main__":
     main()
