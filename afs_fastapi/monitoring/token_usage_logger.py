@@ -87,6 +87,21 @@ class TokenUsageLogger:
         self._engine = create_engine(self.database_url)
         self._SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self._engine)
         Base.metadata.create_all(bind=self._engine)
+        # Configure SQLite pragmas for proper multi-threaded and async operation
+        # This applies to both production and test databases
+        self._configure_sqlite_pragmas()
+
+    def _configure_sqlite_pragmas(self) -> None:
+        """Configure SQLite pragmas for reliable multi-threaded and async operation."""
+        from sqlalchemy import event as sa_event
+
+        @sa_event.listens_for(self._engine, "connect")
+        def set_sqlite_pragma(dbapi_conn: Any, connection_record: Any) -> None:  # noqa: ARG001
+            """Enable WAL mode and other settings for reliable SQLite operation."""
+            cursor = dbapi_conn.cursor()
+            cursor.execute("PRAGMA journal_mode=WAL")
+            cursor.execute("PRAGMA synchronous=NORMAL")
+            cursor.close()
 
     def set_logging_level(self, level: int) -> None:
         """Sets the logging level for the TokenUsageLogger."""

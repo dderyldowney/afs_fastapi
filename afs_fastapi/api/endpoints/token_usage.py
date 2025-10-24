@@ -3,13 +3,14 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, status
 
-from afs_fastapi.monitoring.token_usage_logger import token_logger
+import afs_fastapi.monitoring.token_usage_logger as token_usage_module
 from afs_fastapi.monitoring.token_usage_schemas import TokenUsageCreate, TokenUsageInDB
 
 router = APIRouter()
 
-# Use the global token_logger instance from token_usage_logger module
-# This allows tests to reset the singleton and inject a test database
+# Access token_logger through module to allow test resets to work properly.
+# Tests reset the singleton which updates module.token_logger, and we access it
+# dynamically through the module reference rather than a direct import binding.
 
 
 @router.post("/token-usage", response_model=TokenUsageInDB, status_code=status.HTTP_201_CREATED)
@@ -17,7 +18,7 @@ async def log_token_usage_endpoint(token_usage_data: TokenUsageCreate) -> Any:
     """Logs token usage data for an agent action."""
     try:
         # The log_token_usage method is asynchronous and handles persistence
-        await token_logger.log_token_usage(
+        await token_usage_module.token_logger.log_token_usage(
             agent_id=token_usage_data.agent_id,
             task_id=token_usage_data.task_id,
             tokens_used=token_usage_data.tokens_used,
@@ -43,7 +44,9 @@ def query_token_usage_endpoint(
     """Queries token usage data based on provided filters."""
     try:
         # The query_token_usage method handles data retrieval
-        usage_records = token_logger.query_token_usage(agent_id, task_id, start_time, end_time)
+        usage_records = token_usage_module.token_logger.query_token_usage(
+            agent_id, task_id, start_time, end_time
+        )
         return [TokenUsageInDB.from_orm(record) for record in usage_records]
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)) from e
