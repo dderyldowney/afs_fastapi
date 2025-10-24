@@ -419,6 +419,139 @@ class SocketCANInterface(PhysicalCANInterface):
                 continue
 
 
+class VirtualCANInterface(PhysicalCANInterface):
+    """Virtual CAN interface implementation for testing and simulation."""
+
+    async def connect(self) -> bool:
+        """Connect to virtual CAN interface."""
+        async with self._connection_lock:
+            if self._state == InterfaceState.CONNECTED:
+                return True
+
+            try:
+                self._state = InterfaceState.CONNECTING
+
+                # Create virtual CAN bus
+                self._bus = can.interface.Bus(
+                    interface="virtual",
+                    channel=self.config.channel,
+                    bitrate=self.config.bitrate.value,
+                    fd=self.config.fd_enabled,
+                    data_bitrate=self.config.data_bitrate,
+                    can_filters=None,  # Accept all messages initially
+                )
+
+                # Set up message listener
+                listener: can.BufferedReader = can.BufferedReader()
+                self._listeners.append(listener)
+                self._notifier = can.Notifier(self._bus, [listener])
+
+                # Start heartbeat monitoring
+                self._heartbeat_task = asyncio.create_task(self._heartbeat_loop())
+
+                self._state = InterfaceState.CONNECTED
+                logger.info(
+                    f"Virtual CAN connected: {self.config.channel} at {self.config.bitrate.value} bps"
+                )
+
+                # Start message reception task
+                self._message_reception_task = asyncio.create_task(
+                    self._message_reception_loop(listener)
+                )
+
+                return True
+
+            except Exception as e:
+                self._state = InterfaceState.ERROR
+                self.error_handler.handle_error(
+                    CANErrorType.TIMEOUT,
+                    f"Virtual CAN connection failed: {e}",
+                    metadata={"channel": self.config.channel},
+                )
+                logger.error(f"Virtual CAN connection failed: {e}")
+                return False
+
+    async def disconnect(self) -> bool:
+        """Disconnect from virtual CAN interface."""
+        async with self._connection_lock:
+            try:
+                self._state = InterfaceState.DISCONNECTED
+
+                # Stop heartbeat
+                if self._heartbeat_task:
+                    self._heartbeat_task.cancel()
+                    self._heartbeat_task = None
+
+                # Stop message reception task
+                if self._message_reception_task:
+                    self._message_reception_task.cancel()
+                    self._message_reception_task = None
+
+                # Stop notifier
+                if self._notifier:
+                    self._notifier.stop()
+                    self._notifier = None
+
+                # Shutdown bus
+                if self._bus:
+                    self._bus.shutdown()
+                    self._bus = None
+
+                self._listeners.clear()
+                logger.info(f"Virtual CAN disconnected: {self.config.channel}")
+                return True
+
+            except Exception as e:
+                logger.error(f"Virtual CAN disconnect error: {e}")
+                return False
+
+    async def send_message(self, message: can.Message) -> bool:
+        """Send message via virtual CAN."""
+        if self._state != InterfaceState.CONNECTED or not self._bus:
+            return False
+
+        try:
+            await asyncio.to_thread(self._bus.send, message)
+            self._status.messages_sent += 1
+            logger.debug(f"Virtual CAN message sent: ID={message.arbitration_id:08X}")
+            return True
+
+        except Exception as e:
+            self._status.errors_total += 1
+            self.error_handler.handle_error(
+                CANErrorType.DATA_CORRUPTION,
+                f"Virtual CAN send failed: {e}",
+                message.arbitration_id & 0xFF,
+            )
+            return False
+
+    def get_hardware_info(self) -> dict[str, Any]:
+        """Get virtual CAN hardware information."""
+        return {
+            "interface_type": "VirtualCAN",
+            "channel": self.config.channel,
+            "bitrate": self.config.bitrate.value,
+            "fd_enabled": self.config.fd_enabled,
+            "driver": "python-can-virtual",
+        }
+
+    async def _message_reception_loop(self, listener: can.BufferedReader) -> None:
+        """Background task for receiving messages."""
+        while self._state == InterfaceState.CONNECTED:
+            try:
+                message: can.Message | None = listener.get_message(timeout=1.0)
+                if message:
+                    self._handle_received_message(message)
+            except can.CanError as e:
+                self.error_handler.handle_error(
+                    CANErrorType.DATA_CORRUPTION,
+                    f"Message reception error: {e}",
+                )
+            except Exception:
+                # Timeout or other non-critical error
+                continue
+
+
 class PhysicalCANManager:
     """Manages multiple physical CAN interfaces for tractor connectivity."""
 
@@ -472,6 +605,8 @@ class PhysicalCANManager:
             # Create appropriate interface type
             if config.interface_type == CANInterfaceType.SOCKETCAN:
                 interface = SocketCANInterface(interface_id, config, self.error_handler)
+            elif config.interface_type == CANInterfaceType.VIRTUAL:
+                interface = VirtualCANInterface(interface_id, config, self.error_handler)
             else:
                 raise NotImplementedError(
                     f"Interface type {config.interface_type} not implemented yet"

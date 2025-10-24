@@ -50,6 +50,7 @@ class TestAIProcessingPipelineOptimization(unittest.TestCase):
 
             # Check that the results are the same
             self.assertEqual(result1.final_output, result2.final_output)
+        return None
 
 
 if __name__ == "__main__":

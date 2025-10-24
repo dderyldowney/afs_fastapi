@@ -150,3 +150,8 @@ trace/
 token_usage.db
 test_token_usage.db
 *_token_usage.db
+
+# Temp db files
+tests/test_token_usage_temp.db-shm
+tests/test_token_usage_temp.db-wal
+
