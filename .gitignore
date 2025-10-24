@@ -155,3 +155,4 @@ test_token_usage.db
 tests/test_token_usage_temp.db-shm
 tests/test_token_usage_temp.db-wal
 
+.claude/settings.local.json
