@@ -4,27 +4,13 @@
 repos:
   - repo: local
     hooks:
-      - id: ruff
-        name: Ruff (lint)
-        entry: ruff check
+      - id: formatall
+        name: Format and Lint (Black, isort, Ruff)
+        entry: bin/formatall
         language: system
         types: [python]
         files: ^(?!bin/|tmp_).*
-        files: ^(?!bin/|tmp_).*
-      - id: isort
-        name: isort (imports check)
-        entry: isort
-        args: ["--check-only"]
-        language: system
-        types: [python]
-        files: ^(?!bin/|tmp_).*
-      - id: black
-        name: Black (formatting)
-        entry: black
-        args: ["--check"]
-        language: system
-        types: [python]
-        files: ^(?!bin/|tmp_).*
+        pass_filenames: false
       - id: mypy-app
         name: MyPy (app)
         entry: mypy afs_fastapi
