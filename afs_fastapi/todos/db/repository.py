@@ -188,8 +188,8 @@ class NodeRepository(BaseRepository[DBNode]):
                 if not db_command:
                     db_command = DBCommand(node_id=node_id)
                     self.session.add(db_command)
-                db_command.ac_ref = node_data["command"].get("ac_ref", db_command.ac_ref)
-                db_command.run = str(node_data["command"].get("run", db_command.run))
+                db_command.ac_ref = node_data["command"].get("ac_ref", db_command.ac_ref)  # type: ignore[assignment]
+                db_command.run = str(node_data["command"].get("run", ""))  # type: ignore[assignment]
 
                 self.session.query(DBArtifact).filter(DBArtifact.command_id == node_id).delete()
                 for artifact_text in node_data["command"].get("artifacts", []):

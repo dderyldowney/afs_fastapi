@@ -249,19 +249,19 @@ def _convert_db_node_to_node(db_node: SQLAModelNode) -> Node:
     links = Link(parents=parent_ids, children=child_ids)
 
     metadata = Metadata(
-        owner=db_node.owner or "",
+        owner=str(db_node.owner or ""),
         labels=(
             [str(label.label) for label in db_node.labels if label.label is not None]
             if db_node.labels
             else []
         ),
-        severity=db_node.severity or "",
-        work_type=db_node.work_type or "",
+        severity=str(db_node.severity or ""),
+        work_type=str(db_node.work_type or ""),
     )
     command = None
     if db_node.command:
         command = Command(
-            ac_ref=db_node.command.ac_ref or "",
+            ac_ref=str(db_node.command.ac_ref or ""),
             run=eval(db_node.command.run) if db_node.command.run else {},
             artifacts=(
                 [

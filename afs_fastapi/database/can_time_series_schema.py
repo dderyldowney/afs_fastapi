@@ -26,10 +26,13 @@ from sqlalchemy import (
     UniqueConstraint,
 )
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import DeclarativeBase
 
-# Database base for time-series tables
-TimeSeriesBase = declarative_base()
+
+class TimeSeriesBase(DeclarativeBase):
+    """Base class for all time-series SQLAlchemy models using SQLAlchemy 2.0 API."""
+
+    pass
 
 
 class CANMessagePriority(Enum):
