@@ -1,4 +1,4 @@
-from typing import Literal, TypeAlias
+from typing import Literal
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
@@ -31,9 +31,9 @@ class MetadataModel(BaseModel):
     work_type: str = ""
 
 
-NodeType: TypeAlias = LayerType
-Status: TypeAlias = StatusType
-Priority: TypeAlias = Literal["low", "medium", "high", "critical"]
+type NodeType = LayerType
+type Status = StatusType
+type Priority = Literal["low", "medium", "high", "critical"]
 
 
 class ToDoWriteNodeModel(BaseModel):

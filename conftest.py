@@ -1,5 +1,12 @@
 from __future__ import annotations
 
+import os
+import shutil
+import tempfile
+from typing import Any
+
+import pytest
+
 """Pytest configuration for AFS FastAPI Agricultural Robotics Platform.
 
 This configuration file provides pytest hooks and fixtures for the entire test suite.
@@ -9,13 +16,6 @@ Agricultural Context: Test infrastructure for safety-critical agricultural robot
 systems requires reliable test isolation and proper handling of parallel execution
 to ensure ISO compliance validation.
 """
-
-import os
-import shutil
-import tempfile
-from typing import Any
-
-import pytest
 
 
 def pytest_configure(config: Any) -> None:
