@@ -1,0 +1,287 @@
+#!/usr/bin/env python3
+"""
+Pause Point Status Management Tool for AFS FastAPI Agricultural Robotics Platform.
+
+Provides comprehensive status management for pause points and checkpoints.
+Supports listing, updating, and tracking completion status of development milestones.
+"""
+
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+from typing import Dict, List, Optional
+
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+# Add bin directory to sys.path for common modules
+bin_path = project_root / "bin"
+if bin_path.exists():
+    sys.path.insert(0, str(bin_path))
+
+from common.json_operations import load_json, save_json
+
+
+class PausePointManager:
+    """Manages pause points and checkpoint status updates."""
+
+    def __init__(self):
+        self.project_root = project_root
+        self.pause_points_file = self.project_root / ".claude" / "pause_points.json"
+        self.checkpoints_file = self.project_root / ".claude" / "checkpoints.json"
+
+        # Valid status values
+        self.valid_statuses = [
+            "pending",
+            "in_progress",
+            "completed",
+            "failed",
+            "cancelled",
+            "on_hold"
+        ]
+
+    def load_pause_points(self) -> List[Dict]:
+        """Load pause points from JSON file."""
+        return load_json(self.pause_points_file, default=[])
+
+    def load_checkpoints(self) -> List[Dict]:
+        """Load checkpoints from JSON file."""
+        return load_json(self.checkpoints_file, default=[])
+
+    def save_pause_points(self, pause_points: List[Dict]) -> bool:
+        """Save pause points to JSON file."""
+        return save_json(self.pause_points_file, pause_points)
+
+    def save_checkpoints(self, checkpoints: List[Dict]) -> bool:
+        """Save checkpoints to JSON file."""
+        return save_json(self.checkpoints_file, checkpoints)
+
+    def list_all_points(self) -> None:
+        """List all pause points and checkpoints with their status."""
+        pause_points = self.load_pause_points()
+        checkpoints = self.load_checkpoints()
+
+        print("📍 PAUSE POINTS & CHECKPOINTS STATUS")
+        print("=" * 50)
+        print()
+
+        print("🔄 PAUSE POINTS:")
+        if not pause_points:
+            print("  No pause points found")
+        else:
+            for point in pause_points:
+                status = point.get("status", "no status")
+                status_icon = self._get_status_icon(status)
+                print(f"  {status_icon} {point['id']}: {status}")
+                print(f"    Reason: {point['reason']}")
+                print(f"    Created: {point['timestamp'][:19]}")
+                print()
+
+        print("📍 CHECKPOINTS:")
+        if not checkpoints:
+            print("  No checkpoints found")
+        else:
+            for point in checkpoints:
+                status = point.get("status", "no status")
+                status_icon = self._get_status_icon(status)
+                print(f"  {status_icon} {point['id']}: {status}")
+                print(f"    Description: {point['description']}")
+                print(f"    Created: {point['timestamp'][:19]}")
+                print()
+
+        print("📊 SUMMARY:")
+        total_pause = len(pause_points)
+        total_check = len(checkpoints)
+        completed_pause = sum(1 for p in pause_points if p.get("status") == "completed")
+        completed_check = sum(1 for c in checkpoints if c.get("status") == "completed")
+
+        print(f"  • Pause Points: {completed_pause}/{total_pause} completed")
+        print(f"  • Checkpoints: {completed_check}/{total_check} completed")
+        print(f"  • Total Progress: {completed_pause + completed_check}/{total_pause + total_check}")
+
+    def _get_status_icon(self, status: str) -> str:
+        """Get emoji icon for status."""
+        icons = {
+            "completed": "✅",
+            "in_progress": "🔄",
+            "pending": "⏳",
+            "failed": "❌",
+            "cancelled": "🚫",
+            "on_hold": "⏸️",
+            "no status": "❓"
+        }
+        return icons.get(status, "❓")
+
+    def update_pause_point_status(self, point_id: str, new_status: str) -> bool:
+        """Update the status of a specific pause point."""
+        if new_status not in self.valid_statuses:
+            print(f"❌ Invalid status: {new_status}")
+            print(f"Valid statuses: {', '.join(self.valid_statuses)}")
+            return False
+
+        pause_points = self.load_pause_points()
+
+        for point in pause_points:
+            if point["id"] == point_id:
+                old_status = point.get("status", "no status")
+                point["status"] = new_status
+
+                if self.save_pause_points(pause_points):
+                    status_icon = self._get_status_icon(new_status)
+                    print(f"✅ Updated pause point {point_id}")
+                    print(f"   Status: {old_status} → {new_status} {status_icon}")
+                    print(f"   Reason: {point['reason']}")
+                    return True
+                else:
+                    print(f"❌ Failed to save pause points file")
+                    return False
+
+        print(f"❌ Pause point '{point_id}' not found")
+        return False
+
+    def update_checkpoint_status(self, point_id: str, new_status: str) -> bool:
+        """Update the status of a specific checkpoint."""
+        if new_status not in self.valid_statuses:
+            print(f"❌ Invalid status: {new_status}")
+            print(f"Valid statuses: {', '.join(self.valid_statuses)}")
+            return False
+
+        checkpoints = self.load_checkpoints()
+
+        for point in checkpoints:
+            if point["id"] == point_id:
+                old_status = point.get("status", "no status")
+                point["status"] = new_status
+
+                if self.save_checkpoints(checkpoints):
+                    status_icon = self._get_status_icon(new_status)
+                    print(f"✅ Updated checkpoint {point_id}")
+                    print(f"   Status: {old_status} → {new_status} {status_icon}")
+                    print(f"   Description: {point['description']}")
+                    return True
+                else:
+                    print(f"❌ Failed to save checkpoints file")
+                    return False
+
+        print(f"❌ Checkpoint '{point_id}' not found")
+        return False
+
+    def mark_completed(self, point_id: str) -> bool:
+        """Mark a pause point or checkpoint as completed."""
+        # Try pause points first
+        if self.update_pause_point_status(point_id, "completed"):
+            return True
+
+        # Try checkpoints
+        return self.update_checkpoint_status(point_id, "completed")
+
+    def bulk_update_status(self, new_status: str, point_type: str = "all") -> bool:
+        """Update status for all pause points, checkpoints, or both."""
+        if new_status not in self.valid_statuses:
+            print(f"❌ Invalid status: {new_status}")
+            return False
+
+        updated_count = 0
+
+        if point_type in ["all", "pause"]:
+            pause_points = self.load_pause_points()
+            for point in pause_points:
+                point["status"] = new_status
+                updated_count += 1
+
+            if pause_points:
+                self.save_pause_points(pause_points)
+                print(f"✅ Updated {len(pause_points)} pause points to '{new_status}'")
+
+        if point_type in ["all", "checkpoint"]:
+            checkpoints = self.load_checkpoints()
+            for point in checkpoints:
+                point["status"] = new_status
+                updated_count += 1
+
+            if checkpoints:
+                self.save_checkpoints(checkpoints)
+                print(f"✅ Updated {len(checkpoints)} checkpoints to '{new_status}'")
+
+        print(f"📊 Total updated: {updated_count} items")
+        return updated_count > 0
+
+
+def main():
+    """Main command-line interface."""
+    parser = argparse.ArgumentParser(
+        description="Manage pause point and checkpoint statuses for AFS FastAPI platform",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  %(prog)s list                           # List all pause points and statuses
+  %(prog)s update pause_7 completed       # Mark pause_7 as completed
+  %(prog)s update checkpoint_1 failed     # Mark checkpoint_1 as failed
+  %(prog)s complete pause_8               # Mark pause_8 as completed
+  %(prog)s bulk-complete all              # Mark all points as completed
+  %(prog)s bulk-update in_progress pause  # Mark all pause points as in_progress
+
+Valid statuses: pending, in_progress, completed, failed, cancelled, on_hold
+        """
+    )
+
+    subparsers = parser.add_subparsers(dest="command", help="Available commands")
+
+    # List command
+    subparsers.add_parser("list", help="List all pause points and checkpoints")
+
+    # Update command
+    update_parser = subparsers.add_parser("update", help="Update status of specific point")
+    update_parser.add_argument("point_id", help="ID of pause point or checkpoint")
+    update_parser.add_argument("status", help="New status to set")
+
+    # Complete command (shortcut for completed status)
+    complete_parser = subparsers.add_parser("complete", help="Mark point as completed")
+    complete_parser.add_argument("point_id", help="ID of pause point or checkpoint")
+
+    # Bulk update command
+    bulk_parser = subparsers.add_parser("bulk-update", help="Update status for multiple points")
+    bulk_parser.add_argument("status", help="New status to set")
+    bulk_parser.add_argument("type", choices=["all", "pause", "checkpoint"],
+                           default="all", nargs="?", help="Type of points to update")
+
+    # Bulk complete command (shortcut)
+    bulk_complete_parser = subparsers.add_parser("bulk-complete", help="Mark multiple points as completed")
+    bulk_complete_parser.add_argument("type", choices=["all", "pause", "checkpoint"],
+                                    default="all", nargs="?", help="Type of points to complete")
+
+    args = parser.parse_args()
+
+    if not args.command:
+        parser.print_help()
+        return
+
+    manager = PausePointManager()
+
+    if args.command == "list":
+        manager.list_all_points()
+
+    elif args.command == "update":
+        success = manager.mark_completed(args.point_id) if args.status == "completed" else (
+            manager.update_pause_point_status(args.point_id, args.status) or
+            manager.update_checkpoint_status(args.point_id, args.status)
+        )
+        sys.exit(0 if success else 1)
+
+    elif args.command == "complete":
+        success = manager.mark_completed(args.point_id)
+        sys.exit(0 if success else 1)
+
+    elif args.command == "bulk-update":
+        success = manager.bulk_update_status(args.status, args.type)
+        sys.exit(0 if success else 1)
+
+    elif args.command == "bulk-complete":
+        success = manager.bulk_update_status("completed", args.type)
+        sys.exit(0 if success else 1)
+
+
+if __name__ == "__main__":
+    main()
