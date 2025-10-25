@@ -10,7 +10,7 @@ def main():
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     sys.path.insert(0, project_root)
 
-    from afs_fastapi.todos.manager import get_active_items, get_goals, load_todos
+    from todowrite.manager import get_active_items, get_goals, load_todos
 
     todos_data = load_todos()
     goals = get_goals()

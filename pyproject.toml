@@ -36,6 +36,7 @@ dependencies = [
   "psycopg2-binary>=2.9",    # PostgreSQL adapter
   "alembic>=1.13",           # Database migrations
   # add any concrete libs you use at runtime (DB client, sensors, etc.)
+
 ]
 
 [project.optional-dependencies]
@@ -149,3 +150,6 @@ combine_as_imports = true
 exclude = [
   ".trunk",
 ]
+
+[tool.hatch.metadata]
+allow-direct-references = true

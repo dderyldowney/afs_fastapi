@@ -22,7 +22,7 @@ from .ai_processing_schemas import (
     OptimizationLevelEnum,
     PlatformStatisticsResponse,
 )
-from .endpoints import token_usage
+from .endpoints import todos, token_usage
 
 app = FastAPI(
     title="Automated Farming System API",
@@ -35,6 +35,7 @@ field_allocation_crdt = FieldAllocationCRDT()
 
 # Include the token usage router
 app.include_router(token_usage.router, prefix="/monitoring", tags=["monitoring"])
+app.include_router(todos.router, prefix="/todos", tags=["todos"])
 
 # Optional CORS configuration via env var AFS_CORS_ORIGINS (comma-separated)
 _cors_origins = os.getenv("AFS_CORS_ORIGINS")

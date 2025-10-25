@@ -10,7 +10,7 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import update_step_status  # noqa: E402
+from todowrite.manager import update_step_status  # noqa: E402
 
 
 def main():

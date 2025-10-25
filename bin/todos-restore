@@ -42,7 +42,7 @@ def main():
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     sys.path.insert(0, project_root)
 
-    from afs_fastapi.todos.manager import load_todos
+    from todowrite.manager import load_todos
 
     todos_data = load_todos()
     markdown_output = format_as_markdown(todos_data)

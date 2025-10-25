@@ -10,7 +10,7 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import add_task, get_active_items, load_todos
+from todowrite.manager import add_task, get_active_items, load_todos
 
 
 def main():

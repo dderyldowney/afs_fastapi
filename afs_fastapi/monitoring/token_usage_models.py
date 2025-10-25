@@ -3,8 +3,13 @@ from __future__ import annotations
 from datetime import datetime
 
 from sqlalchemy import Column, DateTime, Float, String
+from sqlalchemy.orm import DeclarativeBase
 
-from afs_fastapi.todos.db.models import Base
+
+class Base(DeclarativeBase):
+    """Base class for all SQLAlchemy models using SQLAlchemy 2.0 API."""
+
+    pass
 
 
 class TokenUsage(Base):
