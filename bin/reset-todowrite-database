@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+import os
+import sys
+
+def main():
+    # Add project root to sys.path
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    sys.path.insert(0, project_root)
+
+    from ToDoWrite.todowrite.manager import init_database
+
+    result = init_database()
+    if result["status"] == "success":
+        print("ToDoWrite database has been reset successfully.")
+        print(f"Database type: {result['database_type']}")
+        print(f"Database URL: {result['url']}")
+    else:
+        print("Failed to reset ToDoWrite database.")
+        print(f"Error: {result['error']}")
+        print(f"Database URL: {result['database_url']}")
+
+if __name__ == "__main__":
+    main()
