@@ -159,12 +159,12 @@ class MessageRouter:
         ----------
         message : can.Message
             CAN message to route
-        available_interfaces : List[str]
+        available_interfaces : list[str]
             Available interface names
 
         Returns
         -------
-        Tuple[List[str], MessagePriority]
+        tuple[list[str], MessagePriority]
             (target_interfaces, message_priority)
         """
         decoded: DecodedPGN | None = self.codec.decode_message(message)
@@ -261,7 +261,7 @@ class MessageRouter:
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             Routing statistics
         """
         return {
@@ -359,7 +359,7 @@ class ConnectionPool:
 
         Returns
         -------
-        List[str]
+        list[str]
             Active interface IDs
         """
         active: list[str] = []
@@ -382,12 +382,12 @@ class ConnectionPool:
 
         Parameters
         ----------
-        exclude : Optional[List[str]]
+        exclude : list[str | None]
             Interface IDs to exclude
 
         Returns
         -------
-        Optional[str]
+        str | None
             Best interface ID or None
         """
         excluded_ids: list[str] = exclude or []
@@ -535,9 +535,9 @@ class CANBusConnectionManager:
         ----------
         pool_config : ConnectionPoolConfig
             Connection pool configuration
-        error_handler : Optional[CANErrorHandler]
+        error_handler : CANErrorHandler | None
             Error handling system
-        error_logger : Optional[ISOBUSErrorLogger]
+        error_logger : ISOBUSErrorLogger | None
             Error logging system
         """
         self.pool_config = pool_config
@@ -779,7 +779,7 @@ class CANBusConnectionManager:
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             Manager status information
         """
         return {
@@ -805,7 +805,7 @@ class CANBusConnectionManager:
 
         Returns
         -------
-        List[str]
+        list[str]
             Active interface IDs
         """
         return self.connection_pool.get_active_interfaces()
@@ -890,14 +890,14 @@ class CANBusConnectionManager:
         ----------
         interface_name_or_message : str | can.Message
             Either interface name (legacy API) or CAN message (new API)
-        message_or_target_interfaces : can.Message | List[str] | None
+        message_or_target_interfaces : can.Message | list[str] | None
             Either CAN message (legacy API) or target interfaces (new API)
         priority : MessagePriority
             Message priority level
 
         Returns
         -------
-        Dict[str, bool] | bool
+        dict[str, bool] | bool
             Send results by interface ID (new API) or success status (legacy API)
         """
         # Legacy API compatibility: send_message(interface_name, message)

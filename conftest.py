@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Pytest configuration for AFS FastAPI Agricultural Robotics Platform.
 
 This configuration file provides pytest hooks and fixtures for the entire test suite.

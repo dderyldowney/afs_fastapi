@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 Agricultural database module for time-series and relational data management.
 

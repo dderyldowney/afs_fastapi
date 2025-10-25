@@ -254,7 +254,7 @@ class ArchivalManager:
 
         Returns
         -------
-        List[DataRetentionPolicy]
+        list[DataRetentionPolicy]
             List of default agricultural retention policies
         """
         return list(self._retention_policies.values())
@@ -269,7 +269,7 @@ class ArchivalManager:
 
         Returns
         -------
-        List[Any]
+        list[Any]
             List of expired database records
         """
         if retention_policy.retention_period == RetentionPeriod.PERMANENT:
@@ -408,7 +408,7 @@ class ArchivalManager:
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             Serialized record data
         """
         record_dict = {}
@@ -424,7 +424,7 @@ class ArchivalManager:
 
         Parameters
         ----------
-        data : List[Dict[str, Any]]
+        data : list[dict[str, Any]]
             Data to compress
 
         Returns
@@ -480,7 +480,7 @@ class ArchivalManager:
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             Storage statistics and recommendations
         """
         stats: dict[str, Any] = {
@@ -597,7 +597,7 @@ class ArchivalManager:
 
         Parameters
         ----------
-        recovery_request : Dict[str, Any]
+        recovery_request : dict[str, Any]
             Data recovery request specification
 
         Returns
@@ -651,7 +651,7 @@ def create_retention_policies() -> list[DataRetentionPolicy]:
 
     Returns
     -------
-    List[DataRetentionPolicy]
+    list[DataRetentionPolicy]
         List of default retention policies
     """
     manager = ArchivalManager(database_session=None)  # type: ignore[arg-type]
@@ -699,7 +699,7 @@ def archive_expired_data(database_session: Session) -> list[ArchivalResult]:
 
     Returns
     -------
-    List[ArchivalResult]
+    list[ArchivalResult]
         Results of all archival operations
     """
     manager = ArchivalManager(database_session=database_session)
@@ -751,7 +751,7 @@ def get_storage_statistics(database_session: Session) -> dict[str, Any]:
 
     Returns
     -------
-    Dict[str, Any]
+    dict[str, Any]
         Storage statistics
     """
     manager = ArchivalManager(database_session=database_session)

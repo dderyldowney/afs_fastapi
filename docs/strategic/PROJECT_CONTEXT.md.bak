@@ -72,21 +72,21 @@ This tagging strategy must be enforced in all future sessions
 - **Format**: `v{major}.{minor}.{patch}` (e.g., `v0.1.1`)
 - **Branch**: Only tag on `main` branch
 - **When**: After merging `develop` → `main` for stable releases
-- **Examples**: `v0.1.1`, `v0.1.6`, `v0.2.0`
+- **Examples**: `v0.1.1`, `v0.1.2`, `v0.2.0`
 
 #### 2. Alpha Tags (Development)
 
-- **Format**: `v{major}.{minor}.{patch}a{n}` (e.g., `v0.1.6a0`)
+- **Format**: `v{major}.{minor}.{patch}a{n}` (e.g., `v0.1.2a0`)
 - **Branch**: Only tag on `develop` branch
 - **When**: After significant development milestones
-- **Sequence**: `v0.1.6a0` → `v0.1.6a1` → `v0.1.6a2` → `v0.1.6`
+- **Sequence**: `v0.1.2a0` → `v0.1.2a1` → `v0.1.2a2` → `v0.1.2`
 - **First Alpha**: Created when starting work on next version
 
 #### 3. Version Progression Rules
 
 ```text
 Current: v0.1.1 (stable on main)
-Next:    v0.1.6a0 → v0.1.6a1 → ... → v0.1.6 (patch)
+Next:    v0.1.2a0 → v0.1.2a1 → ... → v0.1.2 (patch)
 Or:      v0.2.0a0 → v0.2.0a1 → ... → v0.2.0 (minor)
 Or:      v1.0.0a0 → v1.0.0a1 → ... → v1.0.0 (major)
 ```
@@ -95,11 +95,11 @@ Or:      v1.0.0a0 → v1.0.0a1 → ... → v1.0.0 (major)
 
 ```text
 main branch (stable):
-├── v0.1.0 → v0.1.1 → v0.1.6 (release tags only)
+├── v0.1.0 → v0.1.1 → v0.1.2 (release tags only)
 
 develop branch (development):
-├── v0.1.6a0 → v0.1.6a1 → v0.1.6a2 (alpha tags)
-└── merge to main → v0.1.6 release tag
+├── v0.1.2a0 → v0.1.2a1 → v0.1.2a2 (alpha tags)
+└── merge to main → v0.1.2 release tag
 ```
 
 #### 5. Version File Synchronization
@@ -115,13 +115,13 @@ When creating tags, ensure these files match:
 ```bash
 # For alpha releases (on develop branch):
 git checkout develop
-git tag -a v0.1.6a1 -m "Alpha release v0.1.6a1 - [description]"
-git push origin v0.1.6a1
+git tag -a v0.1.2a1 -m "Alpha release v0.1.2a1 - [description]"
+git push origin v0.1.2a1
 
 # For stable releases (on main branch):
 git checkout main
-git tag -a v0.1.6 -m "Release v0.1.6 - [changes]"
-git push origin v0.1.6
+git tag -a v0.1.2 -m "Release v0.1.2 - [changes]"
+git push origin v0.1.2
 ```
 
 #### 7. Enforcement Rules
@@ -146,9 +146,9 @@ In every session, Claude Code must:
 
 ```text
 v0.1.1     (main branch - stable release)
-v0.1.6a0   (develop branch - start development)
-v0.1.6a1   (develop branch - development milestone)
-v0.1.6     (main branch - next stable release)
+v0.1.2a0   (develop branch - start development)
+v0.1.2a1   (develop branch - development milestone)
+v0.1.2     (main branch - next stable release)
 v0.1.3a0   (develop branch - start next development)
 ```
 

@@ -212,7 +212,7 @@ class PhysicalCANInterface(ABC):
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             Hardware information dictionary
         """
         pass
@@ -676,7 +676,7 @@ class PhysicalCANManager:
 
         Returns
         -------
-        Dict[str, bool]
+        dict[str, bool]
             Connection results by interface ID
         """
         results = {}
@@ -689,7 +689,7 @@ class PhysicalCANManager:
 
         Returns
         -------
-        Dict[str, bool]
+        dict[str, bool]
             Disconnection results by interface ID
         """
         results = {}
@@ -707,7 +707,7 @@ class PhysicalCANManager:
 
         Returns
         -------
-        Dict[str, bool]
+        dict[str, bool]
             Send results by interface ID
         """
         results = {}
@@ -740,7 +740,7 @@ class PhysicalCANManager:
 
         Returns
         -------
-        Optional[InterfaceStatus]
+        InterfaceStatus | None
             Interface status or None if not found
         """
         if interface_id in self._interfaces:
@@ -752,7 +752,7 @@ class PhysicalCANManager:
 
         Returns
         -------
-        Dict[str, InterfaceStatus]
+        dict[str, InterfaceStatus]
             Status by interface ID
         """
         return {

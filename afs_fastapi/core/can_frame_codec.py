@@ -425,7 +425,7 @@ class J1939Decoder:
 
         Returns
         -------
-        Optional[DecodedPGN]
+        DecodedPGN | None
             Decoded PGN data or None if not decodable
         """
         try:
@@ -500,7 +500,7 @@ class J1939Decoder:
 
         Returns
         -------
-        Optional[Tuple[int, int, int, int, int]]
+        tuple[int, int, int, int, int | None]
             (priority, data_page, pdu_format, pdu_specific, source_address) or None
         """
         if can_id > 0x1FFFFFFF:  # 29-bit limit
@@ -527,7 +527,7 @@ class J1939Decoder:
 
         Returns
         -------
-        Optional[DecodedSPN]
+        DecodedSPN | None
             Decoded SPN value or None if invalid
         """
         try:
@@ -637,7 +637,7 @@ class J1939Decoder:
 
         Returns
         -------
-        Optional[DecodedPGN]
+        DecodedPGN | None
             Assembled multi-frame message or None if incomplete
         """
         if len(message.data) < 1:
@@ -669,7 +669,7 @@ class J1939Decoder:
 
         Returns
         -------
-        Optional[DecodedPGN]
+        DecodedPGN | None
             None (CM messages don't contain data)
         """
         if len(message.data) < 8:
@@ -715,18 +715,18 @@ class J1939Encoder:
             Parameter Group Number
         source_address : int
             Source address (0-255)
-        spn_values : Dict[int, Any]
+        spn_values : dict[int, Any]
             SPN values to encode {spn: value}
         priority : int, default 6
             Message priority (0-7)
         destination_address : int, default 255
             Destination address (255 for broadcast)
-        timestamp : Optional[float]
+        timestamp : float | None
             Message timestamp
 
         Returns
         -------
-        Optional[can.Message]
+        can.Message | None
             Encoded CAN message or None if encoding fails
         """
         try:
@@ -776,7 +776,7 @@ class J1939Encoder:
 
         Returns
         -------
-        Optional[int]
+        int | None
             Encoded raw value or None if encoding fails
         """
         try:
@@ -923,16 +923,16 @@ class J1939Encoder:
         ----------
         source_address : int
             Engine ECU address
-        engine_speed : Optional[float]
+        engine_speed : float | None
             Engine speed in RPM
-        manifold_pressure : Optional[float]
+        manifold_pressure : float | None
             Intake manifold pressure in kPa
-        torque_percent : Optional[float]
+        torque_percent : float | None
             Engine torque percentage
 
         Returns
         -------
-        Optional[can.Message]
+        can.Message | None
             Encoded EEC1 message
         """
         spn_values = {}
@@ -962,7 +962,7 @@ class J1939Encoder:
 
         Returns
         -------
-        Optional[can.Message]
+        can.Message | None
             Encoded WVS message
         """
         spn_values = {84: speed_kmh}
@@ -987,7 +987,7 @@ class J1939Encoder:
 
         Returns
         -------
-        Optional[can.Message]
+        can.Message | None
             Encoded VP message
         """
         spn_values = {584: latitude, 585: longitude}
@@ -1012,7 +1012,7 @@ class CANFrameCodec:
 
         Returns
         -------
-        Optional[DecodedPGN]
+        DecodedPGN | None
             Decoded message data
         """
         return self.decoder.decode_can_message(message)
@@ -1028,14 +1028,14 @@ class CANFrameCodec:
             Parameter Group Number
         source_address : int
             Source address
-        spn_values : Dict[int, Any]
+        spn_values : dict[int, Any]
             SPN values to encode
         **kwargs
             Additional encoding parameters
 
         Returns
         -------
-        Optional[can.Message]
+        can.Message | None
             Encoded CAN message
         """
         return self.encoder.encode_pgn_message(pgn, source_address, spn_values, **kwargs)
@@ -1050,7 +1050,7 @@ class CANFrameCodec:
 
         Returns
         -------
-        Optional[PGNDefinition]
+        PGNDefinition | None
             PGN definition or None if not found
         """
         return self.decoder.pgn_definitions.get(pgn)
@@ -1065,7 +1065,7 @@ class CANFrameCodec:
 
         Returns
         -------
-        Optional[SPNDefinition]
+        SPNDefinition | None
             SPN definition or None if not found
         """
         return self.decoder.spn_definitions.get(spn)
@@ -1075,7 +1075,7 @@ class CANFrameCodec:
 
         Returns
         -------
-        List[int]
+        list[int]
             List of supported PGN numbers
         """
         return list(self.decoder.pgn_definitions.keys())
@@ -1085,7 +1085,7 @@ class CANFrameCodec:
 
         Returns
         -------
-        List[int]
+        list[int]
             List of supported SPN numbers
         """
         return list(self.decoder.spn_definitions.keys())
@@ -1101,7 +1101,7 @@ class CANFrameCodec:
 
         Returns
         -------
-        Optional[DecodedPGN]
+        DecodedPGN | None
             Decoded message data
         """
         return self.decode_message(message)
@@ -1119,7 +1119,7 @@ class CANFrameCodec:
 
         Returns
         -------
-        Optional[can.Message]
+        can.Message | None
             Encoded CAN message
         """
         try:
@@ -1152,7 +1152,7 @@ class CANFrameCodec:
 
         Returns
         -------
-        Optional[can.Message]
+        can.Message | None
             Encoded CAN message
         """
         try:

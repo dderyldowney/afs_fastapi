@@ -162,7 +162,7 @@ class CANMessageBuffer:
             Buffer configuration
         codec : CANFrameCodec
             CAN frame codec for message decoding
-        flush_callback : Callable[[List[BufferedCANMessage]], bool]
+        flush_callback : Callable[[list[BufferedCANMessage]], bool]
             Callback function for batch writes (returns success status)
         """
         self.config = config
@@ -236,7 +236,7 @@ class CANMessageBuffer:
             CAN message to buffer
         interface_id : str
             Interface that received the message
-        priority : Optional[CANMessagePriority]
+        priority : CANMessagePriority | None
             Message priority (auto-detected if None)
 
         Returns

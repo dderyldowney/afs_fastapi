@@ -106,7 +106,7 @@ class FailSafeAction:
             Speed reduction factor (0.0 to 1.0)
         safety_margin_expansion_factor : float
             Safety zone expansion factor (>= 1.0)
-        safety_actions : List[str]
+        safety_actions : list[str]
             List of safety actions to execute
         requires_operator_intervention : bool
             Whether operator intervention is required
@@ -264,7 +264,7 @@ class CommunicationLossFailSafe:
         ----------
         isobus : Any
             ISOBUS communication interface
-        fleet_status : Dict[str, Dict[str, Any]]
+        fleet_status : dict[str, dict[str, Any]]
             Current status of all tractors in fleet
 
         Returns
@@ -559,7 +559,7 @@ class CommunicationLossFailSafe:
         ----------
         communication_health : CommunicationHealth
             Current communication health status
-        current_operations : List[Dict[str, Any]]
+        current_operations : list[dict[str, Any]]
             Current agricultural operations being performed
 
         Returns

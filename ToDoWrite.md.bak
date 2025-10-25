@@ -405,7 +405,7 @@ make tw-prove                  # Generate command stubs
 make tw-check                  # Full validation before push
 ```
 
-## 13) System Status: PRODUCTION READY (v0.1.6)
+## 13) System Status: PRODUCTION READY (v0.1.5)
 - ✅ **Schema Validation:** JSON Schema enforcement
 - ✅ **SoC Linting:** Automated separation of concerns checking
 - ✅ **Traceability:** Complete forward/backward dependency tracking

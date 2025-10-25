@@ -349,7 +349,7 @@ class CANDataRetentionManager:
 
         Returns
         -------
-        Dict[str, int]
+        dict[str, int]
             Processing results (archived, deleted counts)
         """
         results = {"archived": 0, "deleted": 0}
@@ -394,7 +394,7 @@ class CANDataRetentionManager:
 
         Returns
         -------
-        List[str]
+        list[str]
             Matching table names
         """
         async with self.storage._get_async_session() as session:

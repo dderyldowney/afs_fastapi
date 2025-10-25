@@ -241,13 +241,13 @@ This project uses **Git Flow** with strict tagging conventions:
 #### Tag Types and Rules
 
 **1. Release Tags (Stable Production)**
-- **Format**: `v{major}.{minor}.{patch}` (e.g., `v0.1.1`, `v0.1.6`)
+- **Format**: `v{major}.{minor}.{patch}` (e.g., `v0.1.1`, `v0.1.2`)
 - **Branch**: Only created on `main` branch
 - **When**: After merging `develop` → `main` for stable releases
 - **Who**: Only maintainers create release tags
 
 **2. Alpha Tags (Development)**
-- **Format**: `v{major}.{minor}.{patch}a{n}` (e.g., `v0.1.6a0`, `v0.1.6a1`)
+- **Format**: `v{major}.{minor}.{patch}a{n}` (e.g., `v0.1.2a0`, `v0.1.2a1`)
 - **Branch**: Only created on `develop` branch
 - **When**: After significant development milestones
 - **Sequence**: Must be sequential (a0 → a1 → a2, no gaps)
@@ -255,10 +255,10 @@ This project uses **Git Flow** with strict tagging conventions:
 #### Version File Requirements
 
 Before creating any tag, these files MUST be synchronized:
-- `afs_fastapi/version.py` - Contains `__version__ = "0.1.6"`
-- `pyproject.toml` - Contains `version = "0.1.6"`
+- `afs_fastapi/version.py` - Contains `__version__ = "0.1.2"`
+- `pyproject.toml` - Contains `version = "0.1.2"`
 
-**Version format**: Without 'v' prefix (tag: `v0.1.6`, files: `0.1.6`)
+**Version format**: Without 'v' prefix (tag: `v0.1.2`, files: `0.1.2`)
 
 #### Contributor Guidelines
 
@@ -279,15 +279,15 @@ Before creating any tag, these files MUST be synchronized:
 ```bash
 # Alpha release on develop branch
 git checkout develop
-git tag -a v0.1.6a1 -m "Alpha release v0.1.6a1 - Added new monitoring features"
-git push origin v0.1.6a1
+git tag -a v0.1.2a1 -m "Alpha release v0.1.2a1 - Added new monitoring features"
+git push origin v0.1.2a1
 
 # Stable release on main branch (after merging develop)
 git checkout main
 git merge develop
-git tag -a v0.1.6 -m "Release v0.1.6 - Enhanced monitoring and bug fixes"
+git tag -a v0.1.2 -m "Release v0.1.2 - Enhanced monitoring and bug fixes"
 git push origin main
-git push origin v0.1.6
+git push origin v0.1.2
 ```
 
 #### Current Version Status
@@ -305,11 +305,11 @@ When submitting PRs:
 2. **Update version files** if your changes warrant a version bump:
    ```python
    # afs_fastapi/version.py
-   __version__ = "0.1.6"  # Remove 'a0' when ready for next release
+   __version__ = "0.1.2"  # Remove 'a0' when ready for next release
    ```
    ```toml
    # pyproject.toml
-   version = "0.1.6"
+   version = "0.1.2"
    ```
 3. **Update CHANGELOG.md** with your changes
 4. **Let maintainers handle tagging** - don't create tags yourself

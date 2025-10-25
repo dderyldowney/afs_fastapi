@@ -211,7 +211,7 @@ class EmergencyStopPropagation:
         ----------
         reason_code : EmergencyReasonCode
             Reason for emergency stop (obstacle, malfunction, etc.)
-        source_position : Dict[str, float]
+        source_position : dict[str, float]
             GPS coordinates of emergency source
         severity : EmergencySeverity
             Emergency severity level for conflict resolution
@@ -282,7 +282,7 @@ class EmergencyStopPropagation:
 
         Parameters
         ----------
-        message : Dict[str, Any]
+        message : dict[str, Any]
             Emergency stop message from another tractor
         sender_clock : VectorClock
             Sender's vector clock for causal ordering
@@ -504,7 +504,7 @@ class EmergencyStopPropagation:
 
         Returns
         -------
-        Optional[ActiveEmergency]
+        ActiveEmergency | None
             Active emergency details or None if no emergency active
 
         Agricultural Context

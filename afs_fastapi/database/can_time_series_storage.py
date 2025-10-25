@@ -173,7 +173,7 @@ class CANTimeSeriesStorage:
 
         Parameters
         ----------
-        messages : List[BufferedCANMessage]
+        messages : list[BufferedCANMessage]
             Batch of messages to store
 
         Returns
@@ -446,16 +446,16 @@ class CANTimeSeriesStorage:
             Start of query period
         end_time : datetime
             End of query period
-        equipment_types : Optional[List[str]]
+        equipment_types : list[str | None]
             Filter by equipment types
-        source_addresses : Optional[List[int]]
+        source_addresses : list[int | None]
             Filter by source addresses
         time_window : str, default "1hour"
             Aggregation window
 
         Returns
         -------
-        List[Dict[str, Any]]
+        list[dict[str, Any]]
             Query results
         """
         try:

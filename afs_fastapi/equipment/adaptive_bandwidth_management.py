@@ -158,7 +158,7 @@ class BandwidthPolicy:
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             Policy limits including minimum guarantees and constraints
         """
         if context == OperationBandwidthContext.FIELD_OPERATION:
@@ -340,7 +340,7 @@ class BandwidthAllocator:
 
         Returns
         -------
-        Dict[str, float]
+        dict[str, float]
             Mapping of operation_id to new bandwidth allocation
         """
         reallocation_results = {}
@@ -458,7 +458,7 @@ class BandwidthMonitor:
 
         Parameters
         ----------
-        interface_data : Dict[str, Any]
+        interface_data : dict[str, Any]
             Interface bandwidth data
 
         Returns
@@ -534,7 +534,7 @@ class BandwidthMonitor:
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             Prediction results with confidence metrics
         """
         if len(self.metrics_history) < 5:
