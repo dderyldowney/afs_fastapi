@@ -9,7 +9,12 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.core.todos_manager import create_node, get_goals, init_database, load_todos
+# Add ToDoWrite directory to sys.path
+todowrite_path = project_root / "ToDoWrite"
+if todowrite_path.exists():
+    sys.path.insert(0, str(todowrite_path))
+
+from todowrite.manager import create_node, get_goals, init_database, load_todos
 
 
 def initialize_todowrite_system():

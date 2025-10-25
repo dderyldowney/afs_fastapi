@@ -11,10 +11,15 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from bin.common.json_operations import load_json
-
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
+
+# Add bin directory to sys.path for common modules
+bin_path = project_root / "bin"
+if bin_path.exists():
+    sys.path.insert(0, str(bin_path))
+
+from common.json_operations import load_json
 
 
 def resume_from_point(point_id: str) -> None:
