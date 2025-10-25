@@ -95,6 +95,28 @@ class ToDoResponse(BaseModel):
             ),
         )
 
+    @classmethod
+    def from_todowrite_dict(cls, node_dict: dict) -> "ToDoResponse":
+        """Convert ToDoWrite dictionary format to ToDoResponse."""
+        return cls(
+            id=node_dict.get("id", ""),
+            layer=node_dict.get("layer", "Goal"),  # Default to Goal for get_goals() results
+            title=node_dict.get("title", ""),
+            description=node_dict.get("description"),
+            status=node_dict.get("status", "planned"),
+            severity=node_dict.get("priority", "medium"),  # get_goals() uses 'priority' field
+            parent_id=None,  # Dictionary format doesn't include parent info
+            children_ids=[],  # Dictionary format doesn't include children info
+            labels=[LabelModel(name=label) for label in node_dict.get("labels", [])],
+            links=LinkModel(parents=[], children=[]),
+            metadata=MetadataModel(
+                owner=node_dict.get("owner", "system"),
+                labels=node_dict.get("labels", []),
+                severity=node_dict.get("priority", "medium"),
+                work_type="",
+            ),
+        )
+
 
 @router.post("/", response_model=ToDoResponse, status_code=201)
 async def create_todo_item(request: CreateToDoRequest) -> ToDoResponse:
@@ -131,7 +153,7 @@ async def get_all_goals() -> list[ToDoResponse]:
     Retrieve all ToDoWrite goals.
     """
     goals = get_goals()
-    return [ToDoResponse.from_todowrite_node(goal) for goal in goals]
+    return [ToDoResponse.from_todowrite_dict(goal) for goal in goals]
 
 
 @router.post("/init_db", status_code=200)

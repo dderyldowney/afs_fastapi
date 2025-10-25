@@ -38,8 +38,8 @@ async def test_create_todo_item(client: TestClient):
     data = response.json()
     print(data)
     assert data["title"] == "Test Goal"
-    assert data["node_type"] == "Goal"
-    assert "node_id" in data
+    assert data["layer"] == "Goal"  # API returns "layer", not "node_type"
+    assert "id" in data  # API returns "id", not "node_id"
 
 
 @pytest.mark.asyncio
