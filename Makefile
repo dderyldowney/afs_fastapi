@@ -63,44 +63,44 @@ tw-init:
 # Generate/refresh JSON Schema
 tw-schema:
 	@echo "📋 Generating TodoWrite JSON Schema..."
-	@python3 afs_fastapi/todos/tools/tw_validate.py --write-schema ToDoWrite/configs/schemas/todowrite.schema.json
+	@python3 ToDoWrite/todowrite/tools/extract_schema.py
 	@echo "✅ Schema generated at ToDoWrite/configs/schemas/todowrite.schema.json"
 
 # Lint for Separation of Concerns violations
 tw-lint:
 	@echo "🔍 Linting for SoC violations..."
-	@python3.12 afs_fastapi/todos/tools/tw_lint_soc.py --plans ToDoWrite/configs/plans --report trace/lint_report.json
+	@python3.12 -m ToDoWrite.todowrite.tools.tw_lint_soc --plans ToDoWrite/configs/plans --report trace/lint_report.json
 	@echo "✅ SoC linting completed"
 
 # Validate all plan files against schema
 tw-validate:
 	@echo "✅ Validating YAML files against schema..."
-	@python3.12 afs_fastapi/todos/tools/tw_validate.py --plans ToDoWrite/configs/plans --schema ToDoWrite/configs/schemas/todowrite.schema.json
+	@python3.12 -m ToDoWrite.todowrite.tools.tw_validate --plans ToDoWrite/configs/plans --schema ToDoWrite/configs/schemas/todowrite.schema.json
 	@echo "✅ Schema validation completed"
 
 # Build traceability matrix and dependency graph
 tw-trace:
 	@echo "🔗 Building traceability matrix..."
-	@python3.12 afs_fastapi/todos/tools/tw_trace.py --plans ToDoWrite/configs/plans --out-csv trace/trace.csv --out-graph trace/graph.json
+	@python3.12 -m ToDoWrite.todowrite.tools.tw_trace --plans ToDoWrite/configs/plans --out-csv trace/trace.csv --out-graph trace/graph.json
 	@echo "✅ Traceability analysis completed"
 
 # Generate command stubs for pending Acceptance Criteria
 tw-prove:
 	@echo "⚡ Generating command stubs for Acceptance Criteria..."
-	@python3.12 afs_fastapi/todos/tools/tw_stub_command.py --acs ToDoWrite/configs/plans/acceptance_criteria --out ToDoWrite/configs/commands
+	@python3.12 -m ToDoWrite.todowrite.tools.tw_stub_command --acs ToDoWrite/configs/plans/acceptance_criteria --out ToDoWrite/configs/commands
 	@echo "✅ Command stubs generated"
 
 # Install git commit hooks
 tw-hooks:
 	@echo "🪝 Installing git commit hooks..."
-	@chmod +x afs_fastapi/todos/tools/git-commit-msg-hook.sh || true
-	@ln -sf ../../afs_fastapi/todos/tools/git-commit-msg-hook.sh .git/hooks/commit-msg || true
+	@chmod +x ToDoWrite/todowrite/tools/git-commit-msg-hook.sh || true
+	@ln -sf ../../ToDoWrite/todowrite/tools/git-commit-msg-hook.sh .git/hooks/commit-msg || true
 	@echo "✅ Git commit-msg hook installed"
 
 # Check commit message format (used by git hook)
 tw-commitcheck:
 	@echo "📝 Checking commit message format..."
-	@afs_fastapi/todos/tools/git-commit-msg-hook.sh --check
+	@ToDoWrite/todowrite/tools/git-commit-msg-hook.sh --check
 	@echo "✅ Commit format valid"
 
 # Clean TodoWrite generated files
@@ -114,8 +114,8 @@ tw-clean:
 # Full TodoWrite validation pipeline (strict mode)
 tw-check: tw-schema tw-lint tw-validate tw-trace
 	@echo "🔍 Running full TodoWrite validation pipeline..."
-	@python3 afs_fastapi/todos/tools/tw_lint_soc.py --plans plans --strict
-	@python3 afs_fastapi/todos/tools/tw_trace.py --plans plans --validate
+	@python3 -m ToDoWrite.todowrite.tools.tw_lint_soc --plans plans --strict
+	@python3 -m ToDoWrite.todowrite.tools.tw_trace --plans plans --validate
 	@echo "✅ All TodoWrite checks passed!"
 
 # Development workflow: lint, validate, and generate commands
@@ -145,9 +145,9 @@ tw-examples:
 tw-test: tw-examples tw-all tw-prove
 	@echo "🧪 Testing complete TodoWrite system..."
 	@echo "📊 Testing Results:"
-	@echo "   - Schema validation: $(shell python3 afs_fastapi/todos/tools/tw_validate.py --plans plans >/dev/null 2>&1 && echo 'PASS' || echo 'FAIL')"
-	@echo "   - SoC linting: $(shell python3 afs_fastapi/todos/tools/tw_lint_soc.py --plans plans >/dev/null 2>&1 && echo 'PASS' || echo 'FAIL')"
-	@echo "   - Traceability: $(shell python3 afs_fastapi/todos/tools/tw_trace.py --plans plans --validate >/dev/null 2>&1 && echo 'PASS' || echo 'FAIL')"
+	@echo "   - Schema validation: $(shell python3 -m ToDoWrite.todowrite.tools.tw_validate --plans plans >/dev/null 2>&1 && echo 'PASS' || echo 'FAIL')"
+	@echo "   - SoC linting: $(shell python3 -m ToDoWrite.todowrite.tools.tw_lint_soc --plans plans >/dev/null 2>&1 && echo 'PASS' || echo 'FAIL')"
+	@echo "   - Traceability: $(shell python3 -m ToDoWrite.todowrite.tools.tw_trace --plans plans --validate >/dev/null 2>&1 && echo 'PASS' || echo 'FAIL')"
 	@echo "   - Command generation: $(shell test -f ToDoWrite/configs/commands/CMD-CANAC001.yaml && echo 'PASS' || echo 'FAIL')"
 	@echo "✅ TodoWrite system test completed"
 
