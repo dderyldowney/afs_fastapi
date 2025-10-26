@@ -170,3 +170,4 @@ calibration_data/
 # Build artifacts from agricultural modules
 build/
 dist/
+todowrite.db
