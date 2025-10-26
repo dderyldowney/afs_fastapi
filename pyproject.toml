@@ -26,7 +26,7 @@ classifiers = [
 dependencies = [
   "fastapi>=0.111",          # FastAPI (Pydantic v2)
   "uvicorn[standard]>=0.30", # ASGI server
-  "starlette>=0.46",         # FastAPI’s ASGI toolkit
+  "starlette>=0.46",         # FastAPI's ASGI toolkit
   "pydantic>=2.7",           # Models/validation
   "python-can",              # CAN bus communication
   "httpx",                   # HTTP client for CRDT communication
@@ -35,6 +35,7 @@ dependencies = [
   "SQLAlchemy>=2.0",         # SQLAlchemy ORM
   "psycopg2-binary>=2.9",    # PostgreSQL adapter
   "alembic>=1.13",           # Database migrations
+  "todowrite>=0.1.0",       # Standalone task management system
   # add any concrete libs you use at runtime (DB client, sensors, etc.)
 
 ]
