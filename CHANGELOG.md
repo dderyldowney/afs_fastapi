@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+### Changed
+- Remove user-specific files from repository tracking
+
+### Fixed
+- Fix strategic-pause and strategic-resume scripts
+
+### Configuration
+- **fix**: Fixed incorrect library calls in Makefile
+
 ### Added
 - Add script to reset ToDoWrite database
 - Implement CAN HAL with mock interface support
