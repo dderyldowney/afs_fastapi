@@ -159,3 +159,14 @@ tests/test_token_usage_temp.db-wal
 
 # ToDoWrite standalone module (separate git repository)
 ToDoWrite/
+
+# Agricultural robotics specific files
+*.can
+*.j1939
+equipment_logs/
+field_data/
+calibration_data/
+
+# Build artifacts from agricultural modules
+build/
+dist/
