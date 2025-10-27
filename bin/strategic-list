@@ -50,24 +50,27 @@ def display_strategic_todos():
     print("=== AFS FastAPI Strategic Goals ===")
     print()
 
-    pending_goals = [g for g in goals if g.get("status") not in ["done", "rejected"]]
-    completed_goals = [g for g in goals if g.get("status") == "done"]
+    pending_goals = [g for g in goals if g.status not in ["done", "rejected"]]
+    completed_goals = [g for g in goals if g.status == "done"]
 
     for i, goal in enumerate(pending_goals, 1):
-        priority_emoji = get_priority_emoji(goal.get("priority", "medium"))
-        status_emoji = get_status_emoji(goal.get("status", "planned"))
-        print(f"{i:2d}. {status_emoji} [{priority_emoji}] {goal.get('title', 'No title')}")
-        print(f"     ID: {goal.get('id')} | Category: {goal.get('category', 'general')}")
+        priority = getattr(goal.metadata, 'severity', 'medium') if hasattr(goal, 'metadata') else 'medium'
+        priority_emoji = get_priority_emoji(priority)
+        status_emoji = get_status_emoji(goal.status)
+        print(f"{i:2d}. {status_emoji} [{priority_emoji}] {goal.title}")
+        category = getattr(goal.metadata, 'category', 'general') if hasattr(goal, 'metadata') else 'general'
+        print(f"     ID: {goal.id} | Category: {category}")
         print()
 
     if completed_goals:
         print("-" * 20)
         print("Completed Goals:")
         for _i, goal in enumerate(completed_goals, 1):
-            status_emoji = get_status_emoji(goal.get("status", "done"))
-            print(f"{status_emoji} {goal.get('title', 'No title')} - COMPLETE")
+            status_emoji = get_status_emoji(goal.status)
+            print(f"{status_emoji} {goal.title} - COMPLETE")
+            category = getattr(goal.metadata, 'category', 'general') if hasattr(goal, 'metadata') else 'general'
             print(
-                f"  ID: {goal.get('id')} | Category: {goal.get('category', 'general')}"
+                f"  ID: {goal.id} | Category: {category}"
             )  # Removed date_completed as it's not in new schema
             print()
 

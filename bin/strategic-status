@@ -34,12 +34,12 @@ def display_strategic_status():
 
     total_goals = len(goals)
     pending_count = len(
-        [g for g in goals if g["status"] == "planned" or g["status"] == "in_progress"]
+        [g for g in goals if g.status == "planned" or g.status == "in_progress"]
     )
-    completed_count = len([g for g in goals if g["status"] == "done"])
-    in_progress_count = len([g for g in goals if g["status"] == "in_progress"])
-    blocked_count = len([g for g in goals if g["status"] == "blocked"])
-    rejected_count = len([g for g in goals if g["status"] == "rejected"])
+    completed_count = len([g for g in goals if g.status == "done"])
+    in_progress_count = len([g for g in goals if g.status == "in_progress"])
+    blocked_count = len([g for g in goals if g.status == "blocked"])
+    rejected_count = len([g for g in goals if g.status == "rejected"])
 
     progress_percentage = (completed_count / total_goals * 100) if total_goals > 0 else 0
 
@@ -51,9 +51,9 @@ def display_strategic_status():
     )
 
     for goal in goals:
-        category = goal.get("category", "general")
-        priority = goal.get("priority", "medium")
-        status = goal["status"]
+        category = getattr(goal.metadata, 'category', 'general') if hasattr(goal, 'metadata') else 'general'
+        priority = getattr(goal.metadata, 'severity', 'medium') if hasattr(goal, 'metadata') else 'medium'
+        status = goal.status
 
         category_stats[category][status] += 1
         priority_stats[priority][status] += 1
@@ -99,17 +99,18 @@ def display_strategic_status():
                 )
         print()
 
-    recent_completed = [g for g in goals if g["status"] == "done"]
+    recent_completed = [g for g in goals if g.status == "done"]
     # No date_completed in new schema, so sorting by ID for now
-    recent_completed.sort(key=lambda x: x["id"], reverse=True)
+    recent_completed.sort(key=lambda x: x.id, reverse=True)
 
     if recent_completed:
         print("🎉 Recent Completions")
         for goal in recent_completed[:5]:
+            priority = getattr(goal.metadata, 'severity', 'medium') if hasattr(goal, 'metadata') else 'medium'
             priority_marker = {"high": "[HIGH]", "medium": "[MED]", "low": "[LOW]"}.get(
-                goal["priority"], "[???]"
+                priority, "[???]"
             )
-            print(f'   {goal["id"]} {priority_marker} {goal["title"]}')
+            print(f'   {goal.id} {priority_marker} {goal.title}')
         print()
 
     print("Use 'app.get_goals()' to view detailed strategic objectives.")

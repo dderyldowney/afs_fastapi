@@ -30,21 +30,21 @@ def display_strategic_status_brief():
     high_priority_pending = [
         g
         for g in goals
-        if (g["status"] == "planned" or g["status"] == "in_progress")
-        and g.get("priority") == "high"
+        if (g.status == "planned" or g.status == "in_progress")
+        and getattr(g.metadata, 'severity', 'medium') == "high"
     ]
 
     print("📊 Priority Focus:")
     if high_priority_pending:
         for goal in high_priority_pending[:3]:
-            print(f"   • {goal['title']}")
+            print(f"   • {goal.title}")
     else:
         print("   No high-priority objectives active")
 
     print()
     print("📈 Quick Stats:")
     pending_count = len(
-        [g for g in goals if g["status"] == "planned" or g["status"] == "in_progress"]
+        [g for g in goals if g.status == "planned" or g.status == "in_progress"]
     )
     print(f"   • Pending: {pending_count} objectives")
 
