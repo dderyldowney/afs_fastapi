@@ -18,7 +18,7 @@ from todowrite.app import ToDoWrite  # noqa: E402
 from todowrite.db.models import Node  # noqa: E402
 
 
-def initialize_todowrite_system():
+def initialize_todowrite_system(app):
     """Initialize and populate ToDoWrite system with agricultural robotics context."""
     print("🏗️  Initializing ToDoWrite Database...")
 
@@ -31,7 +31,7 @@ def initialize_todowrite_system():
 
     # Load existing data
     todos_data = app.load_todos()
-    goals = app.get_goals()
+    goals = todos_data.get("Goal", [])
 
     # Populate with agricultural robotics strategic context if empty
     if not goals:
@@ -116,7 +116,7 @@ def main():
     print()
 
     print("🌾 Initializing Agricultural Robotics ToDoWrite System...")
-    todos_data = initialize_todowrite_system()
+    todos_data = initialize_todowrite_system(app)
     print()
 
     # Check and disable automatic pytest execution if configured
