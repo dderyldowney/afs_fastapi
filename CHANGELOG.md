@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### Changed
+- Reconfigure AFS FastAPI to use standalone ToDoWrite package
+
+### Documentation
+- **todowrite**: Create comprehensive standalone package and Python module usage guide
+- **todowrite**: Add comprehensive 12-layer architecture documentation
+
+### Changed
+- Reconfigure AFS FastAPI to use standalone ToDoWrite package
+
+### Documentation
+- **todowrite**: Create comprehensive standalone package and Python module usage guide
+- **todowrite**: Add comprehensive 12-layer architecture documentation
+
+### Changed
 - Remove user-specific files from repository tracking
 
 ### Fixed

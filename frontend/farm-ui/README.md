@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+# AFS FastAPI Farm UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Agricultural Robotics Management Interface for Multi-Tractor Coordination**
 
-## Available Scripts
+This React application provides a web-based management interface for the AFS FastAPI agricultural robotics platform, enabling real-time monitoring and control of multi-tractor field operations.
 
-In the project directory, you can run:
+## 🚜 Agricultural Features
 
-### `npm start`
+- **Tractor Tracking**: Real-time location and status monitoring for agricultural equipment
+- **Field Management**: Field boundary definition, crop planning, and operation scheduling
+- **API Integration**: Direct communication with AFS FastAPI backend for equipment control
+- **Design System**: Consistent agricultural-themed UI components
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠 Development Setup
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+```bash
+# Ensure AFS FastAPI backend is running
+cd ../../
+python -m afs_fastapi
+# Backend available at http://localhost:8000
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation & Development
 
-### `npm run build`
+```bash
+# Install dependencies
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Start development server
+npm start
+# Opens http://localhost:3000 automatically
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Available Scripts
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Command | Description |
+|---------|-------------|
+| `npm start` | Development server with hot reload |
+| `npm test` | Run test suite in interactive watch mode |
+| `npm run build` | Production build for deployment |
+| `npm run eject` | Eject from Create React App (irreversible) |
 
-### `npm run eject`
+## 🌾 Agricultural Architecture
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Core Components
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+src/
+├── features/
+│   ├── tractor_tracking/      # Real-time equipment monitoring
+│   └── field_management/      # Agricultural field operations
+├── api/                       # AFS FastAPI integration
+└── design_system/            # Agricultural UI components
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Backend Integration
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The farm UI connects to the AFS FastAPI backend for:
 
-## Learn More
+- **Equipment Control**: FarmTractor class with 40+ attributes
+- **Fleet Coordination**: Multi-tractor synchronization via Vector Clock
+- **Field Operations**: ISOBUS-compliant agricultural protocols
+- **Safety Systems**: ISO 18497 safety compliance monitoring
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📚 Documentation
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **API Integration**: [src/api_integration.md](src/api_integration.md)
+- **Design System**: [src/design_system.md](src/design_system.md)
+- **Tractor Tracking**: [src/features/tractor_tracking.md](src/features/tractor_tracking.md)
+- **Field Management**: [src/features/field_management.md](src/features/field_management.md)
 
-### Code Splitting
+## 🔗 Related Projects
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **Backend**: [../../README.md](../../README.md) - AFS FastAPI agricultural robotics platform
+- **Documentation**: [../../docs/README.md](../../docs/README.md) - Complete documentation tree
 
-### Analyzing the Bundle Size
+## 🚀 Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+# Production build
+npm run build
 
-### Making a Progressive Web App
+# Deploy to static hosting
+# Build output: ./build/
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The built application can be deployed to any static hosting service and configured to connect to your AFS FastAPI backend deployment.
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Part of the AFS FastAPI Agricultural Robotics Platform**
+For complete agricultural equipment integration and multi-tractor coordination capabilities.

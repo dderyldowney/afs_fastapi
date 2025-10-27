@@ -40,7 +40,7 @@ Before opening a PR, please run through this comprehensive checklist:
 
 **For General Development**:
 - **✅ Add tests**: New behavior or edge cases must have test coverage
-- **✅ Run full suite**: `python -m pytest tests/` (expect **161 tests** passing in ~3s)
+- **✅ Run full suite**: `python -m pytest tests/` (expect **817 tests** passing for agricultural robotics core)
 - **✅ Zero regression**: All existing tests must continue passing
 
 ### 2. Code Quality Standards
@@ -161,7 +161,7 @@ Before opening a PR, please run through this comprehensive checklist:
   - Educational framework preservation
 
 - **WORKFLOW.md**: Authoritative testing reference and architecture guide
-  - Complete test suite analysis (161 tests)
+  - Complete test suite analysis (817 tests)
   - Professional agricultural testing patterns
   - Domain coverage and execution commands
 
@@ -173,7 +173,7 @@ Before opening a PR, please run through this comprehensive checklist:
 **Quick Reference Commands:**
 
 ```bash
-# Run complete test suite (161 tests)
+# Run complete test suite (817 tests)
 python -m pytest tests/ -v
 
 # Check code quality (expect zero warnings)
@@ -326,7 +326,7 @@ When submitting PRs:
 **Essential for All Contributors:**
 
 1. **✅ Follow Test-First Development** for synchronization infrastructure
-2. **✅ Maintain 161-test suite** with 100% pass rate and zero regression
+2. **✅ Maintain 817-test suite** with 100% pass rate and zero regression
 3. **✅ Achieve zero linting warnings** across entire codebase
 4. **✅ Include agricultural context** in all code and tests
 5. **✅ Meet performance requirements** (sub-millisecond for distributed systems)

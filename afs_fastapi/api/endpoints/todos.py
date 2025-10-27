@@ -2,17 +2,17 @@ from typing import Literal
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
-from todowrite.manager import (
+from todowrite.app import (
     LayerType,
     Node as ToDoWriteNode,
     StatusType,
-    create_node,
-    get_goals,
-    init_database,
-    load_todos,
+    ToDoWrite,
 )
 
 router = APIRouter()
+
+# Create ToDoWrite instance for API operations
+todowrite_app = ToDoWrite()
 
 
 class LabelModel(BaseModel):
@@ -141,7 +141,7 @@ async def create_todo_item(request: CreateToDoRequest) -> ToDoResponse:
                 "work_type": "",
             },
         }
-        new_node = create_node(node_data)
+        new_node = todowrite_app.create_node(node_data)
         return ToDoResponse.from_todowrite_node(new_node)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
@@ -152,8 +152,13 @@ async def get_all_goals() -> list[ToDoResponse]:
     """
     Retrieve all ToDoWrite goals.
     """
-    goals = get_goals()
-    return [ToDoResponse.from_todowrite_dict(goal) for goal in goals]
+    try:
+        todos_dict = todowrite_app.load_todos()
+        # Extract only Goal layer nodes
+        goals = todos_dict.get("Goal", [])
+        return [ToDoResponse.from_todowrite_node(goal) for goal in goals]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to retrieve goals: {e}") from e
 
 
 @router.post("/init_db", status_code=200)
@@ -162,7 +167,7 @@ async def initialize_todowrite_database() -> dict[str, str]:
     Initialize the ToDoWrite database.
     """
     try:
-        init_database()
+        todowrite_app.init_database()
         return {"message": "ToDoWrite database initialized successfully."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to initialize database: {e}") from e
@@ -174,7 +179,7 @@ async def load_todowrite_todos() -> list[ToDoResponse]:
     Load ToDo items from the ToDoWrite system.
     """
     try:
-        todos_dict = load_todos()
+        todos_dict = todowrite_app.load_todos()
         all_todos = []
         for layer_nodes in todos_dict.values():
             for todo_node in layer_nodes:
