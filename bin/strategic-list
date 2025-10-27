@@ -8,7 +8,11 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import get_goals  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
+
+# Initialize ToDoWrite app instance
+app = ToDoWrite()
 
 
 def get_priority_emoji(priority):
@@ -36,7 +40,8 @@ def get_status_emoji(status):
 
 
 def display_strategic_todos():
-    goals = get_goals()
+    todos_data = app.load_todos()
+    goals = todos_data.get("Goal", [])
 
     if not goals:
         print("No strategic goals found.")
@@ -71,10 +76,10 @@ def display_strategic_todos():
     print(f"Pending: {len(pending_goals)} | Completed: {len(completed_goals)}")
     print()
     print(
-        'Use \'add_goal("Title", "Description", category="category", priority="priority")\' to add new strategic goals.'
+        'Use \'app.add_goal("Title", "Description", category="category", priority="priority")\' to add new strategic goals.'
     )
     print(
-        "Use 'complete_goal(\"goal_id\")' to mark goals as completed. (Function not yet implemented)"
+        "Use 'app.complete_goal(\"goal_id\")' to mark goals as completed. (Function not yet implemented)"
     )  # Placeholder for future implementation
 
 

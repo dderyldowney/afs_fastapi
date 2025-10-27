@@ -9,17 +9,20 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import get_commands, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Display status of all Commands in the ToDoWrite system.")
     parser.add_argument("--command-id", type=str, help="Show details for a specific command ID.")
     args = parser.parse_args()
 
     if getattr(args, "command_id", None):
         # Show specific command details
-        todos = load_todos()
+        todos = app.load_todos()
         commands = todos.get("Command", [])
         command = None
         for item in commands:
@@ -42,7 +45,7 @@ def main():
         print(f"Children: {', '.join(command.links.children) if command.links.children else 'None'}")
     else:
         # Show all commands
-        commands = get_commands()
+        commands = app.get_commands()
         
         if not commands:
             print("No commands found in the ToDoWrite system.")

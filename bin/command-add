@@ -9,10 +9,13 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import add_command  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Add a new Command to the ToDoWrite system.")
     parser.add_argument("title", type=str, help="The title of the command.")
     parser.add_argument("shell_command", type=str, help="The shell command to execute.")
@@ -21,7 +24,7 @@ def main():
     parser.add_argument("--ac-ref", type=str, help="The acceptance criteria reference.")
     args = parser.parse_args()
 
-    new_command, error = add_command(
+    new_command, error = app.add_command(
         args.title, 
         args.description, 
         args.shell_command, 

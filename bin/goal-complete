@@ -9,15 +9,18 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import complete_goal  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Mark a Goal as complete in the ToDoWrite system.")
     parser.add_argument("goal_id", type=str, help="The ID of the goal to complete.")
     args = parser.parse_args()
 
-    completed_goal, error = complete_goal(args.goal_id)
+    completed_goal, error = app.complete_goal(args.goal_id)
 
     if error:
         print(f"Error: {error}")

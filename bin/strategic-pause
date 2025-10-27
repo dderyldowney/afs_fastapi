@@ -9,15 +9,18 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import get_node_by_id, update_node  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Pause a strategic goal.")
     parser.add_argument("goal_id", type=str, help="The ID of the strategic goal to pause.")
     args = parser.parse_args()
 
-    goal = get_node_by_id(args.goal_id)
+    goal = app.get_node_by_id(args.goal_id)
 
     if not goal:
         print(f"Error: Goal with ID '{args.goal_id}' not found.")
@@ -32,7 +35,7 @@ def main():
         )
         sys.exit(1)
 
-    updated_goal, error = update_node(args.goal_id, {"status": "blocked"})
+    updated_goal, error = app.update_node(args.goal_id, {"status": "blocked"})
 
     if error:
         print(f"Error: {error}")

@@ -38,13 +38,15 @@ def format_as_markdown(todos_data):
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     # Add project root to sys.path
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     sys.path.insert(0, project_root)
 
     from todowrite.manager import load_todos
 
-    todos_data = load_todos()
+    todos_data = app.load_todos()
     markdown_output = format_as_markdown(todos_data)
     print(markdown_output)
 

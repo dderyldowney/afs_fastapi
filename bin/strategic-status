@@ -9,18 +9,23 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import get_goals  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
+
+# Initialize ToDoWrite app instance
+app = ToDoWrite()
 
 
 def display_strategic_status():
-    goals = get_goals()
+    todos_data = app.load_todos()
+    goals = todos_data.get("Goal", [])
 
     if not goals:
         print("=== AFS FastAPI Strategic Status ===")
         print()
         print("No strategic goals found.")
         print(
-            'Use \'add_goal("Title", "Description", category="category", priority="priority")\' to create strategic objectives.'
+            'Use \'app.add_goal("Title", "Description", category="category", priority="priority")\' to create strategic objectives.'
         )
         return
 
@@ -107,9 +112,9 @@ def display_strategic_status():
             print(f'   {goal["id"]} {priority_marker} {goal["title"]}')
         print()
 
-    print("Use 'get_goals()' to view detailed strategic objectives.")
+    print("Use 'app.get_goals()' to view detailed strategic objectives.")
     print(
-        'Use \'add_goal("Title", "Description", category="category", priority="priority")\' to add new strategic objectives.'
+        'Use \'app.add_goal("Title", "Description", category="category", priority="priority")\' to add new strategic objectives.'
     )
 
 

@@ -9,16 +9,19 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import load_todos, update_node  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Mark a SubTask as complete in the ToDoWrite system.")
     parser.add_argument("subtask_id", type=str, help="The ID of the subtask to complete.")
     args = parser.parse_args()
 
     # Verify subtask exists
-    todos = load_todos()
+    todos = app.load_todos()
     subtasks = todos.get("SubTask", [])
     subtask = None
     for s in subtasks:
@@ -36,7 +39,7 @@ def main():
 
     # Update subtask status
     from datetime import datetime
-    updated_subtask, error = update_node(args.subtask_id, {
+    updated_subtask, error = app.update_node(args.subtask_id, {
         "status": "done",
         "metadata": {
             "owner": subtask.metadata.owner,

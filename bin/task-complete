@@ -9,17 +9,20 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import complete_task_in_active_phase  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Mark a task in the active phase as complete.")
     parser.add_argument(
         "search_term", type=str, help="The ID or description of the task to complete."
     )
     args = parser.parse_args()
 
-    completed_task, error = complete_task_in_active_phase(args.search_term)
+    completed_task, error = # DEPRECATED: complete_task_in_active_phase(args.search_term)  # TODO: Update to new API
 
     if error:
         print(f"Error: {error}")

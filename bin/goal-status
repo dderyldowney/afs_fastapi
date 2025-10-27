@@ -9,17 +9,20 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import get_goals, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Display status of all Goals in the ToDoWrite system.")
     parser.add_argument("--goal-id", type=str, help="Show details for a specific goal ID.")
     args = parser.parse_args()
 
     if args.goal_id:
         # Show specific goal details
-        todos = load_todos()
+        todos = app.load_todos()
         goals = todos.get("Goal", [])
         goal = None
         for g in goals:
@@ -44,7 +47,7 @@ def main():
         print(f"Children: {', '.join(goal.links.children) if goal.links.children else 'None'}")
     else:
         # Show all goals
-        goals = get_goals()
+        goals = app.get_goals()
         
         if not goals:
             print("No goals found in the ToDoWrite system.")

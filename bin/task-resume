@@ -9,15 +9,18 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import resume_task  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Resume a paused task.")
     parser.add_argument("task_id", type=str, help="The ID of the task to resume.")
     args = parser.parse_args()
 
-    success, error = resume_task(args.task_id)
+    success, error = # DEPRECATED: resume_task(args.task_id)  # TODO: Update to new API
 
     if error:
         print(f"Error: {error}")

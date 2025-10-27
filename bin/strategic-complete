@@ -9,15 +9,18 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import complete_goal, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Mark a strategic goal as complete.")
     parser.add_argument("search_term", type=str, help="The ID or description of the strategic goal to complete.")
     args = parser.parse_args()
 
-    todos = load_todos()
+    todos = app.load_todos()
     goals = todos.get("Goal", [])  # Updated to use new structure
     matched_goal = None
     for goal in goals:
@@ -28,7 +31,7 @@ def main():
 
     if not matched_goal:
         print(f"Error: No goal found matching \"{args.search_term}\"")
-        print("Use 'get_goals()' to see available goals.")
+        print("Use 'app.get_goals()' to see available goals.")
         sys.exit(1)
 
     if matched_goal.status == 'done':
@@ -36,7 +39,7 @@ def main():
         sys.exit(0)
 
     # Use complete_goal function for enhanced functionality
-    completed_goal, error = complete_goal(matched_goal.id)
+    completed_goal, error = app.complete_goal(matched_goal.id)
 
     if error:
         print(f"Error: {error}")

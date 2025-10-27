@@ -9,17 +9,20 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import get_constraints, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Display status of all Constraintss in the ToDoWrite system.")
     parser.add_argument("--constraint-id", type=str, help="Show details for a specific constraint ID.")
     args = parser.parse_args()
 
     if getattr(args, "constraint_id", None):
         # Show specific constraint details
-        todos = load_todos()
+        todos = app.load_todos()
         constraints = todos.get("Constraints", [])
         constraint = None
         for item in constraints:
@@ -42,7 +45,7 @@ def main():
         print(f"Children: {', '.join(constraint.links.children) if constraint.links.children else 'None'}")
     else:
         # Show all constraints
-        constraints = get_constraints()
+        constraints = app.get_constraints()
         
         if not constraints:
             print("No constraints found in the ToDoWrite system.")

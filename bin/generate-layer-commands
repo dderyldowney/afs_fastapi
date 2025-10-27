@@ -39,10 +39,13 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import add_{name}  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Add a new {layer} to the ToDoWrite system.")
     parser.add_argument("title", type=str, help="The title of the {name}.")
     parser.add_argument("--description", type=str, default="", help="The description of the {name}.")
@@ -90,6 +93,8 @@ from todowrite.manager import complete_{name}  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Mark a {layer} as complete in the ToDoWrite system.")
     parser.add_argument("{name}_id", type=str, help="The ID of the {name} to complete.")
     args = parser.parse_args()
@@ -134,13 +139,15 @@ from todowrite.manager import delete_node, load_todos  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Delete a {layer} from the ToDoWrite system.")
     parser.add_argument("{name}_id", type=str, help="The ID of the {name} to delete.")
     parser.add_argument("--confirm", action="store_true", help="Confirm deletion without prompt.")
     args = parser.parse_args()
 
     # Verify {name} exists
-    todos = load_todos()
+    todos = app.load_todos()
     {name}s = todos.get("{layer}", [])
     {name} = None
     for item in {name}s:
@@ -161,7 +168,7 @@ def main():
             sys.exit(0)
 
     try:
-        delete_node(args.{name}_id)
+        app.delete_node(args.{name}_id)
         print("✓ {layer} deleted successfully!")
         print(f"  ID: {{args.{name}_id}}")
         print(f"  Title: {{{name}.title}}")
@@ -178,6 +185,8 @@ if __name__ == "__main__":
     return content
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     """Generate all missing layer commands."""
     bin_dir = Path(__file__).parent
     

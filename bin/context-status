@@ -9,17 +9,20 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import get_contexts, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Display status of all Contexts in the ToDoWrite system.")
     parser.add_argument("--context-id", type=str, help="Show details for a specific context ID.")
     args = parser.parse_args()
 
     if getattr(args, "context_id", None):
         # Show specific context details
-        todos = load_todos()
+        todos = app.load_todos()
         contexts = todos.get("Context", [])
         context = None
         for item in contexts:
@@ -42,7 +45,7 @@ def main():
         print(f"Children: {', '.join(context.links.children) if context.links.children else 'None'}")
     else:
         # Show all contexts
-        contexts = get_contexts()
+        contexts = app.get_contexts()
         
         if not contexts:
             print("No contexts found in the ToDoWrite system.")

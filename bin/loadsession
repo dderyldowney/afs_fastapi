@@ -14,7 +14,8 @@ todowrite_path = project_root / "ToDoWrite"
 if todowrite_path.exists():
     sys.path.insert(0, str(todowrite_path))
 
-from todowrite.manager import create_node, get_goals, init_database, load_todos
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def initialize_todowrite_system():
@@ -23,14 +24,14 @@ def initialize_todowrite_system():
 
     # Ensure database is initialized
     try:
-        init_database()
+        app.init_database()
         print("✅ ToDoWrite database initialized")
     except Exception as e:
         print(f"⚠️  Database initialization error: {e}")
 
     # Load existing data
-    todos_data = load_todos()
-    goals = get_goals()
+    todos_data = app.load_todos()
+    goals = app.get_goals()
 
     # Populate with agricultural robotics strategic context if empty
     if not goals:
@@ -94,7 +95,7 @@ def initialize_todowrite_system():
         goals_created = 0
         for goal_data in strategic_goals:
             try:
-                create_node(goal_data)
+                app.create_node(goal_data)
                 goals_created += 1
                 print(f"   ✅ Created: {goal_data['title']}")
             except Exception as e:
@@ -108,6 +109,8 @@ def initialize_todowrite_system():
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     print("🚀 AFS FastAPI Enhanced Session Context Loader")
     print("===============================================")
     print()

@@ -9,15 +9,18 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import delete_task  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Delete a task.")
     parser.add_argument("task_id", type=str, help="The ID of the task to delete.")
     args = parser.parse_args()
 
-    success, error = delete_task(args.task_id)
+    success, error = # DEPRECATED: delete_task(args.task_id)  # TODO: Update to new API
 
     if error:
         print(f"Error: {error}")

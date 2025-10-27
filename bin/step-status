@@ -9,12 +9,15 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import get_active_items, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
-    todos_data = load_todos()
-    active_items = get_active_items(todos_data)
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
+    todos_data = app.load_todos()
+    active_items = app.get_active_items(todos_data)
     active_phase = active_items.get("Phase")
     active_step = active_items.get("Step")
 

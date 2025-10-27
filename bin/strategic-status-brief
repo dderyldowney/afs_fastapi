@@ -7,11 +7,16 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import get_goals  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
+
+# Initialize ToDoWrite app instance
+app = ToDoWrite()
 
 
 def display_strategic_status_brief():
-    goals = get_goals()
+    todos_data = app.load_todos()
+    goals = todos_data.get("Goal", [])
 
     if not goals:
         print("🎯 AFS FastAPI Strategic Status (Brief)")

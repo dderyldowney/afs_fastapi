@@ -6,15 +6,17 @@ from datetime import datetime
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     # Add project root to sys.path
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     sys.path.insert(0, project_root)
 
     from todowrite.manager import get_active_items, get_goals, load_todos
 
-    todos_data = load_todos()
-    goals = get_goals()
-    active_items = get_active_items(todos_data)
+    todos_data = app.load_todos()
+    goals = app.get_goals()
+    active_items = app.get_active_items(todos_data)
 
     strategic_summary = {"total": 0, "completed": 0, "pending": 0, "progress_percentage": 0}
     if goals:

@@ -9,17 +9,20 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import get_phases, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Display status of all Phases in the ToDoWrite system.")
     parser.add_argument("--phase-id", type=str, help="Show details for a specific phase ID.")
     args = parser.parse_args()
 
     if getattr(args, "phase_id", None):
         # Show specific phase details
-        todos = load_todos()
+        todos = app.load_todos()
         phases = todos.get("Phase", [])
         phase = None
         for item in phases:
@@ -42,7 +45,7 @@ def main():
         print(f"Children: {', '.join(phase.links.children) if phase.links.children else 'None'}")
     else:
         # Show all phases
-        phases = get_phases()
+        phases = app.get_phases()
 
         if not phases:
             print("No phases found in the ToDoWrite system.")

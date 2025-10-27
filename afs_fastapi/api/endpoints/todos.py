@@ -2,12 +2,7 @@ from typing import Literal
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
-from todowrite.app import (
-    LayerType,
-    Node as ToDoWriteNode,
-    StatusType,
-    ToDoWrite,
-)
+from todowrite.app import LayerType, Node as ToDoWriteNode, StatusType, ToDoWrite
 
 router = APIRouter()
 

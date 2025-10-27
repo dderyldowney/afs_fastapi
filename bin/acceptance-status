@@ -9,17 +9,20 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import get_acceptance_criteria, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Display status of all Acceptance Criterias in the ToDoWrite system.")
     parser.add_argument("--acceptance-id", type=str, help="Show details for a specific acceptance ID.")
     args = parser.parse_args()
 
     if getattr(args, "acceptance_id", None):
         # Show specific acceptance details
-        todos = load_todos()
+        todos = app.load_todos()
         acceptance_criteria = todos.get("Acceptance Criteria", [])
         acceptance = None
         for item in acceptance_criteria:
@@ -42,7 +45,7 @@ def main():
         print(f"Children: {', '.join(acceptance.links.children) if acceptance.links.children else 'None'}")
     else:
         # Show all acceptance_criteria
-        acceptance_criteria = get_acceptance_criteria()
+        acceptance_criteria = app.get_acceptance_criteria()
         
         if not acceptance_criteria:
             print("No acceptance_criteria found in the ToDoWrite system.")

@@ -9,17 +9,20 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.manager import get_interface_contracts, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Display status of all Interface Contracts in the ToDoWrite system.")
     parser.add_argument("--interface-id", type=str, help="Show details for a specific interface ID.")
     args = parser.parse_args()
 
     if getattr(args, "interface_id", None):
         # Show specific interface details
-        todos = load_todos()
+        todos = app.load_todos()
         interface_contracts = todos.get("Interface Contract", [])
         interface = None
         for item in interface_contracts:
@@ -42,7 +45,7 @@ def main():
         print(f"Children: {', '.join(interface.links.children) if interface.links.children else 'None'}")
     else:
         # Show all interface_contracts
-        interface_contracts = get_interface_contracts()
+        interface_contracts = app.get_interface_contracts()
         
         if not interface_contracts:
             print("No interface_contracts found in the ToDoWrite system.")
