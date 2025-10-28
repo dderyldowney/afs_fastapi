@@ -1,11 +1,11 @@
 # ToDoWrite — Current Agent-Loadable System Specification
-> **Status:** ACTIVE SYSTEM (Version 0.1.5) — Load and apply this specification on session startup.
+> **Status:** ACTIVE SYSTEM (Version 0.1.6.1) — Load and apply this specification on session startup.
 > **Intent:** Complete 12-layer declarative planning framework with enforced Separation of Concerns. Only **Command** layer executes; all others are declarative YAML files.
 
 ---
 
 ## 1) Overview
-- **System Version:** 0.1.5 (Current Production)
+- **System Version:** 0.1.6.1 (Current Production)
 - **Architecture:** 12-layer declarative hierarchy with build-time validation
 - **Non‑negotiables:**
   - Layers 1–11 are **non-executable** (no side effects, no CLI/API code).
@@ -148,7 +148,7 @@ This is the only executable layer, responsible for performing actions and genera
 - **Purpose**: **Only layer that executes** - generates verifiable artifacts
 - **Interaction**: Transforms all planning into actionable results
 
-## 3) Current Repo Layout (Version 0.1.5)
+## 3) Current Repo Layout (Version 0.1.6.1)
 ```
 .
 ├─ ToDoWrite/configs/plans/ # Declarative nodes (layers 1–11) as YAML
@@ -164,17 +164,9 @@ This is the only executable layer, responsible for performing actions and genera
 │  ├─ tasks/
 │  └─ subtasks/
 ├─ ToDoWrite/configs/commands/ # Layer 12 only; runnable scripts/YAML
-│  ├─ CMD-CAN001.sh              # Executable shell scripts
 │  └─ CMD-<ID>.yaml              # Command definitions
 ├─ ToDoWrite/configs/schemas/
-│  └─ todowrite.schema.json       # JSON Schema for all nodes
-├─ afs_fastapi/todos/tools/                         # Build-time validation ecosystem
-│  ├─ tw_validate.py              # JSON Schema validator
-│  ├─ tw_lint_soc.py              # SoC linter (layers 1–11 non-executable)
-│  ├─ tw_trace.py                 # Build trace matrix & graph
-│  ├─ tw_stub_command.py          # Generate command stubs for ACs
-│  ├─ migrate_todowrite.py        # Migration from old 5-layer system
-│  └─ git-commit-msg-hook.sh      # Conventional Commit enforcement
+│  └─ todowrite.schema.json       # JSON Schema for all nodes (generated from module)
 ├─ trace/
 │  ├─ trace.csv                   # Forward/backward mapping
 │  └─ graph.json                  # Node/edge graph
@@ -187,17 +179,29 @@ This is the only executable layer, responsible for performing actions and genera
 **MANDATORY:** All agents MUST execute these commands on session startup:
 
 ```bash
+# Safe session startup (preserves existing entries)
+make tw-startup
+```
+
+**Alternative individual commands:**
+```bash
 # 1. Load dependencies
 make tw-deps
 
 # 2. Initialize if needed
 make tw-init
 
-# 3. Validate current state
-make tw-all
+# 3. Validate current state (safe mode)
+make tw-validate-safe
 
 # 4. Install git hooks
 make tw-hooks
+```
+
+**Status checking:**
+```bash
+# Check system status without making changes
+make tw-status
 ```
 
 **Session Management:** The `loadsession` command MUST populate the TodoWrite system by:
@@ -227,8 +231,6 @@ This project uses **work-type tags** and **Conventional Commits** for every chan
 - **Common types:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
 - **Scopes (TodoWrite-specific):** `goal`, `concept`, `context`, `constraints`, `req`, `ac`, `iface`, `phase`, `step`, `task`, `subtask`, `cmd`, `schema`, `lint`, `trace`, `docs`
 - **Examples:**
-  - `feat(req): add R-CAN-001 for 250kbps J1939 bus with ≤50ms jitter`
-  - `test(ac): add AC-CAN-001 Given/When/Then`
   - `build(schema): generate todowrite.schema.json`
   - `ci(lint): enforce SoC for non-exec layers`
   - `docs(spec): clarify Interface Contract units and endianness`
@@ -361,70 +363,10 @@ metadata:
   work_type: architecture
 links:
   parents: []
-  children: [R-CAN-001]
-```
-
-### Requirements Template
-```yaml
-id: R-CAN-001
-layer: Requirements
-title: Tractor exchanges ISO 11783 messages on 250 kbps J1939 bus
-description: >
-  The agricultural control unit shall communicate using ISO 11783 protocol
-  over a 250 kbps network with message timing within 50 millisecond limits.
-metadata:
-  owner: controls-team
-  labels: [work:spec, can, j1939, isobus]
-  severity: med
-  work_type: spec
-links:
-  parents: [GOAL-AGRICULTURAL-AUTOMATION]
-  children: [AC-CAN-001]
-```
-
-### Acceptance Criteria Template
-```yaml
-id: AC-CAN-001
-layer: AcceptanceCriteria
-title: Address Claim within 2 seconds with PGN transmission at 10 Hz minimum frequency
-description: |
-  Given a live 250 kbps network, when the control unit initializes, then the Address Claim process completes within 2 seconds.
-  Protocol messages are transmitted at minimum 10 Hz frequency with timing variance under 50 milliseconds.
-metadata:
-  owner: test-team
-  labels: [work:validation, can, j1939]
-  work_type: validation
-links:
-  parents: [R-CAN-001]
   children: []
 ```
 
-### Command Template (only executable)
-```yaml
-id: CMD-CAN001
-layer: Command
-title: Prove AC-CAN-001
-description: Execute instrumentation to capture Address Claim and PGN jitter.
-metadata:
-  owner: test-team
-  labels: [work:implementation, test, can]
-  work_type: implementation
-links:
-  parents: [AC-CAN-001]
-  children: []
-command:
-  ac_ref: AC-CAN-001
-  run:
-    shell: |
-      ip link set can0 type can bitrate 250000
-      ip link set can0 up
-      candump can0,0x18EEFF00:0x1FFFFFFF
-          workdir: .
-    env:
-      PATH: "/usr/bin:/bin"
-  artifacts:
-    - results/CMD-CAN001/jitter.json
-```
+
 
 ## 12) Example Agent Session Flow
 ```bash
@@ -434,16 +376,11 @@ make tw-deps tw-init tw-hooks
 # Development cycle
 make tw-dev                    # Validate and generate commands
 git add -A
-git commit -F - <<EOF
-feat(req): add R-CAN-001 for 250kbps bus with <=50ms jitter
-
-This commit adds the initial requirement for CAN bus communication
-with specific bitrate and jitter constraints, aligning with ISO 11783.
-EOF
+git commit -m "feat(req): add a new requirement"
 
 # Generate and execute commands
 make tw-prove                  # Generate command stubs
-./ToDoWrite/configs/commands/CMD-CAN001.sh       # Execute specific command
+
 
 # Quality validation
 make tw-check                  # Full validation before push
@@ -456,17 +393,14 @@ make tw-check                  # Full validation before push
 - **Filesystem Safety**: Physical separation (`plans/` vs `commands/`) prevents accidental execution of declarative content, a critical safety feature for agricultural robotics
 - **Traceability Chain**: Each layer links to parents/children, creating an unbroken chain from business goal (Layer 1) to executable command (Layer 12)
 
-### 🚜 **Agricultural Robotics Focus**
-- **Safety-Critical Systems**: The structured approach ensures every agricultural feature traces from strategic business goal down to verified executable implementation
-- **Multi-Tractor Coordination**: Framework supports complex fleet operations with safety compliance and performance optimization
-- **Standards Compliance**: Built-in support for ISO 11783, J1939 CAN bus protocols, and agricultural safety standards
+
 
 ### 📊 **Quality Assurance**
 - **Build-Time Validation**: Automated schema validation and SoC linting prevent violations before commit
 - **Conventional Commits**: Enforced commit message format with ToDoWrite-specific scopes
 - **End-to-End Traceability**: Complete forward/backward dependency tracking from goals to commands
 
-## 14) System Status: PRODUCTION READY (v0.1.5)
+## 14) System Status: PRODUCTION READY (v0.1.6.1)
 
 ### ✅ **Core Functionality**
 - **Schema Validation:** JSON Schema enforcement with agricultural domain examples
@@ -478,14 +412,10 @@ make tw-check                  # Full validation before push
 ### ✅ **Current Implementation State**
 - **11 Declarative Directories**: All planning layers initialized in `ToDoWrite/configs/plans/`
 - **1 Executable Directory**: Commands layer ready in `ToDoWrite/configs/commands/`
-- **Example Content**: Agricultural CAN bus workflow populated (GOAL-AGRICULTURAL-AUTOMATION → R-CAN-001 → AC-CAN-001)
+
 - **Makefile Integration**: All `tw-*` targets functional for development workflow
 
-### ✅ **Agricultural Examples Ready**
-- **CAN Bus Communication**: ISO 11783 over 250 kbps J1939 with ≤50ms jitter
-- **Address Claim Protocol**: ≤2s initialization with performance validation
-- **Multi-Tractor Coordination**: Fleet operations with safety standards
-- **Migration Support:** Seamless upgrade from legacy system
+
 
 ## 15) Agent Requirements (NON-NEGOTIABLE)
 1. **Load this system on every session startup**
@@ -495,4 +425,3 @@ make tw-check                  # Full validation before push
 5. **Enforce Conventional Commit format on all commits**
 6. **Validate before any git operations**
 7. **Maintain traceability links in all nodes**
-

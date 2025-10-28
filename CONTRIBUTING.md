@@ -52,9 +52,9 @@ Before opening a PR, please run through this comprehensive checklist:
 
 ### Schema Management
 
-- **✅ `todos.json` Schema**: The JSON schema for `todos.json` is generated from `TypedDict` definitions in `afs_fastapi/todos/manager.py`.
-  - **Action**: After modifying any `TypedDict` related to `todos.json` in `afs_fastapi/todos/manager.py`, you **MUST** re-run `scripts/generate_todos_schema.py` to update `.claude/todos_schema.json`.
-  - **Purpose**: This ensures the schema remains synchronized with the data structure, providing consistent validation and initial file creation.
+- **✅ TodoWrite Schema**: The project uses the `todowrite` Python module for task management with built-in schema validation.
+  - **Action**: Task management is handled through the `todowrite` module API and YAML files in `ToDoWrite/configs/plans/`.
+  - **Purpose**: This ensures consistent task management using the standardized TodoWrite 12-layer hierarchy.
 
 ### 3. Agricultural Domain Compliance
 

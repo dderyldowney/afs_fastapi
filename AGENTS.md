@@ -92,16 +92,16 @@ All agents MUST adhere to the full specification defined in the `ToDoWrite.md` f
 - **Hierarchical Decomposition**: All work MUST be decomposed through the **12-layer hierarchy**.
 - **Single Concern Principle (SoC)**: Every item at every level MUST address exactly one concern.
 - **Atomicity**: The lowest level, `Command`, MUST map to a single, executable command.
-- **Validation**: All items are subject to a strict validation pipeline, afs_fastapi/todos/manager.py
+- **Validation**: All items are subject to a strict validation pipeline provided by the todowrite Python module
 
 ### Reference Implementation
 
-The `afs_fastapi/todos/manager.py` module provides the reference implementation for the `TodoWrite.md` system, including data structures, validation logic, and current data management. All agents MUST use the functions provided in this module for all task management operations.
+The `todowrite` Python module provides the reference implementation for the `TodoWrite.md` system, including data structures, validation logic, and current data management. All agents MUST use the todowrite module for all task management operations.
 
 ### Enforcement
 
-- All task creation, modification, and execution MUST be done through the `todos_manager.py` API.
-- The validation pipeline in `todos_manager.py` will be enforced.
+- All task creation, modification, and execution MUST be done through the `todowrite` module API.
+- The validation pipeline in the `todowrite` module will be enforced.
 - Agents MUST NOT use any other task management system or format.
 - The legacy task management system is deprecated and MUST NOT be used.
 
