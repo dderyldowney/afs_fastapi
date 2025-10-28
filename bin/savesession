@@ -11,6 +11,7 @@ sys.path.insert(0, str(project_root))
 from todowrite.app import ToDoWrite  # noqa: E402
 from todowrite.db.models import Node  # noqa: E402
 
+
 def main():
     # Initialize ToDoWrite app instance
     app = ToDoWrite()
