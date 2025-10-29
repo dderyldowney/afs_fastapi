@@ -8,6 +8,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+### Added
+- **todowrite**: implement database preference order configuration
+- **api**: Complete Phase 1 FastAPI Agricultural Automation Platform implementation
+
+### Changed
+- **todowrite**: migrate from embedded to standalone Python module
+- Complete ToDoWrite migration from manager-based to class-based API
+
+### Fixed
+- **structure**: resolve duplicate module name errors and standardize package structure
+- Complete ToDoWrite Node API compatibility across core management scripts
+- Correct ToDoWrite API calls in loadsession script
+
+### Documentation
+- Update session state documentation for infrastructure completion
+
+### Added
+- **todowrite**: implement database preference order configuration
+- **api**: Complete Phase 1 FastAPI Agricultural Automation Platform implementation
+
+### Changed
+- **todowrite**: migrate from embedded to standalone Python module
+- Complete ToDoWrite migration from manager-based to class-based API
+
+### Fixed
+- **structure**: resolve duplicate module name errors and standardize package structure
+- Complete ToDoWrite Node API compatibility across core management scripts
+- Correct ToDoWrite API calls in loadsession script
+
+### Documentation
+- Update session state documentation for infrastructure completion
+
 ### Changed
 - Reconfigure AFS FastAPI to use standalone ToDoWrite package
 

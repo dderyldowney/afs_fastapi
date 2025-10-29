@@ -51,7 +51,7 @@ async def test_get_all_goals(client: TestClient):
         "title": "Another Test Goal",
         "description": "Another test goal description.",
         "status": "planned",
-        "priority": "medium",
+        "priority": "med",
         "parent_id": None,
     }
     client.post("/todos/", json=todo_data)

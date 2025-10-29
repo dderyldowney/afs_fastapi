@@ -30,7 +30,7 @@ class MetadataModel(BaseModel):
 
 type NodeType = LayerType
 type Status = StatusType
-type Priority = Literal["low", "medium", "high", "critical"]
+type Priority = Literal["", "low", "med", "medium", "high", "critical"]
 
 
 class ToDoWriteNodeModel(BaseModel):
@@ -115,30 +115,67 @@ class ToDoResponse(BaseModel):
         )
 
 
+def _generate_todowrite_id(layer: str) -> str:
+    """Generate a TodoWrite-compliant ID for the given layer."""
+    import uuid
+
+    # Map layer types to prefixes
+    layer_prefixes = {
+        "Goal": "GOAL",
+        "Concept": "CON",
+        "Context": "CTX",
+        "Constraints": "CST",
+        "Requirements": "R",
+        "AcceptanceCriteria": "AC",
+        "InterfaceContract": "IF",
+        "Phase": "PH",
+        "Step": "STP",
+        "Task": "TSK",
+        "SubTask": "SUB",
+        "Command": "CMD",
+    }
+
+    prefix = layer_prefixes.get(layer, "GOAL")
+    # Generate a short unique suffix
+    suffix = str(uuid.uuid4()).replace("-", "")[:8].upper()
+    return f"{prefix}-{suffix}"
+
+
 @router.post("/", response_model=ToDoResponse, status_code=201)
 async def create_todo_item(request: CreateToDoRequest) -> ToDoResponse:
     """
     Create a new ToDo item (Goal, Phase, Step, Task, SubTask).
     """
     try:
-        import uuid
-
-        node_id = str(uuid.uuid4())
+        node_id = _generate_todowrite_id(request.node_type)
         node_data = {
             "id": node_id,
             "layer": request.node_type,
             "title": request.title,
             "description": request.description,
-            "status": request.status,
+            # Note: status is auto-assigned by TodoWrite as "planned"
             "links": {"parents": [request.parent_id] if request.parent_id else [], "children": []},
             "metadata": {
                 "owner": "system",  # Default owner
                 "labels": [],
                 "severity": request.priority,  # Map priority to severity
-                "work_type": "",
+                "work_type": "implementation",  # Default work type
             },
         }
         new_node = todowrite_app.create_node(node_data)
+
+        # If a specific status was requested and it's not the default "planned", update it
+        if request.status != "planned":
+            # Get the node from database to update status
+            try:
+                # Use get_node to retrieve the created node, then update its status directly
+                created_node = todowrite_app.get_node(new_node.id)
+                created_node.status = request.status
+                new_node = created_node
+            except Exception:
+                # If status update fails, continue with the created node
+                pass
+
         return ToDoResponse.from_todowrite_node(new_node)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
