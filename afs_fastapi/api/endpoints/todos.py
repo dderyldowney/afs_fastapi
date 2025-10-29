@@ -2,12 +2,14 @@ from typing import Literal
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
-from todowrite.app import LayerType, Node as ToDoWriteNode, StatusType, ToDoWrite
+from todowrite.app import LayerType, Node as ToDoWriteNode, StatusType
+
+from afs_fastapi.core.todowrite_config import get_global_todowrite_app, get_todowrite_status
 
 router = APIRouter()
 
-# Create ToDoWrite instance for API operations
-todowrite_app = ToDoWrite()
+# Get configured TodoWrite instance for API operations
+todowrite_app = get_global_todowrite_app()
 
 
 class LabelModel(BaseModel):
@@ -182,3 +184,26 @@ async def load_todowrite_todos() -> list[ToDoResponse]:
         return all_todos
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to load todos: {e}") from e
+
+
+@router.get("/config", response_model=dict[str, str])
+async def get_todowrite_config() -> dict[str, str]:
+    """
+    Get TodoWrite configuration status.
+
+    Returns information about database configuration, storage preference,
+    and connection status for agricultural robotics task management.
+    """
+    try:
+        config_status = get_todowrite_status()
+
+        # Test database connection
+        try:
+            todowrite_app.load_todos()
+            config_status["connection_status"] = "Connected"
+        except Exception as e:
+            config_status["connection_status"] = f"Error: {str(e)}"
+
+        return config_status
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get config: {e}") from e

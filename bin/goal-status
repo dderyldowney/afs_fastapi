@@ -9,13 +9,14 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.app import ToDoWrite  # noqa: E402
 from todowrite.db.models import Node  # noqa: E402
+
+from afs_fastapi.core.todowrite_config import get_global_todowrite_app  # noqa: E402
 
 
 def main():
-    # Initialize ToDoWrite app instance
-    app = ToDoWrite()
+    # Initialize ToDoWrite app instance with proper configuration
+    app = get_global_todowrite_app()
     parser = argparse.ArgumentParser(description="Display status of all Goals in the ToDoWrite system.")
     parser.add_argument("--goal-id", type=str, help="Show details for a specific goal ID.")
     args = parser.parse_args()
@@ -47,8 +48,9 @@ def main():
         print(f"Children: {', '.join(goal.links.children) if goal.links.children else 'None'}")
     else:
         # Show all goals
-        goals = app.get_goals()
-        
+        todos = app.load_todos()
+        goals = todos.get("Goal", [])
+
         if not goals:
             print("No goals found in the ToDoWrite system.")
             return
@@ -57,17 +59,17 @@ def main():
         print("=" * 50)
         
         for goal in goals:
-            status_icon = "✓" if goal["status"] == "done" else "○" if goal["status"] == "active" else "·"
-            print(f"{status_icon} {goal['id']}")
-            print(f"   Title: {goal['title']}")
-            print(f"   Status: {goal['status']}")
-            print(f"   Priority: {goal.get('priority', 'N/A')}")
+            status_icon = "✓" if goal.status == "done" else "○" if goal.status == "active" else "·"
+            print(f"{status_icon} {goal.id}")
+            print(f"   Title: {goal.title}")
+            print(f"   Status: {goal.status}")
+            print(f"   Priority: {getattr(goal.metadata, 'severity', 'N/A') if hasattr(goal, 'metadata') else 'N/A'}")
             print()
 
         print(f"Total Goals: {len(goals)}")
-        completed = len([g for g in goals if g["status"] == "done"])
-        active = len([g for g in goals if g["status"] == "active"])
-        planned = len([g for g in goals if g["status"] == "planned"])
+        completed = len([g for g in goals if g.status == "done"])
+        active = len([g for g in goals if g.status == "active"])
+        planned = len([g for g in goals if g.status == "planned"])
         print(f"Completed: {completed}, Active: {active}, Planned: {planned}")
 
 

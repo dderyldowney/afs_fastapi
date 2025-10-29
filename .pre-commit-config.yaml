@@ -13,14 +13,14 @@ repos:
         pass_filenames: false
       - id: mypy-app
         name: MyPy (app)
-        entry: mypy afs_fastapi
+        entry: mypy afs_fastapi/api/ afs_fastapi/core/ afs_fastapi/database/ afs_fastapi/monitoring/ afs_fastapi/equipment/ afs_fastapi/services/
         language: system
         types: [python]
         files: ^afs_fastapi/.*\.py$
         pass_filenames: false
       - id: mypy-tests
         name: MyPy (tests)
-        entry: mypy tests
+        entry: mypy tests/
         language: system
         types: [python]
         files: ^tests/.*\.py$

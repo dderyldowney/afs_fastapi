@@ -59,6 +59,9 @@ tw-init:
 	@mkdir -p ToDoWrite/configs/plans/{goals,concepts,contexts,constraints,requirements,acceptance_criteria,interface_contracts,phases,steps,tasks,subtasks}
 	@mkdir -p ToDoWrite/configs/commands ToDoWrite/configs/schemas
 	@mkdir -p trace results
+	@echo "🔗 Creating symlinks for TodoWrite directories..."
+	@ln -sf ToDoWrite/configs/plans plans || echo "⚠️  Plans symlink already exists"
+	@ln -sf ToDoWrite/configs configs || echo "⚠️  Configs symlink already exists"
 	@echo "✅ TodoWrite layout initialized"
 
 # Generate/refresh JSON Schema (using built-in schema from todowrite module)
@@ -141,24 +144,35 @@ tw-deps:
 	@pip install todowrite pyyaml jsonschema
 	@echo "✅ TodoWrite dependencies installed"
 
+# Initialize TodoWrite database
+tw-init-db:
+	@echo "🗄️  Initializing TodoWrite database..."
+	@python3 -c "from afs_fastapi.core.todowrite_config import create_todowrite_app, get_todowrite_status; import sys; app = create_todowrite_app(); app.init_database(); status = get_todowrite_status(); print('✅ TodoWrite database initialized successfully'); print(f'📊 Database type: {status[\"database_type\"]}'); print(f'🔗 Database URL: {status[\"database_url\"]}'); print(f'⚙️  Storage preference: {status[\"storage_preference\"]}')" || echo "❌ Database initialization failed"
+	@echo "📥 Importing existing YAML files..."
+	@python3 -m todowrite import-yaml || echo "⚠️  YAML import failed or no files to import"
+	@echo "✅ TodoWrite database initialization completed"
+
 # Safe session startup - preserves existing TodoWrite entries
 tw-startup:
 	@echo "🚀 Starting TodoWrite session (safe mode - preserves existing entries)..."
-	@echo "📦 Step 1/5: Installing dependencies..."
+	@echo "📦 Step 1/6: Installing dependencies..."
 	@$(MAKE) tw-deps
-	@echo "🏗️  Step 2/5: Initializing directory structure..."
+	@echo "🏗️  Step 2/6: Initializing directory structure..."
 	@$(MAKE) tw-init
-	@echo "🔍 Step 3/5: Checking TodoWrite module availability..."
+	@echo "🗄️  Step 3/6: Initializing database..."
+	@$(MAKE) tw-init-db
+	@echo "🔍 Step 4/6: Checking TodoWrite module availability..."
 	@python3 -c "import todowrite; print('✅ TodoWrite module available')" 2>/dev/null || echo "⚠️  TodoWrite module not installed - some features may be limited"
-	@echo "✅ Step 4/5: Validating current state (graceful mode)..."
+	@echo "✅ Step 5/6: Validating current state (graceful mode)..."
 	@$(MAKE) tw-validate-safe
-	@echo "🪝 Step 5/5: Installing git hooks..."
+	@echo "🪝 Step 6/6: Installing git hooks..."
 	@$(MAKE) tw-hooks
 	@echo ""
 	@echo "📊 TodoWrite Session Status:"
 	@echo "   - Existing YAML files: $$(find ToDoWrite/configs/plans -name '*.yaml' 2>/dev/null | wc -l | tr -d ' ')"
 	@echo "   - Directory structure: ✅ Ready"
 	@echo "   - Dependencies: ✅ Installed"
+	@echo "   - Database: ✅ Initialized"
 	@echo "   - TodoWrite module: $$(python3 -c 'import todowrite; print("✅ Available")' 2>/dev/null || echo '⚠️  Not installed')"
 	@echo ""
 	@echo "🎯 TodoWrite system ready! Existing entries preserved."
@@ -226,14 +240,17 @@ tw-status:
 	@echo "  - Phases: $$(find ToDoWrite/configs/plans/phases -name '*.yaml' 2>/dev/null | wc -l | tr -d ' ') files"
 	@echo "  - Total YAML files: $$(find ToDoWrite/configs/plans -name '*.yaml' 2>/dev/null | wc -l | tr -d ' ')"
 	@echo ""
+	@echo "🗄️  Database Configuration:"
+	@python3 -c "from afs_fastapi.core.todowrite_config import get_todowrite_status; status = get_todowrite_status(); print(f'  📊 Database type: {status[\"database_type\"]}'); print(f'  🔗 Database URL: {status[\"database_url\"]}'); print(f'  ⚙️  Storage preference: {status[\"storage_preference\"]}'); print(f'  🔄 Auto import: {status[\"auto_import\"]}')" || echo "  ❌ Configuration error"
+	@echo ""
 	@echo "🔧 System State:"
 	@if [ -f ".git/hooks/commit-msg" ]; then echo "  ✅ Git hooks installed"; else echo "  ❌ Git hooks missing"; fi
 	@if command -v python3 >/dev/null 2>&1; then echo "  ✅ Python3 available"; else echo "  ❌ Python3 missing"; fi
 	@echo ""
 	@echo "💡 Next Steps:"
+	@echo "  - Run 'make tw-init-db' to initialize database"
 	@echo "  - Run 'make tw-startup' for safe session initialization"
 	@echo "  - Run 'make tw-all' to validate current state"
-	@echo "  - Run 'make tw-examples' to add example files (safe mode)"
 
 # Display TodoWrite help information
 tw-help:
