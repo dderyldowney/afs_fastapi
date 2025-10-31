@@ -133,6 +133,12 @@ Thumbs.db
 .claude/current_session.json
 .claude/optimization_monitoring.json
 .claude/session_optimization_tracking.json
+.claude/conversation_config.json
+.claude/.agent_registry.json
+
+# TodoWrite database files
+todowrite.db
+ToDoWrite/todos.db
 
 # VSCode configuration directory
 .vscode/
