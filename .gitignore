@@ -139,6 +139,7 @@ Thumbs.db
 .claude/current_session.json
 .claude/optimization_monitoring.json
 .claude/session_optimization_tracking.json
+.claude/.agent_registry.json
 
 # VSCode configuration directory
 .vscode/
