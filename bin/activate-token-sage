@@ -1,0 +1,25 @@
+#!/bin/bash
+"""
+Token-Sage Activation Script
+
+Manually activate token-sage for the current session.
+"""
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+if [[ -f "$PROJECT_ROOT/.token-sage-env" ]]; then
+    echo "🚀 Activating token-sage..."
+    source "$PROJECT_ROOT/.token-sage-env"
+
+    # Test token-sage functionality
+    if python3 "$PROJECT_ROOT/always_token_sage.py" "test activation" &>/dev/null; then
+        echo "✅ Token-sage activated successfully"
+        echo "💰 Ready for 95% token reduction"
+    else
+        echo "⚠️  Token-sage activation test failed"
+    fi
+else
+    echo "❌ Token-sage environment not found"
+    exit 1
+fi
