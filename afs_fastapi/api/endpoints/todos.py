@@ -170,8 +170,9 @@ async def create_todo_item(request: CreateToDoRequest) -> ToDoResponse:
             try:
                 # Use get_node to retrieve the created node, then update its status directly
                 created_node = todowrite_app.get_node(new_node.id)
-                created_node.status = request.status
-                new_node = created_node
+                if created_node is not None:
+                    created_node.status = request.status
+                    new_node = created_node
             except Exception:
                 # If status update fails, continue with the created node
                 pass
