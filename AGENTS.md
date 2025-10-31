@@ -30,11 +30,11 @@ All agents MUST adhere to the security protocols defined in [SECURITY_PROTOCOL.m
 
 ## Token Efficiency and CLI Usage Mandate
 
-**CRITICAL REQUIREMENT**: All AI agents MUST prioritize token efficiency and the use of command-line interface (CLI) tools for targeted data extraction and file content queries. Full file reads (`read_file`) and broad content searches (`search_file_content`) are token-intensive and MUST be minimized.
+**CRITICAL REQUIREMENT**: All AI agents MUST prioritize token efficiency and the use of local toolsets (patch, awk, sed, grep, ripgrep) for targeted data extraction and file content queries. Full file reads (`read_file`) and broad content searches (`search_file_content`) are token-intensive and MUST be minimized.
 
 ### Core Principles:
 
--   **Prioritize CLI Tools**: Agents MUST use `jq` for JSON parsing, `grep` for text pattern matching, `awk`, `find`, `sed`, `xargs`, and other appropriate CLI tools for efficient file system navigation and content manipulation.
+-   **Prioritize Local Toolsets**: Agents MUST use `patch`, `awk`, `sed`, `grep`, `ripgrep` (rg), `jq`, `find`, `xargs`, and other appropriate CLI tools for efficient file system navigation and content manipulation. **ripgrep (rg) is preferred over grep for better performance**, and `patch` is preferred for applying targeted file changes. **Agents are NOT limited to just these tools - they SHOULD use ANY CLI tool that helps reduce token usage**.
 -   **Targeted Data Extraction**: `run_shell_command` is the primary tool for file content queries. Agents will craft precise CLI commands to extract only the necessary information.
 -   **Minimize Full File Reads**: `read_file` is to be used ONLY after targeted CLI extraction has identified small, confirmed relevant files or specific lines within files.
 -   **Minimize Broad Content Searches**: `search_file_content` is to be used ONLY for small, known files where the overhead of CLI tool setup outweighs the token cost, or when a quick, high-level overview is needed for a very limited scope.
@@ -44,12 +44,24 @@ All agents MUST adhere to the security protocols defined in [SECURITY_PROTOCOL.m
     *   Agents WILL optimize search strategies for minimal token consumption.
     *   Agents WILL measure and enforce token efficiency metrics.
 -   **Documentation**: Agents WILL document CLI tool usage and rationale in their thought processes.
+-   **Specific Tool Usage Examples**:
+  - Use `rg "pattern" --type py` for fast Python code searches
+  - Use `jq '.field | select(.value == "target")' file.json` for JSON data extraction
+  - Use `awk '{print $1, $3}' file.txt` for structured text extraction
+  - Use `sed 's/old/new/g' file.txt` for targeted text replacements
+  - Use `patch -p1 < changes.patch` for applying file changes
+  - Use `find . -name "*.py" -exec grep -l "pattern" {} +` for recursive file searching
+  - Use `cut -d',' -f1,3 data.csv` for CSV column extraction
+  - Use `sort | uniq -c` for counting unique occurrences
+  - Use `tr '[:upper:]' '[:lower:]'` for case conversion
+  - Use `head -n 10` and `tail -n 10` for file boundary examination
 
 ### Enforcement:
 
 -   Violation of these token efficiency guidelines will be considered a critical failure.
--   Automated checks WILL be implemented and enforced to monitor token usage and CLI tool prioritization across ALL sessions, current and future. These checks will ensure adherence to token budget constraints and optimal search strategies.
+-   Automated checks WILL be implemented and enforced to monitor token usage and local toolset prioritization across ALL sessions, current and future. These checks will ensure adherence to token budget constraints and optimal search strategies.
 -   All token usage by AI agents MUST be logged using the `TokenUsageLogger` via the `/monitoring/token-usage` API endpoint.
+-   **Zero-exceptions policy**: ALL agents MUST use local toolsets for all file operations. No agent is exempt from this requirement, regardless of task complexity or context size. **Agents MUST continuously evaluate and use ANY CLI tool that helps reduce token usage, including but not limited to: patch, awk, sed, grep, ripgrep, jq, cut, sort, uniq, tr, head, tail, wc, ls, cat, tee, diff, comm, join, paste, split, etc.**
 
 This is a non-negotiable requirement for ALL agents to ensure cost-effectiveness and operational efficiency.
 
