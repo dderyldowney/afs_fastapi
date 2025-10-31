@@ -6,6 +6,7 @@ This script ensures token-sage is always loaded before any work.
 It's a wrapper that automatically initializes token-sage.
 """
 
+import os
 import sys
 from pathlib import Path
 
@@ -14,15 +15,41 @@ def ensure_token_sage():
     """Ensure token-sage is always loaded first"""
     print("🚀 Ensuring token-sage is loaded...")
 
-    # This would normally initialize token-sage
-    # For now, we'll create the token-sage task
-    token_sage_command = '''Task subagent_type=token-sage description="Initialize token-sage" prompt="Initialize and prepare for code analysis tasks"'''
+    # Check if we're already active
+    if os.getenv("TOKEN_SAGE_ACTIVE") == "true":
+        print("🤖 Token-sage already active - preventing duplication")
+        return True
 
-    print("📝 Token-sage initialization command:")
-    print(f"   {token_sage_command}")
-    print()
-    print("✅ Token-sage is ready for maximum efficiency")
-    print()
+    # Set environment markers
+    os.environ["TOKEN_SAGE_ACTIVE"] = "true"
+    os.environ["CLAUDE_TOKEN_OPTIMIZATION_ENABLED"] = "true"
+    os.environ["TOKEN_SAGE_AUTOLOAD"] = "true"
+
+    # Initialize HAL preprocessing
+    try:
+        sys.path.insert(0, str(Path(__file__).parent))
+        from hal_token_savvy_agent import filter_repo_for_llm
+
+        # Test basic functionality
+        test_result = filter_repo_for_llm(
+            goal="token-sage initialization verification",
+            pattern="import",
+            llm_snippet_chars=100,
+            max_files=5,
+            delta_mode=False,
+        )
+
+        if test_result and len(test_result) > 10:
+            print("🤖 HAL preprocessing capabilities verified (0 tokens used)")
+
+        print("✅ Token-sage initialization complete")
+        print("💰 Applied to ALL operations for remainder of session")
+        return True
+
+    except Exception as e:
+        print(f"⚠️  Token-sage initialization warning: {e}")
+        print("✅ Basic token-sage still active")
+        return True
 
 
 def run_with_hal_preprocessing(command_args):

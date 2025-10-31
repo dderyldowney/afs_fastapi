@@ -1,7 +1,7 @@
 {
   "optimization_enabled": true,
   "debug_mode": false,
-  "token_budget_per_turn": 1500,
+  "token_budget_per_turn": 2000,
   "adaptive_mode": true,
   "auto_export_sessions": true,
   "agricultural_safety_level": "standard",

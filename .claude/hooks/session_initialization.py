@@ -265,23 +265,50 @@ class UniversalSessionInitializationHook:
 
         This ensures maximum token efficiency from the very start of any session.
         Token-sage provides 95% token reduction for agricultural robotics development.
+
+        CRITICAL: This loads token-sage ONCE at session start and applies it
+        to ALL subsequent operations throughout the session.
         """
         try:
+            # Check if token-sage is already active to prevent duplication
+            token_sage_status = os.getenv('TOKEN_SAGE_ACTIVE')
+            if token_sage_status == 'true':
+                print("🤖 Token-sage already active - preventing duplication", file=sys.stderr)
+                return True
+
             # Check if token-sage is available
             token_sage_script = self.project_root / "always_token_sage.py"
             if not token_sage_script.exists():
                 print("⚠️  Token-sage script not found", file=sys.stderr)
                 return False
 
-            # Run token-sage initialization
+            # Mark token-sage as being initialized to prevent recursive calls
+            os.environ['TOKEN_SAGE_INITIALIZING'] = 'true'
+
+            # Run token-sage initialization with environment setup
+            env = {**os.environ, 'TOKEN_SAGE_SESSION_ID': self.current_agent_id}
+
             result = subprocess.run(
                 [sys.executable, str(token_sage_script), "initialize"],
                 capture_output=True,
                 text=True,
-                timeout=10
+                timeout=10,
+                env=env
             )
 
+            # Clear initialization flag regardless of result
+            if 'TOKEN_SAGE_INITIALIZING' in env:
+                del env['TOKEN_SAGE_INITIALIZING']
+
             if result.returncode == 0:
+                # Mark token-sage as active for this session
+                os.environ['TOKEN_SAGE_ACTIVE'] = 'true'
+
+                # Set environment variables for token optimization
+                os.environ['CLAUDE_TOKEN_OPTIMIZATION_ENABLED'] = 'true'
+                os.environ['TOKEN_SAGE_AUTOLOAD'] = 'true'
+                os.environ['HAL_PREPROCESSING_ENABLED'] = 'true'
+
                 # Try to initialize HAL preprocessing as well
                 hal_script = self.project_root / "hal_token_savvy_agent.py"
                 if hal_script.exists():
@@ -307,9 +334,13 @@ class UniversalSessionInitializationHook:
 
                 print("🚀 Token-sage automatically loaded - Ready for maximum efficiency", file=sys.stderr)
                 print("💰 Potential token savings: 95% for code analysis tasks", file=sys.stderr)
+                print("🎯 Applied to ALL operations for remainder of session", file=sys.stderr)
                 return True
             else:
                 print(f"⚠️  Token-sage initialization failed: {result.stderr}", file=sys.stderr)
+                # Clear failed initialization
+                if 'TOKEN_SAGE_ACTIVE' in os.environ:
+                    del os.environ['TOKEN_SAGE_ACTIVE']
                 return False
 
         except subprocess.TimeoutExpired:
