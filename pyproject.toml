@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "afs_fastapi"
-version = "0.1.6"
+dynamic = ["version"]
 description = "Automated Farming System API (FastAPI)."
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -186,6 +186,9 @@ timeout = 30
 exclude = [
   ".trunk",
 ]
+
+[tool.hatch.version]
+path = "afs_fastapi/version.py"
 
 [tool.hatch.metadata]
 allow-direct-references = true
