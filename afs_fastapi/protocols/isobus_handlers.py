@@ -171,7 +171,7 @@ class AddressClaimHandler:
 
         Returns
         -------
-        Optional[ISOBUSDevice]
+        ISOBUSDevice | None
             Claimed device information
         """
         try:
@@ -299,7 +299,7 @@ class AddressClaimHandler:
 
         Returns
         -------
-        Optional[ISOBUSDevice]
+        ISOBUSDevice | None
             Device information or None
         """
         return self.claimed_addresses.get(address)
@@ -314,7 +314,7 @@ class AddressClaimHandler:
 
         Returns
         -------
-        List[ISOBUSDevice]
+        list[ISOBUSDevice]
             List of devices with specified function
         """
         return [device for device in self.claimed_addresses.values() if device.function == function]
@@ -364,7 +364,7 @@ class TransportProtocolHandler:
 
         Returns
         -------
-        Optional[str]
+        str | None
             Session ID if session created
         """
         try:
@@ -455,7 +455,7 @@ class TransportProtocolHandler:
 
         Returns
         -------
-        Optional[bytes]
+        bytes | None
             Completed message data if session finished
         """
         try:
@@ -601,7 +601,7 @@ class DiagnosticHandler:
 
         Parameters
         ----------
-        callback : Callable[[int, List[DiagnosticTroubleCode]], None]
+        callback : Callable[[int, list[DiagnosticTroubleCode]], None]
             Callback function (source_address, dtcs)
         """
         self._diagnostic_callbacks.append(callback)
@@ -616,7 +616,7 @@ class DiagnosticHandler:
 
         Returns
         -------
-        List[DiagnosticTroubleCode]
+        list[DiagnosticTroubleCode]
             List of active DTCs
         """
         try:
@@ -668,7 +668,7 @@ class DiagnosticHandler:
 
         Returns
         -------
-        List[DiagnosticTroubleCode]
+        list[DiagnosticTroubleCode]
             List of previously active DTCs
         """
         try:
@@ -751,7 +751,7 @@ class DiagnosticHandler:
 
         Returns
         -------
-        Optional[DiagnosticTroubleCode]
+        DiagnosticTroubleCode | None
             Parsed DTC or None
         """
         try:
@@ -796,7 +796,7 @@ class DiagnosticHandler:
 
         Returns
         -------
-        List[DiagnosticTroubleCode]
+        list[DiagnosticTroubleCode]
             List of active DTCs
         """
         return self.active_dtcs.get(source_address, [])
@@ -806,7 +806,7 @@ class DiagnosticHandler:
 
         Returns
         -------
-        Dict[int, List[DiagnosticTroubleCode]]
+        dict[int, list[DiagnosticTroubleCode]]
             Active DTCs by source address
         """
         return self.active_dtcs.copy()
@@ -826,7 +826,7 @@ class ISOBUSProtocolManager:
         ----------
         codec : CANFrameCodec
             CAN frame codec
-        error_handler : Optional[CANErrorHandler]
+        error_handler : CANErrorHandler | None
             Error handling system
         """
         self.codec = codec
@@ -953,7 +953,7 @@ class ISOBUSProtocolManager:
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             Network status information
         """
         return {

@@ -167,7 +167,7 @@ class TrajectoryPrediction:
 
         Parameters
         ----------
-        future_positions : List[PositionVector]
+        future_positions : list[PositionVector]
             Predicted future positions
         prediction_horizon : float
             Time horizon for predictions
@@ -419,9 +419,9 @@ class CollisionAvoidanceSystem:
             Current velocity of equipment
         operational_status : str
             Current operational status
-        communication_health : Optional[Dict[str, Any]]
+        communication_health : dict[str, Any | None]
             Communication health status
-        field_conditions : Optional[Dict[str, Any]]
+        field_conditions : dict[str, Any | None]
             Current field conditions
 
         Returns
@@ -845,12 +845,12 @@ class CollisionAvoidanceSystem:
 
         Parameters
         ----------
-        tractor_states : List[Dict[str, Any]]
+        tractor_states : list[dict[str, Any]]
             Current states of all tractors
 
         Returns
         -------
-        Dict[str, DynamicSafetyZone]
+        dict[str, DynamicSafetyZone]
             Coordinated safety zones for each tractor
 
         Agricultural Context

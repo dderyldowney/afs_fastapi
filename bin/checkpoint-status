@@ -1,0 +1,156 @@
+#!/usr/bin/env python3
+"""
+Checkpoint Status Management Tool for AFS FastAPI Agricultural Robotics Platform.
+
+Dedicated checkpoint status management following the same pattern as goal-status,
+phase-status, etc. Provides focused checkpoint operations for agricultural development.
+"""
+
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+# Add bin directory to sys.path for common modules
+bin_path = project_root / "bin"
+if bin_path.exists():
+    sys.path.insert(0, str(bin_path))
+
+from common.json_operations import load_json, save_json
+
+
+def list_checkpoints() -> None:
+    """List all checkpoints with their status."""
+    checkpoints_file = project_root / ".claude" / "checkpoints.json"
+    checkpoints = load_json(checkpoints_file, default=[])
+
+    print("📍 CHECKPOINT STATUS OVERVIEW")
+    print("=" * 40)
+    print()
+
+    if not checkpoints:
+        print("No checkpoints found")
+        return
+
+    for checkpoint in checkpoints:
+        status = checkpoint.get("status", "no status")
+        status_icon = _get_status_icon(status)
+
+        print(f"{status_icon} {checkpoint['id']}: {status}")
+        print(f"    Description: {checkpoint['description']}")
+        print(f"    Created: {checkpoint['timestamp'][:19]}")
+        print(f"    Git Hash: {checkpoint['git_hash'][:8]}...")
+        print()
+
+    # Summary
+    total = len(checkpoints)
+    completed = sum(1 for c in checkpoints if c.get("status") == "completed")
+    print("📊 CHECKPOINT SUMMARY:")
+    print(f"  • Total Checkpoints: {total}")
+    print(f"  • Completed: {completed}/{total} ({(completed/total*100):.1f}%)")
+    print(f"  • Remaining: {total - completed}")
+
+
+def _get_status_icon(status: str) -> str:
+    """Get emoji icon for status."""
+    icons = {
+        "completed": "✅",
+        "in_progress": "🔄",
+        "pending": "⏳",
+        "failed": "❌",
+        "cancelled": "🚫",
+        "on_hold": "⏸️",
+        "no status": "❓"
+    }
+    return icons.get(status, "❓")
+
+
+def update_checkpoint_status(checkpoint_id: str, new_status: str) -> bool:
+    """Update the status of a specific checkpoint."""
+    valid_statuses = ["pending", "in_progress", "completed", "failed", "cancelled", "on_hold"]
+
+    if new_status not in valid_statuses:
+        print(f"❌ Invalid status: {new_status}")
+        print(f"Valid statuses: {', '.join(valid_statuses)}")
+        return False
+
+    checkpoints_file = project_root / ".claude" / "checkpoints.json"
+    checkpoints = load_json(checkpoints_file, default=[])
+
+    for checkpoint in checkpoints:
+        if checkpoint["id"] == checkpoint_id:
+            old_status = checkpoint.get("status", "no status")
+            checkpoint["status"] = new_status
+
+            if save_json(checkpoints_file, checkpoints):
+                status_icon = _get_status_icon(new_status)
+                print(f"✅ Updated checkpoint {checkpoint_id}")
+                print(f"   Status: {old_status} → {new_status} {status_icon}")
+                print(f"   Description: {checkpoint['description']}")
+                return True
+            else:
+                print(f"❌ Failed to save checkpoints file")
+                return False
+
+    print(f"❌ Checkpoint '{checkpoint_id}' not found")
+    return False
+
+
+def complete_checkpoint(checkpoint_id: str) -> bool:
+    """Mark a checkpoint as completed."""
+    return update_checkpoint_status(checkpoint_id, "completed")
+
+
+def main():
+    """Main command-line interface."""
+    parser = argparse.ArgumentParser(
+        description="Dedicated checkpoint status management for AFS FastAPI platform",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  %(prog)s list                     # List all checkpoints with status
+  %(prog)s update checkpoint_1 completed  # Mark checkpoint_1 as completed
+  %(prog)s complete checkpoint_1    # Mark checkpoint_1 as completed (shortcut)
+
+Valid statuses: pending, in_progress, completed, failed, cancelled, on_hold
+
+Note: For combined pause point and checkpoint management, use bin/pause-status
+        """
+    )
+
+    subparsers = parser.add_subparsers(dest="command", help="Available commands")
+
+    # List command
+    subparsers.add_parser("list", help="List all checkpoints with status")
+
+    # Update command
+    update_parser = subparsers.add_parser("update", help="Update checkpoint status")
+    update_parser.add_argument("checkpoint_id", help="ID of checkpoint to update")
+    update_parser.add_argument("status", help="New status to set")
+
+    # Complete command
+    complete_parser = subparsers.add_parser("complete", help="Mark checkpoint as completed")
+    complete_parser.add_argument("checkpoint_id", help="ID of checkpoint to complete")
+
+    args = parser.parse_args()
+
+    if not args.command:
+        parser.print_help()
+        return
+
+    if args.command == "list":
+        list_checkpoints()
+    elif args.command == "update":
+        success = update_checkpoint_status(args.checkpoint_id, args.status)
+        sys.exit(0 if success else 1)
+    elif args.command == "complete":
+        success = complete_checkpoint(args.checkpoint_id)
+        sys.exit(0 if success else 1)
+
+
+if __name__ == "__main__":
+    main()

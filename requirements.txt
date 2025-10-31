@@ -128,3 +128,6 @@ wheel==0.43.0
 wrapt==1.17.3
 zipp==3.19.2
 jsonschema
+
+# Security: pip upgraded to resolve CVE-2025-8869 tarfile extraction vulnerability
+pip==25.3

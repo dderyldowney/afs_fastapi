@@ -3,9 +3,8 @@ import os
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from models.field_segment import FieldSegment  # type: ignore
-
 from ..equipment.farm_tractors import FarmTractor, FarmTractorResponse
+from ..models.field_segment import FieldSegment
 from ..monitoring.schemas import SoilReadingResponse, WaterQualityResponse
 from ..monitoring.soil_monitor import SoilMonitor
 from ..monitoring.water_monitor import WaterMonitor
@@ -22,7 +21,7 @@ from .ai_processing_schemas import (
     OptimizationLevelEnum,
     PlatformStatisticsResponse,
 )
-from .endpoints import token_usage
+from .endpoints import todos, token_usage
 
 app = FastAPI(
     title="Automated Farming System API",
@@ -35,6 +34,7 @@ field_allocation_crdt = FieldAllocationCRDT()
 
 # Include the token usage router
 app.include_router(token_usage.router, prefix="/monitoring", tags=["monitoring"])
+app.include_router(todos.router, prefix="/todos", tags=["todos"])
 
 # Optional CORS configuration via env var AFS_CORS_ORIGINS (comma-separated)
 _cors_origins = os.getenv("AFS_CORS_ORIGINS")

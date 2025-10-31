@@ -258,7 +258,7 @@ class FieldAllocationCRDT:
 
         Returns
         -------
-        Optional[str]
+        str | None
             Owner identifier or None if unassigned.
 
         Agricultural Context

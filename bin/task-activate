@@ -8,15 +8,18 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import activate_task  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Activate an existing development task.")
     parser.add_argument("task_id", type=str, help="The ID of the task to activate.")
     args = parser.parse_args()
 
-    activated_task, error = activate_task(args.task_id)
+    activated_task, error = # DEPRECATED: activate_task(args.task_id)  # TODO: Update to new API
 
     if error:
         print(f"Error: {error}")

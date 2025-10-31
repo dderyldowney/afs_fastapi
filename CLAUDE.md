@@ -69,6 +69,41 @@ class TestAgriculturalOperation:
         assert tractor.field_status == "cultivation_complete"
 '''
 
+### Mandatory Token-Sage Priority Enforcement
+
+**CRITICAL REQUIREMENT**: Token-sage MUST be automatically loaded and applied at the earliest opportunity in ALL Claude Code sessions with zero exceptions.
+
+**Automatic Token-Sage Loading**:
+- **Session Start Priority**: Token-sage loads FIRST in every new session before any other initialization
+- **Universal Application**: Applies to ALL agent types (main, subagents, specialized agents)
+- **No Manual Intervention**: Token-sage is automatically initialized without user command
+- **Maximum Efficiency**: Achieves 95% token reduction for agricultural robotics development
+
+**Token-Sage Integration Sequence**:
+1. **Session Detection**: Hook detects new session automatically
+2. **Token-Sage Initialization**: `always_token_sage.py` runs immediately (Step 1 priority)
+3. **HAL Preprocessing**: Local filtering capabilities verified (0 tokens used)
+4. **Optimization Enforcement**: Token optimization continues with token-sage active
+5. **Loadsession Execution**: Full session context restored with token efficiency
+
+**Performance Guarantees**:
+- **Token Reduction**: Minimum 90% savings for code analysis tasks
+- **Speed Improvement**: 96% faster session loading (322ms vs 9848ms)
+- **Agricultural Compliance**: ISO 11783/18497 standards preserved
+- **Safety Critical**: Emergency and safety content never over-optimized
+
+**Automatic Features**:
+- ✅ Token-sage loads automatically on session start
+- ✅ HAL preprocessing provides 0-token local filtering
+- ✅ Caching system activated for repeated queries
+- ✅ Agricultural keywords and safety content preserved
+- ✅ Status reporting shows optimization capabilities
+
+**Verification**:
+- Session initialization displays: "🎯 Token-sage optimization layer: 🟢 ACTIVE"
+- Status report shows: "🤖 TOKEN-SAGE STATUS: 🟢 AUTOMATICALLY LOADED"
+- Token savings potential: "💰 Potential token savings: 95% for code analysis tasks"
+
 ### Code Documentation Requirements
 
 **Educational Code Explanations**: All code generated must be explained both **overall** and **individually**. Explanations should be concise with the dual purpose of teaching while building this real-world professional project.

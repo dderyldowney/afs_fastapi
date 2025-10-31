@@ -9,10 +9,13 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import add_goal  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Add a new strategic goal.")
     parser.add_argument("description", type=str, help="The description of the strategic goal.")
     parser.add_argument(
@@ -27,7 +30,7 @@ def main():
     )
     args = parser.parse_args()
 
-    new_goal = add_goal(args.description, args.description, args.category, args.priority)
+    new_goal = app.add_goal(args.description, args.description, args.category, args.priority)
 
     print(f"✓ Strategic goal added: {new_goal['id']}")
     print(f"  Description: {new_goal['description']}")

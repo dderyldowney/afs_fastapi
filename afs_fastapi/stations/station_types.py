@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 # afs_fastapi/stations/station_types.py
 from enum import Enum
 

@@ -1,0 +1,24 @@
+# Token-Sage Environment Configuration
+# Auto-generated for AFS FastAPI Agricultural Automation Platform
+
+# Token optimization settings
+export CLAUDE_TOKEN_OPTIMIZATION_ENABLED=true
+export TOKEN_SAGE_AUTOLOAD=true
+export HAL_PREPROCESSING_ENABLED=true
+export TOKEN_SAGE_CACHE_DIR="$HOME/.token_optimized_cache"
+
+# Agricultural compliance settings
+export AGRICULTURAL_SAFETY_COMPLIANCE=true
+export ISO_11783_COMPLIANCE=true
+export ISO_18497_COMPLIANCE=true
+
+# Performance optimization
+export TOKEN_CONSERVATION_LEVEL=aggressive
+export CONTEXT_COMPRESSION_ENABLED=true
+export RESPONSE_COMPRESSION_ENABLED=true
+
+# Logging
+export TOKEN_USAGE_LOGGING=true
+export OPTIMIZATION_LOGGING=true
+
+echo "🤖 Token-sage environment loaded"

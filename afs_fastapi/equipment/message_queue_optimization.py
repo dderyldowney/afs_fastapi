@@ -594,7 +594,7 @@ class MessageQueue:
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             Queue status information
         """
         return {
@@ -700,7 +700,7 @@ class MessageQueueManager:
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             System status including all queues
         """
         return {

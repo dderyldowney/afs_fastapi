@@ -6,12 +6,12 @@
 
 ## Current Status & Recent Developments
 
-**Agricultural Robotics Platform (v0.1.6)**
+**Agricultural Robotics Platform**
 
 AFS FastAPI has evolved into a production-ready multi-tractor coordination system with comprehensive reliability, database persistence, and educational value.
 
 **Recent Major Enhancements:**
-- **TodoWrite v0.1.5 System**: Complete 12-layer declarative planning framework with PostgreSQL database support for task management and session persistence
+- **TodoWrite System**: Complete 12-layer declarative planning framework with PostgreSQL database support for task management and session persistence
 - **Database Integration**: Full PostgreSQL support with Alembic migrations, enabling production-grade data persistence and agricultural operation tracking
 - **CAN Message Handler**: Enhanced equipment communication interface for agricultural vehicle coordination and real-time data exchange
 - **Test-First Development**: Complete TDD methodology with mandatory Red-Green-Refactor enforcement
@@ -180,7 +180,7 @@ AFS FastAPI has evolved into a production-ready multi-tractor coordination syste
 - Git commit separation and CHANGELOG automation (COMPLETED)
 - Universal AI agent infrastructure (COMPLETED)
 - CAN Network Traffic Management (COMPLETED)
-- TodoWrite v0.1.5 with 12-layer declarative planning framework (COMPLETED)
+- TodoWrite System with 12-layer declarative planning framework (COMPLETED)
 - PostgreSQL database integration with Alembic migrations (COMPLETED)
 
 **Phase 3: Advanced Coordination (Current)**
@@ -657,7 +657,7 @@ AFS FastAPI now includes comprehensive PostgreSQL support for production-grade d
 - **Agricultural Context**: Domain-specific data models optimized for farming operations
 - **Local Development**: Standalone database operation for development and testing environments
 
-### TodoWrite v0.1.5 System
+### TodoWrite System
 
 **12-Layer Hierarchical Framework:**
 ```
@@ -713,7 +713,7 @@ alembic upgrade head
 8. **Verify TodoWrite system**: `./bin/todo-status`
 9. Install build tools: `pip install build`
 10. Build the project: `python -m build`
-11. Install the generated wheel file: `pip install dist/afs_fastapi-0.1.5-py3-none-any.whl`
+11. Install the generated wheel file: `pip install dist/afs_fastapi-0.1.6-py3-none-any.whl`
 12. Import afs_fastapi into your project: `import afs_fastapi`
 
 ### Development and Testing
@@ -891,12 +891,12 @@ This project enables automated checks (Dependabot + pip-audit) for dependency vu
 
 ## Conclusion
 
-AFS FastAPI represents a comprehensive platform combining production-grade agricultural robotics capabilities with educational value for professional development. The platform demonstrates industry-leading Test-Driven Development enforcement, distributed systems excellence, TodoWrite v0.1.5 task management, and universal AI agent infrastructure—establishing a foundation for safe, reliable, and efficient multi-tractor coordination in modern agriculture.
+AFS FastAPI represents a comprehensive platform combining production-grade agricultural robotics capabilities with educational value for professional development. The platform demonstrates industry-leading Test-Driven Development enforcement, distributed systems excellence, TodoWrite task management, and universal AI agent infrastructure—establishing a foundation for safe, reliable, and efficient multi-tractor coordination in modern agriculture.
 
-**Platform Status**: Production-ready multi-tractor coordination system with PostgreSQL database integration, TodoWrite v0.1.5 hierarchical task management, mandatory TDD enforcement, and zero technical debt.
+**Platform Status**: Production-ready multi-tractor coordination system with PostgreSQL database integration, TodoWrite hierarchical task management, mandatory TDD enforcement, and zero technical debt.
 
 **Strategic Achievement**: Industry's only platform combining ISO compliance, distributed systems coordination, comprehensive database persistence, 12-layer task management framework, and comprehensive educational framework with universal AI agent development standards.
 
-**Recent Achievements**: TodoWrite v0.1.5 rewrite with 12-layer declarative planning framework, PostgreSQL integration with Alembic migrations, enhanced CAN message handling, and comprehensive test suite expansion to 846 tests.
+**Recent Achievements**: TodoWrite rewrite with 12-layer declarative planning framework, PostgreSQL integration with Alembic migrations, enhanced CAN message handling, and comprehensive test suite expansion to 846 tests.
 
 **Future Readiness**: Advanced capabilities positioned for CRDT implementation, enhanced ISOBUS messaging, enterprise scaling, and real agricultural equipment integration.

@@ -9,17 +9,20 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import delete_node, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Delete a Goal from the ToDoWrite system.")
     parser.add_argument("goal_id", type=str, help="The ID of the goal to delete.")
     parser.add_argument("--confirm", action="store_true", help="Confirm deletion without prompt.")
     args = parser.parse_args()
 
     # Verify goal exists
-    todos = load_todos()
+    todos = app.load_todos()
     goals = todos.get("Goal", [])
     goal = None
     for g in goals:
@@ -40,7 +43,7 @@ def main():
             sys.exit(0)
 
     try:
-        delete_node(args.goal_id)
+        app.delete_node(args.goal_id)
         print("✓ Goal deleted successfully!")
         print(f"  ID: {args.goal_id}")
         print(f"  Title: {goal.title}")

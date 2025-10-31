@@ -10,10 +10,13 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import complete_command, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Execute a Command from the ToDoWrite system.")
     parser.add_argument("command_id", type=str, help="The ID of the command to execute.")
     parser.add_argument("--dry-run", action="store_true", help="Show what would be executed without running.")
@@ -21,7 +24,7 @@ def main():
     args = parser.parse_args()
 
     # Find the command
-    todos = load_todos()
+    todos = app.load_todos()
     commands = todos.get("Command", [])
     command = None
     for c in commands:
@@ -75,7 +78,7 @@ def main():
             print("✓ Command executed successfully!")
             
             if args.auto_complete:
-                completed_command, error = complete_command(args.command_id)
+                completed_command, error = app.complete_command(args.command_id)
                 if error:
                     print(f"Warning: Failed to mark command as complete: {error}")
                 else:

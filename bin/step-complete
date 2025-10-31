@@ -10,17 +10,20 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import update_step_status  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(
         description="Complete a step and mark all its tasks as completed."
     )
     parser.add_argument("step_id", type=str, help="The ID of the step to complete.")
     args = parser.parse_args()
 
-    updated_step, error = update_step_status(args.step_id, "done")
+    updated_step, error = # DEPRECATED: update_step_status(args.step_id, "done")  # TODO: Update to new API
 
     if error:
         print(f"Error: {error}")

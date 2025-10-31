@@ -9,17 +9,20 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import get_requirements, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Display status of all Requirementss in the ToDoWrite system.")
     parser.add_argument("--requirement-id", type=str, help="Show details for a specific requirement ID.")
     args = parser.parse_args()
 
     if getattr(args, "requirement_id", None):
         # Show specific requirement details
-        todos = load_todos()
+        todos = app.load_todos()
         requirements = todos.get("Requirements", [])
         requirement = None
         for item in requirements:
@@ -42,7 +45,7 @@ def main():
         print(f"Children: {', '.join(requirement.links.children) if requirement.links.children else 'None'}")
     else:
         # Show all requirements
-        requirements = get_requirements()
+        requirements = app.get_requirements()
         
         if not requirements:
             print("No requirements found in the ToDoWrite system.")

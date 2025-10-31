@@ -9,15 +9,18 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import complete_phase  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Mark a Phase as complete in the ToDoWrite system.")
     parser.add_argument("phase_id", type=str, help="The ID of the phase to complete.")
     args = parser.parse_args()
 
-    completed_phase, error = complete_phase(args.phase_id)
+    completed_phase, error = app.complete_phase(args.phase_id)
 
     if error:
         print(f"Error: {error}")

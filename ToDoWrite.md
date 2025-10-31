@@ -1,11 +1,11 @@
 # ToDoWrite — Current Agent-Loadable System Specification
-> **Status:** ACTIVE SYSTEM (Version 0.1.5) — Load and apply this specification on session startup.
+> **Status:** ACTIVE SYSTEM (Version 0.1.6.1) — Load and apply this specification on session startup.
 > **Intent:** Complete 12-layer declarative planning framework with enforced Separation of Concerns. Only **Command** layer executes; all others are declarative YAML files.
 
 ---
 
 ## 1) Overview
-- **System Version:** 0.1.5 (Current Production)
+- **System Version:** 0.1.6.1 (Current Production)
 - **Architecture:** 12-layer declarative hierarchy with build-time validation
 - **Non‑negotiables:**
   - Layers 1–11 are **non-executable** (no side effects, no CLI/API code).
@@ -28,7 +28,33 @@
 11. **SubTask** — Smallest planning granule. *(Declarative)*
 12. **Command** — **Only executable** layer (CLI/API/scripts). *(Executable)*
 
-## 2.1) Functional Groupings of the 12-Layer Hierarchy
+## 2.1) Complete Layer Architecture & Storage Mapping
+
+### 📋 Layers 1-11: Declarative (Non-Executable)
+*Stored in `ToDoWrite/configs/plans/`*
+
+| Layer | Name | Purpose | Storage Directory |
+|-------|------|---------|------------------|
+| 1 | **Goal** | Business/mission intent | `goals/` |
+| 2 | **Concept** | Architectural approaches | `concepts/` |
+| 3 | **Context** | Environment & assumptions | `contexts/` |
+| 4 | **Constraints** | Standards & legal limits | `constraints/` |
+| 5 | **Requirements** | Atomic specifications | `requirements/` |
+| 6 | **Acceptance Criteria** | Pass/fail conditions | `acceptance_criteria/` |
+| 7 | **Interface Contract** | APIs & protocols | `interface_contracts/` |
+| 8 | **Phase** | Major delivery slices | `phases/` |
+| 9 | **Step** | Single-concern work units | `steps/` |
+| 10 | **Task** | Contributor work assignments | `tasks/` |
+| 11 | **SubTask** | Smallest planning units | `subtasks/` |
+
+### ⚡ Layer 12: Executable
+*Stored in `ToDoWrite/configs/commands/`*
+
+| Layer | Name | Purpose | Storage Directory |
+|-------|------|---------|------------------|
+| 12 | **Command** | **ONLY** executable layer | `commands/` |
+
+## 2.2) Functional Groupings of the 12-Layer Hierarchy
 
 To facilitate understanding and interaction for AI agents, the 12-layer hierarchy is grouped by functional role, ensuring clarity in purpose, agent interaction, and expected outputs for effective task decomposition and execution.
 
@@ -104,7 +130,25 @@ This is the only executable layer, responsible for performing actions and genera
     *   **Agent Interaction:** Agents generate Commands from Acceptance Criteria or SubTasks. Agents *execute* Commands. The output of a Command is critical for verifying the completion of higher-level layers.
     *   **Expected Outputs:** An executable script or command definition (e.g., `.sh`, `.py`, `.yaml` with `run` block), linked to its parent Acceptance Criteria or SubTask. The execution of a Command should produce verifiable artifacts (e.g., test reports, log files, data outputs) that confirm the successful completion of the intended action. Verifiable by the successful execution and the integrity of its generated artifacts.
 
-## 3) Current Repo Layout (Version 0.1.5)
+### 📋 **Functional Groupings Summary**
+
+#### **I. Strategic & High-Level Planning (Layers 1-4)**
+- **Purpose**: Define vision, architecture, environment, and constraints
+- **Interaction**: Guide all subsequent layers but never execute
+
+#### **II. Specification & Definition (Layers 5-7)**
+- **Purpose**: Translate strategy into concrete, testable specifications
+- **Interaction**: Bridge between strategic vision and work breakdown
+
+#### **III. Work Breakdown & Granular Units (Layers 8-11)**
+- **Purpose**: Break specifications into manageable work units
+- **Interaction**: Organize and track development progress
+
+#### **IV. Execution (Layer 12)**
+- **Purpose**: **Only layer that executes** - generates verifiable artifacts
+- **Interaction**: Transforms all planning into actionable results
+
+## 3) Current Repo Layout (Version 0.1.6.1)
 ```
 .
 ├─ ToDoWrite/configs/plans/ # Declarative nodes (layers 1–11) as YAML
@@ -120,17 +164,9 @@ This is the only executable layer, responsible for performing actions and genera
 │  ├─ tasks/
 │  └─ subtasks/
 ├─ ToDoWrite/configs/commands/ # Layer 12 only; runnable scripts/YAML
-│  ├─ CMD-CAN001.sh              # Executable shell scripts
 │  └─ CMD-<ID>.yaml              # Command definitions
 ├─ ToDoWrite/configs/schemas/
-│  └─ todowrite.schema.json       # JSON Schema for all nodes
-├─ afs_fastapi/todos/tools/                         # Build-time validation ecosystem
-│  ├─ tw_validate.py              # JSON Schema validator
-│  ├─ tw_lint_soc.py              # SoC linter (layers 1–11 non-executable)
-│  ├─ tw_trace.py                 # Build trace matrix & graph
-│  ├─ tw_stub_command.py          # Generate command stubs for ACs
-│  ├─ migrate_todowrite.py        # Migration from old 5-layer system
-│  └─ git-commit-msg-hook.sh      # Conventional Commit enforcement
+│  └─ todowrite.schema.json       # JSON Schema for all nodes (generated from module)
 ├─ trace/
 │  ├─ trace.csv                   # Forward/backward mapping
 │  └─ graph.json                  # Node/edge graph
@@ -143,17 +179,29 @@ This is the only executable layer, responsible for performing actions and genera
 **MANDATORY:** All agents MUST execute these commands on session startup:
 
 ```bash
+# Safe session startup (preserves existing entries)
+make tw-startup
+```
+
+**Alternative individual commands:**
+```bash
 # 1. Load dependencies
 make tw-deps
 
 # 2. Initialize if needed
 make tw-init
 
-# 3. Validate current state
-make tw-all
+# 3. Validate current state (safe mode)
+make tw-validate-safe
 
 # 4. Install git hooks
 make tw-hooks
+```
+
+**Status checking:**
+```bash
+# Check system status without making changes
+make tw-status
 ```
 
 **Session Management:** The `loadsession` command MUST populate the TodoWrite system by:
@@ -183,8 +231,6 @@ This project uses **work-type tags** and **Conventional Commits** for every chan
 - **Common types:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
 - **Scopes (TodoWrite-specific):** `goal`, `concept`, `context`, `constraints`, `req`, `ac`, `iface`, `phase`, `step`, `task`, `subtask`, `cmd`, `schema`, `lint`, `trace`, `docs`
 - **Examples:**
-  - `feat(req): add R-CAN-001 for 250kbps J1939 bus with ≤50ms jitter`
-  - `test(ac): add AC-CAN-001 Given/When/Then`
   - `build(schema): generate todowrite.schema.json`
   - `ci(lint): enforce SoC for non-exec layers`
   - `docs(spec): clarify Interface Contract units and endianness`
@@ -317,70 +363,10 @@ metadata:
   work_type: architecture
 links:
   parents: []
-  children: [R-CAN-001]
-```
-
-### Requirements Template
-```yaml
-id: R-CAN-001
-layer: Requirements
-title: Tractor exchanges ISO 11783 messages on 250 kbps J1939 bus
-description: >
-  The agricultural control unit shall communicate using ISO 11783 protocol
-  over a 250 kbps network with message timing within 50 millisecond limits.
-metadata:
-  owner: controls-team
-  labels: [work:spec, can, j1939, isobus]
-  severity: med
-  work_type: spec
-links:
-  parents: [GOAL-AGRICULTURAL-AUTOMATION]
-  children: [AC-CAN-001]
-```
-
-### Acceptance Criteria Template
-```yaml
-id: AC-CAN-001
-layer: AcceptanceCriteria
-title: Address Claim within 2 seconds with PGN transmission at 10 Hz minimum frequency
-description: |
-  Given a live 250 kbps network, when the control unit initializes, then the Address Claim process completes within 2 seconds.
-  Protocol messages are transmitted at minimum 10 Hz frequency with timing variance under 50 milliseconds.
-metadata:
-  owner: test-team
-  labels: [work:validation, can, j1939]
-  work_type: validation
-links:
-  parents: [R-CAN-001]
   children: []
 ```
 
-### Command Template (only executable)
-```yaml
-id: CMD-CAN001
-layer: Command
-title: Prove AC-CAN-001
-description: Execute instrumentation to capture Address Claim and PGN jitter.
-metadata:
-  owner: test-team
-  labels: [work:implementation, test, can]
-  work_type: implementation
-links:
-  parents: [AC-CAN-001]
-  children: []
-command:
-  ac_ref: AC-CAN-001
-  run:
-    shell: |
-      ip link set can0 type can bitrate 250000
-      ip link set can0 up
-      candump can0,0x18EEFF00:0x1FFFFFFF
-          workdir: .
-    env:
-      PATH: "/usr/bin:/bin"
-  artifacts:
-    - results/CMD-CAN001/jitter.json
-```
+
 
 ## 12) Example Agent Session Flow
 ```bash
@@ -390,31 +376,48 @@ make tw-deps tw-init tw-hooks
 # Development cycle
 make tw-dev                    # Validate and generate commands
 git add -A
-git commit -F - <<EOF
-feat(req): add R-CAN-001 for 250kbps bus with <=50ms jitter
-
-This commit adds the initial requirement for CAN bus communication
-with specific bitrate and jitter constraints, aligning with ISO 11783.
-EOF
+git commit -m "feat(req): add a new requirement"
 
 # Generate and execute commands
 make tw-prove                  # Generate command stubs
-./ToDoWrite/configs/commands/CMD-CAN001.sh       # Execute specific command
+
 
 # Quality validation
 make tw-check                  # Full validation before push
 ```
 
-## 13) System Status: PRODUCTION READY (v0.1.5)
-- ✅ **Schema Validation:** JSON Schema enforcement
-- ✅ **SoC Linting:** Automated separation of concerns checking
-- ✅ **Traceability:** Complete forward/backward dependency tracking
-- ✅ **Command Generation:** Automatic stub creation from Acceptance Criteria
-- ✅ **Git Integration:** Conventional Commits enforcement
-- ✅ **Migration Support:** Seamless upgrade from legacy system
-- ✅ **Agricultural Focus:** Domain-specific examples and validation
+## 13) Architectural Insights & Design Principles
 
-## 14) Agent Requirements (NON-NEGOTIABLE)
+### 🏗️ **Separation of Concerns Architecture**
+- **11+1 Structure**: The 11 declarative + 1 executable design enforces pure separation - planning layers cannot execute code, ensuring clean architectural boundaries
+- **Filesystem Safety**: Physical separation (`plans/` vs `commands/`) prevents accidental execution of declarative content, a critical safety feature for agricultural robotics
+- **Traceability Chain**: Each layer links to parents/children, creating an unbroken chain from business goal (Layer 1) to executable command (Layer 12)
+
+
+
+### 📊 **Quality Assurance**
+- **Build-Time Validation**: Automated schema validation and SoC linting prevent violations before commit
+- **Conventional Commits**: Enforced commit message format with ToDoWrite-specific scopes
+- **End-to-End Traceability**: Complete forward/backward dependency tracking from goals to commands
+
+## 14) System Status: PRODUCTION READY (v0.1.6.1)
+
+### ✅ **Core Functionality**
+- **Schema Validation:** JSON Schema enforcement with agricultural domain examples
+- **SoC Linting:** Automated separation of concerns checking
+- **Traceability:** Complete forward/backward dependency tracking
+- **Command Generation:** Automatic stub creation from Acceptance Criteria
+- **Git Integration:** Conventional Commits enforcement with ToDoWrite scopes
+
+### ✅ **Current Implementation State**
+- **11 Declarative Directories**: All planning layers initialized in `ToDoWrite/configs/plans/`
+- **1 Executable Directory**: Commands layer ready in `ToDoWrite/configs/commands/`
+
+- **Makefile Integration**: All `tw-*` targets functional for development workflow
+
+
+
+## 15) Agent Requirements (NON-NEGOTIABLE)
 1. **Load this system on every session startup**
 2. **Use Makefile targets for all TodoWrite operations**
 3. **Create YAML files in appropriate `ToDoWrite/configs/plans/` directories**
@@ -422,4 +425,3 @@ make tw-check                  # Full validation before push
 5. **Enforce Conventional Commit format on all commits**
 6. **Validate before any git operations**
 7. **Maintain traceability links in all nodes**
-

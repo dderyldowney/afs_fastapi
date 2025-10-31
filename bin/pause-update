@@ -1,0 +1,96 @@
+#!/usr/bin/env python3
+"""
+Pause Point Update Tool - convenience wrapper for pause-status update.
+
+Updates pause point or checkpoint status to any valid value.
+"""
+
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
+# Add bin directory to sys.path for common modules
+bin_path = project_root / "bin"
+if bin_path.exists():
+    sys.path.insert(0, str(bin_path))
+
+from common.json_operations import load_json, save_json
+
+
+def update_point_status(point_id: str, new_status: str) -> bool:
+    """Update a pause point or checkpoint status."""
+    valid_statuses = ["pending", "in_progress", "completed", "failed", "cancelled", "on_hold"]
+
+    if new_status not in valid_statuses:
+        print(f"❌ Invalid status: {new_status}")
+        print(f"Valid statuses: {', '.join(valid_statuses)}")
+        return False
+
+    pause_points_file = project_root / ".claude" / "pause_points.json"
+    checkpoints_file = project_root / ".claude" / "checkpoints.json"
+
+    # Try pause points first
+    pause_points = load_json(pause_points_file, default=[])
+    for point in pause_points:
+        if point["id"] == point_id:
+            old_status = point.get("status", "no status")
+            point["status"] = new_status
+            if save_json(pause_points_file, pause_points):
+                status_icons = {
+                    "completed": "✅", "in_progress": "🔄", "pending": "⏳",
+                    "failed": "❌", "cancelled": "🚫", "on_hold": "⏸️"
+                }
+                icon = status_icons.get(new_status, "📝")
+                print(f"✅ Updated pause point {point_id}")
+                print(f"   Status: {old_status} → {new_status} {icon}")
+                print(f"   Reason: {point['reason']}")
+                return True
+            else:
+                print(f"❌ Failed to save pause points file")
+                return False
+
+    # Try checkpoints
+    checkpoints = load_json(checkpoints_file, default=[])
+    for point in checkpoints:
+        if point["id"] == point_id:
+            old_status = point.get("status", "no status")
+            point["status"] = new_status
+            if save_json(checkpoints_file, checkpoints):
+                status_icons = {
+                    "completed": "✅", "in_progress": "🔄", "pending": "⏳",
+                    "failed": "❌", "cancelled": "🚫", "on_hold": "⏸️"
+                }
+                icon = status_icons.get(new_status, "📝")
+                print(f"✅ Updated checkpoint {point_id}")
+                print(f"   Status: {old_status} → {new_status} {icon}")
+                print(f"   Description: {point['description']}")
+                return True
+            else:
+                print(f"❌ Failed to save checkpoints file")
+                return False
+
+    print(f"❌ Pause point or checkpoint '{point_id}' not found")
+    return False
+
+
+def main():
+    """Main function."""
+    parser = argparse.ArgumentParser(
+        description="Update pause point or checkpoint status in the AFS FastAPI system.",
+        epilog="Valid statuses: pending, in_progress, completed, failed, cancelled, on_hold"
+    )
+    parser.add_argument("point_id", type=str, help="The ID of the pause point or checkpoint to update.")
+    parser.add_argument("status", type=str, help="The new status to set.")
+    args = parser.parse_args()
+
+    success = update_point_status(args.point_id, args.status)
+    sys.exit(0 if success else 1)
+
+
+if __name__ == "__main__":
+    main()

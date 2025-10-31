@@ -9,15 +9,18 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Display status of all SubTasks in the ToDoWrite system.")
     parser.add_argument("--subtask-id", type=str, help="Show details for a specific subtask ID.")
     args = parser.parse_args()
 
-    todos = load_todos()
+    todos = app.load_todos()
     subtasks = todos.get("SubTask", [])
 
     if args.subtask_id:

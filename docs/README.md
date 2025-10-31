@@ -63,7 +63,7 @@ Essential files that remain in the project root for immediate access:
 - **[../CLAUDE.md](../CLAUDE.md)** - Claude Code configuration and project instructions
 - **[../AGENTS.md](../AGENTS.md)** - Professional agent documentation
 - **[../SESSION_SUMMARY.md](../SESSION_SUMMARY.md)** - Cross-session context preservation
-- **[../WORKFLOW.md](../WORKFLOW.md)** - Authoritative testing reference (161 tests)
+- **[../WORKFLOW.md](../WORKFLOW.md)** - Authoritative testing reference (817 tests)
 - **[../TDD_WORKFLOW.md](../TDD_WORKFLOW.md)** - Test-First development methodology
 - **[../README.md](../README.md)** - Project overview and setup
 - **[../CHANGELOG.md](../CHANGELOG.md)** - Version history

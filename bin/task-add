@@ -9,17 +9,20 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import add_task, get_active_items, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Add a new task to the active step.")
     parser.add_argument("title", type=str, help="The title of the task.")
     parser.add_argument("--description", type=str, default="", help="The description of the task.")
     args = parser.parse_args()
 
-    todos_data = load_todos()
-    active_items = get_active_items(todos_data)
+    todos_data = app.load_todos()
+    active_items = app.get_active_items(todos_data)
     active_step = active_items.get("Step")
 
     if not active_step:
@@ -28,7 +31,7 @@ def main():
         )
         sys.exit(1)
 
-    new_task, error = add_task(active_step["id"], args.title, args.description)
+    new_task, error = app.add_task(active_step["id"], args.title, args.description)
 
     if error:
         print(f"Error: {error}")

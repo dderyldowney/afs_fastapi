@@ -8,5 +8,6 @@ isort . --quiet
 # Fix linting issues with Ruff
 ruff check . --fix --quiet
 
-# Validate types with MyPy
-mypy afs_fastapi --ignore-missing-imports --no-strict-optional
+# Validate types with MyPy (separate commands to avoid __main__.py conflicts)
+mypy afs_fastapi/api/ afs_fastapi/core/ afs_fastapi/database/ afs_fastapi/monitoring/ afs_fastapi/equipment/ afs_fastapi/services/ afs_fastapi/models/ afs_fastapi/protocols/ afs_fastapi/safety/ afs_fastapi/scripts/ afs_fastapi/stations/ --ignore-missing-imports --no-strict-optional
+mypy tests/ --ignore-missing-imports --no-strict-optional

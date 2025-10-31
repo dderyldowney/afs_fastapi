@@ -138,7 +138,7 @@
 
 ### Cross-Session Continuity
 - The `TodoWrite.md` system is the single source of truth for all work items, with task persistence handled by the system.
-- All task operations are managed through the `afs_fastapi/todos/manager.py` module.
+- All task operations are managed through the `todowrite` Python module.
 - Strategic objectives provide long-term direction.
 - Phase steps ensure tactical implementation progress.
 - Complete session state preservation and restoration.

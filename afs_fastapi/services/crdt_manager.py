@@ -1,6 +1,6 @@
 import time
 
-from models.field_segment import FieldSegment  # type: ignore
+from ..models.field_segment import FieldSegment
 
 
 class FieldAllocationCRDT:

@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 # type: ignore
 
@@ -9,17 +8,21 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import get_active_items, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
+
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     print("💾 AFS FastAPI Session State Snapshot")
     print("======================================")
     print()
 
     # Gather data
-    todos_data = load_todos()
+    todos_data = app.load_todos()
     goals = todos_data.get("Goal", [])
-    active_items = get_active_items(todos_data)
+    active_items = app.get_active_items(todos_data)
     active_phase = active_items.get("Phase")
 
     # Calculate counts for strategic goals

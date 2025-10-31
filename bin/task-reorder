@@ -9,16 +9,19 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import reorder_tasks  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Reorder a task.")
     parser.add_argument("task_id", type=str, help="The ID of the task to reorder.")
     parser.add_argument("new_position", type=int, help="The new position of the task.")
     args = parser.parse_args()
 
-    success, error = reorder_tasks(args.task_id, args.new_position)
+    success, error = # DEPRECATED: reorder_tasks(args.task_id, args.new_position)  # TODO: Update to new API
 
     if error:
         print(f"Error: {error}")

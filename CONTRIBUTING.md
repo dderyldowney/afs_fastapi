@@ -40,7 +40,7 @@ Before opening a PR, please run through this comprehensive checklist:
 
 **For General Development**:
 - **✅ Add tests**: New behavior or edge cases must have test coverage
-- **✅ Run full suite**: `python -m pytest tests/` (expect **161 tests** passing in ~3s)
+- **✅ Run full suite**: `python -m pytest tests/` (expect **817 tests** passing for agricultural robotics core)
 - **✅ Zero regression**: All existing tests must continue passing
 
 ### 2. Code Quality Standards
@@ -52,9 +52,9 @@ Before opening a PR, please run through this comprehensive checklist:
 
 ### Schema Management
 
-- **✅ `todos.json` Schema**: The JSON schema for `todos.json` is generated from `TypedDict` definitions in `afs_fastapi/todos/manager.py`.
-  - **Action**: After modifying any `TypedDict` related to `todos.json` in `afs_fastapi/todos/manager.py`, you **MUST** re-run `scripts/generate_todos_schema.py` to update `.claude/todos_schema.json`.
-  - **Purpose**: This ensures the schema remains synchronized with the data structure, providing consistent validation and initial file creation.
+- **✅ TodoWrite Schema**: The project uses the `todowrite` Python module for task management with built-in schema validation.
+  - **Action**: Task management is handled through the `todowrite` module API and YAML files in `ToDoWrite/configs/plans/`.
+  - **Purpose**: This ensures consistent task management using the standardized TodoWrite 12-layer hierarchy.
 
 ### 3. Agricultural Domain Compliance
 
@@ -161,7 +161,7 @@ Before opening a PR, please run through this comprehensive checklist:
   - Educational framework preservation
 
 - **WORKFLOW.md**: Authoritative testing reference and architecture guide
-  - Complete test suite analysis (161 tests)
+  - Complete test suite analysis (817 tests)
   - Professional agricultural testing patterns
   - Domain coverage and execution commands
 
@@ -173,7 +173,7 @@ Before opening a PR, please run through this comprehensive checklist:
 **Quick Reference Commands:**
 
 ```bash
-# Run complete test suite (161 tests)
+# Run complete test suite (817 tests)
 python -m pytest tests/ -v
 
 # Check code quality (expect zero warnings)
@@ -241,13 +241,13 @@ This project uses **Git Flow** with strict tagging conventions:
 #### Tag Types and Rules
 
 **1. Release Tags (Stable Production)**
-- **Format**: `v{major}.{minor}.{patch}` (e.g., `v0.1.1`, `v0.1.2`)
+- **Format**: `v{major}.{minor}.{patch}` (e.g., `v0.1.1`, `v0.1.6`)
 - **Branch**: Only created on `main` branch
 - **When**: After merging `develop` → `main` for stable releases
 - **Who**: Only maintainers create release tags
 
 **2. Alpha Tags (Development)**
-- **Format**: `v{major}.{minor}.{patch}a{n}` (e.g., `v0.1.2a0`, `v0.1.2a1`)
+- **Format**: `v{major}.{minor}.{patch}a{n}` (e.g., `v0.1.6a0`, `v0.1.6a1`)
 - **Branch**: Only created on `develop` branch
 - **When**: After significant development milestones
 - **Sequence**: Must be sequential (a0 → a1 → a2, no gaps)
@@ -255,10 +255,10 @@ This project uses **Git Flow** with strict tagging conventions:
 #### Version File Requirements
 
 Before creating any tag, these files MUST be synchronized:
-- `afs_fastapi/version.py` - Contains `__version__ = "0.1.2"`
-- `pyproject.toml` - Contains `version = "0.1.2"`
+- `afs_fastapi/version.py` - Contains `__version__ = "0.1.6"`
+- `pyproject.toml` - Contains `version = "0.1.6"`
 
-**Version format**: Without 'v' prefix (tag: `v0.1.2`, files: `0.1.2`)
+**Version format**: Without 'v' prefix (tag: `v0.1.6`, files: `0.1.6`)
 
 #### Contributor Guidelines
 
@@ -279,15 +279,15 @@ Before creating any tag, these files MUST be synchronized:
 ```bash
 # Alpha release on develop branch
 git checkout develop
-git tag -a v0.1.2a1 -m "Alpha release v0.1.2a1 - Added new monitoring features"
-git push origin v0.1.2a1
+git tag -a v0.1.6a1 -m "Alpha release v0.1.6a1 - Added new monitoring features"
+git push origin v0.1.6a1
 
 # Stable release on main branch (after merging develop)
 git checkout main
 git merge develop
-git tag -a v0.1.2 -m "Release v0.1.2 - Enhanced monitoring and bug fixes"
+git tag -a v0.1.6 -m "Release v0.1.6 - Enhanced monitoring and bug fixes"
 git push origin main
-git push origin v0.1.2
+git push origin v0.1.6
 ```
 
 #### Current Version Status
@@ -305,11 +305,11 @@ When submitting PRs:
 2. **Update version files** if your changes warrant a version bump:
    ```python
    # afs_fastapi/version.py
-   __version__ = "0.1.2"  # Remove 'a0' when ready for next release
+   __version__ = "0.1.6"  # Remove 'a0' when ready for next release
    ```
    ```toml
    # pyproject.toml
-   version = "0.1.2"
+   version = "0.1.6"
    ```
 3. **Update CHANGELOG.md** with your changes
 4. **Let maintainers handle tagging** - don't create tags yourself
@@ -326,7 +326,7 @@ When submitting PRs:
 **Essential for All Contributors:**
 
 1. **✅ Follow Test-First Development** for synchronization infrastructure
-2. **✅ Maintain 161-test suite** with 100% pass rate and zero regression
+2. **✅ Maintain 817-test suite** with 100% pass rate and zero regression
 3. **✅ Achieve zero linting warnings** across entire codebase
 4. **✅ Include agricultural context** in all code and tests
 5. **✅ Meet performance requirements** (sub-millisecond for distributed systems)

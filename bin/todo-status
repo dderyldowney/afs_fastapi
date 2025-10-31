@@ -7,13 +7,8 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import (  # noqa: E402
-    GoalItem,
-    Node,
-    PhaseItem,
-    get_active_items,
-    load_todos,
-)
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def get_status_counts(goals: list[Node]) -> tuple[int, int, int]:
@@ -58,7 +53,9 @@ def main():
     print("=== AFS FastAPI TODO System Status ===")
     print("")
 
-    todos_data = load_todos()
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
+    todos_data = app.load_todos()
     goals = todos_data.get("Goal", [])
 
     # Strategic overview
@@ -98,7 +95,7 @@ def main():
     print("🔄 CURRENT PHASE IMPLEMENTATION")
     print("=" * 50)
 
-    active_items = get_active_items(todos_data)
+    active_items = app.get_active_items(todos_data)
     current_phase = active_items.get("Phase")
 
     if current_phase:

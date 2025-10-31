@@ -109,7 +109,7 @@ class LinuxSocketCANManager:
 
         Returns
         -------
-        List[LinuxCANInterfaceInfo]
+        list[LinuxCANInterfaceInfo]
             List of discovered CAN interfaces
         """
         interfaces: list[LinuxCANInterfaceInfo] = []
@@ -150,7 +150,7 @@ class LinuxSocketCANManager:
 
         Returns
         -------
-        Optional[LinuxCANInterfaceInfo]
+        LinuxCANInterfaceInfo | None
             Parsed interface information
         """
         try:
@@ -320,12 +320,12 @@ class LinuxSocketCANManager:
 
         Parameters
         ----------
-        cmd : List[str]
+        cmd : list[str]
             Command and arguments
 
         Returns
         -------
-        Tuple[str, str]
+        tuple[str, str]
             (stdout, stderr) output
 
         Raises
@@ -356,7 +356,7 @@ class LinuxSocketCANManager:
 
         Returns
         -------
-        Optional[CANStatistics]
+        CANStatistics | None
             Interface statistics or None if unavailable
         """
         try:
@@ -473,12 +473,12 @@ class LinuxSocketCANManager:
 
         Parameters
         ----------
-        filter_specs : List[Tuple[int, int, bool]]
+        filter_specs : list[tuple[int, int, bool]]
             List of (can_id, mask, extended) filter specifications
 
         Returns
         -------
-        List[CANFilter]
+        list[CANFilter]
             Created CAN filters
         """
         filters: list[CANFilter] = []
@@ -499,7 +499,7 @@ class LinuxSocketCANManager:
 
         Returns
         -------
-        List[CANFilter]
+        list[CANFilter]
             Standard agricultural CAN filters
         """
         # Standard ISOBUS/J1939 filters for agricultural equipment
@@ -617,7 +617,7 @@ class LinuxSocketCANManager:
 
         Returns
         -------
-        Optional[CANStatistics]
+        CANStatistics | None
             Cached statistics or None
         """
         return self._statistics_cache.get(interface_name)
@@ -634,7 +634,7 @@ class LinuxSocketCANManager:
         ----------
         interface_name : str
             Interface to optimize
-        high_priority_ids : List[int]
+        high_priority_ids : list[int]
             CAN IDs that should have priority
         queue_size : int, default 100
             Queue size optimization
@@ -669,7 +669,7 @@ class LinuxSocketCANManager:
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             Health check results
         """
         health_report: dict[str, Any] = {
@@ -870,7 +870,7 @@ class EnhancedSocketCANInterface(SocketCANInterface):
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             Health status report
         """
         return await self.linux_manager.perform_bus_health_check(self.config.channel)
@@ -880,7 +880,7 @@ class EnhancedSocketCANInterface(SocketCANInterface):
 
         Returns
         -------
-        Optional[CANStatistics]
+        CANStatistics | None
             Current statistics or None
         """
         return self.linux_manager.get_cached_statistics(self.config.channel)

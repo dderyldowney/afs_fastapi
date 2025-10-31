@@ -146,7 +146,7 @@ class SpeedDataHandler:
 
         Returns
         -------
-        Optional[SpeedData]
+        SpeedData | None
             Processed speed data
         """
         try:
@@ -400,7 +400,7 @@ class FuelDataHandler:
 
         Returns
         -------
-        Optional[FuelData]
+        FuelData | None
             Processed fuel data
         """
         try:
@@ -667,7 +667,7 @@ class GPSDataHandler:
 
         Returns
         -------
-        Optional[GPSData]
+        GPSData | None
             Processed GPS data
         """
         try:
@@ -761,7 +761,7 @@ class GPSDataHandler:
 
         Returns
         -------
-        Optional[float]
+        float | None
             Speed over ground in km/h
         """
         history = self._gps_history.get(source_address, [])
@@ -1110,12 +1110,12 @@ class CriticalDataAggregator:
 
         Parameters
         ----------
-        source_address : Optional[int]
+        source_address : int | None
             Specific source address, or None for all
 
         Returns
         -------
-        Dict[int, Dict[str, Any]]
+        dict[int, dict[str, Any]]
             Current critical data by source address
         """
         if source_address is not None:
@@ -1132,7 +1132,7 @@ class CriticalDataAggregator:
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             Equipment summary
         """
         data = self._current_data.get(source_address, {})
@@ -1214,7 +1214,7 @@ class CriticalDataAggregator:
 
         Returns
         -------
-        List[Dict[str, Any]]
+        list[dict[str, Any]]
             Active alerts
         """
         # Get recent alerts (last 5 minutes)
@@ -1307,7 +1307,7 @@ class CriticalDataAggregator:
 
         Parameters
         ----------
-        callback : Callable[[int, Dict[str, Any]], None]
+        callback : Callable[[int, dict[str, Any]], None]
             Data callback function
         """
         self._data_callbacks.append(callback)

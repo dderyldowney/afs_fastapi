@@ -1,10 +1,4 @@
-"""
-Agricultural database module for time-series and relational data management.
-
-This module provides database schemas, models, and utilities for storing
-and managing agricultural data including ISOBUS messages, sensor readings,
-equipment metadata, operational analytics, and comprehensive data archiving.
-"""
+from __future__ import annotations
 
 from .agricultural_archiving import (
     ArchivalManager,
@@ -38,6 +32,14 @@ from .agricultural_schemas import (
     validate_gps_coordinates,
     validate_isobus_address,
 )
+
+"""
+Agricultural database module for time-series and relational data management.
+
+This module provides database schemas, models, and utilities for storing
+and managing agricultural data including ISOBUS messages, sensor readings,
+equipment metadata, operational analytics, and comprehensive data archiving.
+"""
 
 __all__ = [
     # Database schemas

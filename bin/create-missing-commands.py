@@ -51,17 +51,20 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from afs_fastapi.todos.manager import {get_func}, load_todos  # noqa: E402
+from todowrite.app import ToDoWrite  # noqa: E402
+from todowrite.db.models import Node  # noqa: E402
 
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     parser = argparse.ArgumentParser(description="Display status of all {layer}s in the ToDoWrite system.")
     parser.add_argument("--{name}-id", type=str, help="Show details for a specific {name} ID.")
     args = parser.parse_args()
 
     if getattr(args, "{name}_id", None):
         # Show specific {name} details
-        todos = load_todos()
+        todos = app.load_todos()
         {plural} = todos.get("{layer}", [])
         {name} = None
         for item in {plural}:
@@ -113,6 +116,8 @@ if __name__ == "__main__":
     return content
 
 def main():
+    # Initialize ToDoWrite app instance
+    app = ToDoWrite()
     """Create all missing status commands."""
     bin_dir = Path(__file__).parent
     

@@ -94,7 +94,7 @@ class ChangelogEnforcementHook:
             staged_files: List of files staged for commit
 
         Returns:
-            True if CHANGELOG.md is in staged files, merge commit, or [skip-changelog], False otherwise
+            True if CHANGELOG in staged files, merge commit, or [skip-changelog], False otherwise
 
         Agricultural Context:
             Every platform modification must be documented in CHANGELOG.md for

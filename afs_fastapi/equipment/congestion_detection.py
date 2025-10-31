@@ -255,7 +255,7 @@ class NetworkCongestionDetector:
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             Interface status by interface ID
         """
         # This method would integrate with the actual interface manager
@@ -267,7 +267,7 @@ class NetworkCongestionDetector:
 
         Parameters
         ----------
-        interface_status : Dict[str, Any]
+        interface_status : dict[str, Any]
             Current interface status data
 
         Returns
@@ -337,7 +337,7 @@ class NetworkCongestionDetector:
 
         Returns
         -------
-        Tuple[float, float]
+        tuple[float, float]
             (average_latency_ms, peak_latency_ms)
         """
         # This would implement actual latency measurement
@@ -406,7 +406,7 @@ class NetworkCongestionDetector:
 
         Returns
         -------
-        Dict[str, Any]
+        dict[str, Any]
             Prediction results with confidence metrics
         """
         if len(self.metrics_history) < 5:
@@ -492,7 +492,7 @@ class TrafficThrottler:
             Current congestion metrics
         congestion_level : CongestionLevel
             Current congestion level
-        operation_context : Optional[str]
+        operation_context : str | None
             Agricultural operation context ("field_operation", "transport", etc.)
 
         Returns
