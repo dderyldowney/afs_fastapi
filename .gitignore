@@ -178,3 +178,4 @@ calibration_data/
 build/
 dist/
 todowrite.db
+.claude/conversation_config.json
