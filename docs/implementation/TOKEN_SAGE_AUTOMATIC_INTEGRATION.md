@@ -61,7 +61,7 @@ Claude Code Session Start
 | `bin/activate-token-sage` | Activation script | `./bin/activate-token-sage` |
 | `bin/token-sage-status` | Status check | `./bin/token-sage-status` |
 | `bin/test-token-sage-integration` | Integration test | `./bin/test-token-sage-integration` |
-| `CLAUDE_SUBAGENTS_PACKAGE/` | Duplicate implementations | Redundant backup system |
+| `CLAUDE_SUBAGENTS_PACKAGE/` | Backup implementations | Redundant backup system (flat structure) |
 
 ## 🛠️ Usage Instructions
 
