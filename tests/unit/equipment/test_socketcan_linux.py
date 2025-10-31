@@ -426,6 +426,21 @@ tx_dropped: 1"""
             assert "High bus load" in issues_text
 
 
+def _await_async_mocks(interface: EnhancedSocketCANInterface) -> None:
+    """Helper function to properly await async mock coroutines."""
+    for mock_attr in ["_message_reception_loop", "_heartbeat_loop"]:
+        mock_obj = getattr(interface, mock_attr, None)
+        if (
+            mock_obj
+            and hasattr(mock_obj, "return_value")
+            and asyncio.iscoroutine(mock_obj.return_value)
+        ):
+            try:
+                asyncio.run(mock_obj.return_value)
+            except Exception:
+                pass  # Ignore errors during cleanup
+
+
 class TestEnhancedSocketCANInterface:
     """Test enhanced SocketCAN interface with Linux optimizations."""
 
@@ -534,6 +549,9 @@ class TestEnhancedSocketCANInterface:
 
             # First connect (with mocked bus and tasks)
             await enhanced_interface.connect()
+
+            # Properly await async mocks before cleanup
+            _await_async_mocks(enhanced_interface)
 
             # Then disconnect
             result = await enhanced_interface.disconnect()
