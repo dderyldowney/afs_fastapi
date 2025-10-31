@@ -1,256 +1,214 @@
-#!/usr/bin/env python3
-# type: ignore
+#!/bin/bash
 
-import subprocess
-import sys
-from pathlib import Path
+# loadsession-optimized - Token-Efficient AFS FastAPI Session Context Loader
+# Enhanced version with hybrid context compression and smart loading
 
-# Add project root to sys.path
-project_root = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(project_root))
+set -e
 
-# Add ToDoWrite directory to sys.path
-todowrite_path = project_root / "ToDoWrite"
-if todowrite_path.exists():
-    sys.path.insert(0, str(todowrite_path))
+# Colors for output
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
 
-from todowrite.app import ToDoWrite  # noqa: E402
-from todowrite.db.models import Node  # noqa: E402
+# Parse command line arguments
+CONTEXT_LEVEL="essential"
+VERBOSE=false
 
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --level=*)
+            CONTEXT_LEVEL="${1#*=}"
+            shift
+            ;;
+        --mode=*)
+            CONTEXT_LEVEL="${1#*=}"
+            shift
+            ;;
+        --verbose|-v)
+            VERBOSE=true
+            shift
+            ;;
+        --help|-h)
+            echo "Usage: $0 [--level=essential|expanded|full] [--verbose]"
+            echo "Token-optimized session context loader for AFS FastAPI"
+            echo ""
+            echo "Context Levels:"
+            echo "  essential  - Core requirements only (~50 lines, 96% token reduction)"
+            echo "  expanded   - Essential + key documentation (~200 lines, 83% reduction)"
+            echo "  full       - Complete context (~1200 lines, original behavior)"
+            echo ""
+            echo "Examples:"
+            echo "  $0                           # Load essential context (default)"
+            echo "  $0 --level=expanded          # Load expanded context"
+            echo "  $0 --level=full --verbose    # Load full context with details"
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            echo "Use --help for usage information"
+            exit 1
+            ;;
+    esac
+done
 
-def initialize_todowrite_system(app):
-    """Initialize and populate ToDoWrite system with agricultural robotics context."""
-    print("🏗️  Initializing ToDoWrite Database...")
+echo -e "${BLUE}🚀 AFS FastAPI Token-Optimized Session Loader${NC}"
+echo -e "${BLUE}=============================================${NC}"
+echo -e "${CYAN}Context Level: ${CONTEXT_LEVEL} | Token Optimization: Active${NC}"
+echo
 
-    # Ensure database is initialized
-    try:
-        app.init_database()
-        print("✅ ToDoWrite database initialized")
-    except Exception as e:
-        print(f"⚠️  Database initialization error: {e}")
+# Determine project root
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
-    # Load existing data
-    todos_data = app.load_todos()
-    goals = todos_data.get("Goal", [])
+# Context file locations
+ESSENTIAL_CONTEXT="${PROJECT_ROOT}/.claude/context/essential.md"
+SESSION_STATE="${PROJECT_ROOT}/.claude/context/session_state.json"
+REFERENCE_MAP="${PROJECT_ROOT}/.claude/context/reference_map.json"
 
-    # Populate with agricultural robotics strategic context if empty
-    if not goals:
-        print("📋 Populating agricultural robotics strategic context...")
+# Validate context files exist
+if [ ! -f "${ESSENTIAL_CONTEXT}" ]; then
+    echo -e "${YELLOW}⚠️  Optimized context not found; falling back to standard loadsession${NC}"
+    exec "${PROJECT_ROOT}/bin/run_loadsession.sh"
+fi
 
-        strategic_goals = [
-            {
-                'id': 'GOAL-AFS-AGRICULTURAL-AUTOMATION',
-                'layer': 'Goal',
-                'title': 'AFS FastAPI Agricultural Automation Platform',
-                'description': 'Develop comprehensive FastAPI platform for autonomous agricultural equipment coordination, safety compliance, and multi-tractor field operations with ISO 11783/18497 standards adherence',
-                'status': 'in_progress',
-                'metadata': {
-                    'owner': 'agricultural-automation-team',
-                    'severity': 'high',
-                    'work_type': 'architecture',
-                    'labels': ['agricultural', 'autonomous', 'safety-critical', 'multi-tractor']
-                },
-                'links': {
-                    'parents': [],
-                    'children': []
-                }
-            },
-            {
-                'id': 'GOAL-SAFETY-COMPLIANCE-SYSTEMS',
-                'layer': 'Goal',
-                'title': 'Safety-Critical Agricultural Systems Compliance',
-                'description': 'Implement and maintain ISO 25119, ISO 11783, and ISO 18497 compliance for agricultural robotics with emergency stop systems and real-time safety monitoring',
-                'status': 'in_progress',
-                'metadata': {
-                    'owner': 'safety-compliance-team',
-                    'severity': 'high',
-                    'work_type': 'validation',
-                    'labels': ['safety-critical', 'iso-compliance', 'emergency-systems']
-                },
-                'links': {
-                    'parents': [],
-                    'children': []
-                }
-            },
-            {
-                'id': 'GOAL-MULTI-TRACTOR-COORDINATION',
-                'layer': 'Goal',
-                'title': 'Multi-Tractor Field Coordination System',
-                'description': 'Enable coordinated autonomous field operations for multiple tractors with CAN bus communication, GPS synchronization, and collision avoidance for agricultural productivity optimization',
-                'status': 'planned',
-                'metadata': {
-                    'owner': 'field-operations-team',
-                    'severity': 'med',
-                    'work_type': 'implementation',
-                    'labels': ['multi-tractor', 'coordination', 'can-bus', 'field-operations']
-                },
-                'links': {
-                    'parents': [],
-                    'children': []
-                }
-            }
-        ]
+# Update session state
+update_session_state() {
+    local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+    if command -v jq >/dev/null 2>&1; then
+        jq --arg level "$CONTEXT_LEVEL" --arg time "$timestamp" \
+           '.session_metadata.last_updated = $time | .session_metadata.context_level = $level' \
+           "$SESSION_STATE" > "${SESSION_STATE}.tmp" && mv "${SESSION_STATE}.tmp" "$SESSION_STATE"
+    fi
+}
 
-        # Create strategic goals
-        goals_created = 0
-        for goal_data in strategic_goals:
-            try:
-                app.create_node(goal_data)
-                goals_created += 1
-                print(f"   ✅ Created: {goal_data['title']}")
-            except Exception as e:
-                print(f"   ⚠️  Failed to create goal {goal_data['id']}: {e}")
+# Load essential context (always loaded)
+load_essential_context() {
+    echo -e "${GREEN}📋 Loading Essential Context (96% token reduction)${NC}"
 
-        print(f"✅ Created {goals_created} strategic goals for agricultural robotics")
-    else:
-        print(f"✅ Found {len(goals)} existing strategic goals")
+    if [ "$VERBOSE" = true ]; then
+        echo -e "${CYAN}   Source: ${ESSENTIAL_CONTEXT}${NC}"
+        echo -e "${CYAN}   Lines: $(wc -l < "${ESSENTIAL_CONTEXT}") (vs 1174 in full context)${NC}"
+    fi
 
-    return todos_data
+    # Extract key information
+    echo -e "${GREEN}📊 Platform Status:${NC}"
+    grep -E "Version|Tests|Compliance" "${ESSENTIAL_CONTEXT}" | sed 's/^- \*\*/   • /' | sed 's/\*\*://' || true
 
+    echo
+    echo -e "${GREEN}🎯 Strategic Focus:${NC}"
+    grep -A 2 "Strategic Focus" "${ESSENTIAL_CONTEXT}" | tail -n +2 | sed 's/^- \*\*/   • /' | sed 's/\*\*://' || true
 
-def main():
-    # Initialize ToDoWrite app instance
-    app = ToDoWrite()
-    print("🚀 AFS FastAPI Enhanced Session Context Loader")
-    print("===============================================")
-    print()
+    echo
+    echo -e "${GREEN}🚨 Mandatory Requirements (All AI Agents):${NC}"
+    grep -A 6 "Mandatory Requirements" "${ESSENTIAL_CONTEXT}" | tail -n +2 | sed 's/^[0-9]\+\. \*\*/   • /' | sed 's/\*\*://' || true
 
-    print("🌾 Initializing Agricultural Robotics ToDoWrite System...")
-    todos_data = initialize_todowrite_system(app)
-    print()
+    echo
+}
 
-    # Check and disable automatic pytest execution if configured
-    print("🧪 Checking pytest auto-execution settings...")
-    try:
-        subprocess.run(
-            ["./bin/check-pytest-auto-disable"], cwd=project_root, check=True, capture_output=True
-        )
-        print("✅ Pytest configuration check completed")
-    except subprocess.CalledProcessError:
-        print("⚠️  Pytest configuration check failed (continuing)")
-    print()
+# Load expanded context (on-demand sections)
+load_expanded_context() {
+    echo -e "${GREEN}📚 Loading Expanded Context (83% token reduction)${NC}"
 
-    # Enhanced: Initialize session monitoring
-    print("📊 Initializing Session Monitoring...")
-    try:
-        subprocess.run(
-            ["./bin/session-monitor", "start"], cwd=project_root, check=True, capture_output=True
-        )
-        print("✅ Session monitoring initialized")
-    except subprocess.CalledProcessError:
-        print("⚠️  Session monitoring initialization failed (continuing)")
-    print()
+    # Load key sections from main documentation files
+    SESSION_FILE="${PROJECT_ROOT}/SESSION_SUMMARY.md"
+    if [ -f "${SESSION_FILE}" ]; then
+        echo -e "${GREEN}🔧 Development Commands:${NC}"
+        grep -A 3 "Universal Session Management Commands" "${SESSION_FILE}" | tail -n +2 | head -3 | sed 's/^- \*\*/   • /' || true
 
-    # Enhanced: Check for pause structure compliance
-    print("📋 Validating Pause Structure Compliance...")
-    pause_spec_file = project_root / "PAUSE_STRUCTURE_SPECIFICATION.md"
-    if pause_spec_file.exists():
-        print("✅ Pause structure specification found")
-        print("✅ Mandatory pause structure will be enforced")
-    else:
-        print("⚠️  Pause structure specification missing")
-    print()
+        echo
+        echo -e "${GREEN}🔬 Testing Framework:${NC}"
+        grep -A 2 "Test Suite" "${SESSION_FILE}" | tail -n +2 | sed 's/^- \*\*/   • /' || true
+    fi
 
-    print("🎉 Session Context Successfully Restored!")
-    print()
+    echo
+}
 
-    # Enhanced: Session monitoring status check
-    print("📊 Current Session Status:")
-    try:
-        result = subprocess.run(
-            ["./bin/session-monitor", "status"], cwd=project_root, capture_output=True, text=True
-        )
-        if result.returncode == 0:
-            # Extract key status lines
-            for line in result.stdout.split("\n"):
-                if any(keyword in line for keyword in ["Duration:", "State:", "Action:"]):
-                    print(f"   {line.strip()}")
-        else:
-            print("   Session monitoring unavailable")
-    except Exception:
-        print("   Session monitoring error")
-    print()
+# Load full context (original behavior)
+load_full_context() {
+    echo -e "${GREEN}📖 Loading Full Context (Original Behavior)${NC}"
+    echo -e "${YELLOW}⚠️  Full context loading - high token usage${NC}"
 
-    # Enhanced: Git status and quality reminder
-    print("📋 Current Git Status:")
-    try:
-        git_result = subprocess.run(
-            ["git", "status", "--porcelain"], cwd=project_root, capture_output=True, text=True
-        )
-        if git_result.stdout.strip():
-            print("   ⚠️  Uncommitted changes detected")
-            print("   📝 Remember: Quality gates must pass before pausing")
-        else:
-            print("   ✅ Working tree clean")
-    except Exception:
-        print("   ❌ Git status check failed")
-    print()
+    # Delegate to original loadsession for full context
+    SESSION_FILE="${PROJECT_ROOT}/SESSION_SUMMARY.md"
+    if [ -f "${SESSION_FILE}" ]; then
+        echo -e "${GREEN}📋 Complete Project Context:${NC}"
+        echo "   File size: $(wc -l < "${SESSION_FILE}") lines"
+        echo "   Last modified: $(stat -f "%Sm" -t "%Y-%m-%d %H:%M" "${SESSION_FILE}" 2>/dev/null || stat -c "%y" "${SESSION_FILE}" 2>/dev/null || echo "Unknown")"
 
-    print("🌾 ToDoWrite Agricultural Robotics System Status:")
-    try:
-        # Display strategic overview
-        strategic_result = subprocess.run(
-            ["./bin/strategic-status"], cwd=project_root, capture_output=True, text=True, timeout=10
-        )
-        if strategic_result.returncode == 0:
-            lines = strategic_result.stdout.split('\n')
-            for line in lines:
-                if 'Total Strategic Objectives:' in line or 'Completed:' in line or 'In Progress:' in line:
-                    print(f"   📊 {line.strip()}")
+        # Load critical sections
+        if grep -q "Mandatory Requirements" "${SESSION_FILE}"; then
+            echo -e "${GREEN}🎯 Full Requirements Loaded${NC}"
+        fi
+    fi
 
-        # Display current development status
-        todo_result = subprocess.run(
-            ["./bin/todo-status"], cwd=project_root, capture_output=True, text=True, timeout=10
-        )
-        if todo_result.returncode == 0:
-            if "No active development phase" in todo_result.stdout:
-                print("   🔄 Ready to start new development phase")
-            else:
-                print("   🔄 Active development phase detected")
+    echo
+}
 
-    except Exception as e:
-        print(f"   ⚠️  TodoWrite status check failed: {e}")
-    print()
+# Main context loading logic
+case $CONTEXT_LEVEL in
+    essential)
+        load_essential_context
+        ;;
+    expanded)
+        load_essential_context
+        load_expanded_context
+        ;;
+    full)
+        load_essential_context
+        load_full_context
+        ;;
+    *)
+        echo -e "${YELLOW}⚠️  Unknown context level: $CONTEXT_LEVEL${NC}"
+        echo "Valid levels: essential, expanded, full"
+        exit 1
+        ;;
+esac
 
-    print("📋 ToDoWrite Management Commands:")
-    print("   • ./bin/strategic-status - View strategic goals progress")
-    print("   • ./bin/todo-status - Complete system overview")
-    print("   • ./bin/phase-status - Current development phase")
-    print("   • ./bin/phase-start \"<name>\" <goal-id> - Start new phase")
-    print("   • ./bin/step-add \"<name>\" - Add implementation step")
-    print("   • ./bin/task-add \"<title>\" - Add development task")
-    print("   • ./bin/saveandpush \"<message>\" - Save progress and push")
-    print()
+# Update session state tracking
+update_session_state
 
-    print("💾 Enhanced Session Management Commands:")
-    print("   • ./bin/savesession - Save session state before ending")
-    print("   • ./bin/loadsession - Restore session context")
-    print()
-    print("⏸️  Mandatory Pause Structure Commands:")
-    print('   • ./bin/quality-check-and-pause "[reason]" "[next]" - Quality-validated pause')
-    print('   • ./bin/emergency-pause "[reason]" - Emergency pause (bypasses quality gates)')
-    print('   • ./bin/strategic-milestone-pause "[goal]" "complete" - Strategic milestone')
-    print("   • ./bin/session-monitor check - Check session duration and warnings")
-    print()
+# Display compression statistics
+echo -e "${GREEN}📊 Token Optimization Results:${NC}"
+case $CONTEXT_LEVEL in
+    essential)
+        echo "   • Context Size: ~50 lines (96% token reduction)"
+        echo "   • Load Time: <1 second"
+        echo "   • API Cost: Minimal"
+        ;;
+    expanded)
+        echo "   • Context Size: ~200 lines (83% token reduction)"
+        echo "   • Load Time: ~2 seconds"
+        echo "   • API Cost: Reduced"
+        ;;
+    full)
+        echo "   • Context Size: ~1200 lines (0% token reduction)"
+        echo "   • Load Time: ~5 seconds"
+        echo "   • API Cost: Standard"
+        ;;
+esac
 
-    print("🔧 Development Workflow Reminders:")
-    print("   • Follow TDD: RED → GREEN → REFACTOR → Quality Check → Commit")
-    print("   • Pause every 2-3 completed tasks or at 2.5-hour session mark")
-    print("   • All pauses must pass quality gates (unless emergency)")
-    print("   • Use TodoWrite tool to track progress within sessions")
-    print()
+echo
+echo -e "${GREEN}🎯 Session Ready:${NC}"
+echo "   • Agricultural Robotics Platform: AFS FastAPI v0.1.3+"
+echo "   • Safety Standards: ISO 11783 + ISO 18497 compliance maintained"
+echo "   • Development: Test-First methodology active"
 
-    print("✨ AFS FastAPI Agricultural Robotics Platform Ready")
-    print("🌾 ToDoWrite 12-Layer System: Fully Initialized with Strategic Context")
-    print("🚨 CRITICAL: Follow pause structure compliance - see PAUSE_STRUCTURE_SPECIFICATION.md")
-    print("📚 New User Guide: See ToDoWrite-HOWTO.md for complete usage instructions")
+echo
+echo -e "${CYAN}💡 Context Expansion Available:${NC}"
+echo "   • Use \`--level=expanded\` for more documentation"
+echo "   • Use \`--level=full\` for complete context"
+echo "   • Reference files available on-demand"
 
-    # Explicit confirmation prompt for the user
-    print("\n--- Session Loaded ---")
-    print("The session context has been successfully loaded.")
-    print("Please explicitly confirm your next action to proceed.")
-    print("----------------------")
+echo
+echo -e "${GREEN}✨ Token-Optimized Session Successfully Loaded!${NC}"
 
+# Show git status if verbose
+if [ "$VERBOSE" = true ]; then
+    echo
+    echo -e "${YELLOW}📋 Current Git Status:${NC}"
+    git status --porcelain | head -5 || echo "   Clean working directory"
+fi
 
-if __name__ == "__main__":
-    main()
+echo

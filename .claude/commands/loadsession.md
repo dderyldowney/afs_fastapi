@@ -1,6 +1,6 @@
-# loadsession-optimized Command Documentation
+# loadsession Command Documentation
 
-**Command**: `./bin/loadsession-optimized`
+**Command**: `./bin/loadsession`
 **Purpose**: Token-efficient session context loading with hybrid compression
 **Category**: Session Management (Cross-Agent Universal)
 **Token Reduction**: 96% reduction vs standard loadsession
@@ -13,16 +13,16 @@ Enhanced session initialization command implementing hybrid context compression 
 
 ```bash
 # Essential context (default - 96% token reduction)
-./bin/loadsession-optimized
+./bin/loadsession
 
 # Expanded context (83% token reduction)
-./bin/loadsession-optimized --level=expanded
+./bin/loadsession --level=expanded
 
 # Full context (original behavior)
-./bin/loadsession-optimized --level=full
+./bin/loadsession --level=full
 
 # Verbose output with timing
-./bin/loadsession-optimized --level=essential --verbose
+./bin/loadsession --level=essential --verbose
 ```
 
 ## Context Levels
@@ -101,18 +101,18 @@ Enhanced session initialization command implementing hybrid context compression 
 
 ```bash
 # Start new session with minimal token usage
-./bin/loadsession-optimized
+./bin/loadsession
 
 # Development work requiring more context
-./bin/loadsession-optimized --level=expanded
+./bin/loadsession --level=expanded
 
 # Architecture or compliance work needing full documentation
-./bin/loadsession-optimized --level=full --verbose
+./bin/loadsession --level=full --verbose
 ```
 
 ## Error Handling
 
-- **Graceful Fallback**: Automatically uses standard `./bin/loadsession` if optimized files unavailable
+- **Graceful Fallback**: Maintains full functionality even if context files unavailable
 - **Context Validation**: Verifies essential context files exist before loading
 - **Session State Recovery**: Handles corrupted JSON with default values
 

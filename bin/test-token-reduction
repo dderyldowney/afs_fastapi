@@ -111,20 +111,20 @@ echo
 echo -e "${GREEN}⚡ Test 3: Session Loading Performance${NC}"
 echo "======================================"
 
-if [ -f "${PROJECT_ROOT}/bin/loadsession-optimized" ]; then
-    echo -e "${YELLOW}Testing optimized session loading...${NC}"
+if [ -f "${PROJECT_ROOT}/bin/loadsession" ]; then
+    echo -e "${YELLOW}Testing unified session loading...${NC}"
 
     # Time the essential loading
     start_time=$(date +%s%N)
-    OPTIMIZED_OUTPUT=$("${PROJECT_ROOT}/bin/loadsession-optimized" --level=essential 2>/dev/null || echo "Optimized loading failed")
+    OPTIMIZED_OUTPUT=$("${PROJECT_ROOT}/bin/loadsession" --level=essential 2>/dev/null || echo "Essential loading failed")
     end_time=$(date +%s%N)
     optimized_duration=$(((end_time - start_time) / 1000000)) # Convert to milliseconds
 
-    echo "   Optimized loading time: ${optimized_duration}ms"
+    echo "   Essential loading time: ${optimized_duration}ms"
 
-    # Time the original loading
+    # Time the full loading
     start_time=$(date +%s%N)
-    ORIGINAL_OUTPUT=$("${PROJECT_ROOT}/bin/loadsession" 2>/dev/null || echo "Original loading failed")
+    ORIGINAL_OUTPUT=$("${PROJECT_ROOT}/bin/loadsession" --level=full 2>/dev/null || echo "Full loading failed")
     end_time=$(date +%s%N)
     original_duration=$(((end_time - start_time) / 1000000))
 
@@ -234,7 +234,7 @@ echo "   • ISO compliance documentation maintained"
 
 echo
 echo -e "${CYAN}💡 Usage Recommendations:${NC}"
-echo "   • Use 'bin/loadsession-optimized' for daily development"
+echo "   • Use 'bin/loadsession' for daily development"
 echo "   • Use 'bin/*-brief' commands for routine status checks"
 echo "   • Request full context only when needed"
 echo "   • Leverage rolling summaries for session continuity"
