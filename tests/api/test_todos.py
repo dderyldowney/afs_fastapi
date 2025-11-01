@@ -13,7 +13,7 @@ async def client_fixture():
 
 @pytest.mark.asyncio
 async def test_initialize_todowrite_database(client: TestClient):
-    response = client.post("/todos/init_db")
+    response = client.post("/api/v1/todos/init_db")
     assert response.status_code == 200
     assert response.json() == {"message": "ToDoWrite database initialized successfully."}
 
@@ -21,7 +21,7 @@ async def test_initialize_todowrite_database(client: TestClient):
 @pytest.mark.asyncio
 async def test_create_todo_item(client: TestClient):
     # Ensure database is initialized before creating items
-    client.post("/todos/init_db")
+    client.post("/api/v1/todos/init_db")
 
     todo_data = {
         "node_type": "Goal",
@@ -31,7 +31,7 @@ async def test_create_todo_item(client: TestClient):
         "priority": "high",
         "parent_id": None,
     }
-    response = client.post("/todos/", json=todo_data)
+    response = client.post("/api/v1/todos/", json=todo_data)
     if response.status_code != 201:
         print(response.json())
     assert response.status_code == 201
@@ -45,7 +45,7 @@ async def test_create_todo_item(client: TestClient):
 @pytest.mark.asyncio
 async def test_get_all_goals(client: TestClient):
     # Ensure database is initialized and a goal exists
-    client.post("/todos/init_db")
+    client.post("/api/v1/todos/init_db")
     todo_data = {
         "node_type": "Goal",
         "title": "Another Test Goal",
@@ -54,9 +54,9 @@ async def test_get_all_goals(client: TestClient):
         "priority": "med",
         "parent_id": None,
     }
-    client.post("/todos/", json=todo_data)
+    client.post("/api/v1/todos/", json=todo_data)
 
-    response = client.get("/todos/goals")
+    response = client.get("/api/v1/todos/goals")
     assert response.status_code == 200
     data = response.json()
     assert isinstance(data, list)
@@ -67,7 +67,7 @@ async def test_get_all_goals(client: TestClient):
 @pytest.mark.asyncio
 async def test_load_todowrite_todos(client: TestClient):
     # Ensure database is initialized and some todos exist
-    client.post("/todos/init_db")
+    client.post("/api/v1/todos/init_db")
     todo_data = {
         "node_type": "Task",
         "title": "Loadable Task",
@@ -76,9 +76,9 @@ async def test_load_todowrite_todos(client: TestClient):
         "priority": "low",
         "parent_id": None,
     }
-    client.post("/todos/", json=todo_data)
+    client.post("/api/v1/todos/", json=todo_data)
 
-    response = client.post("/todos/load_todos")
+    response = client.post("/api/v1/todos/load_todos")
     assert response.status_code == 200
     data = response.json()
     assert isinstance(data, list)

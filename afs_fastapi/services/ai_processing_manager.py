@@ -283,9 +283,19 @@ class AIProcessingManager:
 
     def get_platform_statistics(self) -> dict[str, Any]:
         """Get comprehensive platform AI processing statistics."""
+        # Create a JSON-serializable copy of service stats
+        serializable_service_stats = {}
+        for service_name, service_data in self._registered_services.items():
+            serializable_service_stats[service_name] = {
+                "optimization_level": service_data["optimization_level"].value,
+                "priority": service_data.get("priority", "medium"),
+                "requests_processed": service_data.get("requests_processed", 0),
+                "tokens_saved": service_data.get("tokens_saved", 0),
+            }
+
         return {
             "global_stats": self._processing_stats.copy(),
-            "service_stats": self._registered_services.copy(),
+            "service_stats": serializable_service_stats,
             "configuration": {
                 "agricultural_safety_mode": self.agricultural_safety_mode,
                 "default_optimization_level": self.default_optimization_level.value,

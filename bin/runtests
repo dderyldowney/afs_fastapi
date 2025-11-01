@@ -19,6 +19,7 @@ COVERAGE=false
 SERIAL=false
 QUIET=false
 OPTIMIZED=true
+PATHS=()
 
 print_usage() {
     echo "Usage: $(basename "$0") [-h] [-q] [-c] [-s] [PATHS...]"

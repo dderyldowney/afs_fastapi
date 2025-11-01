@@ -1,16 +1,10 @@
-"""API endpoints module for AFS FastAPI.
+"""
+API endpoint modules for AFS FastAPI.
 
-This module contains all FastAPI router endpoints for the agricultural
-robotics platform including equipment management, fleet coordination,
-safety systems, and monitoring capabilities.
+This package contains all the modernized API endpoints with comprehensive
+error handling, validation, and agricultural compliance features.
 """
 
-# Endpoints can be imported directly from afs_fastapi.api.endpoints
-from . import equipment, fleet, safety, todos  # noqa: F401
+from . import equipment, monitoring, todos, token_usage
 
-__all__: list[str] = [
-    "equipment",
-    "fleet",
-    "safety",
-    "todos",
-]
+__all__ = ["equipment", "monitoring", "token_usage", "todos"]

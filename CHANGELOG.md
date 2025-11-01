@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### Added
+- **config**: Mandate comprehensive local toolset usage for all AI agents
+
+### Changed
+- **build**: Modernize Python packaging with Hatch dynamic versioning
+- **test**: Implement 4.9x faster pytest optimization for agricultural robotics
+
+### Configuration
+- **gitignore**: Add .claude/conversation_config.json to ignore user-specific local configuration
+
+### Added
+- **config**: Mandate comprehensive local toolset usage for all AI agents
+
+### Changed
+- **build**: Modernize Python packaging with Hatch dynamic versioning
+- **test**: Implement 4.9x faster pytest optimization for agricultural robotics
+
+### Configuration
+- **gitignore**: Add .claude/conversation_config.json to ignore user-specific local configuration
+
+### Added
 - **hooks**: Configure automatic loadsession execution for new sessions
 - **token-sage**: Complete automatic integration implementation
 - **token-sage**: Complete automatic integration for maximum efficiency

@@ -1,6 +1,10 @@
 {
+  "include": ["."],
+  "exclude": [".venv"],
+  "strict": true
+}{
   "pythonVersion": "3.12",
-  "reportMissingTypeStubs": false,
+  "reportMissingTypeStubs": true,
   "typeCheckingMode": "strict",
   "useLibraryCodeForTypes": true
 }
