@@ -22,9 +22,7 @@ from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from sqlalchemy import create_engine
-from sqlalchemy.ext.asyncio import (
-    AsyncEngine,
-)
+from sqlalchemy.ext.asyncio import AsyncEngine
 from sqlalchemy.orm import sessionmaker
 
 from afs_fastapi.database.optimized_db_config import get_optimized_db_config

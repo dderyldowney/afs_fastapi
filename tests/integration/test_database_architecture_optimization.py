@@ -363,7 +363,6 @@ class TestDatabaseArchitectureOptimization:
 
         # Test global configuration access
 
-
         global_config = asyncio.run(get_optimized_db_config())
         assert global_config is not None
         assert global_config.connection_pool is not None
