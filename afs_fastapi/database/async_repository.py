@@ -1257,7 +1257,20 @@ class UnitOfWork:
         if exc_type is None:
             self.commit()
         else:
-            self.rollback()
+            import asyncio
+
+            asyncio.run(self.rollback())
+
+    async def __aenter__(self) -> UnitOfWork:
+        """Enter async context manager."""
+        return self
+
+    async def __aexit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
+        """Exit async context manager and commit or rollback transaction."""
+        if exc_type is None:
+            await self.commit()
+        else:
+            await self.rollback()
 
     def get_repository(self, repository_class: type) -> BaseAsyncRepository:
         """Get or create repository instance.
@@ -1333,9 +1346,9 @@ class UnitOfWork:
         self._dirty.clear()
         self._deleted.clear()
 
-    def rollback(self) -> None:
+    async def rollback(self) -> None:
         """Rollback all changes."""
-        self.session.rollback()
+        await self.session.rollback()
         self._new.clear()
         self._dirty.clear()
         self._deleted.clear()

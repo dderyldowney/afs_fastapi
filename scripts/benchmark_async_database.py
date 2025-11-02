@@ -625,7 +625,7 @@ def main() -> None:
         """Run benchmark asynchronously."""
         try:
             # Run comprehensive benchmark
-            results = await benchmark.run_comprehensive_benchmark(
+            await benchmark.run_comprehensive_benchmark(
                 iterations=args.iterations, batch_size=args.batch_size
             )
 

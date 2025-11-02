@@ -74,7 +74,7 @@ def sync_operations_demo(sync_engine, count: int = 1000):
 
         # Query records
         query_start = time.time()
-        results = session.query(TestEquipment).limit(count // 10).all()
+        session.query(TestEquipment).limit(count // 10).all()
         query_time = time.time() - query_start
 
     total_time = time.time() - start_time
@@ -135,7 +135,7 @@ async def async_operations_demo(async_engine, count: int = 1000):
         # Query records
         query_start = time.time()
         result = await session.execute(select(TestEquipment).limit(count // 10))
-        results = result.scalars().all()
+        result.scalars().all()
         query_time = time.time() - query_start
 
     total_time = time.time() - start_time

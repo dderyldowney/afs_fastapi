@@ -5,7 +5,7 @@
 This documentation aims to provide comprehensive guidance for users interacting with the AFS FastAPI Agricultural Robotics Platform. It will cover:
 
 *   **Platform Tools**: Usage and purpose of command-line interface (CLI) tools located in the `bin/` directory (e.g., `savesession`, `saveandpush`, `todo-status`, `strategic-list`, `formatall`).
-*   **Environment and Tooling**: Setup and configuration of the development environment, including dependency management, virtual environments, pre-commit hooks, testing procedures (`pytest`), and code quality tools (`black`, `ruff`, `isort`, `mypy`).
+*   **Environment and Tooling**: Setup and configuration of the development environment, including dependency management, virtual environments, pre-commit hooks, testing procedures (`pytest`), and code quality tools (`black`, `ruff`, `isort`, `pyright`).
 *   **`afs_fastapi` Python Module**: Detailed API reference, core concepts, and usage examples for the Python modules within the `afs_fastapi/` directory, covering equipment control, monitoring, and API interactions.
 
 ## 2. Target Audience Needs
@@ -45,7 +45,7 @@ The documentation will be organized into the following main sections:
 *   Virtual Environments
 *   Pre-commit Hooks (Explanation and Usage)
 *   Testing (Running `pytest`, Interpreting Reports)
-*   Code Quality (Formatting with `black`, Linting with `ruff`, Import Sorting with `isort`, Type Checking with `mypy`)
+*   Code Quality (Formatting with `black`, Linting with `ruff`, Import Sorting with `isort`, Type Checking with `pyright`)
 
 ### 4.4. `afs_fastapi` Python Module Reference
 *   Core Concepts and Architecture

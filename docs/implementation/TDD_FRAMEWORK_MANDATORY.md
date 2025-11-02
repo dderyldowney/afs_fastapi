@@ -93,7 +93,7 @@ pytest tests/unit/ -q
 **Green Phase Requirements**:
 - Implementation must satisfy test requirements exactly
 - No additional functionality beyond test requirements
-- Code must pass all quality checks (ruff, mypy, black)
+- Code must pass all quality checks (ruff, pyright, black)
 - Performance requirements must be met
 
 #### Phase 3: REFACTOR (Quality Enhancement)
@@ -105,7 +105,7 @@ pytest tests/unit/services/test_new_component.py -v
 
 # REQUIRED: Quality validation
 ruff check afs_fastapi/services/ --select=ALL
-mypy afs_fastapi/services/ --strict
+pyright afs_fastapi/services/ --strict
 black afs_fastapi/services/
 # EXPECTED OUTPUT: Zero warnings/errors
 ```
@@ -204,7 +204,7 @@ class TestMonitoringComponent(unittest.TestCase):
 # These commands MUST pass before any commit is accepted:
 pytest --tb=short -q                           # All tests pass
 ruff check afs_fastapi/ --select=ALL          # Zero linting warnings
-mypy afs_fastapi/ --strict                    # Complete type safety
+pyright afs_fastapi/ --strict                    # Complete type safety
 black --check afs_fastapi/                    # Code formatting compliance
 ```
 

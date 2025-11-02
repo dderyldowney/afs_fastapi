@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### Added
+- **version**: Update version to 0.1.7
+
+### Changed
+- **monitoring**: Enhanced token usage logging optimization
+
+### Added
+- **version**: Update version to 0.1.7
+
+### Changed
+- **monitoring**: Enhanced token usage logging optimization
+
+### Added
 - **config**: Mandate comprehensive local toolset usage for all AI agents
 
 ### Changed
@@ -211,7 +223,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -247,7 +259,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -284,8 +296,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -419,7 +431,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -658,7 +670,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -694,7 +706,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -731,8 +743,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -866,7 +878,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -1105,7 +1117,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -1141,7 +1153,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -1178,8 +1190,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -1313,7 +1325,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -1552,7 +1564,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -1588,7 +1600,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -1625,8 +1637,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -1760,7 +1772,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -1999,7 +2011,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -2035,7 +2047,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -2072,8 +2084,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -2207,7 +2219,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -2441,7 +2453,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -2477,7 +2489,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -2514,8 +2526,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -2649,7 +2661,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -2883,7 +2895,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -2919,7 +2931,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -2956,8 +2968,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -3091,7 +3103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -3325,7 +3337,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -3361,7 +3373,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -3398,8 +3410,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -3533,7 +3545,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -3767,7 +3779,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -3803,7 +3815,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -3840,8 +3852,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -3975,7 +3987,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -4209,7 +4221,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -4245,7 +4257,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -4282,8 +4294,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -4416,7 +4428,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -4650,7 +4662,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -4686,7 +4698,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -4723,8 +4735,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -4857,7 +4869,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -5091,7 +5103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -5127,7 +5139,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -5164,8 +5176,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -5296,7 +5308,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -5530,7 +5542,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -5566,7 +5578,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -5603,8 +5615,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -5735,7 +5747,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -5969,7 +5981,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -6005,7 +6017,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -6042,8 +6054,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -6174,7 +6186,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -6408,7 +6420,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -6444,7 +6456,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -6481,8 +6493,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -6613,7 +6625,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -6847,7 +6859,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -6883,7 +6895,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -6920,8 +6932,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -7052,7 +7064,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -7286,7 +7298,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -7322,7 +7334,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -7359,8 +7371,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -7491,7 +7503,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -7725,7 +7737,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -7761,7 +7773,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -7798,8 +7810,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -7930,7 +7942,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -8164,7 +8176,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -8200,7 +8212,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -8237,8 +8249,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -8369,7 +8381,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -8602,7 +8614,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -8638,7 +8650,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -8675,8 +8687,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -8807,7 +8819,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -9038,7 +9050,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -9074,7 +9086,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -9111,8 +9123,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -9243,7 +9255,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -9474,7 +9486,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -9510,7 +9522,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -9547,8 +9559,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
+- Create fulltest script and fix pyright errors
 - Enhance test coverage, fix environment issues, and address placeholder tests.
 - Add GSet CRDT implementation and fix pytest configuration, including .claude files and CHANGELOG.md updates.
 - **phases**: Implement multi-phase management with pause/resume
@@ -9679,7 +9691,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **imports**: Resolve ModuleNotFoundError for afs_fastapi.models
 - Resolve FieldAllocationCRDT test failures
 - Resolve FieldAllocationCRDT test failures
-- **fleet**: Resolve mypy error in agricultural robotics
+- **fleet**: Resolve pyright error in agricultural robotics
 - **infrastructure**: Enhance updatechangelog agricultural platform execution
 - **infrastructure**: Repair saveandpush staging logic for agricultural platform
 - **commands**: Improve updatedocs error handling for agricultural platform
@@ -9910,7 +9922,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -9946,7 +9958,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -9976,7 +9988,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -10124,7 +10136,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -10160,7 +10172,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -10190,7 +10202,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -10338,7 +10350,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -10374,7 +10386,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -10404,7 +10416,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -10552,7 +10564,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -10588,7 +10600,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -10618,7 +10630,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -10766,7 +10778,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -10802,7 +10814,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -10832,7 +10844,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -10980,7 +10992,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -11016,7 +11028,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -11046,7 +11058,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -11194,7 +11206,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -11230,7 +11242,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -11260,7 +11272,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -11407,7 +11419,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -11443,7 +11455,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -11473,7 +11485,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -11620,7 +11632,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -11656,7 +11668,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -11686,7 +11698,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -11833,7 +11845,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -11869,7 +11881,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -11899,7 +11911,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -12046,7 +12058,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -12082,7 +12094,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -12112,7 +12124,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -12259,7 +12271,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -12295,7 +12307,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -12325,7 +12337,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -12472,7 +12484,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -12508,7 +12520,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -12538,7 +12550,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -12684,7 +12696,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -12720,7 +12732,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -12750,7 +12762,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -12895,7 +12907,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -12931,7 +12943,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -12961,7 +12973,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -13106,7 +13118,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -13142,7 +13154,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -13172,7 +13184,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -13317,7 +13329,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -13353,7 +13365,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -13383,7 +13395,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -13528,7 +13540,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -13564,7 +13576,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -13594,7 +13606,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -13739,7 +13751,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -13775,7 +13787,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -13805,7 +13817,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -13950,7 +13962,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -13986,7 +13998,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -14016,7 +14028,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -14161,7 +14173,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -14197,7 +14209,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -14227,7 +14239,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -14372,7 +14384,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -14408,7 +14420,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -14438,7 +14450,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -14583,7 +14595,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -14619,7 +14631,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -14649,7 +14661,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -14794,7 +14806,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -14830,7 +14842,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -14860,7 +14872,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -15005,7 +15017,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -15041,7 +15053,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -15071,7 +15083,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -15216,7 +15228,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -15252,7 +15264,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -15282,7 +15294,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -15427,7 +15439,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -15463,7 +15475,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -15493,7 +15505,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -15638,7 +15650,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -15674,7 +15686,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -15704,7 +15716,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -15849,7 +15861,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -15885,7 +15897,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -15915,7 +15927,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -16060,7 +16072,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -16096,7 +16108,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -16126,7 +16138,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -16271,7 +16283,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -16307,7 +16319,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -16337,7 +16349,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -16482,7 +16494,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -16518,7 +16530,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -16548,7 +16560,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -16693,7 +16705,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -16729,7 +16741,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -16759,7 +16771,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -16904,7 +16916,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -16940,7 +16952,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -16970,7 +16982,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -17114,7 +17126,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -17150,7 +17162,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -17180,7 +17192,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -17324,7 +17336,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -17360,7 +17372,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -17390,7 +17402,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -17534,7 +17546,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -17570,7 +17582,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -17600,7 +17612,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -17744,7 +17756,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -17780,7 +17792,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -17810,7 +17822,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -17954,7 +17966,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -17990,7 +18002,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -18020,7 +18032,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -18164,7 +18176,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -18200,7 +18212,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -18230,7 +18242,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -18374,7 +18386,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -18410,7 +18422,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -18440,7 +18452,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -18584,7 +18596,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -18620,7 +18632,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -18650,7 +18662,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -18794,7 +18806,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -18830,7 +18842,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -18860,7 +18872,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -19003,7 +19015,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -19039,7 +19051,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -19069,7 +19081,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -19211,7 +19223,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -19247,7 +19259,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -19277,7 +19289,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -19419,7 +19431,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -19455,7 +19467,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -19485,7 +19497,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -19627,7 +19639,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -19663,7 +19675,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -19693,7 +19705,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -19835,7 +19847,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -19871,7 +19883,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -19901,7 +19913,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -20043,7 +20055,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -20079,7 +20091,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -20109,7 +20121,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -20251,7 +20263,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -20287,7 +20299,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -20317,7 +20329,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -20459,7 +20471,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -20495,7 +20507,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -20525,7 +20537,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -20667,7 +20679,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -20703,7 +20715,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -20733,7 +20745,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -20875,7 +20887,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -20911,7 +20923,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -20941,7 +20953,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -21083,7 +21095,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -21119,7 +21131,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -21149,7 +21161,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -21291,7 +21303,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -21327,7 +21339,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -21357,7 +21369,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -21499,7 +21511,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -21535,7 +21547,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -21565,7 +21577,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -21707,7 +21719,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -21743,7 +21755,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -21773,7 +21785,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -21915,7 +21927,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -21951,7 +21963,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -21981,7 +21993,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -22123,7 +22135,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -22159,7 +22171,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -22189,7 +22201,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -22331,7 +22343,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -22367,7 +22379,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -22397,7 +22409,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -22539,7 +22551,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -22575,7 +22587,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -22605,7 +22617,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -22747,7 +22759,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -22783,7 +22795,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -22813,7 +22825,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -22955,7 +22967,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -22991,7 +23003,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -23021,7 +23033,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -23163,7 +23175,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -23199,7 +23211,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -23229,7 +23241,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -23371,7 +23383,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -23407,7 +23419,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -23437,7 +23449,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -23579,7 +23591,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -23615,7 +23627,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -23645,7 +23657,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -23787,7 +23799,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -23823,7 +23835,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -23853,7 +23865,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -23995,7 +24007,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -24031,7 +24043,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -24061,7 +24073,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -24203,7 +24215,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -24239,7 +24251,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -24269,7 +24281,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -24411,7 +24423,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -24447,7 +24459,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -24477,7 +24489,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -24619,7 +24631,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -24655,7 +24667,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -24685,7 +24697,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -24827,7 +24839,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -24863,7 +24875,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -24893,7 +24905,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -25035,7 +25047,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -25071,7 +25083,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -25101,7 +25113,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -25243,7 +25255,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -25279,7 +25291,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -25309,7 +25321,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -25451,7 +25463,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -25487,7 +25499,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -25517,7 +25529,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -25659,7 +25671,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -25695,7 +25707,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -25725,7 +25737,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -25867,7 +25879,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -25903,7 +25915,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -25933,7 +25945,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -26075,7 +26087,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -26111,7 +26123,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -26141,7 +26153,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -26283,7 +26295,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -26319,7 +26331,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -26349,7 +26361,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -26491,7 +26503,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -26527,7 +26539,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -26557,7 +26569,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -26699,7 +26711,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -26735,7 +26747,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -26765,7 +26777,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -26907,7 +26919,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -26943,7 +26955,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -26973,7 +26985,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -27115,7 +27127,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -27151,7 +27163,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -27181,7 +27193,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -27323,7 +27335,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -27359,7 +27371,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -27389,7 +27401,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -27531,7 +27543,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -27567,7 +27579,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -27597,7 +27609,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -27738,7 +27750,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -27774,7 +27786,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -27804,7 +27816,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -27944,7 +27956,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -27980,7 +27992,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -28010,7 +28022,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -28149,7 +28161,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -28185,7 +28197,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -28215,7 +28227,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -28353,7 +28365,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **todos**: initialize TodoWrite system with agricultural robotics strategic goals
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -28389,7 +28401,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -28419,7 +28431,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -28556,7 +28568,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -28592,7 +28604,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -28622,7 +28634,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -28758,7 +28770,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -28794,7 +28806,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -28824,7 +28836,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -28960,7 +28972,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -28996,7 +29008,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -29026,7 +29038,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -29162,7 +29174,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -29198,7 +29210,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -29228,7 +29240,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -29364,7 +29376,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -29400,7 +29412,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -29430,7 +29442,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -29566,7 +29578,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -29602,7 +29614,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -29632,7 +29644,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -29768,7 +29780,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -29804,7 +29816,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -29834,7 +29846,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -29970,7 +29982,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -30006,7 +30018,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -30036,7 +30048,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -30172,7 +30184,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -30208,7 +30220,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -30238,7 +30250,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -30374,7 +30386,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -30410,7 +30422,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -30440,7 +30452,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -30576,7 +30588,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -30612,7 +30624,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -30642,7 +30654,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -30778,7 +30790,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -30814,7 +30826,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -30844,7 +30856,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -30980,7 +30992,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -31016,7 +31028,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -31046,7 +31058,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -31182,7 +31194,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -31218,7 +31230,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -31248,7 +31260,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -31384,7 +31396,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -31420,7 +31432,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -31450,7 +31462,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -31586,7 +31598,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -31622,7 +31634,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -31652,7 +31664,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -31788,7 +31800,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **tests**: Removed unused ignore directive from tests.
 - **todowrite**: Complete 12-layer CLI system and flexible hierarchy validation
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -31824,7 +31836,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -31854,7 +31866,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -31988,7 +32000,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -32024,7 +32036,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -32054,7 +32066,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -32186,7 +32198,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -32222,7 +32234,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -32252,7 +32264,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - apply ruff, black, and isort formatting to test files
@@ -32384,7 +32396,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -32420,7 +32432,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -32450,7 +32462,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -32580,7 +32592,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -32616,7 +32628,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -32646,7 +32658,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -32776,7 +32788,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -32812,7 +32824,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -32842,7 +32854,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -32972,7 +32984,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -33008,7 +33020,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -33038,7 +33050,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -33168,7 +33180,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -33204,7 +33216,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -33234,7 +33246,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -33364,7 +33376,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -33400,7 +33412,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -33430,7 +33442,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -33560,7 +33572,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -33596,7 +33608,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -33626,7 +33638,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -33756,7 +33768,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -33792,7 +33804,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -33822,7 +33834,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -33952,7 +33964,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -33988,7 +34000,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -34018,7 +34030,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -34148,7 +34160,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -34184,7 +34196,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -34214,7 +34226,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -34343,7 +34355,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -34379,7 +34391,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -34409,7 +34421,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -34538,7 +34550,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -34574,7 +34586,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -34604,7 +34616,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -34732,7 +34744,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -34768,7 +34780,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -34798,7 +34810,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -34926,7 +34938,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -34962,7 +34974,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -34992,7 +35004,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -35119,7 +35131,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -35155,7 +35167,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -35185,7 +35197,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -35312,7 +35324,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -35348,7 +35360,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -35378,7 +35390,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -35505,7 +35517,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -35541,7 +35553,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -35571,7 +35583,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -35698,7 +35710,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -35734,7 +35746,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -35764,7 +35776,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -35890,7 +35902,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -35926,7 +35938,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -35956,7 +35968,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -36082,7 +36094,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -36118,7 +36130,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -36148,7 +36160,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -36274,7 +36286,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -36310,7 +36322,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -36340,7 +36352,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -36466,7 +36478,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -36502,7 +36514,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -36532,7 +36544,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -36657,7 +36669,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -36693,7 +36705,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -36723,7 +36735,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -36848,7 +36860,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -36884,7 +36896,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -36914,7 +36926,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -37039,7 +37051,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -37075,7 +37087,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -37105,7 +37117,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -37230,7 +37242,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -37266,7 +37278,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -37296,7 +37308,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -37421,7 +37433,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -37457,7 +37469,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -37487,7 +37499,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -37612,7 +37624,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -37648,7 +37660,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -37678,7 +37690,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -37802,7 +37814,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -37838,7 +37850,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -37868,7 +37880,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -37992,7 +38004,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -38028,7 +38040,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -38058,7 +38070,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -38181,7 +38193,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -38217,7 +38229,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -38247,7 +38259,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -38370,7 +38382,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -38406,7 +38418,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -38436,7 +38448,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -38559,7 +38571,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -38595,7 +38607,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -38625,7 +38637,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -38748,7 +38760,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -38784,7 +38796,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -38814,7 +38826,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -38937,7 +38949,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -38973,7 +38985,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -39003,7 +39015,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -39126,7 +39138,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -39162,7 +39174,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -39192,7 +39204,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -39315,7 +39327,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -39351,7 +39363,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -39381,7 +39393,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -39503,7 +39515,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -39539,7 +39551,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -39569,7 +39581,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -39691,7 +39703,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -39727,7 +39739,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -39757,7 +39769,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -39879,7 +39891,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -39915,7 +39927,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -39945,7 +39957,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -40067,7 +40079,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -40103,7 +40115,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -40133,7 +40145,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -40254,7 +40266,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -40290,7 +40302,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -40320,7 +40332,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -40441,7 +40453,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -40477,7 +40489,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -40507,7 +40519,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -40627,7 +40639,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -40663,7 +40675,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -40693,7 +40705,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -40813,7 +40825,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -40849,7 +40861,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -40879,7 +40891,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -40998,7 +41010,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -41034,7 +41046,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -41064,7 +41076,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -41183,7 +41195,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -41219,7 +41231,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -41249,7 +41261,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -41368,7 +41380,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -41404,7 +41416,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -41434,7 +41446,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -41553,7 +41565,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -41589,7 +41601,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -41619,7 +41631,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -41738,7 +41750,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -41774,7 +41786,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -41804,7 +41816,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -41923,7 +41935,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -41959,7 +41971,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -41989,7 +42001,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -42107,7 +42119,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -42143,7 +42155,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -42173,7 +42185,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -42291,7 +42303,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -42327,7 +42339,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -42357,7 +42369,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -42475,7 +42487,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -42511,7 +42523,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -42541,7 +42553,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -42659,7 +42671,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -42695,7 +42707,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -42725,7 +42737,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -42843,7 +42855,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -42879,7 +42891,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -42909,7 +42921,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -43027,7 +43039,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -43063,7 +43075,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -43093,7 +43105,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -43211,7 +43223,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -43247,7 +43259,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -43277,7 +43289,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -43395,7 +43407,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -43431,7 +43443,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -43461,7 +43473,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -43579,7 +43591,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -43615,7 +43627,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -43645,7 +43657,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -43763,7 +43775,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -43799,7 +43811,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -43829,7 +43841,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -43947,7 +43959,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -43983,7 +43995,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -44013,7 +44025,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -44131,7 +44143,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -44167,7 +44179,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -44197,7 +44209,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -44315,7 +44327,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -44351,7 +44363,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -44381,7 +44393,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -44499,7 +44511,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -44535,7 +44547,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -44565,7 +44577,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -44683,7 +44695,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -44719,7 +44731,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -44749,7 +44761,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -44866,7 +44878,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **session**: Synchronize session configuration state
 
 ### Added
-- **pre-commit**: Run mypy separately for app and tests
+- **pre-commit**: Run pyright separately for app and tests
 - **update**: Continued type annotation work.
 - Complete comprehensive type annotations audit - third wave implementation
 - **type-annotations**: add comprehensive type hints to all agricultural equipment and services modules
@@ -44902,7 +44914,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -44932,7 +44944,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **services**: Convert AgriculturalAIIntegration to async and update static analysis
@@ -45082,7 +45094,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -45112,7 +45124,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **project**: Move doc_update_reminder.sh to project tools and update references
@@ -45260,7 +45272,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -45290,7 +45302,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **project**: Move doc_update_reminder.sh to project tools and update references
@@ -45437,7 +45449,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -45467,7 +45479,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **project**: Move doc_update_reminder.sh to project tools and update references
@@ -45610,7 +45622,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -45640,7 +45652,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **project**: Move doc_update_reminder.sh to project tools and update references
@@ -45778,7 +45790,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -45808,7 +45820,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **project**: Move doc_update_reminder.sh to project tools and update references
@@ -45946,7 +45958,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhance session management and internal tooling
 - Add todos-restore script and update todos manager
 - Ensure unique TodoWrite goal IDs and strict single-concern descriptions
-- Resolve mypy errors in critical tractor data handlers and fix todos_manager KeyError
+- Resolve pyright errors in critical tractor data handlers and fix todos_manager KeyError
 - Re-initialize ToDoWrite system and complete initial task
 - Ignore .claude/todos.json in .gitignore
 - Configure Git LFS for .claude/todos.json
@@ -45976,7 +45988,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **gemini**: Add config to specify GEMINI.md location
 - **cloud**: Implement initial cloud integration placeholders
 - **equipment**: Add tests and logging to CanBusManager
-- Create fulltest script and fix mypy errors
+- Create fulltest script and fix pyright errors
 
 ### Changed
 - **project**: Move doc_update_reminder.sh to project tools and update references

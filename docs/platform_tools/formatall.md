@@ -17,7 +17,7 @@ To apply linters and formatters across the entire project, execute the `formatal
 *   **Comprehensive Code Formatting**: Utilizes `black` to automatically reformat Python code to adhere to a consistent style.
 *   **Linting**: Employs `ruff` to identify and report various code quality issues, potential bugs, and stylistic errors.
 *   **Import Sorting**: Uses `isort` to automatically sort and format import statements, improving readability and consistency.
-*   **Type Checking**: Integrates `mypy` for static type checking, helping to catch type-related errors early in the development cycle.
+*   **Type Checking**: Integrates `pyright` for static type checking, helping to catch type-related errors early in the development cycle.
 *   **Pre-commit Integration**: Designed to be run manually or integrated into pre-commit hooks to enforce code quality before commits are made.
 
 ## Agricultural Context

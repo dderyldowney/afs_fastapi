@@ -328,7 +328,7 @@
             },
             {
               "id": "task-011",
-              "description": "Document code formatting and linting (e.g., `black`, `ruff`, `isort`, `mypy`).",
+              "description": "Document code formatting and linting (e.g., `black`, `ruff`, `isort`, `pyright`).",
               "status": "completed"
             },
             {

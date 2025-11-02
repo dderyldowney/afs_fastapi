@@ -6,7 +6,7 @@
 ---
 
 ## Overview
-This priority successfully migrated the TodoWrite system's SQLAlchemy models and manager to full SQLAlchemy 2.0 API compliance with comprehensive type safety, resolving all deprecated API patterns and mypy type-checking errors.
+This priority successfully migrated the TodoWrite system's SQLAlchemy models and manager to full SQLAlchemy 2.0 API compliance with comprehensive type safety, resolving all deprecated API patterns and pyright type-checking errors.
 
 ---
 
@@ -32,7 +32,7 @@ Added explicit `str()` casting at ORM-to-domain model boundary conversion:
 - **Line 259**: `work_type=str(db_node.work_type or "")` - Ensures Column[str] → str conversion
 - **Line 264**: `ac_ref=str(db_node.command.ac_ref or "")` - Ensures Command Column[str] → str conversion
 
-**Benefit**: Explicit boundary enforcement between SQLAlchemy ORM layer and domain model layer, improving type clarity and enabling mypy strict mode validation.
+**Benefit**: Explicit boundary enforcement between SQLAlchemy ORM layer and domain model layer, improving type clarity and enabling pyright strict mode validation.
 
 ### 3. **afs_fastapi/todos/db/repository.py** - Column Assignment Type Safety
 Fixed type-safety issues when assigning to ORM Column attributes:
@@ -48,11 +48,11 @@ Fixed type-safety issues when assigning to ORM Column attributes:
 
 ## Validation Results
 
-### ✅ Type Checking (mypy)
+### ✅ Type Checking (pyright)
 ```
 Success: no issues found in 12 source files (afs_fastapi/todos/)
 ```
-- All models, manager, repository, and utilities pass strict mypy validation
+- All models, manager, repository, and utilities pass strict pyright validation
 - No type errors or warnings
 
 ### ✅ Testing
@@ -129,7 +129,7 @@ Priority 2.2 is complete. Recommended next actions:
 **Validation commands used:**
 ```bash
 # Type checking
-python -m mypy afs_fastapi/todos/
+python -m pyright afs_fastapi/todos/
 
 # Testing
 python -m pytest tests/unit/test_todos/ tests/test_todowrite_flexible_hierarchy.py -v

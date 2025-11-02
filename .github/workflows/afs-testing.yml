@@ -36,9 +36,9 @@ jobs:
     - name: Check formatting with black
       run: |
         black --check .
-    - name: Type check with mypy
+    - name: Type check with pyright
       run: |
-        mypy .
+        pyright .
     - name: Test with pytest
       run: |
         pytest -v

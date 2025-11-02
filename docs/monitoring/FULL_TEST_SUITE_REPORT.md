@@ -65,7 +65,7 @@ Root Level Tests (9 tests):
 ```bash
 # All commands executed with zero warnings
 ruff check .                    # ✅ All checks passed!
-mypy afs_fastapi/              # ✅ Success: no issues found
+pyright afs_fastapi/              # ✅ Success: no issues found
 black --check .                # ✅ 55 files would be left unchanged
 isort --check-only .           # ✅ Skipped 3 files (clean)
 ```

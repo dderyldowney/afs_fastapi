@@ -47,7 +47,7 @@ class FieldAllocationCRDT:
     - CRDT properties: convergence, commutativity, associativity, idempotence.
     - Conflict resolution: vector clock → LWW timestamp → lexicographic owner_id.
     - Each section stores: (owner_id, vector_clock, lww_timestamp).
-    - See tests in ``tests/unit/services/test_field_allocation_crdt.py``.
+    - See tests in ``tests/services/test_field_allocation_crdt.py``.
     """
 
     def __init__(self, field_id: str, tractor_ids: list[str] | None = None) -> None:

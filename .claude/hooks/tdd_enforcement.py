@@ -106,7 +106,7 @@ class TDDEnforcementValidator:
             Tuple of (exists, expected_test_path)
         """
         # Convert source path to expected test path
-        # afs_fastapi/services/synchronization.py -> tests/unit/services/test_synchronization.py
+        # afs_fastapi/services/synchronization.py -> tests/services/test_synchronization.py
 
         if source_file.startswith("afs_fastapi/"):
             relative_path = source_file[len("afs_fastapi/") :]
@@ -118,7 +118,7 @@ class TDDEnforcementValidator:
 
             test_file = f"test_{module_file}"
             test_path = (
-                f"tests/unit/{module_dir}/{test_file}" if module_dir else f"tests/unit/{test_file}"
+                f"tests/{module_dir}/{test_file}" if module_dir else f"tests/{test_file}"
             )
 
             return os.path.exists(test_path), test_path

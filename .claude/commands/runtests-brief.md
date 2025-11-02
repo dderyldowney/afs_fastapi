@@ -69,7 +69,7 @@ Compressed test execution command that provides essential pass/fail information 
 **Compatible Commands**:
 - `./bin/runtests` - Full test execution
 - `pytest` - Direct pytest execution
-- Quality tools: `ruff`, `mypy`, `black`, `isort`
+- Quality tools: `ruff`, `pyright`, `black`, `isort`
 
 ## Error Handling
 

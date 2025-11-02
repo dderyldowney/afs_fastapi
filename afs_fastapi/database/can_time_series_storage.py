@@ -142,7 +142,7 @@ class CANTimeSeriesStorage:
                 expire_on_commit=False,
             )
 
-            assert self._sync_engine is not None  # Assert for mypy
+            assert self._sync_engine is not None  # Assert for pyright
             # Initialize database schema
             await self._initialize_schema()
 
@@ -498,7 +498,7 @@ class CANTimeSeriesStorage:
         AsyncSession
             Database session
         """
-        assert self._async_session_factory is not None  # Assert for mypy
+        assert self._async_session_factory is not None  # Assert for pyright
         async with self._async_session_factory() as session:
             try:
                 yield session  # type: ignore
@@ -523,7 +523,7 @@ class CANTimeSeriesStorage:
     async def _initialize_schema(self) -> None:
         """Initialize database schema and tables."""
         if self._sync_engine:
-            assert self._sync_engine is not None  # Assert for mypy
+            assert self._sync_engine is not None  # Assert for pyright
             with self._sync_engine.begin() as conn:
                 TimeSeriesBase.metadata.create_all(conn)
 

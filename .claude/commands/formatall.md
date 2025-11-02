@@ -21,7 +21,7 @@ isort . --quiet
 ruff check . --fix --quiet
 
 # Validate types with MyPy
-mypy . --ignore-missing-imports --no-strict-optional
+pyright . --ignore-missing-imports --no-strict-optional
 ```
 
 ## When to Use

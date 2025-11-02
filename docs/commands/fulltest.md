@@ -12,7 +12,7 @@ python -m pytest tests/ -v --tb=short
 
 # 2. Run code quality checks in parallel
 ruff check .
-mypy afs_fastapi/
+pyright afs_fastapi/
 black --check .
 isort --check-only .
 
@@ -109,7 +109,7 @@ python -m pytest tests/ -v --tb=short
 ```bash
 # Execute all quality tools
 ruff check .                    # Linting
-mypy afs_fastapi/              # Type checking
+pyright afs_fastapi/              # Type checking
 black --check .                # Formatting
 isort --check-only .           # Import sorting
 # Expected: Zero warnings across all tools

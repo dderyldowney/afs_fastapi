@@ -51,7 +51,7 @@ async def test_basic_async_operations():
         from afs_fastapi.database.agricultural_schemas_async import AsyncDatabaseManager
 
         # Test initialization
-        manager = AsyncDatabaseManager("sqlite+aiosqlite:///:memory:")
+        AsyncDatabaseManager("sqlite+aiosqlite:///:memory:")
         logger.info("✅ Async database manager created")
 
         # Test connection (this won't actually work with aiosqlite in this context)

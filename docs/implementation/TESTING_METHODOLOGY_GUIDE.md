@@ -29,7 +29,7 @@ python -m pytest tests/ -v --tb=short
 **2. Validate Code Quality** (Execute in parallel):
 ```bash
 ruff check .                    # Linting validation
-mypy afs_fastapi/              # Type checking
+pyright afs_fastapi/              # Type checking
 black --check .                # Code formatting
 isort --check-only .           # Import organization
 # Expected: Zero warnings across all tools

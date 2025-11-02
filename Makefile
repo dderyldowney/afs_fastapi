@@ -7,7 +7,7 @@ help:
 	@echo "  test    - Run pytest (-q)"
 	@echo "  lint    - Ruff lint"
 	@echo "  format  - Black + isort"
-	@echo "  type    - mypy type-check"
+	@echo "  type    - pyright type-check"
 	@echo "  check   - lint + type + test"
 	@echo "  precommit-install - install and enable pre-commit hooks"
 	@echo "  precommit-run     - run pre-commit on all files"
@@ -27,12 +27,12 @@ format:
 	black . && isort .
 
 type:
-	mypy .
+	pyright .
 
 check: install-dev lint type test
 
 clean:
-	rm -rf .pytest_cache .mypy_cache **/__pycache__
+	rm -rf .pytest_cache .pyright_cache **/__pycache__
 
 precommit-install:
 	python -m pip install pre-commit && pre-commit install

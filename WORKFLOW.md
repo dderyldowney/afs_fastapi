@@ -27,7 +27,7 @@
 
 ### Example TDD Implementation: Vector Clock
 
-**tests/unit/services/test_vector_clock.py** demonstrates complete Red-Green-Refactor cycle:
+**tests/services/test_vector_clock.py** demonstrates complete Red-Green-Refactor cycle:
 - **11 comprehensive tests** covering distributed systems patterns
 - **Performance requirements** (sub-millisecond operations for real-time coordination)
 - **Agricultural domain testing** (multi-tractor field operations, ISOBUS compliance)
@@ -339,15 +339,15 @@ python -m pytest tests/features/ -v
 # 28 passed in 0.82s
 
 # Equipment unit tests - Tractor components
-python -m pytest tests/unit/equipment/ -v
+python -m pytest tests/equipment/ -v
 # 54 passed in 0.32s
 
 # Monitoring unit tests - Environmental sensors
-python -m pytest tests/unit/monitoring/ -v
+python -m pytest tests/monitoring/ -v
 # 10 passed in 0.27s
 
 # Infrastructure tests - API and stations
-python -m pytest tests/unit/api/ tests/unit/stations/ -v
+python -m pytest tests/api/ tests/library/ -v
 # 17 passed in 0.74s
 
 # Root-level tests - Edge cases
@@ -363,7 +363,7 @@ ruff check afs_fastapi/ tests/
 # All checks passed!
 
 # Type checking
-mypy afs_fastapi/
+pyright afs_fastapi/
 # Success: no issues found in 17 source files
 
 # Code formatting

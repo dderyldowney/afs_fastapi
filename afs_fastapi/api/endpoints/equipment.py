@@ -373,7 +373,7 @@ async def list_equipment(
             filtered_equipment = [eq for eq in filtered_equipment if eq["status"] == status_filter]
 
         # Apply pagination
-        total_items = len(filtered_equipment)
+        len(filtered_equipment)
         start_idx = (page - 1) * page_size
         end_idx = start_idx + page_size
         paginated_equipment = filtered_equipment[start_idx:end_idx]

@@ -185,7 +185,7 @@ class TestAgriculturalOperationMode:
             (AgriculturalOperationMode.EMERGENCY, AgriculturalOperationMode.IDLE),
         ]
 
-        for from_mode, to_mode in valid_transitions:
+        for _from_mode, to_mode in valid_transitions:
             assert to_mode.value in [
                 "idle",
                 "preparing",
@@ -324,7 +324,7 @@ class TestAgriculturalProtocolHandler:
             timestamp=time.time(),
         )
 
-        result = await handler.process_agricultural_message(emergency_message)
+        await handler.process_agricultural_message(emergency_message)
 
         # Should transition to emergency mode
         assert handler.operation_mode == AgriculturalOperationMode.EMERGENCY
@@ -360,7 +360,7 @@ class TestAgriculturalProtocolHandler:
             timestamp=time.time(),
         )
 
-        result = await handler.process_agricultural_message(gps_message)
+        await handler.process_agricultural_message(gps_message)
 
         # Should update position data
         assert "latitude" in handler.position_data
@@ -395,7 +395,7 @@ class TestAgriculturalProtocolHandler:
             timestamp=time.time(),
         )
 
-        result = await handler.process_agricultural_message(fuel_message)
+        await handler.process_agricultural_message(fuel_message)
 
         # Should update fuel status
         assert "fuel_level_percent" in handler.safety_status
@@ -789,7 +789,7 @@ class TestIntegrationScenarios:
         ]
 
         results = []
-        for address, arbitration_id, data in operations:
+        for _address, arbitration_id, data in operations:
             message = can.Message(
                 arbitration_id=arbitration_id,
                 data=data,
@@ -884,7 +884,7 @@ class TestIntegrationScenarios:
             timestamp=time.time(),
         )
 
-        result = await handler.process_agricultural_message(gps_message)
+        await handler.process_agricultural_message(gps_message)
 
         # Should update position data and field operations
         assert "latitude" in handler.position_data

@@ -178,7 +178,7 @@ v0.1.3a0   (develop branch - start next development)
 ## Development Tools
 
 - **Testing**: pytest with asyncio support (see `WORKFLOW.md` for complete test architecture)
-- **Type Checking**: mypy (strict mode) and pyright
+- **Type Checking**: pyright (strict mode) and pyright
 - **Code Formatting**: black and ruff
 - **Dependencies**: FastAPI, Pydantic v2, Uvicorn
 - **Python Version**: 3.12 (strict requirement)

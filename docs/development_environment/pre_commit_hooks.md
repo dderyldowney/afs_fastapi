@@ -6,7 +6,7 @@ Pre-commit hooks are a powerful mechanism to ensure code quality and consistency
 
 Pre-commit hooks serve several critical purposes:
 
-*   **Code Quality Enforcement**: Automatically run linters (e.g., `ruff`), formatters (e.g., `black`), and type checkers (e.g., `mypy`) to ensure all committed code adheres to predefined style guides and quality standards.
+*   **Code Quality Enforcement**: Automatically run linters (e.g., `ruff`), formatters (e.g., `black`), and type checkers (e.g., `pyright`) to ensure all committed code adheres to predefined style guides and quality standards.
 *   **Early Bug Detection**: Catch common errors, syntax issues, and potential bugs before they are even committed to the repository, reducing the likelihood of introducing defects.
 *   **Consistency**: Maintain a consistent code style and structure across the entire codebase, which is crucial for collaborative development and long-term maintainability.
 *   **Reduced Review Overhead**: By automating basic code quality checks, code reviewers can focus on more complex logic and architectural concerns.
@@ -26,7 +26,7 @@ Currently, the project includes hooks for:
 *   **`ruff`**: A fast Python linter, used for checking code style and potential errors.
 *   **`black`**: An uncompromising Python code formatter, ensuring consistent code style.
 *   **`isort`**: A Python utility to sort imports alphabetically and automatically separate them into sections and by type.
-*   **`mypy`**: A static type checker for Python, used to catch type-related errors.
+*   **`pyright`**: A static type checker for Python, used to catch type-related errors.
 *   **`tdd-enforcement`**: A custom hook to enforce Test-Driven Development policies.
 *   **`safety-validation`**: A custom hook for validating adherence to safety standards (e.g., ISO 18497 alignment).
 

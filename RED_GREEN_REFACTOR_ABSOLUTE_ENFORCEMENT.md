@@ -38,7 +38,7 @@ pytest tests/unit/component/test_new_feature.py::test_specific_behavior -v
 # STEP 3: Improve code while maintaining tests
 pytest tests/unit/component/ -v  # All tests must remain PASSED
 ruff check afs_fastapi/component/ --select=ALL  # Zero warnings
-mypy afs_fastapi/component/ --strict  # Complete type safety
+pyright afs_fastapi/component/ --strict  # Complete type safety
 ```
 
 **❌ FORBIDDEN REFACTOR PHASE VIOLATIONS**:

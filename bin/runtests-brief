@@ -97,8 +97,8 @@ if command -v ruff >/dev/null 2>&1; then
 fi
 
 # Type checking
-if command -v mypy >/dev/null 2>&1; then
-    TYPE_ERRORS=$(mypy . 2>/dev/null | grep -c "error" 2>/dev/null || echo "0")
+if command -v pyright >/dev/null 2>&1; then
+    TYPE_ERRORS=$(pyright . 2>/dev/null | grep -c "error" 2>/dev/null || echo "0")
     TYPE_ERRORS=$(echo "$TYPE_ERRORS" | tr -d '\n' | sed 's/[^0-9]//g')
     TYPE_ERRORS=${TYPE_ERRORS:-0}
     if [ "$TYPE_ERRORS" -eq 0 ]; then

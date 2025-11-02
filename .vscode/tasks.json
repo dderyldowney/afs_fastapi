@@ -27,9 +27,9 @@
       "problemMatcher": []
     },
     {
-      "label": "Type-check: mypy",
+      "label": "Type-check: pyright",
       "type": "shell",
-      "command": "mypy .",
+      "command": "pyright .",
       "problemMatcher": []
     }
     ,

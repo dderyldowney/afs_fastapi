@@ -195,7 +195,7 @@ def main():  # MISSING RETURN TYPE
 **Fix Required**:
 - Add complete type annotations to all functions
 - Update function signatures to include return types
-- Run `mypy` to validate compliance
+- Run `pyright` to validate compliance
 
 ---
 

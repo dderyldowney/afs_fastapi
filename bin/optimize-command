@@ -29,7 +29,7 @@ Examples:
   ./bin/optimize-command git status
 
   # Optimize test results
-  ./bin/optimize-command pytest tests/unit/ -v
+  ./bin/optimize-command pytest tests/ -v
 
   # Optimize strategic status with specific optimization
   ./bin/optimize-command --type agricultural ./bin/strategic-status

@@ -25,7 +25,7 @@ def main() -> None:
         print("  • Test suite execution (pytest)")
         print("  • Code formatting (Black)")
         print("  • Linting checks (Ruff)")
-        print("  • Type validation (MyPy)")
+        print("  • Type validation (Pyright)")
         print("  • Import sorting (isort)")
         print("  • Git status verification")
         print()
@@ -46,7 +46,7 @@ def main() -> None:
         # ("pytest", "Running test suite..."), # Temporarily disabled due to timeout
         ("python -m black --check .", "Checking code formatting..."),
         ("python -m ruff check .", "Running linting checks..."),
-        # ("python -m mypy afs_fastapi tests", "Validating type annotations..."), # Temporarily disabled as requested
+        # ("pyright afs_fastapi tests", "Validating type annotations..."), # Temporarily disabled as requested
         ("python -m isort --check .", "Checking import sorting..."),
     ]
 

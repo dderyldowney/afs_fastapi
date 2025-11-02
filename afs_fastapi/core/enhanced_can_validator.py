@@ -236,7 +236,7 @@ class EnhancedCANFrameValidator:
 
             def _extract_pgn(self, can_id: int) -> int:
                 # Extract PGN from 29-bit CAN ID
-                priority = (can_id >> 26) & 0x07
+                (can_id >> 26) & 0x07
                 data_page = (can_id >> 24) & 0x01
                 pdu_format = (can_id >> 16) & 0xFF
                 pdu_specific = (can_id >> 8) & 0xFF
@@ -279,7 +279,7 @@ class EnhancedCANFrameValidator:
         data_page = (can_id >> 24) & 0x01
         pdu_format = (can_id >> 16) & 0xFF
         pdu_specific = (can_id >> 8) & 0xFF
-        source_address = can_id & 0xFF
+        can_id & 0xFF
 
         # Validate priority ranges for agricultural operations
         if priority > 7:

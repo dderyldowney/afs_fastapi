@@ -43,11 +43,11 @@ Tests
   - pytest -q
   - or python -m pytest tests/ -v --tb=short
 - Run a directory:
-  - python -m pytest tests/unit/equipment -v
+  - python -m pytest tests/equipment -v
 - Run a single file:
-  - python -m pytest tests/unit/api/test_main.py -v
+  - python -m pytest tests/api/test_main.py -v
 - Run a single test:
-  - python -m pytest tests/unit/api/test_main.py::test_read_root -q
+  - python -m pytest tests/api/test_main.py::test_read_root -q
 - Filter by keyword:
   - python -m pytest -k "vector_clock" -q
 
@@ -55,19 +55,19 @@ Lint, format, and types
 - Lint: ruff check .
 - Format (check): black --check . && isort --check-only .
 - Format (apply): black . && isort .
-- Type-check: mypy .
+- Type-check: pyright .
 - Make targets: make lint, make format, make type, make test, make check
 
 Pre-commit hooks (local enforcement)
 - Install hooks: make precommit-install
 - Run hooks on all files: make precommit-run
 - These hooks enforce:
-  - Code quality: Ruff, Black (check), isort (check-only), MyPy
+  - Code quality: Ruff, Black (check), isort (check-only), Pyright
   - Mandatory TDD and safety validators from .claude/hooks/ (see CLAUDE.md and AGENTS.md)
 
 CI expectations (what must pass)
 - GitHub Actions run on Python 3.12 and execute:
-  - ruff check ., black --check ., isort --check-only ., mypy ., pytest -q
+  - ruff check ., black --check ., isort --check-only ., pyright ., pytest -q
   - TDD enforcement and Safety validation scripts (.claude/hooks/*)
 
 Big-picture architecture
@@ -99,7 +99,7 @@ Domain model and services (the core of “how it works”)
 
 Testing layout and patterns
 - Pytest configuration resides in pytest.ini (strict markers, modern import mode, asyncio fixture scope).
-- Tests are under tests/ with unit, integration, functional, features, and step_defs groupings. FastAPI endpoints are covered in tests/unit/api/test_main.py (via TestClient).
+- Tests are under tests/ with integration, functional, features, library, api, equipment, monitoring, protocols, safety, services, and cli groupings. FastAPI endpoints are covered in tests/api/test_main.py (via TestClient).
 - The repository emphasizes Test-First Development; pre-commit hooks and CI enforce TDD and safety checks.
 
 Rules and references for agents (important excerpts)

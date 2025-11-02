@@ -71,7 +71,7 @@ async def submit_soil_reading(
         validated_data = validate_agricultural_data(soil_request.readings)
 
         # Create soil monitor instance
-        soil_monitor = SoilMonitor(soil_request.sensor_id)
+        SoilMonitor(soil_request.sensor_id)
 
         # Validate soil-specific measurements
         moisture = validated_data.get("moisture_percent", 0)
@@ -236,7 +236,7 @@ async def get_soil_readings(
         filtered_readings.sort(key=lambda x: x.get(sort_key, ""), reverse=reverse_order)
 
         # Apply pagination
-        total_items = len(filtered_readings)
+        len(filtered_readings)
         start_idx = (query_params.page - 1) * query_params.page_size
         end_idx = start_idx + query_params.page_size
         paginated_readings = filtered_readings[start_idx:end_idx]
@@ -305,7 +305,7 @@ async def submit_water_reading(
         validated_data = validate_agricultural_data(water_request.readings)
 
         # Create water monitor instance
-        water_monitor = WaterMonitor(water_request.sensor_id)
+        WaterMonitor(water_request.sensor_id)
 
         # Validate water-specific measurements
         ph = validated_data.get("ph", 7.0)
@@ -482,7 +482,7 @@ async def get_water_readings(
         filtered_readings.sort(key=lambda x: x.get(sort_key, ""), reverse=reverse_order)
 
         # Apply pagination
-        total_items = len(filtered_readings)
+        len(filtered_readings)
         start_idx = (query_params.page - 1) * query_params.page_size
         end_idx = start_idx + query_params.page_size
         paginated_readings = filtered_readings[start_idx:end_idx]

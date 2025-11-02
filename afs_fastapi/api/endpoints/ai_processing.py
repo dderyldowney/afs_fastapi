@@ -623,7 +623,7 @@ def _validate_agricultural_context(context_data: dict[str, Any]) -> None:
     # Validate operation type
     if "operation_type" in context_data:
         try:
-            operation_type = OperationType(context_data["operation_type"])
+            OperationType(context_data["operation_type"])
         except ValueError:
             raise AgriculturalValidationError(
                 f"Invalid operation type: {context_data['operation_type']}",

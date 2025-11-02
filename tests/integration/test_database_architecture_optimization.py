@@ -425,11 +425,6 @@ class TestDatabaseArchitectureOptimization:
     ) -> None:
         """Test connection pool recovery capabilities."""
         # Get initial health status
-        initial_status = (
-            optimized_connection_pool._health_monitor._health_status
-            if optimized_connection_pool._health_monitor
-            else None
-        )
 
         # Execute health check
         health_result = await optimized_connection_pool.execute_health_check()
@@ -457,7 +452,7 @@ class TestDatabasePerformanceComparison:
         start_time = time.time()
 
         # Simulate multiple connection acquisitions
-        for i in range(10):
+        for _i in range(10):
             # This would be much faster with connection pooling
             time.sleep(0.001)  # Simulate connection acquisition
 
@@ -465,7 +460,7 @@ class TestDatabasePerformanceComparison:
 
         # Simulate direct connections (slower)
         start_time = time.time()
-        for i in range(10):
+        for _i in range(10):
             time.sleep(0.01)  # Simulate slower direct connection
 
         direct_time = time.time() - start_time

@@ -146,13 +146,13 @@ This project enforces strict type safety to ensure the reliability and maintaina
 
 - All function and method signatures MUST include type hints for all arguments and the return value.
 - All variables MUST be annotated with their type when they are defined.
-- The `mypy` pre-commit hook is enabled and MUST pass for all commits.
+- The `pyright` pre-commit hook is enabled and MUST pass for all commits.
 - Agents MUST NOT generate any code or tests without proper type hinting and annotation.
 
 ## Configuration
 
 - Python: `>=3.12,<3.13` (see `pyproject.toml`)
-- **Quality gates**: Ruff, Black, MyPy, isort; zero warnings expected (195 tests maintained)
+- **Quality gates**: Ruff, Black, Pyright, isort; zero warnings expected (195 tests maintained)
 - **TDD enforcement hooks** (required):
   - `.claude/hooks/tdd_enforcement.py` - Validates Test-First Development compliance
   - `.claude/hooks/safety_validation.py` - Ensures agricultural safety standards compliance
@@ -176,7 +176,7 @@ This project enforces strict type safety to ensure the reliability and maintaina
 ## Dependencies
 
 - Runtime: `fastapi`, `uvicorn[standard]`, `starlette`, `pydantic`
-- Dev/Test: `pytest`, `pytest-asyncio`, `httpx`, `mypy`, `ruff`, `black`, `isort`
+- Dev/Test: `pytest`, `pytest-asyncio`, `httpx`, `pyright`, `ruff`, `black`, `isort`
 - See `pyproject.toml` for pinned versions and scripts
 
 ## Examples
@@ -187,7 +187,7 @@ This project enforces strict type safety to ensure the reliability and maintaina
   3) **GREEN**: Implement minimal code in `afs_fastapi/` to satisfy test requirements
   4) Run `pytest` to confirm GREEN phase - test now passes
   5) **REFACTOR**: Enhance code quality while maintaining test coverage
-  6) Ensure all quality gates pass: `ruff`, `black`, `mypy`, `isort` (zero warnings)
+  6) Ensure all quality gates pass: `ruff`, `black`, `pyright`, `isort` (zero warnings)
   7) Pre-commit hooks validate TDD compliance and agricultural safety standards
 - **Git Commit Separation of Concerns** (enforced by pre-commit hooks):
   1) Each commit addresses exactly one concern: `feat`, `fix`, `docs`, `refactor`, `test`, `config`, `perf`, `security`
@@ -203,7 +203,7 @@ This project enforces strict type safety to ensure the reliability and maintaina
 - VS Code tasks (suggested):
   - Run API: command `python -m afs_fastapi` (uses env vars below)
   - Run tests: command `pytest -q`
-  - Linters/formatters: `ruff check . && black --check . && mypy .`
+  - Linters/formatters: `ruff check . && black --check . && pyright .`
 - Environment variables for running the API:
   - `AFS_API_HOST` (default `127.0.0.1`)
   - `AFS_API_PORT` (default `8000`)
@@ -213,7 +213,7 @@ This project enforces strict type safety to ensure the reliability and maintaina
   - Start API quickly: `AFS_API_RELOAD=1 python -m afs_fastapi`
   - Exercise OpenAPI docs: open `http://127.0.0.1:8000/docs`
   - Run focused tests: `pytest -q tests/services/test_*.py -k fleet`
-  - Type-check changed files: `git diff --name-only HEAD~1 | rg ".py$" | xargs -r mypy`
+  - Type-check changed files: `git diff --name-only HEAD~1 | rg ".py$" | xargs -r pyright`
   - Lint and format: `ruff check . && black . && isort .`
   - Pre-commit: `make precommit-install` then `make precommit-run`
   - Pytest config now in `pytest.ini` (kept minimal; mirrors previous pyproject settings)
@@ -229,7 +229,7 @@ This project enforces strict type safety to ensure the reliability and maintaina
 
 - **Config**: `.pre-commit-config.yaml` (local hooks; no network dependency)
 - **Enforced on every commit** (blocks non-compliant code):
-  - **Code quality**: Ruff (lint), Black (format check), isort (imports), MyPy (types)
+  - **Code quality**: Ruff (lint), Black (format check), isort (imports), Pyright (types)
   - **TDD enforcement**: `.claude/hooks/tdd_enforcement.py` - Validates Test-First Development
   - **Safety validation**: `.claude/hooks/safety_validation.py` - Ensures agricultural safety standards compliance
   - **Commit separation**: `.claude/hooks/commit_separation_enforcement.py` - Enforces single concern per commit
@@ -255,7 +255,7 @@ This project enforces strict type safety to ensure the reliability and maintaina
 ## Coding Conventions (Agricultural Robotics Standards)
 
 - **Naming**: Clear, conversational naming following PEP 8 with agricultural domain context
-- **Type safety**: Precise type hints; maintain mypy strict mode compliance (zero warnings)
+- **Type safety**: Precise type hints; maintain pyright strict mode compliance (zero warnings)
 - **Interface Contracts**: Utilize Python `Protocol` classes for defining clear and explicit interface contracts to enhance type safety, modularity, and maintainability across the codebase.
 - **Function design**: Compact, purposeful functions avoiding over-engineering
 - **Testing requirements**: Comprehensive tests with realistic agricultural scenarios and performance validation

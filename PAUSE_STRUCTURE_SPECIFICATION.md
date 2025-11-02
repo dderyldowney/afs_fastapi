@@ -112,7 +112,7 @@ This document defines the mandatory **Recommended Pause Structure for Session Op
 1. ✅ All tests passing: `pytest --tb=short`
 2. ✅ Code formatting: `black --check`
 3. ✅ Linting: `ruff check`
-4. ✅ Type checking: `mypy`
+4. ✅ Type checking: `pyright`
 5. ✅ Import sorting: `isort --check`
 6. ✅ Git status clean: `git status`
 

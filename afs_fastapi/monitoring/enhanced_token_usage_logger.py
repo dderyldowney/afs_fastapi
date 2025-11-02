@@ -104,9 +104,7 @@ class EnhancedTokenUsageLogger:
         engine = create_engine(database_url, echo=False, pool_size=5, pool_pre_ping=True)
 
         # Create session factory with connection pooling
-        SessionLocal = sessionmaker(
-            autocommit=False, autoflush=False, bind=engine, expire_on_commit=False
-        )
+        sessionmaker(autocommit=False, autoflush=False, bind=engine, expire_on_commit=False)
 
         # Create tables with optimized schema
         Base.metadata.create_all(bind=engine)

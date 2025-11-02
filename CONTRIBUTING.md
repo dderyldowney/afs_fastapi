@@ -47,7 +47,7 @@ Before opening a PR, please run through this comprehensive checklist:
 
 - **✅ Linting**: `ruff check .` (must show zero warnings)
 - **✅ Formatting**: `black --check .` and `ruff format --check .`
-- **✅ Type checking**: `mypy .` (or `pyright` if preferred)
+- **✅ Type checking**: `pyright .`
 - **✅ Performance**: Distributed systems components must meet sub-millisecond requirements
 
 ### Schema Management
@@ -125,7 +125,7 @@ Before opening a PR, please run through this comprehensive checklist:
 
 **Code Quality:**
 - **Zero warnings**: Maintain zero linting warnings across entire codebase
-- **Type safety**: Complete type annotations with mypy strict mode compliance
+- **Type safety**: Complete type annotations with pyright strict mode compliance
 - **Documentation**: Comprehensive docstrings with agricultural context
 
 ### Distributed Systems Contribution Requirements
@@ -179,7 +179,7 @@ python -m pytest tests/ -v
 # Check code quality (expect zero warnings)
 ruff check .
 black --check .
-mypy .
+pyright .
 
 # Test performance of distributed systems
 python -c "
@@ -199,7 +199,7 @@ python -m afs_fastapi
 
 **Example: Adding New Synchronization Component**
 
-1. **RED Phase** - Write failing test in `tests/unit/services/`:
+1. **RED Phase** - Write failing test in `tests/services/`:
 ```python
 def test_new_component_agricultural_behavior(self):
     """Test component handles multi-tractor field coordination."""
@@ -342,7 +342,7 @@ When submitting PRs:
 **Quality Gates:**
 - All 161 tests passing in ~3 seconds
 - Zero warnings from `ruff check .`
-- Type safety with `mypy .`
+- Type safety with `pyright .`
 - Performance validation for critical components
 
 Thank you for contributing to AFS FastAPI's mission of advancing **enterprise-grade agricultural robotics** through **Test-First development** and **distributed systems excellence**!

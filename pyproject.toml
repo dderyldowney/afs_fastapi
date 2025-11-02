@@ -48,7 +48,7 @@ dev = [
   "pytest-mock>=3.14",       # Mock utilities
   "pytest-timeout>=2.4",     # Test timeout management
   "httpx>=0.27",
-  "mypy>=1.10",
+  "pyright>=1.1",
   "ruff>=0.5",
   "black>=24.0",
   "markdown-it-py>=3.0",      # Tier 1: CommonMark-compliant markdown parser
@@ -99,38 +99,57 @@ exclude = '''
 )/ 
 '''
 
-[tool.mypy]
-python_version = "3.12"
-follow_imports = "normal"
-strict = true
-warn_unused_configs = true
-disallow_untyped_defs = true
-warn_return_any = true
-no_implicit_optional = true
-show_error_codes = true
-pretty = true
-# If you vendor optional libs, ignore their imports to keep signal clean:
-# ignore_missing_imports = true
-packages = ["afs_fastapi"]
-explicit_package_bases = true
-
-# SQLAlchemy specific configuration - disable strict checking for database tests
-[[tool.mypy.overrides]]
-module = "tests.unit.database.*"
-# Allow float literals for SQLAlchemy Float columns in tests
-disable_error_code = ["arg-type"]
-warn_return_any = false
-
 [tool.pyright]
-# Pyright can live in pyproject; this keeps VS Code/Pylance aligned.
+# Enhanced pyright configuration with maximum error detection
 typeCheckingMode = "strict"
 pythonVersion = "3.12"
-# Point to your venv so editors pick it up automatically (works well with .venv pattern)
+reportMissingImports = "error"
+reportMissingTypeStubs = "error"
+reportUndefinedVariable = "error"
+reportUnboundVariable = "error"
+reportUnusedImport = "error"
+reportUnusedClass = "error"
+reportUnusedFunction = "error"
+reportUnusedVariable = "error"
+reportDuplicateImport = "error"
+reportOptionalSubscript = "error"
+reportOptionalMemberAccess = "error"
+reportOptionalCall = "error"
+reportOptionalIterable = "error"
+reportOptionalContextManager = "error"
+reportUntypedFunctionDecorator = "error"
+reportUntypedClassDecorator = "error"
+reportUntypedBaseClass = "error"
+reportUntypedNamedTuple = "error"
+reportUnnecessaryComparison = "error"
+reportUnnecessaryContains = "error"
+reportUnnecessaryIsInstance = "error"
+reportUnnecessaryCast = "error"
+reportUnnecessaryEllipsis = "error"
+reportInvalidStubStatement = "error"
+reportIncompleteStub = "error"
+reportUnsupportedDunderAll = "error"
+reportPrivateImportUsage = "error"
+reportConstantRedefinition = "error"
+reportDeprecated = "error"
+reportUnreachable = "error"
+reportPossiblyUnboundVariable = "error"
+reportPossiblyUndefinedVariable = "error"
+reportMissingModuleSource = "error"
+reportInvalidTypeForm = "error"
+reportPropertyTypeMismatch = "error"
+reportUnsupportedOperandType = "error"
+reportArgumentType = "error"
+reportAssignmentType = "error"
+reportReturnType = "error"
+reportOperatorIssue = "error"
+reportUnnecessaryTypeIgnoreComment = "error"
+
+# Virtual environment configuration
 virtualenvPath = "."
 virtualenv = ".venv"
-reportMissingTypeStubs = "warning"
-reportUnknownMemberType = "warning"
 stubPath = "typings"
+
 
 [tool.coverage.run]
 branch = true

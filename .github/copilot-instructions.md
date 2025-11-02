@@ -42,7 +42,7 @@ Create a virtualenv, install deps, and run tests and type checks:
     source .venv/bin/activate
     pip install -r requirements.txt
     pytest tests/
-    mypy afs_fastapi/ tests/
+    pyright afs_fastapi/ tests/
     black --check afs_fastapi/ tests/
     flake8 afs_fastapi/ tests/
     isort --check-only afs_fastapi/ tests/

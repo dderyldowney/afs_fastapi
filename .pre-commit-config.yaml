@@ -11,16 +11,16 @@ repos:
         types: [python]
         files: ^(?!bin/|tmp_).*
         pass_filenames: false
-      - id: mypy-app
-        name: MyPy (app)
-        entry: mypy afs_fastapi/api/ afs_fastapi/core/ afs_fastapi/database/ afs_fastapi/monitoring/ afs_fastapi/equipment/ afs_fastapi/services/ afs_fastapi/models/ afs_fastapi/protocols/ afs_fastapi/safety/ afs_fastapi/scripts/ afs_fastapi/stations/
+      - id: pyright-app
+        name: Pyright (app)
+        entry: pyright afs_fastapi/api/ afs_fastapi/core/ afs_fastapi/database/ afs_fastapi/monitoring/ afs_fastapi/equipment/ afs_fastapi/services/ afs_fastapi/models/ afs_fastapi/protocols/ afs_fastapi/safety/ afs_fastapi/scripts/ afs_fastapi/stations/
         language: system
         types: [python]
         files: ^afs_fastapi/.*\.py$
         pass_filenames: false
-      - id: mypy-tests
-        name: MyPy (tests)
-        entry: mypy tests/
+      - id: pyright-tests
+        name: Pyright (tests)
+        entry: pyright tests/
         language: system
         types: [python]
         files: ^tests/.*\.py$

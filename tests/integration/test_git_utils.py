@@ -39,7 +39,7 @@ def test_git_working_directory_cleanliness(mock_subprocess_run):
         ".pytest_cache/",
         "__pycache__/",
         ".coverage",
-        ".mypy_cache/",
+        ".pyright_cache/",
         "*.pyc",
         "*.pyo",
         ".DS_Store",

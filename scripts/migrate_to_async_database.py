@@ -594,7 +594,7 @@ async def run_migration_tests() -> None:
         import pytest
 
         # Run async database tests
-        test_args = ["-v", "tests/unit/database/test_async_agricural_schemas.py"]
+        test_args = ["-v", "tests/database/test_async_agricural_schemas.py"]
         exit_code = pytest.main(test_args)
 
         if exit_code == 0:

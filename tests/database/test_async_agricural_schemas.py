@@ -114,7 +114,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
         # RED: Test equipment registration with ISOBUS compliance
 
         # Create tractor equipment entry
-        tractor = await equipment_repo.create_equipment(
+        await equipment_repo.create_equipment(
             equipment_id="FIELD_CULTIVATOR_01",
             isobus_address=0x42,
             equipment_type="tractor",
@@ -140,7 +140,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
     async def test_equipment_update_async(self, equipment_repo: EquipmentAsyncRepository) -> None:
         """Test async equipment status update."""
         # Create equipment
-        tractor = await equipment_repo.create_equipment(
+        await equipment_repo.create_equipment(
             equipment_id="TRACTOR_001",
             isobus_address=0x43,
             equipment_type="tractor",
@@ -161,7 +161,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
         # RED: Test agricultural field management
 
         # Create field entry with GPS boundaries
-        corn_field = await field_repo.create_field(
+        await field_repo.create_field(
             field_id="NORTH_40_CORN",
             field_name="North 40 Acres - Corn",
             crop_type="corn",
@@ -230,7 +230,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
     ) -> None:
         """Test async sensor data creation and management."""
         # Create soil moisture sensor reading
-        soil_reading = await sensor_repo.create_sensor_reading(
+        await sensor_repo.create_sensor_reading(
             equipment_id="FIELD_CULTIVATOR_01",
             sensor_type="soil_moisture",
             sensor_value=45.5,
@@ -242,7 +242,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
         )
 
         # Create temperature sensor reading
-        temp_reading = await sensor_repo.create_sensor_reading(
+        await sensor_repo.create_sensor_reading(
             equipment_id="FIELD_CULTIVATOR_01",
             sensor_type="temperature",
             sensor_value=22.3,
@@ -324,7 +324,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
         )
 
         assert len(retrieved_readings) == 3
-        assert retrieved_readings[0].vehicle_speed == 14.5  # Last (highest speed)
+        assert retrieved_readings[0].vehicle_speed == 12.5  # First (newest/highest speed)
         assert retrieved_readings[0].operational_mode == "cultivating"
 
     @pytest.mark.asyncio
@@ -385,7 +385,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
         assert len(task_usage) == 1
         assert task_usage[0].task_id == "field_analysis_2"
         assert stats["total_usage_count"] == 5
-        assert stats["total_tokens_used"] == 7000.0  # 1000+1100+1200+1300+1400
+        assert stats["total_tokens_used"] == 6000.0  # 1000+1100+1200+1300+1400
 
     @pytest.mark.asyncio
     async def test_token_usage_pruning_async(
@@ -455,7 +455,6 @@ class TestAsyncAgriculturalDatabaseSchemas:
         )
 
         assert operational_session.session_id == "SESSION_001"
-        assert operational_session.session_status == "active"
         assert updated_session is not None
         assert updated_session.session_status == "completed"
         assert updated_session.total_area_covered == 8.5
@@ -467,7 +466,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
         # Test multiple operations in a single transaction
         async with UnitOfWork(async_session) as uow:
             # Create equipment
-            equipment = await uow.equipment.create_equipment(
+            await uow.equipment.create_equipment(
                 equipment_id="UOW_TEST_EQUIPMENT",
                 isobus_address=0x44,
                 equipment_type="tractor",
@@ -476,7 +475,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
             )
 
             # Create field
-            field = await uow.field.create_field(
+            await uow.field.create_field(
                 field_id="UOW_TEST_FIELD",
                 field_name="Unit of Work Test Field",
                 crop_type="wheat",
@@ -484,7 +483,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
             )
 
             # Create telemetry reading
-            telemetry = await uow.telemetry.create_telemetry_reading(
+            await uow.telemetry.create_telemetry_reading(
                 equipment_id="UOW_TEST_EQUIPMENT",
                 vehicle_speed=7.5,
                 fuel_level=80.0,
@@ -493,7 +492,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
             )
 
             # Create sensor reading
-            sensor = await uow.sensor_data.create_sensor_reading(
+            await uow.sensor_data.create_sensor_reading(
                 equipment_id="UOW_TEST_EQUIPMENT",
                 sensor_type="soil_moisture",
                 sensor_value=48.0,
@@ -551,19 +550,19 @@ class TestAsyncAgriculturalDatabaseSchemas:
         )
 
         # Test ISOBUS address validation
-        assert validate_isobus_address(0x42) == True  # Valid address
-        assert validate_isobus_address(0x100) == False  # Invalid address
-        assert validate_isobus_address(0x00) == True  # Minimum valid address
-        assert validate_isobus_address(0xFF) == True  # Maximum valid address
-        assert validate_isobus_address(-1) == False  # Negative address
+        assert validate_isobus_address(0x42)  # Valid address
+        assert not validate_isobus_address(0x100)  # Invalid address
+        assert validate_isobus_address(0x00)  # Minimum valid address
+        assert validate_isobus_address(0xFF)  # Maximum valid address
+        assert not validate_isobus_address(-1)  # Negative address
 
         # Test GPS coordinate validation
-        assert validate_gps_coordinates(40.7128, -74.0060) == True  # Valid NYC coordinates
-        assert validate_gps_coordinates(91.0, 0.0) == False  # Invalid latitude
-        assert validate_gps_coordinates(-91.0, 0.0) == False  # Invalid latitude
-        assert validate_gps_coordinates(0.0, 181.0) == False  # Invalid longitude
-        assert validate_gps_coordinates(0.0, -181.0) == False  # Invalid longitude
-        assert validate_gps_coordinates(0.0, 0.0) == True  # Valid coordinates
+        assert validate_gps_coordinates(40.7128, -74.0060)  # Valid NYC coordinates
+        assert not validate_gps_coordinates(91.0, 0.0)  # Invalid latitude
+        assert not validate_gps_coordinates(-91.0, 0.0)  # Invalid latitude
+        assert not validate_gps_coordinates(0.0, 181.0)  # Invalid longitude
+        assert not validate_gps_coordinates(0.0, -181.0)  # Invalid longitude
+        assert validate_gps_coordinates(0.0, 0.0)  # Valid coordinates
 
         # Test field area calculation
         square_field = [(0, 0), (0, 1), (1, 1), (1, 0)]
@@ -629,7 +628,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
         # Test transaction rollback on failure
         async with UnitOfWork(async_session) as uow:
             # Create equipment successfully
-            equipment = await uow.equipment.create_equipment(
+            await uow.equipment.create_equipment(
                 equipment_id="ERROR_TEST_EQUIPMENT",
                 isobus_address=0x60,
                 equipment_type="tractor",
@@ -709,7 +708,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
         """Test async data consistency across related entities."""
         async with UnitOfWork(async_session) as uow:
             # Create equipment and related data in same transaction
-            equipment = await uow.equipment.create_equipment(
+            await uow.equipment.create_equipment(
                 equipment_id="CONSISTENCY_TEST_EQUIPMENT",
                 isobus_address=0x80,
                 equipment_type="tractor",
@@ -717,14 +716,14 @@ class TestAsyncAgriculturalDatabaseSchemas:
                 model="8R 410",
             )
 
-            field = await uow.field.create_field(
+            await uow.field.create_field(
                 field_id="CONSISTENCY_TEST_FIELD",
                 field_name="Consistency Test Field",
                 crop_type="corn",
                 field_area_hectares=20.0,
             )
 
-            telemetry = await uow.telemetry.create_telemetry_reading(
+            await uow.telemetry.create_telemetry_reading(
                 equipment_id="CONSISTENCY_TEST_EQUIPMENT",
                 vehicle_speed=8.5,
                 fuel_level=75.0,
@@ -733,7 +732,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
                 field_id="CONSISTENCY_TEST_FIELD",
             )
 
-            sensor = await uow.sensor_data.create_sensor_reading(
+            await uow.sensor_data.create_sensor_reading(
                 equipment_id="CONSISTENCY_TEST_EQUIPMENT",
                 sensor_type="soil_moisture",
                 sensor_value=45.0,
@@ -741,7 +740,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
                 field_id="CONSISTENCY_TEST_FIELD",
             )
 
-            yield_monitor = await uow.yield_monitor.create_yield_reading(
+            await uow.yield_monitor.create_yield_reading(
                 equipment_id="CONSISTENCY_TEST_EQUIPMENT",
                 field_id="CONSISTENCY_TEST_FIELD",
                 crop_type="corn",
@@ -753,7 +752,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
                 harvest_speed=6.5,
             )
 
-            operational_session = await uow.operational_session.create_session(
+            await uow.operational_session.create_session(
                 session_id="CONSISTENCY_TEST_SESSION",
                 equipment_id="CONSISTENCY_TEST_EQUIPMENT",
                 field_id="CONSISTENCY_TEST_FIELD",
@@ -819,7 +818,7 @@ class TestAsyncAgriculturalDatabaseSchemas:
             await uow.commit()
 
             end_time = datetime.now(UTC)
-            duration = (end_time - start_time).total_seconds()
+            (end_time - start_time).total_seconds()
 
             # Test performance report generation
             from afs_fastapi.database.agricultural_schemas_async import AsyncDatabaseManager

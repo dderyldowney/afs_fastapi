@@ -24,7 +24,7 @@
 
 ```bash
 # Create failing test first
-pytest tests/unit/services/test_vector_clock.py::TestVectorClock::test_increment_operation -v
+pytest tests/services/test_vector_clock.py::TestVectorClock::test_increment_operation -v
 # Expected: FAILED (test file doesn't exist yet)
 ```
 
@@ -32,7 +32,7 @@ pytest tests/unit/services/test_vector_clock.py::TestVectorClock::test_increment
 
 ```bash
 # Implement minimal code to pass
-pytest tests/unit/services/test_vector_clock.py::TestVectorClock::test_increment_operation -v
+pytest tests/services/test_vector_clock.py::TestVectorClock::test_increment_operation -v
 # Expected: PASSED
 ```
 
@@ -40,7 +40,7 @@ pytest tests/unit/services/test_vector_clock.py::TestVectorClock::test_increment
 
 ```bash
 # Refactor while maintaining tests
-pytest tests/unit/services/ -v
+pytest tests/services/ -v
 ruff check afs_fastapi/services/
 black afs_fastapi/services/
 # Expected: All tests pass, zero linting warnings
@@ -177,7 +177,7 @@ def test_isobus_message_queue_reliability(self):
 
 ```bash
 # Watch mode for continuous TDD development
-pytest-watch tests/unit/services/ --verbose --clear
+pytest-watch tests/services/ --verbose --clear
 
 # Coverage reporting for TDD progress
 pytest tests/unit/services/ --cov=afs_fastapi.services --cov-report=html
@@ -194,7 +194,7 @@ pre-commit run --all-files
 
 # Zero-warning enforcement
 ruff check afs_fastapi/services/ --select=ALL
-mypy afs_fastapi/services/ --strict
+pyright afs_fastapi/services/
 
 # Performance regression testing
 pytest tests/performance/ --benchmark-only
@@ -239,7 +239,7 @@ pytest tests/performance/ --benchmark-only
 - [ ] Zero failing tests across all synchronization components
 - [ ] 100% test coverage for distributed systems logic
 - [ ] Sub-millisecond performance for critical operations
-- [ ] Zero linting warnings (ruff, mypy, black compliance)
+- [ ] Zero linting warnings (ruff, pyright, black compliance)
 
 ### Agricultural Domain Validation
 - [ ] ISOBUS protocol compliance verified through testing

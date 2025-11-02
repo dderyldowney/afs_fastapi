@@ -104,9 +104,7 @@ class AsyncTokenUsageLogger:
         """
         # Create async engine for testing
         engine = create_async_engine(database_url, echo=False)
-        async_session_factory = async_sessionmaker(
-            engine, class_=AsyncSession, expire_on_commit=False
-        )
+        async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
         # Create tables
         with engine.connect() as conn:
@@ -223,7 +221,7 @@ class AsyncTokenUsageLogger:
 
         try:
             timestamp = timestamp or datetime.now(UTC)
-            token_id = str(uuid.uuid4())
+            str(uuid.uuid4())
 
             # Use async session with connection pooling
             async with self.async_session_factory() as session:
@@ -361,7 +359,7 @@ class AsyncTokenUsageLogger:
                     repository = uow.token_usage
 
                     # Get token usage statistics first
-                    stats = await repository.get_token_usage_statistics(
+                    await repository.get_token_usage_statistics(
                         agent_id=agent_id,
                         task_id=task_id,
                         start_time=start_time,

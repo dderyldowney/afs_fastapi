@@ -42,7 +42,7 @@ AFS FastAPI is a production-ready agricultural robotics platform for multi-tract
 **Development Dependencies**:
 - pytest>=8.0: Testing framework
 - pytest-asyncio>=0.23: Async testing support
-- mypy>=1.10: Static type checking (mandatory)
+- pyright>=1.10: Static type checking (mandatory)
 - ruff>=0.5: Linting (zero warnings expected)
 - black>=24.0: Code formatting (enforced)
 - isort: Import sorting
@@ -60,7 +60,7 @@ pip install -r requirements.txt
 pytest tests/
 
 # Type checking and linting
-mypy afs_fastapi/ tests/
+pyright afs_fastapi/ tests/
 black --check afs_fastapi/ tests/
 ruff check afs_fastapi/ tests/
 ```
@@ -109,7 +109,7 @@ pytest tests/
 
 **Type Safety**:
 - Mandatory type hints for all code
-- Static type checking with mypy
+- Static type checking with pyright
 - Zero type-related warnings allowed
 
 ## Project Features

@@ -100,7 +100,7 @@ isort --check-only your_module.py
 To type-check a specific file:
 
 ```bash
-mypy your_module.py
+pyright your_module.py
 ```
 
 To type-check the entire project (as part of `formatall`):
@@ -111,7 +111,7 @@ To type-check the entire project (as part of `formatall`):
 
 ### 5.2. Configuration
 
-MyPy is configured via `mypy.ini` in the project's root directory, which specifies settings for strictness and module paths.
+MyPy is configured via `pyright.ini` in the project's root directory, which specifies settings for strictness and module paths.
 
 ## 6. Integration with `formatall` and Pre-commit Hooks
 

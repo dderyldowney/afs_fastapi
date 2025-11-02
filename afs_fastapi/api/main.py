@@ -87,11 +87,11 @@ async def app_lifespan(app: FastAPI):
     # Initialize monitoring systems
     try:
         # Test soil monitor
-        soil_monitor = SoilMonitor("TEST")
+        SoilMonitor("TEST")
         print("✅ Soil monitoring system initialized")
 
         # Test water monitor
-        water_monitor = WaterMonitor("TEST")
+        WaterMonitor("TEST")
         print("✅ Water monitoring system initialized")
     except Exception as e:
         print(f"⚠️  Monitoring systems initialization warning: {e}")
@@ -99,7 +99,7 @@ async def app_lifespan(app: FastAPI):
     # Initialize equipment systems
     try:
         # Create test tractor
-        test_tractor = FarmTractor("Test", "Tractor", 2024)
+        FarmTractor("Test", "Tractor", 2024)
         print("✅ Equipment control system initialized")
     except Exception as e:
         print(f"⚠️  Equipment systems initialization warning: {e}")
@@ -200,8 +200,8 @@ async def health_check() -> dict[str, Any]:
 
     # Check monitoring systems
     try:
-        soil_monitor = SoilMonitor("TEST")
-        water_monitor = WaterMonitor("TEST")
+        SoilMonitor("TEST")
+        WaterMonitor("TEST")
         health_results["systems"]["monitoring"] = "operational"
     except Exception as e:
         health_results["systems"]["monitoring"] = "degraded"
@@ -209,7 +209,7 @@ async def health_check() -> dict[str, Any]:
 
     # Check equipment systems
     try:
-        test_tractor = FarmTractor("Test", "Tractor", 2024)
+        FarmTractor("Test", "Tractor", 2024)
         health_results["systems"]["equipment"] = "operational"
     except Exception as e:
         health_results["systems"]["equipment"] = "degraded"
@@ -352,9 +352,7 @@ async def request_validation_exception_handler(
 
     # Extract first validation error for the response
     error_detail = exc.errors()[0] if exc.errors() else {}
-    field_name = (
-        ".".join(str(x) for x in error_detail.get("loc", [])) if "loc" in error_detail else None
-    )
+    (".".join(str(x) for x in error_detail.get("loc", [])) if "loc" in error_detail else None)
     error_message = error_detail.get("msg", "Validation error")
 
     from afs_fastapi.api.core.error_handling import create_error_response
