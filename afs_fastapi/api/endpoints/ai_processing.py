@@ -624,7 +624,7 @@ def _validate_agricultural_context(context_data: dict[str, Any]) -> None:
     if "operation_type" in context_data:
         try:
             OperationType(context_data["operation_type"])
-        except ValueError:
+        except ValueError as err:
             raise AgriculturalValidationError(
                 f"Invalid operation type: {context_data['operation_type']}",
                 recovery_suggestions=[
@@ -632,7 +632,7 @@ def _validate_agricultural_context(context_data: dict[str, Any]) -> None:
                     "Check agricultural operation standards",
                     "Validate operation against equipment capabilities",
                 ],
-            )
+            ) from err
 
 
 def _validate_equipment_context(context_data: dict[str, Any]) -> None:

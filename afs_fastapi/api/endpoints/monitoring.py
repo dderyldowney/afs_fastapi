@@ -151,13 +151,13 @@ async def submit_soil_reading(
 )
 async def get_soil_readings(
     request: Request,
-    sensor_id: str | None = Query(None, description="Filter by sensor ID"),
-    field_id: str | None = Query(None, description="Filter by field ID"),
-    start_time: datetime | None = Query(None, description="Start time filter"),
-    end_time: datetime | None = Query(None, description="End time filter"),
-    data_quality: str | None = Query(None, description="Filter by data quality"),
-    page: int = Query(1, ge=1, description="Page number"),
-    page_size: int = Query(20, ge=1, le=100, description="Items per page"),
+    sensor_id: str | None = None,
+    field_id: str | None = None,
+    start_time: datetime | None = None,
+    end_time: datetime | None = None,
+    data_quality: str | None = None,
+    page: int = 1,
+    page_size: int = 20,
     query_params: CommonQueryParams = Depends(),
 ) -> PaginatedResponse:
     """

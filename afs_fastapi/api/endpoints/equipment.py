@@ -42,11 +42,9 @@ async def get_equipment_status(
     request: Request,
     equipment_id: str,
     include_diagnostics: bool = Query(True, description="Include diagnostic data"),
-    include_location: bool = Query(True, description="Include GPS location"),
-    include_safety: bool = Query(True, description="Include safety status"),
-    equipment_type: EquipmentType = Query(
-        EquipmentType.TRACTOR, description="Equipment type filter"
-    ),
+    include_location: bool = True,
+    include_safety: bool = True,
+    equipment_type: EquipmentType = EquipmentType.TRACTOR,
 ) -> EquipmentStatusResponse:
     """
     Get detailed status information for agricultural equipment.
@@ -307,12 +305,10 @@ async def control_equipment(
 )
 async def list_equipment(
     request: Request,
-    equipment_type: EquipmentType | None = Query(None, description="Filter by equipment type"),
-    status_filter: str | None = Query(
-        None, description="Filter by status (online/offline/maintenance)"
-    ),
-    page: int = Query(1, ge=1, description="Page number"),
-    page_size: int = Query(10, ge=1, le=50, description="Items per page"),
+    equipment_type: EquipmentType | None = None,
+    status_filter: str | None = None,
+    page: int = 1,
+    page_size: int = 10,
 ) -> StandardResponse:
     """
     Get list of registered agricultural equipment.
