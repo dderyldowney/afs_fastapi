@@ -48,78 +48,190 @@ ALL agents, including AI assistants, must adhere to these principles at ALL time
 - Reduce function parameters
 - Combine related operations
 - Remove unused imports
-- Consolidate duplicate tests
 
-**VIGILANCE CHECKLIST** - Before completing any task:
-- [ ] Can this be simpler?
-- [ ] Is there redundant code?
-- [ ] Are there unused variables/imports?
-- [ ] Can CLI tools replace reading files?
-- [ ] Does this follow PEP standards?
-- [ ] Is this over-engineered?
+**BEFORE EVERY OPERATION**:
+1. Can this be simpler?
+2. Is there redundant code?
+3. Are there unused variables/imports?
+4. Can CLI tools replace reading files?
+5. Does this follow PEP standards?
+6. Is this over-engineered?
+7. Will tests cleanup all artifacts?
 
 ### 5. TDD - Red-Green-Refactor (ABSOLUTELY MANDATORY)
-**TEST-DRIVEN DEVELOPMENT METHODOLOGY - NOT OPTIONAL**:
-1. **RED**: Write failing test FIRST - ALWAYS
-2. **GREEN**: Make MINIMAL changes to pass test ONLY
-3. **REFACTOR**: Simplify while keeping test GREEN ONLY
-4. **REPEAT**: Cycle continues for EACH feature - NO EXCEPTIONS
+**NOT OPTIONAL - REQUIRED FOR ALL CHANGES**
 
-**TDD ABSOLUTE REQUIREMENTS**:
-- ALWAYS write tests BEFORE code (RED phase) - NEVER skipped
-- NEVER write production code WITHOUT failing test - ZERO TOLERANCE
-- TDD IS MANDATORY - NOT "nice to have" or "available"
-- Red-Green-Refactor cycle MUST be followed FOR ALL CHANGES
-- Keep test-to-code ratio high (minimum 80% coverage) - ENFORCED
-- Refactor ONLY after GREEN phase confirmed - NO SHORTCUTS
-- Simplicity during REFACTOR phase (KIS principle) - REQUIRED
+**RED**: Write a failing test that demonstrates the requirement
+**GREEN**: Write the simplest code to make the test pass
+**REFACTOR**: Improve code quality while keeping tests green
+**REPEAT**: Continue cycle for all functionality
 
-**VIOLATION CONSEQUENCES**: Any code written without following TDD Red-Green-Refactor IS NOT ACCEPTABLE
+**NO EXCEPTIONS** - All code changes must follow TDD methodology:
+- Test cases must be written first
+- All tests must pass before refactoring
+- No production code without failing tests
+- Refactoring only after tests pass
 
-### 6. Test Cleanup (MANDATORY)
-**ZERO ARTIFACTS REQUIREMENT**:
-- Tests MUST clean up ALL artifacts after execution
-- Leave ZERO files, databases, temporary data
-- Use setUp/tearDown methods properly
-- Clean up database connections
+### 6. Pre-Commit Compliance (ABSOLUTELY MANDATORY)
+**NEVER BYPASS PRE-COMMIT HOOKS**
+
+**FORBIDDEN ACTIONS**:
+- **NEVER** use `--no-verify` to bypass pre-commit hooks
+- **NEVER** use `git commit --no-verify` under any circumstances
+- **NEVER** disable pre-commit hooks temporarily
+- **NEVER** commit code that fails pre-commit checks
+
+**REQUIRED PROCESS**:
+1. **FIX ALL ISSUES** identified by pre-commit hooks
+2. **RESOLVE ALL ERRORS** before committing
+3. **ASK FOR PERMISSION** only in exceptional circumstances
+4. **DOCUMENT EXCEPTIONS** if any bypass is absolutely necessary
+
+**EXCEPTIONAL CIRCUMSTANCES** (Must be explicitly requested):
+- Critical production hotfixes with team approval
+- Infrastructure issues preventing hook execution
+- Verified false positives from tools with documented evidence
+
+**MANDATORY VERIFICATION**:
+- All code must pass all pre-commit hooks
+- No linting errors or warnings
+- All tests must pass
+- Code quality standards must be met
+
+### 7. Test Cleanup Requirements (MANDATORY)
+**ZERO ARTIFACTS AFTER TEST COMPLETION**
+
+**REQUIRED CLEANUP ACTIONS**:
 - Remove temporary directories
+- Delete database files
 - Reset environment variables
+- Clean up cache files
+- Remove generated content
 - Verify cleanup with assertions
 
-**CLEANUP ENFORCEMENT**:
-- NO test files left in project directory
-- NO database files after test completion
-- NO temporary directories after test completion
-- NO environment pollution
-- NO resource leaks
+**MANDATORY VERIFICATION**:
+- Tests must leave the system in original state
+- No side effects after test completion
+- All temporary resources properly disposed
+- File system returned to pre-test condition
 
-### 7. Test Simplification (MANDATORY)
-**KIS TESTING PRINCIPLES**:
-- One assertion per test when possible
-- Test one behavior per test
-- Use simple, descriptive test names
-- Avoid complex test setup/teardown
-- Don't test implementation details
-- Use simple test data
-- Eliminate redundant test cases
-- Apply TDD Red-Green-Refactor methodology (MANDATORY)
-- Follow Red-Green-Refactor cycle for ALL changes (NO EXCEPTIONS)
-- Ensure complete cleanup (ZERO artifacts) (MANDATORY)
+## VIOLATION CONSEQUENCES
 
-### Enforcement and Violations
+**ANY VIOLATION OF THESE DIRECTIVES IS UNACCEPTABLE**
 
-**ABSOLUTE REQUIREMENTS** - NO EXCEPTIONS:
-- PEP compliance (verified by linting tools)
-- CLI tool usage for file operations
-- Constant simplification vigilance
-- KIS principles in all code
-- TDD Red-Green-Refactor methodology
-- Test cleanup (ZERO artifacts)
-- Test simplification
+- **Pre-commit bypass**: IMMEDIATE REJECTION - Never bypass pre-commit hooks
+- **KIS violations**: Immediate refactoring required
+- **PEP violations**: Code will not be accepted
+- **CLI tool neglect**: Context will be rejected
+- **TDD bypass**: Changes will be rejected
+- **Cleanup violations**: Tests will be failed
 
-**VIOLATIONS OF THESE DIRECTIVES ARE NOT ACCEPTABLE**
+**SEVERITY LEVELS**:
+- **CRITICAL (Pre-commit bypass)**: Immediate rollback required
+- **HIGH (TDD, PEP)**: Code rejected until fixed
+- **MEDIUM (KIS, CLI)**: Refactoring required before acceptance
+- **LOW (Cleanup)**: Test fixes required
 
-**MONITORING**: All interactions will be evaluated for compliance with these non-negotiable requirements.
+## ENFORCEMENT
 
-**Last updated: 2025-11-03**
-**Status: ACTIVE - NON-NEGOTIABLE - PERMANENT**
+These directives are **ENFORCED AUTOMATICALLY** through:
+- Site-wide Python configuration
+- Import hooks and monitoring
+- Test framework integration
+- Code review requirements
+- **Pre-commit hook enforcement** (Mandatory for all commits)
+
+**PRE-COMMIT ENFORCEMENT**:
+- **MANDATORY HOOKS**: All pre-commit hooks must pass
+- **NO BYPASS ALLOWED**: `--no-verify` is forbidden
+- **AUTOMATIC REJECTION**: Commits with failing hooks are rejected
+- **QUALITY GATE**: Code quality must meet standards
+
+**NO AGENT CAN BYPASS THESE REQUIREMENTS**
+
+---
+
+## APPROVED AGENT PATTERNS
+
+### Simplicity Examples
+```python
+# ✅ GOOD: Simple and clear
+def calculate_total(items):
+    return sum(item.price for item in items)
+
+# ❌ BAD: Over-engineered
+def calculate_total(items: List[ProductType], currency: CurrencyType,
+                   tax_calculator: TaxCalculatorInterface,
+                   discount_applier: DiscountApplierClass) -> MonetaryAmount:
+    # Complex implementation that could be simple
+```
+
+### CLI Tool Examples
+```bash
+# ✅ GOOD: Use grep first
+grep -r "import.*requests" src/
+
+# ✅ GOOD: Use find for files
+find . -name "*.py" -exec grep -l "TODO" {} \;
+
+# ❌ BAD: Read entire files when not needed
+# Don't read entire file when you just need to check for imports
+```
+
+### TDD Examples
+```python
+# ✅ GOOD: Test first, then implementation
+def test_add_numbers():
+    assert add(2, 3) == 5
+
+def add(a, b):
+    return a + b
+
+# ❌ BAD: Implementation without tests
+def complex_business_logic():
+    # Code written without failing test
+```
+
+### Pre-Commit Examples
+```bash
+# ✅ GOOD: Fix issues identified by pre-commit
+git add .
+git commit -m "Fix style issues"
+
+# ✅ GOOD: Address all pre-commit feedback
+# Fix linting errors first, then commit
+black src/
+isort src/
+git add .
+git commit -m "Code improvements"
+
+# ❌ FORBIDDEN: Never bypass pre-commit hooks
+git commit --no-verify -m "Quick fix"  # NEVER DO THIS
+
+# ❌ FORBIDDEN: Don't use --no-verify under any circumstances
+git add .
+git commit --no-verify -m "Bypassing hooks"  # IMMEDIATE REJECTION
+```
+
+### Correct Process for Pre-Commit Issues
+```bash
+# 1. Run pre-commit manually to check issues
+pre-commit run --all-files
+
+# 2. Fix identified issues
+black .
+isort .
+ruff check --fix .
+
+# 3. Fix remaining issues manually
+# Address any remaining errors
+
+# 4. Commit normally (hooks will pass)
+git add .
+git commit -m "Proper code fixes"
+```
+
+**REMEMBER**:
+- **Simplicity** is not just a preference - it is a requirement
+- **Pre-commit compliance** is absolutely mandatory - no exceptions
+- **Quality gates** protect code integrity for all team members

@@ -167,11 +167,13 @@ class AgriculturalValidationError(Exception):
             severity=severity,
             category=category,
             message=message,
+            technical_details=None,
             equipment_id=equipment_id,
             field_id=field_id,
             operation_type=operation_type,
             agricultural_context=agricultural_context,
             recovery_suggestions=recovery_suggestions or [],
+            iso_violation_details=None,
         )
         super().__init__(message)
 
@@ -198,12 +200,13 @@ class AgriculturalBusinessError(Exception):
             severity=severity,
             category=category,
             message=message,
+            technical_details=None,
             equipment_id=equipment_id,
             field_id=field_id,
             operation_type=operation_type,
             agricultural_context=agricultural_context,
-            iso_violation_details=iso_violation_details,
             recovery_suggestions=recovery_suggestions or [],
+            iso_violation_details=iso_violation_details,
         )
         super().__init__(message)
 
@@ -230,12 +233,13 @@ class AgriculturalSafetyError(Exception):
             severity=severity,
             category=category,
             message=message,
+            technical_details=None,
             equipment_id=equipment_id,
             field_id=field_id,
             operation_type=operation_type,
             agricultural_context=agricultural_context,
-            iso_violation_details=iso_violation_details,
             recovery_suggestions=recovery_suggestions or [],
+            iso_violation_details=iso_violation_details,
         )
         super().__init__(message)
 
@@ -333,7 +337,7 @@ def validation_exception_handler(request: Request, exc: Exception) -> JSONRespon
     logger.warning(f"Validation error: {exc}")
 
     error_details = AgriculturalErrorDetails(
-        error_code=ErrorCode.VALIDATION_ERROR,
+        code=ErrorCode.VALIDATION_ERROR,
         severity=ErrorSeverity.MEDIUM,
         category=ErrorCategory.VALIDATION,
         message=str(exc),
@@ -372,7 +376,7 @@ def http_exception_handler(request: Request, exc: HTTPException) -> JSONResponse
     error_code = error_mapping.get(exc.status_code, ErrorCode.INTERNAL_SERVER_ERROR)
 
     error_details = AgriculturalErrorDetails(
-        error_code=error_code,
+        code=error_code,
         severity=ErrorSeverity.HIGH,
         category=ErrorCategory.SYSTEM,
         message=str(exc.detail),
@@ -396,7 +400,7 @@ def general_exception_handler(request: Request, exc: Exception) -> JSONResponse:
     logger.error(f"Unexpected error: {exc}", exc_info=True)
 
     error_details = AgriculturalErrorDetails(
-        error_code=ErrorCode.INTERNAL_SERVER_ERROR,
+        code=ErrorCode.INTERNAL_SERVER_ERROR,
         severity=ErrorSeverity.CRITICAL,
         category=ErrorCategory.SYSTEM,
         message="An unexpected error occurred",

@@ -54,6 +54,17 @@ def load_agent_directives():
             "Is this over-engineered?",
             "Will tests cleanup all artifacts?",
             "Is this TDD compliant (RED-GREEN-REFACTOR)?",
+            "Will pre-commit hooks pass?",
+            "Is there any reason to bypass pre-commit?",
+            "Can all pre-commit issues be fixed?",
+        ],
+        "pre_commit_compliance": [
+            "NEVER use --no-verify under any circumstances",
+            "ALL pre-commit hooks must pass before committing",
+            "FIX ALL issues identified by pre-commit tools",
+            "ASK PERMISSION only for exceptional circumstances",
+            "DOCUMENT any exceptions with valid justification",
+            "IMMEDIATE REJECTION for unauthorized bypasses",
         ],
         "test_cleanup_requirements": [
             "ZERO artifacts after test completion",

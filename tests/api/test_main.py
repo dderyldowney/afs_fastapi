@@ -10,13 +10,25 @@ client = TestClient(app)
 def test_read_root():
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"message": "Welcome to the Agricultural Farm System API"}
+    data = response.json()
+    assert "name" in data
+    assert data["name"] == "Automated Farming System API"
+    assert "version" in data
+    assert "description" in data
+    assert "endpoints" in data
+    assert "health_check" in data
 
 
 def test_health_check():
     response = client.get("/health")
     assert response.status_code == 200
-    assert response.json() == {"status": "healthy"}
+    data = response.json()
+    assert "status" in data
+    assert data["status"] == "healthy"
+    assert "timestamp" in data
+    assert "systems" in data
+    assert "version" in data
+    assert "compliance" in data
 
 
 def test_api_version():
