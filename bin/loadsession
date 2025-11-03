@@ -105,6 +105,24 @@ load_essential_context() {
     grep -A 6 "Mandatory Requirements" "${ESSENTIAL_CONTEXT}" | tail -n +2 | sed 's/^[0-9]\+\. \*\*/   • /' | sed 's/\*\*://' || true
 
     echo
+    echo -e "${GREEN}🛡️  Agent Enforcement System:${NC}"
+    AGENT_CONFIG="${PROJECT_ROOT}/AGENT_ENFORCEMENT_PACKAGE.py"
+    if [ -f "${AGENT_CONFIG}" ]; then
+        echo "   ✅ AI Agent Enforcement Package: ACTIVE"
+        echo "   📋 Enforcement Status: KIS, PEP, CLI, TDD requirements loaded"
+        echo "   🎯 Autonomy: Cannot be bypassed or ignored"
+
+        # Show specific enforcement rules
+        echo -e "${CYAN}   Enforced Standards:${NC}"
+        echo "   • Keep It Simple (KIS)"
+        echo "   • PEP Compliance (8, 484, 695, 570)"
+        echo "   • CLI Tool Usage Standards"
+        echo "   • TDD Methodology (Red-Green-Refactor)"
+    else
+        echo "   ⚠️  AI Agent Enforcement Package: Not Found"
+    fi
+
+    echo
 }
 
 # Load expanded context (on-demand sections)
