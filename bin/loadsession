@@ -191,7 +191,7 @@ esac
 
 echo
 echo -e "${GREEN}🎯 Session Ready:${NC}"
-echo "   • Agricultural Robotics Platform: AFS FastAPI v0.1.3+"
+echo "   • Agricultural Robotics Platform: AFS FastAPI v0.1.7"
 echo "   • Safety Standards: ISO 11783 + ISO 18497 compliance maintained"
 echo "   • Development: Test-First methodology active"
 

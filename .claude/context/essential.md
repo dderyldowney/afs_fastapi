@@ -1,7 +1,7 @@
 # AFS FastAPI Essential Context (Token-Optimized)
 
 ## Platform Status
-- **Version**: v0.1.3+ (TDD + Commit Separation + CHANGELOG Protection)
+- **Version**: v0.1.7 (TDD + Commit Separation + CHANGELOG Protection)
 - **Tests**: 214 tests (211 pass, 3 xfail) - Quality: Zero warnings
 - **Compliance**: ISO 11783 (ISOBUS) + ISO 18497 (Safety)
 

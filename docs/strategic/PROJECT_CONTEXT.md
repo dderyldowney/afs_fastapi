@@ -61,7 +61,7 @@ This tagging strategy must be enforced in all future sessions
 
 ### Current Version State
 
-- **Latest Release**: `v0.1.3` (main branch)
+- **Latest Release**: `v0.1.7` (main branch)
 - **Development**: `develop` branch prepared for next development cycle
 - **Branch Strategy**: Git Flow with `main` (stable) and `develop` (active development)
 

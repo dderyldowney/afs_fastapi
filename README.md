@@ -713,7 +713,7 @@ alembic upgrade head
 8. **Verify TodoWrite system**: `./bin/todo-status`
 9. Install build tools: `pip install build`
 10. Build the project: `python -m build`
-11. Install the generated wheel file: `pip install dist/afs_fastapi-0.1.6-py3-none-any.whl`
+11. Install the generated wheel file: `pip install dist/afs_fastapi-0.1.7-py3-none-any.whl`
 12. Import afs_fastapi into your project: `import afs_fastapi`
 
 ### Development and Testing
