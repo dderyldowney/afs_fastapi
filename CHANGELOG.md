@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Documentation
+- Create comprehensive FUTURE_ENHANCEMENTS.md roadmap
+
+### Documentation
+- Create comprehensive FUTURE_ENHANCEMENTS.md roadmap
+
 ## [0.1.7] - 2025-11-03
 
 ### Added
