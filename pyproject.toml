@@ -74,7 +74,7 @@ Issues = "https://github.com/dderyldowney/afs_fastapi/issues"
 # Ruff will infer from [project].requires-python, but we pin explicitly for clarity.
 target-version = "py312"
 line-length = 100
-# Enable Ruff lints that complement mypy/pyright without being noisy.
+# Enable Ruff lints that complement PyRight without being noisy.
 lint.select = ["E", "F", "UP", "B"]
 lint.ignore = [
   "E501",  # line length handled by formatter
