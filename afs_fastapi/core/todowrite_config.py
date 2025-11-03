@@ -13,8 +13,8 @@ from __future__ import annotations
 
 import os
 
-from todowrite.app import ToDoWrite
-from todowrite.db.config import StoragePreference
+from todowrite import ToDoWrite
+from todowrite.database import StoragePreference
 
 
 def get_todowrite_database_url() -> str | None:

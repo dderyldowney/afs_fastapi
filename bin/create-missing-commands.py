@@ -51,8 +51,8 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.app import ToDoWrite  # noqa: E402
-from todowrite.db.models import Node  # noqa: E402
+from todowrite import ToDoWrite  # noqa: E402
+from todowrite.database.models import Node  # noqa: E402
 
 
 def main():

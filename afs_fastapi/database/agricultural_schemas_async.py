@@ -431,9 +431,6 @@ class AsyncDatabaseManager:
             # Create async engine with optimized settings
             self.async_engine = create_async_engine(
                 self.database_url,
-                pool_size=self.pool_config.get("pool_size", 20),
-                max_overflow=self.pool_config.get("max_overflow", 10),
-                pool_timeout=self.pool_config.get("pool_timeout", 30.0),
                 pool_recycle=self.pool_config.get("pool_recycle", 3600),
                 pool_pre_ping=True,
                 echo=False,

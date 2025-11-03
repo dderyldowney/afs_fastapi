@@ -2,7 +2,7 @@ from typing import Literal
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
-from todowrite.app import LayerType, Node as ToDoWriteNode, StatusType
+from todowrite import LayerType, Node as ToDoWriteNode, StatusType
 
 from afs_fastapi.core.todowrite_config import get_global_todowrite_app, get_todowrite_status
 

@@ -729,7 +729,6 @@ class TestAsyncAgriculturalDatabaseSchemas:
                 fuel_level=75.0,
                 engine_temperature=85.0,
                 operational_mode="cultivating",
-                field_id="CONSISTENCY_TEST_FIELD",
             )
 
             await uow.sensor_data.create_sensor_reading(
