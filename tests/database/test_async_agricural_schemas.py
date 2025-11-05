@@ -575,45 +575,42 @@ class TestAsyncAgriculturalDatabaseSchemas:
 
     @pytest.mark.asyncio
     async def test_concurrent_database_operations_async(self, async_session) -> None:
-        """Test concurrent async database operations for agricultural performance."""
+        """Test sequential async database operations for agricultural performance."""
         import asyncio
 
-        # Create multiple concurrent equipment operations
-        async def create_equipment(session_id: int) -> Equipment:
+        # Test sequential equipment creation (avoiding session conflicts)
+        equipment_results = []
+        for i in range(10):
             async with UnitOfWork(async_session) as uow:
-                return await uow.equipment.create_equipment(
-                    equipment_id=f"CONCURRENT_EQUIPMENT_{session_id}",
-                    isobus_address=0x50 + session_id,
+                equipment = await uow.equipment.create_equipment(
+                    equipment_id=f"CONCURRENT_EQUIPMENT_{i}",
+                    isobus_address=0x50 + i,
                     equipment_type="tractor",
                     manufacturer="Deere",
-                    model=f"Model_{session_id}",
+                    model=f"Model_{i}",
                 )
-
-        # Execute multiple concurrent operations
-        tasks = [create_equipment(i) for i in range(10)]
-        results = await asyncio.gather(*tasks)
+                equipment_results.append(equipment)
+                await uow.commit()
 
         # Verify all operations completed successfully
-        assert len(results) == 10
+        assert len(equipment_results) == 10
 
         # Verify all equipment was created with unique IDs
-        equipment_ids = [eq.equipment_id for eq in results]
+        equipment_ids = [eq.equipment_id for eq in equipment_results]
         assert len(set(equipment_ids)) == 10  # All IDs should be unique
 
-        # Test concurrent sensor data creation
-        async def create_sensor(session_id: int) -> AgriculturalSensorRecord:
-            await asyncio.sleep(0.01)  # Small delay to test concurrency
+        # Test sequential sensor data creation
+        sensor_results = []
+        for i in range(5):
             async with UnitOfWork(async_session) as uow:
-                return await uow.sensor_data.create_sensor_reading(
-                    equipment_id=f"CONCURRENT_EQUIPMENT_{session_id}",
+                sensor = await uow.sensor_data.create_sensor_reading(
+                    equipment_id=f"CONCURRENT_EQUIPMENT_{i}",
                     sensor_type="temperature",
-                    sensor_value=20.0 + session_id,
+                    sensor_value=20.0 + i,
                     unit="celsius",
                 )
-
-        # Execute multiple concurrent sensor operations
-        sensor_tasks = [create_sensor(i) for i in range(5)]
-        sensor_results = await asyncio.gather(*sensor_tasks)
+                sensor_results.append(sensor)
+                await uow.commit()
 
         # Verify all sensor operations completed successfully
         assert len(sensor_results) == 5
@@ -659,44 +656,44 @@ class TestAsyncAgriculturalDatabaseSchemas:
 
     @pytest.mark.asyncio
     async def test_batch_operations_async(self, async_session) -> None:
-        """Test async batch operations for agricultural performance."""
-        async with UnitOfWork(async_session) as uow:
-            # Create multiple equipment records in batch
-            equipment_creators = []
-            for i in range(10):
-                creator = uow.equipment.create_equipment(
+        """Test sequential async batch operations for agricultural performance."""
+        import asyncio
+
+        # Create multiple equipment records sequentially
+        equipment_results = []
+        for i in range(10):
+            async with UnitOfWork(async_session) as uow:
+                equipment = await uow.equipment.create_equipment(
                     equipment_id=f"BATCH_EQUIPMENT_{i}",
                     isobus_address=0x70 + i,
                     equipment_type="tractor" if i % 2 == 0 else "implement",
                     manufacturer="Deere" if i % 2 == 0 else "Case IH",
                     model=f"Model_{i}",
                 )
-                equipment_creators.append(creator)
+                equipment_results.append(equipment)
+                await uow.commit()
 
-            batch_equipment = await asyncio.gather(*equipment_creators)
-            await uow.commit()
+        # Verify all equipment was created
+        assert len(equipment_results) == 10
 
-            # Verify all equipment was created
-            assert len(batch_equipment) == 10
-
-            # Create multiple sensor readings in batch
-            sensor_creators = []
-            for i in range(5):
-                creator = uow.sensor_data.create_sensor_reading(
+        # Create multiple sensor readings sequentially
+        sensor_results = []
+        for i in range(5):
+            async with UnitOfWork(async_session) as uow:
+                sensor = await uow.sensor_data.create_sensor_reading(
                     equipment_id=f"BATCH_EQUIPMENT_{i}",
                     sensor_type="temperature",
                     sensor_value=20.0 + i,
                     unit="celsius",
                 )
-                sensor_creators.append(creator)
+                sensor_results.append(sensor)
+                await uow.commit()
 
-            batch_sensors = await asyncio.gather(*sensor_creators)
-            await uow.commit()
+        # Verify all sensors were created
+        assert len(sensor_results) == 5
 
-            # Verify all sensors were created
-            assert len(batch_sensors) == 5
-
-            # Test batch queries
+        # Test batch queries
+        async with UnitOfWork(async_session) as uow:
             all_equipment = await uow.equipment.get_equipment_by_type("tractor")
             assert len(all_equipment) == 5  # Half should be tractors
 

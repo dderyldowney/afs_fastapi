@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **tests**: Resolve import issues and test failures
+
+### Fixed
+- **tests**: Resolve import issues and test failures
+
+### Fixed
+- **tests**: Resolve import issues and test failures
+
+### Fixed
+- **tests**: Resolve import issues and test failures
+
 ### Changed
 - Apply comprehensive linting and formatting improvements
 - Remove all MyPy references and establish PyRight as defacto type checker

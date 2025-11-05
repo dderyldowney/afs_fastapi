@@ -18,10 +18,9 @@ correctly while maintaining fast CI/CD pipelines for agricultural robotics.
 from __future__ import annotations
 
 import subprocess
-from unittest.mock import MagicMock
 import tempfile
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from tests.utilities.cli_testing import CLICommandTester
 
