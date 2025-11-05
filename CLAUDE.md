@@ -10,6 +10,25 @@ This file contains project-specific instructions for Claude Code sessions workin
 
 ## Claude-Specific Instructions
 
+### Output Preference Standards
+
+**User Preference**: Show thinking process but minimize verbose output when making changes.
+
+**Implementation**:
+- **Thinking**: Show reasoning and decision-making process clearly
+- **Output**: Minimize verbose tool output (Bash commands, long logs, etc.)
+- **Balance**: Provide enough context to understand progress without overwhelming detail
+- **Session Persistence**: This preference applies across all current and future sessions
+
+**Example Format**:
+```
+<thinking>
+I need to run the linter to fix code issues. I'll use Ruff with unsafe fixes enabled to handle auto-fixable problems, then stage the changes.
+</thinking>
+
+[Ran Ruff linter - 18 fixes applied]
+```
+
 ### Format-First Generation Standards
 
 **Requirement**: All generated content must emerge in final quality-controlled form.
