@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import os
 from contextlib import asynccontextmanager, contextmanager
-from typing import AsyncGenerator
+from collections.abc import AsyncGenerator
 
 from afs_fastapi.database.connection_pool import AgriculturalConnectionPool, PoolConfiguration
 
@@ -246,6 +246,10 @@ async def get_optimized_db_config(database_url: str | None = None) -> OptimizedD
 
     if _db_config is None:
         _db_config = OptimizedDatabaseConfig(database_url)
+
+    # Initialize connection pool if not already initialized
+    if _db_config.connection_pool is None:
+        await _db_config.initialize_pool()
 
     return _db_config
 

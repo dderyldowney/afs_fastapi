@@ -10,6 +10,7 @@ Implementation follows Test-First Development (TDD) GREEN phase.
 
 from __future__ import annotations
 
+import json
 from datetime import UTC, datetime, timedelta
 from enum import Enum
 
@@ -23,13 +24,11 @@ from sqlalchemy import (
     Integer,
     LargeBinary,
     String,
-    Text,
     UniqueConstraint,
 )
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.types import TypeDecorator, TEXT
-import json
 from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.types import TEXT, TypeDecorator
 
 
 class TimeSeriesBase(DeclarativeBase):
@@ -43,6 +42,7 @@ class SQLiteJSON(TypeDecorator):
 
     Uses TEXT storage for SQLite and JSONB for PostgreSQL.
     """
+
     impl = TEXT
     cache_ok = True
 
@@ -57,7 +57,7 @@ class SQLiteJSON(TypeDecorator):
         return json.loads(value)
 
     def load_dialect_impl(self, dialect):
-        if dialect.name == 'postgresql':
+        if dialect.name == "postgresql":
             return dialect.type_descriptor(JSONB())
         return self.impl
 
@@ -80,7 +80,7 @@ class CANMessageRaw(TimeSeriesBase):  # type: ignore
     __tablename__ = "can_messages_raw"
 
     # Primary key and timestamp
-    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     timestamp = Column(DateTime(timezone=True), nullable=False, index=True)
 
     # CAN message components

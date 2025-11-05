@@ -254,12 +254,20 @@ class EnhancedTokenUsageLogger:
             Token usage log entry
         """
         try:
+            # Convert async database URL to sync URL for sync operations
+            sync_db_url = self.database_url.replace("+aiosqlite", "")
+
             # Create engine with connection pooling (skip pool settings for SQLite)
             engine_kwargs = {"echo": False}
-            if not self.database_url.startswith("sqlite"):
+            if not sync_db_url.startswith("sqlite"):
                 engine_kwargs.update({"pool_size": 5, "pool_pre_ping": True, "pool_recycle": 3600})
 
-            engine = create_engine(self.database_url, **engine_kwargs)
+            engine = create_engine(sync_db_url, **engine_kwargs)
+
+            # Create tables if they don't exist
+            from afs_fastapi.monitoring.token_usage_models import TokenUsage
+
+            TokenUsage.metadata.create_all(bind=engine)
 
             SessionLocal = sessionmaker(
                 autocommit=False, autoflush=False, bind=engine, expire_on_commit=False
@@ -444,10 +452,20 @@ class EnhancedTokenUsageLogger:
             Query results
         """
         try:
-            # Create engine with connection pooling
-            engine = create_engine(
-                self.database_url, echo=False, pool_size=5, pool_pre_ping=True, pool_recycle=3600
-            )
+            # Convert async database URL to sync URL for sync operations
+            sync_db_url = self.database_url.replace("+aiosqlite", "")
+
+            # Create engine with connection pooling (skip pool settings for SQLite)
+            engine_kwargs = {"echo": False}
+            if not sync_db_url.startswith("sqlite"):
+                engine_kwargs.update({"pool_size": 5, "pool_pre_ping": True, "pool_recycle": 3600})
+
+            engine = create_engine(sync_db_url, **engine_kwargs)
+
+            # Create tables if they don't exist
+            from afs_fastapi.monitoring.token_usage_models import TokenUsage
+
+            TokenUsage.metadata.create_all(bind=engine)
 
             SessionLocal = sessionmaker(
                 autocommit=False, autoflush=False, bind=engine, expire_on_commit=False
@@ -569,10 +587,20 @@ class EnhancedTokenUsageLogger:
             Cutoff date for pruning
         """
         try:
-            # Create engine with connection pooling
-            engine = create_engine(
-                self.database_url, echo=False, pool_size=5, pool_pre_ping=True, pool_recycle=3600
-            )
+            # Convert async database URL to sync URL for sync operations
+            sync_db_url = self.database_url.replace("+aiosqlite", "")
+
+            # Create engine with connection pooling (skip pool settings for SQLite)
+            engine_kwargs = {"echo": False}
+            if not sync_db_url.startswith("sqlite"):
+                engine_kwargs.update({"pool_size": 5, "pool_pre_ping": True, "pool_recycle": 3600})
+
+            engine = create_engine(sync_db_url, **engine_kwargs)
+
+            # Create tables if they don't exist
+            from afs_fastapi.monitoring.token_usage_models import TokenUsage
+
+            TokenUsage.metadata.create_all(bind=engine)
 
             SessionLocal = sessionmaker(
                 autocommit=False, autoflush=False, bind=engine, expire_on_commit=False
