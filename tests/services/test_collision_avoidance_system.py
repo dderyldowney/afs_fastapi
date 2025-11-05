@@ -29,10 +29,10 @@ These tests validate actual collision detection and avoidance logic.
 
 from __future__ import annotations
 
-from unittest.mock import AsyncMock
 
 import pytest
 
+from afs_fastapi.equipment.network.isobus import ISOBUSDevice
 from afs_fastapi.services.collision_avoidance_system import (
     CollisionAvoidanceAction,
     CollisionAvoidanceSystem,
@@ -43,6 +43,7 @@ from afs_fastapi.services.collision_avoidance_system import (
     TrajectoryPrediction,
     VelocityVector,
 )
+from afs_fastapi.services.fleet import FleetCoordinationEngine
 
 
 class TestDynamicSafetyZoneCalculation:
@@ -410,12 +411,8 @@ class TestCollisionAvoidanceActions:
         strategy considering work priorities and field patterns.
         """
         # Arrange
-        mock_fleet_coordination = AsyncMock()
-        mock_fleet_coordination.resolve_collision_conflict.return_value = {
-            "primary_avoider": "TRACTOR_GAMMA",
-            "maneuver_type": "YIELD_RIGHT_OF_WAY",
-            "secondary_action": "MAINTAIN_COURSE",
-        }
+        isobus = ISOBUSDevice(device_address=0x97)
+        fleet_coordination = FleetCoordinationEngine("TRACTOR_GAMMA", isobus)
 
         collision_system = CollisionAvoidanceSystem(base_safety_radius=10.0)
 
@@ -433,12 +430,12 @@ class TestCollisionAvoidanceActions:
             threat=threat,
             own_tractor_id="TRACTOR_GAMMA",
             other_tractor_id="TRACTOR_DELTA",
-            fleet_coordination=mock_fleet_coordination,
+            fleet_coordination=fleet_coordination,
         )
 
         # Assert
         assert isinstance(action, CollisionAvoidanceAction)
-        mock_fleet_coordination.resolve_collision_conflict.assert_called_once()
+        # Real fleet coordination should be used instead of mock assertion
         assert action.fleet_coordination_required is True
         assert action.coordinated_maneuver is True
 

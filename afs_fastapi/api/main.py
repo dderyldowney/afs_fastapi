@@ -305,7 +305,7 @@ async def value_error_handler(request: Request, exc: ValueError) -> JSONResponse
 
     from afs_fastapi.api.core.error_handling import create_error_response
 
-    response_dict = create_error_response(
+    error_response = create_error_response(
         error_code=ErrorCode.VALIDATION_ERROR,
         message=str(exc),
         severity="medium",
@@ -317,7 +317,7 @@ async def value_error_handler(request: Request, exc: ValueError) -> JSONResponse
         ],
         request=request,
     )
-    return JSONResponse(status_code=422, content=response_dict)
+    return JSONResponse(status_code=422, content=error_response.model_dump())
 
 
 @app.exception_handler(TypeError)
@@ -326,7 +326,7 @@ async def type_error_handler(request: Request, exc: TypeError) -> JSONResponse:
     logger = logging.getLogger(__name__)
     logger.warning(f"Type error: {exc}")
 
-    response_dict = create_error_response(
+    error_response = create_error_response(
         error_code=ErrorCode.VALIDATION_ERROR,
         message=str(exc),
         severity="medium",
@@ -338,7 +338,7 @@ async def type_error_handler(request: Request, exc: TypeError) -> JSONResponse:
         ],
         request=request,
     )
-    return JSONResponse(status_code=422, content=response_dict)
+    return JSONResponse(status_code=422, content=error_response.model_dump())
 
 
 # Request validation error handler
@@ -357,7 +357,7 @@ async def request_validation_exception_handler(
 
     from afs_fastapi.api.core.error_handling import create_error_response
 
-    response_dict = create_error_response(
+    error_response = create_error_response(
         error_code=ErrorCode.VALIDATION_ERROR,
         message=error_message,
         severity="medium",
@@ -370,7 +370,7 @@ async def request_validation_exception_handler(
         ],
         request=request,
     )
-    return JSONResponse(status_code=422, content=response_dict)
+    return JSONResponse(status_code=422, content=error_response.model_dump())
 
 
 # Global exception handlers
@@ -394,7 +394,7 @@ async def error_logging_middleware(request: Request, call_next):
         logger.error(f"Unhandled error in {request.method} {request.url}: {e}", exc_info=True)
 
         # Create error response
-        response_dict = create_error_response(
+        error_response = create_error_response(
             error_code=ErrorCode.INTERNAL_SERVER_ERROR,
             message="An unexpected error occurred",
             severity="critical",
@@ -407,7 +407,8 @@ async def error_logging_middleware(request: Request, call_next):
             request=request,
         )
 
-        return JSONResponse(status_code=500, content=response_dict)
+        # Convert Pydantic model to dict for JSON response
+        return JSONResponse(status_code=500, content=error_response.model_dump())
 
 
 # Additional utility endpoint

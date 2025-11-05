@@ -8,9 +8,8 @@ safety-critical and operational message classification.
 from __future__ import annotations
 
 from datetime import UTC, datetime
-from unittest.mock import Mock
 
-# Import will be created
+# Import real message classes instead of using Mock
 from afs_fastapi.equipment.advanced_message_prioritization import (
     AdvancedMessagePrioritizer,
     AgriculturalOperationContext,
@@ -279,17 +278,33 @@ class TestTrafficThrottlingDecisionFramework:
     """Test the traffic throttling decision framework for network optimization."""
 
     def test_throttling_decision_respects_qos_constraints(self) -> None:
-        """Test that throttling decisions respect QoS level constraints."""
+        """Test that throttling decisions respect QoS level constraints using real message objects."""
         # RED: Throttling must never violate QoS level maximum delays
         decision_framework = TrafficThrottlingDecision()
 
-        emergency_message = Mock()
-        emergency_message.qos_level = QoSLevel.EMERGENCY
-        emergency_message.max_allowable_delay = 50
+        # Create real emergency message
+        emergency_message = PrioritizedMessage(
+            message_id="emergency_001",
+            original_message={"type": "emergency_stop"},
+            qos_level=QoSLevel.EMERGENCY,
+            base_priority=1,
+            effective_priority=1,
+            safety_related=True,
+            can_be_throttled=False,
+            max_allowable_delay=50,
+        )
 
-        critical_message = Mock()
-        critical_message.qos_level = QoSLevel.CRITICAL
-        critical_message.max_allowable_delay = 200
+        # Create real critical message
+        critical_message = PrioritizedMessage(
+            message_id="critical_001",
+            original_message={"type": "collision_warning"},
+            qos_level=QoSLevel.CRITICAL,
+            base_priority=2,
+            effective_priority=2,
+            safety_related=True,
+            can_be_throttled=False,
+            max_allowable_delay=200,
+        )
 
         # Under severe congestion
         severe_congestion = {"congestion_level": 0.95, "queue_depth": 300}
@@ -320,10 +335,19 @@ class TestTrafficThrottlingDecisionFramework:
             "inter_tractor_spacing": 50.0,  # meters
         }
 
-        coordination_message = Mock()
-        coordination_message.qos_level = QoSLevel.OPERATIONAL
-        coordination_message.fleet_coordination = True
-        coordination_message.operation_context = AgriculturalOperationContext.FIELD_CULTIVATION
+        # Create real coordination message
+        coordination_message = PrioritizedMessage(
+            message_id="coordination_001",
+            original_message={"type": "fleet_coordination"},
+            qos_level=QoSLevel.OPERATIONAL,
+            base_priority=5,
+            effective_priority=4,  # Boosted for fleet coordination
+            fleet_coordination_boost=True,
+            safety_related=False,
+            can_be_throttled=True,
+            max_allowable_delay=500,
+            operation_context=AgriculturalOperationContext.FIELD_CULTIVATION,
+        )
 
         decision = decision_framework.evaluate_throttling(
             coordination_message,

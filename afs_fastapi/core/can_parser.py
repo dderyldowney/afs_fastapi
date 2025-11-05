@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Any
 
 from .j1939_parser import parse_j1939_message

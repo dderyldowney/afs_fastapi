@@ -14,10 +14,13 @@ from __future__ import annotations
 import uuid
 from collections.abc import AsyncGenerator
 from datetime import UTC, datetime
-from typing import Any
+from typing import Any, Generic, TypeVar
 
 from sqlalchemy import and_, delete, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
+
+# Generic type for repository entities
+T = TypeVar("T")
 
 from afs_fastapi.database.agricultural_schemas_async import (
     AgriculturalSensorRecord,
@@ -31,7 +34,7 @@ from afs_fastapi.database.agricultural_schemas_async import (
 )
 
 
-class BaseAsyncRepository:
+class BaseAsyncRepository(Generic[T]):
     """Base repository for async database operations."""
 
     def __init__(self, session: AsyncSession) -> None:
@@ -44,7 +47,7 @@ class BaseAsyncRepository:
         """
         self.session = session
 
-    async def create(self, instance: Any) -> Any:
+    async def create(self, instance: T) -> T:
         """Create a new database record.
 
         Parameters
@@ -62,7 +65,7 @@ class BaseAsyncRepository:
         await self.session.refresh(instance)
         return instance
 
-    async def get_by_id(self, model_class: type, entity_id: str | int) -> Any | None:
+    async def get_by_id(self, model_class: type[T], entity_id: str | int) -> T | None:
         """Get entity by ID.
 
         Parameters
@@ -77,13 +80,22 @@ class BaseAsyncRepository:
         Optional[Any]
             Entity instance or None if not found
         """
-        result = await self.session.execute(
-            select(model_class).where(
-                model_class.id == entity_id
-                if hasattr(model_class, "id")
-                else model_class.equipment_id == entity_id
-            )
-        )
+        # Build query with proper attribute access
+        query = select(model_class)
+
+        # Try to determine the primary key attribute
+        if hasattr(model_class, "id"):
+            query = query.where(model_class.id == entity_id)
+        elif hasattr(model_class, "equipment_id"):
+            query = query.where(model_class.equipment_id == entity_id)
+        else:
+            # Fallback: use first column attribute
+            column_attrs = [attr for attr in model_class.__table__.columns.keys()]
+            if column_attrs:
+                first_attr = getattr(model_class, column_attrs[0])
+                query = query.where(first_attr == entity_id)
+
+        result = await self.session.execute(query)
         return result.scalar_one_or_none()
 
     async def update(self, instance: Any, **kwargs: Any) -> Any:
@@ -144,10 +156,10 @@ class BaseAsyncRepository:
             List of entity instances
         """
         result = await self.session.execute(select(model_class).offset(offset).limit(limit))
-        return result.scalars().all()
+        return list(result.scalars().all())
 
 
-class EquipmentAsyncRepository(BaseAsyncRepository):
+class EquipmentAsyncRepository(BaseAsyncRepository[Equipment]):
     """Async repository for equipment management in agricultural operations."""
 
     async def create_equipment(
@@ -243,7 +255,7 @@ class EquipmentAsyncRepository(BaseAsyncRepository):
             query = query.where(Equipment.status == status)
 
         result = await self.session.execute(query)
-        return result.scalars().all()
+        return list(result.scalars().all())
 
     async def update_equipment_status(self, equipment_id: str, status: str) -> Equipment | None:
         """Update equipment status.
@@ -273,7 +285,7 @@ class EquipmentAsyncRepository(BaseAsyncRepository):
         return equipment
 
 
-class FieldAsyncRepository(BaseAsyncRepository):
+class FieldAsyncRepository(BaseAsyncRepository[Field]):
     """Async repository for field management in agricultural operations."""
 
     async def create_field(
@@ -377,7 +389,7 @@ class FieldAsyncRepository(BaseAsyncRepository):
         return result.scalars().all()
 
 
-class ISOBUSMessageAsyncRepository(BaseAsyncRepository):
+class ISOBUSMessageAsyncRepository(BaseAsyncRepository[ISOBUSMessageRecord]):
     """Async repository for ISOBUS message management in agricultural operations."""
 
     async def create_message(
@@ -510,7 +522,7 @@ class ISOBUSMessageAsyncRepository(BaseAsyncRepository):
         return result.scalars().all()
 
 
-class AgriculturalSensorAsyncRepository(BaseAsyncRepository):
+class AgriculturalSensorAsyncRepository(BaseAsyncRepository[AgriculturalSensorRecord]):
     """Async repository for agricultural sensor data management."""
 
     async def create_sensor_reading(
@@ -706,7 +718,7 @@ class AgriculturalSensorAsyncRepository(BaseAsyncRepository):
         }
 
 
-class TractorTelemetryAsyncRepository(BaseAsyncRepository):
+class TractorTelemetryAsyncRepository(BaseAsyncRepository[TractorTelemetryRecord]):
     """Async repository for tractor telemetry data management."""
 
     async def create_telemetry_reading(
@@ -808,7 +820,7 @@ class TractorTelemetryAsyncRepository(BaseAsyncRepository):
         return result.scalars().all()
 
 
-class YieldMonitorAsyncRepository(BaseAsyncRepository):
+class YieldMonitorAsyncRepository(BaseAsyncRepository[YieldMonitorRecord]):
     """Async repository for yield monitoring data management."""
 
     async def create_yield_reading(
@@ -873,7 +885,7 @@ class YieldMonitorAsyncRepository(BaseAsyncRepository):
         return await self.create(reading)
 
 
-class TokenUsageAsyncRepository(BaseAsyncRepository):
+class TokenUsageAsyncRepository(BaseAsyncRepository[TokenUsage]):
     """Async repository for token usage tracking in agricultural AI operations."""
 
     async def create_token_usage(
@@ -1065,7 +1077,7 @@ class TokenUsageAsyncRepository(BaseAsyncRepository):
         return result.rowcount
 
 
-class OperationalSessionAsyncRepository(BaseAsyncRepository):
+class OperationalSessionAsyncRepository(BaseAsyncRepository[OperationalSession]):
     """Async repository for operational session management in agricultural operations."""
 
     async def create_session(

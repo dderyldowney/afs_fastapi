@@ -32,7 +32,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any
 
-from afs_fastapi.equipment.reliable_isobus import ReliableISOBUSDevice
+from afs_fastapi.equipment.network.isobus import ISOBUSDevice
 from afs_fastapi.services.fleet import FleetCoordinationEngine
 from afs_fastapi.services.synchronization import VectorClock
 
@@ -158,7 +158,7 @@ class EmergencyStopPropagation:
         self,
         fleet_coordination: FleetCoordinationEngine,
         vector_clock: VectorClock,
-        isobus: ReliableISOBUSDevice,
+        isobus: ISOBUSDevice,
         acknowledgment_timeout: float = 2.0,
     ) -> None:
         """Initialize emergency stop propagation system.
@@ -169,7 +169,7 @@ class EmergencyStopPropagation:
             Fleet coordination engine for tractor management
         vector_clock : VectorClock
             Vector clock for causal ordering of emergency events
-        isobus : ReliableISOBUSDevice
+        isobus : ISOBUSDevice
             Reliable ISOBUS interface for guaranteed message delivery
         acknowledgment_timeout : float, optional
             Timeout in seconds for emergency acknowledgments, by default 2.0

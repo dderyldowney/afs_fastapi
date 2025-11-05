@@ -12,9 +12,9 @@ coordination issues, and maintaining audit trails for equipment certification.
 
 from __future__ import annotations
 
-import subprocess
 from pathlib import Path
-from unittest.mock import MagicMock, patch
+
+from tests.utilities.cli_testing import CLICommandTester
 
 
 class TestUpdateChangelogGitParsing:
@@ -275,42 +275,31 @@ class TestUpdateChangelogAgriculturalContext:
 class TestUpdateChangelogCommandExecution:
     """Test command-line execution and file I/O operations."""
 
-    @patch("subprocess.run")
-    def test_command_updates_changelog_file(
-        self, mock_subprocess_run: MagicMock, tmp_path: Path
-    ) -> None:
-        """Test that command successfully updates CHANGELOG.md file.
-
-        STUBBED: Provides operational proof without actual CHANGELOG generation.
-        Validates command construction and execution path.
+    def test_command_updates_changelog_file(self, tmp_path: Path) -> None:
+        """Test that command successfully updates CHANGELOG.md file with real CLI execution.
 
         Agricultural Context: Automated changelog updates ensure no manual
         intervention required, reducing documentation errors for safety audits.
         """
-        # Mock successful CHANGELOG update
-        mock_result = MagicMock()
-        mock_result.returncode = 0
-        mock_result.stdout = "CHANGELOG.md updated successfully"
-        mock_result.stderr = ""
-        mock_subprocess_run.return_value = mock_result
+        # Setup CLI tester with real execution
+        cli_tester = CLICommandTester(enable_real_execution=True)
 
         changelog_path = tmp_path / "CHANGELOG.md"
+        changelog_path.write_text("# Changelog\n\nOriginal content\n")
 
-        # Execute updatechangelog command
-        result = subprocess.run(
-            ["python", "-m", "afs_fastapi.scripts.updatechangelog", str(changelog_path)],
-            capture_output=True,
-            text=True,
-        )
+        # Execute updatechangelog command with real CLI
+        command = ["python", "-m", "afs_fastapi.scripts.updatechangelog", str(changelog_path)]
 
-        # Verify command called with correct parameters
-        mock_subprocess_run.assert_called_once()
-        call_args = mock_subprocess_run.call_args[0][0]
-        assert "python" in call_args
-        assert "afs_fastapi.scripts.updatechangelog" in " ".join(call_args)
+        result = cli_tester.run_command(command)
 
-        # Verify success
+        # Verify command executed successfully
         assert result.returncode == 0
+        assert result.stdout is not None
+
+        # Verify the changelog file was actually modified
+        assert changelog_path.exists()
+        updated_content = changelog_path.read_text()
+        assert len(updated_content) > len("# Changelog\n\nOriginal content\n")
 
     def test_command_creates_backup_before_update(self, tmp_path: Path) -> None:
         """Test creation of backup file before modifying CHANGELOG.md.

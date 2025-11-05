@@ -78,7 +78,7 @@ class TestTokenUsageAPI(unittest.TestCase):
 
     def test_log_token_usage_endpoint(self):
         response = client.post(
-            "/monitoring/token-usage",
+            "/api/v1/monitoring/token-usage",
             json={
                 "agent_id": "api_test_agent",
                 "task_id": "api_test_task",
@@ -140,7 +140,7 @@ class TestTokenUsageAPI(unittest.TestCase):
         db.close()
 
         # Test query by agent_id
-        response = client.get("/monitoring/token-usage?agent_id=query_agent1")
+        response = client.get("/api/v1/monitoring/token-usage?agent_id=query_agent1")
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(len(data), 2)
@@ -148,7 +148,7 @@ class TestTokenUsageAPI(unittest.TestCase):
 
         # Test query by time range
         response = client.get(
-            "/monitoring/token-usage?start_time=2023-01-01T10:30:00&end_time=2023-01-01T11:30:00"
+            "/api/v1/monitoring/token-usage?start_time=2023-01-01T10:30:00&end_time=2023-01-01T11:30:00"
         )
         self.assertEqual(response.status_code, 200)
         data = response.json()

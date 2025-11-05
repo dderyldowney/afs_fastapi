@@ -16,6 +16,7 @@ import uuid
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
+from sqlalchemy import text
 from sqlalchemy.ext.asyncio import (
     AsyncEngine,
     AsyncSession,
@@ -72,7 +73,7 @@ class AsyncTokenUsageLogger:
         self.connection_pool: AgriculturalConnectionPool | None = None
 
         # Performance tracking
-        self._performance_metrics = {
+        self._performance_metrics: dict[str, int | float | list[float]] = {
             "total_operations": 0,
             "successful_operations": 0,
             "failed_operations": 0,
@@ -86,7 +87,7 @@ class AsyncTokenUsageLogger:
         self._setup_logging()
 
     @classmethod
-    def reset_for_testing(cls, database_url: str) -> AsyncTokenUsageLogger:
+    async def reset_for_testing(cls, database_url: str) -> AsyncTokenUsageLogger:
         """Reset singleton instance for testing with a new database.
 
         This method is intended for testing only. It allows tests to reinitialize
@@ -107,9 +108,11 @@ class AsyncTokenUsageLogger:
         async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
         # Create tables
-        with engine.connect() as conn:
-            conn.execute(
-                "CREATE TABLE IF NOT EXISTS token_usage (id TEXT PRIMARY KEY, agent_id TEXT NOT NULL, task_id TEXT NOT NULL, tokens_used FLOAT NOT NULL, model_name TEXT NOT NULL, timestamp TIMESTAMP NOT NULL)"
+        async with engine.connect() as conn:
+            await conn.execute(
+                text(
+                    "CREATE TABLE IF NOT EXISTS token_usage (id TEXT PRIMARY KEY, agent_id TEXT NOT NULL, task_id TEXT NOT NULL, tokens_used FLOAT NOT NULL, model_name TEXT NOT NULL, timestamp TIMESTAMP NOT NULL)"
+                )
             )
 
         cls._instance = cls(database_url=database_url)
@@ -163,7 +166,7 @@ class AsyncTokenUsageLogger:
 
             # Test connection
             async with self.async_engine.connect() as conn:
-                await conn.execute("SELECT 1")
+                await conn.execute(text("SELECT 1"))
 
             self._initialized = True
             logger.info("Async token usage logger initialized successfully")

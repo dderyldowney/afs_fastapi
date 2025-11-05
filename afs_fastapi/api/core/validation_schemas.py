@@ -12,7 +12,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Any
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, ValidationInfo, field_validator
 
 
 class EquipmentType(str, Enum):
@@ -98,7 +98,7 @@ class ISOBUSAddress(BaseModel):
 
     @field_validator("address")
     @classmethod
-    def validate_address(cls, v):
+    def validate_address(cls, v: int) -> int:
         """Validate ISOBUS address format."""
         if v not in range(0x80, 0x88):  # Standard tractor range
             raise ValueError("ISOBUS address should be between 0x80-0x87 for tractors")
@@ -114,7 +114,7 @@ class GPSCoordinates(BaseModel):
 
     @field_validator("latitude", "longitude")
     @classmethod
-    def validate_coordinates(cls, v):
+    def validate_coordinates(cls, v: float) -> float:
         """Validate coordinate precision."""
         if abs(v) > 180:
             raise ValueError("Coordinates must be within valid ranges")
@@ -136,7 +136,7 @@ class FieldSegmentRequest(BaseModel):
 
     @field_validator("segment_id")
     @classmethod
-    def validate_segment_id(cls, v):
+    def validate_segment_id(cls, v: str) -> str:
         """Validate segment ID format."""
         if not re.match(r"^[A-Z]{1,5}-\d{3,5}$", v):
             raise ValueError("Segment ID must follow format like 'FS-001' or 'FIELD-A001'")
@@ -144,7 +144,7 @@ class FieldSegmentRequest(BaseModel):
 
     @field_validator("field_id")
     @classmethod
-    def validate_field_id(cls, v):
+    def validate_field_id(cls, v: str) -> str:
         """Validate field ID format."""
         if not re.match(r"^[A-Z]{1,5}-\d{3,5}$", v):
             raise ValueError("Field ID must follow format like 'FIELD-001' or 'A-12345'")
@@ -164,7 +164,7 @@ class EquipmentControlRequest(BaseModel):
 
     @field_validator("equipment_id")
     @classmethod
-    def validate_equipment_id(cls, v):
+    def validate_equipment_id(cls, v: str) -> str:
         """Validate equipment ID format."""
         if not re.match(r"^[A-Z]{3,5}-\d{3}$", v):
             raise ValueError("Equipment ID must follow format like 'TRC-001' or 'PLT-123'")
@@ -172,7 +172,7 @@ class EquipmentControlRequest(BaseModel):
 
     @field_validator("operation")
     @classmethod
-    def validate_operation(cls, v):
+    def validate_operation(cls, v: str) -> str:
         """Validate operation type."""
         valid_operations = [
             "start_engine",
@@ -202,7 +202,7 @@ class SoilSensorRequest(BaseModel):
 
     @field_validator("sensor_id")
     @classmethod
-    def validate_sensor_id(cls, v):
+    def validate_sensor_id(cls, v: str) -> str:
         """Validate sensor ID format."""
         if not re.match(r"^[A-Z]{3,5}-\d{3}$", v):
             raise ValueError("Sensor ID must follow format like 'SOI-001' or 'SRN-123'")
@@ -210,7 +210,7 @@ class SoilSensorRequest(BaseModel):
 
     @field_validator("readings")
     @classmethod
-    def validate_soil_readings(cls, v):
+    def validate_soil_readings(cls, v: dict[str, Any]) -> dict[str, Any]:
         """Validate soil measurement ranges."""
         if "moisture_percent" in v:
             if not 0 <= v["moisture_percent"] <= 100:
@@ -241,7 +241,7 @@ class WaterQualityRequest(BaseModel):
 
     @field_validator("sensor_id")
     @classmethod
-    def validate_sensor_id(cls, v):
+    def validate_sensor_id(cls, v: str) -> str:
         """Validate sensor ID format."""
         if not re.match(r"^[A-Z]{3,5}-\d{3}$", v):
             raise ValueError("Water sensor ID must follow format like 'WAT-001' or 'WQR-123'")
@@ -249,7 +249,7 @@ class WaterQualityRequest(BaseModel):
 
     @field_validator("readings")
     @classmethod
-    def validate_water_readings(cls, v):
+    def validate_water_readings(cls, v: dict[str, Any]) -> dict[str, Any]:
         """Validate water quality measurements."""
         if "ph" in v:
             if not 0 <= v["ph"] <= 14:
@@ -287,7 +287,7 @@ class AIProcessingRequest(BaseModel):
 
     @field_validator("context_data")
     @classmethod
-    def validate_context_data(cls, v):
+    def validate_context_data(cls, v: dict[str, Any] | None) -> dict[str, Any] | None:
         """Validate agricultural context data."""
         if v is None:
             return v
@@ -310,7 +310,7 @@ class AIProcessingRequest(BaseModel):
 
     @field_validator("safety_override")
     @classmethod
-    def validate_safety_override(cls, v, info):
+    def validate_safety_override(cls, v: bool, info: ValidationInfo) -> bool:
         """Validate safety override is only used for emergency situations."""
         if v is True:
             user_input = info.data.get("user_input", "")
@@ -364,7 +364,7 @@ class FleetCoordinationRequest(BaseModel):
 
     @field_validator("fleet_id")
     @classmethod
-    def validate_fleet_id(cls, v):
+    def validate_fleet_id(cls, v: str) -> str:
         """Validate fleet ID format."""
         if not re.match(r"^FLT-\d{3,5}$", v):
             raise ValueError("Fleet ID must follow format like 'FLT-001' or 'FLT-12345'")
@@ -372,7 +372,7 @@ class FleetCoordinationRequest(BaseModel):
 
     @field_validator("tractor_ids")
     @classmethod
-    def validate_tractor_ids(cls, v):
+    def validate_tractor_ids(cls, v: list[str]) -> list[str]:
         """Validate tractor ID formats."""
         for tractor_id in v:
             if not re.match(r"^[A-Z]{3,5}-\d{3}$", tractor_id):
@@ -399,7 +399,7 @@ class FieldOperationRequest(BaseModel):
 
     @field_validator("field_id")
     @classmethod
-    def validate_field_id(cls, v):
+    def validate_field_id(cls, v: str) -> str:
         """Validate field ID format."""
         if not re.match(r"^[A-Z]{1,5}-\d{3,5}$", v):
             raise ValueError("Field ID must follow format like 'FIELD-001' or 'A-12345'")
@@ -421,7 +421,7 @@ class SafetyZoneRequest(BaseModel):
 
     @field_validator("zone_id")
     @classmethod
-    def validate_zone_id(cls, v):
+    def validate_zone_id(cls, v: str) -> str:
         """Validate zone ID format."""
         if not re.match(r"^[A-Z]{3}-\d{3}$", v):
             raise ValueError("Zone ID must follow format like 'SZN-001' or 'ZON-123'")
@@ -440,7 +440,7 @@ class EquipmentStatusRequest(BaseModel):
 
     @field_validator("equipment_ids")
     @classmethod
-    def validate_equipment_ids(cls, v):
+    def validate_equipment_ids(cls, v: list[str]) -> list[str]:
         """Validate equipment ID formats."""
         for equipment_id in v:
             if not re.match(r"^[A-Z]{3,5}-\d{3}$", equipment_id):
@@ -459,7 +459,7 @@ class ComplianceCheckRequest(BaseModel):
 
     @field_validator("compliance_type")
     @classmethod
-    def validate_compliance_type(cls, v):
+    def validate_compliance_type(cls, v: str) -> str:
         """Validate compliance type."""
         valid_types = [
             "iso_11783",
@@ -485,7 +485,7 @@ class CommonQueryParams(BaseModel):
 
     @field_validator("sort_order")
     @classmethod
-    def validate_sort_order(cls, v):
+    def validate_sort_order(cls, v: str) -> str:
         """Validate sort order."""
         if v not in ["asc", "desc"]:
             raise ValueError("Sort order must be 'asc' or 'desc'")

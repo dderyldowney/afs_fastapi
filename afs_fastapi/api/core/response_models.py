@@ -21,6 +21,23 @@ class BaseResponse(BaseModel):
     request_id: str | None = Field(None, description="Unique request identifier")
 
 
+class ErrorDetail(BaseModel):
+    """Detailed error information."""
+
+    code: str = Field(..., description="Error code")
+    message: str = Field(..., description="Error message")
+    severity: str = Field(..., description="Error severity level")
+    category: str = Field(..., description="Error category")
+    field: str | None = Field(None, description="Field name (if applicable)")
+    value: Any | None = Field(None, description="Invalid value (if applicable)")
+    equipment_id: str | None = Field(None, description="Affected equipment ID")
+    field_id: str | None = Field(None, description="Affected field ID")
+    operation_type: str | None = Field(None, description="Type of operation")
+    recovery_suggestions: list[str] = Field(
+        default_factory=list, description="Recovery suggestions"
+    )
+
+
 class StandardResponse(BaseResponse):
     """Standard success response format."""
 
@@ -87,7 +104,7 @@ class MonitoringDataResponse(BaseResponse):
     sensor_type: str = Field(..., description="Type of sensor")
     location: dict[str, float] = Field(..., description="Sensor location coordinates")
     readings: dict[str, Any] = Field(..., description="Sensor readings")
-    timestamp: datetime = Field(..., description="Reading timestamp")
+    reading_timestamp: datetime = Field(..., description="Reading timestamp")
     data_quality: str = Field("good", description="Data quality assessment")
     calibration_due: datetime | None = Field(None, description="Next calibration due")
     agricultural_metrics: dict[str, Any] = Field(
@@ -137,6 +154,23 @@ class SystemHealthResponse(BaseResponse):
     last_health_check: datetime = Field(..., description="Last health check time")
 
 
+class ComplianceViolation(BaseModel):
+    """Individual compliance violation for agricultural safety reporting."""
+
+    code: str = Field(..., description="Violation code identifier")
+    message: str = Field(..., description="Human-readable violation message")
+    severity: str = Field(..., description="Violation severity level")
+    category: str = Field(..., description="Violation category")
+    field: str | None = Field(None, description="Field name related to violation")
+    value: Any | None = Field(None, description="Value that caused violation")
+    equipment_id: str | None = Field(None, description="Related equipment ID")
+    field_id: str | None = Field(None, description="Related field ID")
+    operation_type: str | None = Field(None, description="Related operation type")
+    recovery_suggestions: list[str] = Field(
+        default_factory=list, description="Suggested recovery actions"
+    )
+
+
 class ComplianceReportResponse(BaseResponse):
     """Standardized compliance report response."""
 
@@ -146,30 +180,13 @@ class ComplianceReportResponse(BaseResponse):
     iso_11783_compliance: bool = Field(True, description="ISO 11783 compliance status")
     iso_18497_compliance: bool = Field(True, description="ISO 18497 compliance status")
     agricultural_safety_compliance: bool = Field(True, description="Agricultural safety compliance")
-    violations: list[dict[str, Any]] = Field(
+    violations: list[dict[str, str]] = Field(  # type: ignore[reportUnknownVariableType]
         default_factory=list, description="Compliance violations"
     )
     recommendations: list[str] = Field(
         default_factory=list, description="Compliance recommendations"
     )
     generated_at: datetime = Field(..., description="Report generation timestamp")
-
-
-class ErrorDetail(BaseModel):
-    """Detailed error information."""
-
-    code: str = Field(..., description="Error code")
-    message: str = Field(..., description="Error message")
-    severity: str = Field(..., description="Error severity level")
-    category: str = Field(..., description="Error category")
-    field: str | None = Field(None, description="Field name (if applicable)")
-    value: Any | None = Field(None, description="Invalid value (if applicable)")
-    equipment_id: str | None = Field(None, description="Affected equipment ID")
-    field_id: str | None = Field(None, description="Affected field ID")
-    operation_type: str | None = Field(None, description="Type of operation")
-    recovery_suggestions: list[str] = Field(
-        default_factory=list, description="Recovery suggestions"
-    )
 
 
 class APIValidationError(Exception):
@@ -179,7 +196,15 @@ class APIValidationError(Exception):
         """Initialize API validation error."""
         self.message = message
         self.details = details or ErrorDetail(
-            code="VALIDATION_ERROR", message=message, severity="medium", category="validation"
+            code="VALIDATION_ERROR",
+            message=message,
+            severity="medium",
+            category="validation",
+            field=None,
+            value=None,
+            equipment_id=None,
+            field_id=None,
+            operation_type=None,
         )
         super().__init__(message)
 
@@ -194,14 +219,11 @@ class AgriculturalValidationError(APIValidationError):
             message=message,
             severity="high",
             category="agricultural_validation",
+            field=None,
+            value=None,
             equipment_id=equipment_id,
             field_id=field_id,
-            recovery_suggestions=[
-                "Check agricultural equipment specifications",
-                "Verify field conditions are suitable for operation",
-                "Ensure compliance with ISO standards",
-                "Consult agricultural safety protocols",
-            ],
+            operation_type="agricultural_operation",
         )
         super().__init__(message, details)
 
@@ -276,6 +298,7 @@ def create_success_response(
 ) -> StandardResponse:
     """Create a standardized success response."""
     return StandardResponse(
+        success=True,
         data=data,
         message=message,
         pagination=pagination,
@@ -292,6 +315,7 @@ def create_error_response(
     value: Any | None = None,
     equipment_id: str | None = None,
     field_id: str | None = None,
+    operation_type: str | None = None,
     recovery_suggestions: list[str] | None = None,
     request_id: str | None = None,
 ) -> ErrorResponse:
@@ -305,10 +329,12 @@ def create_error_response(
         value=value,
         equipment_id=equipment_id,
         field_id=field_id,
+        operation_type=operation_type,
         recovery_suggestions=recovery_suggestions or [],
     )
 
     return ErrorResponse(
+        success=False,
         error=error_detail.model_dump(),
         recovery_suggestions=error_detail.recovery_suggestions,
         request_id=request_id,
@@ -322,6 +348,7 @@ def create_paginated_response(
     total_pages = max(1, (total + page_size - 1) // page_size)
 
     return PaginatedResponse(
+        success=True,
         data=data,
         total=total,
         page=page,

@@ -9,7 +9,8 @@ from __future__ import annotations
 
 import asyncio
 import subprocess
-from unittest.mock import AsyncMock, MagicMock, mock_open, patch
+from pathlib import Path
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import can
 import pytest
@@ -207,31 +208,28 @@ class TestLinuxSocketCANManager:  # Reverted to original name
 
     @pytest.mark.asyncio
     async def test_statistics_parsing_from_proc(
-        self, linux_manager: LinuxSocketCANManager
-    ) -> None:  # Reverted to original name
-        """Test parsing statistics from /proc/net/can/stats."""
-        mock_proc_content = """rx_packets: 1250
+        self, linux_manager: LinuxSocketCANManager, tmp_path: Path
+    ) -> None:
+        """Test parsing statistics from real CAN stats file."""
+        # Create real temporary file with CAN stats data
+        proc_content = """rx_packets: 1250
 tx_packets: 980
 rx_errors: 5
 tx_errors: 2
 rx_dropped: 0
 tx_dropped: 1"""
 
-        mock_path = MagicMock()
-        mock_path.exists.return_value = True
+        stats_file = tmp_path / "can_stats"
+        stats_file.write_text(proc_content)
 
-        with (
-            patch("pathlib.Path", return_value=mock_path),
-            patch("builtins.open", mock_open(read_data=mock_proc_content)),
-        ):
+        # Use real file operations
+        stats = await linux_manager._parse_proc_stats("can0", stats_file)
 
-            stats = await linux_manager._parse_proc_stats("can0", mock_path)
-
-            assert stats.interface_name == "can0"
-            assert stats.rx_packets == 1250
-            assert stats.tx_packets == 980
-            assert stats.rx_errors == 5
-            assert stats.tx_errors == 2
+        assert stats.interface_name == "can0"
+        assert stats.rx_packets == 1250
+        assert stats.tx_packets == 980
+        assert stats.rx_errors == 5
+        assert stats.tx_errors == 2
 
     def test_can_filter_creation(
         self, linux_manager: LinuxSocketCANManager

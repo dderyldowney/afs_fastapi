@@ -23,11 +23,26 @@ from afs_fastapi.api.core.validation_schemas import (
     AIProcessingRequest,
     FleetCoordinationRequest,
     OperationType,
+    OptimizationLevel,
 )
 from afs_fastapi.services import ai_processing_manager
+from afs_fastapi.services.ai_processing_pipeline import (
+    OptimizationLevel as ServiceOptimizationLevel,
+)
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
+
+
+def convert_optimization_level(api_level: OptimizationLevel) -> ServiceOptimizationLevel:
+    """Convert API OptimizationLevel to service OptimizationLevel."""
+    level_mapping: dict[OptimizationLevel, ServiceOptimizationLevel] = {
+        OptimizationLevel.CONSERVATIVE: ServiceOptimizationLevel.CONSERVATIVE,
+        OptimizationLevel.STANDARD: ServiceOptimizationLevel.STANDARD,
+        OptimizationLevel.AGGRESSIVE: ServiceOptimizationLevel.AGGRESSIVE,
+        OptimizationLevel.ADAPTIVE: ServiceOptimizationLevel.ADAPTIVE,
+    }
+    return level_mapping.get(api_level, ServiceOptimizationLevel.STANDARD)
 
 
 @router.post(
@@ -39,7 +54,7 @@ logger = logging.getLogger(__name__)
 )
 async def process_with_ai_optimization(
     request: Request, processing_request: AIProcessingRequest
-) -> AIProcessingResponse:
+) -> AIProcessingResponse | JSONResponse:
     """
     Process agricultural text input with AI optimization pipeline.
 
@@ -79,7 +94,9 @@ async def process_with_ai_optimization(
             result = await ai_processing_manager.process_agricultural_request(
                 user_input=processing_request.user_input,
                 service_name=processing_request.service_name or "platform",
-                optimization_level=optimization_level,
+                optimization_level=convert_optimization_level(
+                    optimization_level or OptimizationLevel.STANDARD
+                ),
                 context_data=processing_request.context_data,
             )
 
@@ -95,18 +112,18 @@ async def process_with_ai_optimization(
             )
 
         # Prepare standardized response matching test expectations
-        return JSONResponse(
-            status_code=200,
-            content={
-                "success": True,
-                "input_text": processing_request.user_input,
-                "processed_output": result.final_output,
-                "optimization_applied": result.optimization_applied,
-                "optimization_level": processing_request.optimization_level or "standard",
-                "agricultural_compliance": result.agricultural_compliance_maintained,
-                "timestamp": "2024-01-01T12:00:00Z",
-                "request_id": str(request.url),
-            },
+        return AIProcessingResponse(
+            success=True,
+            input_text=processing_request.user_input,
+            processed_output=result.final_output,
+            optimization_applied=result.optimization_applied,
+            tokens_saved=getattr(result, "tokens_saved", 0),
+            processing_time_ms=getattr(result, "processing_time_ms", 0.0),
+            agricultural_compliance=result.agricultural_compliance_maintained,
+            optimization_level=processing_request.optimization_level or "standard",
+            fallback_used=getattr(result, "fallback_used", False),
+            metrics=getattr(result, "metrics", {}),
+            request_id=str(request.url),
         )
 
     except AgriculturalValidationError as e:
@@ -122,7 +139,7 @@ async def process_with_ai_optimization(
                 "Manual review required for safety-critical content",
             ],
         )
-        return JSONResponse(status_code=422, content=response)
+        return JSONResponse(status_code=422, content=response.model_dump())
 
     except Exception as e:
         logger.error(f"AI processing error: {e}")
@@ -138,7 +155,7 @@ async def process_with_ai_optimization(
                 "Contact AI support team",
             ],
         )
-        return JSONResponse(status_code=500, content=response)
+        return JSONResponse(status_code=500, content=response.model_dump())
 
 
 @router.post(
@@ -150,7 +167,7 @@ async def process_with_ai_optimization(
 )
 async def optimize_equipment_communication(
     request: Request, equipment_request: AIProcessingRequest
-) -> AIProcessingResponse:
+) -> AIProcessingResponse | JSONResponse:
     """
     Optimize equipment communication messages for ISOBUS and safety protocols.
 
@@ -216,7 +233,7 @@ async def optimize_equipment_communication(
                 "Verify ISO 11783 compliance",
             ],
         )
-        return JSONResponse(status_code=422, content=response)
+        return JSONResponse(status_code=422, content=response.model_dump())
 
     except Exception as e:
         logger.error(f"Equipment optimization error: {e}")
@@ -232,7 +249,7 @@ async def optimize_equipment_communication(
                 "Contact equipment support team",
             ],
         )
-        return JSONResponse(status_code=500, content=response)
+        return JSONResponse(status_code=500, content=response.model_dump())
 
 
 @router.post(
@@ -244,7 +261,7 @@ async def optimize_equipment_communication(
 )
 async def optimize_fleet_coordination(
     request: Request, fleet_request: FleetCoordinationRequest
-) -> AIProcessingResponse:
+) -> AIProcessingResponse | JSONResponse:
     """
     Optimize fleet coordination messages and multi-tractor commands.
 
@@ -309,7 +326,7 @@ async def optimize_fleet_coordination(
                 "Verify equipment compatibility",
             ],
         )
-        return JSONResponse(status_code=422, content=response)
+        return JSONResponse(status_code=422, content=response.model_dump())
 
     except Exception as e:
         logger.error(f"Fleet optimization error: {e}")
@@ -325,7 +342,7 @@ async def optimize_fleet_coordination(
                 "Contact fleet management support",
             ],
         )
-        return JSONResponse(status_code=500, content=response)
+        return JSONResponse(status_code=500, content=response.model_dump())
 
 
 @router.get(
@@ -385,7 +402,7 @@ async def get_ai_processing_statistics(request: Request) -> StandardResponse:
                 "Contact system administrator",
             ],
         )
-        return JSONResponse(status_code=500, content=response)
+        return JSONResponse(status_code=500, content=response.model_dump())
 
 
 @router.get(
@@ -441,7 +458,7 @@ async def ai_processing_health_check(request: Request) -> StandardResponse:
                 "Contact system administrator",
             ],
         )
-        return JSONResponse(status_code=503, content=response)
+        return JSONResponse(status_code=503, content=response.model_dump())
 
 
 @router.get(
@@ -585,7 +602,7 @@ async def get_optimization_levels(request: Request) -> StandardResponse:
                 "Contact system administrator",
             ],
         )
-        return JSONResponse(status_code=500, content=response)
+        return JSONResponse(status_code=500, content=response.model_dump())
 
 
 # Helper functions

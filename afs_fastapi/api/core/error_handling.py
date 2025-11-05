@@ -14,7 +14,7 @@ from typing import Any
 
 from fastapi import HTTPException, Request, status
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_serializer
 
 # Configure logging for API error handling
 logger = logging.getLogger(__name__)
@@ -117,6 +117,11 @@ class APIErrorResponse(BaseModel):
     path: str | None = Field(None, description="API endpoint path")
     method: str | None = Field(None, description="HTTP method")
 
+    @field_serializer("timestamp")
+    def serialize_timestamp(self, value: datetime) -> str:
+        """Serialize datetime as ISO format string."""
+        return value.isoformat()
+
 
 class StandardResponse(BaseModel):
     """Standardized success response format for all API endpoints."""
@@ -129,6 +134,11 @@ class StandardResponse(BaseModel):
     pagination: dict[str, Any] | None = Field(
         None, description="Pagination information for list responses"
     )
+
+    @field_serializer("timestamp")
+    def serialize_timestamp(self, value: datetime) -> str:
+        """Serialize datetime as ISO format string."""
+        return value.isoformat()
 
 
 class PaginatedResponse(BaseModel):
@@ -144,6 +154,11 @@ class PaginatedResponse(BaseModel):
     has_previous: bool = Field(..., description="Whether there are previous pages")
     request_id: str | None = Field(None, description="Unique request identifier")
     timestamp: datetime = Field(default_factory=datetime.now, description="Response timestamp")
+
+    @field_serializer("timestamp")
+    def serialize_timestamp(self, value: datetime) -> str:
+        """Serialize datetime as ISO format string."""
+        return value.isoformat()
 
 
 class AgriculturalValidationError(Exception):
@@ -252,9 +267,13 @@ def create_error_response(
     message: str | None = None,
     severity: str = "medium",
     category: str = "validation",
+    technical_details: str | None = None,
     equipment_id: str | None = None,
     field_id: str | None = None,
+    operation_type: str | None = None,
+    agricultural_context: dict[str, Any] | None = None,
     recovery_suggestions: list[str] | None = None,
+    iso_violation_details: dict[str, Any] | None = None,
 ) -> APIErrorResponse:
     """Create standardized error response."""
     # Create error details if not provided
@@ -267,24 +286,24 @@ def create_error_response(
             severity=ErrorSeverity(severity),
             category=ErrorCategory(category),
             message=message,
+            technical_details=technical_details,
             equipment_id=equipment_id,
             field_id=field_id,
+            operation_type=operation_type,
+            agricultural_context=agricultural_context,
             recovery_suggestions=recovery_suggestions or [],
+            iso_violation_details=iso_violation_details,
         )
 
     response = APIErrorResponse(
+        success=False,
         error=error_details,
         request_id=request_id or _generate_request_id(),
         path=str(request.url) if request else None,
         method=request.method if request else None,
     )
 
-    # Convert datetime to string for JSON serialization
-    response_dict = response.model_dump()
-    if "timestamp" in response_dict:
-        response_dict["timestamp"] = response_dict["timestamp"].isoformat()
-
-    return response_dict
+    return response
 
 
 def create_success_response(
@@ -295,6 +314,7 @@ def create_success_response(
 ) -> StandardResponse:
     """Create standardized success response."""
     return StandardResponse(
+        success=True,
         data=data,
         message=message,
         request_id=request_id or _generate_request_id(),
@@ -313,6 +333,7 @@ def create_paginated_response(
     total_pages = (total + page_size - 1) // page_size
 
     return PaginatedResponse(
+        success=True,
         data=data,
         total=total,
         page=page,
@@ -342,11 +363,16 @@ def validation_exception_handler(request: Request, exc: Exception) -> JSONRespon
         category=ErrorCategory.VALIDATION,
         message=str(exc),
         technical_details="Input validation failed",
+        equipment_id=None,
+        field_id=None,
+        operation_type=None,
+        agricultural_context=None,
         recovery_suggestions=[
             "Check input data types and formats",
             "Validate required fields are present",
             "Ensure numeric values are within valid ranges",
         ],
+        iso_violation_details=None,
     )
 
     response = create_error_response(error_details, request)
@@ -381,11 +407,16 @@ def http_exception_handler(request: Request, exc: HTTPException) -> JSONResponse
         category=ErrorCategory.SYSTEM,
         message=str(exc.detail),
         technical_details=f"HTTP {exc.status_code}",
+        equipment_id=None,
+        field_id=None,
+        operation_type=None,
+        agricultural_context=None,
         recovery_suggestions=[
             "Check request parameters",
             "Verify API authentication",
             "Try again later",
         ],
+        iso_violation_details=None,
     )
 
     response = create_error_response(error_details, request)
@@ -405,11 +436,16 @@ def general_exception_handler(request: Request, exc: Exception) -> JSONResponse:
         category=ErrorCategory.SYSTEM,
         message="An unexpected error occurred",
         technical_details="Internal server error",
+        equipment_id=None,
+        field_id=None,
+        operation_type=None,
+        agricultural_context=None,
         recovery_suggestions=[
             "Contact system administrator",
             "Check server logs for details",
             "Try again later",
         ],
+        iso_violation_details=None,
     )
 
     response = create_error_response(error_details, request)

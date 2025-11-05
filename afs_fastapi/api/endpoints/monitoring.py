@@ -123,7 +123,7 @@ async def submit_soil_reading(
                 "Validate sensor location",
             ],
         )
-        return JSONResponse(status_code=422, content=response)
+        return JSONResponse(status_code=422, content=response.model_dump())
 
     except Exception as e:
         logger.error(f"Error processing soil reading from {soil_request.sensor_id}: {e}")
@@ -139,7 +139,7 @@ async def submit_soil_reading(
                 "Contact technical support",
             ],
         )
-        return JSONResponse(status_code=500, content=response)
+        return JSONResponse(status_code=500, content=response.model_dump())
 
 
 @router.get(
@@ -268,7 +268,7 @@ async def get_soil_readings(
                 "Contact system administrator",
             ],
         )
-        return JSONResponse(status_code=500, content=response)
+        return JSONResponse(status_code=500, content=response.model_dump())
 
 
 @router.post(
@@ -365,7 +365,7 @@ async def submit_water_reading(
                 "Test water supply regularly",
             ],
         )
-        return JSONResponse(status_code=422, content=response)
+        return JSONResponse(status_code=422, content=response.model_dump())
 
     except Exception as e:
         logger.error(f"Error processing water reading from {water_request.sensor_id}: {e}")
@@ -381,7 +381,7 @@ async def submit_water_reading(
                 "Contact technical support",
             ],
         )
-        return JSONResponse(status_code=500, content=response)
+        return JSONResponse(status_code=500, content=response.model_dump())
 
 
 @router.get(
@@ -514,7 +514,7 @@ async def get_water_readings(
                 "Contact system administrator",
             ],
         )
-        return JSONResponse(status_code=500, content=response)
+        return JSONResponse(status_code=500, content=response.model_dump())
 
 
 @router.get(
@@ -636,7 +636,7 @@ async def get_sensor_status(request: Request) -> StandardResponse:
                 "Contact network administrator",
             ],
         )
-        return JSONResponse(status_code=500, content=response)
+        return JSONResponse(status_code=500, content=response.model_dump())
 
 
 # Helper functions

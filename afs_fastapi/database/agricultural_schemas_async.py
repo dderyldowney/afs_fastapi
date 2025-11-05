@@ -34,7 +34,7 @@ class Base(DeclarativeBase):
     pass
 
 
-class JSONType(TypeDecorator):
+class JSONType(TypeDecorator[str]):
     """Custom JSON type that handles serialization for database compatibility."""
 
     impl = Text
@@ -117,7 +117,7 @@ class Field(Base):
     field_name: Mapped[str] = mapped_column(String(100), nullable=False)
     crop_type: Mapped[str | None] = mapped_column(String(30), nullable=True)
     field_area_hectares: Mapped[float | None] = mapped_column(Float, nullable=True)
-    boundary_coordinates: Mapped[list | None] = mapped_column(
+    boundary_coordinates: Mapped[list[tuple[float, float]] | None] = mapped_column(
         JSONType, nullable=True
     )  # List of (lat, lon) tuples
     soil_type: Mapped[str | None] = mapped_column(String(30), nullable=True)
@@ -165,7 +165,7 @@ class ISOBUSMessageRecord(Base):
     pgn: Mapped[int] = mapped_column(Integer, nullable=False)  # Parameter Group Number
     source_address: Mapped[int] = mapped_column(Integer, nullable=False)
     destination_address: Mapped[int] = mapped_column(Integer, nullable=False)
-    data_payload: Mapped[dict | None] = mapped_column(
+    data_payload: Mapped[dict[str, Any] | None] = mapped_column(
         JSONType, nullable=True
     )  # Parsed message data
     priority_level: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
@@ -367,7 +367,9 @@ class TokenUsage(Base):
     task_id: Mapped[str] = mapped_column(String, nullable=False)
     tokens_used: Mapped[float] = mapped_column(Float, nullable=False)
     model_name: Mapped[str] = mapped_column(String, nullable=False)
-    timestamp: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    timestamp: Mapped[datetime] = mapped_column(
+        DateTime, default=lambda: datetime.now(UTC), nullable=False
+    )
 
     # Async-compatible indexes for performance
     __table_args__ = (
@@ -393,7 +395,7 @@ class AsyncDatabaseManager:
     for agricultural robotics data patterns.
     """
 
-    def __init__(self, database_url: str, pool_config: dict | None = None) -> None:
+    def __init__(self, database_url: str, pool_config: dict[str, Any] | None = None) -> None:
         """Initialize async database manager.
 
         Parameters
@@ -411,7 +413,7 @@ class AsyncDatabaseManager:
         self.async_session_factory: async_sessionmaker[AsyncSession] | None = None
 
         # Performance tracking
-        self._performance_metrics = {
+        self._performance_metrics: dict[str, int | float | list[float]] = {
             "total_operations": 0,
             "successful_operations": 0,
             "failed_operations": 0,

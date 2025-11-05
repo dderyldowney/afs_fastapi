@@ -12,11 +12,11 @@ from __future__ import annotations
 import asyncio
 import time
 from datetime import datetime, timedelta
-from unittest.mock import Mock
 
 import can
 import pytest
 
+from afs_fastapi.protocols.sae_j1939 import J1939DTC
 from afs_fastapi.safety.cross_layer_validation import (
     CrossLayerSafetyValidator,
     DTCSafetyAnalyzer,
@@ -565,12 +565,18 @@ class TestDTCSafetyAnalyzer:
 
     def test_critical_dtc_analysis(self, dtc_analyzer: DTCSafetyAnalyzer) -> None:
         """Test analysis of critical DTCs."""
-        # Create mock emergency stop system DTC
-        emergency_dtc = Mock()
-        emergency_dtc.spn = 9999
-        emergency_dtc.fmi = 15
-        emergency_dtc.occurrence_count = 1
-        emergency_dtc.timestamp = datetime.now()
+        # Create emergency stop system DTC
+        emergency_dtc = J1939DTC(
+            spn=9999,
+            fmi=15,
+            failure_mode=15,
+            occurrence_count=1,
+            source_address=0x80,
+            severity="Critical",
+            requires_immediate_action=True,
+            equipment_type="Tractor",
+            fault_category="Emergency System",
+        )
 
         analysis = dtc_analyzer.analyze_dtc_safety_impact(emergency_dtc)
 
@@ -582,12 +588,18 @@ class TestDTCSafetyAnalyzer:
 
     def test_engine_dtc_analysis(self, dtc_analyzer: DTCSafetyAnalyzer) -> None:
         """Test analysis of engine-related DTCs."""
-        # Create mock engine coolant temperature DTC
-        coolant_dtc = Mock()
-        coolant_dtc.spn = 110
-        coolant_dtc.fmi = 16
-        coolant_dtc.occurrence_count = 3
-        coolant_dtc.timestamp = datetime.now()
+        # Create engine coolant temperature DTC
+        coolant_dtc = J1939DTC(
+            spn=110,
+            fmi=16,
+            failure_mode=16,
+            occurrence_count=3,
+            source_address=0x00,
+            severity="High",
+            requires_immediate_action=False,
+            equipment_type="Engine",
+            fault_category="Coolant System",
+        )
 
         analysis = dtc_analyzer.analyze_dtc_safety_impact(coolant_dtc)
 
@@ -599,12 +611,18 @@ class TestDTCSafetyAnalyzer:
 
     def test_low_priority_dtc_analysis(self, dtc_analyzer: DTCSafetyAnalyzer) -> None:
         """Test analysis of low-priority DTCs."""
-        # Create mock non-critical DTC
-        non_critical_dtc = Mock()
-        non_critical_dtc.spn = 1234
-        non_critical_dtc.fmi = 2
-        non_critical_dtc.occurrence_count = 1
-        non_critical_dtc.timestamp = datetime.now()
+        # Create non-critical DTC
+        non_critical_dtc = J1939DTC(
+            spn=1234,
+            fmi=2,
+            failure_mode=2,
+            occurrence_count=1,
+            source_address=0x21,
+            severity="Low",
+            requires_immediate_action=False,
+            equipment_type="Implement",
+            fault_category="Sensor",
+        )
 
         analysis = dtc_analyzer.analyze_dtc_safety_impact(non_critical_dtc)
 
@@ -649,12 +667,18 @@ class TestIntegratedSafetySystem:
 
         validation_result = validator.validate_safety_critical_message(emergency_message)
 
-        # 3. Analyze critical DTC
-        critical_dtc = Mock()
-        critical_dtc.spn = 9999
-        critical_dtc.fmi = 15
-        critical_dtc.occurrence_count = 1
-        critical_dtc.timestamp = datetime.now()
+        # 3. Analyze critical DTC using real DTC object
+        critical_dtc = J1939DTC(
+            spn=9999,
+            fmi=15,
+            failure_mode=15,
+            occurrence_count=1,
+            source_address=0x80,
+            severity="Critical",
+            requires_immediate_action=True,
+            equipment_type="Tractor",
+            fault_category="Emergency System",
+        )
 
         dtc_analysis = dtc_analyzer.analyze_dtc_safety_impact(critical_dtc)
 
@@ -689,12 +713,18 @@ class TestIntegratedSafetySystem:
             "emergency_stop", "autonomous_operation", ["bystander_safety"]
         )
 
-        # Trigger additional escalation through DTC
-        emergency_dtc = Mock()
-        emergency_dtc.spn = 9999
-        emergency_dtc.fmi = 15
-        emergency_dtc.occurrence_count = 1
-        emergency_dtc.timestamp = datetime.now()
+        # Trigger additional escalation through DTC using real object
+        emergency_dtc = J1939DTC(
+            spn=9999,
+            fmi=15,
+            failure_mode=15,
+            occurrence_count=1,
+            source_address=0x80,
+            severity="Critical",
+            requires_immediate_action=True,
+            equipment_type="Tractor",
+            fault_category="Emergency System",
+        )
 
         dtc_analysis = dtc_analyzer.analyze_dtc_safety_impact(emergency_dtc)
 

@@ -31,6 +31,7 @@ from afs_fastapi.equipment.physical_can_interface import (
     CANInterfaceType,
     InterfaceConfiguration,
     InterfaceState,
+    InterfaceStatus,
     PhysicalCANManager,
 )
 
@@ -306,26 +307,32 @@ class TestConnectionPool:
         connection_pool: ConnectionPool,
     ) -> None:
         """Test health score calculation."""
-        # Mock healthy status
-        healthy_status = MagicMock()
-        healthy_status.state = InterfaceState.CONNECTED
-        healthy_status.errors_total = 5
-        healthy_status.messages_sent = 1000
-        healthy_status.messages_received = 1500
-        healthy_status.bus_load_percentage = 45.0
-        healthy_status.last_heartbeat = datetime.now()
+        # Create healthy status
+        healthy_status = InterfaceStatus(
+            interface_id="can0",
+            state=InterfaceState.CONNECTED,
+            last_heartbeat=datetime.now(),
+            errors_total=5,
+            messages_sent=1000,
+            messages_received=1500,
+            bus_load_percentage=45.0,
+            connection_uptime=timedelta(minutes=15),
+        )
 
         score = connection_pool._calculate_health_score(healthy_status)
         assert 0.8 <= score <= 1.0
 
-        # Mock unhealthy status
-        unhealthy_status = MagicMock()
-        unhealthy_status.state = InterfaceState.ERROR
-        unhealthy_status.errors_total = 200
-        unhealthy_status.messages_sent = 100
-        unhealthy_status.messages_received = 100
-        unhealthy_status.bus_load_percentage = 95.0
-        unhealthy_status.last_heartbeat = datetime.now() - timedelta(minutes=2)
+        # Create unhealthy status
+        unhealthy_status = InterfaceStatus(
+            interface_id="can1",
+            state=InterfaceState.ERROR,
+            last_heartbeat=datetime.now() - timedelta(minutes=2),
+            errors_total=200,
+            messages_sent=100,
+            messages_received=100,
+            bus_load_percentage=95.0,
+            connection_uptime=timedelta(minutes=1),
+        )
 
         score = connection_pool._calculate_health_score(unhealthy_status)
         assert score < 0.5

@@ -10,9 +10,11 @@ agricultural operations including emergency stops and collision avoidance.
 """
 
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import Mock
 
 import pytest
+
+from tests.utilities.timing_testing import TimeTestController
 
 
 class TestJ1939AddressClaiming(unittest.TestCase):
@@ -272,10 +274,29 @@ class TestJ1939TransportProtocol(unittest.TestCase):
         assert "Missing segment" in str(excinfo.value)
         assert excinfo.value.error_code == "SEGMENT_MISSING"
 
-        # Test segment timeout handling
-        with patch("time.time", return_value=1000):
-            result = transport.wait_for_segment(segment_number=2, timeout_ms=500)
+        # Test segment timeout handling using timing
+        controller = TimeTestController()
 
+        # Start waiting for segment with 500ms timeout
+        import threading
+
+        result_container = []
+
+        def wait_for_segment():
+            result = transport.wait_for_segment(segment_number=2, timeout_ms=500)
+            result_container.append(result)
+
+        # Start the wait in a separate thread
+        wait_thread = threading.Thread(target=wait_for_segment)
+        wait_thread.start()
+
+        # Wait longer than timeout to ensure timeout occurs
+        controller.wait_for_duration(0.6)  # 600ms > 500ms timeout
+        wait_thread.join(timeout=0.1)
+
+        # Check timeout result
+        assert len(result_container) == 1
+        result = result_container[0]
         assert result.timeout_occurred is True
         assert result.error_code == "SEGMENT_TIMEOUT"
 
@@ -411,14 +432,10 @@ class TestJ1939AgriculturalIntegration(unittest.TestCase):
         assert isobus_message.agricultural_context == "Position Data"
         assert isobus_message.compatibility_verified is True
 
-        # Test bidirectional communication
-        # Note: This is a mock test - actual implementation would handle the message
-        from unittest.mock import patch
-
-        with patch.object(isobus_handler, "handle_message", return_value=True) as mock_handle:
-            result = isobus_handler.handle_message(Mock())
-            assert result is True
-            mock_handle.assert_called_once()
+        # Test bidirectional communication - simplified without mocking
+        # Note: Basic verification that the handler is callable
+        assert hasattr(isobus_handler, "handle_message")
+        assert callable(isobus_handler.handle_message)
 
     def test_j1939_performance_under_agricultural_constraints(self) -> None:
         """

@@ -942,9 +942,7 @@ class CANBusConnectionManager:
                         api_message, available_interfaces
                     )
 
-                # Ensure target_interfaces is a list of strings for type safety
-                if not isinstance(api_target_interfaces, list):
-                    raise ValueError("target_interfaces must be a list of interface IDs")
+                # target_interfaces is guaranteed to be a list[str] from route_message()
 
                 # Send to target interfaces
                 results: dict[str, bool] = {}

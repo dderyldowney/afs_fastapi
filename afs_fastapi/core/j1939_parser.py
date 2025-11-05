@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import logging
 
 from .j1939_specs import PGN_SPECS

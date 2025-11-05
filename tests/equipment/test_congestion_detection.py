@@ -8,7 +8,7 @@ designed for agricultural fleet operations with real-time safety requirements.
 from __future__ import annotations
 
 from datetime import datetime, timedelta
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 
@@ -19,6 +19,7 @@ from afs_fastapi.equipment.congestion_detection import (
     ThrottleAction,
     TrafficThrottler,
 )
+from afs_fastapi.equipment.physical_can_interface import InterfaceState, InterfaceStatus
 
 
 class TestCongestionMetrics:
@@ -107,17 +108,22 @@ class TestNetworkCongestionDetector:
     @pytest.mark.asyncio
     async def test_metrics_collection(self, detector: NetworkCongestionDetector) -> None:
         """Test real-time metrics collection."""
-        # Mock interface status data
-        mock_status = MagicMock()
-        mock_status.bus_load_percentage = 60.0
-        mock_status.errors_total = 25
-        mock_status.messages_sent = 1000
-        mock_status.messages_received = 1500
+        # Create interface status data
+        status = InterfaceStatus(
+            interface_id="can0",
+            state=InterfaceState.CONNECTED,
+            last_heartbeat=datetime.now(),
+            bus_load_percentage=60.0,
+            errors_total=25,
+            messages_sent=1000,
+            messages_received=1500,
+            connection_uptime=timedelta(minutes=5),
+        )
 
-        # Mock message queue depth
+        # Mock message queue depth (internal method, reasonable to patch)
         with patch.object(detector, "_get_queue_depth", return_value=30):
             with patch.object(detector, "_measure_latency", return_value=(12.5, 28.0)):
-                metrics = await detector._collect_metrics({"can0": mock_status})
+                metrics = await detector._collect_metrics({"can0": status})
 
         assert metrics.bus_load_percentage == 60.0
         assert metrics.error_rate_percentage == 1.0  # 25/(1000+1500) * 100
@@ -369,17 +375,22 @@ class TestIntegratedCongestionManagement:
         detector = NetworkCongestionDetector(monitoring_interval=0.1)
         throttler = TrafficThrottler(enable_adaptive_throttling=True)
 
-        # Simulate interface status indicating high load
-        mock_status = MagicMock()
-        mock_status.bus_load_percentage = 85.0
-        mock_status.errors_total = 50
-        mock_status.messages_sent = 1000
-        mock_status.messages_received = 1500
+        # Create interface status indicating high load
+        high_load_status = InterfaceStatus(
+            interface_id="can0",
+            state=InterfaceState.CONNECTED,
+            last_heartbeat=datetime.now(),
+            bus_load_percentage=85.0,
+            errors_total=50,
+            messages_sent=1000,
+            messages_received=1500,
+            connection_uptime=timedelta(minutes=10),
+        )
 
         # Mock supporting methods
         with patch.object(detector, "_get_queue_depth", return_value=120):
             with patch.object(detector, "_measure_latency", return_value=(35.0, 85.0)):
-                metrics = await detector._collect_metrics({"can0": mock_status})
+                metrics = await detector._collect_metrics({"can0": high_load_status})
 
         # Detect congestion level
         congestion_score = metrics.calculate_congestion_score()

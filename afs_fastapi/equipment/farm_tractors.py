@@ -501,9 +501,9 @@ class FarmTractor(
         self.regenerative_mode: bool = False
 
         # Enhanced Reliable ISOBUS Communication
-        from afs_fastapi.equipment.reliable_isobus import ReliableISOBUSDevice
+        from afs_fastapi.equipment.network.isobus import ISOBUSDevice
 
-        self.reliable_isobus = ReliableISOBUSDevice(device_address=self.isobus_address)
+        self.reliable_isobus = ISOBUSDevice(device_address=self.isobus_address)
 
     def start_engine(self) -> str:
         if self.engine_on:

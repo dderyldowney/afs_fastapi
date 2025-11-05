@@ -21,7 +21,7 @@ router = APIRouter(prefix="/safety", tags=["Safety Systems"])
 class SimpleSafetyManager:
     """Simple safety system management for API demonstration."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.emergency_active: bool = False
         self.collision_avoidance_active: bool = True
         self.emergency_history: list[dict[str, Any]] = []
@@ -54,7 +54,7 @@ class SimpleSafetyManager:
             "propagation_time_ms": 250.0,
         }
 
-    def reset_emergency_stop(self):
+    def reset_emergency_stop(self) -> bool:
         """Reset emergency stop system."""
         self.emergency_active = False
         return True

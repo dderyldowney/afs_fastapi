@@ -21,15 +21,16 @@ Agricultural Context
 import time
 import unittest
 from datetime import datetime
-from unittest.mock import Mock, patch
+from unittest.mock import Mock
 
 from afs_fastapi.equipment.farm_tractors import FarmTractor, ISOBUSMessage
-from afs_fastapi.equipment.reliable_isobus import (
+from afs_fastapi.equipment.network.isobus import (
+    ISOBUSDevice,
     MessageDeliveryTracker,
-    ReliableISOBUSDevice,
     ReliableISOBUSMessage,
 )
 from afs_fastapi.services.field_allocation import FieldAllocationCRDT
+from tests.utilities.timing_testing import TimeTestController
 
 
 class TestReliableISOBUSMessage(unittest.TestCase):
@@ -143,15 +144,18 @@ class TestMessageDeliveryTracker(unittest.TestCase):
             retry_interval=0.1,
         )
 
-        current_time = time.time()
-        with patch("time.time", return_value=current_time):
-            self.tracker.track_message(reliable_msg)
+        # Track when we started the test
+        start_time = time.time()
+        self.tracker.track_message(reliable_msg)
 
         # Should schedule first retry in priority queue
         self.assertEqual(len(self.tracker._retry_queue), 1)
         retry_time, priority, sequence, message_id = self.tracker._retry_queue[0]
         self.assertEqual(message_id, "MSG_002")
-        self.assertAlmostEqual(retry_time, current_time + 0.1, places=2)
+
+        # Assert retry timing is correct using real time
+        actual_interval = retry_time - start_time
+        self.assertAlmostEqual(actual_interval, 0.1, places=2)
         self.assertEqual(priority, 0)  # Default priority
 
     def test_handle_acknowledgment_success(self):
@@ -173,30 +177,33 @@ class TestMessageDeliveryTracker(unittest.TestCase):
         self.assertNotIn("UNKNOWN_MSG", self.tracker._acknowledgments)
 
     def test_process_retries_timing(self):
-        """Test retry processing based on timing."""
+        """Test retry processing based on timing using real delays."""
         reliable_msg = ReliableISOBUSMessage(
             message_id="MSG_004",
             base_message=self.base_message,
             retry_interval=0.1,
         )
 
-        current_time = time.time()
-        with patch("time.time", return_value=current_time):
-            self.tracker.track_message(reliable_msg)
+        # Use timing instead of mocking
+        controller = TimeTestController()
+
+        # Track the message
+        self.tracker.track_message(reliable_msg)
 
         # Before retry time - no retries
-        with patch("time.time", return_value=current_time + 0.05):
-            retries = self.tracker.process_retries()
-            self.assertEqual(len(retries), 0)
+        retries = self.tracker.process_retries()
+        self.assertEqual(len(retries), 0)
+
+        # Wait until retry time should be reached
+        controller.wait_for_duration(0.1)
 
         # After retry time - should return message for retry
-        with patch("time.time", return_value=current_time + 0.15):
-            retries = self.tracker.process_retries()
-            self.assertEqual(len(retries), 1)
-            self.assertEqual(retries[0].message_id, "MSG_004")
+        retries = self.tracker.process_retries()
+        self.assertEqual(len(retries), 1)
+        self.assertEqual(retries[0].message_id, "MSG_004")
 
     def test_exponential_backoff_retry_intervals(self):
-        """Test exponential backoff for retry intervals."""
+        """Test exponential backoff for retry intervals using timing."""
         reliable_msg = ReliableISOBUSMessage(
             message_id="MSG_005",
             base_message=self.base_message,
@@ -204,46 +211,52 @@ class TestMessageDeliveryTracker(unittest.TestCase):
             max_retries=3,
         )
 
+        # Use timing instead of mocking
+        controller = TimeTestController()
         self.tracker.track_message(reliable_msg)
 
-        # Simulate multiple retry attempts
-        base_time = time.time()
+        # Simulate multiple retry attempts with real delays
         expected_intervals = [0.1, 0.2, 0.4]  # Exponential backoff
 
-        for i, _expected_interval in enumerate(expected_intervals):
-            with patch("time.time", return_value=base_time + sum(expected_intervals[: i + 1])):
-                retries = self.tracker.process_retries()
-                if i < len(expected_intervals) - 1:
-                    self.assertEqual(len(retries), 1)
-                else:
-                    # Should stop retrying after max_retries
-                    break
+        for i, expected_interval in enumerate(expected_intervals):
+            # Wait for the expected interval
+            controller.wait_for_duration(expected_interval)
+
+            # Check for retries
+            retries = self.tracker.process_retries()
+            if i < len(expected_intervals) - 1:
+                self.assertEqual(len(retries), 1, f"Retry {i+1} should return message")
+            else:
+                # Should stop retrying after max_retries
+                break
 
     def test_timeout_handling(self):
-        """Test message timeout and cleanup."""
+        """Test message timeout and cleanup using timing."""
         reliable_msg = ReliableISOBUSMessage(
             message_id="MSG_006",
             base_message=self.base_message,
             timeout=1.0,
         )
 
-        current_time = time.time()
-        with patch("time.time", return_value=current_time):
-            self.tracker.track_message(reliable_msg)
+        # Use timing instead of mocking
+        controller = TimeTestController()
+        self.tracker.track_message(reliable_msg)
 
-        # After timeout period
-        with patch("time.time", return_value=current_time + 1.5):
-            timed_out = self.tracker.cleanup_timed_out_messages()
-            self.assertEqual(len(timed_out), 1)
-            self.assertEqual(timed_out[0], "MSG_006")
-            self.assertNotIn("MSG_006", self.tracker._pending_messages)
+        # Wait for timeout period to pass
+        controller.wait_for_duration(1.5)
+
+        # Check for timed out messages
+        timed_out = self.tracker.cleanup_timed_out_messages()
+        self.assertEqual(len(timed_out), 1)
+        self.assertEqual(timed_out[0], "MSG_006")
+        self.assertNotIn("MSG_006", self.tracker._pending_messages)
 
 
-class TestReliableISOBUSDevice(unittest.TestCase):
+class TestISOBUSDevice(unittest.TestCase):
     """Test enhanced ISOBUS device with guaranteed delivery."""
 
     def setUp(self):
-        self.device = ReliableISOBUSDevice(device_address=0x80)
+        self.device = ISOBUSDevice(device_address=0x80)
         self.base_message = ISOBUSMessage(
             pgn=0xFE48,
             source_address=0x80,
@@ -347,8 +360,8 @@ class TestAgriculturalScenarios(unittest.TestCase):
         self.tractor_b = FarmTractor("Case IH", "Magnum", 2024)
 
         # Enhance tractors with reliable messaging
-        self.tractor_a.reliable_isobus = ReliableISOBUSDevice(device_address=0x80)
-        self.tractor_b.reliable_isobus = ReliableISOBUSDevice(device_address=0x81)
+        self.tractor_a.reliable_isobus = ISOBUSDevice(device_address=0x80)
+        self.tractor_b.reliable_isobus = ISOBUSDevice(device_address=0x81)
 
     def test_emergency_stop_guaranteed_delivery(self):
         """Test emergency stop message guaranteed delivery."""
@@ -433,12 +446,12 @@ class TestAgriculturalScenarios(unittest.TestCase):
             retry_interval=0.2,
         )
 
-        # Simulate network partition - no ack received
-        current_time = time.time()
-        with patch("time.time", return_value=current_time + 0.3):
-            retries = self.tractor_a.reliable_isobus.delivery_tracker.process_retries()
-            self.assertEqual(len(retries), 1)
-            self.assertEqual(retries[0].message_id, message_id)
+        # Simulate network partition - no ack received using timing
+        controller = TimeTestController()
+        controller.wait_for_duration(0.3)
+        retries = self.tractor_a.reliable_isobus.delivery_tracker.process_retries()
+        self.assertEqual(len(retries), 1)
+        self.assertEqual(retries[0].message_id, message_id)
 
     def test_fleet_synchronization_priority_handling(self):
         """Test fleet synchronization with message priority handling."""

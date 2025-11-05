@@ -36,7 +36,7 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from afs_fastapi.equipment.reliable_isobus import ReliableISOBUSDevice
+from afs_fastapi.equipment.network.isobus import ISOBUSDevice
 from afs_fastapi.services.emergency_stop_propagation import (
     EmergencyReasonCode,
     EmergencySeverity,
@@ -539,7 +539,7 @@ class TestFleetCoordinationIntegration:
 
         for tractor_id in tractor_ids:
             # Mock only the hardware ISOBUS interface (not coordination logic)
-            mock_isobus = AsyncMock(spec=ReliableISOBUSDevice)
+            mock_isobus = AsyncMock(spec=ISOBUSDevice)
             mock_isobus.start = AsyncMock()
             mock_isobus.stop = AsyncMock()
             mock_isobus.broadcast_message = AsyncMock()

@@ -79,7 +79,7 @@ async def get_equipment_status(
                 ],
                 request=request,
             )
-            return JSONResponse(status_code=404, content=response)
+            return JSONResponse(status_code=404, content=response.model_dump())
 
         # Create equipment instance (simplified for demo)
         if equipment_type == EquipmentType.TRACTOR:
@@ -141,7 +141,7 @@ async def get_equipment_status(
                 "Contact equipment manager for assistance",
             ],
         )
-        return JSONResponse(status_code=422, content=response)
+        return JSONResponse(status_code=422, content=response.model_dump())
 
     except Exception as e:
         logger.error(f"Error retrieving equipment status for {equipment_id}: {e}")
@@ -157,7 +157,7 @@ async def get_equipment_status(
                 "Check equipment maintenance status",
             ],
         )
-        return JSONResponse(status_code=404, content=response)
+        return JSONResponse(status_code=404, content=response.model_dump())
 
 
 @router.post(
@@ -261,7 +261,7 @@ async def control_equipment(
             recovery_suggestions=e.error_details.recovery_suggestions,
             request=request,
         )
-        return JSONResponse(status_code=400, content=response_dict)
+        return JSONResponse(status_code=400, content=response_dict.model_dump())
 
     except AgriculturalValidationError as e:
         response_dict = create_error_response(
@@ -277,7 +277,7 @@ async def control_equipment(
             ],
             request=request,
         )
-        return JSONResponse(status_code=422, content=response_dict)
+        return JSONResponse(status_code=422, content=response_dict.model_dump())
 
     except Exception as e:
         logger.error(f"Error controlling equipment {control_request.equipment_id}: {e}")
@@ -294,7 +294,7 @@ async def control_equipment(
             ],
             request=request,
         )
-        return JSONResponse(status_code=500, content=response_dict)
+        return JSONResponse(status_code=500, content=response_dict.model_dump())
 
 
 @router.get(
@@ -401,7 +401,7 @@ async def list_equipment(
                 "Contact system administrator",
             ],
         )
-        return JSONResponse(status_code=500, content=response)
+        return JSONResponse(status_code=500, content=response.model_dump())
 
 
 @router.get(
@@ -493,7 +493,7 @@ async def get_equipment_maintenance(request: Request, equipment_id: str) -> Stan
                 "Contact equipment management",
             ],
         )
-        return JSONResponse(status_code=422, content=response)
+        return JSONResponse(status_code=422, content=response.model_dump())
 
     except Exception as e:
         logger.error(f"Error retrieving maintenance info for {equipment_id}: {e}")
@@ -509,7 +509,7 @@ async def get_equipment_maintenance(request: Request, equipment_id: str) -> Stan
                 "Contact maintenance department",
             ],
         )
-        return JSONResponse(status_code=404, content=response)
+        return JSONResponse(status_code=404, content=response.model_dump())
 
 
 @router.get(
@@ -630,4 +630,4 @@ async def get_equipment_types(request: Request) -> StandardResponse:
                 "Contact system administrator",
             ],
         )
-        return JSONResponse(status_code=500, content=response)
+        return JSONResponse(status_code=500, content=response.model_dump())

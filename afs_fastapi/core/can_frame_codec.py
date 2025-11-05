@@ -19,9 +19,12 @@ from enum import Enum
 from typing import Any
 
 try:
-    import can
+    from can import Message
+
+    _CAN_LIBRARY_AVAILABLE: bool = True
 except ImportError:
-    can = None  # type: ignore
+    Message: Any = None  # Fallback type if can library not available
+    _CAN_LIBRARY_AVAILABLE: bool = False
 
 logger = logging.getLogger(__name__)
 
@@ -415,12 +418,12 @@ class J1939Decoder:
             for spn_def in pgn_def.spn_definitions:
                 self.spn_definitions[spn_def.spn] = spn_def
 
-    def decode_can_message(self, message: can.Message) -> DecodedPGN | None:
+    def decode_can_message(self, message: Any) -> DecodedPGN | None:
         """Decode a CAN message into structured J1939 data.
 
         Parameters
         ----------
-        message : can.Message
+        message : Message
             CAN message to decode
 
         Returns
@@ -430,12 +433,14 @@ class J1939Decoder:
         """
         try:
             # Extract J1939 components from CAN ID
-            if not message.is_extended_id:
-                logger.debug(f"Ignoring standard frame: {message.arbitration_id:08X}")
+            if not getattr(message, "is_extended_id", False):
+                logger.debug(
+                    f"Ignoring standard frame: {getattr(message, 'arbitration_id', 0):08X}"
+                )
                 return None
 
             j1939_id: tuple[int, int, int, int, int] | None = self._parse_j1939_id(
-                message.arbitration_id
+                getattr(message, "arbitration_id", 0)
             )
             if not j1939_id:
                 return None
@@ -622,13 +627,13 @@ class J1939Decoder:
         return extracted
 
     def _handle_transport_protocol_dt(
-        self, message: can.Message, source_address: int, destination_address: int
+        self, message: Message, source_address: int, destination_address: int
     ) -> DecodedPGN | None:
         """Handle J1939 Transport Protocol Data Transfer message.
 
         Parameters
         ----------
-        message : can.Message
+        message : Message
             TP.DT message
         source_address : int
             Source address
@@ -654,13 +659,13 @@ class J1939Decoder:
         return None
 
     def _handle_transport_protocol_cm(
-        self, message: can.Message, source_address: int, destination_address: int
+        self, message: Message, source_address: int, destination_address: int
     ) -> DecodedPGN | None:
         """Handle J1939 Transport Protocol Connection Management message.
 
         Parameters
         ----------
-        message : can.Message
+        message : Message
             TP.CM message
         source_address : int
             Source address
@@ -706,7 +711,7 @@ class J1939Encoder:
         priority: int = 6,
         destination_address: int = 255,
         timestamp: float | None = None,
-    ) -> can.Message | None:
+    ) -> Message | None:
         """Encode a PGN message with SPN values.
 
         Parameters
@@ -726,7 +731,7 @@ class J1939Encoder:
 
         Returns
         -------
-        can.Message | None
+        Message | None
             Encoded CAN message or None if encoding fails
         """
         try:
@@ -753,7 +758,7 @@ class J1939Encoder:
             # Construct J1939 CAN ID
             can_id = self._construct_j1939_id(pgn, priority, source_address, destination_address)
 
-            return can.Message(
+            return Message(
                 arbitration_id=can_id,
                 data=bytes(data),
                 is_extended_id=True,
@@ -916,7 +921,7 @@ class J1939Encoder:
         engine_speed: float | None = None,
         manifold_pressure: float | None = None,
         torque_percent: float | None = None,
-    ) -> can.Message | None:
+    ) -> Message | None:
         """Convenience method to encode Electronic Engine Controller 1 data.
 
         Parameters
@@ -932,7 +937,7 @@ class J1939Encoder:
 
         Returns
         -------
-        can.Message | None
+        Message | None
             Encoded EEC1 message
         """
         spn_values = {}
@@ -950,7 +955,7 @@ class J1939Encoder:
         self,
         source_address: int,
         speed_kmh: float,
-    ) -> can.Message | None:
+    ) -> Message | None:
         """Convenience method to encode vehicle speed data.
 
         Parameters
@@ -962,7 +967,7 @@ class J1939Encoder:
 
         Returns
         -------
-        can.Message | None
+        Message | None
             Encoded WVS message
         """
         spn_values = {84: speed_kmh}
@@ -973,7 +978,7 @@ class J1939Encoder:
         source_address: int,
         latitude: float,
         longitude: float,
-    ) -> can.Message | None:
+    ) -> Message | None:
         """Convenience method to encode GPS position data.
 
         Parameters
@@ -987,7 +992,7 @@ class J1939Encoder:
 
         Returns
         -------
-        can.Message | None
+        Message | None
             Encoded VP message
         """
         spn_values = {584: latitude, 585: longitude}
@@ -1002,12 +1007,12 @@ class CANFrameCodec:
         self.decoder = J1939Decoder()
         self.encoder = J1939Encoder()
 
-    def decode_message(self, message: can.Message) -> DecodedPGN | None:
+    def decode_message(self, message: Message) -> DecodedPGN | None:
         """Decode a CAN message.
 
         Parameters
         ----------
-        message : can.Message
+        message : Message
             Message to decode
 
         Returns
@@ -1019,7 +1024,7 @@ class CANFrameCodec:
 
     def encode_message(
         self, pgn: int, source_address: int, spn_values: dict[int, Any], **kwargs
-    ) -> can.Message | None:
+    ) -> Message | None:
         """Encode a PGN message.
 
         Parameters
@@ -1035,7 +1040,7 @@ class CANFrameCodec:
 
         Returns
         -------
-        can.Message | None
+        Message | None
             Encoded CAN message
         """
         return self.encoder.encode_pgn_message(pgn, source_address, spn_values, **kwargs)
@@ -1091,12 +1096,12 @@ class CANFrameCodec:
         return list(self.decoder.spn_definitions.keys())
 
     # Test compatibility methods
-    def decode_can_message(self, message: can.Message) -> DecodedPGN | None:
+    def decode_can_message(self, message: Any) -> DecodedPGN | None:
         """Decode a CAN message (alias for decode_message for test compatibility).
 
         Parameters
         ----------
-        message : can.Message
+        message : Message
             Message to decode
 
         Returns
@@ -1106,7 +1111,7 @@ class CANFrameCodec:
         """
         return self.decode_message(message)
 
-    def encode_engine_data(self, engine_data, source_address: int) -> can.Message | None:
+    def encode_engine_data(self, engine_data, source_address: int) -> Message | None:
         """Encode engine data object to CAN message (for test compatibility).
 
         Parameters
@@ -1119,7 +1124,7 @@ class CANFrameCodec:
 
         Returns
         -------
-        can.Message | None
+        Message | None
             Encoded CAN message
         """
         try:
@@ -1140,7 +1145,7 @@ class CANFrameCodec:
             logger.error(f"Failed to encode engine data: {e}")
             return None
 
-    def encode_vehicle_position(self, position_data, source_address: int) -> can.Message | None:
+    def encode_vehicle_position(self, position_data, source_address: int) -> Message | None:
         """Encode vehicle position object to CAN message (for test compatibility).
 
         Parameters
@@ -1152,7 +1157,7 @@ class CANFrameCodec:
 
         Returns
         -------
-        can.Message | None
+        Message | None
             Encoded CAN message
         """
         try:

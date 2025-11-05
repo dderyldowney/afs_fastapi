@@ -27,9 +27,9 @@ from typing import Any
 sys.path.append(str(Path(__file__).parent.parent.parent / ".claude" / "utilities"))
 
 try:
-    import markdown_it  # type: ignore[import-untyped]
+    import markdown_it
 except ImportError:
-    markdown_it = None  # type: ignore[assignment]
+    markdown_it = None
 
 
 # Universal Tree class that works with or without markdown_it
@@ -41,7 +41,7 @@ class Tree:
         if markdown_it is None:
             return ""
         # Simple fallback rendering
-        content_parts = []
+        content_parts: list[str] = []
         for token in self.tokens:
             if hasattr(token, "content") and token.content:
                 content_parts.append(token.content)
@@ -145,7 +145,7 @@ class PipelineContext:
             "18497",
         ]
 
-        detected = []
+        detected: list[str] = []
 
         # Check both user input and session context for keywords
         text_to_check = f"{self.user_input} {self.session_context}".lower()

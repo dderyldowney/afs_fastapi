@@ -340,7 +340,7 @@ class MessageDeliveryTracker:
         }
 
 
-class ReliableISOBUSDevice:
+class ISOBUSDevice:
     """Enhanced ISOBUS device with guaranteed delivery capabilities.
 
     Extends basic ISOBUS communication with reliability protocols for

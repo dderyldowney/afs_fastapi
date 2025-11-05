@@ -461,17 +461,6 @@ class CommunicationLossFailSafe:
                 requires_operator_intervention=True,
             )
 
-        else:
-            # Default safe action for unknown scenarios
-            action = FailSafeAction(
-                continue_operations=False,
-                operational_mode=FailSafeMode.ISOLATED,
-                operational_speed_reduction=0.0,
-                safety_margin_expansion_factor=1.0,
-                safety_actions=["stop all operations", "await manual intervention"],
-                requires_operator_intervention=True,
-            )
-
         logger.info(
             f"Communication loss handled: {loss_type.value} -> {action.operational_mode.value}, "
             f"continue_ops={action.continue_operations}, intervention_required={action.requires_operator_intervention}"
