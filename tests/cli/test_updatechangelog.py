@@ -15,7 +15,6 @@ from __future__ import annotations
 from pathlib import Path
 
 
-
 class TestUpdateChangelogGitParsing:
     """Test git log parsing and commit extraction for CHANGELOG generation."""
 

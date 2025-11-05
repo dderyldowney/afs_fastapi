@@ -251,7 +251,7 @@ class TestAgriculturalPrioritySystem(unittest.TestCase):
 
     def test_agricultural_priority_constants(self):
         """Test that agricultural priority constants are properly defined."""
-        from afs_fastapi.equipment.reliable_isobus import ISOBUSPriority
+        from afs_fastapi.equipment.network.isobus import ISOBUSPriority
 
         # Emergency should be highest priority (0)
         self.assertEqual(ISOBUSPriority.EMERGENCY_STOP, 0)

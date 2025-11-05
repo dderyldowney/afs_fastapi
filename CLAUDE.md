@@ -61,6 +61,49 @@ black . && isort . && ruff check . --fix
 - Multiple separate git commands when combined commands work
 - Running full test suites when targeted testing is adequate
 
+### Readability and Path of Least Resistance Standards
+
+**Primary Focus**: Readability and the path of least resistance for all code and test generation.
+
+**Implementation**:
+- **Test-First Development (TDD)**: Generate tests BEFORE implementation code
+- **Readability First**: Prioritize clear, readable code over clever solutions
+- **Simple Solutions**: Choose straightforward approaches over complex implementations
+- **Maintainable Code**: Write code that future developers can easily understand
+- **Agricultural Clarity**: Use domain-specific examples and clear naming
+- **Session Persistence**: This focus applies across all current and future sessions
+
+**TDD Workflow Examples**:
+```python
+# GOOD: Clear, readable test first
+def test_tractor_status_monitoring():
+    """Test that tractor status monitoring provides accurate equipment state."""
+    tractor = FarmTractor(equipment_id="TRC-001")
+    status = tractor.get_status()
+
+    assert status.engine_on is True
+    assert status.gps_coordinates is not None
+    assert status.operational_hours >= 0.0
+
+# Then implement minimal code to pass test
+```
+
+**Readability Examples**:
+```python
+# GOOD: Clear and readable
+def calculate_field_yield(tractor_data: TractorTelemetry) -> float:
+    """Calculate yield per acre based on tractor telemetry data."""
+    if not tractor_data.acres_covered:
+        return 0.0
+
+    total_yield = sum(tractor_data.yield_data)
+    yield_per_acre = total_yield / tractor_data.acres_covered
+    return round(yield_per_acre, 2)
+
+# AVOID: Overly complex or clever
+def yld(y, a, d=[('w', 'c')]) -> float: return round(y if a else 0 / (a or 1), 2)
+```
+
 ### Format-First Generation Standards
 
 **Requirement**: All generated content must emerge in final quality-controlled form.

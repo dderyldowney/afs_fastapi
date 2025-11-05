@@ -869,7 +869,7 @@ class FarmTractor(
         int
             Priority level (0 = highest priority).
         """
-        from afs_fastapi.equipment.reliable_isobus import ISOBUSPriority
+        from afs_fastapi.equipment.network.isobus import ISOBUSPriority
 
         # Map ISOBUS PGNs to agricultural priorities
         if pgn == 0xFE49:  # Emergency messages
@@ -1008,7 +1008,7 @@ class FarmTractor(
         ...     use_reliable=False
         ... )
         """
-        from afs_fastapi.equipment.reliable_isobus import ISOBUSPriority
+        from afs_fastapi.equipment.network.isobus import ISOBUSPriority
 
         # Encode command parameters for ISOBUS transmission
         command_data: bytes = self._encode_implement_command(command_type, parameters)
@@ -1498,7 +1498,7 @@ class FarmTractor(
         str
             Message ID for tracking delivery status.
         """
-        from afs_fastapi.equipment.reliable_isobus import ISOBUSPriority
+        from afs_fastapi.equipment.network.isobus import ISOBUSPriority
 
         # Use agricultural priority if not specified
         if priority is None:
@@ -1560,7 +1560,7 @@ class FarmTractor(
         str
             Message ID for tracking delivery status.
         """
-        from afs_fastapi.equipment.reliable_isobus import ISOBUSPriority
+        from afs_fastapi.equipment.network.isobus import ISOBUSPriority
 
         # Use agricultural priority if not specified
         if priority is None:
@@ -1618,7 +1618,7 @@ class FarmTractor(
         emergency_data: bytes = b"\xff\x00\x00\x00\x01"  # Emergency stop pattern
 
         # Send emergency broadcast with highest priority and guaranteed delivery
-        from afs_fastapi.equipment.reliable_isobus import ISOBUSPriority
+        from afs_fastapi.equipment.network.isobus import ISOBUSPriority
 
         message_ids: list[str] = []
 
