@@ -14,7 +14,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from tests.utilities.cli_testing import CLICommandTester
 
 
 class TestUpdateChangelogGitParsing:
@@ -281,8 +280,10 @@ class TestUpdateChangelogCommandExecution:
         Agricultural Context: Automated changelog updates ensure no manual
         intervention required, reducing documentation errors for safety audits.
         """
-        # Setup CLI tester with real execution
-        cli_tester = CLICommandTester(enable_real_execution=True)
+        # Setup CLI environment for real execution
+        from tests.utilities.cli_testing import CLIEnvironment
+
+        cli_env = CLIEnvironment()
 
         changelog_path = tmp_path / "CHANGELOG.md"
         changelog_path.write_text("# Changelog\n\nOriginal content\n")
@@ -290,7 +291,7 @@ class TestUpdateChangelogCommandExecution:
         # Execute updatechangelog command with real CLI
         command = ["python", "-m", "afs_fastapi.scripts.updatechangelog", str(changelog_path)]
 
-        result = cli_tester.run_command(command)
+        result = cli_env.run_command(command)
 
         # Verify command executed successfully
         assert result.returncode == 0

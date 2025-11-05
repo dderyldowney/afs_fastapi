@@ -29,6 +29,38 @@ I need to run the linter to fix code issues. I'll use Ruff with unsafe fixes ena
 [Ran Ruff linter - 18 fixes applied]
 ```
 
+### CLI Tool Usage Standards
+
+**Mandatory Requirement**: Efficient CLI tool usage across all current and future sessions.
+
+**Implementation**:
+- **Parallel Execution**: Run multiple independent tools simultaneously when possible
+- **Efficient Output**: Use concise output formats (`-q`, `--tb=no`, tail/head for summaries)
+- **Batch Operations**: Combine related operations into single commands
+- **Tool Selection**: Use appropriate tools for specific tasks (Grep vs find, etc.)
+- **Session Persistence**: This requirement applies across all current and future sessions
+
+**Efficiency Examples**:
+```bash
+# Good: Parallel execution
+pytest tests/api/ tests/unit/ --tb=no -q &
+pytest tests/integration/ --tb=no -q &
+
+# Good: Concise output
+pytest --tb=no -q | tail -5
+git status --porcelain
+
+# Good: Batch operations
+git add . && git commit -m "message"
+black . && isort . && ruff check . --fix
+```
+
+**Inefficient Patterns to Avoid**:
+- Running tools sequentially when parallel execution is possible
+- Using verbose output when summary is sufficient
+- Multiple separate git commands when combined commands work
+- Running full test suites when targeted testing is adequate
+
 ### Format-First Generation Standards
 
 **Requirement**: All generated content must emerge in final quality-controlled form.

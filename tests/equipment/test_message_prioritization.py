@@ -22,7 +22,7 @@ from afs_fastapi.equipment.message_prioritization import (
     TrafficClass,
     TrafficShaper,
 )
-from afs_fastapi.equipment.reliable_isobus import ISOBUSPriority
+from afs_fastapi.equipment.network.isobus import ISOBUSPriority
 
 
 class TestTrafficClassification:

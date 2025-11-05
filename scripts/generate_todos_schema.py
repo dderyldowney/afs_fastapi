@@ -1,5 +1,5 @@
 import json
-import os
+from pathlib import Path
 
 from pydantic import TypeAdapter
 
@@ -13,11 +13,11 @@ def generate_schema():
 
     # Define project_root here, as it's needed for schema_dir
     # This assumes the script is run from the project root or afs_fastapi is installed
-    project_root = os.getcwd()
+    project_root = Path.cwd()
 
-    schema_dir = os.path.join(project_root, ".claude")
-    os.makedirs(schema_dir, exist_ok=True)
-    schema_file_path = os.path.join(schema_dir, "todos_schema.json")
+    schema_dir = project_root / ".claude"
+    schema_dir.mkdir(exist_ok=True)
+    schema_file_path = schema_dir / "todos_schema.json"
 
     with open(schema_file_path, "w") as f:
         json.dump(json_schema, f, indent=2)

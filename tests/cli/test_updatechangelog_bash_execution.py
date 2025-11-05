@@ -155,9 +155,9 @@ class TestUpdateChangelogBashExecution:
             )
 
             # Test without actually changing directories
-            import os
+            from pathlib import Path
 
-            original_cwd = os.getcwd()
+            original_cwd = Path.cwd()
             result = subprocess.run(
                 [f"{original_cwd}/bin/updatechangelog"], capture_output=True, text=True
             )
