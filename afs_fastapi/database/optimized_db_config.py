@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import os
 from contextlib import asynccontextmanager, contextmanager
+from typing import AsyncGenerator
 
 from afs_fastapi.database.connection_pool import AgriculturalConnectionPool, PoolConfiguration
 

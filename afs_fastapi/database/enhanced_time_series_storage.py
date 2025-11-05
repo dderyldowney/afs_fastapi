@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import time
 from datetime import datetime
 from typing import Any
 
@@ -521,7 +522,13 @@ class EnhancedTimeSeriesStorage:
     async def _initialize_schema(self) -> None:
         """Initialize database schema with connection pooling."""
         if self.connection_pool:
-            sync_url = self.database_url.replace("+asyncpg", "")
+            # Convert async URL to sync URL for schema creation
+            sync_url = self.database_url
+            if "+aiosqlite" in sync_url:
+                sync_url = sync_url.replace("+aiosqlite", "")
+            elif "+asyncpg" in sync_url:
+                sync_url = sync_url.replace("+asyncpg", "")
+
             sync_engine = create_engine(sync_url)
 
             with sync_engine.begin() as conn:
@@ -533,6 +540,11 @@ class EnhancedTimeSeriesStorage:
 
     async def _setup_timescaledb(self) -> None:
         """Setup TimescaleDB features with connection pooling."""
+        # Skip TimescaleDB setup for SQLite (only available with PostgreSQL)
+        if "sqlite" in self.database_url.lower():
+            logger.info("Skipping TimescaleDB setup for SQLite database")
+            return
+
         logger.info("Setting up TimescaleDB features with connection pooling")
         try:
             async with self.connection_pool.get_async_session() as session:

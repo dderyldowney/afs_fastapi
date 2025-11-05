@@ -23,9 +23,12 @@ from sqlalchemy import (
     Integer,
     LargeBinary,
     String,
+    Text,
     UniqueConstraint,
 )
 from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.types import TypeDecorator, TEXT
+import json
 from sqlalchemy.orm import DeclarativeBase
 
 
@@ -33,6 +36,30 @@ class TimeSeriesBase(DeclarativeBase):
     """Base class for all time-series SQLAlchemy models using SQLAlchemy 2.0 API."""
 
     pass
+
+
+class SQLiteJSON(TypeDecorator):
+    """SQLite-compatible JSON type decorator.
+
+    Uses TEXT storage for SQLite and JSONB for PostgreSQL.
+    """
+    impl = TEXT
+    cache_ok = True
+
+    def process_bind_param(self, value, dialect):
+        if value is None:
+            return None
+        return json.dumps(value)
+
+    def process_result_value(self, value, dialect):
+        if value is None:
+            return None
+        return json.loads(value)
+
+    def load_dialect_impl(self, dialect):
+        if dialect.name == 'postgresql':
+            return dialect.type_descriptor(JSONB())
+        return self.impl
 
 
 class CANMessagePriority(Enum):
@@ -112,8 +139,8 @@ class CANMessageDecoded(TimeSeriesBase):  # type: ignore
     destination_address = Column(Integer, nullable=True)
 
     # Decoded data (JSON for flexible SPN storage)
-    spn_values = Column(JSONB, nullable=False)  # {spn_number: {value, units, is_valid}}
-    message_data = Column(JSONB, nullable=True)  # Additional message metadata
+    spn_values = Column(SQLiteJSON, nullable=False)  # {spn_number: {value, units, is_valid}}
+    message_data = Column(SQLiteJSON, nullable=True)  # Additional message metadata
 
     # Data quality indicators
     decoding_success = Column(Boolean, nullable=False, default=True)
@@ -224,10 +251,10 @@ class CANNetworkHealth(TimeSeriesBase):  # type: ignore
     bandwidth_utilization = Column(Float, nullable=True)  # bps
 
     # Network topology
-    active_devices = Column(JSONB, nullable=True)  # {address: {last_seen, message_count}}
+    active_devices = Column(SQLiteJSON, nullable=True)  # {address: {last_seen, message_count}}
     device_count = Column(Integer, nullable=False, default=0)
-    new_devices = Column(JSONB, nullable=True)  # devices seen for first time
-    offline_devices = Column(JSONB, nullable=True)  # devices not seen recently
+    new_devices = Column(SQLiteJSON, nullable=True)  # devices seen for first time
+    offline_devices = Column(SQLiteJSON, nullable=True)  # devices not seen recently
 
     # Health indicators
     overall_health_score = Column(Float, nullable=False, default=1.0)  # 0-1
@@ -235,7 +262,7 @@ class CANNetworkHealth(TimeSeriesBase):  # type: ignore
     latency_max = Column(Float, nullable=True)  # ms
 
     # Alert status
-    active_alerts = Column(JSONB, nullable=True)  # current system alerts
+    active_alerts = Column(SQLiteJSON, nullable=True)  # current system alerts
     alert_count = Column(Integer, nullable=False, default=0)
 
     # Indexes for monitoring queries
@@ -272,7 +299,7 @@ class EquipmentSession(TimeSeriesBase):  # type: ignore
     operation_type = Column(String(100), nullable=True)  # planting, harvesting, etc.
     field_id = Column(String(100), nullable=True, index=True)
     crop_type = Column(String(50), nullable=True)
-    weather_conditions = Column(JSONB, nullable=True)
+    weather_conditions = Column(SQLiteJSON, nullable=True)
 
     # Performance summary
     total_fuel_consumed = Column(Float, nullable=True)  # liters
@@ -286,9 +313,9 @@ class EquipmentSession(TimeSeriesBase):  # type: ignore
     data_completeness = Column(Float, nullable=True)  # 0-1
 
     # GPS boundaries (for field mapping)
-    start_location = Column(JSONB, nullable=True)  # {lat, lon, altitude}
-    end_location = Column(JSONB, nullable=True)
-    work_area_bounds = Column(JSONB, nullable=True)  # polygon coordinates
+    start_location = Column(SQLiteJSON, nullable=True)  # {lat, lon, altitude}
+    end_location = Column(SQLiteJSON, nullable=True)
+    work_area_bounds = Column(SQLiteJSON, nullable=True)  # polygon coordinates
 
     # Session status
     is_active = Column(Boolean, nullable=False, default=True)

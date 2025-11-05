@@ -10,7 +10,6 @@ Implementation follows Test-First Development (TDD) GREEN phase.
 
 from __future__ import annotations
 
-import asyncio
 from datetime import UTC, datetime, timedelta
 
 import pytest
@@ -18,10 +17,8 @@ import pytest_asyncio
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from afs_fastapi.database.agricultural_schemas_async import (
-    AgriculturalSensorRecord,
     AsyncDatabaseManager,
     Base,
-    Equipment,
 )
 from afs_fastapi.database.async_repository import (
     AgriculturalSensorAsyncRepository,
@@ -576,7 +573,6 @@ class TestAsyncAgriculturalDatabaseSchemas:
     @pytest.mark.asyncio
     async def test_concurrent_database_operations_async(self, async_session) -> None:
         """Test sequential async database operations for agricultural performance."""
-        import asyncio
 
         # Test sequential equipment creation (avoiding session conflicts)
         equipment_results = []
@@ -657,7 +653,6 @@ class TestAsyncAgriculturalDatabaseSchemas:
     @pytest.mark.asyncio
     async def test_batch_operations_async(self, async_session) -> None:
         """Test sequential async batch operations for agricultural performance."""
-        import asyncio
 
         # Create multiple equipment records sequentially
         equipment_results = []
