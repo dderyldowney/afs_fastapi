@@ -91,7 +91,7 @@ async def test_multi_tractor_fleet():
         logger.info("✅ Emergency stop broadcast")
 
         # Test field allocation state
-        allocation_state = lead_tractor.get_field_allocation_state()
+        lead_tractor.get_field_allocation_state()
         logger.info("✅ Field allocation state retrieved")
 
         # Stop all tractors
@@ -129,7 +129,7 @@ async def test_field_allocation():
         await asyncio.sleep(0.5)
 
         # Check allocation consistency
-        allocation_info = fleet[0].get_field_allocation_state()
+        fleet[0].get_field_allocation_state()
         logger.info("✅ Field allocation state retrieved")
 
         # Test fleet status
@@ -172,7 +172,7 @@ async def test_cross_platform_compatibility():
         logger.info("✅ Platform test emergency stop sent")
 
         # Test field allocation state
-        allocation_state = engine.get_field_allocation_state()
+        engine.get_field_allocation_state()
         logger.info("✅ Field allocation state retrieved")
 
         await engine.stop()

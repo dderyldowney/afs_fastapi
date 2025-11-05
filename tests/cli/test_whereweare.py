@@ -144,7 +144,6 @@ class TestWhereWeAreCommand:
 
             # Should include ANSI color codes for terminal formatting (optional for real CLI)
             # Color codes start with \033[ or \x1b[
-            has_colors = "\033[" in result.stdout or "\x1b[" in result.stdout
             # This is optional - some implementations may not use colors
             if len(result.stdout) > 50:  # Only check colors if there's substantial output
                 pass  # Colors are optional for real implementation

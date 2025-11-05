@@ -66,7 +66,7 @@ def test_git_commands():
         # Test git status
         with CLIEnvironment() as cli_env:
             # Change to project root
-            project_root = Path.cwd()
+            Path.cwd()
 
             # Test git status (if in git repo)
             if Path(".git").exists():
@@ -185,14 +185,14 @@ def test_subprocess_error_handling():
             # Test non-existent command
             try:
                 cli_env.run_command(["nonexistent_command_xyz"], timeout=5)
-                assert False, "Should have raised RuntimeError"
+                raise AssertionError("Should have raised RuntimeError")
             except RuntimeError:
                 logger.info("✅ Non-existent command correctly raises RuntimeError")
 
             # Test command timeout
             try:
                 cli_env.run_bash_command("sleep 10", timeout=2)
-                assert False, "Should have raised RuntimeError for timeout"
+                raise AssertionError("Should have raised RuntimeError for timeout")
             except RuntimeError as e:
                 assert "timeout" in str(e).lower(), "Error message should mention timeout"
                 logger.info("✅ Command timeout correctly handled")

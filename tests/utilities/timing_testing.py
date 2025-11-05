@@ -8,9 +8,9 @@ without mocking time.time(), using timing with controlled delays.
 from __future__ import annotations
 
 import time
+from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
-from collections.abc import Callable
 
 
 @dataclass

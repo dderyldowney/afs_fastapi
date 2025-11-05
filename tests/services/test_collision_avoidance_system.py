@@ -29,7 +29,6 @@ These tests validate actual collision detection and avoidance logic.
 
 from __future__ import annotations
 
-
 import pytest
 
 from afs_fastapi.equipment.network.isobus import ISOBUSDevice

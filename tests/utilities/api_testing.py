@@ -353,7 +353,7 @@ def test_api_endpoint(endpoint: str, method: str = "GET", data: Any = None, **kw
     """
     try:
         tester = APITester()
-        result = tester.test_endpoint(method, endpoint, data=data, **kwargs)
+        tester.test_endpoint(method, endpoint, data=data, **kwargs)
         return True
     except Exception:
         return False
@@ -378,7 +378,7 @@ def run_api_test_suite(test_cases: list[dict[str, Any]]) -> dict[str, bool]:
     for i, test_case in enumerate(test_cases):
         test_name = test_case.get("name", f"test_{i+1}")
         try:
-            result = tester.test_endpoint(**test_case)
+            tester.test_endpoint(**test_case)
             results[test_name] = True
         except Exception as e:
             logger.error(f"API test '{test_name}' failed: {e}")

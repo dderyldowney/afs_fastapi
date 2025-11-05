@@ -10,8 +10,8 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from typing import Any
 from collections.abc import Callable
+from typing import Any
 
 from afs_fastapi.core.can_frame_codec import CANFrameCodec
 from afs_fastapi.core.can_hal import SmartCanHal

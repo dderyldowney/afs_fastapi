@@ -129,5 +129,5 @@ class TestUpdateDocsCommand:
             output = help_result.stdout.lower()
             # Check for agricultural terms (optional, but good if present)
             ag_terms = ["agricultural", "farming", "tractor", "farm", "afs"]
-            has_ag_context = any(term in output for term in ag_terms)
+            any(term in output for term in ag_terms)
             # Not required to pass, but good to have agricultural context

@@ -48,8 +48,6 @@ from afs_fastapi.services.synchronization import VectorClock
 # No more mocking imports needed
 
 
-
-
 class TestEmergencyStopPropagationCore:
     """Test core functionality of EmergencyStopPropagation system."""
 

@@ -54,7 +54,7 @@ async def test_vector_clock_functionality():
         vc2 = ServiceTestFactory.create_vector_clock(["TRACTOR_B", "TRACTOR_C", "TRACTOR_D"])
         vc2.increment("TRACTOR_B")
 
-        merged_clock = vc.merge(vc2)
+        vc.merge(vc2)
         logger.info("✅ Clock merging successful")
 
         return True
@@ -149,7 +149,7 @@ async def test_fleet_coordination():
         logger.info(f"✅ Fleet status: {len(fleet_status)} members tracked")
 
         # Test field allocation state
-        field_state = engine.get_field_allocation_state()
+        engine.get_field_allocation_state()
         logger.info("✅ Field allocation state retrieved")
 
         # Stop the engine

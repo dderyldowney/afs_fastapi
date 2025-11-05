@@ -14,7 +14,7 @@ from __future__ import annotations
 import uuid
 from collections.abc import AsyncGenerator
 from datetime import UTC, datetime
-from typing import Any, Generic, TypeVar
+from typing import Any, TypeVar
 
 from sqlalchemy import and_, delete, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -34,7 +34,7 @@ from afs_fastapi.database.agricultural_schemas_async import (
 )
 
 
-class BaseAsyncRepository(Generic[T]):
+class BaseAsyncRepository[T]:
     """Base repository for async database operations."""
 
     def __init__(self, session: AsyncSession) -> None:

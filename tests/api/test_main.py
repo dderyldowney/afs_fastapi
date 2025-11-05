@@ -52,7 +52,7 @@ def test_get_soil_status():
     # Use real monitoring system data instead of mocking
     sensor_id = "SOIL001"
     mock_monitoring = MonitoringSystem()
-    expected_data = mock_monitoring.get_soil_composition(sensor_id)
+    mock_monitoring.get_soil_composition(sensor_id)
 
     response = client.get(f"/monitoring/soil/{sensor_id}")
     assert response.status_code == 200
@@ -76,7 +76,7 @@ def test_get_water_status():
     # Use real monitoring system data instead of mocking
     sensor_id = "WTR001"
     mock_monitoring = MonitoringSystem()
-    expected_data = mock_monitoring.get_water_quality(sensor_id)
+    mock_monitoring.get_water_quality(sensor_id)
 
     response = client.get(f"/monitoring/water/{sensor_id}")
     assert response.status_code == 200

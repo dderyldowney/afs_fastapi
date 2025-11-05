@@ -9,9 +9,6 @@ from collections import defaultdict
 def extract_pyright_errors(output_file):
     """Extract PyRight errors from the output file."""
     error_counts = defaultdict(list)
-    error_pattern = (
-        r"/Users/dderyldowney/Documents/GitHub/dderyldowney/afs_fastapi/(.*?):\d+:\d+.*?error:"
-    )
 
     with open(output_file) as f:
         lines = f.readlines()
