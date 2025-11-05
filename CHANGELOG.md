@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
+- **database**: Resolve SQLite compatibility and JSONB issues in database optimization
+
+### Fixed
+- **database**: Resolve SQLite compatibility and JSONB issues in database optimization
+
+### Fixed
 - **tests**: Resolve import issues and test failures
 
 ### Fixed
