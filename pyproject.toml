@@ -35,7 +35,7 @@ dependencies = [
   "SQLAlchemy>=2.0",         # SQLAlchemy ORM
   "psycopg2-binary>=2.9",    # PostgreSQL adapter
   "alembic>=1.13",           # Database migrations
-  "todowrite>=0.1.0",       # Standalone task management system
+  "todowrite==0.3.1",       # Standalone task management system
   # add any concrete libs you use at runtime (DB client, sensors, etc.)
 
 ]

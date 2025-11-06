@@ -147,35 +147,37 @@ async def create_todo_item(request: CreateToDoRequest) -> ToDoResponse:
     Create a new ToDo item (Goal, Phase, Step, Task, SubTask).
     """
     try:
+        # Map priority to work_type
+        work_type_mapping = {
+            "low": "docs",
+            "med": "docs",
+            "medium": "docs",
+            "high": "implementation",
+            "critical": "implementation"
+        }
+        work_type = work_type_mapping.get(request.priority, "implementation")
+
+        # Generate node ID and session ID
         node_id = _generate_todowrite_id(request.node_type)
+        session_id = f"session-{node_id}"  # Use node_id as session identifier since sessions were removed
+
+        # Create node with complete data structure including session_id
         node_data = {
             "id": node_id,
-            "layer": request.node_type,
+            "session_id": session_id,  # Required by database schema even though sessions were removed
             "title": request.title,
-            "description": request.description,
-            # Note: status is auto-assigned by TodoWrite as "planned"
+            "layer": request.node_type,
+            "description": request.description or "",
+            "status": request.status,
             "links": {"parents": [request.parent_id] if request.parent_id else [], "children": []},
             "metadata": {
-                "owner": "system",  # Default owner
+                "owner": "system",
                 "labels": [],
-                "severity": request.priority,  # Map priority to severity
-                "work_type": "implementation",  # Default work type
-            },
+                "work_type": work_type
+            }
         }
-        new_node = todowrite_app.create_node(node_data)
 
-        # If a specific status was requested and it's not the default "planned", update it
-        if request.status != "planned":
-            # Get the node from database to update status
-            try:
-                # Use get_node to retrieve the created node, then update its status directly
-                created_node = todowrite_app.get_node(new_node.id)
-                if created_node is not None:
-                    created_node.status = request.status
-                    new_node = created_node
-            except Exception:
-                # If status update fails, continue with the created node
-                pass
+        new_node = todowrite_app.create_node(node_data)
 
         return ToDoResponse.from_todowrite_node(new_node)
     except Exception as e:
