@@ -5,8 +5,8 @@ This script provides the definitive conclusion that FarmTractor is a real
 implementation based on our comprehensive testing evidence.
 """
 
-import sys
 import os
+import sys
 
 # Add the project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -117,8 +117,8 @@ if __name__ == "__main__":
     result = farm_tractor_final_verification()
     print(f"\n{'='*70}")
     print(f"FINAL DETERMINATION: FarmTractor is {'✅ REAL IMPLEMENTATION' if result else '❌ MOCK/STUB'}")
-    print(f"Evidence: Comprehensive testing of 1253+ line implementation")
-    print(f"Business Logic: Multi-level validation with safety compliance")
-    print(f"Features: Complete agricultural equipment simulation")
+    print("Evidence: Comprehensive testing of 1253+ line implementation")
+    print("Business Logic: Multi-level validation with safety compliance")
+    print("Features: Complete agricultural equipment simulation")
     print(f"{'='*70}")
     sys.exit(0 if result else 1)

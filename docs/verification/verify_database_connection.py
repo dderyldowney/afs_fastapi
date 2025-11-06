@@ -15,12 +15,11 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
+from sqlalchemy import text
+
 from afs_fastapi.database.optimized_db_config import (
     get_optimized_db_config,
-    initialize_optimized_database,
 )
-from afs_fastapi.database.agricultural_schemas import Base
-from sqlalchemy import text
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
@@ -71,11 +70,6 @@ async def verify_real_database():
             print("4. Testing database table creation...")
 
             # Create all tables from schemas
-            from afs_fastapi.database.agricultural_schemas import (
-                Equipment, Field, ISOBUSMessageRecord,
-                AgriculturalSensorRecord, TractorTelemetryRecord,
-                YieldMonitorRecord, OperationalSession
-            )
 
             # Create tables
             await session.execute(text("""

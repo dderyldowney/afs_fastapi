@@ -10,15 +10,15 @@ metrics on test quality and implementation usage.
 import ast
 import json
 import re
-from pathlib import Path
-from typing import Dict, List, Any, Tuple
 from collections import defaultdict
+from pathlib import Path
+from typing import Any
 
 
-def analyze_test_file(test_file: Path) -> Dict[str, Any]:
+def analyze_test_file(test_file: Path) -> dict[str, Any]:
     """Analyze a single test file for implementation usage."""
     try:
-        with open(test_file, 'r', encoding='utf-8') as f:
+        with open(test_file, encoding='utf-8') as f:
             content = f.read()
 
         tree = ast.parse(content)
@@ -85,7 +85,7 @@ def analyze_test_file(test_file: Path) -> Dict[str, Any]:
         }
 
 
-def categorize_test_quality(analysis: Dict[str, Any]) -> str:
+def categorize_test_quality(analysis: dict[str, Any]) -> str:
     """Categorize test quality based on metrics."""
     if analysis.get("error"):
         return "error"
@@ -111,7 +111,7 @@ def categorize_test_quality(analysis: Dict[str, Any]) -> str:
         return "acceptable"
 
 
-def analyze_test_suite() -> Dict[str, Any]:
+def analyze_test_suite() -> dict[str, Any]:
     """Analyze the entire test suite."""
     test_dir = Path("tests")
 
@@ -203,7 +203,7 @@ def analyze_test_suite() -> Dict[str, Any]:
     return analysis
 
 
-def print_analysis_summary(analysis: Dict[str, Any]) -> None:
+def print_analysis_summary(analysis: dict[str, Any]) -> None:
     """Print a human-readable summary of the analysis."""
     print("=" * 60)
     print("AFS FASTAPI TEST SUITE ANALYSIS SUMMARY")
@@ -216,13 +216,13 @@ def print_analysis_summary(analysis: Dict[str, Any]) -> None:
     summary = analysis["summary"]
     metrics = analysis["quality_metrics"]
 
-    print(f"\n📊 BASIC METRICS:")
+    print("\n📊 BASIC METRICS:")
     print(f"   Total test files: {summary['total_test_files']}")
     print(f"   Total tests: {summary['total_tests']}")
     print(f"   Total async tests: {summary['total_async_tests']}")
     print(f"   Total assertions: {summary['total_assertions']}")
 
-    print(f"\n🎯 QUALITY METRICS:")
+    print("\n🎯 QUALITY METRICS:")
     print(f"   Real implementation usage: {metrics.get('real_implementation_percentage', 0):.1f}%")
     print(f"   Mock-heavy files: {metrics.get('mock_heavy_percentage', 0):.1f}%")
     print(f"   Problematic files: {metrics.get('problematic_percentage', 0):.1f}%")
@@ -231,28 +231,28 @@ def print_analysis_summary(analysis: Dict[str, Any]) -> None:
     print(f"   Avg assertions per test: {metrics.get('avg_assertions_per_test', 0):.1f}")
     print(f"   Async test percentage: {metrics.get('async_test_percentage', 0):.1f}%")
 
-    print(f"\n📈 QUALITY DISTRIBUTION:")
+    print("\n📈 QUALITY DISTRIBUTION:")
     for quality, count in sorted(analysis["quality_distribution"].items()):
         emoji = {"excellent": "🟢", "good": "🟡", "acceptable": "🟠",
                 "mock_heavy": "🔴", "no_real_imports": "🔴", "empty": "⚪", "error": "❌"}.get(quality, "⚫")
         print(f"   {emoji} {quality}: {count} files")
 
     if analysis["mock_heavy_files"]:
-        print(f"\n⚠️  MOCK-HEAVY FILES:")
+        print("\n⚠️  MOCK-HEAVY FILES:")
         for file_info in analysis["mock_heavy_files"][:5]:  # Show top 5
             print(f"   {file_info['file']}: {file_info['mock_count']} mocks, {file_info['test_count']} tests")
         if len(analysis["mock_heavy_files"]) > 5:
             print(f"   ... and {len(analysis['mock_heavy_files']) - 5} more")
 
     if analysis["problematic_files"]:
-        print(f"\n❌ PROBLEMATIC FILES:")
+        print("\n❌ PROBLEMATIC FILES:")
         for file_path in analysis["problematic_files"][:5]:  # Show top 5
             print(f"   {file_path}")
         if len(analysis["problematic_files"]) > 5:
             print(f"   ... and {len(analysis['problematic_files']) - 5} more")
 
     print(f"\n✅ REAL IMPLEMENTATION FILES: {len(analysis['real_implementation_files'])}")
-    print(f"   (Files that import from afs_fastapi)")
+    print("   (Files that import from afs_fastapi)")
 
 
 def main():
@@ -277,7 +277,7 @@ def main():
     real_impl_pct = metrics.get("real_implementation_percentage", 0)
     mock_heavy_pct = metrics.get("mock_heavy_percentage", 0)
 
-    print(f"\n🎉 OVERALL ASSESSMENT:")
+    print("\n🎉 OVERALL ASSESSMENT:")
     if real_impl_pct >= 80 and mock_heavy_pct <= 20:
         print("   ✅ EXCELLENT: Tests primarily use real implementations")
         return "excellent"

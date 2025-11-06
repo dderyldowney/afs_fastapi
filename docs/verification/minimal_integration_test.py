@@ -6,7 +6,6 @@ This test bypasses optional dependencies to focus on core components.
 import asyncio
 import sys
 import traceback
-from datetime import datetime
 from pathlib import Path
 
 # Add project root to Python path

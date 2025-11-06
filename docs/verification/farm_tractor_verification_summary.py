@@ -5,13 +5,14 @@ This script summarizes our comprehensive verification that FarmTractor is a real
 implementation with sophisticated business logic, not a mock or stub.
 """
 
-import sys
 import os
+import sys
 
 # Add the project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from afs_fastapi.equipment.farm_tractors import FarmTractor, ImplementPosition
+from afs_fastapi.equipment.farm_tractors import FarmTractor
+
 
 def verify_farm_tractor_comprehensive():
     """Comprehensive verification of FarmTractor implementation."""
@@ -20,7 +21,7 @@ def verify_farm_tractor_comprehensive():
     try:
         # Create tractor
         tractor = FarmTractor("John Deere", "8RX", 2023)
-        print(f"✅ FarmTractor class instantiated successfully")
+        print("✅ FarmTractor class instantiated successfully")
         print(f"   - Type: {type(tractor).__name__}")
         print(f"   - Module: {type(tractor).__module__}")
 

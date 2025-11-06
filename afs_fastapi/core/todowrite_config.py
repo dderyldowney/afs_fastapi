@@ -13,8 +13,12 @@ from __future__ import annotations
 
 import os
 
-from todowrite import ToDoWrite
-from todowrite.database import StoragePreference
+try:
+    from todowrite import ToDoWrite
+    from todowrite.database import StoragePreference
+except ImportError:
+    # Use mock implementations when todowrite is not available
+    from afs_fastapi.core.todowrite_mock import StoragePreference, ToDoWrite
 
 
 def get_todowrite_database_url() -> str | None:

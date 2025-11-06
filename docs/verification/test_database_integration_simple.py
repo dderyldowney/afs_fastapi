@@ -5,11 +5,10 @@ Simple database integration test for Task 4.
 This test verifies database functionality without import issues.
 """
 
-import sqlite3
 import os
-import json
+import sqlite3
 from datetime import datetime
-from pathlib import Path
+
 
 def test_database_schemas_file():
     """Test that database schema file contains real implementations."""
@@ -21,7 +20,7 @@ def test_database_schemas_file():
         print(f"❌ Schema file {schema_file} not found")
         return False
 
-    with open(schema_file, 'r') as f:
+    with open(schema_file) as f:
         content = f.read()
 
     # Check for real schema implementations

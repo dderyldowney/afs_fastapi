@@ -5,9 +5,9 @@ This script tests FarmTractor database integration to verify it can work
 with the real database system if implemented.
 """
 
-import sys
-import os
 import asyncio
+import os
+import sys
 
 # Add the project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

@@ -5,13 +5,14 @@ This script directly tests FarmTractor functionality without going through
 the full FastAPI import chain to avoid dependency issues.
 """
 
-import sys
 import os
+import sys
 
 # Add the project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from afs_fastapi.equipment.farm_tractors import FarmTractor
+
 
 def test_farm_tractor_functionality():
     """Test FarmTractor core functionality."""

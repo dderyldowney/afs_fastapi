@@ -2,13 +2,14 @@
 Investigate FarmTractor attribute structure
 """
 
-import sys
 import os
+import sys
 
 # Add the project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from afs_fastapi.equipment.farm_tractors import FarmTractor
+
 
 def investigate_farm_tractor():
     """Investigate FarmTractor attribute structure."""

@@ -2,13 +2,14 @@
 Check FarmTractor implement position values
 """
 
-import sys
 import os
+import sys
 
 # Add the project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from afs_fastapi.equipment.farm_tractors import FarmTractor
+
 
 def check_implement_position():
     """Check implement position enum values."""
@@ -37,7 +38,7 @@ def check_implement_position():
 
         # Check enum type
         from afs_fastapi.equipment.farm_tractors import ImplementPosition
-        print(f"\nImplementPosition enum values:")
+        print("\nImplementPosition enum values:")
         for position in ImplementPosition:
             print(f"  {position.name}: {position.value}")
 

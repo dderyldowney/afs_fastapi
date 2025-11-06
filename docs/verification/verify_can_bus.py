@@ -15,21 +15,19 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 try:
+    from afs_fastapi.core.can_frame_codec import CANFrameCodec
     from afs_fastapi.equipment.can_bus_manager import (
         CANBusConnectionManager,
+        ConnectionPool,
         ConnectionPoolConfig,
         ManagerState,
         MessagePriority,
-        RoutingRule,
         MessageRouter,
-        ConnectionPool,
+        RoutingRule,
     )
-    from afs_fastapi.equipment.physical_can_interface import (
-        InterfaceConfiguration,
-        InterfaceState,
-    )
-    from afs_fastapi.core.can_frame_codec import CANFrameCodec
     from afs_fastapi.equipment.can_error_handling import CANErrorHandler, ISOBUSErrorLogger
+    from afs_fastapi.equipment.physical_can_interface import InterfaceConfiguration, InterfaceState
+
     CAN_IMPORTS_AVAILABLE = True
 except ImportError as e:
     print(f"⚠️  Import warning: {e}")
@@ -39,12 +37,13 @@ except ImportError as e:
     CAN_IMPORTS_AVAILABLE = False
     try:
         import afs_fastapi.equipment.can_bus_manager as can_manager
-        CANBusConnectionManager = getattr(can_manager, 'CANBusConnectionManager', None)
-        ConnectionPoolConfig = getattr(can_manager, 'ConnectionPoolConfig', None)
-        ManagerState = getattr(can_manager, 'ManagerState', None)
-        MessagePriority = getattr(can_manager, 'MessagePriority', None)
-        MessageRouter = getattr(can_manager, 'MessageRouter', None)
-        ConnectionPool = getattr(can_manager, 'ConnectionPool', None)
+
+        CANBusConnectionManager = getattr(can_manager, "CANBusConnectionManager", None)
+        ConnectionPoolConfig = getattr(can_manager, "ConnectionPoolConfig", None)
+        ManagerState = getattr(can_manager, "ManagerState", None)
+        MessagePriority = getattr(can_manager, "MessagePriority", None)
+        MessageRouter = getattr(can_manager, "MessageRouter", None)
+        ConnectionPool = getattr(can_manager, "ConnectionPool", None)
         print("✅ Core CAN bus manager components imported")
         CAN_IMPORTS_AVAILABLE = True
     except Exception as e2:
@@ -70,19 +69,19 @@ def verify_can_bus_implementation():
     try:
         # 1. Check if it's a real class with methods
         cls = CANBusConnectionManager
-        methods = [m for m in dir(cls) if not m.startswith('_') and callable(getattr(cls, m))]
+        methods = [m for m in dir(cls) if not m.startswith("_") and callable(getattr(cls, m))]
         print(f"CAN Bus Manager methods: {len(methods)} found")
 
         # Key methods that should exist in real implementation
         key_methods = [
-            'initialize',
-            'shutdown',
-            'send_message',
-            'add_message_callback',
-            'get_manager_status',
-            'get_active_interfaces',
-            'create_interface',
-            'initialize_interface'
+            "initialize",
+            "shutdown",
+            "send_message",
+            "add_message_callback",
+            "get_manager_status",
+            "get_active_interfaces",
+            "create_interface",
+            "initialize_interface",
         ]
 
         found_key_methods = [m for m in key_methods if m in methods]
@@ -98,9 +97,10 @@ def verify_can_bus_implementation():
 
             # Look for real implementation patterns
             has_async_def = "async def" in source
-            has_real_logic = any(pattern in source for pattern in [
-                "try:", "except:", "if ", "for ", "while ", "await ", "class "
-            ])
+            has_real_logic = any(
+                pattern in source
+                for pattern in ["try:", "except:", "if ", "for ", "while ", "await ", "class "]
+            )
             has_imports = "import " in source
             has_logging = "logger" in source
 
@@ -122,19 +122,19 @@ def verify_can_bus_implementation():
 
         # Try to get the key dependencies
         try:
-            if 'CANFrameCodec' in globals():
+            if "CANFrameCodec" in globals():
                 dependencies.append(CANFrameCodec)
         except:
             pass
 
         try:
-            if 'CANErrorHandler' in globals():
+            if "CANErrorHandler" in globals():
                 dependencies.append(CANErrorHandler)
         except:
             pass
 
         try:
-            if 'ISOBUSErrorLogger' in globals():
+            if "ISOBUSErrorLogger" in globals():
                 dependencies.append(ISOBUSErrorLogger)
         except:
             pass
@@ -144,7 +144,7 @@ def verify_can_bus_implementation():
 
         real_dependencies = 0
         for dep in dependencies:
-            if dep and hasattr(dep, '__name__'):
+            if dep and hasattr(dep, "__name__"):
                 print(f"✅ Dependency: {dep.__name__}")
                 real_dependencies += 1
             elif dep:
@@ -161,7 +161,7 @@ def verify_can_bus_implementation():
                 backup_interfaces=["test_backup"],
                 max_connections_per_interface=1,
                 health_check_interval=5.0,
-                auto_recovery=True
+                auto_recovery=True,
             )
 
             manager = CANBusConnectionManager(config)
@@ -187,7 +187,7 @@ def verify_can_bus_implementation():
         results["has_real_constants"] = has_states and has_priorities
 
         # Overall result
-        print(f"\n=== CAN Bus Implementation Analysis ===")
+        print("\n=== CAN Bus Implementation Analysis ===")
         print(f"✅ Real class with methods: {results['has_real_methods']}")
         print(f"✅ Source code complexity: {results['source_lines']} lines")
         print(f"✅ Real business logic: {results['has_real_logic']}")
@@ -226,15 +226,18 @@ def verify_component_implementations():
     for name, cls in components.items():
         try:
             source = inspect.getsource(cls)
-            methods = [m for m in dir(cls) if not m.startswith('_') and callable(getattr(cls, m))]
+            methods = [m for m in dir(cls) if not m.startswith("_") and callable(getattr(cls, m))]
 
-            has_real_logic = any(pattern in source for pattern in [
-                "def ", "async def", "if ", "for ", "try:", "except:"
-            ])
+            has_real_logic = any(
+                pattern in source
+                for pattern in ["def ", "async def", "if ", "for ", "try:", "except:"]
+            )
 
             is_real = len(source.splitlines()) > 10 and has_real_logic and len(methods) > 2
 
-            print(f"✅ {name}: {len(source.splitlines())} lines, {len(methods)} methods, real: {is_real}")
+            print(
+                f"✅ {name}: {len(source.splitlines())} lines, {len(methods)} methods, real: {is_real}"
+            )
             component_results[name] = is_real
 
         except Exception as e:
@@ -266,7 +269,9 @@ def main():
     print("=" * 60)
     print(f"CAN Bus Manager: {'✅ REAL IMPLEMENTATION' if main_result else '❌ MOCK/STUB'}")
     print(f"Components: {'✅ REAL IMPLEMENTATION' if components_result else '❌ MOCK/STUB'}")
-    print(f"Overall: {'✅ PASS - Real CAN bus system' if overall_result else '❌ FAIL - Mock/stub detected'}")
+    print(
+        f"Overall: {'✅ PASS - Real CAN bus system' if overall_result else '❌ FAIL - Mock/stub detected'}"
+    )
 
     if overall_result:
         print("\n🚀 The CAN bus system contains real implementation with:")

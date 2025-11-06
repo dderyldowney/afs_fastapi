@@ -8,11 +8,11 @@ implementations with actual database operations, working around import issues.
 
 import asyncio
 import logging
-import sys
 import os
 import sqlite3
-from pathlib import Path
+import sys
 from datetime import datetime
+from pathlib import Path
 
 # Add project root to Python path
 project_root = Path(__file__).parent.parent.parent
@@ -20,8 +20,18 @@ sys.path.insert(0, str(project_root))
 
 # Try to import basic SQLAlchemy
 try:
-    from sqlalchemy import create_engine, text, MetaData, Table, Column, String, Integer, Float, DateTime
-    from sqlalchemy.orm import sessionmaker, declarative_base
+    from sqlalchemy import (
+        Column,
+        DateTime,
+        Float,
+        Integer,
+        MetaData,
+        String,
+        Table,
+        create_engine,
+        text,
+    )
+    from sqlalchemy.orm import declarative_base, sessionmaker
     print("✅ SQLAlchemy imports successful")
     HAS_SQLALCHEMY = True
 except ImportError as e:
@@ -51,7 +61,7 @@ def verify_database_files():
             all_files_good = False
             continue
 
-        with open(file_path, 'r') as f:
+        with open(file_path) as f:
             content = f.read()
 
         # Check for real implementation indicators
@@ -72,13 +82,13 @@ def verify_database_files():
 
         # Check if it's a real implementation vs stub
         if file_size < 500:
-            print(f"   ⚠️  File seems small - might be a stub")
+            print("   ⚠️  File seems small - might be a stub")
             all_files_good = False
         elif 'pass' in content and content.count('pass') > 5:
-            print(f"   ⚠️  Many 'pass' statements - might be stubs")
+            print("   ⚠️  Many 'pass' statements - might be stubs")
             all_files_good = False
         else:
-            print(f"   ✅ Appears to be real implementation")
+            print("   ✅ Appears to be real implementation")
 
     return all_files_good
 
@@ -231,7 +241,7 @@ async def verify_schema_implementations():
         print(f"❌ Schema file {schema_file} missing")
         return False
 
-    with open(schema_file, 'r') as f:
+    with open(schema_file) as f:
         content = f.read()
 
     # Check for real schema definitions

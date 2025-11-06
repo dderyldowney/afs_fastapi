@@ -6,10 +6,11 @@ not stubs or mock responses. It analyzes the app structure and endpoints to ensu
 they contain actual business logic.
 """
 
-from afs_fastapi.api.main import app
 import inspect
 import sys
 from pathlib import Path
+
+from afs_fastapi.api.main import app
 
 # Add the project root to Python path
 project_root = Path(__file__).parent.parent.parent
@@ -84,18 +85,18 @@ def verify_api_startup():
                     print(f"   - Has business logic: {has_business_logic}")
 
                     if has_real_logic and has_business_logic:
-                        print(f"   ✅ REAL implementation detected")
+                        print("   ✅ REAL implementation detected")
                         real_endpoints += 1
                     else:
-                        print(f"   ⚠️  Possible stub/mock implementation")
+                        print("   ⚠️  Possible stub/mock implementation")
                         stub_endpoints += 1
 
                 except OSError:
-                    print(f"   ❌ Could not analyze source (built-in or C extension)")
+                    print("   ❌ Could not analyze source (built-in or C extension)")
                     stub_endpoints += 1
 
         # Check router endpoints
-        print(f"\n=== Router Analysis ===")
+        print("\n=== Router Analysis ===")
         router_info = []
 
         for route in app.routes:
@@ -106,7 +107,7 @@ def verify_api_startup():
         print(f"✅ Router prefixes: {router_info}")
 
         # Summary
-        print(f"\n=== Verification Summary ===")
+        print("\n=== Verification Summary ===")
         print(f"Real endpoints detected: {real_endpoints}")
         print(f"Stub/mock endpoints: {stub_endpoints}")
         print(f"Total routes analyzed: {len(routes)}")
@@ -126,13 +127,13 @@ def verify_api_startup():
 
 def analyze_app_structure():
     """Analyze the overall app structure and imports."""
-    print(f"\n=== App Structure Analysis ===")
+    print("\n=== App Structure Analysis ===")
 
     # Check key imports in main.py
     try:
+        import afs_fastapi.api.endpoints.ai_processing as ai_module
         import afs_fastapi.api.endpoints.equipment as equipment_module
         import afs_fastapi.api.endpoints.monitoring as monitoring_module
-        import afs_fastapi.api.endpoints.ai_processing as ai_module
         print("✅ Key endpoint modules imported successfully")
 
         # Check equipment module has real content

@@ -9,16 +9,16 @@ import ast
 import re
 import sys
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Any
 
 # Add the project root to Python path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-def analyze_endpoint_source(endpoint_file: Path) -> Dict[str, Any]:
+def analyze_endpoint_source(endpoint_file: Path) -> dict[str, Any]:
     """Analyze an endpoint file to check for real implementations."""
     try:
-        with open(endpoint_file, 'r', encoding='utf-8') as f:
+        with open(endpoint_file, encoding='utf-8') as f:
             content = f.read()
 
         tree = ast.parse(content)
@@ -135,7 +135,7 @@ def analyze_api_endpoints():
 
 def analyze_main_app():
     """Analyze the main FastAPI app."""
-    print(f"\n=== Main App Analysis ===")
+    print("\n=== Main App Analysis ===")
 
     main_file = project_root / 'afs_fastapi' / 'api' / 'main.py'
     if not main_file.exists():
@@ -143,7 +143,7 @@ def analyze_main_app():
         return False
 
     try:
-        with open(main_file, 'r', encoding='utf-8') as f:
+        with open(main_file, encoding='utf-8') as f:
             content = f.read()
 
         # Check for real implementation indicators
@@ -201,7 +201,7 @@ def analyze_main_app():
 
 def check_test_client_usage():
     """Check if tests use real TestClient."""
-    print(f"\n=== TestClient Usage Analysis ===")
+    print("\n=== TestClient Usage Analysis ===")
 
     test_files = list(project_root.glob('tests/**/*api*.py'))
     test_files.extend(list(project_root.glob('tests/**/test_*api*.py')))
@@ -219,7 +219,7 @@ def check_test_client_usage():
 
     for test_file in test_files:
         try:
-            with open(test_file, 'r', encoding='utf-8') as f:
+            with open(test_file, encoding='utf-8') as f:
                 content = f.read()
 
             analysis = {
@@ -266,8 +266,8 @@ def main():
     test_analysis = check_test_client_usage()
 
     # Generate summary
-    print(f"\n📊 ANALYSIS SUMMARY")
-    print(f"=" * 50)
+    print("\n📊 ANALYSIS SUMMARY")
+    print("=" * 50)
     print(f"Endpoint files analyzed: {endpoint_analysis['total_files']}")
     print(f"Total endpoint functions: {endpoint_analysis['total_functions']}")
     print(f"Real implementations: {endpoint_analysis['real_implementations']}")
@@ -283,8 +283,8 @@ def main():
     main_success = main_analysis['is_real_implementation']
     test_success = test_analysis['files_with_real_app_import'] > 0
 
-    print(f"\n🎯 VERIFICATION RESULTS")
-    print(f"=" * 50)
+    print("\n🎯 VERIFICATION RESULTS")
+    print("=" * 50)
     print(f"Endpoints have real implementations: {'✅ YES' if endpoint_success else '❌ NO'}")
     print(f"Main app is real implementation: {'✅ YES' if main_success else '❌ NO'}")
     print(f"Tests use real TestClient: {'✅ YES' if test_success else '❌ NO'}")

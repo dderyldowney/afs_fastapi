@@ -8,9 +8,8 @@ not stub definitions, and checks the actual schema structure.
 
 import asyncio
 import logging
-import sys
 import os
-import inspect
+import sys
 from pathlib import Path
 
 # Add project root to Python path
@@ -32,7 +31,7 @@ def analyze_schema_file():
         print(f"❌ Schema file {schema_file} not found")
         return False
 
-    with open(schema_file, 'r') as f:
+    with open(schema_file) as f:
         content = f.read()
 
     # Extract class definitions
@@ -110,19 +109,19 @@ def analyze_schema_file():
 
         # Determine if it's real or stub
         if cls['lines'] < 10:
-            print(f"   ⚠️  Very small class - might be stub")
+            print("   ⚠️  Very small class - might be stub")
             all_classes_real = False
         elif pass_count > 3:
-            print(f"   ⚠️  Many pass statements - might be stub")
+            print("   ⚠️  Many pass statements - might be stub")
             all_classes_real = False
         elif not has_tablename:
-            print(f"   ❌ No table name - invalid schema")
+            print("   ❌ No table name - invalid schema")
             all_classes_real = False
         elif not has_columns:
-            print(f"   ❌ No columns defined - invalid schema")
+            print("   ❌ No columns defined - invalid schema")
             all_classes_real = False
         else:
-            print(f"   ✅ Appears to be complete implementation")
+            print("   ✅ Appears to be complete implementation")
 
         # Count mapped fields/columns
         if 'Mapped[' in source:
@@ -147,7 +146,7 @@ def verify_schema_structure():
     ]
 
     schema_file = "afs_fastapi/database/agricultural_schemas.py"
-    with open(schema_file, 'r') as f:
+    with open(schema_file) as f:
         content = f.read()
 
     found_classes = []
@@ -214,7 +213,7 @@ def test_schema_imports():
     schema_file = "afs_fastapi/database/agricultural_schemas.py"
 
     try:
-        with open(schema_file, 'r') as f:
+        with open(schema_file) as f:
             content = f.read()
 
         # Check import statements
@@ -256,7 +255,7 @@ def count_database_entities():
     print("\n=== Database Entity Count ===")
 
     schema_file = "afs_fastapi/database/agricultural_schemas.py"
-    with open(schema_file, 'r') as f:
+    with open(schema_file) as f:
         content = f.read()
 
     # Count different types of database entities

@@ -7,13 +7,13 @@ to verify the database layer works with real implementations.
 """
 
 import asyncio
+import json
 import logging
-import sys
 import os
 import sqlite3
-import json
+import sys
+from datetime import datetime
 from pathlib import Path
-from datetime import datetime, timezone
 
 # Add project root to Python path
 project_root = Path(__file__).parent.parent.parent
@@ -21,8 +21,19 @@ sys.path.insert(0, str(project_root))
 
 # Try to import SQLAlchemy
 try:
-    from sqlalchemy import create_engine, text, MetaData, Table, Column, String, Integer, Float, DateTime, JSON
-    from sqlalchemy.orm import sessionmaker, declarative_base
+    from sqlalchemy import (
+        JSON,
+        Column,
+        DateTime,
+        Float,
+        Integer,
+        MetaData,
+        String,
+        Table,
+        create_engine,
+        text,
+    )
+    from sqlalchemy.orm import declarative_base, sessionmaker
     from sqlalchemy.types import TypeDecorator
     print("✅ SQLAlchemy imports successful")
     HAS_SQLALCHEMY = True
@@ -267,7 +278,7 @@ def test_sensor_data_operations(cursor, conn):
         GROUP BY sensor_type
     ''')
     sensor_summary = cursor.fetchall()
-    print(f"✅ READ: Sensor data summary:")
+    print("✅ READ: Sensor data summary:")
     for sensor_type, avg_value, count in sensor_summary:
         print(f"   {sensor_type}: avg={avg_value:.2f}, count={count}")
 
@@ -321,7 +332,7 @@ def test_telemetry_operations(cursor, conn):
         WHERE equipment_id = 'TRACTOR_001'
     ''')
     analytics = cursor.fetchone()
-    print(f"✅ READ: Telemetry analytics:")
+    print("✅ READ: Telemetry analytics:")
     print(f"   Average engine speed: {analytics[0]:.1f} RPM")
     print(f"   Average speed: {analytics[1]:.1f} km/h")
     print(f"   Average fuel rate: {analytics[2]:.1f} L/h")
@@ -382,7 +393,7 @@ def test_session_operations(cursor, conn):
     ''')
     session_info = cursor.fetchone()
     if session_info:
-        print(f"✅ READ: Session info:")
+        print("✅ READ: Session info:")
         print(f"   Session: {session_info[0]} ({session_info[1]})")
         print(f"   Equipment: {session_info[2]} {session_info[3]}")
         print(f"   Field: {session_info[4]} ({session_info[5]} acres)")

@@ -5,10 +5,11 @@ This script analyzes the FarmTractor class to verify it's a real implementation
 with actual functionality, not a mock or stub.
 """
 
-from afs_fastapi.equipment.farm_tractors import FarmTractor
 import inspect
 import sys
-from pathlib import Path
+
+from afs_fastapi.equipment.farm_tractors import FarmTractor
+
 
 def analyze_farm_tractor():
     """Analyze FarmTractor class implementation."""

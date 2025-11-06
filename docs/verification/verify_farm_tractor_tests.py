@@ -6,9 +6,10 @@ instead of mocks or stubs.
 """
 
 import ast
+import re
 import sys
 from pathlib import Path
-import re
+
 
 def verify_farm_tractor_tests():
     """Verify FarmTractor tests use real implementation."""
@@ -42,7 +43,7 @@ def verify_farm_tractor_tests():
         print(f"\n--- Analyzing {test_file} ---")
 
         try:
-            with open(test_file, 'r', encoding='utf-8') as f:
+            with open(test_file, encoding='utf-8') as f:
                 content = f.read()
 
             # Parse AST
@@ -126,7 +127,7 @@ def verify_farm_tractor_tests():
             })
 
     # Summary
-    print(f"\n=== Summary ===")
+    print("\n=== Summary ===")
     total_files = len(results)
     files_with_real_import = sum(1 for r in results if r.get('has_real_import', False))
     files_with_mocks = sum(1 for r in results if r.get('has_mocks', False))

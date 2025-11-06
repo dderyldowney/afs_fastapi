@@ -5,13 +5,14 @@ This script provides the complete verification that FarmTractor is a real
 implementation with sophisticated business logic validation chains.
 """
 
-import sys
 import os
+import sys
 
 # Add the project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from afs_fastapi.equipment.farm_tractors import FarmTractor, ImplementPosition
+from afs_fastapi.equipment.farm_tractors import FarmTractor
+
 
 def complete_farm_tractor_verification():
     """Complete verification of FarmTractor implementation."""

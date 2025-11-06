@@ -23,9 +23,7 @@ from afs_fastapi.api.core.validation_schemas import (
     validate_equipment_data,
     validate_field_data,
 )
-from afs_fastapi.database.async_repository import (
-    UnitOfWork,
-)
+from afs_fastapi.database.async_repository import UnitOfWork
 from afs_fastapi.database.optimized_db_config import get_optimized_db_config
 
 router = APIRouter()
@@ -34,9 +32,7 @@ logger = logging.getLogger(__name__)
 
 async def get_db_session() -> AsyncSession:
     """Get database session for CRUD operations."""
-    from afs_fastapi.database.optimized_db_config import (
-        get_optimized_session,
-    )
+    from afs_fastapi.database.optimized_db_config import get_optimized_session
 
     # Initialize the database pool if not already done
     db_config = await get_optimized_db_config()

@@ -5,13 +5,14 @@ This script tests FarmTractor functionality based on its actual behavior
 and enum values, showing the comprehensive real implementation.
 """
 
-import sys
 import os
+import sys
 
 # Add the project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from afs_fastapi.equipment.farm_tractors import FarmTractor, ImplementPosition
+
 
 def test_farm_tractor_functionality():
     """Test FarmTractor core functionality based on actual behavior."""

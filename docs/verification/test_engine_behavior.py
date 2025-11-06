@@ -2,13 +2,14 @@
 Test FarmTractor engine behavior
 """
 
-import sys
 import os
+import sys
 
 # Add the project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from afs_fastapi.equipment.farm_tractors import FarmTractor
+
 
 def test_engine_behavior():
     """Test engine behavior details."""
@@ -17,13 +18,13 @@ def test_engine_behavior():
     try:
         tractor = FarmTractor("John Deere", "8RX", 2023)
 
-        print(f"Initial state:")
+        print("Initial state:")
         print(f"  Engine on: {tractor.engine_on}")
         print(f"  Engine RPM: {tractor.engine_rpm}")
         print(f"  Speed: {tractor.speed}")
 
         result = tractor.start_engine()
-        print(f"\nAfter start_engine():")
+        print("\nAfter start_engine():")
         print(f"  Result: {result}")
         print(f"  Engine on: {tractor.engine_on}")
         print(f"  Engine RPM: {tractor.engine_rpm}")
@@ -31,7 +32,7 @@ def test_engine_behavior():
 
         # Try to accelerate to see if RPM changes
         result = tractor.accelerate(5)
-        print(f"\nAfter accelerate(5):")
+        print("\nAfter accelerate(5):")
         print(f"  Result: {result}")
         print(f"  Engine on: {tractor.engine_on}")
         print(f"  Engine RPM: {tractor.engine_rpm}")

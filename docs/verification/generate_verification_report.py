@@ -7,8 +7,8 @@ test suite analysis and component mapping data.
 """
 
 import json
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 
 def load_analysis_data():

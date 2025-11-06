@@ -5,13 +5,14 @@ This script tests FarmTractor functionality with proper business logic
 validation sequence.
 """
 
-import sys
 import os
+import sys
 
 # Add the project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from afs_fastapi.equipment.farm_tractors import FarmTractor
+
 
 def test_farm_tractor_functionality():
     """Test FarmTractor core functionality with proper validation sequence."""
