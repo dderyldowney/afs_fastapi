@@ -1,0 +1,846 @@
+{
+  "tests/__init__.py": {
+    "imports": [],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/helpers.py": {
+    "imports": [],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/database/test_async_agricural_schemas.py": {
+    "imports": [
+      "database.agricultural_schemas_async",
+      "database.async_repository",
+      "database.agricultural_schemas_async",
+      "database.agricultural_schemas_async"
+    ],
+    "test_count": 19,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/database/test_agricultural_data_archiving.py": {
+    "imports": [
+      "database.agricultural_archiving",
+      "database.agricultural_schemas",
+      "models.agricultural_sensor_data"
+    ],
+    "test_count": 8,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/database/test_agricultural_database_schemas.py": {
+    "imports": [
+      "database.agricultural_schemas",
+      "models.agricultural_sensor_data"
+    ],
+    "test_count": 7,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/integration/test_can_integration_focused.py": {
+    "imports": [
+      "core.can_frame_codec",
+      "equipment.can_bus_manager",
+      "equipment.can_error_handling",
+      "equipment.physical_can_interface",
+      "protocols.isobus_handlers"
+    ],
+    "test_count": 10,
+    "has_async": true,
+    "has_integration": true
+  },
+  "tests/integration/test_fleet_coordination_integration.py": {
+    "imports": [
+      "equipment.network.isobus",
+      "services.emergency_stop_propagation",
+      "services.field_allocation",
+      "services.fleet",
+      "services.synchronization"
+    ],
+    "test_count": 4,
+    "has_async": true,
+    "has_integration": true
+  },
+  "tests/integration/test_tractor_can_data.py": {
+    "imports": [
+      "core.can_parser",
+      "core.j1939_specs"
+    ],
+    "test_count": 1,
+    "has_async": false,
+    "has_integration": true
+  },
+  "tests/integration/test_ai_processing_platform_integration.py": {
+    "imports": [
+      "api.ai_processing_schemas",
+      "equipment.farm_tractors",
+      "services"
+    ],
+    "test_count": 14,
+    "has_async": true,
+    "has_integration": true
+  },
+  "tests/integration/test_git_utils.py": {
+    "imports": [],
+    "test_count": 3,
+    "has_async": false,
+    "has_integration": true
+  },
+  "tests/integration/test_database_architecture_optimization.py": {
+    "imports": [
+      "database.connection_pool",
+      "database.enhanced_time_series_storage",
+      "database.optimized_db_config",
+      "monitoring.enhanced_token_usage_logger",
+      "database.can_message_buffer"
+    ],
+    "test_count": 17,
+    "has_async": true,
+    "has_integration": true
+  },
+  "tests/integration/test_can_bus_integration.py": {
+    "imports": [
+      "equipment.can_bus_manager",
+      "equipment.physical_can_interface"
+    ],
+    "test_count": 4,
+    "has_async": false,
+    "has_integration": true
+  },
+  "tests/integration/test_can_interface_integration.py": {
+    "imports": [
+      "core.can_frame_codec",
+      "equipment.can_bus_manager",
+      "equipment.can_error_handling",
+      "equipment.physical_can_interface",
+      "protocols.isobus_handlers"
+    ],
+    "test_count": 6,
+    "has_async": true,
+    "has_integration": true
+  },
+  "tests/features/__init__.py": {
+    "imports": [],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/features/farm_tractor_test.py": {
+    "imports": [
+      "equipment.farm_tractors"
+    ],
+    "test_count": 5,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/features/engine_workflow_test.py": {
+    "imports": [
+      "equipment.farm_tractors"
+    ],
+    "test_count": 5,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/features/api_serialization_test.py": {
+    "imports": [
+      "equipment.farm_tractors"
+    ],
+    "test_count": 7,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/features/api_endpoint_consumption_test.py": {
+    "imports": [
+      "api.main"
+    ],
+    "test_count": 11,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/library/test_station_types.py": {
+    "imports": [
+      "stations.station_types"
+    ],
+    "test_count": 7,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/library/__init__.py": {
+    "imports": [],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/library/test_agricultural_sensor_data.py": {
+    "imports": [
+      "equipment.farm_tractors",
+      "models.agricultural_sensor_data"
+    ],
+    "test_count": 6,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/library/test_derived_stations.py": {
+    "imports": [
+      "stations.station_types"
+    ],
+    "test_count": 4,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/cli/test_updatedocs_real.py": {
+    "imports": [],
+    "test_count": 8,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/cli/test_changelog_enforcement.py": {
+    "imports": [],
+    "test_count": 12,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/cli/test_updatechangelog.py": {
+    "imports": [
+      "scripts",
+      "scripts",
+      "scripts",
+      "scripts",
+      "scripts",
+      "scripts",
+      "scripts",
+      "scripts",
+      "scripts",
+      "scripts",
+      "scripts",
+      "scripts",
+      "scripts"
+    ],
+    "test_count": 14,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/cli/test_updatewebdocs.py": {
+    "imports": [],
+    "test_count": 11,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/cli/test_convert_readme_to_index_html.py": {
+    "imports": [],
+    "test_count": 5,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/cli/test_example_command.py": {
+    "imports": [],
+    "test_count": 1,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/cli/__init__.py": {
+    "imports": [],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/cli/test_updatechangelog_bash_execution.py": {
+    "imports": [],
+    "test_count": 11,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/cli/test_can_message_handler.py": {
+    "imports": [
+      "equipment.can_message_handler"
+    ],
+    "test_count": 5,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/cli/test_whereweare.py": {
+    "imports": [],
+    "test_count": 13,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/cli/test_session_initialization.py": {
+    "imports": [],
+    "test_count": 10,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/cli/test_updatedocs.py": {
+    "imports": [],
+    "test_count": 13,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/safety/test_iso25119_compliance.py": {
+    "imports": [
+      "safety.iso25119",
+      "safety.iso25119",
+      "safety.iso25119",
+      "safety.iso25119",
+      "safety.iso25119",
+      "safety.iso25119",
+      "safety.iso25119",
+      "safety.iso25119",
+      "safety.iso25119"
+    ],
+    "test_count": 9,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/safety/test_dynamic_safety_monitoring.py": {
+    "imports": [
+      "protocols.sae_j1939",
+      "safety.cross_layer_validation",
+      "safety.iso25119"
+    ],
+    "test_count": 37,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/safety/test_cross_layer_validation.py": {
+    "imports": [
+      "safety.cross_layer_validation",
+      "safety.iso25119"
+    ],
+    "test_count": 21,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/utilities/cli_testing.py": {
+    "imports": [],
+    "test_count": 4,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/utilities/timing_testing.py": {
+    "imports": [],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/utilities/api_testing.py": {
+    "imports": [
+      "api.main"
+    ],
+    "test_count": 7,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/factories/can_integration_factory.py": {
+    "imports": [
+      "core.can_manager"
+    ],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": true
+  },
+  "tests/factories/fleet_coordination_factory.py": {
+    "imports": [
+      "core.can_manager",
+      "equipment.network.isobus",
+      "services.fleet"
+    ],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/factories/service_test_factory.py": {
+    "imports": [
+      "services.field_allocation",
+      "services.fleet",
+      "services.synchronization"
+    ],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/api/test_todos.py": {
+    "imports": [
+      "api.main"
+    ],
+    "test_count": 4,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/api/test_token_usage_api.py": {
+    "imports": [
+      "api.main",
+      "monitoring.token_usage_logger",
+      "monitoring.token_usage_models",
+      "monitoring.token_usage_repository"
+    ],
+    "test_count": 2,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/api/test_main.py": {
+    "imports": [
+      "api.main"
+    ],
+    "test_count": 6,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/api/test_modernized_api.py": {
+    "imports": [
+      "api.core.error_handling",
+      "api.main"
+    ],
+    "test_count": 26,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/monitoring/__init__.py": {
+    "imports": [],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/monitoring/test_soil_monitor.py": {
+    "imports": [
+      "monitoring.soil_monitor"
+    ],
+    "test_count": 3,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/monitoring/test_monitors.py": {
+    "imports": [
+      "monitoring.soil_monitor",
+      "monitoring.water_monitor"
+    ],
+    "test_count": 2,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/monitoring/test_water_monitor.py": {
+    "imports": [
+      "monitoring.water_monitor"
+    ],
+    "test_count": 3,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/monitoring/test_backends.py": {
+    "imports": [
+      "monitoring.interfaces",
+      "monitoring.soil_monitor",
+      "monitoring.water_monitor"
+    ],
+    "test_count": 2,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/monitoring/test_token_usage.py": {
+    "imports": [
+      "monitoring.token_usage_logger"
+    ],
+    "test_count": 3,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/equipment/test_critical_tractor_data_handlers.py": {
+    "imports": [
+      "core.can_frame_codec",
+      "equipment.can_error_handling",
+      "equipment.critical_tractor_data_handlers"
+    ],
+    "test_count": 21,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/equipment/test_farm_tractors.py": {
+    "imports": [
+      "equipment.farm_tractors"
+    ],
+    "test_count": 10,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/equipment/test_to_response.py": {
+    "imports": [
+      "equipment.farm_tractors"
+    ],
+    "test_count": 2,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/equipment/test_congestion_detection.py": {
+    "imports": [
+      "equipment.congestion_detection",
+      "equipment.physical_can_interface"
+    ],
+    "test_count": 19,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/equipment/test_message_prioritization.py": {
+    "imports": [
+      "equipment.farm_tractors",
+      "equipment.message_prioritization",
+      "equipment.network.isobus"
+    ],
+    "test_count": 20,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/equipment/__init__.py": {
+    "imports": [],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/equipment/test_adaptive_bandwidth_management.py": {
+    "imports": [
+      "equipment.adaptive_bandwidth_management",
+      "equipment.advanced_message_prioritization",
+      "equipment.congestion_detection"
+    ],
+    "test_count": 18,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/equipment/test_can_bus_manager.py": {
+    "imports": [
+      "core.can_frame_codec",
+      "equipment.can_bus_manager",
+      "equipment.can_error_handling",
+      "equipment.physical_can_interface"
+    ],
+    "test_count": 30,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/equipment/test_message_queue_optimization.py": {
+    "imports": [
+      "equipment.congestion_detection",
+      "equipment.message_queue_optimization"
+    ],
+    "test_count": 39,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/equipment/test_physical_can_interface.py": {
+    "imports": [
+      "equipment.can_error_handling",
+      "equipment.physical_can_interface"
+    ],
+    "test_count": 27,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/equipment/test_can_error_handling.py": {
+    "imports": [
+      "equipment.can_error_handling",
+      "equipment.farm_tractors"
+    ],
+    "test_count": 13,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/equipment/test_robotic_interfaces.py": {
+    "imports": [
+      "equipment.farm_tractors"
+    ],
+    "test_count": 33,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/equipment/test_isobus_guaranteed_delivery.py": {
+    "imports": [
+      "equipment.farm_tractors",
+      "equipment.network.isobus",
+      "services.field_allocation"
+    ],
+    "test_count": 24,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/equipment/test_advanced_message_prioritization.py": {
+    "imports": [
+      "equipment.advanced_message_prioritization"
+    ],
+    "test_count": 15,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/equipment/test_sample_tdd_enforcement.py": {
+    "imports": [
+      "equipment.soil_monitor",
+      "equipment.soil_monitor",
+      "equipment.soil_monitor"
+    ],
+    "test_count": 3,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/equipment/test_agricultural_can_protocols.py": {
+    "imports": [
+      "core.enhanced_can_validator",
+      "equipment.agricultural_can_protocols"
+    ],
+    "test_count": 26,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/equipment/test_socketcan_linux.py": {
+    "imports": [
+      "equipment.can_error_handling",
+      "equipment.physical_can_interface",
+      "equipment.socketcan_linux",
+      "equipment.socketcan_linux"
+    ],
+    "test_count": 21,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/equipment/test_farm_tractor_advanced.py": {
+    "imports": [
+      "equipment.farm_tractors"
+    ],
+    "test_count": 8,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/equipment/test_agricultural_integration.py": {
+    "imports": [
+      "equipment.farm_tractors",
+      "services.field_allocation",
+      "equipment.network.isobus"
+    ],
+    "test_count": 12,
+    "has_async": false,
+    "has_integration": true
+  },
+  "tests/equipment/test_farm_tractor.py": {
+    "imports": [
+      "equipment.farm_tractors"
+    ],
+    "test_count": 11,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/protocols/test_sae_j1939_stack.py": {
+    "imports": [
+      "protocols.sae_j1939",
+      "protocols.sae_j1939",
+      "protocols.sae_j1939",
+      "protocols.sae_j1939",
+      "protocols.sae_j1939",
+      "protocols.sae_j1939",
+      "protocols.sae_j1939",
+      "protocols.sae_j1939",
+      "protocols.sae_j1939",
+      "protocols.sae_j1939",
+      "protocols.sae_j1939",
+      "protocols.sae_j1939",
+      "protocols.sae_j1939",
+      "core.can_frame_codec",
+      "protocols.isobus_handlers",
+      "protocols.sae_j1939",
+      "protocols.sae_j1939"
+    ],
+    "test_count": 13,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/protocols/test_isobus_handlers.py": {
+    "imports": [
+      "core.can_frame_codec",
+      "equipment.can_error_handling",
+      "protocols.isobus_handlers"
+    ],
+    "test_count": 29,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/functional/test_realtime_optimization.py": {
+    "imports": [
+      "core.conversation_manager",
+      "services.realtime_token_optimizer",
+      "services.ai_processing_pipeline",
+      "core.conversation_manager"
+    ],
+    "test_count": 24,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/services/field_allocation.py": {
+    "imports": [
+      "services.synchronization"
+    ],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/services/test_field_allocation_crdt.py": {
+    "imports": [
+      "services.field_allocation"
+    ],
+    "test_count": 6,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/services/test_cloud_integration.py": {
+    "imports": [
+      "services.cloud_integration"
+    ],
+    "test_count": 12,
+    "has_async": false,
+    "has_integration": true
+  },
+  "tests/services/test_ai_processing_pipeline_dynamic_context.py": {
+    "imports": [
+      "services.ai_processing_pipeline"
+    ],
+    "test_count": 9,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/services/crdt.py": {
+    "imports": [],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/services/test_collision_avoidance_system.py": {
+    "imports": [
+      "equipment.network.isobus",
+      "services.collision_avoidance_system",
+      "services.fleet"
+    ],
+    "test_count": 15,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/services/test_ai_processing_pipeline.py": {
+    "imports": [
+      "services.ai_processing_pipeline"
+    ],
+    "test_count": 17,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/services/__init__.py": {
+    "imports": [],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/services/test_crdt.py": {
+    "imports": [
+      "services.crdt"
+    ],
+    "test_count": 4,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/services/test_emergency_stop_propagation.py": {
+    "imports": [
+      "equipment.network.isobus",
+      "services.emergency_stop_propagation",
+      "services.fleet",
+      "services.synchronization"
+    ],
+    "test_count": 11,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/services/test_communication_loss_failsafe.py": {
+    "imports": [
+      "services.communication_loss_failsafe"
+    ],
+    "test_count": 13,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/services/test_vector_clock.py": {
+    "imports": [
+      "services.synchronization"
+    ],
+    "test_count": 14,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/services/test_fleet_coordination_engine.py": {
+    "imports": [
+      "equipment.network.isobus",
+      "services.fleet"
+    ],
+    "test_count": 11,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/services/test_field_allocation.py": {
+    "imports": [
+      "services.field_allocation"
+    ],
+    "test_count": 1,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/services/test_service1.py": {
+    "imports": [],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/services/test_cost_calculator.py": {
+    "imports": [
+      "services.cost_calculator",
+      "services.cost_calculator",
+      "services.cost_calculator",
+      "services.cost_calculator",
+      "services.cost_calculator",
+      "services.cost_calculator",
+      "services.cost_calculator",
+      "services.cost_calculator",
+      "services.cost_calculator",
+      "services.cost_calculator",
+      "services.cost_calculator",
+      "services.cost_calculator"
+    ],
+    "test_count": 12,
+    "has_async": false,
+    "has_integration": false
+  },
+  "tests/services/test_ai_processing_pipeline_optimization.py": {
+    "imports": [
+      "services.ai_processing_pipeline"
+    ],
+    "test_count": 3,
+    "has_async": true,
+    "has_integration": false
+  },
+  "tests/integration/can_communication/tractor_simulator.py": {
+    "imports": [
+      "core.can_hal"
+    ],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": true
+  },
+  "tests/integration/can_communication/test_can_communication.py": {
+    "imports": [],
+    "test_count": 1,
+    "has_async": false,
+    "has_integration": true
+  },
+  "tests/integration/can_communication/platform_test.py": {
+    "imports": [
+      "core.can_hal"
+    ],
+    "test_count": 0,
+    "has_async": false,
+    "has_integration": true
+  }
+}
