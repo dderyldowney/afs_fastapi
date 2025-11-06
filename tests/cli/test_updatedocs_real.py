@@ -114,6 +114,7 @@ class TestUpdateDocsCommand:
                 for indicator in [
                     "#!/bin/bash",
                     "#!/bin/sh",
+                    "#!/usr/bin/env bash",
                     "#!/usr/bin/env python",
                     "#!/usr/bin/python3",
                 ]

@@ -615,9 +615,8 @@ class TestAsyncAgriculturalDatabaseSchemas:
     @pytest.mark.asyncio
     async def test_error_handling_async(self, async_session) -> None:
         """Test async error handling and transaction rollback."""
-        # Test transaction rollback on failure
+        # First create equipment successfully
         async with UnitOfWork(async_session) as uow:
-            # Create equipment successfully
             await uow.equipment.create_equipment(
                 equipment_id="ERROR_TEST_EQUIPMENT",
                 isobus_address=0x60,
@@ -625,26 +624,30 @@ class TestAsyncAgriculturalDatabaseSchemas:
                 manufacturer="Case IH",
             )
 
-            # Attempt to create equipment with duplicate ID (should cause constraint violation)
-            try:
+        # Verify equipment exists
+        async with UnitOfWork(async_session) as uow:
+            retrieved_equipment = await uow.equipment.get_equipment_by_isobus_address(0x60)
+            assert retrieved_equipment is not None
+            assert retrieved_equipment.equipment_id == "ERROR_TEST_EQUIPMENT"
+
+        # Test transaction rollback on failure - attempt to create duplicate
+        with pytest.raises(Exception):  # Expect constraint violation
+            async with UnitOfWork(async_session) as uow:
+                # Attempt to create equipment with duplicate ID (should cause constraint violation)
                 await uow.equipment.create_equipment(
                     equipment_id="ERROR_TEST_EQUIPMENT",  # Duplicate ID
                     isobus_address=0x61,
                     equipment_type="implement",
                     manufacturer="Great Plains",
                 )
-                pytest.fail("Expected constraint violation was not raised")
-            except Exception:
-                # Transaction should be rolled back automatically
-                pass
 
-        # Verify that the original equipment still exists but duplicate was not created
+        # Verify that the original equipment still exists and no duplicate was created
         async with UnitOfWork(async_session) as uow:
-            retrieved_equipment = await uow.equipment.get_equipment_by_isobus_address(0x60)
+            original_equipment = await uow.equipment.get_equipment_by_isobus_address(0x60)
             duplicate_equipment = await uow.equipment.get_equipment_by_isobus_address(0x61)
 
-            assert retrieved_equipment is not None
-            assert retrieved_equipment.equipment_id == "ERROR_TEST_EQUIPMENT"
+            assert original_equipment is not None
+            assert original_equipment.equipment_id == "ERROR_TEST_EQUIPMENT"
             assert duplicate_equipment is None  # Should not exist due to rollback
 
     @pytest.mark.asyncio
