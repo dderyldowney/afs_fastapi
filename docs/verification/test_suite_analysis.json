@@ -1,0 +1,1598 @@
+{
+  "summary": {
+    "total_test_files": 75,
+    "total_tests": 690,
+    "total_async_tests": 188,
+    "files_with_mocks": 26,
+    "files_with_real_imports": 63,
+    "total_mocks": 614,
+    "total_assertions": 2750
+  },
+  "quality_distribution": {
+    "empty": 9,
+    "excellent": 27,
+    "no_real_imports": 9,
+    "good": 11,
+    "mock_heavy": 7,
+    "low_assertions": 10,
+    "acceptable": 2
+  },
+  "files_by_category": {
+    "empty": [
+      "tests/database/test_async_agricural_schemas.py",
+      "tests/integration/test_can_integration_focused.py",
+      "tests/integration/test_fleet_coordination_integration.py",
+      "tests/integration/test_ai_processing_platform_integration.py",
+      "tests/integration/test_can_interface_integration.py",
+      "tests/factories/service_test_factory.py",
+      "tests/api/test_todos.py",
+      "tests/monitoring/test_token_usage.py",
+      "tests/services/test_service1.py"
+    ],
+    "excellent": [
+      "tests/database/test_agricultural_data_archiving.py",
+      "tests/database/test_agricultural_database_schemas.py",
+      "tests/integration/test_tractor_can_data.py",
+      "tests/library/test_agricultural_sensor_data.py",
+      "tests/safety/test_iso25119_compliance.py",
+      "tests/safety/test_dynamic_safety_monitoring.py",
+      "tests/safety/test_cross_layer_validation.py",
+      "tests/monitoring/test_soil_monitor.py",
+      "tests/monitoring/test_monitors.py",
+      "tests/monitoring/test_water_monitor.py",
+      "tests/monitoring/test_backends.py",
+      "tests/equipment/test_to_response.py",
+      "tests/equipment/test_congestion_detection.py",
+      "tests/equipment/test_message_prioritization.py",
+      "tests/equipment/test_message_queue_optimization.py",
+      "tests/equipment/test_can_error_handling.py",
+      "tests/equipment/test_advanced_message_prioritization.py",
+      "tests/equipment/test_sample_tdd_enforcement.py",
+      "tests/equipment/test_agricultural_can_protocols.py",
+      "tests/protocols/test_isobus_handlers.py",
+      "tests/services/test_field_allocation_crdt.py",
+      "tests/services/test_ai_processing_pipeline_dynamic_context.py",
+      "tests/services/test_collision_avoidance_system.py",
+      "tests/services/test_emergency_stop_propagation.py",
+      "tests/services/test_fleet_coordination_engine.py",
+      "tests/services/test_field_allocation.py",
+      "tests/services/test_cost_calculator.py"
+    ],
+    "no_real_imports": [
+      "tests/integration/test_git_utils.py",
+      "tests/cli/test_updatedocs_real.py",
+      "tests/cli/test_changelog_enforcement.py",
+      "tests/cli/test_updatewebdocs.py",
+      "tests/cli/test_convert_readme_to_index_html.py",
+      "tests/cli/test_example_command.py",
+      "tests/cli/test_whereweare.py",
+      "tests/cli/test_session_initialization.py",
+      "tests/integration/can_communication/test_can_communication.py"
+    ],
+    "good": [
+      "tests/integration/test_database_architecture_optimization.py",
+      "tests/library/test_station_types.py",
+      "tests/cli/test_updatechangelog.py",
+      "tests/api/test_modernized_api.py",
+      "tests/equipment/test_critical_tractor_data_handlers.py",
+      "tests/equipment/test_farm_tractors.py",
+      "tests/equipment/test_adaptive_bandwidth_management.py",
+      "tests/protocols/test_sae_j1939_stack.py",
+      "tests/functional/test_realtime_optimization.py",
+      "tests/services/test_cloud_integration.py",
+      "tests/services/test_crdt.py"
+    ],
+    "mock_heavy": [
+      "tests/integration/test_can_bus_integration.py",
+      "tests/cli/test_updatechangelog_bash_execution.py",
+      "tests/cli/test_updatedocs.py",
+      "tests/equipment/test_can_bus_manager.py",
+      "tests/equipment/test_physical_can_interface.py",
+      "tests/equipment/test_socketcan_linux.py",
+      "tests/services/test_communication_loss_failsafe.py"
+    ],
+    "low_assertions": [
+      "tests/library/test_derived_stations.py",
+      "tests/cli/test_can_message_handler.py",
+      "tests/api/test_token_usage_api.py",
+      "tests/equipment/test_robotic_interfaces.py",
+      "tests/equipment/test_isobus_guaranteed_delivery.py",
+      "tests/equipment/test_farm_tractor_advanced.py",
+      "tests/equipment/test_agricultural_integration.py",
+      "tests/equipment/test_farm_tractor.py",
+      "tests/services/test_vector_clock.py",
+      "tests/services/test_ai_processing_pipeline_optimization.py"
+    ],
+    "acceptable": [
+      "tests/api/test_main.py",
+      "tests/services/test_ai_processing_pipeline.py"
+    ]
+  },
+  "detailed_analysis": [
+    {
+      "file": "tests/database/test_async_agricural_schemas.py",
+      "test_count": 0,
+      "async_test_count": 19,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "database.agricultural_schemas_async",
+        "database.async_repository",
+        "database.agricultural_schemas_async",
+        "database.agricultural_schemas_async"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 0,
+      "assertion_count": 104,
+      "assertion_per_test": 104.0
+    },
+    {
+      "file": "tests/database/test_agricultural_data_archiving.py",
+      "test_count": 8,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "database.agricultural_archiving",
+        "database.agricultural_schemas",
+        "models.agricultural_sensor_data"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 44.375,
+      "assertion_count": 56,
+      "assertion_per_test": 7.0
+    },
+    {
+      "file": "tests/database/test_agricultural_database_schemas.py",
+      "test_count": 7,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "database.agricultural_schemas",
+        "models.agricultural_sensor_data"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 49.0,
+      "assertion_count": 24,
+      "assertion_per_test": 3.4285714285714284
+    },
+    {
+      "file": "tests/integration/test_can_integration_focused.py",
+      "test_count": 0,
+      "async_test_count": 10,
+      "mock_count": 12,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "core.can_frame_codec",
+        "equipment.can_bus_manager",
+        "equipment.can_error_handling",
+        "equipment.physical_can_interface",
+        "protocols.isobus_handlers"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 0,
+      "assertion_count": 51,
+      "assertion_per_test": 51.0
+    },
+    {
+      "file": "tests/integration/test_fleet_coordination_integration.py",
+      "test_count": 0,
+      "async_test_count": 4,
+      "mock_count": 20,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.network.isobus",
+        "services.emergency_stop_propagation",
+        "services.field_allocation",
+        "services.fleet",
+        "services.synchronization"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 0,
+      "assertion_count": 29,
+      "assertion_per_test": 29.0
+    },
+    {
+      "file": "tests/integration/test_tractor_can_data.py",
+      "test_count": 1,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "core.can_parser",
+        "core.j1939_specs"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 1.0,
+      "assertion_count": 9,
+      "assertion_per_test": 9.0
+    },
+    {
+      "file": "tests/integration/test_ai_processing_platform_integration.py",
+      "test_count": 0,
+      "async_test_count": 14,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "api.ai_processing_schemas",
+        "equipment.farm_tractors",
+        "services"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 0,
+      "assertion_count": 79,
+      "assertion_per_test": 79.0
+    },
+    {
+      "file": "tests/integration/test_git_utils.py",
+      "test_count": 3,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": false,
+      "afs_imports": [],
+      "relative_imports": [],
+      "avg_test_length": 28.0,
+      "assertion_count": 6,
+      "assertion_per_test": 2.0
+    },
+    {
+      "file": "tests/integration/test_database_architecture_optimization.py",
+      "test_count": 9,
+      "async_test_count": 8,
+      "mock_count": 2,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "database.connection_pool",
+        "database.enhanced_time_series_storage",
+        "database.optimized_db_config",
+        "monitoring.enhanced_token_usage_logger",
+        "database.can_message_buffer"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 36.77777777777778,
+      "assertion_count": 68,
+      "assertion_per_test": 7.555555555555555
+    },
+    {
+      "file": "tests/integration/test_can_bus_integration.py",
+      "test_count": 4,
+      "async_test_count": 0,
+      "mock_count": 10,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.can_bus_manager",
+        "equipment.physical_can_interface"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 17.75,
+      "assertion_count": 0,
+      "assertion_per_test": 0.0
+    },
+    {
+      "file": "tests/integration/test_can_interface_integration.py",
+      "test_count": 0,
+      "async_test_count": 6,
+      "mock_count": 115,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "core.can_frame_codec",
+        "equipment.can_bus_manager",
+        "equipment.can_error_handling",
+        "equipment.physical_can_interface",
+        "protocols.isobus_handlers"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 0,
+      "assertion_count": 26,
+      "assertion_per_test": 26.0
+    },
+    {
+      "file": "tests/library/test_station_types.py",
+      "test_count": 7,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "stations.station_types"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 2.857142857142857,
+      "assertion_count": 13,
+      "assertion_per_test": 1.8571428571428572
+    },
+    {
+      "file": "tests/library/test_agricultural_sensor_data.py",
+      "test_count": 6,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.farm_tractors",
+        "models.agricultural_sensor_data"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 32.333333333333336,
+      "assertion_count": 32,
+      "assertion_per_test": 5.333333333333333
+    },
+    {
+      "file": "tests/library/test_derived_stations.py",
+      "test_count": 4,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "stations.station_types"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 4.5,
+      "assertion_count": 0,
+      "assertion_per_test": 0.0
+    },
+    {
+      "file": "tests/cli/test_updatedocs_real.py",
+      "test_count": 8,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": false,
+      "afs_imports": [],
+      "relative_imports": [],
+      "avg_test_length": 12.125,
+      "assertion_count": 18,
+      "assertion_per_test": 2.25
+    },
+    {
+      "file": "tests/cli/test_changelog_enforcement.py",
+      "test_count": 12,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": false,
+      "afs_imports": [],
+      "relative_imports": [],
+      "avg_test_length": 22.916666666666668,
+      "assertion_count": 19,
+      "assertion_per_test": 1.5833333333333333
+    },
+    {
+      "file": "tests/cli/test_updatechangelog.py",
+      "test_count": 14,
+      "async_test_count": 0,
+      "mock_count": 2,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "scripts",
+        "scripts",
+        "scripts",
+        "scripts",
+        "scripts",
+        "scripts",
+        "scripts",
+        "scripts",
+        "scripts",
+        "scripts",
+        "scripts",
+        "scripts",
+        "scripts"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 21.642857142857142,
+      "assertion_count": 41,
+      "assertion_per_test": 2.9285714285714284
+    },
+    {
+      "file": "tests/cli/test_updatewebdocs.py",
+      "test_count": 11,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": false,
+      "afs_imports": [],
+      "relative_imports": [],
+      "avg_test_length": 16.09090909090909,
+      "assertion_count": 33,
+      "assertion_per_test": 3.0
+    },
+    {
+      "file": "tests/cli/test_convert_readme_to_index_html.py",
+      "test_count": 5,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": false,
+      "afs_imports": [],
+      "relative_imports": [],
+      "avg_test_length": 34.8,
+      "assertion_count": 36,
+      "assertion_per_test": 7.2
+    },
+    {
+      "file": "tests/cli/test_example_command.py",
+      "test_count": 1,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": false,
+      "afs_imports": [],
+      "relative_imports": [],
+      "avg_test_length": 30.0,
+      "assertion_count": 5,
+      "assertion_per_test": 5.0
+    },
+    {
+      "file": "tests/cli/test_updatechangelog_bash_execution.py",
+      "test_count": 11,
+      "async_test_count": 0,
+      "mock_count": 24,
+      "has_mocks": true,
+      "has_real_imports": false,
+      "afs_imports": [],
+      "relative_imports": [],
+      "avg_test_length": 29.0,
+      "assertion_count": 30,
+      "assertion_per_test": 2.727272727272727
+    },
+    {
+      "file": "tests/cli/test_can_message_handler.py",
+      "test_count": 5,
+      "async_test_count": 0,
+      "mock_count": 6,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.can_message_handler"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 8.2,
+      "assertion_count": 4,
+      "assertion_per_test": 0.8
+    },
+    {
+      "file": "tests/cli/test_whereweare.py",
+      "test_count": 13,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": false,
+      "afs_imports": [],
+      "relative_imports": [],
+      "avg_test_length": 14.461538461538462,
+      "assertion_count": 34,
+      "assertion_per_test": 2.6153846153846154
+    },
+    {
+      "file": "tests/cli/test_session_initialization.py",
+      "test_count": 10,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": false,
+      "afs_imports": [],
+      "relative_imports": [],
+      "avg_test_length": 23.8,
+      "assertion_count": 21,
+      "assertion_per_test": 2.1
+    },
+    {
+      "file": "tests/cli/test_updatedocs.py",
+      "test_count": 13,
+      "async_test_count": 0,
+      "mock_count": 50,
+      "has_mocks": true,
+      "has_real_imports": false,
+      "afs_imports": [],
+      "relative_imports": [],
+      "avg_test_length": 21.076923076923077,
+      "assertion_count": 30,
+      "assertion_per_test": 2.3076923076923075
+    },
+    {
+      "file": "tests/safety/test_iso25119_compliance.py",
+      "test_count": 9,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "safety.iso25119",
+        "safety.iso25119",
+        "safety.iso25119",
+        "safety.iso25119",
+        "safety.iso25119",
+        "safety.iso25119",
+        "safety.iso25119",
+        "safety.iso25119",
+        "safety.iso25119"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 45.111111111111114,
+      "assertion_count": 68,
+      "assertion_per_test": 7.555555555555555
+    },
+    {
+      "file": "tests/safety/test_dynamic_safety_monitoring.py",
+      "test_count": 35,
+      "async_test_count": 2,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "protocols.sae_j1939",
+        "safety.cross_layer_validation",
+        "safety.iso25119"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 16.057142857142857,
+      "assertion_count": 118,
+      "assertion_per_test": 3.3714285714285714
+    },
+    {
+      "file": "tests/safety/test_cross_layer_validation.py",
+      "test_count": 20,
+      "async_test_count": 1,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "safety.cross_layer_validation",
+        "safety.iso25119"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 19.8,
+      "assertion_count": 84,
+      "assertion_per_test": 4.2
+    },
+    {
+      "file": "tests/factories/service_test_factory.py",
+      "test_count": 0,
+      "async_test_count": 0,
+      "mock_count": 1,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "services.field_allocation",
+        "services.fleet",
+        "services.synchronization"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 0,
+      "assertion_count": 0,
+      "assertion_per_test": 0.0
+    },
+    {
+      "file": "tests/api/test_todos.py",
+      "test_count": 0,
+      "async_test_count": 4,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "api.main"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 0,
+      "assertion_count": 14,
+      "assertion_per_test": 14.0
+    },
+    {
+      "file": "tests/api/test_token_usage_api.py",
+      "test_count": 2,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "api.main",
+        "monitoring.token_usage_logger",
+        "monitoring.token_usage_models",
+        "monitoring.token_usage_repository"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 37.5,
+      "assertion_count": 1,
+      "assertion_per_test": 0.5
+    },
+    {
+      "file": "tests/api/test_main.py",
+      "test_count": 6,
+      "async_test_count": 0,
+      "mock_count": 4,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "api.main"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 12.166666666666666,
+      "assertion_count": 41,
+      "assertion_per_test": 6.833333333333333
+    },
+    {
+      "file": "tests/api/test_modernized_api.py",
+      "test_count": 26,
+      "async_test_count": 0,
+      "mock_count": 4,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "api.core.error_handling",
+        "api.main"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 14.115384615384615,
+      "assertion_count": 108,
+      "assertion_per_test": 4.153846153846154
+    },
+    {
+      "file": "tests/monitoring/test_soil_monitor.py",
+      "test_count": 3,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "monitoring.soil_monitor"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 10.333333333333334,
+      "assertion_count": 13,
+      "assertion_per_test": 4.333333333333333
+    },
+    {
+      "file": "tests/monitoring/test_monitors.py",
+      "test_count": 2,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "monitoring.soil_monitor",
+        "monitoring.water_monitor"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 4.0,
+      "assertion_count": 4,
+      "assertion_per_test": 2.0
+    },
+    {
+      "file": "tests/monitoring/test_water_monitor.py",
+      "test_count": 3,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "monitoring.water_monitor"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 13.0,
+      "assertion_count": 15,
+      "assertion_per_test": 5.0
+    },
+    {
+      "file": "tests/monitoring/test_backends.py",
+      "test_count": 2,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "monitoring.interfaces",
+        "monitoring.soil_monitor",
+        "monitoring.water_monitor"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 5.0,
+      "assertion_count": 6,
+      "assertion_per_test": 3.0
+    },
+    {
+      "file": "tests/monitoring/test_token_usage.py",
+      "test_count": 0,
+      "async_test_count": 3,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "monitoring.token_usage_logger"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 0,
+      "assertion_count": 7,
+      "assertion_per_test": 7.0
+    },
+    {
+      "file": "tests/equipment/test_critical_tractor_data_handlers.py",
+      "test_count": 21,
+      "async_test_count": 0,
+      "mock_count": 2,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "core.can_frame_codec",
+        "equipment.can_error_handling",
+        "equipment.critical_tractor_data_handlers"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 24.333333333333332,
+      "assertion_count": 116,
+      "assertion_per_test": 5.523809523809524
+    },
+    {
+      "file": "tests/equipment/test_farm_tractors.py",
+      "test_count": 10,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.farm_tractors"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 9.9,
+      "assertion_count": 17,
+      "assertion_per_test": 1.7
+    },
+    {
+      "file": "tests/equipment/test_to_response.py",
+      "test_count": 2,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.farm_tractors"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 14.5,
+      "assertion_count": 19,
+      "assertion_per_test": 9.5
+    },
+    {
+      "file": "tests/equipment/test_congestion_detection.py",
+      "test_count": 13,
+      "async_test_count": 6,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.congestion_detection",
+        "equipment.physical_can_interface"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 28.384615384615383,
+      "assertion_count": 62,
+      "assertion_per_test": 4.769230769230769
+    },
+    {
+      "file": "tests/equipment/test_message_prioritization.py",
+      "test_count": 20,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.farm_tractors",
+        "equipment.message_prioritization",
+        "equipment.network.isobus"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 23.5,
+      "assertion_count": 60,
+      "assertion_per_test": 3.0
+    },
+    {
+      "file": "tests/equipment/test_adaptive_bandwidth_management.py",
+      "test_count": 13,
+      "async_test_count": 5,
+      "mock_count": 2,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.adaptive_bandwidth_management",
+        "equipment.advanced_message_prioritization",
+        "equipment.congestion_detection"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 27.615384615384617,
+      "assertion_count": 62,
+      "assertion_per_test": 4.769230769230769
+    },
+    {
+      "file": "tests/equipment/test_can_bus_manager.py",
+      "test_count": 18,
+      "async_test_count": 12,
+      "mock_count": 51,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "core.can_frame_codec",
+        "equipment.can_bus_manager",
+        "equipment.can_error_handling",
+        "equipment.physical_can_interface"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 33.22222222222222,
+      "assertion_count": 75,
+      "assertion_per_test": 4.166666666666667
+    },
+    {
+      "file": "tests/equipment/test_message_queue_optimization.py",
+      "test_count": 30,
+      "async_test_count": 9,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.congestion_detection",
+        "equipment.message_queue_optimization"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 15.766666666666667,
+      "assertion_count": 99,
+      "assertion_per_test": 3.3
+    },
+    {
+      "file": "tests/equipment/test_physical_can_interface.py",
+      "test_count": 11,
+      "async_test_count": 16,
+      "mock_count": 129,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.can_error_handling",
+        "equipment.physical_can_interface"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 53.90909090909091,
+      "assertion_count": 79,
+      "assertion_per_test": 7.181818181818182
+    },
+    {
+      "file": "tests/equipment/test_can_error_handling.py",
+      "test_count": 13,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.can_error_handling",
+        "equipment.farm_tractors"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 19.307692307692307,
+      "assertion_count": 44,
+      "assertion_per_test": 3.3846153846153846
+    },
+    {
+      "file": "tests/equipment/test_robotic_interfaces.py",
+      "test_count": 33,
+      "async_test_count": 0,
+      "mock_count": 1,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.farm_tractors"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 12.242424242424242,
+      "assertion_count": 0,
+      "assertion_per_test": 0.0
+    },
+    {
+      "file": "tests/equipment/test_isobus_guaranteed_delivery.py",
+      "test_count": 24,
+      "async_test_count": 0,
+      "mock_count": 6,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.farm_tractors",
+        "equipment.network.isobus",
+        "services.field_allocation"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 17.0,
+      "assertion_count": 0,
+      "assertion_per_test": 0.0
+    },
+    {
+      "file": "tests/equipment/test_advanced_message_prioritization.py",
+      "test_count": 15,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.advanced_message_prioritization"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 23.8,
+      "assertion_count": 47,
+      "assertion_per_test": 3.1333333333333333
+    },
+    {
+      "file": "tests/equipment/test_sample_tdd_enforcement.py",
+      "test_count": 3,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.soil_monitor",
+        "equipment.soil_monitor",
+        "equipment.soil_monitor"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 27.0,
+      "assertion_count": 16,
+      "assertion_per_test": 5.333333333333333
+    },
+    {
+      "file": "tests/equipment/test_agricultural_can_protocols.py",
+      "test_count": 16,
+      "async_test_count": 10,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "core.enhanced_can_validator",
+        "equipment.agricultural_can_protocols"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 49.125,
+      "assertion_count": 124,
+      "assertion_per_test": 7.75
+    },
+    {
+      "file": "tests/equipment/test_socketcan_linux.py",
+      "test_count": 3,
+      "async_test_count": 18,
+      "mock_count": 92,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.can_error_handling",
+        "equipment.physical_can_interface",
+        "equipment.socketcan_linux",
+        "equipment.socketcan_linux"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 216.0,
+      "assertion_count": 89,
+      "assertion_per_test": 29.666666666666668
+    },
+    {
+      "file": "tests/equipment/test_farm_tractor_advanced.py",
+      "test_count": 8,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.farm_tractors"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 20.5,
+      "assertion_count": 0,
+      "assertion_per_test": 0.0
+    },
+    {
+      "file": "tests/equipment/test_agricultural_integration.py",
+      "test_count": 12,
+      "async_test_count": 0,
+      "mock_count": 3,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.farm_tractors",
+        "services.field_allocation",
+        "equipment.network.isobus"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 18.5,
+      "assertion_count": 0,
+      "assertion_per_test": 0.0
+    },
+    {
+      "file": "tests/equipment/test_farm_tractor.py",
+      "test_count": 11,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.farm_tractors"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 19.818181818181817,
+      "assertion_count": 0,
+      "assertion_per_test": 0.0
+    },
+    {
+      "file": "tests/protocols/test_sae_j1939_stack.py",
+      "test_count": 13,
+      "async_test_count": 0,
+      "mock_count": 5,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "protocols.sae_j1939",
+        "protocols.sae_j1939",
+        "protocols.sae_j1939",
+        "protocols.sae_j1939",
+        "protocols.sae_j1939",
+        "protocols.sae_j1939",
+        "protocols.sae_j1939",
+        "protocols.sae_j1939",
+        "protocols.sae_j1939",
+        "protocols.sae_j1939",
+        "protocols.sae_j1939",
+        "protocols.sae_j1939",
+        "protocols.sae_j1939",
+        "core.can_frame_codec",
+        "protocols.isobus_handlers",
+        "protocols.sae_j1939",
+        "protocols.sae_j1939"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 28.846153846153847,
+      "assertion_count": 54,
+      "assertion_per_test": 4.153846153846154
+    },
+    {
+      "file": "tests/protocols/test_isobus_handlers.py",
+      "test_count": 25,
+      "async_test_count": 4,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "core.can_frame_codec",
+        "equipment.can_error_handling",
+        "protocols.isobus_handlers"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 30.72,
+      "assertion_count": 121,
+      "assertion_per_test": 4.84
+    },
+    {
+      "file": "tests/functional/test_realtime_optimization.py",
+      "test_count": 24,
+      "async_test_count": 0,
+      "mock_count": 2,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "core.conversation_manager",
+        "services.realtime_token_optimizer",
+        "services.ai_processing_pipeline",
+        "core.conversation_manager"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 23.041666666666668,
+      "assertion_count": 101,
+      "assertion_per_test": 4.208333333333333
+    },
+    {
+      "file": "tests/services/test_field_allocation_crdt.py",
+      "test_count": 6,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "services.field_allocation"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 20.5,
+      "assertion_count": 13,
+      "assertion_per_test": 2.1666666666666665
+    },
+    {
+      "file": "tests/services/test_cloud_integration.py",
+      "test_count": 12,
+      "async_test_count": 0,
+      "mock_count": 5,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "services.cloud_integration"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 3.25,
+      "assertion_count": 21,
+      "assertion_per_test": 1.75
+    },
+    {
+      "file": "tests/services/test_ai_processing_pipeline_dynamic_context.py",
+      "test_count": 9,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "services.ai_processing_pipeline"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 12.444444444444445,
+      "assertion_count": 18,
+      "assertion_per_test": 2.0
+    },
+    {
+      "file": "tests/services/test_collision_avoidance_system.py",
+      "test_count": 11,
+      "async_test_count": 4,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.network.isobus",
+        "services.collision_avoidance_system",
+        "services.fleet"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 45.18181818181818,
+      "assertion_count": 70,
+      "assertion_per_test": 6.363636363636363
+    },
+    {
+      "file": "tests/services/test_ai_processing_pipeline.py",
+      "test_count": 11,
+      "async_test_count": 6,
+      "mock_count": 7,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "services.ai_processing_pipeline"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 16.727272727272727,
+      "assertion_count": 46,
+      "assertion_per_test": 4.181818181818182
+    },
+    {
+      "file": "tests/services/test_crdt.py",
+      "test_count": 4,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "services.crdt"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 19.5,
+      "assertion_count": 7,
+      "assertion_per_test": 1.75
+    },
+    {
+      "file": "tests/services/test_emergency_stop_propagation.py",
+      "test_count": 1,
+      "async_test_count": 10,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.network.isobus",
+        "services.emergency_stop_propagation",
+        "services.fleet",
+        "services.synchronization"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 166.0,
+      "assertion_count": 17,
+      "assertion_per_test": 17.0
+    },
+    {
+      "file": "tests/services/test_communication_loss_failsafe.py",
+      "test_count": 6,
+      "async_test_count": 7,
+      "mock_count": 56,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "services.communication_loss_failsafe"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 64.0,
+      "assertion_count": 66,
+      "assertion_per_test": 11.0
+    },
+    {
+      "file": "tests/services/test_vector_clock.py",
+      "test_count": 14,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "services.synchronization"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 19.357142857142858,
+      "assertion_count": 0,
+      "assertion_per_test": 0.0
+    },
+    {
+      "file": "tests/services/test_fleet_coordination_engine.py",
+      "test_count": 2,
+      "async_test_count": 9,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "equipment.network.isobus",
+        "services.fleet"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 149.0,
+      "assertion_count": 25,
+      "assertion_per_test": 12.5
+    },
+    {
+      "file": "tests/services/test_field_allocation.py",
+      "test_count": 1,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "services.field_allocation"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 29.0,
+      "assertion_count": 7,
+      "assertion_per_test": 7.0
+    },
+    {
+      "file": "tests/services/test_service1.py",
+      "test_count": 0,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": false,
+      "afs_imports": [],
+      "relative_imports": [],
+      "avg_test_length": 0,
+      "assertion_count": 0,
+      "assertion_per_test": 0.0
+    },
+    {
+      "file": "tests/services/test_cost_calculator.py",
+      "test_count": 12,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": true,
+      "afs_imports": [
+        "services.cost_calculator",
+        "services.cost_calculator",
+        "services.cost_calculator",
+        "services.cost_calculator",
+        "services.cost_calculator",
+        "services.cost_calculator",
+        "services.cost_calculator",
+        "services.cost_calculator",
+        "services.cost_calculator",
+        "services.cost_calculator",
+        "services.cost_calculator",
+        "services.cost_calculator"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 23.333333333333332,
+      "assertion_count": 27,
+      "assertion_per_test": 2.25
+    },
+    {
+      "file": "tests/services/test_ai_processing_pipeline_optimization.py",
+      "test_count": 2,
+      "async_test_count": 1,
+      "mock_count": 3,
+      "has_mocks": true,
+      "has_real_imports": true,
+      "afs_imports": [
+        "services.ai_processing_pipeline"
+      ],
+      "relative_imports": [],
+      "avg_test_length": 16.5,
+      "assertion_count": 0,
+      "assertion_per_test": 0.0
+    },
+    {
+      "file": "tests/integration/can_communication/test_can_communication.py",
+      "test_count": 1,
+      "async_test_count": 0,
+      "mock_count": 0,
+      "has_mocks": false,
+      "has_real_imports": false,
+      "afs_imports": [],
+      "relative_imports": [],
+      "avg_test_length": 16.0,
+      "assertion_count": 1,
+      "assertion_per_test": 1.0
+    }
+  ],
+  "mock_heavy_files": [
+    {
+      "file": "tests/integration/test_can_integration_focused.py",
+      "mock_count": 12,
+      "test_count": 0,
+      "mock_ratio": 12.0
+    },
+    {
+      "file": "tests/integration/test_fleet_coordination_integration.py",
+      "mock_count": 20,
+      "test_count": 0,
+      "mock_ratio": 20.0
+    },
+    {
+      "file": "tests/integration/test_can_bus_integration.py",
+      "mock_count": 10,
+      "test_count": 4,
+      "mock_ratio": 2.5
+    },
+    {
+      "file": "tests/integration/test_can_interface_integration.py",
+      "mock_count": 115,
+      "test_count": 0,
+      "mock_ratio": 115.0
+    },
+    {
+      "file": "tests/cli/test_updatechangelog_bash_execution.py",
+      "mock_count": 24,
+      "test_count": 11,
+      "mock_ratio": 2.1818181818181817
+    },
+    {
+      "file": "tests/cli/test_can_message_handler.py",
+      "mock_count": 6,
+      "test_count": 5,
+      "mock_ratio": 1.2
+    },
+    {
+      "file": "tests/cli/test_updatedocs.py",
+      "mock_count": 50,
+      "test_count": 13,
+      "mock_ratio": 3.8461538461538463
+    },
+    {
+      "file": "tests/api/test_main.py",
+      "mock_count": 4,
+      "test_count": 6,
+      "mock_ratio": 0.6666666666666666
+    },
+    {
+      "file": "tests/api/test_modernized_api.py",
+      "mock_count": 4,
+      "test_count": 26,
+      "mock_ratio": 0.15384615384615385
+    },
+    {
+      "file": "tests/equipment/test_can_bus_manager.py",
+      "mock_count": 51,
+      "test_count": 18,
+      "mock_ratio": 2.8333333333333335
+    },
+    {
+      "file": "tests/equipment/test_physical_can_interface.py",
+      "mock_count": 129,
+      "test_count": 11,
+      "mock_ratio": 11.727272727272727
+    },
+    {
+      "file": "tests/equipment/test_isobus_guaranteed_delivery.py",
+      "mock_count": 6,
+      "test_count": 24,
+      "mock_ratio": 0.25
+    },
+    {
+      "file": "tests/equipment/test_socketcan_linux.py",
+      "mock_count": 92,
+      "test_count": 3,
+      "mock_ratio": 30.666666666666668
+    },
+    {
+      "file": "tests/protocols/test_sae_j1939_stack.py",
+      "mock_count": 5,
+      "test_count": 13,
+      "mock_ratio": 0.38461538461538464
+    },
+    {
+      "file": "tests/services/test_cloud_integration.py",
+      "mock_count": 5,
+      "test_count": 12,
+      "mock_ratio": 0.4166666666666667
+    },
+    {
+      "file": "tests/services/test_ai_processing_pipeline.py",
+      "mock_count": 7,
+      "test_count": 11,
+      "mock_ratio": 0.6363636363636364
+    },
+    {
+      "file": "tests/services/test_communication_loss_failsafe.py",
+      "mock_count": 56,
+      "test_count": 6,
+      "mock_ratio": 9.333333333333334
+    }
+  ],
+  "real_implementation_files": [
+    "tests/database/test_async_agricural_schemas.py",
+    "tests/database/test_agricultural_data_archiving.py",
+    "tests/database/test_agricultural_database_schemas.py",
+    "tests/integration/test_can_integration_focused.py",
+    "tests/integration/test_fleet_coordination_integration.py",
+    "tests/integration/test_tractor_can_data.py",
+    "tests/integration/test_ai_processing_platform_integration.py",
+    "tests/integration/test_database_architecture_optimization.py",
+    "tests/integration/test_can_bus_integration.py",
+    "tests/integration/test_can_interface_integration.py",
+    "tests/library/test_station_types.py",
+    "tests/library/test_agricultural_sensor_data.py",
+    "tests/library/test_derived_stations.py",
+    "tests/cli/test_updatechangelog.py",
+    "tests/cli/test_can_message_handler.py",
+    "tests/safety/test_iso25119_compliance.py",
+    "tests/safety/test_dynamic_safety_monitoring.py",
+    "tests/safety/test_cross_layer_validation.py",
+    "tests/factories/service_test_factory.py",
+    "tests/api/test_todos.py",
+    "tests/api/test_token_usage_api.py",
+    "tests/api/test_main.py",
+    "tests/api/test_modernized_api.py",
+    "tests/monitoring/test_soil_monitor.py",
+    "tests/monitoring/test_monitors.py",
+    "tests/monitoring/test_water_monitor.py",
+    "tests/monitoring/test_backends.py",
+    "tests/monitoring/test_token_usage.py",
+    "tests/equipment/test_critical_tractor_data_handlers.py",
+    "tests/equipment/test_farm_tractors.py",
+    "tests/equipment/test_to_response.py",
+    "tests/equipment/test_congestion_detection.py",
+    "tests/equipment/test_message_prioritization.py",
+    "tests/equipment/test_adaptive_bandwidth_management.py",
+    "tests/equipment/test_can_bus_manager.py",
+    "tests/equipment/test_message_queue_optimization.py",
+    "tests/equipment/test_physical_can_interface.py",
+    "tests/equipment/test_can_error_handling.py",
+    "tests/equipment/test_robotic_interfaces.py",
+    "tests/equipment/test_isobus_guaranteed_delivery.py",
+    "tests/equipment/test_advanced_message_prioritization.py",
+    "tests/equipment/test_sample_tdd_enforcement.py",
+    "tests/equipment/test_agricultural_can_protocols.py",
+    "tests/equipment/test_socketcan_linux.py",
+    "tests/equipment/test_farm_tractor_advanced.py",
+    "tests/equipment/test_agricultural_integration.py",
+    "tests/equipment/test_farm_tractor.py",
+    "tests/protocols/test_sae_j1939_stack.py",
+    "tests/protocols/test_isobus_handlers.py",
+    "tests/functional/test_realtime_optimization.py",
+    "tests/services/test_field_allocation_crdt.py",
+    "tests/services/test_cloud_integration.py",
+    "tests/services/test_ai_processing_pipeline_dynamic_context.py",
+    "tests/services/test_collision_avoidance_system.py",
+    "tests/services/test_ai_processing_pipeline.py",
+    "tests/services/test_crdt.py",
+    "tests/services/test_emergency_stop_propagation.py",
+    "tests/services/test_communication_loss_failsafe.py",
+    "tests/services/test_vector_clock.py",
+    "tests/services/test_fleet_coordination_engine.py",
+    "tests/services/test_field_allocation.py",
+    "tests/services/test_cost_calculator.py",
+    "tests/services/test_ai_processing_pipeline_optimization.py"
+  ],
+  "import_analysis": {
+    "afs_fastapi.database.agricultural_schemas_async": 3,
+    "afs_fastapi.database.async_repository": 1,
+    "afs_fastapi.database.agricultural_archiving": 1,
+    "afs_fastapi.database.agricultural_schemas": 2,
+    "afs_fastapi.models.agricultural_sensor_data": 3,
+    "afs_fastapi.core.can_frame_codec": 6,
+    "afs_fastapi.equipment.can_bus_manager": 4,
+    "afs_fastapi.equipment.can_error_handling": 8,
+    "afs_fastapi.equipment.physical_can_interface": 7,
+    "afs_fastapi.protocols.isobus_handlers": 4,
+    "afs_fastapi.equipment.network.isobus": 7,
+    "afs_fastapi.services.emergency_stop_propagation": 2,
+    "afs_fastapi.services.field_allocation": 6,
+    "afs_fastapi.services.fleet": 5,
+    "afs_fastapi.services.synchronization": 4,
+    "afs_fastapi.core.can_parser": 1,
+    "afs_fastapi.core.j1939_specs": 1,
+    "afs_fastapi.api.ai_processing_schemas": 1,
+    "afs_fastapi.equipment.farm_tractors": 11,
+    "afs_fastapi.services": 1,
+    "afs_fastapi.database.connection_pool": 1,
+    "afs_fastapi.database.enhanced_time_series_storage": 1,
+    "afs_fastapi.database.optimized_db_config": 1,
+    "afs_fastapi.monitoring.enhanced_token_usage_logger": 1,
+    "afs_fastapi.database.can_message_buffer": 1,
+    "afs_fastapi.stations.station_types": 2,
+    "afs_fastapi.scripts": 13,
+    "afs_fastapi.equipment.can_message_handler": 1,
+    "afs_fastapi.safety.iso25119": 11,
+    "afs_fastapi.protocols.sae_j1939": 16,
+    "afs_fastapi.safety.cross_layer_validation": 2,
+    "afs_fastapi.api.main": 4,
+    "afs_fastapi.monitoring.token_usage_logger": 2,
+    "afs_fastapi.monitoring.token_usage_models": 1,
+    "afs_fastapi.monitoring.token_usage_repository": 1,
+    "afs_fastapi.api.core.error_handling": 1,
+    "afs_fastapi.monitoring.soil_monitor": 3,
+    "afs_fastapi.monitoring.water_monitor": 3,
+    "afs_fastapi.monitoring.interfaces": 1,
+    "afs_fastapi.equipment.critical_tractor_data_handlers": 1,
+    "afs_fastapi.equipment.congestion_detection": 3,
+    "afs_fastapi.equipment.message_prioritization": 1,
+    "afs_fastapi.equipment.adaptive_bandwidth_management": 1,
+    "afs_fastapi.equipment.advanced_message_prioritization": 2,
+    "afs_fastapi.equipment.message_queue_optimization": 1,
+    "afs_fastapi.equipment.soil_monitor": 3,
+    "afs_fastapi.core.enhanced_can_validator": 1,
+    "afs_fastapi.equipment.agricultural_can_protocols": 1,
+    "afs_fastapi.equipment.socketcan_linux": 2,
+    "afs_fastapi.core.conversation_manager": 2,
+    "afs_fastapi.services.realtime_token_optimizer": 1,
+    "afs_fastapi.services.ai_processing_pipeline": 4,
+    "afs_fastapi.services.cloud_integration": 1,
+    "afs_fastapi.services.collision_avoidance_system": 1,
+    "afs_fastapi.services.crdt": 1,
+    "afs_fastapi.services.communication_loss_failsafe": 1,
+    "afs_fastapi.services.cost_calculator": 12
+  },
+  "problematic_files": [
+    "tests/database/test_async_agricural_schemas.py",
+    "tests/integration/test_can_integration_focused.py",
+    "tests/integration/test_fleet_coordination_integration.py",
+    "tests/integration/test_ai_processing_platform_integration.py",
+    "tests/integration/test_git_utils.py",
+    "tests/integration/test_can_bus_integration.py",
+    "tests/integration/test_can_interface_integration.py",
+    "tests/cli/test_updatedocs_real.py",
+    "tests/cli/test_changelog_enforcement.py",
+    "tests/cli/test_updatewebdocs.py",
+    "tests/cli/test_convert_readme_to_index_html.py",
+    "tests/cli/test_example_command.py",
+    "tests/cli/test_updatechangelog_bash_execution.py",
+    "tests/cli/test_whereweare.py",
+    "tests/cli/test_session_initialization.py",
+    "tests/cli/test_updatedocs.py",
+    "tests/factories/service_test_factory.py",
+    "tests/api/test_todos.py",
+    "tests/monitoring/test_token_usage.py",
+    "tests/equipment/test_can_bus_manager.py",
+    "tests/equipment/test_physical_can_interface.py",
+    "tests/equipment/test_socketcan_linux.py",
+    "tests/services/test_communication_loss_failsafe.py",
+    "tests/services/test_service1.py",
+    "tests/integration/can_communication/test_can_communication.py"
+  ],
+  "quality_metrics": {
+    "real_implementation_percentage": 84.0,
+    "mock_heavy_percentage": 22.666666666666664,
+    "problematic_percentage": 33.33333333333333,
+    "excellent_quality_percentage": 36.0,
+    "avg_tests_per_file": 9.2,
+    "avg_assertions_per_test": 3.9855072463768115,
+    "async_test_percentage": 27.246376811594203
+  }
+}
