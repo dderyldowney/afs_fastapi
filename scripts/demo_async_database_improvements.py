@@ -16,7 +16,13 @@ from datetime import datetime, timedelta
 import sqlalchemy
 from sqlalchemy import create_engine, select
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
+
+
+# Define Base for SQLAlchemy models
+class Base(DeclarativeBase):
+    pass
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -180,7 +186,7 @@ async def agricultural_can_message_demo():
     async def process_can_messages_async(messages):
         """Process CAN messages with async operations."""
         engine = create_async_engine("/can_messages_async.db", echo=False)
-        async_session_factory = async_session_maker(engine, expire_on_commit=False)
+        async_session_factory = async_sessionmaker(engine, expire_on_commit=False)
 
         class CANMessage(Base):
             __tablename__ = "can_messages"

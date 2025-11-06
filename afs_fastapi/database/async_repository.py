@@ -19,11 +19,9 @@ from typing import Any, TypeVar
 from sqlalchemy import and_, delete, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-# Generic type for repository entities
-T = TypeVar("T")
-
 from afs_fastapi.database.agricultural_schemas_async import (
     AgriculturalSensorRecord,
+    AsyncDatabaseManager,
     Equipment,
     Field,
     ISOBUSMessageRecord,
@@ -32,6 +30,9 @@ from afs_fastapi.database.agricultural_schemas_async import (
     TractorTelemetryRecord,
     YieldMonitorRecord,
 )
+
+# Generic type for repository entities
+T = TypeVar("T")
 
 
 class BaseAsyncRepository[T]:
@@ -284,6 +285,54 @@ class EquipmentAsyncRepository(BaseAsyncRepository[Equipment]):
 
         return equipment
 
+    async def get_equipment_by_id(self, equipment_id: str) -> Equipment | None:
+        """Get equipment by ID.
+
+        Parameters
+        ----------
+        equipment_id : str
+            Equipment identifier
+
+        Returns
+        -------
+        Optional[Equipment]
+            Equipment instance or None if not found
+        """
+        result = await self.session.execute(
+            select(Equipment).where(Equipment.equipment_id == equipment_id)
+        )
+        return result.scalar_one_or_none()
+
+    async def list_equipment(
+        self, filters: dict | None = None, limit: int = 100, offset: int = 0
+    ) -> list[Equipment]:
+        """List all equipment with pagination and optional filtering.
+
+        Parameters
+        ----------
+        filters : dict, optional
+            Filter criteria (e.g., equipment_type, manufacturer)
+        limit : int, default 100
+            Maximum number of equipment to return
+        offset : int, default 0
+            Number of equipment to skip
+
+        Returns
+        -------
+        list[Equipment]
+            List of equipment instances
+        """
+        query = select(Equipment).offset(offset).limit(limit)
+
+        if filters:
+            if "equipment_type" in filters:
+                query = query.where(Equipment.equipment_type == filters["equipment_type"])
+            if "manufacturer" in filters:
+                query = query.where(Equipment.manufacturer == filters["manufacturer"])
+
+        result = await self.session.execute(query)
+        return list(result.scalars().all())
+
 
 class FieldAsyncRepository(BaseAsyncRepository[Field]):
     """Async repository for field management in agricultural operations."""
@@ -387,6 +436,23 @@ class FieldAsyncRepository(BaseAsyncRepository[Field]):
 
         result = await self.session.execute(query)
         return result.scalars().all()
+
+    async def list_fields(self, limit: int = 100, offset: int = 0) -> list[Field]:
+        """List all fields with pagination.
+
+        Parameters
+        ----------
+        limit : int, default 100
+            Maximum number of fields to return
+        offset : int, default 0
+            Number of fields to skip
+
+        Returns
+        -------
+        list[Field]
+            List of field instances
+        """
+        return await self.list_all(Field, limit=limit, offset=offset)
 
 
 class ISOBUSMessageAsyncRepository(BaseAsyncRepository[ISOBUSMessageRecord]):
@@ -1379,7 +1445,7 @@ class UnitOfWork:
                 instance.updated_at = datetime.now(UTC)
 
         # Track deleted instances
-        for instance in self._deleted:
+        for _instance in self._deleted:
             # Log deletion event for agricultural operations tracking
             pass
 

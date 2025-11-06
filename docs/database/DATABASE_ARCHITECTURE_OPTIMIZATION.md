@@ -24,10 +24,10 @@ The `AgriculturalConnectionPool` class provides unified connection management wi
 - **Agricultural Optimizations**: Tuned specifically for farm equipment workloads
 
 ```python
-from afs_fastapi.database.connection_pool import AgriculturalConnectionPool, PoolConfiguration
+from afs_fastapi.database.connection_pool import AgriculturalConnectionPool, ConnectionPoolConfig
 
 # Create optimized connection pool
-pool_config = PoolConfiguration(
+pool_config = ConnectionPoolConfig(
     max_connections=50,          # Support multiple farm equipment
     min_connections=10,          # Maintain warm connections
     pool_size=30,               # Optimal for agricultural telemetry
@@ -264,10 +264,10 @@ for rec in report['agricultural_recommendations']:
 ### Production Configuration
 
 ```python
-from afs_fastapi.database.connection_pool import PoolConfiguration
+from afs_fastapi.database.connection_pool import ConnectionPoolConfig
 
 # Production configuration for agricultural robotics
-production_config = PoolConfiguration(
+production_config = ConnectionPoolConfig(
     max_connections=100,         # High concurrency for multiple equipment
     min_connections=20,          # Maintain warm connections
     pool_timeout=30.0,           # Agricultural data timeouts
@@ -288,7 +288,7 @@ production_config = PoolConfiguration(
 
 ```python
 # Development configuration
-development_config = PoolConfiguration(
+development_config = ConnectionPoolConfig(
     max_connections=20,         # Lower for development
     min_connections=5,          # Fewer connections
     pool_timeout=10.0,          # Faster timeouts

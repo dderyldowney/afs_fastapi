@@ -43,6 +43,9 @@ class JSONType(TypeDecorator[str]):
     def process_bind_param(self, value: Any, dialect: Any) -> str | None:
         """Convert Python object to JSON string for database storage."""
         if value is not None:
+            # Handle binary data by converting to hex string
+            if isinstance(value, bytes):
+                value = value.hex()
             return json.dumps(value)
         return value
 
@@ -158,7 +161,9 @@ class ISOBUSMessageRecord(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
 
-    timestamp: Mapped[datetime] = mapped_column(DateTime, nullable=False, index=True)
+    timestamp: Mapped[datetime] = mapped_column(
+        DateTime, nullable=False, index=True, default=lambda: datetime.now(UTC)
+    )
     equipment_id: Mapped[str] = mapped_column(
         String(50), ForeignKey("equipment.equipment_id"), nullable=False
     )
@@ -459,7 +464,7 @@ class AsyncDatabaseManager:
         except Exception as e:
             self._performance_metrics["total_operations"] += 1
             self._performance_metrics["failed_operations"] += 1
-            raise RuntimeError(f"Failed to initialize async database: {e}")
+            raise RuntimeError(f"Failed to initialize async database: {e}") from e
 
     async def get_session(self) -> AsyncGenerator[AsyncSession, None]:
         """Get an async database session with proper error handling.

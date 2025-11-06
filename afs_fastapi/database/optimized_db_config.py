@@ -14,8 +14,8 @@ Implementation follows Test-First Development (TDD) GREEN phase.
 from __future__ import annotations
 
 import os
-from contextlib import asynccontextmanager, contextmanager
 from collections.abc import AsyncGenerator
+from contextlib import asynccontextmanager, contextmanager
 
 from afs_fastapi.database.connection_pool import AgriculturalConnectionPool, PoolConfiguration
 
@@ -84,7 +84,7 @@ class OptimizedDatabaseConfig:
             return sqlite_url
 
         # Default to PostgreSQL with TimescaleDB for agricultural operations
-        return "postgresql://postgres:password@localhost:5432/afs_fastapi?sslmode=require"
+        return "postgresql+asyncpg://postgres:password@localhost:5432/afs_fastapi"
 
     async def initialize_pool(self, custom_config: PoolConfiguration | None = None) -> bool:
         """Initialize connection pool with agricultural optimizations.

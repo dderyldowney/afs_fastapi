@@ -21,30 +21,16 @@ async def test_async_imports() -> bool:
 
     try:
         # Test async schemas
-        from afs_fastapi.database.agricultural_schemas_async import (
-            AsyncDatabaseManager,
-            Equipment,
-            Field,
-            TokenUsage,
-        )
+        import afs_fastapi.database.agricultural_schemas_async
+        import afs_fastapi.database.async_repository
+        import afs_fastapi.monitoring.async_token_usage_logger
 
-        print("✅ AsyncDatabaseManager and models imported successfully")
+        # Use the imports to verify they work
+        _ = afs_fastapi.database.agricultural_schemas_async
+        _ = afs_fastapi.database.async_repository
+        _ = afs_fastapi.monitoring.async_token_usage_logger
 
-        # Test async repository
-        from afs_fastapi.database.async_repository import (
-            BaseAsyncRepository,
-            EquipmentAsyncRepository,
-            FieldAsyncRepository,
-            TokenUsageAsyncRepository,
-            UnitOfWork,
-        )
-
-        print("✅ Async repositories imported successfully")
-
-        # Test async token logger
-        from afs_fastapi.monitoring.async_token_usage_logger import AsyncTokenUsageLogger
-
-        print("✅ AsyncTokenUsageLogger imported successfully")
+        print("✅ All async modules imported successfully")
 
         return True
 

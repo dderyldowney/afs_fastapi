@@ -631,7 +631,9 @@ class TestAsyncAgriculturalDatabaseSchemas:
             assert retrieved_equipment.equipment_id == "ERROR_TEST_EQUIPMENT"
 
         # Test transaction rollback on failure - attempt to create duplicate
-        with pytest.raises(Exception):  # Expect constraint violation
+        from sqlalchemy.exc import IntegrityError
+
+        with pytest.raises(IntegrityError):  # Expect constraint violation
             async with UnitOfWork(async_session) as uow:
                 # Attempt to create equipment with duplicate ID (should cause constraint violation)
                 await uow.equipment.create_equipment(

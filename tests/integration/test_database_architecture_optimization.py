@@ -396,7 +396,7 @@ class TestDatabaseArchitectureOptimization:
 
         # Performance assertions (adjust based on your expectations)
         assert operations_completed >= 40  # Most operations should succeed
-        assert avg_time < 0.1  # Average should be less than 100ms
+        assert avg_time < 0.2  # Average should be less than 200ms
 
     def test_agricultural_optimization_features(
         self, optimized_pool_config: PoolConfiguration

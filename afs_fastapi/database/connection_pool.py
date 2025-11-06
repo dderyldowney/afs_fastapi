@@ -242,6 +242,11 @@ class AgriculturalConnectionPool:
                 )
             else:
                 # For PostgreSQL with asyncpg, we can use pooling
+                # asyncpg doesn't support connect_timeout parameter
+                connect_args = {}
+                if "asyncpg" not in self.database_url:
+                    connect_args = {"connect_timeout": self.config.connection_timeout}
+
                 self._async_engine = create_async_engine(
                     self.database_url,
                     pool_size=self.config.pool_size,
@@ -251,7 +256,7 @@ class AgriculturalConnectionPool:
                     pool_pre_ping=self.config.pool_pre_ping,
                     echo=False,  # Set to True for debugging
                     future=True,
-                    connect_args={"connect_timeout": self.config.connection_timeout},
+                    connect_args=connect_args,
                 )
 
             # Create sync engine for schema operations
@@ -259,6 +264,14 @@ class AgriculturalConnectionPool:
                 sync_url = self.database_url.replace("+aiosqlite", "")
             else:
                 sync_url = self.database_url.replace("+asyncpg", "")
+            # sync engine connection args depend on database type
+            if "sqlite" in sync_url:
+                # SQLite doesn't support connect_timeout
+                sync_connect_args = {"check_same_thread": False}
+            else:
+                # PostgreSQL supports connect_timeout
+                sync_connect_args = {"connect_timeout": self.config.connection_timeout}
+
             self._sync_engine = create_engine(
                 sync_url,
                 pool_size=self.config.pool_size,
@@ -268,7 +281,7 @@ class AgriculturalConnectionPool:
                 pool_pre_ping=self.config.pool_pre_ping,
                 echo=False,
                 poolclass=QueuePool,
-                connect_args={"connect_timeout": self.config.connection_timeout},
+                connect_args=sync_connect_args,
             )
 
             # Create optimized session factories

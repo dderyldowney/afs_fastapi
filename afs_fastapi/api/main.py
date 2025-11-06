@@ -31,6 +31,7 @@ from afs_fastapi.api.core.error_handling import (
 from afs_fastapi.api.core.response_models import AIProcessingResponse
 from afs_fastapi.api.endpoints import equipment, monitoring
 from afs_fastapi.api.endpoints.ai_processing import router as ai_processing
+from afs_fastapi.api.endpoints.crud import router as crud_router
 from afs_fastapi.api.endpoints.todos import router as todos_router
 from afs_fastapi.api.endpoints.token_usage import router as token_usage_router
 from afs_fastapi.equipment.farm_tractors import FarmTractor, FarmTractorResponse
@@ -136,6 +137,7 @@ async def request_middleware(request: Request, call_next):
 # Register API routers
 app.include_router(equipment.router, prefix="/api/v1/equipment", tags=["equipment"])
 app.include_router(monitoring.router, prefix="/api/v1/monitoring", tags=["monitoring"])
+app.include_router(crud_router, prefix="/api/v1", tags=["crud"])
 app.include_router(ai_processing, prefix="/api/v1/ai", tags=["ai-processing"])
 app.include_router(token_usage_router, prefix="/api/v1/monitoring", tags=["monitoring"])
 app.include_router(todos_router, prefix="/api/v1/todos", tags=["todos"])

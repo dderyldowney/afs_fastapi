@@ -30,6 +30,8 @@ from datetime import datetime
 
 from sqlalchemy import create_engine, text
 
+from afs_fastapi.database.async_repository import UnitOfWork
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"

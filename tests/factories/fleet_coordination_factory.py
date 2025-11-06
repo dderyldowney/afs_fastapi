@@ -143,7 +143,7 @@ class TestISOBUSDevice(ISOBUSDevice):
         message["priority"] = 0  # Highest priority
         return await self.broadcast_message(message)
 
-    async def send_message(self, message: Any) -> bool:
+    async def send_message_interface(self, message: Any) -> bool:
         """Send ISOBUS message (interface compatibility)."""
         if isinstance(message, dict):
             return await self.send_message(message)

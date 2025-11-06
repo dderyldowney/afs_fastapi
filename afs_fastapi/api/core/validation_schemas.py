@@ -534,3 +534,228 @@ def validate_equipment_operation(operation: str, equipment_type: str) -> bool:
 
     valid_equipment = operation_equipment_map.get(operation, ["general"])
     return equipment_type in valid_equipment
+
+
+# CRUD Validation Schemas
+class EquipmentCreateRequest(BaseModel):
+    """Request schema for creating equipment."""
+
+    equipment_id: str = Field(
+        ..., min_length=1, max_length=50, description="Unique equipment identifier"
+    )
+    isobus_address: int = Field(..., ge=0, le=255, description="ISOBUS address (0-255)")
+    equipment_type: EquipmentType = Field(..., description="Type of agricultural equipment")
+    manufacturer: str = Field(
+        ..., min_length=1, max_length=50, description="Equipment manufacturer"
+    )
+    model: str | None = Field(None, max_length=50, description="Equipment model")
+    serial_number: str | None = Field(None, max_length=100, description="Serial number")
+    firmware_version: str | None = Field(None, max_length=20, description="Firmware version")
+    installation_date: datetime | None = Field(None, description="Installation date")
+
+    @field_validator("equipment_id")
+    @classmethod
+    def validate_equipment_id(cls, v: str) -> str:
+        """Validate equipment ID format."""
+        if not re.match(r"^[A-Za-z0-9_-]+$", v):
+            raise ValueError(
+                "Equipment ID can only contain letters, numbers, hyphens, and underscores"
+            )
+        return v.upper()
+
+
+class EquipmentUpdateRequest(BaseModel):
+    """Request schema for updating equipment."""
+
+    isobus_address: int = Field(..., ge=0, le=255, description="ISOBUS address (0-255)")
+    equipment_type: EquipmentType = Field(..., description="Type of agricultural equipment")
+    manufacturer: str = Field(
+        ..., min_length=1, max_length=50, description="Equipment manufacturer"
+    )
+    model: str | None = Field(None, max_length=50, description="Equipment model")
+    serial_number: str | None = Field(None, max_length=100, description="Serial number")
+    firmware_version: str | None = Field(None, max_length=20, description="Firmware version")
+    installation_date: datetime | None = Field(None, description="Installation date")
+    status: str = Field("active", description="Equipment status")
+
+
+class EquipmentResponse(BaseModel):
+    """Response schema for equipment data."""
+
+    equipment_id: str
+    isobus_address: int
+    equipment_type: str
+    manufacturer: str
+    model: str | None
+    serial_number: str | None
+    firmware_version: str | None
+    installation_date: datetime | None
+    status: str
+    created_at: datetime
+    updated_at: datetime | None
+
+    class Config:
+        from_attributes = True
+
+
+class FieldCreateRequest(BaseModel):
+    """Request schema for creating fields."""
+
+    field_id: str = Field(..., min_length=1, max_length=50, description="Unique field identifier")
+    field_name: str = Field(..., min_length=1, max_length=100, description="Field name")
+    crop_type: str | None = Field(None, max_length=30, description="Crop type")
+    field_area_hectares: float | None = Field(
+        None, ge=0, le=10000, description="Field area in hectares"
+    )
+    boundary_coordinates: list[tuple[float, float]] | None = Field(
+        None, description="GPS boundary coordinates"
+    )
+    soil_type: str | None = Field(None, max_length=30, description="Soil type")
+    drainage_class: str | None = Field(None, max_length=30, description="Drainage class")
+    elevation_meters: float | None = Field(None, description="Elevation in meters")
+    slope_percentage: float | None = Field(None, ge=0, le=100, description="Slope percentage")
+
+    @field_validator("field_id")
+    @classmethod
+    def validate_field_id(cls, v: str) -> str:
+        """Validate field ID format."""
+        if not re.match(r"^[A-Za-z0-9_-]+$", v):
+            raise ValueError("Field ID can only contain letters, numbers, hyphens, and underscores")
+        return v.upper()
+
+    @field_validator("boundary_coordinates")
+    @classmethod
+    def validate_boundary_coordinates(
+        cls, v: list[tuple[float, float]] | None
+    ) -> list[tuple[float, float]] | None:
+        """Validate GPS boundary coordinates."""
+        if v is None:
+            return v
+
+        if len(v) < 3:
+            raise ValueError("Boundary must have at least 3 points")
+
+        for i, (lat, lon) in enumerate(v):
+            if not (-90 <= lat <= 90):
+                raise ValueError(f"Invalid latitude at point {i}: {lat}")
+            if not (-180 <= lon <= 180):
+                raise ValueError(f"Invalid longitude at point {i}: {lon}")
+
+        return v
+
+
+class FieldUpdateRequest(BaseModel):
+    """Request schema for updating fields."""
+
+    field_name: str = Field(..., min_length=1, max_length=100, description="Field name")
+    crop_type: str | None = Field(None, max_length=30, description="Crop type")
+    field_area_hectares: float | None = Field(
+        None, ge=0, le=10000, description="Field area in hectares"
+    )
+    boundary_coordinates: list[tuple[float, float]] | None = Field(
+        None, description="GPS boundary coordinates"
+    )
+    soil_type: str | None = Field(None, max_length=30, description="Soil type")
+    drainage_class: str | None = Field(None, max_length=30, description="Drainage class")
+    elevation_meters: float | None = Field(None, description="Elevation in meters")
+    slope_percentage: float | None = Field(None, ge=0, le=100, description="Slope percentage")
+
+
+class FieldResponse(BaseModel):
+    """Response schema for field data."""
+
+    field_id: str
+    field_name: str
+    crop_type: str | None
+    field_area_hectares: float | None
+    boundary_coordinates: list[tuple[float, float]] | None
+    soil_type: str | None
+    drainage_class: str | None
+    elevation_meters: float | None
+    slope_percentage: float | None
+    created_at: datetime
+    updated_at: datetime | None
+
+    class Config:
+        from_attributes = True
+
+
+# Additional validation functions for CRUD operations
+def validate_equipment_data(data: dict[str, Any]) -> dict[str, Any]:
+    """Validate equipment data against agricultural standards."""
+    validated_data = data.copy()
+
+    # Validate ISOBUS address uniqueness requirements
+    isobus_address = validated_data.get("isobus_address")
+    if isobus_address is not None:
+        # Standard ISOBUS addresses: 0-127 for global, 128-247 for vehicle specific, 248-255 for special
+        if not (0 <= isobus_address <= 255):
+            raise ValueError("ISOBUS address must be between 0-255")
+
+        # Agricultural equipment typically uses 128-247 range
+        if isobus_address < 128 and isobus_address not in [0, 255]:
+            raise ValueError("Agricultural equipment should use ISOBUS addresses 128-247")
+
+    # Validate equipment type against manufacturer patterns
+    equipment_type = validated_data.get("equipment_type")
+    manufacturer = validated_data.get("manufacturer", "").lower()
+
+    # Basic manufacturer validation for common agricultural brands
+    known_manufacturers = [
+        "john deere",
+        "case ih",
+        "new holland",
+        "massey ferguson",
+        "claas",
+        "fendt",
+    ]
+    if manufacturer and not any(known in manufacturer for known in known_manufacturers):
+        # Allow but flag for potential review
+        pass
+
+    return validated_data
+
+
+def validate_field_data(data: dict[str, Any]) -> dict[str, Any]:
+    """Validate field data against agricultural standards."""
+    validated_data = data.copy()
+
+    # Validate field area
+    field_area = validated_data.get("field_area_hectares")
+    if field_area is not None:
+        if field_area <= 0:
+            raise ValueError("Field area must be greater than 0")
+        if field_area > 10000:  # 10,000 hectares is very large
+            raise ValueError("Field area exceeds reasonable limit of 10,000 hectares")
+
+    # Validate crop type against common agricultural crops
+    crop_type = validated_data.get("crop_type")
+    if crop_type:
+        common_crops = [
+            "corn",
+            "wheat",
+            "soybeans",
+            "cotton",
+            "rice",
+            "barley",
+            "oats",
+            "sorghum",
+            "alfalfa",
+            "hay",
+            "pasture",
+            "vegetables",
+            "fruits",
+        ]
+        if crop_type.lower() not in common_crops:
+            # Allow but note for potential review
+            pass
+
+    # Validate slope for agricultural machinery safety
+    slope = validated_data.get("slope_percentage")
+    if slope is not None:
+        if slope > 30:
+            raise ValueError(
+                "Slope percentage exceeds 30% - may be unsafe for agricultural machinery"
+            )
+
+    return validated_data

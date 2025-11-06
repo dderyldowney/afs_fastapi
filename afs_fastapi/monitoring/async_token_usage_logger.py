@@ -955,7 +955,7 @@ def create_async_token_logger() -> AsyncTokenUsageLogger:
     configuration for development, testing, and production.
     """
     database_url = os.environ.get(
-        "ASYNC_TOKEN_USAGE_DATABASE_URL", "async+psycopgql://localhost/token_usage"
+        "ASYNC_TOKEN_USAGE_DATABASE_URL", "postgresql+asyncpg://localhost/token_usage"
     )
 
     # For development, use SQLite with async support

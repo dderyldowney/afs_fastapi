@@ -9,8 +9,8 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from todowrite.app import ToDoWrite  # noqa: E402
-from todowrite.db.models import Node  # noqa: E402
+from todowrite import Node  # noqa: E402
+from todowrite import ToDoWrite  # noqa: E402
 
 
 def main():
@@ -20,10 +20,11 @@ def main():
     parser.add_argument("--acceptance-id", type=str, help="Show details for a specific acceptance ID.")
     args = parser.parse_args()
 
+    nodes = app.get_all_nodes()
+    acceptance_criteria = nodes.get("Acceptance Criteria", [])
+
     if getattr(args, "acceptance_id", None):
         # Show specific acceptance details
-        todos = app.load_todos()
-        acceptance_criteria = todos.get("Acceptance Criteria", [])
         acceptance = None
         for item in acceptance_criteria:
             if item.id == getattr(args, "acceptance_id"):
@@ -45,26 +46,25 @@ def main():
         print(f"Children: {', '.join(acceptance.links.children) if acceptance.links.children else 'None'}")
     else:
         # Show all acceptance_criteria
-        acceptance_criteria = app.get_acceptance_criteria()
-        
         if not acceptance_criteria:
             print("No acceptance_criteria found in the ToDoWrite system.")
+            print("Available layers:", list(nodes.keys()))
             return
 
         print("✅ All Acceptance Criterias Status")
         print("=" * 50)
-        
+
         for item in acceptance_criteria:
-            status_icon = "✓" if item["status"] == "done" else "○" if item["status"] == "active" else "·"
-            print(f"{status_icon} {item['id']}")
-            print(f"   Title: {item['title']}")
-            print(f"   Status: {item['status']}")
+            status_icon = "✓" if item.status == "done" else "○" if item.status == "active" else "·"
+            print(f"{status_icon} {item.id}")
+            print(f"   Title: {item.title}")
+            print(f"   Status: {item.status}")
             print()
 
         print(f"Total Acceptance Criterias: {len(acceptance_criteria)}")
-        completed = len([item for item in acceptance_criteria if item["status"] == "done"])
-        active = len([item for item in acceptance_criteria if item["status"] == "active"])
-        planned = len([item for item in acceptance_criteria if item["status"] == "planned"])
+        completed = len([item for item in acceptance_criteria if item.status == "done"])
+        active = len([item for item in acceptance_criteria if item.status == "active"])
+        planned = len([item for item in acceptance_criteria if item.status == "planned"])
         print(f"Completed: {completed}, Active: {active}, Planned: {planned}")
 
 

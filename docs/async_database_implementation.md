@@ -231,7 +231,7 @@ AGRICULTURAL_HEALTH_CHECK_INTERVAL=60.0
 ### Database Configuration
 ```python
 # Optimal PostgreSQL configuration for agricultural robotics
-connection_pool_config = PoolConfiguration(
+connection_pool_config = ConnectionPoolConfig(
     max_connections=50,
     min_connections=5,
     pool_timeout=30.0,

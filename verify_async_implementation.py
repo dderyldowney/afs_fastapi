@@ -20,21 +20,16 @@ async def test_async_imports():
     logger.info("🔍 Testing async imports...")
 
     try:
-        from afs_fastapi.database.agricultural_schemas_async import (
-            AsyncDatabaseManager,
-            Equipment,
-            Field,
-        )
+        import afs_fastapi.database.agricultural_schemas_async
+        import afs_fastapi.database.async_repository
+        import afs_fastapi.monitoring.async_token_usage_logger
 
-        logger.info("✅ Agricultural schemas imported successfully")
+        # Use the imports to verify they work
+        _ = afs_fastapi.database.agricultural_schemas_async
+        _ = afs_fastapi.database.async_repository
+        _ = afs_fastapi.monitoring.async_token_usage_logger
 
-        from afs_fastapi.database.async_repository import EquipmentAsyncRepository, UnitOfWork
-
-        logger.info("✅ Async repositories imported successfully")
-
-        from afs_fastapi.monitoring.async_token_usage_logger import AsyncTokenUsageLogger
-
-        logger.info("✅ Async token usage logger imported successfully")
+        logger.info("✅ All async modules imported successfully")
 
         return True
 

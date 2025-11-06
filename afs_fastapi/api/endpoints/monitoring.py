@@ -5,6 +5,8 @@ This module provides RESTful endpoints for agricultural environmental monitoring
 with proper validation, error handling, and ISO compliance.
 """
 
+# ruff: noqa: B008  # FastAPI requires Depends() and Query() in function defaults
+
 from __future__ import annotations
 
 import logging
@@ -158,7 +160,7 @@ async def get_soil_readings(
     data_quality: str | None = None,
     page: int = 1,
     page_size: int = 20,
-    query_params: CommonQueryParams = Depends(),
+    query_params: CommonQueryParams = Depends(CommonQueryParams),
 ) -> PaginatedResponse:
     """
     Retrieve soil sensor readings with comprehensive filtering.
@@ -400,7 +402,7 @@ async def get_water_readings(
     quality_threshold: float | None = Query(None, description="Quality threshold filter"),
     page: int = Query(1, ge=1, description="Page number"),
     page_size: int = Query(20, ge=1, le=100, description="Items per page"),
-    query_params: CommonQueryParams = Depends(),
+    query_params: CommonQueryParams = Depends(CommonQueryParams),
 ) -> PaginatedResponse:
     """
     Retrieve water quality readings with comprehensive filtering.
