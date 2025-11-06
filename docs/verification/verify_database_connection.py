@@ -17,9 +17,7 @@ sys.path.insert(0, str(project_root))
 
 from sqlalchemy import text
 
-from afs_fastapi.database.optimized_db_config import (
-    get_optimized_db_config,
-)
+from afs_fastapi.database.optimized_db_config import get_optimized_db_config
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
